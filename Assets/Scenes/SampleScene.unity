@@ -2159,6 +2159,8 @@ GameObject:
   - component: {fileID: 1664313466}
   - component: {fileID: 1664313465}
   - component: {fileID: 1664313467}
+  - component: {fileID: 1664313469}
+  - component: {fileID: 1664313468}
   m_Layer: 0
   m_Name: Pawn
   m_TagString: Untagged
@@ -2261,6 +2263,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1664313468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664313464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a3fb2d85686614385cb3a76cc43bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIPawn
+  m_Speed: 1
+--- !u!114 &1664313469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664313464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b0c90f48feeed458084fe59756935f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
 --- !u!1 &2046977267
 GameObject:
   m_ObjectHideFlags: 0
@@ -11312,6 +11339,8 @@ GameObject:
   - component: {fileID: 2122682475}
   - component: {fileID: 2122682474}
   - component: {fileID: 2122682476}
+  - component: {fileID: 2122682478}
+  - component: {fileID: 2122682477}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -11386,7 +11415,7 @@ Transform:
   m_GameObject: {fileID: 2122682473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.689646, y: -5.048565, z: 0}
+  m_LocalPosition: {x: -10.39, y: -5.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11414,6 +11443,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2122682477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122682473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a3fb2d85686614385cb3a76cc43bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIPawn
+  m_Speed: 1
+--- !u!114 &2122682478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122682473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b0c90f48feeed458084fe59756935f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
