@@ -9,10 +9,10 @@ public class AIPawn : MonoBehaviour
         get => m_Destination ?? transform.position;
     }
 
-    void Start()
-    {
-        SetDestination(new Vector3(-7.0f, -2.0f, 0));
-    }
+    // void Start()
+    // {
+    //     SetDestination(new Vector3(-7.0f, -2.0f, 0));
+    // }
 
     void Update()
     {

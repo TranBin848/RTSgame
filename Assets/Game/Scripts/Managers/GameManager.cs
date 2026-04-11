@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : SingletonManager<GameManager>
 {
     private Vector2 m_initialTouchPosition;
+    public Unit ActiveUnit;
     void Update()
     {
         Vector2 inputPosition = Input.touchCount > 0 ? Input.GetTouch(0).position : Input.mousePosition;
@@ -17,13 +18,22 @@ public class GameManager : SingletonManager<GameManager>
         {
             if (Vector2.Distance(m_initialTouchPosition, inputPosition) < 10f)
             {
-                DeleteClick(inputPosition);
+                DetectClick(inputPosition);
             }
         }
     }
 
-    void DeleteClick(Vector2 inputPosition)
+    void DetectClick(Vector2 inputPosition)
     {
-        Debug.Log($"Clicked at screen position: {inputPosition}");
+        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
+        handleClickOnGround(worldPoint);
     }
+    void handleClickOnGround(Vector2 worldPoint)
+    {
+        if (ActiveUnit != null)
+        {
+            ActiveUnit.MoveTo(worldPoint);
+        }
+    }
+
 };
