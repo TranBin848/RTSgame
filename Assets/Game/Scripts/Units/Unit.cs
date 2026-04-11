@@ -2,10 +2,14 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
+    [SerializeField]
+    private Material m_HighlightMaterial;
     public bool isMoving = false;
+    public bool isTargeted = false;
     protected Animator m_Animator;
     protected AIPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
+    protected Material m_OriginalMaterial;
     protected void Awake()
     {
         if (TryGetComponent<Animator>(out var animator))
@@ -20,6 +24,10 @@ public abstract class Unit : MonoBehaviour
         {
             m_SpriteRenderer = spriteRenderer;
         }
+        if (m_SpriteRenderer != null)
+        {
+            m_OriginalMaterial = m_SpriteRenderer.material;
+        }
     }
     public void MoveTo(Vector3 destination)
     {
@@ -29,6 +37,30 @@ public abstract class Unit : MonoBehaviour
         if (m_AIPawn != null)
         {
             m_AIPawn.SetDestination(destination);
+        }
+    }
+    public void Select()
+    {
+        HighLight();
+        isTargeted = true;
+    }
+    public void Deselect()
+    {
+        UnHighlight();
+        isTargeted = false;
+    }
+    void HighLight()
+    {
+        if (m_SpriteRenderer != null && m_HighlightMaterial != null)
+        {
+            m_SpriteRenderer.material = m_HighlightMaterial;
+        }
+    }
+    void UnHighlight()
+    {
+        if (m_SpriteRenderer != null && m_OriginalMaterial != null)
+        {
+            m_SpriteRenderer.material = m_OriginalMaterial;
         }
     }
 }

@@ -5,6 +5,7 @@ public class GameManager : SingletonManager<GameManager>
 {
     private Vector2 m_initialTouchPosition;
     public Unit ActiveUnit;
+    public bool HasActiveUnit => ActiveUnit != null;
     void Update()
     {
         Vector2 inputPosition = Input.touchCount > 0 ? Input.GetTouch(0).position : Input.mousePosition;
@@ -60,6 +61,11 @@ public class GameManager : SingletonManager<GameManager>
     }
     void SelectNewUnit(Unit unit)
     {
+        if (HasActiveUnit)
+        {
+            ActiveUnit.Deselect();
+        }
         ActiveUnit = unit;
+        ActiveUnit.Select();
     }
 };
