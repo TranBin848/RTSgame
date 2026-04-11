@@ -22,11 +22,6 @@ public abstract class Unit : MonoBehaviour
         if (m_AIPawn != null)
         {
             m_AIPawn.SetDestination(destination);
-            isMoving = true;
-            if (m_Animator != null)
-            {
-                m_Animator.SetBool("isMoving", true);
-            }
         }
     }
 }
