@@ -2,14 +2,13 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
-    [SerializeField]
-    private Material m_HighlightMaterial;
     public bool isMoving = false;
     public bool isTargeted = false;
     protected Animator m_Animator;
     protected AIPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
     protected Material m_OriginalMaterial;
+    protected Material m_HighlightMaterial;
     protected void Awake()
     {
         if (TryGetComponent<Animator>(out var animator))
@@ -28,6 +27,7 @@ public abstract class Unit : MonoBehaviour
         {
             m_OriginalMaterial = m_SpriteRenderer.material;
         }
+        m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
     }
     public void MoveTo(Vector3 destination)
     {

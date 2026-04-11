@@ -2258,7 +2258,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bb14fb6ff8eeb64387a413bbd487156, type: 2}
+  - {fileID: 2100000, guid: 1743af7f59de89340b04f5eb23a94358, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2354,6 +2354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
   isMoving: 0
+  isTargeted: 0
 --- !u!70 &1664313470
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -11477,7 +11478,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bb14fb6ff8eeb64387a413bbd487156, type: 2}
+  - {fileID: 2100000, guid: 1743af7f59de89340b04f5eb23a94358, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11573,6 +11574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
   isMoving: 0
+  isTargeted: 0
 --- !u!70 &2122682479
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
