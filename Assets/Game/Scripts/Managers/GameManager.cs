@@ -1,33 +1,44 @@
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : SingletonManager<GameManager>
 {
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
+    [SerializeField] private ActionBar m_ActionBar;
     private Vector2 m_initialTouchPosition;
+    public Vector2 InputPosition => Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
+    public bool isLeftClickOrTapDown => Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+    public bool isLeftClickOrTapUp => Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
     public Unit ActiveUnit;
     public bool HasActiveUnit => ActiveUnit != null;
+    void Start()
+    {
+        ClearActionBarUI();
+    }
     void Update()
     {
-        Vector2 inputPosition = Input.touchCount > 0 ? Input.GetTouch(0).position : Input.mousePosition;
-
-        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        if (isLeftClickOrTapDown)
         {
-            m_initialTouchPosition = inputPosition;
+            m_initialTouchPosition = InputPosition;
         }
 
-        if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+        if (isLeftClickOrTapUp)
         {
-            if (Vector2.Distance(m_initialTouchPosition, inputPosition) < 10f)
+            if (Vector2.Distance(m_initialTouchPosition, InputPosition) < 10f)
             {
-                DetectClick(inputPosition);
+                DetectClick(InputPosition);
             }
         }
     }
 
     void DetectClick(Vector2 inputPosition)
     {
+        if (iSPointOverUIElelement())
+        {
+            return;
+        }
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
@@ -75,6 +86,7 @@ public class GameManager : SingletonManager<GameManager>
         }
         ActiveUnit = unit;
         ActiveUnit.Select();
+        ShowUnitAction();
     }
     bool isClickedOnActiveUnit(Unit unit)
     {
@@ -88,9 +100,30 @@ public class GameManager : SingletonManager<GameManager>
     {
         ActiveUnit.Deselect();
         ActiveUnit = null;
+        ClearActionBarUI();
     }
     void DisplayClickEffect(Vector2 worldPoint)
     {
         Instantiate(m_PointToClickPrefab, worldPoint, Quaternion.identity);
+    }
+    void ShowUnitAction()
+    {
+        m_ActionBar.Show();
+    }
+    void ClearActionBarUI()
+    {
+        m_ActionBar.ClearActions();
+        m_ActionBar.Hide();
+    }
+    bool iSPointOverUIElelement()
+    {
+        if (Input.touchCount > 0)
+        {
+            return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        }
+        else
+        {
+            return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        }
     }
 };
