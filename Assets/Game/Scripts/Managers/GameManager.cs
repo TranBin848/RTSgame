@@ -52,14 +52,19 @@ public class GameManager : SingletonManager<GameManager>
     }
     void handleClickOnGround(Vector2 worldPoint)
     {
-        DisplayClickEffect(worldPoint);
-        if (ActiveUnit != null)
+        if (HasActiveUnit && isHumanUnit(ActiveUnit))
         {
+            DisplayClickEffect(worldPoint);
             ActiveUnit.MoveTo(worldPoint);
         }
     }
     void handleClickOnUnit(Unit unit)
     {
+        if (isClickedOnActiveUnit(unit))
+        {
+            cancelActiveUnit();
+            return;
+        }
         SelectNewUnit(unit);
     }
     void SelectNewUnit(Unit unit)
@@ -71,7 +76,19 @@ public class GameManager : SingletonManager<GameManager>
         ActiveUnit = unit;
         ActiveUnit.Select();
     }
-
+    bool isClickedOnActiveUnit(Unit unit)
+    {
+        return HasActiveUnit && unit == ActiveUnit;
+    }
+    bool isHumanUnit(Unit unit)
+    {
+        return unit is HumanoidUnit;
+    }
+    void cancelActiveUnit()
+    {
+        ActiveUnit.Deselect();
+        ActiveUnit = null;
+    }
     void DisplayClickEffect(Vector2 worldPoint)
     {
         Instantiate(m_PointToClickPrefab, worldPoint, Quaternion.identity);
