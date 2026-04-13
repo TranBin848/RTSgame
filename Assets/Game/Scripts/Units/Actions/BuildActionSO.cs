@@ -1,0 +1,20 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "BuildAction", menuName = "Game/Actions/BuildAction")]
+public class BuildActionSo : ActionSO
+{
+    [SerializeField] private Sprite m_PlacementSprite;
+    [SerializeField] private Sprite m_FoundingSprite;
+    [SerializeField] private Sprite m_CompleteSprite;
+
+    [SerializeField] private int m_GoldCost;
+    [SerializeField] private int m_WoodCost;
+    public Sprite PlacementSprite => m_PlacementSprite;
+    public Sprite FoundingSprite => m_FoundingSprite;
+    public Sprite CompleteSprite => m_CompleteSprite;
+    public int GoldCost => m_GoldCost;
+    public int WoodCost => m_WoodCost;
+    public override void Excute(GameManager gameManager)
+    {
+    }
+}
