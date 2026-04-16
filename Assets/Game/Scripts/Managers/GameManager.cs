@@ -9,9 +9,7 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private ActionBar m_ActionBar;
     private Vector2 m_initialTouchPosition;
     private PlacementProcess m_PlacementProcess;
-    public Vector2 InputPosition => Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
-    public bool isLeftClickOrTapDown => Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
-    public bool isLeftClickOrTapUp => Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
+
     public Unit ActiveUnit;
     public bool HasActiveUnit => ActiveUnit != null;
     void Start()
@@ -26,16 +24,16 @@ public class GameManager : SingletonManager<GameManager>
         }
         else
         {
-            if (isLeftClickOrTapDown)
+            if (GameUtils.isLeftClickOrTapDown)
             {
-                m_initialTouchPosition = InputPosition;
+                m_initialTouchPosition = GameUtils.InputPosition;
             }
 
-            if (isLeftClickOrTapUp)
+            if (GameUtils.isLeftClickOrTapUp)
             {
-                if (Vector2.Distance(m_initialTouchPosition, InputPosition) < 10f)
+                if (Vector2.Distance(m_initialTouchPosition, GameUtils.InputPosition) < 10f)
                 {
-                    DetectClick(InputPosition);
+                    DetectClick(GameUtils.InputPosition);
                 }
             }
         }

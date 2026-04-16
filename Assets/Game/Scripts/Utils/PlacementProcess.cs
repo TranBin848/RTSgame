@@ -10,7 +10,11 @@ public class PlacementProcess
     }
     public void Update()
     {
-        Debug.Log($"Updating placement process for {m_BuildAction.name}");
+        Vector3 worldPosition = GameUtils.InputHoldWorldPosition;
+        if (m_PlacementOutline != null && worldPosition != Vector3.zero)
+        {
+            m_PlacementOutline.transform.position = new Vector3(worldPosition.x, worldPosition.y, 0f);
+        }
     }
     public void ShowPlacementOutline()
     {
