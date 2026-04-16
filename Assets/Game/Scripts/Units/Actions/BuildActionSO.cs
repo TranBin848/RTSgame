@@ -14,7 +14,8 @@ public class BuildActionSo : ActionSO
     public Sprite CompleteSprite => m_CompleteSprite;
     public int GoldCost => m_GoldCost;
     public int WoodCost => m_WoodCost;
-    public override void Excute(GameManager gameManager)
+    public override void Excute(GameManager manager)
     {
+        manager.StartBuildProcess(this);
     }
 }

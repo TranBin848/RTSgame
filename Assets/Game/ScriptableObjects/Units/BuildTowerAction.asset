@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0b2974d7ff70f44935c36aeb558719, type: 3}
   m_Name: BuildTowerAction
   m_EditorClassIdentifier: Assembly-CSharp::BuildActionSo
-  Icon: {fileID: 0}
-  ActionName: 
+  Icon: {fileID: 1071588874, guid: d4ac38b5a0d99484188207986cbca7ee, type: 3}
+  ActionName: Build Tower
   Guid: 38a2517c-bed8-45bb-a9a2-9cb5ff506bf6
   m_PlacementSprite: {fileID: 0}
   m_FoundingSprite: {fileID: 0}

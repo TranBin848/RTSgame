@@ -33,6 +33,10 @@ public class GameManager : SingletonManager<GameManager>
         }
     }
 
+    public void StartBuildProcess(BuildActionSo buildAction)
+    {
+        Debug.Log($"Starting build process for {buildAction.name}");
+    }
     void DetectClick(Vector2 inputPosition)
     {
         if (iSPointOverUIElelement())
@@ -86,7 +90,7 @@ public class GameManager : SingletonManager<GameManager>
         }
         ActiveUnit = unit;
         ActiveUnit.Select();
-        ShowUnitAction();
+        ShowUnitAction(unit);
     }
     bool isClickedOnActiveUnit(Unit unit)
     {
@@ -106,9 +110,19 @@ public class GameManager : SingletonManager<GameManager>
     {
         Instantiate(m_PointToClickPrefab, worldPoint, Quaternion.identity);
     }
-    void ShowUnitAction()
+    void ShowUnitAction(Unit unit)
     {
+        ClearActionBarUI();
+        if (unit.Actions.Length == 0)
+        {
+            return;
+        }
         m_ActionBar.Show();
+        foreach (var action in unit.Actions)
+        {
+            m_ActionBar.RegisterAction(action.Icon,
+                () => action.Excute(this));
+        }
     }
     void ClearActionBarUI()
     {

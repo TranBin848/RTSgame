@@ -763,7 +763,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: -5, z: 0}
@@ -924,7 +924,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -11, y: -3, z: 0}
@@ -970,7 +970,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -8, y: -3, z: 0}
@@ -2906,6 +2906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b0c90f48feeed458084fe59756935f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
+  m_Actions:
+  - {fileID: 11400000, guid: 6556196f813f88344a5e3c5eb214b3b9, type: 2}
   isMoving: 0
   isTargeted: 0
 --- !u!70 &1664313470
@@ -12126,6 +12128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b0c90f48feeed458084fe59756935f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
+  m_Actions: []
   isMoving: 0
   isTargeted: 0
 --- !u!70 &2122682479
