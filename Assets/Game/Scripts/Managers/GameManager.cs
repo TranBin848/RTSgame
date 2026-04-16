@@ -7,7 +7,7 @@ public class GameManager : SingletonManager<GameManager>
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
-    private Vector2 m_initialTouchPosition;
+
     private PlacementProcess m_PlacementProcess;
 
     public Unit ActiveUnit;
@@ -22,20 +22,9 @@ public class GameManager : SingletonManager<GameManager>
         {
             m_PlacementProcess.Update();
         }
-        else
+        else if (GameUtils.TryGetShortClickPosition(out Vector2 inputPosition))
         {
-            if (GameUtils.isLeftClickOrTapDown)
-            {
-                m_initialTouchPosition = GameUtils.InputPosition;
-            }
-
-            if (GameUtils.isLeftClickOrTapUp)
-            {
-                if (Vector2.Distance(m_initialTouchPosition, GameUtils.InputPosition) < 10f)
-                {
-                    DetectClick(GameUtils.InputPosition);
-                }
-            }
+            DetectClick(inputPosition);
         }
     }
 
@@ -46,7 +35,7 @@ public class GameManager : SingletonManager<GameManager>
     }
     void DetectClick(Vector2 inputPosition)
     {
-        if (iSPointOverUIElelement())
+        if (GameUtils.iSPointOverUIElelement())
         {
             return;
         }
@@ -136,15 +125,5 @@ public class GameManager : SingletonManager<GameManager>
         m_ActionBar.ClearActions();
         m_ActionBar.Hide();
     }
-    bool iSPointOverUIElelement()
-    {
-        if (Input.touchCount > 0)
-        {
-            return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-        }
-        else
-        {
-            return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
-        }
-    }
+
 };

@@ -10,8 +10,7 @@ public class PlacementProcess
     }
     public void Update()
     {
-        Vector3 worldPosition = GameUtils.InputHoldWorldPosition;
-        if (m_PlacementOutline != null && worldPosition != Vector3.zero)
+        if (GameUtils.TryGetHoldPosition(out Vector3 worldPosition))
         {
             m_PlacementOutline.transform.position = new Vector3(worldPosition.x, worldPosition.y, 0f);
         }
