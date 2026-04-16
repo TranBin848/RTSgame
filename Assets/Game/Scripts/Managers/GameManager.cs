@@ -8,6 +8,7 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
     private Vector2 m_initialTouchPosition;
+    private PlacementProcess m_PlacementProcess;
     public Vector2 InputPosition => Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
     public bool isLeftClickOrTapDown => Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
     public bool isLeftClickOrTapUp => Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
@@ -19,23 +20,31 @@ public class GameManager : SingletonManager<GameManager>
     }
     void Update()
     {
-        if (isLeftClickOrTapDown)
+        if (m_PlacementProcess != null)
         {
-            m_initialTouchPosition = InputPosition;
+            m_PlacementProcess.Update();
         }
-
-        if (isLeftClickOrTapUp)
+        else
         {
-            if (Vector2.Distance(m_initialTouchPosition, InputPosition) < 10f)
+            if (isLeftClickOrTapDown)
             {
-                DetectClick(InputPosition);
+                m_initialTouchPosition = InputPosition;
+            }
+
+            if (isLeftClickOrTapUp)
+            {
+                if (Vector2.Distance(m_initialTouchPosition, InputPosition) < 10f)
+                {
+                    DetectClick(InputPosition);
+                }
             }
         }
     }
 
     public void StartBuildProcess(BuildActionSo buildAction)
     {
-        Debug.Log($"Starting build process for {buildAction.name}");
+        m_PlacementProcess = new PlacementProcess(buildAction);
+        m_PlacementProcess.ShowPlacementOutline();
     }
     void DetectClick(Vector2 inputPosition)
     {

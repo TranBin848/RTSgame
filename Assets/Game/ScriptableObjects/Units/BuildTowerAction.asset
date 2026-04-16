@@ -15,7 +15,7 @@ MonoBehaviour:
   Icon: {fileID: 1071588874, guid: d4ac38b5a0d99484188207986cbca7ee, type: 3}
   ActionName: Build Tower
   Guid: 38a2517c-bed8-45bb-a9a2-9cb5ff506bf6
-  m_PlacementSprite: {fileID: 0}
+  m_PlacementSprite: {fileID: 21300000, guid: 28b0d16d761d97b4f9c889724d25aba3, type: 3}
   m_FoundingSprite: {fileID: 0}
   m_CompleteSprite: {fileID: 0}
   m_GoldCost: 0
