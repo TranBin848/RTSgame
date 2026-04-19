@@ -709,7 +709,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -14, y: -7, z: 0}
@@ -4044,7 +4044,7 @@ GameObject:
   - component: {fileID: 1664313470}
   - component: {fileID: 1664313469}
   - component: {fileID: 1664313468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13392,7 +13392,7 @@ GameObject:
   - component: {fileID: 2122682479}
   - component: {fileID: 2122682478}
   - component: {fileID: 2122682477}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
