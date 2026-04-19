@@ -8,6 +8,8 @@ public class PlacementProcess
     private Tilemap m_WalkableTilemap;
     private Tilemap m_OverlayTilemap;
     private Sprite m_PlaceholderTileSprite;
+    private Color m_HightlightColor = new Color(1f, 1f, 1f, 0.5f);
+    private Color m_BlockColor = new Color(1f, 0f, 0f, 0.8f);
     public PlacementProcess(BuildActionSo buildAction, Tilemap walkableTilemap, Tilemap overlayTilemap)
     {
         m_PlaceholderTileSprite = Resources.Load<Sprite>("Images/PlaceholderTileSprite");
@@ -62,10 +64,15 @@ public class PlacementProcess
         {
             var tile = ScriptableObject.CreateInstance<Tile>();
             tile.sprite = m_PlaceholderTileSprite;
-            tile.color = new Color(1, 1, 1, 0.4f);
+            if (CanPlaceTiles(pos))
+            {
+                tile.color = m_HightlightColor;
+            }
+            else
+            {
+                tile.color = m_BlockColor;
+            }
             m_OverlayTilemap.SetTile(pos, tile);
-            // m_OverlayTilemap.SetTileFlags(pos, TileFlags.None);
-            // m_OverlayTilemap.SetColor(pos, Color.blue);
         }
     }
     void ClearHighlight()
@@ -75,5 +82,10 @@ public class PlacementProcess
         {
             m_OverlayTilemap.SetTile(pos, null);
         }
+    }
+    bool CanPlaceTiles(Vector3Int tilePosition)
+    {
+
+        return m_WalkableTilemap.HasTile(tilePosition);
     }
 }
