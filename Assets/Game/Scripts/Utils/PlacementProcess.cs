@@ -26,6 +26,10 @@ public class PlacementProcess
         {
             HighLightTiles(m_PlacementOutline.transform.position);
         }
+        if (GameUtils.iSPointOverUIElelement())
+        {
+            return;
+        }
         if (GameUtils.TryGetHoldPosition(out Vector3 worldPosition))
         {
             m_PlacementOutline.transform.position = SnapToGrid(worldPosition);
