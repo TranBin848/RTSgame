@@ -14,6 +14,10 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
     private PlacementProcess m_PlacementProcess;
+    private int m_Gold = 1000;
+    private int m_Wood = 1000;
+    public int Gold => m_Gold;
+    public int Wood => m_Wood;
 
     public Unit ActiveUnit;
     public bool HasActiveUnit => ActiveUnit != null;
@@ -42,7 +46,7 @@ public class GameManager : SingletonManager<GameManager>
 
         m_PlacementProcess = new PlacementProcess(buildAction, m_WalkableTilemap, m_OverlayTilemap, m_UnreachableTilemaps);
         m_PlacementProcess.ShowPlacementOutline();
-        m_ConfirmationBar.Show();
+        m_ConfirmationBar.Show(m_PlacementProcess.BuildAction.GoldCost, m_PlacementProcess.BuildAction.WoodCost);
         m_ConfirmationBar.SetupHooks(ConfirmBuildProcess, CancelBuildProcess);
     }
     void DetectClick(Vector2 inputPosition)
@@ -140,13 +144,27 @@ public class GameManager : SingletonManager<GameManager>
 
     void ConfirmBuildProcess()
     {
+        if (!TryDeductResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost))
+        {
+            Debug.Log("Not enough resources");
+            return;
+        }
         if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
         {
             m_ConfirmationBar.Hide();
             m_PlacementProcess = null;
             Debug.Log("Foundation layed out: " + buildPosition);
         }
+        else
+        {
+            RevertResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost);
+        }
 
+    }
+    void RevertResources(int gold, int wood)
+    {
+        m_Gold += gold;
+        m_Wood += wood;
     }
     void CancelBuildProcess()
     {
@@ -154,5 +172,20 @@ public class GameManager : SingletonManager<GameManager>
         m_PlacementProcess.CleanUp();
         m_PlacementProcess = null;
         Debug.Log("Build Process Canceled");
+    }
+    bool TryDeductResources(int goldCost, int woodCost)
+    {
+        if (m_Gold >= goldCost && m_Wood >= woodCost)
+        {
+            m_Gold -= goldCost;
+            m_Wood -= woodCost;
+            return true;
+        }
+        return false;
+    }
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 40, 200, 20), "Gold: " + m_Gold.ToString(), new GUIStyle { fontSize = 30 });
+        GUI.Label(new Rect(10, 80, 200, 20), "Wood: " + m_Wood.ToString(), new GUIStyle { fontSize = 30 });
     }
 };

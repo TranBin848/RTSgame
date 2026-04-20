@@ -12,6 +12,10 @@ public class PlacementProcess
     private Color m_HightlightColor = new Color(1f, 1f, 1f, 0.5f);
     private Color m_BlockColor = new Color(1f, 0f, 0f, 0.8f);
 
+    public BuildActionSo BuildAction => m_BuildAction;
+    public int GoldCost => BuildAction.GoldCost;
+    public int WoodCost => BuildAction.WoodCost;
+
     public PlacementProcess(BuildActionSo buildAction, Tilemap walkableTilemap, Tilemap overlayTilemap, Tilemap[] unreachableTilemaps)
     {
         m_PlaceholderTileSprite = Resources.Load<Sprite>("Images/PlaceholderTileSprite");
