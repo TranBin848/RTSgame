@@ -43,6 +43,36 @@ public class PlacementProcess
         spriteRenderer.color = new Color(1f, 1f, 1f, 0.7f);
         spriteRenderer.sprite = m_BuildAction.PlacementSprite;
     }
+    public void CleanUp()
+    {
+        if (m_PlacementOutline != null)
+        {
+            GameObject.Destroy(m_PlacementOutline);
+        }
+        ClearHighlight();
+    }
+    public bool TryFinalizePlacement(out Vector3 placementPosition)
+    {
+        if (isPlacementAreaValid())
+        {
+            ClearHighlight();
+            placementPosition = m_PlacementOutline.transform.position;
+            GameObject.Destroy(m_PlacementOutline);
+            return true;
+        }
+        Debug.Log("Invalid Placement Area");
+        placementPosition = Vector3Int.zero;
+        return false;
+    }
+    bool isPlacementAreaValid()
+    {
+        foreach (var tilePosition in m_HighlightPositions)
+        {
+            if (!CanPlaceTiles(tilePosition)) return false;
+        }
+
+        return true;
+    }
     Vector3 SnapToGrid(Vector3 worldPosition)
     {
         return new Vector3(Mathf.Round(worldPosition.x), Mathf.Round(worldPosition.y), 0f);
@@ -92,7 +122,6 @@ public class PlacementProcess
     }
     bool CanPlaceTiles(Vector3Int tilePosition)
     {
-
         return m_WalkableTilemap.HasTile(tilePosition) &&
         !isInUnreachableTilemap(tilePosition) &&
         !isBlockByGameObject(tilePosition);

@@ -140,10 +140,19 @@ public class GameManager : SingletonManager<GameManager>
 
     void ConfirmBuildProcess()
     {
-        Debug.Log("Build Process Finalized");
+        if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
+        {
+            m_ConfirmationBar.Hide();
+            m_PlacementProcess = null;
+            Debug.Log("Foundation layed out: " + buildPosition);
+        }
+
     }
     void CancelBuildProcess()
     {
+        m_ConfirmationBar.Hide();
+        m_PlacementProcess.CleanUp();
+        m_PlacementProcess = null;
         Debug.Log("Build Process Canceled");
     }
 };
