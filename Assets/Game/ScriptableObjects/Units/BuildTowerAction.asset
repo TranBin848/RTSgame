@@ -16,6 +16,7 @@ MonoBehaviour:
   ActionName: Build Tower
   Guid: 38a2517c-bed8-45bb-a9a2-9cb5ff506bf6
   m_StructureUnitPrefab: {fileID: 5696124603996004655, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+  m_ConstructionTime: 10
   m_PlacementSprite: {fileID: 21300000, guid: 28b0d16d761d97b4f9c889724d25aba3, type: 3}
   m_FoundationSprite: {fileID: 21300000, guid: bc4bb691fcf543941b512358178bedda, type: 3}
   m_MiddleSprite: {fileID: 21300000, guid: 89808430e3e396f4680339528810cf0a, type: 3}

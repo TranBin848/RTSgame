@@ -11,10 +11,10 @@ public class WorkerUnit : HumanoidUnit
             CheckForConstruction();
         }
     }
-    protected override void OnSetDestination()
-    {
-        ResetState();
-    }
+    protected override void OnSetDestination() => ResetState();
+
+    public void OnBuildingFinished() => ResetState();
+
     public void SendToBuild(StructureUnit structure)
     {
         MoveTo(structure.transform.position);

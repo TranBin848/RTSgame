@@ -13,7 +13,7 @@ public class StructureUnit : Unit
             m_BuildingProcess.Update();
         }
     }
-
+    public void OnConstructionFinished() => m_BuildingProcess = null;
     public void RegisterBuildingProcess(BuildingProcess buildingProcess)
     {
         m_BuildingProcess = buildingProcess;
