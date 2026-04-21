@@ -4,14 +4,15 @@ using UnityEngine;
 public class BuildActionSo : ActionSO
 {
     [SerializeField] private Sprite m_PlacementSprite;
-    [SerializeField] private Sprite m_FoundingSprite;
+    [SerializeField] private Sprite m_FoundationSprite;
+    [SerializeField] private Sprite m_MiddleSprite;
     [SerializeField] private Sprite m_CompleteSprite;
     [SerializeField] private Vector3Int m_BuildingSize;
     [SerializeField] private Vector3Int m_OriginalOffset;
     [SerializeField] private int m_GoldCost;
     [SerializeField] private int m_WoodCost;
     public Sprite PlacementSprite => m_PlacementSprite;
-    public Sprite FoundingSprite => m_FoundingSprite;
+    public Sprite FoundationSprite => m_FoundationSprite;
     public Sprite CompleteSprite => m_CompleteSprite;
     public Vector3Int BuildingSize => m_BuildingSize;
     public Vector3Int OriginalOffset => m_OriginalOffset;

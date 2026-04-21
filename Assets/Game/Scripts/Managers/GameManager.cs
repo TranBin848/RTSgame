@@ -152,8 +152,12 @@ public class GameManager : SingletonManager<GameManager>
         if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
         {
             m_ConfirmationBar.Hide();
+
+            new BuildingProcess(m_PlacementProcess.BuildAction, buildPosition);
+            ActiveUnit.MoveTo(buildPosition);
+
             m_PlacementProcess = null;
-            Debug.Log("Foundation layed out: " + buildPosition);
+
         }
         else
         {
