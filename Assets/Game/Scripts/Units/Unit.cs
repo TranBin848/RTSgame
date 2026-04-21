@@ -10,8 +10,8 @@ public abstract class Unit : MonoBehaviour
     protected SpriteRenderer m_SpriteRenderer;
     protected Material m_OriginalMaterial;
     protected Material m_HighlightMaterial;
-
     public ActionSO[] Actions => m_Actions;
+    public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
     protected void Awake()
     {
         if (TryGetComponent<Animator>(out var animator))
