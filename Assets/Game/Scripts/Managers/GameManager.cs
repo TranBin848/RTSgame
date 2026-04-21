@@ -153,9 +153,11 @@ public class GameManager : SingletonManager<GameManager>
         {
             m_ConfirmationBar.Hide();
 
-            new BuildingProcess(m_PlacementProcess.BuildAction, buildPosition);
-            ActiveUnit.MoveTo(buildPosition);
-            ActiveUnit.SetTask(UnitTask.Build);
+            new BuildingProcess(
+                m_PlacementProcess.BuildAction,
+                 buildPosition,
+                 (WorkerUnit)ActiveUnit
+                 );
 
             m_PlacementProcess = null;
 
