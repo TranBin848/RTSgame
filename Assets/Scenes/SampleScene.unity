@@ -984,7 +984,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -14, y: -7, z: 0}
@@ -1099,7 +1099,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -9, y: -7, z: 0}
@@ -5143,7 +5143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorkerUnit
   m_Actions:
   - {fileID: 11400000, guid: 6556196f813f88344a5e3c5eb214b3b9, type: 2}
-  isMoving: 0
+  m_ObjectDetectionRadius: 1
   isTargeted: 0
 --- !u!1 &1708311422
 GameObject:
@@ -14695,7 +14695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
   m_Actions: []
-  isMoving: 0
+  m_ObjectDetectionRadius: 3
   isTargeted: 0
 --- !u!70 &2122682479
 CapsuleCollider2D:

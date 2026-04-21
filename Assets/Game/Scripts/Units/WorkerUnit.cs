@@ -35,6 +35,8 @@ public class WorkerUnit : HumanoidUnit
     }
     void StartedBuilding(StructureUnit structure)
     {
+        SetState(UnitState.Building);
+        m_Animator.SetBool("isBuilding", true);
         structure.AssignWorkerToBuildProcess(this);
     }
     void ResetState()
@@ -44,6 +46,7 @@ public class WorkerUnit : HumanoidUnit
         {
             CleanUpTarget();
         }
+        m_Animator.SetBool("isBuilding", false);
     }
     void CleanUpTarget()
     {
@@ -54,18 +57,3 @@ public class WorkerUnit : HumanoidUnit
         SetTarget(null);
     }
 }
-
-// private void CheckForCloseObjects()
-// {
-//     var hits = RunProximityObjectDetection();
-//     foreach (var hit in hits)
-//     {
-//         if (CurrentTask == UnitTask.Build && hit.gameObject == Target.gameObject)
-//         {
-//             if (hit.TryGetComponent<StructureUnit>(out var structure))
-//             {
-//                 StartedBuilding(structure);
-//             }
-//         }
-//     }
-// }

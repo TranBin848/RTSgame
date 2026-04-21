@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum UnitState
 {
-    Idle, Moving, Attacking, Chopping, Mining
+    Idle, Moving, Attacking, Chopping, Mining, Building
 }
 public enum UnitTask
 {
@@ -11,7 +11,7 @@ public enum UnitTask
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField] private ActionSO[] m_Actions;
-    [SerializeField] protected float m_ObjectDetectionRadius = 3f;
+    [SerializeField] protected float m_ObjectDetectionRadius = 0.5f;
 
     public bool isTargeted = false;
     protected Animator m_Animator;
