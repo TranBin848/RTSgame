@@ -5,10 +5,8 @@ public class PlacementProcess
     private GameObject m_PlacementOutline;
     private BuildActionSo m_BuildAction;
     private Vector3Int[] m_HighlightPositions;
-    private Tilemap m_WalkableTilemap;
-    private Tilemap m_OverlayTilemap;
-    private Tilemap[] m_UnreachableTilemaps;
     private Sprite m_PlaceholderTileSprite;
+    private TilemapManager m_TilemapManager;
     private Color m_HightlightColor = new Color(1f, 1f, 1f, 0.5f);
     private Color m_BlockColor = new Color(1f, 0f, 0f, 0.8f);
 
@@ -16,13 +14,11 @@ public class PlacementProcess
     public int GoldCost => BuildAction.GoldCost;
     public int WoodCost => BuildAction.WoodCost;
 
-    public PlacementProcess(BuildActionSo buildAction, Tilemap walkableTilemap, Tilemap overlayTilemap, Tilemap[] unreachableTilemaps)
+    public PlacementProcess(BuildActionSo buildAction, TilemapManager tilemapManager)
     {
         m_PlaceholderTileSprite = Resources.Load<Sprite>("Images/PlaceholderTileSprite");
         m_BuildAction = buildAction;
-        m_WalkableTilemap = walkableTilemap;
-        m_OverlayTilemap = overlayTilemap;
-        m_UnreachableTilemaps = unreachableTilemaps;
+        m_TilemapManager = tilemapManager;
     }
     public void Update()
     {
@@ -72,7 +68,7 @@ public class PlacementProcess
     {
         foreach (var tilePosition in m_HighlightPositions)
         {
-            if (!CanPlaceTiles(tilePosition)) return false;
+            if (!m_TilemapManager.CanPlaceTiles(tilePosition)) return false;
         }
 
         return true;
@@ -105,7 +101,7 @@ public class PlacementProcess
         {
             var tile = ScriptableObject.CreateInstance<Tile>();
             tile.sprite = m_PlaceholderTileSprite;
-            if (CanPlaceTiles(pos))
+            if (m_TilemapManager.CanPlaceTiles(pos))
             {
                 tile.color = m_HightlightColor;
             }
@@ -113,7 +109,7 @@ public class PlacementProcess
             {
                 tile.color = m_BlockColor;
             }
-            m_OverlayTilemap.SetTile(pos, tile);
+            m_TilemapManager.SetTileOverlay(pos, tile);
         }
     }
     void ClearHighlight()
@@ -121,42 +117,8 @@ public class PlacementProcess
         if (m_HighlightPositions == null) return;
         foreach (var pos in m_HighlightPositions)
         {
-            m_OverlayTilemap.SetTile(pos, null);
+            m_TilemapManager.SetTileOverlay(pos, null);
         }
     }
-    bool CanPlaceTiles(Vector3Int tilePosition)
-    {
-        return m_WalkableTilemap.HasTile(tilePosition) &&
-        !isInUnreachableTilemap(tilePosition) &&
-        !isBlockByGameObject(tilePosition);
-    }
-    bool isInUnreachableTilemap(Vector3Int tilePosition)
-    {
-        foreach (var tilemap in m_UnreachableTilemaps)
-        {
-            if (tilemap.HasTile(tilePosition))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    bool isBlockByGameObject(Vector3Int tilePosition)
-    {
-        Vector3 tileSize = m_WalkableTilemap.cellSize;
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(
-            new Vector2(tilePosition.x + tileSize.x / 2, tilePosition.y + tileSize.y / 2),
-            tileSize * 0.9f,
-            0f
-            );
-        foreach (var collider in colliders)
-        {
-            var layer = collider.gameObject.layer;
-            if (layer == LayerMask.NameToLayer("Unit") || layer == LayerMask.NameToLayer("Building"))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

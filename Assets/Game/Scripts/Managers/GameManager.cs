@@ -5,10 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class GameManager : SingletonManager<GameManager>
 {
-    [Header("Tilemaps")]
-    [SerializeField] private Tilemap m_WalkableTilemap;
-    [SerializeField] private Tilemap m_OverlayTilemap;
-    [SerializeField] private Tilemap[] m_UnreachableTilemaps;
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
@@ -43,8 +39,8 @@ public class GameManager : SingletonManager<GameManager>
         {
             return;
         }
-
-        m_PlacementProcess = new PlacementProcess(buildAction, m_WalkableTilemap, m_OverlayTilemap, m_UnreachableTilemaps);
+        var tilemapManager = TilemapManager.Get();
+        m_PlacementProcess = new PlacementProcess(buildAction, tilemapManager);
         m_PlacementProcess.ShowPlacementOutline();
         m_ConfirmationBar.Show(m_PlacementProcess.BuildAction.GoldCost, m_PlacementProcess.BuildAction.WoodCost);
         m_ConfirmationBar.SetupHooks(ConfirmBuildProcess, CancelBuildProcess);
