@@ -3,17 +3,12 @@ using UnityEngine.UIElements;
 
 public class AIPawn : MonoBehaviour
 {
-    [SerializeField] private float m_Speed = 1.0f;
+    [SerializeField] private float m_Speed = 2.0f;
     private Vector3? m_Destination;
     public Vector3 Destination
     {
         get => m_Destination ?? transform.position;
     }
-
-    // void Start()
-    // {
-    //     SetDestination(new Vector3(-7.0f, -2.0f, 0));
-    // }
 
     void Update()
     {
