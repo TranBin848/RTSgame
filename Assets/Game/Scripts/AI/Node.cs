@@ -1,12 +1,20 @@
+using UnityEngine;
+
 public class Node
 {
-    public float x;
-    public float y;
+    public int x;
+    public int y;
+    public float centerX;
+    public float centerY;
     public bool isWalkable;
-    public Node(float x, float y, bool isWalkable)
+    public Node(Vector3Int position, Vector3 cellSize, bool isWalkable)
     {
-        this.x = x;
-        this.y = y;
+        this.x = position.x;
+        this.y = position.y;
+        Vector3 halfCell = cellSize / 2f;
+        var nodeCenterPosition = position + halfCell;
+        centerX = nodeCenterPosition.x;
+        centerY = nodeCenterPosition.y;
         this.isWalkable = isWalkable;
     }
 }
