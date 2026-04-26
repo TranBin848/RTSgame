@@ -7,11 +7,22 @@ public class TilemapManager : SingletonManager<TilemapManager>
     [SerializeField] private Tilemap m_WalkableTilemap;
     [SerializeField] private Tilemap m_OverlayTilemap;
     [SerializeField] private Tilemap[] m_UnreachableTilemaps;
+
+    [Header("Testing")]
+    [SerializeField] private Transform m_StartTransform;
+    [SerializeField] private Transform m_EndTransform;
     public Tilemap PathfindingTilemap => m_WalkableTilemap;
     private Pathfinding m_Pathfinding;
     void Start()
     {
         m_Pathfinding = new Pathfinding(this);
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            m_Pathfinding.FindPath(m_StartTransform.position, m_EndTransform.position);
+        }
     }
     public bool CamWalkAtTile(Vector3Int tilePosition)
     {

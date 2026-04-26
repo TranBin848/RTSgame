@@ -32,8 +32,30 @@ public class Pathfinding
                 bool isWalkable = m_TilemapManager.CamWalkAtTile(nodeLeftBottomPosition);
                 var node = new Node(nodeLeftBottomPosition, cellSize, isWalkable);
                 m_Grid[x, y] = node;
-                Debug.Log("Node at " + nodeLeftBottomPosition + " is walkable: " + node.isWalkable);
             }
         }
+    }
+    public void FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
+    {
+        Node startNode = FindNode(startWorldPosition);
+        Node endNode = FindNode(endWorldPosition);
+        Debug.Log("Start Node: (" + startNode.x + ", " + startNode.y + "), Walkable: " + startNode.isWalkable);
+        Debug.Log("End Node: (" + endNode.x + ", " + endNode.y + "), Walkable: " + endNode.isWalkable);
+    }
+    Node FindNode(Vector3 worldPosition)
+    {
+        Vector3Int flooredPosition = new Vector3Int(
+            Mathf.FloorToInt(worldPosition.x),
+            Mathf.FloorToInt(worldPosition.y),
+            0
+            );
+        int gridx = flooredPosition.x - m_GridOffset.x;
+        int gridy = flooredPosition.y - m_GridOffset.y;
+        if (gridx >= 0 && gridx < m_Width && gridy >= 0 && gridy < m_Height)
+        {
+            return m_Grid[gridx, gridy];
+        }
+        Debug.LogError("World position " + worldPosition + " is out of grid bounds.");
+        return null;
     }
 }

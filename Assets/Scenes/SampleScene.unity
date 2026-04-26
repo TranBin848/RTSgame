@@ -267,8 +267,8 @@ GameObject:
   - component: {fileID: 31872011}
   - component: {fileID: 31872010}
   m_Layer: 0
-  m_Name: PathfindingManager
-  m_TagString: Untagged
+  m_Name: TilemapManager
+  m_TagString: TilemapManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,6 +286,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathfindingManager
   m_WalkableTilemap: {fileID: 1266608441}
+  m_OverlayTilemap: {fileID: 2113658089}
+  m_UnreachableTilemaps:
+  - {fileID: 323949340}
+  m_StartTransform: {fileID: 1664313466}
+  m_EndTransform: {fileID: 2122682475}
 --- !u!4 &31872011
 Transform:
   m_ObjectHideFlags: 0
@@ -1213,7 +1218,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -6, y: -7, z: 0}
@@ -1650,7 +1655,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: 0, z: 0}
@@ -2790,10 +2795,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d72098051a04b143b8fa7baca02c59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  m_WalkableTilemap: {fileID: 1266608441}
-  m_OverlayTilemap: {fileID: 2113658089}
-  m_UnreachableTilemaps:
-  - {fileID: 323949340}
   m_PointToClickPrefab: {fileID: 7896186051564479908, guid: 3f4ac2755bb4cf84097c630d2c529ede, type: 3}
   m_ActionBar: {fileID: 752726686}
   m_ConfirmationBar: {fileID: 317125889}
