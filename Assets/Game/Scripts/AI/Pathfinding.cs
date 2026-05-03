@@ -56,6 +56,7 @@ public class Pathfinding
             {
                 var path = RetracePath(startNode, endNode, startWorldPosition);
                 Debug.Log("Path found: " + string.Join(" -> ", path));
+                ResetNodes(openList, closedList);
                 return path;
             }
 
@@ -88,6 +89,7 @@ public class Pathfinding
 
         }
         Debug.Log("No path found.");
+        ResetNodes(openList, closedList);
         return new List<Vector3>();
     }
     Node GetLowerFCostNode(List<Node> openList)
@@ -164,5 +166,24 @@ public class Pathfinding
         }
         Debug.LogError("World position " + worldPosition + " is out of grid bounds.");
         return null;
+    }
+    void ResetNodes(List<Node> OL, HashSet<Node> CL)
+    {
+        foreach (var node in OL)
+        {
+            node.gCost = 0;
+            node.hCost = 0;
+            node.fCost = 0;
+            node.parent = null;
+        }
+        foreach (var node in CL)
+        {
+            node.gCost = 0;
+            node.hCost = 0;
+            node.fCost = 0;
+            node.parent = null;
+        }
+        OL.Clear();
+        CL.Clear();
     }
 }
