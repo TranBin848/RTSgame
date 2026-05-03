@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class AIPawn : MonoBehaviour
 {
@@ -7,11 +8,7 @@ public class AIPawn : MonoBehaviour
     private List<Node> m_CurrentPath = new();
     private TilemapManager m_TilemapManager;
     private int m_CurrentNodeIndex = 0;
-    private Vector3? m_Destination;
-    public Vector3 Destination
-    {
-        get => m_Destination ?? transform.position;
-    }
+
     private void Start()
     {
         m_TilemapManager = TilemapManager.Get();
@@ -21,7 +18,6 @@ public class AIPawn : MonoBehaviour
     {
         if (!isPathValid())
         {
-            m_Destination = null;
             return;
         }
         Node currentNode = m_CurrentPath[m_CurrentNodeIndex];
@@ -32,14 +28,30 @@ public class AIPawn : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
-            m_CurrentNodeIndex++;
+            if (m_CurrentNodeIndex == m_CurrentPath.Count - 1)
+            {
+                m_CurrentPath = new();
+            }
+            else
+            {
+                m_CurrentNodeIndex++;
+            }
+
         }
     }
 
     public void SetDestination(Vector3 destination)
     {
+        if (m_CurrentPath.Count > 0)
+        {
+            Node newEndNode = m_TilemapManager.FindNode(destination);
+
+            if (newEndNode == m_CurrentPath[^1])
+            {
+                return;
+            }
+        }
         m_CurrentPath = m_TilemapManager.FindPath(transform.position, destination);
-        m_Destination = destination;
         m_CurrentNodeIndex = 0;
     }
 

@@ -149,7 +149,7 @@ public class Pathfinding
         }
         return neighbors;
     }
-    Node FindNode(Vector3 worldPosition)
+    public Node FindNode(Vector3 worldPosition)
     {
         Vector3Int flooredPosition = new Vector3Int(
             Mathf.FloorToInt(worldPosition.x),
