@@ -7,6 +7,10 @@ public class Node
     public float centerX;
     public float centerY;
     public bool isWalkable;
+    public float gCost;
+    public float hCost;
+    public float fCost;
+    public Node parent;
     public Node(Vector3Int position, Vector3 cellSize, bool isWalkable)
     {
         this.x = position.x;
@@ -16,5 +20,9 @@ public class Node
         centerX = nodeCenterPosition.x;
         centerY = nodeCenterPosition.y;
         this.isWalkable = isWalkable;
+    }
+    public override string ToString()
+    {
+        return $"Node({x}, {y})";
     }
 }

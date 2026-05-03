@@ -1,4 +1,5 @@
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TilemapManager : SingletonManager<TilemapManager>
@@ -9,20 +10,16 @@ public class TilemapManager : SingletonManager<TilemapManager>
     [SerializeField] private Tilemap[] m_UnreachableTilemaps;
 
     [Header("Testing")]
-    [SerializeField] private Transform m_StartTransform;
-    [SerializeField] private Transform m_EndTransform;
+
     public Tilemap PathfindingTilemap => m_WalkableTilemap;
     private Pathfinding m_Pathfinding;
     void Start()
     {
         m_Pathfinding = new Pathfinding(this);
     }
-    void Update()
+    public List<Node> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            m_Pathfinding.FindPath(m_StartTransform.position, m_EndTransform.position);
-        }
+        return m_Pathfinding.FindPath(startWorldPosition, endWorldPosition);
     }
     public bool CamWalkAtTile(Vector3Int tilePosition)
     {

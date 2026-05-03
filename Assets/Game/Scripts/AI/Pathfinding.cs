@@ -1,4 +1,4 @@
-using System.Net.Mail;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Pathfinding
@@ -35,12 +35,119 @@ public class Pathfinding
             }
         }
     }
-    public void FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
+    public List<Node> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
     {
         Node startNode = FindNode(startWorldPosition);
         Node endNode = FindNode(endWorldPosition);
-        Debug.Log("Start Node: (" + startNode.x + ", " + startNode.y + "), Walkable: " + startNode.isWalkable);
-        Debug.Log("End Node: (" + endNode.x + ", " + endNode.y + "), Walkable: " + endNode.isWalkable);
+        if (startNode == null || endNode == null)
+        {
+            Debug.LogError("Start or end node is out of grid bounds.");
+            return new List<Node>();
+        }
+        List<Node> openList = new();
+        HashSet<Node> closedList = new();
+
+        openList.Add(startNode);
+
+        while (openList.Count > 0)
+        {
+            Node currentNode = GetLowerFCostNode(openList);
+            if (currentNode == endNode)
+            {
+                var path = RetracePath(startNode, endNode);
+                Debug.Log("Path found: " + string.Join(" -> ", path));
+                return path;
+            }
+
+            openList.Remove(currentNode);
+            closedList.Add(currentNode);
+
+            Debug.Log("OL: " + string.Join(", ", openList));
+            Debug.Log("CL: " + string.Join(", ", closedList));
+
+            foreach (Node neighbor in GetNeighbors(currentNode))
+            {
+                if (!neighbor.isWalkable || closedList.Contains(neighbor))
+                {
+                    continue;
+                }
+                float tentativeG = currentNode.gCost + GetDistance(currentNode, neighbor);
+                if (tentativeG < neighbor.gCost || !openList.Contains(neighbor))
+                {
+                    neighbor.gCost = tentativeG;
+                    neighbor.hCost = GetDistance(neighbor, endNode);
+                    neighbor.fCost = neighbor.gCost + neighbor.hCost;
+                    neighbor.parent = currentNode;
+
+                    if (!openList.Contains(neighbor))
+                    {
+                        openList.Add(neighbor);
+                    }
+                }
+            }
+
+        }
+        Debug.Log("No path found.");
+        return new List<Node>();
+    }
+    Node GetLowerFCostNode(List<Node> openList)
+    {
+        Node lowerFCostNode = openList[0];
+        foreach (Node node in openList)
+        {
+            if (node.fCost < lowerFCostNode.fCost || (node.fCost == lowerFCostNode.fCost && node.hCost < lowerFCostNode.hCost))
+            {
+                lowerFCostNode = node;
+            }
+        }
+        return lowerFCostNode;
+    }
+    List<Node> RetracePath(Node startNode, Node endNode)
+    {
+        List<Node> path = new();
+        Node currentNode = endNode;
+
+        while (currentNode != startNode)
+        {
+            path.Add(currentNode);
+            currentNode = currentNode.parent;
+        }
+        path.Add(startNode);
+        path.Reverse();
+        return path;
+    }
+    float GetDistance(Node a, Node b)
+    {
+        int dstX = Mathf.Abs(a.x - b.x);
+        int dstY = Mathf.Abs(a.y - b.y);
+        if (dstX > dstY)
+            return 14 * dstY + 10 * (dstX - dstY);
+        return 14 * dstX + 10 * (dstY - dstX);
+    }
+    List<Node> GetNeighbors(Node node)
+    {
+        List<Node> neighbors = new();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+
+                int checkX = node.x + x - m_GridOffset.x;
+                int checkY = node.y + y - m_GridOffset.y;
+
+                if (checkX >= 0 && checkX < m_Width && checkY >= 0 && checkY < m_Height)
+                {
+                    var neighbor = m_Grid[checkX, checkY];
+                    if (neighbor.isWalkable)
+                    {
+                        neighbors.Add(neighbor);
+                    }
+                }
+            }
+        }
+        return neighbors;
     }
     Node FindNode(Vector3 worldPosition)
     {
