@@ -35,14 +35,14 @@ public class Pathfinding
             }
         }
     }
-    public List<Node> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
+    public List<Vector3> FindPath(Vector3 startWorldPosition, Vector3 endWorldPosition)
     {
         Node startNode = FindNode(startWorldPosition);
         Node endNode = FindNode(endWorldPosition);
         if (startNode == null || endNode == null)
         {
             Debug.LogError("Start or end node is out of grid bounds.");
-            return new List<Node>();
+            return new List<Vector3>();
         }
         List<Node> openList = new();
         HashSet<Node> closedList = new();
@@ -54,7 +54,7 @@ public class Pathfinding
             Node currentNode = GetLowerFCostNode(openList);
             if (currentNode == endNode)
             {
-                var path = RetracePath(startNode, endNode);
+                var path = RetracePath(startNode, endNode, startWorldPosition);
                 Debug.Log("Path found: " + string.Join(" -> ", path));
                 return path;
             }
@@ -88,7 +88,7 @@ public class Pathfinding
 
         }
         Debug.Log("No path found.");
-        return new List<Node>();
+        return new List<Vector3>();
     }
     Node GetLowerFCostNode(List<Node> openList)
     {
@@ -102,17 +102,17 @@ public class Pathfinding
         }
         return lowerFCostNode;
     }
-    List<Node> RetracePath(Node startNode, Node endNode)
+    List<Vector3> RetracePath(Node startNode, Node endNode, Vector3 startPosition)
     {
-        List<Node> path = new();
+        List<Vector3> path = new();
         Node currentNode = endNode;
 
         while (currentNode != startNode)
         {
-            path.Add(currentNode);
+            path.Add(new Vector3(currentNode.centerX, currentNode.centerY));
             currentNode = currentNode.parent;
         }
-        path.Add(startNode);
+        path.Add(startPosition);
         path.Reverse();
         return path;
     }
