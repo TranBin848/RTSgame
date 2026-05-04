@@ -3,7 +3,11 @@ using UnityEngine;
 public class StructureUnit : Unit
 {
     private BuildingProcess m_BuildingProcess;
-
+    private TilemapManager m_TilemapManager;
+    void Start()
+    {
+        m_TilemapManager = TilemapManager.Get();
+    }
     public bool isUnderConstruction => m_BuildingProcess != null;
 
     void Update()
@@ -57,6 +61,6 @@ public class StructureUnit : Unit
             Mathf.RoundToInt(transform.position.y - halfHeight),
             0);
 
-        TilemapManager.Get().UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
+        m_TilemapManager.UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
     }
 }

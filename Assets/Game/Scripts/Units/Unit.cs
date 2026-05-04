@@ -34,6 +34,7 @@ public abstract class Unit : MonoBehaviour
         if (TryGetComponent<AIPawn>(out var aiPawn))
         {
             m_AIPawn = aiPawn;
+            m_AIPawn.OnNewPositionSelected += TurnToPosition;
         }
         if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
         {
@@ -44,6 +45,13 @@ public abstract class Unit : MonoBehaviour
             m_OriginalMaterial = m_SpriteRenderer.material;
         }
         m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
+    }
+    void OnDestroy()
+    {
+        if (m_AIPawn != null)
+        {
+            m_AIPawn.OnNewPositionSelected -= TurnToPosition;
+        }
     }
 
     public void SetTask(UnitTask task)
@@ -60,9 +68,6 @@ public abstract class Unit : MonoBehaviour
     }
     public void MoveTo(Vector3 destination)
     {
-        var direction = (destination - transform.position).normalized;
-        m_SpriteRenderer.flipX = direction.x < 0;
-
         if (m_AIPawn != null)
         {
             m_AIPawn.SetDestination(destination);
@@ -94,6 +99,11 @@ public abstract class Unit : MonoBehaviour
     protected Collider2D[] RunProximityObjectDetection()
     {
         return Physics2D.OverlapCircleAll(transform.position, m_ObjectDetectionRadius);
+    }
+    void TurnToPosition(Vector3 position)
+    {
+        var direction = (position - transform.position).normalized;
+        m_SpriteRenderer.flipX = direction.x < 0;
     }
     void HighLight()
     {
