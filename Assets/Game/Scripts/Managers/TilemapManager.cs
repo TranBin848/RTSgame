@@ -28,7 +28,8 @@ public class TilemapManager : SingletonManager<TilemapManager>
     public bool CamWalkAtTile(Vector3Int tilePosition)
     {
         return m_WalkableTilemap.HasTile(tilePosition) &&
-        !isInUnreachableTilemap(tilePosition);
+        !isInUnreachableTilemap(tilePosition) &&
+        !isBlockByBuilding(tilePosition);
     }
     public bool CanPlaceTiles(Vector3Int tilePosition)
     {
@@ -46,6 +47,15 @@ public class TilemapManager : SingletonManager<TilemapManager>
             }
         }
         return false;
+    }
+    public bool isBlockByBuilding(Vector3Int tilePosition)
+    {
+        Vector3 worldPosition = m_WalkableTilemap.CellToWorld(tilePosition) + m_WalkableTilemap.cellSize / 2;
+        int buildingLayerMask = 1 << LayerMask.NameToLayer("Building");
+
+        Collider2D[] collider = Physics2D.OverlapPointAll(worldPosition, buildingLayerMask);
+        return collider.Length > 0;
+
     }
     public bool isBlockByGameObject(Vector3Int tilePosition)
     {

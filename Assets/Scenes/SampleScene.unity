@@ -1538,7 +1538,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -15, y: -1, z: 0}
@@ -5310,6 +5310,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708311422}
   m_CullTransparentMesh: 1
+--- !u!1001 &1749802454
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.74453
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.00686
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697215776523667284, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527654185206737124, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_Name
+      value: Tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
 --- !u!1 &1781963766
 GameObject:
   m_ObjectHideFlags: 0
@@ -14791,3 +14848,4 @@ SceneRoots:
   - {fileID: 53930966}
   - {fileID: 603986749}
   - {fileID: 31872011}
+  - {fileID: 1749802454}
