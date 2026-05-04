@@ -25,6 +25,10 @@ public class TilemapManager : SingletonManager<TilemapManager>
     {
         return m_Pathfinding.FindNode(worldPosition);
     }
+    public void UpdateNodesInArea(Vector3Int startPosition, int width, int height)
+    {
+        m_Pathfinding.UpdateNodesInArea(startPosition, width, height);
+    }
     public bool CamWalkAtTile(Vector3Int tilePosition)
     {
         return m_WalkableTilemap.HasTile(tilePosition) &&

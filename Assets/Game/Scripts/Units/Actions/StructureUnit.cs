@@ -13,7 +13,15 @@ public class StructureUnit : Unit
             m_BuildingProcess.Update();
         }
     }
-    public void OnConstructionFinished() => m_BuildingProcess = null;
+    public void OnDestroy()
+    {
+        UpdateWalkability();
+    }
+    public void OnConstructionFinished()
+    {
+        m_BuildingProcess = null;
+        UpdateWalkability();
+    }
     public void RegisterBuildingProcess(BuildingProcess buildingProcess)
     {
         m_BuildingProcess = buildingProcess;
@@ -35,5 +43,20 @@ public class StructureUnit : Unit
             return;
         }
         m_BuildingProcess.RemoveWorker();
+    }
+    void UpdateWalkability()
+    {
+        int buildingWidthInTiles = 6;
+        int buildingHeightInTiles = 6;
+
+        float halfWidth = buildingHeightInTiles * 0.5f;
+        float halfHeight = buildingHeightInTiles * 0.5f;
+
+        Vector3Int startPosition = new Vector3Int(
+            Mathf.RoundToInt(transform.position.x - halfWidth),
+            Mathf.RoundToInt(transform.position.y - halfHeight),
+            0);
+
+        TilemapManager.Get().UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
     }
 }
