@@ -49,6 +49,9 @@ public class Pathfinding
 
         openList.Add(startNode);
 
+        Node closetNode = startNode;
+        float closetDistanceToEnd = GetDistance(closetNode, endNode);
+
         while (openList.Count > 0)
         {
             Node currentNode = GetLowerFCostNode(openList);
@@ -75,10 +78,17 @@ public class Pathfinding
                 float tentativeG = currentNode.gCost + GetDistance(currentNode, neighbor);
                 if (tentativeG < neighbor.gCost || !openList.Contains(neighbor))
                 {
+                    var distance = GetDistance(neighbor, endNode);
                     neighbor.gCost = tentativeG;
-                    neighbor.hCost = GetDistance(neighbor, endNode);
+                    neighbor.hCost = distance;
                     neighbor.fCost = neighbor.gCost + neighbor.hCost;
                     neighbor.parent = currentNode;
+
+                    if (distance < closetDistanceToEnd)
+                    {
+                        closetNode = neighbor;
+                        closetDistanceToEnd = distance;
+                    }
 
                     if (!openList.Contains(neighbor))
                     {
@@ -88,9 +98,9 @@ public class Pathfinding
             }
 
         }
-        Debug.Log("No path found.");
+        var unFinishedPath = RetracePath(startNode, closetNode, startWorldPosition);
         ResetNodes(openList, closedList);
-        return new List<Vector3>();
+        return unFinishedPath;
     }
     Node GetLowerFCostNode(List<Node> openList)
     {
