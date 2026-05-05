@@ -2360,6 +2360,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2485,6 +2486,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1068028fc24ce4aa6d6db56db434f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  m_PanSpeed: 20
+  m_EdgeSize: 30
+  m_Smoothing: 10
+  m_ZoomSpeed: 5
+  m_MinZoom: 3
+  m_MaxZoom: 15
 --- !u!1 &603986746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,7 +2815,6 @@ MonoBehaviour:
   m_PointToClickPrefab: {fileID: 7896186051564479908, guid: 3f4ac2755bb4cf84097c630d2c529ede, type: 3}
   m_ActionBar: {fileID: 752726686}
   m_ConfirmationBar: {fileID: 317125889}
-  m_PanSpeed: 20
   ActiveUnit: {fileID: 0}
 --- !u!4 &682572417
 Transform:

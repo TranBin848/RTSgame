@@ -6,8 +6,6 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
-    [Header("Camera Settings")]
-    [SerializeField] private float m_PanSpeed = 10f;
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 1000;
     private int m_Wood = 1000;
@@ -18,13 +16,16 @@ public class GameManager : SingletonManager<GameManager>
     public bool HasActiveUnit => ActiveUnit != null;
     void Start()
     {
-        m_CameraController = new CameraController(m_PanSpeed);
+        m_CameraController = FindObjectOfType<CameraController>();
+        if (m_CameraController == null)
+        {
+            Debug.LogWarning("CameraController not found in scene. Automatically adding to Main Camera.");
+            m_CameraController = Camera.main.gameObject.AddComponent<CameraController>();
+        }
         ClearActionBarUI();
     }
     void Update()
     {
-        m_CameraController.Update();
-
         if (m_PlacementProcess != null)
         {
             m_PlacementProcess.Update();
