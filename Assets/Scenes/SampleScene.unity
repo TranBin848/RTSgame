@@ -2796,6 +2796,7 @@ MonoBehaviour:
   m_PointToClickPrefab: {fileID: 7896186051564479908, guid: 3f4ac2755bb4cf84097c630d2c529ede, type: 3}
   m_ActionBar: {fileID: 752726686}
   m_ConfirmationBar: {fileID: 317125889}
+  m_PanSpeed: 20
   ActiveUnit: {fileID: 0}
 --- !u!4 &682572417
 Transform:
@@ -5074,7 +5075,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 25
+  m_SortingOrder: 26
   m_Sprite: {fileID: 6240580, guid: d3aeb1b39bb3d5042afa89c0e49bc129, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14742,7 +14743,7 @@ Transform:
   m_GameObject: {fileID: 2122682473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.39, y: -5.08, z: 0}
+  m_LocalPosition: {x: -12.52, y: -1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

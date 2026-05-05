@@ -1,7 +1,4 @@
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Tilemaps;
 
 public class GameManager : SingletonManager<GameManager>
 {
@@ -9,20 +6,25 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
+    [Header("Camera Settings")]
+    [SerializeField] private float m_PanSpeed = 10f;
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 1000;
     private int m_Wood = 1000;
     public int Gold => m_Gold;
     public int Wood => m_Wood;
-
     public Unit ActiveUnit;
+    private CameraController m_CameraController;
     public bool HasActiveUnit => ActiveUnit != null;
     void Start()
     {
+        m_CameraController = new CameraController(m_PanSpeed);
         ClearActionBarUI();
     }
     void Update()
     {
+        m_CameraController.Update();
+
         if (m_PlacementProcess != null)
         {
             m_PlacementProcess.Update();
@@ -44,6 +46,7 @@ public class GameManager : SingletonManager<GameManager>
         m_PlacementProcess.ShowPlacementOutline();
         m_ConfirmationBar.Show(m_PlacementProcess.BuildAction.GoldCost, m_PlacementProcess.BuildAction.WoodCost);
         m_ConfirmationBar.SetupHooks(ConfirmBuildProcess, CancelBuildProcess);
+        m_CameraController.LockCamera = true;
     }
     void DetectClick(Vector2 inputPosition)
     {
@@ -169,7 +172,7 @@ public class GameManager : SingletonManager<GameManager>
                  );
 
             m_PlacementProcess = null;
-
+            m_CameraController.LockCamera = false;
         }
         else
         {
@@ -187,6 +190,7 @@ public class GameManager : SingletonManager<GameManager>
         m_ConfirmationBar.Hide();
         m_PlacementProcess.CleanUp();
         m_PlacementProcess = null;
+        m_CameraController.LockCamera = false;
         Debug.Log("Build Process Canceled");
     }
     bool TryDeductResources(int goldCost, int woodCost)
