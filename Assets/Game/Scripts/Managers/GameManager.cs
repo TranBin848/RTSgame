@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : SingletonManager<GameManager>
@@ -12,6 +13,8 @@ public class GameManager : SingletonManager<GameManager>
     public int Gold => m_Gold;
     public int Wood => m_Wood;
     public Unit ActiveUnit;
+    private List<Unit> m_PlayerUnits = new();
+    private List<Unit> m_EnemyUnits = new();
     private CameraController m_CameraController;
     public bool HasActiveUnit => ActiveUnit != null;
     void Start()
@@ -35,7 +38,29 @@ public class GameManager : SingletonManager<GameManager>
             DetectClick(inputPosition);
         }
     }
+    public void RegisterUnit(Unit unit)
+    {
+        if (unit.IsPlayer)
+        {
+            m_PlayerUnits.Add(unit);
+        }
+        else
+        {
+            m_EnemyUnits.Add(unit);
+        }
+    }
+    public void UnregisterUnit(Unit unit)
+    {
+        if (unit.IsPlayer)
+        {
+            m_PlayerUnits.Remove(unit);
+        }
+        else
+        {
+            m_EnemyUnits.Remove(unit);
+        }
 
+    }
     public void StartBuildProcess(BuildActionSo buildAction)
     {
         if (m_PlacementProcess != null)

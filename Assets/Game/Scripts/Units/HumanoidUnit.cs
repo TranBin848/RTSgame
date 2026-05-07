@@ -6,8 +6,9 @@ public class HumanoidUnit : Unit
     protected float m_SmoothFactor = 50;
     protected float m_SmoothSpeed;
     public float CurrentSpeed => m_Velocity.magnitude;
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         m_lastPosition = transform.position;
     }
     void Update()
