@@ -61,6 +61,25 @@ public class GameManager : SingletonManager<GameManager>
         }
 
     }
+    public Unit FindClosetUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
+    {
+        List<Unit> units = isPlayer ? m_PlayerUnits : m_EnemyUnits;
+        float maxDistanceSqr = maxDistance * maxDistance;
+        Unit closestUnit = null;
+        float closestDistanceSqr = float.MaxValue;
+
+        foreach (var unit in units)
+        {
+            float distance = (unit.transform.position - originPosition).sqrMagnitude;
+            if (distance < maxDistanceSqr && distance <= closestDistanceSqr)
+            {
+                closestDistanceSqr = distance;
+                closestUnit = unit;
+            }
+        }
+        return closestUnit;
+    }
+
     public void StartBuildProcess(BuildActionSo buildAction)
     {
         if (m_PlacementProcess != null)

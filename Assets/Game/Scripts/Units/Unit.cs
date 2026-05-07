@@ -113,6 +113,11 @@ public abstract class Unit : MonoBehaviour
     {
         m_GameManager.UnregisterUnit(unit);
     }
+    protected virtual bool TryFindClosetFoe(out Unit foe)
+    {
+        foe = m_GameManager.FindClosetUnit(transform.position, m_ObjectDetectionRadius, !IsPlayer);
+        return foe != null;
+    }
     protected Collider2D[] RunProximityObjectDetection()
     {
         return Physics2D.OverlapCircleAll(transform.position, m_ObjectDetectionRadius);
