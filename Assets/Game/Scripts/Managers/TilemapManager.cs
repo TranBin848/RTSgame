@@ -55,29 +55,28 @@ public class TilemapManager : SingletonManager<TilemapManager>
     public bool isBlockByBuilding(Vector3Int tilePosition)
     {
         Vector3 worldPosition = m_WalkableTilemap.CellToWorld(tilePosition) + m_WalkableTilemap.cellSize / 2;
-        int buildingLayerMask = 1 << LayerMask.NameToLayer("Building");
-
+        int buildingLayerMask = 1 << LayerMask.NameToLayer("Unit");
         Collider2D[] collider = Physics2D.OverlapPointAll(worldPosition, buildingLayerMask);
-        return collider.Length > 0;
+
+        foreach (var col in collider)
+        {
+            if (col.CompareTag("Building")) return true;
+        }
+
+        return false;
 
     }
     public bool isBlockByGameObject(Vector3Int tilePosition)
     {
         Vector3 tileSize = m_WalkableTilemap.cellSize;
+        int unitLayerMask = 1 << LayerMask.NameToLayer("Unit");
         Collider2D[] colliders = Physics2D.OverlapBoxAll(
             new Vector2(tilePosition.x + tileSize.x / 2, tilePosition.y + tileSize.y / 2),
             tileSize * 0.9f,
-            0f
+            0f, unitLayerMask
             );
-        foreach (var collider in colliders)
-        {
-            var layer = collider.gameObject.layer;
-            if (layer == LayerMask.NameToLayer("Unit") || layer == LayerMask.NameToLayer("Building"))
-            {
-                return true;
-            }
-        }
-        return false;
+
+        return colliders.Length > 0;
     }
     public void SetTileOverlay(Vector3Int tilePosition, Tile tile)
     {

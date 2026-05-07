@@ -60,7 +60,10 @@ public class GameManager : SingletonManager<GameManager>
 
         if (HasClickedOnUnit(hit, out var unit))
         {
-            handleClickOnUnit(unit);
+            if (unit.IsPlayer)
+            {
+                handleClickOnPlayerUnit(unit);
+            }
         }
         else
         {
@@ -85,7 +88,7 @@ public class GameManager : SingletonManager<GameManager>
             ActiveUnit.MoveTo(worldPoint);
         }
     }
-    void handleClickOnUnit(Unit unit)
+    void handleClickOnPlayerUnit(Unit unit)
     {
         if (isClickedOnActiveUnit(unit))
         {

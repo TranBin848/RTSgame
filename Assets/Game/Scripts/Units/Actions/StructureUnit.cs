@@ -3,6 +3,7 @@ using UnityEngine;
 public class StructureUnit : Unit
 {
     private BuildingProcess m_BuildingProcess;
+    public override bool IsBuilding => true;
     private TilemapManager m_TilemapManager;
     void Start()
     {
