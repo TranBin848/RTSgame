@@ -48,6 +48,7 @@ public class GameManager : SingletonManager<GameManager>
         {
             m_EnemyUnits.Add(unit);
         }
+        Debug.Log($"Registered {(unit.IsPlayer ? "Player" : "Enemy")} Unit: {unit.name}");
     }
     public void UnregisterUnit(Unit unit)
     {
@@ -71,7 +72,8 @@ public class GameManager : SingletonManager<GameManager>
         foreach (var unit in units)
         {
             float distance = (unit.transform.position - originPosition).sqrMagnitude;
-            if (distance < maxDistanceSqr && distance <= closestDistanceSqr)
+            Debug.Log($"Checking unit {unit.name} at distance {Mathf.Sqrt(distance)} (sqr: {distance}) against max distance {maxDistance} (sqr: {maxDistanceSqr})");
+            if (distance <= maxDistanceSqr && distance <= closestDistanceSqr)
             {
                 closestDistanceSqr = distance;
                 closestUnit = unit;

@@ -13,7 +13,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private ActionSO[] m_Actions;
     [SerializeField] protected float m_ObjectDetectionRadius = 0.5f;
     [SerializeField] protected float m_UnitDetectionCheckRate = 0.5f;
-
+    [SerializeField] protected float m_AttackRange = 1f;
     public bool isTargeted = false;
     protected GameManager m_GameManager;
     protected Animator m_Animator;
@@ -121,6 +121,7 @@ public abstract class Unit : MonoBehaviour
         {
             m_NextUnitDetectionTime = Time.time + m_UnitDetectionCheckRate;
             foe = m_GameManager.FindClosetUnit(transform.position, m_ObjectDetectionRadius, !IsPlayer);
+            Debug.Log($"Found closet foe: {foe?.name ?? "None"}");
             return foe != null;
         }
         else
@@ -128,6 +129,10 @@ public abstract class Unit : MonoBehaviour
             foe = null;
             return false;
         }
+    }
+    protected bool IsTargetInRange(Transform targetTransform)
+    {
+        return Vector3.Distance(transform.position, targetTransform.position) <= m_AttackRange;
     }
     protected Collider2D[] RunProximityObjectDetection()
     {
@@ -156,5 +161,8 @@ public abstract class Unit : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_ObjectDetectionRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, m_AttackRange);
     }
 }
