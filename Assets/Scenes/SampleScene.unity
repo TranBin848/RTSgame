@@ -1101,7 +1101,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -11, y: -7, z: 0}
@@ -2287,7 +2287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a3fb2d85686614385cb3a76cc43bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIPawn
-  m_Speed: 8
+  m_Speed: 2
 --- !u!114 &337512139
 MonoBehaviour:
   m_ObjectHideFlags: 0

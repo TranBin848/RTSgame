@@ -14,6 +14,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_ObjectDetectionRadius = 0.5f;
     [SerializeField] protected float m_UnitDetectionCheckRate = 0.5f;
     [SerializeField] protected float m_AttackRange = 1f;
+    [SerializeField] protected float m_AutoAttackFrequency = 1.5f;
     public bool isTargeted = false;
     protected GameManager m_GameManager;
     protected Animator m_Animator;
@@ -22,6 +23,7 @@ public abstract class Unit : MonoBehaviour
     protected Material m_OriginalMaterial;
     protected Material m_HighlightMaterial;
     protected float m_NextUnitDetectionTime = 0f;
+    protected float m_NextAutoAttackTime;
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
     public Unit Target { get; protected set; }
@@ -130,6 +132,19 @@ public abstract class Unit : MonoBehaviour
             return false;
         }
     }
+    protected virtual bool TryAttackCurrentTarget()
+    {
+        if (Time.time >= m_NextAutoAttackTime)
+        {
+            Debug.Log($"Trying to auto attack target: {Target?.name ?? "None"}");
+            m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
+            return true;
+        }
+
+        Debug.Log("Attack is on CD");
+        return false;
+    }
+
     protected bool IsTargetInRange(Transform targetTransform)
     {
         return Vector3.Distance(transform.position, targetTransform.position) <= m_AttackRange;

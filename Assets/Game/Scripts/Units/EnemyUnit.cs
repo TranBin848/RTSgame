@@ -38,8 +38,7 @@ public class EnemyUnit : HumanoidUnit
                 {
                     if (IsTargetInRange(Target.transform))
                     {
-                        // Attack logic here
-                        Debug.Log($"{name} is attacking {Target.name}");
+                        TryAttackCurrentTarget();
                     }
                     else
                     {
