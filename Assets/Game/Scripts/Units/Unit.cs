@@ -97,6 +97,10 @@ public abstract class Unit : MonoBehaviour
         UnHighlight();
         isTargeted = false;
     }
+    public void StopMovement()
+    {
+        m_AIPawn?.Stop();
+    }
     protected virtual void OnSetDestination()
     {
 
@@ -136,13 +140,17 @@ public abstract class Unit : MonoBehaviour
     {
         if (Time.time >= m_NextAutoAttackTime)
         {
-            Debug.Log($"Trying to auto attack target: {Target?.name ?? "None"}");
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
+            PerformAttackAnimation();
             return true;
         }
 
         Debug.Log("Attack is on CD");
         return false;
+    }
+    protected virtual void PerformAttackAnimation()
+    {
+
     }
 
     protected bool IsTargetInRange(Transform targetTransform)

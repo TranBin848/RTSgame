@@ -8,19 +8,17 @@ public class EnemyUnit : HumanoidUnit
         switch (CurrentState)
         {
             case UnitState.Idle:
-                break;
             case UnitState.Moving:
                 if (hasTarget)
                 {
                     if (IsTargetInRange(Target.transform))
                     {
                         SetState(UnitState.Attacking);
-                        Debug.Log($"{name} is attacking {Target.name}");
+                        StopMovement();
                     }
                     else
                     {
                         MoveTo(Target.transform.position);
-                        Debug.Log($"{name} is moving towards {Target.name}");
                     }
                 }
                 else
@@ -29,7 +27,6 @@ public class EnemyUnit : HumanoidUnit
                     {
                         SetTarget(foe);
                         MoveTo(foe.transform.position);
-                        Debug.Log($"{name} is moving towards {foe.name}");
                     }
                 }
                 break;
@@ -43,13 +40,11 @@ public class EnemyUnit : HumanoidUnit
                     else
                     {
                         SetState(UnitState.Moving);
-                        Debug.Log($"{name} is moving towards {Target.name}");
                     }
                 }
                 else
                 {
                     SetState(UnitState.Idle);
-                    Debug.Log($"{name} has no target and is now idle");
                 }
                 break;
         }

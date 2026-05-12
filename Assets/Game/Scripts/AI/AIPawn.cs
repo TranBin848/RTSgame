@@ -58,7 +58,11 @@ public class AIPawn : MonoBehaviour
         m_CurrentNodeIndex = 0;
         OnNewPositionSelected.Invoke(m_CurrentPath[m_CurrentNodeIndex]);
     }
-
+    public void Stop()
+    {
+        m_CurrentPath.Clear();
+        m_CurrentNodeIndex = 0;
+    }
     bool isPathValid()
     {
         return m_CurrentPath.Count > 0 && m_CurrentNodeIndex < m_CurrentPath.Count;
