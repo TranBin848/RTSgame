@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum UnitState
@@ -15,6 +16,8 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_UnitDetectionCheckRate = 0.5f;
     [SerializeField] protected float m_AttackRange = 1f;
     [SerializeField] protected float m_AutoAttackFrequency = 1.5f;
+    [SerializeField] protected float m_AutoAttackDamageDelay = 0.5f;
+    [SerializeField] protected int m_AutoAttackDamage = 10;
     public bool isTargeted = false;
     protected GameManager m_GameManager;
     protected Animator m_Animator;
@@ -142,6 +145,7 @@ public abstract class Unit : MonoBehaviour
         {
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
             PerformAttackAnimation();
+            StartCoroutine(DelayDamage(m_AutoAttackDamageDelay, m_AutoAttackDamage, Target));
             return true;
         }
 
@@ -151,6 +155,18 @@ public abstract class Unit : MonoBehaviour
     protected virtual void PerformAttackAnimation()
     {
 
+    }
+    protected virtual void TakeDamage(int dmg, Unit damager)
+    {
+        Debug.Log($"{name} took {dmg} damage from {damager.name}");
+    }
+    protected IEnumerator DelayDamage(float delay, int damage, Unit target)
+    {
+        yield return new WaitForSeconds(delay);
+        if (target != null)
+        {
+            target.TakeDamage(damage, this);
+        }
     }
 
     protected bool IsTargetInRange(Transform targetTransform)
