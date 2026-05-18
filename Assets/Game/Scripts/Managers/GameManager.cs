@@ -7,6 +7,7 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
+    [SerializeField] private TextPopupController m_TextPopupController;
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 1000;
     private int m_Wood = 1000;
@@ -60,8 +61,12 @@ public class GameManager : SingletonManager<GameManager>
         {
             m_EnemyUnits.Remove(unit);
         }
-
     }
+    public void ShowTextPopup(string text, Color color, Vector3 position)
+    {
+        m_TextPopupController.Spam(text, color, position);
+    }
+
     public Unit FindClosetUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
     {
         List<Unit> units = isPlayer ? m_PlayerUnits : m_EnemyUnits;

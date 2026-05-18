@@ -25,6 +25,7 @@ public abstract class Unit : MonoBehaviour
     protected SpriteRenderer m_SpriteRenderer;
     protected Material m_OriginalMaterial;
     protected Material m_HighlightMaterial;
+    protected CapsuleCollider2D m_Collider;
     protected float m_NextUnitDetectionTime = 0f;
     protected float m_NextAutoAttackTime;
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
@@ -49,6 +50,10 @@ public abstract class Unit : MonoBehaviour
         if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
         {
             m_SpriteRenderer = spriteRenderer;
+        }
+        if (TryGetComponent<CapsuleCollider2D>(out var collider))
+        {
+            m_Collider = collider;
         }
         if (m_SpriteRenderer != null)
         {
@@ -103,6 +108,10 @@ public abstract class Unit : MonoBehaviour
     public void StopMovement()
     {
         m_AIPawn?.Stop();
+    }
+    public Vector3 GetTopPosition()
+    {
+        return transform.position + Vector3.up * m_Collider.size.y / 2;
     }
     protected virtual void OnSetDestination()
     {
@@ -159,6 +168,7 @@ public abstract class Unit : MonoBehaviour
     protected virtual void TakeDamage(int dmg, Unit damager)
     {
         Debug.Log($"{name} took {dmg} damage from {damager.name}");
+        m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
     }
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
     {
