@@ -1354,7 +1354,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -4, y: -5, z: 0}
@@ -2308,6 +2308,7 @@ MonoBehaviour:
   m_AutoAttackDamageDelay: 0.5
   m_AutoAttackDamage: 10
   m_Health: 100
+  m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
 --- !u!70 &337512140
 CapsuleCollider2D:
@@ -5446,6 +5447,7 @@ MonoBehaviour:
   m_AutoAttackDamageDelay: 0.5
   m_AutoAttackDamage: 10
   m_Health: 20
+  m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
 --- !u!1 &1708311422
 GameObject:
@@ -15069,6 +15071,7 @@ MonoBehaviour:
   m_AutoAttackDamageDelay: 0.5
   m_AutoAttackDamage: 10
   m_Health: 100
+  m_DamageFlashColor: {r: 0.96981126, g: 0.67777, b: 0.6569099, a: 1}
   isTargeted: 0
 --- !u!70 &2122682479
 CapsuleCollider2D:

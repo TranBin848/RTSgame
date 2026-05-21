@@ -19,6 +19,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] protected float m_AutoAttackDamageDelay = 0.5f;
     [SerializeField] protected int m_AutoAttackDamage = 10;
     [SerializeField] protected int m_Health = 100;
+    [SerializeField] protected Color m_DamageFlashColor = new Color(1f, 0.27f, 0.25f, 1f);
     public bool isTargeted = false;
     protected GameManager m_GameManager;
     protected Animator m_Animator;
@@ -39,6 +40,7 @@ public abstract class Unit : MonoBehaviour
     public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
     public bool hasTarget => Target != null;
     public int CurrentHealth => m_CurrentHealth;
+
     protected void Awake()
     {
         if (TryGetComponent<Animator>(out var animator))
@@ -191,10 +193,19 @@ public abstract class Unit : MonoBehaviour
         m_CurrentHealth -= dmg;
         Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
+        StartCoroutine(FlashEffect(m_DamageFlashColor, 0.2f));
+
         if (m_CurrentHealth <= 0)
         {
             Die();
         }
+    }
+    protected IEnumerator FlashEffect(Color color, float duration)
+    {
+        Color originalColor = m_SpriteRenderer.color;
+        m_SpriteRenderer.color = color;
+        yield return new WaitForSeconds(duration);
+        m_SpriteRenderer.color = originalColor;
     }
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
     {
