@@ -76,7 +76,6 @@ public abstract class Unit : MonoBehaviour
         {
             m_AIPawn.OnNewPositionSelected -= TurnToPosition;
         }
-        UnregisterUnit(this);
     }
 
     public void SetTask(UnitTask task)
@@ -154,6 +153,10 @@ public abstract class Unit : MonoBehaviour
     }
     protected virtual bool TryAttackCurrentTarget()
     {
+        if (Target == null || Target.CurrentState == UnitState.Dead)
+        {
+            return false;
+        }
         if (Time.time >= m_NextAutoAttackTime)
         {
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
@@ -169,11 +172,15 @@ public abstract class Unit : MonoBehaviour
     {
 
     }
+    protected virtual void RunDeadEffect()
+    {
+
+    }
     protected virtual void Die()
     {
         SetState(UnitState.Dead);
-
-        Destroy(gameObject);
+        RunDeadEffect();
+        UnregisterUnit(this);
     }
     protected virtual void TakeDamage(int dmg, Unit damager)
     {
@@ -194,7 +201,14 @@ public abstract class Unit : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (target != null)
         {
-            target.TakeDamage(damage, this);
+            if (target.CurrentState == UnitState.Dead)
+            {
+                SetTarget(null);
+            }
+            else
+            {
+                target.TakeDamage(damage, this);
+            }
         }
     }
 

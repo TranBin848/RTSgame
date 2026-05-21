@@ -65,6 +65,7 @@ public class GameManager : SingletonManager<GameManager>
                 ActiveUnit.Deselect();
                 ActiveUnit = null;
             }
+            unit.StopMovement();
             m_PlayerUnits.Remove(unit);
         }
         else

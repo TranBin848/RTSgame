@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public class HumanoidUnit : Unit
 {
@@ -52,6 +53,16 @@ public class HumanoidUnit : Unit
         Vector3 direction = (Target.transform.position - transform.position).normalized;
         m_SpriteRenderer.flipX = direction.x < 0;
         m_Animator.SetTrigger("Attack");
+    }
+    protected override void RunDeadEffect()
+    {
+        m_Animator.SetTrigger("Dead");
+        StartCoroutine(LateObjectDestroy(1.2f));
+    }
+    private IEnumerator LateObjectDestroy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
 
