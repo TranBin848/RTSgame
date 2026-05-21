@@ -193,19 +193,27 @@ public abstract class Unit : MonoBehaviour
         m_CurrentHealth -= dmg;
         Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
-        StartCoroutine(FlashEffect(m_DamageFlashColor, 0.2f));
+        StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
 
         if (m_CurrentHealth <= 0)
         {
             Die();
         }
     }
-    protected IEnumerator FlashEffect(Color color, float duration)
+    protected IEnumerator FlashEffect(Color color, int flashCount, float duration)
     {
         Color originalColor = m_SpriteRenderer.color;
-        m_SpriteRenderer.color = color;
-        yield return new WaitForSeconds(duration);
+        for (int i = 0; i < flashCount; i++)
+        {
+            m_SpriteRenderer.color = color;
+            yield return new WaitForSeconds(duration / 2f);
+
+            m_SpriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(duration / 2f);
+        }
+
         m_SpriteRenderer.color = originalColor;
+
     }
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
     {
