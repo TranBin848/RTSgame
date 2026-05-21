@@ -76,6 +76,10 @@ public class GameManager : SingletonManager<GameManager>
 
         foreach (var unit in units)
         {
+            if (unit.CurrentState == UnitState.Dead)
+            {
+                continue;
+            }
             float distance = (unit.transform.position - originPosition).sqrMagnitude;
             Debug.Log($"Checking unit {unit.name} at distance {Mathf.Sqrt(distance)} (sqr: {distance}) against max distance {maxDistance} (sqr: {maxDistanceSqr})");
             if (distance <= maxDistanceSqr && distance <= closestDistanceSqr)
@@ -163,6 +167,10 @@ public class GameManager : SingletonManager<GameManager>
     }
     void SelectNewUnit(Unit unit)
     {
+        if (unit.CurrentState == UnitState.Dead)
+        {
+            return;
+        }
         if (HasActiveUnit)
         {
             ActiveUnit.Deselect();

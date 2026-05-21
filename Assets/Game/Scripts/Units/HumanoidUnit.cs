@@ -13,6 +13,10 @@ public class HumanoidUnit : Unit
     }
     void Update()
     {
+        if (CurrentState == UnitState.Dead)
+        {
+            return;
+        }
         UpdateVelocity();
         UpdateBehaviour();
         UpdateMovementAnimation();
