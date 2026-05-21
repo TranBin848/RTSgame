@@ -173,10 +173,7 @@ public abstract class Unit : MonoBehaviour
     {
         SetState(UnitState.Dead);
 
-        if (isTargeted)
-        {
-            Deselect();
-        }
+        Destroy(gameObject);
     }
     protected virtual void TakeDamage(int dmg, Unit damager)
     {

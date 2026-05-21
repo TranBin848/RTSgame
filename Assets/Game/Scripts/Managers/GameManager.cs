@@ -55,6 +55,16 @@ public class GameManager : SingletonManager<GameManager>
     {
         if (unit.IsPlayer)
         {
+            if (m_PlacementProcess != null)
+            {
+                CancelBuildProcess();
+            }
+            if (ActiveUnit == unit)
+            {
+                ClearActionBarUI();
+                ActiveUnit.Deselect();
+                ActiveUnit = null;
+            }
             m_PlayerUnits.Remove(unit);
         }
         else
