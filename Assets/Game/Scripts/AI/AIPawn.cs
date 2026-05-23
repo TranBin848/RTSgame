@@ -6,10 +6,12 @@ using UnityEngine.Events;
 public class AIPawn : MonoBehaviour
 {
     [SerializeField] private float m_Speed = 8.0f;
-    public UnityAction<Vector3> OnNewPositionSelected = delegate { };
+
     private List<Vector3> m_CurrentPath = new();
     private TilemapManager m_TilemapManager;
     private int m_CurrentNodeIndex = 0;
+    public UnityAction<Vector3> OnNewPositionSelected = delegate { };
+    public UnityAction OnDestinationReached = delegate { };
 
     private void Start()
     {
@@ -32,6 +34,7 @@ public class AIPawn : MonoBehaviour
             if (m_CurrentNodeIndex == m_CurrentPath.Count - 1)
             {
                 m_CurrentPath = new();
+                OnDestinationReached.Invoke();
             }
             else
             {

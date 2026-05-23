@@ -51,6 +51,7 @@ public abstract class Unit : MonoBehaviour
         {
             m_AIPawn = aiPawn;
             m_AIPawn.OnNewPositionSelected += TurnToPosition;
+            m_AIPawn.OnDestinationReached += OnDestinationReached;
         }
         if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
         {
@@ -77,6 +78,7 @@ public abstract class Unit : MonoBehaviour
         if (m_AIPawn != null)
         {
             m_AIPawn.OnNewPositionSelected -= TurnToPosition;
+            m_AIPawn.OnDestinationReached -= OnDestinationReached;
         }
     }
 
@@ -243,6 +245,10 @@ public abstract class Unit : MonoBehaviour
     {
         var direction = (position - transform.position).normalized;
         m_SpriteRenderer.flipX = direction.x < 0;
+    }
+    protected virtual void OnDestinationReached()
+    {
+        // This can be overridden by child classes to implement behavior when reaching destination
     }
     void HighLight()
     {

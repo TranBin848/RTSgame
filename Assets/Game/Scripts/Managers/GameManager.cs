@@ -179,7 +179,6 @@ public class GameManager : SingletonManager<GameManager>
         if (HasActiveUnit)
         {
             ActiveUnit.SetTarget(unit);
-            ActiveUnit.MoveTo(unit.transform.position);
             ActiveUnit.SetTask(UnitTask.Attack);
             DisplayClickEffect(unit.GetTopPosition());
         }
