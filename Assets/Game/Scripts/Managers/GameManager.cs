@@ -13,6 +13,7 @@ public class GameManager : SingletonManager<GameManager>
     private int m_Wood = 1000;
     public int Gold => m_Gold;
     public int Wood => m_Wood;
+    public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
     private List<Unit> m_PlayerUnits = new();
     private List<Unit> m_EnemyUnits = new();
@@ -130,6 +131,10 @@ public class GameManager : SingletonManager<GameManager>
             {
                 handleClickOnPlayerUnit(unit);
             }
+            else
+            {
+                handleClickOnEnemyUnit(unit);
+            }
         }
         else
         {
@@ -168,6 +173,16 @@ public class GameManager : SingletonManager<GameManager>
         }
 
         SelectNewUnit(unit);
+    }
+    void handleClickOnEnemyUnit(Unit unit)
+    {
+        if (HasActiveUnit)
+        {
+            ActiveUnit.SetTarget(unit);
+            ActiveUnit.MoveTo(unit.transform.position);
+            ActiveUnit.SetTask(UnitTask.Attack);
+            DisplayClickEffect(unit.GetTopPosition());
+        }
     }
     bool WorkerClickedOnUnfinishedBuilding(Unit clickedUnit)
     {

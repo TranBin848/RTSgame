@@ -103,3 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caa347fbb356de40a050a26cda6ca5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PointToClick
+  m_Color: {r: 1, g: 0, b: 0.24191332, a: 1}
+  m_Lifetime: 0.5
+  m_StartDistance: 0.8
+  m_EndDistance: 0.1
+  m_StartScale: 0.8
+  m_EndScale: 0.2
+  m_CustomArrowSprite: {fileID: 0}

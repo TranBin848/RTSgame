@@ -1354,7 +1354,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -4, y: -5, z: 0}
@@ -3434,6 +3434,62 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.89811, y: 0.60195, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1171367545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1171367547}
+  - component: {fileID: 1171367546}
+  m_Layer: 0
+  m_Name: CursorManager
+  m_TagString: CursorManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1171367546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171367545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbe05891a7f4184fbd87edca86d5150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorManager
+  m_CursorMode: 1
+  m_UseCustomSize: 1
+  m_CursorSize: {x: 48, y: 48}
+  m_DefaultCursorTexture: {fileID: 2800000, guid: 46063085d3038a44390a5ccb5fdcb82e, type: 3}
+  m_DefaultHotspot: {x: 24, y: 24}
+  m_CursorMappings:
+  - Task: 4
+    CursorTexture: {fileID: 2800000, guid: 8e6b0dff3a87c9441b7a59c628c778f6, type: 3}
+    Hotspot: {x: 24, y: 24}
+  - Task: 1
+    CursorTexture: {fileID: 2800000, guid: aeec94c53991b4242b45021f4917a111, type: 3}
+    Hotspot: {x: 24, y: 24}
+--- !u!4 &1171367547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171367545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.65697, y: -2.03223, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14934,8 +14990,8 @@ GameObject:
   - component: {fileID: 2122682474}
   - component: {fileID: 2122682476}
   - component: {fileID: 2122682479}
-  - component: {fileID: 2122682478}
   - component: {fileID: 2122682477}
+  - component: {fileID: 2122682480}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Untagged
@@ -15051,28 +15107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIPawn
   m_Speed: 3
---- !u!114 &2122682478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122682473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b0c90f48feeed458084fe59756935f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HumanoidUnit
-  m_Actions: []
-  m_ObjectDetectionRadius: 2
-  m_UnitDetectionCheckRate: 0.5
-  m_AttackRange: 1
-  m_AutoAttackFrequency: 1.5
-  m_AutoAttackDamageDelay: 0.5
-  m_AutoAttackDamage: 10
-  m_Health: 100
-  m_DamageFlashColor: {r: 0.96981126, g: 0.67777, b: 0.6569099, a: 1}
-  isTargeted: 0
 --- !u!70 &2122682479
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -15110,6 +15144,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0.031393528, y: -0.019620895}
   m_Size: {x: 1.069314, y: 1.202735}
   m_Direction: 0
+--- !u!114 &2122682480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122682473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a2d381a8d1ff24797170cfe1c5d41a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WarriorUnit
+  m_Actions: []
+  m_ObjectDetectionRadius: 3
+  m_UnitDetectionCheckRate: 0.5
+  m_AttackRange: 1
+  m_AutoAttackFrequency: 1.5
+  m_AutoAttackDamageDelay: 0.5
+  m_AutoAttackDamage: 10
+  m_Health: 100
+  m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
+  isTargeted: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -15126,3 +15182,4 @@ SceneRoots:
   - {fileID: 31872011}
   - {fileID: 1749802454}
   - {fileID: 337512135}
+  - {fileID: 1171367547}
