@@ -3,6 +3,16 @@ using UnityEngine;
 public class WarriorUnit : HumanoidUnit
 {
     private bool m_IsRetreating = false;
+    public override void SetStance(UnitStanceActionSO stance)
+    {
+        base.SetStance(stance);
+        if (CurrentStance == UnitStance.Defensive)
+        {
+            SetState(UnitState.Idle);
+            StopMovement();
+            m_IsRetreating = false;
+        }
+    }
     protected override void OnSetTask(UnitTask oldTask, UnitTask newTask)
     {
         if (newTask == UnitTask.Attack && hasTarget)
@@ -12,14 +22,11 @@ public class WarriorUnit : HumanoidUnit
         base.OnSetTask(oldTask, newTask);
     }
 
-    protected override void OnSetDestination()
+    protected override void OnSetDestination(DestinationSource source)
     {
-        if (hasTarget && (CurrentTask == UnitTask.Attack || CurrentState == UnitState.Attacking))
+        if (hasTarget && source == DestinationSource.PlayerClick && (CurrentTask == UnitTask.Attack || CurrentState == UnitState.Attacking))
         {
             m_IsRetreating = true;
-        }
-        if (CurrentTask == UnitTask.Attack)
-        {
             SetTask(UnitTask.None);
             SetTarget(null);
         }
@@ -39,13 +46,20 @@ public class WarriorUnit : HumanoidUnit
                     StopMovement();
                     SetState(UnitState.Attacking);
                 }
+                else if (CurrentStance == UnitStance.Offensive)
+                {
+                    MoveTo(Target.transform.position);
+                }
             }
             else
             {
-                if (!m_IsRetreating && TryFindClosetFoe(out var foe))
+                if (CurrentStance == UnitStance.Offensive)
                 {
-                    SetTarget(foe);
-                    SetTask(UnitTask.Attack);
+                    if (!m_IsRetreating && TryFindClosetFoe(out var foe))
+                    {
+                        SetTarget(foe);
+                        SetTask(UnitTask.Attack);
+                    }
                 }
             }
         }
@@ -59,8 +73,15 @@ public class WarriorUnit : HumanoidUnit
                 }
                 else
                 {
-                    MoveTo(Target.transform.position);
-                    SetState(UnitState.Idle);
+                    if (CurrentStance == UnitStance.Defensive)
+                    {
+                        SetTarget(null);
+                        SetState(UnitState.Idle);
+                    }
+                    else
+                    {
+                        MoveTo(Target.transform.position);
+                    }
                 }
             }
             else

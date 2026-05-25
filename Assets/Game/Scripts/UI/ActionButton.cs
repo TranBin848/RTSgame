@@ -7,7 +7,7 @@ public class ActionButton : MonoBehaviour
     [SerializeField] private Image m_IconImage;
     [SerializeField] private Button m_Button;
 
-    void Oestroy()
+    void OnDestroy()
     {
         m_Button.onClick.RemoveAllListeners();
     }

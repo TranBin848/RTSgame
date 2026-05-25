@@ -9,6 +9,10 @@ public enum UnitTask
 {
     None, Build, Chop, Mine, Attack
 }
+public enum DestinationSource
+{
+    CodeTriggered, PlayerClick
+}
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField] private ActionSO[] m_Actions;
@@ -31,6 +35,7 @@ public abstract class Unit : MonoBehaviour
     protected float m_NextUnitDetectionTime = 0f;
     protected float m_NextAutoAttackTime;
     protected int m_CurrentHealth;
+    protected UnitStance m_CurrentStance = UnitStance.Offensive;
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
     public Unit Target { get; protected set; }
@@ -40,6 +45,7 @@ public abstract class Unit : MonoBehaviour
     public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
     public bool hasTarget => Target != null;
     public int CurrentHealth => m_CurrentHealth;
+    public UnitStance CurrentStance => m_CurrentStance;
 
     protected void Awake()
     {
@@ -94,13 +100,17 @@ public abstract class Unit : MonoBehaviour
     {
         Target = target;
     }
-    public void MoveTo(Vector3 destination)
+    public virtual void SetStance(UnitStanceActionSO stance)
+    {
+        m_CurrentStance = stance.UnitStance;
+    }
+    public void MoveTo(Vector3 destination, DestinationSource source = DestinationSource.CodeTriggered)
     {
         if (m_AIPawn != null)
         {
             m_AIPawn.SetDestination(destination);
         }
-        OnSetDestination();
+        OnSetDestination(source);
     }
     public void Select()
     {
@@ -120,7 +130,7 @@ public abstract class Unit : MonoBehaviour
     {
         return transform.position + Vector3.up * m_Collider.size.y / 2;
     }
-    protected virtual void OnSetDestination()
+    protected virtual void OnSetDestination(DestinationSource source)
     {
 
     }
@@ -193,6 +203,12 @@ public abstract class Unit : MonoBehaviour
             return;
         }
         m_CurrentHealth -= dmg;
+
+        if (!hasTarget)
+        {
+            SetTarget(damager);
+        }
+
         Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
         StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));

@@ -7,6 +7,7 @@ public class StructureUnit : Unit
     private TilemapManager m_TilemapManager;
     void Start()
     {
+        base.Start();
         m_TilemapManager = TilemapManager.Get();
     }
     public bool isUnderConstruction => m_BuildingProcess != null;
@@ -51,8 +52,8 @@ public class StructureUnit : Unit
     }
     void UpdateWalkability()
     {
-        int buildingWidthInTiles = 6;
-        int buildingHeightInTiles = 6;
+        int buildingWidthInTiles = 4;
+        int buildingHeightInTiles = 4;
 
         float halfWidth = buildingHeightInTiles * 0.5f;
         float halfHeight = buildingHeightInTiles * 0.5f;

@@ -1400,7 +1400,7 @@ Tilemap:
       - {fileID: -1984231580, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 1595648524, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
       - {fileID: 657000433, guid: 5189d6ff8ca3e4b43858da26d21d2607, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -4, y: -4, z: 0}
@@ -2247,7 +2247,7 @@ Transform:
   m_GameObject: {fileID: 337512133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.16534, y: -2.9928238, z: 0}
+  m_LocalPosition: {x: -9.56, y: -1.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2301,9 +2301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   m_Actions: []
-  m_ObjectDetectionRadius: 2
+  m_ObjectDetectionRadius: 4
   m_UnitDetectionCheckRate: 0.5
-  m_AttackRange: 0.75
+  m_AttackRange: 1.5
   m_AutoAttackFrequency: 1.5
   m_AutoAttackDamageDelay: 0.5
   m_AutoAttackDamage: 10
@@ -5404,7 +5404,7 @@ Transform:
   m_GameObject: {fileID: 1664313464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.02, y: -5.07, z: 0}
+  m_LocalPosition: {x: -4.5, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5636,7 +5636,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5696124603996004655, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
       propertyPath: m_AttackRange
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5696124603996004655, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
       propertyPath: m_ObjectDetectionRadius
@@ -15066,7 +15066,7 @@ Transform:
   m_GameObject: {fileID: 2122682473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.4, y: -1.5, z: 0}
+  m_LocalPosition: {x: -3.41, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15156,7 +15156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a2d381a8d1ff24797170cfe1c5d41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WarriorUnit
-  m_Actions: []
+  m_Actions:
+  - {fileID: 11400000, guid: 18ddca89fd1f9a443ba796e6047dc782, type: 2}
+  - {fileID: 11400000, guid: fa60cb36040e87c4ebd2169bad49ee96, type: 2}
   m_ObjectDetectionRadius: 3
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 1

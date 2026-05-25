@@ -11,7 +11,7 @@ public class WorkerUnit : HumanoidUnit
             CheckForConstruction();
         }
     }
-    protected override void OnSetDestination() => ResetState();
+    protected override void OnSetDestination(DestinationSource source) => ResetState();
 
     public void OnBuildingFinished() => ResetState();
 

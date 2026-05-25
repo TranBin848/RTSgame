@@ -156,7 +156,7 @@ public class GameManager : SingletonManager<GameManager>
         if (HasActiveUnit && isHumanUnit(ActiveUnit))
         {
             DisplayClickEffect(worldPoint);
-            ActiveUnit.MoveTo(worldPoint);
+            ActiveUnit.MoveTo(worldPoint, DestinationSource.PlayerClick);
         }
     }
     void handleClickOnPlayerUnit(Unit unit)
@@ -300,6 +300,7 @@ public class GameManager : SingletonManager<GameManager>
         {
             GUI.Label(new Rect(10, 120, 200, 20), "State: " + ActiveUnit.CurrentState.ToString(), new GUIStyle { fontSize = 30 });
             GUI.Label(new Rect(10, 160, 200, 20), "Task: " + ActiveUnit.CurrentTask.ToString(), new GUIStyle { fontSize = 30 });
+            GUI.Label(new Rect(10, 200, 200, 20), "Stance: " + ActiveUnit.CurrentStance.ToString(), new GUIStyle { fontSize = 30 });
         }
     }
 };
