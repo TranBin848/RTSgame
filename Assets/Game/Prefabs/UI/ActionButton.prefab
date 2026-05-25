@@ -143,10 +143,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d23b63bccfe0a604ea7fa2d25b71943d, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 1297004710, guid: d23b63bccfe0a604ea7fa2d25b71943d, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
-  m_FillCenter: 1
+  m_FillCenter: 0
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
@@ -211,3 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ActionButton
   m_IconImage: {fileID: 1046690594459514383}
   m_Button: {fileID: 7180914275268415413}
+  m_ButtonFocusedSprite: {fileID: -1144842447, guid: 49a308fd3af697e45b6d88f9592e2831, type: 3}
+  m_ButtonDefaultSprite: {fileID: 1297004710, guid: d23b63bccfe0a604ea7fa2d25b71943d, type: 3}
+  m_ButtonImage: {fileID: 5277652009030811985}

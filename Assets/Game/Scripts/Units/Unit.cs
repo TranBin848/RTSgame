@@ -103,6 +103,15 @@ public abstract class Unit : MonoBehaviour
     public virtual void SetStance(UnitStanceActionSO stance)
     {
         m_CurrentStance = stance.UnitStance;
+
+        for (int i = 0; i < m_Actions.Length; i++)
+        {
+            if (m_Actions[i] == stance)
+            {
+                m_GameManager.FocusActionUI(i);
+                return;
+            }
+        }
     }
     public void MoveTo(Vector3 destination, DestinationSource source = DestinationSource.CodeTriggered)
     {
@@ -116,6 +125,15 @@ public abstract class Unit : MonoBehaviour
     {
         HighLight();
         isTargeted = true;
+
+        for (int i = 0; i < m_Actions.Length; i++)
+        {
+            if (m_Actions[i] is UnitStanceActionSO stanceAction && stanceAction.UnitStance == m_CurrentStance)
+            {
+                m_GameManager.FocusActionUI(i);
+                return;
+            }
+        }
     }
     public void Deselect()
     {
@@ -196,6 +214,7 @@ public abstract class Unit : MonoBehaviour
         RunDeadEffect();
         UnregisterUnit(this);
     }
+    private Coroutine m_FlashCoroutine;
     protected virtual void TakeDamage(int dmg, Unit damager)
     {
         if (CurrentState == UnitState.Dead)
@@ -211,7 +230,10 @@ public abstract class Unit : MonoBehaviour
 
         Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
-        StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
+        if (m_FlashCoroutine == null)
+        {
+            StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
+        }
 
         if (m_CurrentHealth <= 0)
         {
@@ -231,6 +253,7 @@ public abstract class Unit : MonoBehaviour
         }
 
         m_SpriteRenderer.color = originalColor;
+        m_FlashCoroutine = null;
 
     }
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
