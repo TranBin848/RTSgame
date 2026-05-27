@@ -47,6 +47,7 @@ public abstract class Unit : MonoBehaviour
     public bool hasTarget => Target != null;
     public int CurrentHealth => m_CurrentHealth;
     public UnitStance CurrentStance => m_CurrentStance;
+    public CapsuleCollider2D Collider => m_Collider;
 
     protected void Awake()
     {
@@ -277,9 +278,12 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    protected bool IsTargetInRange(Transform targetTransform)
+    protected bool IsTargetInRange(Unit target)
     {
-        return Vector3.Distance(transform.position, targetTransform.position) <= m_AttackRange;
+        var targetCollider = target.Collider;
+        var targetClosetPoint = targetCollider.ClosestPoint(transform.position);
+
+        return Vector3.Distance(targetClosetPoint, transform.position) <= m_AttackRange;
     }
     protected Collider2D[] RunProximityObjectDetection()
     {

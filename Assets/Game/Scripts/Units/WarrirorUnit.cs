@@ -50,7 +50,7 @@ public class WarriorUnit : HumanoidUnit
         {
             if (hasTarget)
             {
-                if (IsTargetInRange(Target.transform))
+                if (IsTargetInRange(Target))
                 {
                     StopMovement();
                     SetState(UnitState.Attacking);
@@ -76,7 +76,7 @@ public class WarriorUnit : HumanoidUnit
         {
             if (hasTarget)
             {
-                if (IsTargetInRange(Target.transform))
+                if (IsTargetInRange(Target))
                 {
                     TryAttackCurrentTarget();
                 }

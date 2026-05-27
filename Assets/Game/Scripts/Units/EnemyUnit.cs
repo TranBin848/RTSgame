@@ -13,7 +13,7 @@ public class EnemyUnit : HumanoidUnit
             case UnitState.Moving:
                 if (hasTarget)
                 {
-                    if (IsTargetInRange(Target.transform))
+                    if (IsTargetInRange(Target))
                     {
                         SetState(UnitState.Attacking);
                         StopMovement();
@@ -35,7 +35,7 @@ public class EnemyUnit : HumanoidUnit
             case UnitState.Attacking:
                 if (hasTarget)
                 {
-                    if (IsTargetInRange(Target.transform))
+                    if (IsTargetInRange(Target))
                     {
                         m_CurrentAttackCommitmentTime = m_AttackCommitmentTime;
                         TryAttackCurrentTarget();
