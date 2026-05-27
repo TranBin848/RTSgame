@@ -214,11 +214,12 @@ public abstract class Unit : MonoBehaviour
     protected virtual void Die()
     {
         SetState(UnitState.Dead);
+        StopMovement();
         RunDeadEffect();
         UnregisterUnit(this);
     }
     private Coroutine m_FlashCoroutine;
-    protected virtual void TakeDamage(int dmg, Unit damager)
+    public virtual void TakeDamage(int dmg, Unit damager)
     {
         if (CurrentState == UnitState.Dead)
         {

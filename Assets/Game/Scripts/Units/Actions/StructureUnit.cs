@@ -18,12 +18,16 @@ public class StructureUnit : Unit
         {
             m_BuildingProcess.Update();
         }
+        else
+        {
+            AfterConstructionUpdate();
+        }
     }
     public void OnDestroy()
     {
         UpdateWalkability();
     }
-    public void OnConstructionFinished()
+    public virtual void OnConstructionFinished()
     {
         m_BuildingProcess = null;
         UpdateWalkability();
@@ -49,6 +53,10 @@ public class StructureUnit : Unit
             return;
         }
         m_BuildingProcess.RemoveWorker();
+    }
+    protected virtual void AfterConstructionUpdate()
+    {
+
     }
     void UpdateWalkability()
     {
