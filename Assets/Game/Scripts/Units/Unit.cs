@@ -29,6 +29,7 @@ public abstract class Unit : MonoBehaviour
     protected Animator m_Animator;
     protected AIPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
+    protected Color m_OriginalColor;
     protected Material m_OriginalMaterial;
     protected Material m_HighlightMaterial;
     protected CapsuleCollider2D m_Collider;
@@ -62,6 +63,7 @@ public abstract class Unit : MonoBehaviour
         if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
         {
             m_SpriteRenderer = spriteRenderer;
+            m_OriginalColor = m_SpriteRenderer.color;
         }
         if (TryGetComponent<CapsuleCollider2D>(out var collider))
         {
@@ -230,10 +232,13 @@ public abstract class Unit : MonoBehaviour
 
         Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
-        if (m_FlashCoroutine == null)
+
+        if (m_FlashCoroutine != null)
         {
-            StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
+            StopCoroutine(m_FlashCoroutine);
+            m_SpriteRenderer.color = m_OriginalColor;
         }
+        m_FlashCoroutine = StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
 
         if (m_CurrentHealth <= 0)
         {
@@ -252,7 +257,7 @@ public abstract class Unit : MonoBehaviour
             yield return new WaitForSeconds(duration / 2f);
         }
 
-        m_SpriteRenderer.color = originalColor;
+        m_SpriteRenderer.color = m_OriginalColor;
         m_FlashCoroutine = null;
 
     }
@@ -282,6 +287,7 @@ public abstract class Unit : MonoBehaviour
     }
     void TurnToPosition(Vector3 position)
     {
+        if (hasTarget && !IsPlayer) return;
         var direction = (position - transform.position).normalized;
         m_SpriteRenderer.flipX = direction.x < 0;
     }
