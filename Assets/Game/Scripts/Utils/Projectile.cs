@@ -7,10 +7,11 @@ public class Projectile : MonoBehaviour
     private Unit m_Target;
     private Unit m_Owner;
 
-    public void Initialize(Unit owner, Unit target)
+    public void Initialize(Unit owner, Unit target, int damage)
     {
         m_Owner = owner;
         m_Target = target;
+        m_Damage = damage;
     }
 
     void Update()

@@ -186,6 +186,11 @@ public abstract class Unit : MonoBehaviour
             return false;
         }
     }
+    protected virtual void OnAttackReady(Unit target)
+    {
+        PerformAttackAnimation();
+        StartCoroutine(DelayDamage(m_AutoAttackDamageDelay, m_AutoAttackDamage, Target));
+    }
     protected virtual bool TryAttackCurrentTarget()
     {
         if (Target == null || Target.CurrentState == UnitState.Dead)
@@ -195,8 +200,7 @@ public abstract class Unit : MonoBehaviour
         if (Time.time >= m_NextAutoAttackTime)
         {
             m_NextAutoAttackTime = Time.time + m_AutoAttackFrequency;
-            PerformAttackAnimation();
-            StartCoroutine(DelayDamage(m_AutoAttackDamageDelay, m_AutoAttackDamage, Target));
+            OnAttackReady(Target);
             return true;
         }
 
@@ -214,7 +218,11 @@ public abstract class Unit : MonoBehaviour
     protected virtual void Die()
     {
         SetState(UnitState.Dead);
-        StopMovement();
+
+        if (m_AIPawn != null)
+        {
+            StopMovement();
+        }
         RunDeadEffect();
         UnregisterUnit(this);
     }
