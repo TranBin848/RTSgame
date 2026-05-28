@@ -41,7 +41,6 @@ public class Pathfinding
         Node endNode = FindNode(endWorldPosition);
         if (startNode == null || endNode == null)
         {
-            Debug.LogError("Start or end node is out of grid bounds.");
             return new List<Vector3>();
         }
         List<Node> openList = new();
@@ -174,7 +173,6 @@ public class Pathfinding
         {
             return m_Grid[gridx, gridy];
         }
-        Debug.LogError("World position " + worldPosition + " is out of grid bounds.");
         return null;
     }
     public void UpdateNodesInArea(Vector3Int startPosition, int width, int height)

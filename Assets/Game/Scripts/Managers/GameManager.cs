@@ -122,10 +122,11 @@ public class GameManager : SingletonManager<GameManager>
     }
     void DetectClick(Vector2 inputPosition)
     {
-        if (GameUtils.iSPointOverUIElelement())
+        if (Camera.main == null || GameUtils.iSPointOverUIElelement() || !GameUtils.IsScreenPositionInBounds(inputPosition))
         {
             return;
         }
+
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 

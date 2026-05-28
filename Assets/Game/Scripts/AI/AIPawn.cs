@@ -72,6 +72,14 @@ public class AIPawn : MonoBehaviour
         m_CurrentDestination = destination;
         m_CurrentPath = m_TilemapManager.FindPath(transform.position, destination);
         m_CurrentNodeIndex = 0;
+
+        if (m_CurrentPath == null || m_CurrentPath.Count == 0)
+        {
+            m_CurrentPath = new();
+            m_CurrentDestination = null;
+            return;
+        }
+
         OnNewPositionSelected.Invoke(m_CurrentPath[m_CurrentNodeIndex]);
     }
     public void Stop()

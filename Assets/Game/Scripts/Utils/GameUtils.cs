@@ -7,6 +7,14 @@ public static class GameUtils
     public static bool isLeftClickOrTapUp => Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
     private static Vector2 m_initialTouchPosition;
 
+    public static bool IsScreenPositionInBounds(Vector2 inputPosition)
+    {
+        return inputPosition.x >= 0
+            && inputPosition.x <= Screen.width
+            && inputPosition.y >= 0
+            && inputPosition.y <= Screen.height;
+    }
+
     public static bool TryGetShortClickPosition(out Vector2 inputPosition, float maxDistance = 10f)
     {
         inputPosition = InputPosition;
@@ -14,11 +22,15 @@ public static class GameUtils
         if (isLeftClickOrTapDown)
         {
             m_initialTouchPosition = inputPosition;
-
         }
 
         if (isLeftClickOrTapUp)
         {
+            if (!IsScreenPositionInBounds(m_initialTouchPosition) || !IsScreenPositionInBounds(inputPosition))
+            {
+                return false;
+            }
+
             if (Vector2.Distance(m_initialTouchPosition, inputPosition) < maxDistance)
             {
                 return true;
