@@ -79,6 +79,7 @@ public class WarriorUnit : HumanoidUnit
                 if (IsTargetInRange(Target))
                 {
                     TryAttackCurrentTarget();
+                    StopMovement();
                 }
                 else
                 {

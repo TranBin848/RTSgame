@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections;
-public class RangerUnit : WarriorUnit
+public class EnemyRangerUnit : EnemyUnit
 {
     [SerializeField] private Projectile m_ProjectilePrefab;
 
     protected override void OnAttackReady(Unit target)
     {
         PerformAttackAnimation();
-        StartCoroutine(ShootProjectile(0.4f, target));
+        StartCoroutine(ShootProjectile(0.48f, target));
     }
 
     private IEnumerator ShootProjectile(float delay, Unit target)
