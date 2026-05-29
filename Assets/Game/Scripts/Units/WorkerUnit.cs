@@ -11,6 +11,15 @@ public class WorkerUnit : HumanoidUnit
         {
             CheckForConstruction();
         }
+        else if (CurrentTask == UnitTask.Chop && m_AssignedTree != null)
+        {
+            HandleChoppingTask();
+        }
+
+        if (CurrentState == UnitState.Chopping)
+        {
+            StartChopping();
+        }
     }
     protected override void OnSetDestination(DestinationSource source) => ResetState();
 
@@ -24,13 +33,38 @@ public class WorkerUnit : HumanoidUnit
     }
     public void SendToChop(Tree tree)
     {
-        if (tree.TryOccupy())
+        if (tree.TryToClaim())
         {
             MoveTo(tree.GetBottomPosition());
             SetTask(UnitTask.Chop);
             m_AssignedTree = tree;
             Debug.Log($"Worker {name} assigned to chop tree {tree.name}");
         }
+    }
+    protected override void Die()
+    {
+        base.Die();
+        if (m_AssignedTree != null)
+        {
+            m_AssignedTree.Release();
+        }
+    }
+    void HandleChoppingTask()
+    {
+        var treeBottomPosition = m_AssignedTree.GetBottomPosition();
+        var workerClosetPoint = Collider.ClosestPoint(treeBottomPosition);
+
+        var distance = Vector3.Distance(workerClosetPoint, treeBottomPosition);
+
+        if (distance <= 0.1f)
+        {
+            StopMovement();
+            SetState(UnitState.Chopping);
+        }
+    }
+    void StartChopping()
+    {
+        m_Animator.SetBool("isChopping", true);
     }
     void CheckForConstruction()
     {
@@ -58,10 +92,11 @@ public class WorkerUnit : HumanoidUnit
             CleanUpTarget();
         }
         m_Animator.SetBool("isBuilding", false);
+        m_Animator.SetBool("isChopping", false);
 
         if (m_AssignedTree != null)
         {
-            m_AssignedTree.Unoccupy();
+            m_AssignedTree.Release();
             m_AssignedTree = null;
         }
     }

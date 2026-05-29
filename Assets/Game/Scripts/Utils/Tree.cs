@@ -3,21 +3,21 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     [SerializeField] private CapsuleCollider2D m_Collider;
-    private bool m_Occupied = false;
-    public bool Occupied => m_Occupied;
+    private bool m_Claimed = false;
+    public bool Claimed => m_Claimed;
 
-    public bool TryOccupy()
+    public bool TryToClaim()
     {
-        if (!m_Occupied)
+        if (!m_Claimed)
         {
-            m_Occupied = true;
+            m_Claimed = true;
             return true;
         }
         return false;
     }
-    public void Unoccupy()
+    public void Release()
     {
-        m_Occupied = false;
+        m_Claimed = false;
     }
     public Vector3 GetBottomPosition()
     {
