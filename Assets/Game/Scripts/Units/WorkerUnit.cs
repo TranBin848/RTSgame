@@ -8,18 +8,26 @@ public class WorkerUnit : HumanoidUnit
     [SerializeField] private int m_WoodPerTick = 1;
     [SerializeField] private float m_HitTreeFrequency = 0.3f;
 
-    [SerializeField] private SpriteRenderer m_HoldingWoodSprite;
-    [SerializeField] private SpriteRenderer m_HoldingGoldSprite;
     private float m_ChoppingTimer;
     private float m_HitTreeTimer;
     private int m_WoodCollected;
     private int m_GoldCollected;
+    private int m_MeatCollected;
     private int m_WoodCapacity = 5;
     private int m_GoldCapacity = 10;
+    private int m_MeatCapacity = 5;
     public Tree m_AssignedTree;
     public bool IsHoldingWood => m_WoodCollected > 0;
     public bool IsHoldingGold => m_GoldCollected > 0;
-    public bool IsHoldingResource => IsHoldingWood || IsHoldingGold;
+    public bool IsHoldingMeat => m_MeatCollected > 0;
+    public bool IsHoldingResource => IsHoldingWood || IsHoldingGold || IsHoldingMeat;
+    public enum CarryType
+    {
+        None = 0,
+        Wood = 1,
+        Gold = 2,
+        Meat = 3
+    }
     protected override void UpdateBehaviour()
     {
         if (CurrentTask == UnitTask.Build && hasTarget)
@@ -77,21 +85,23 @@ public class WorkerUnit : HumanoidUnit
         {
             if (IsHoldingWood)
             {
-                m_HoldingWoodSprite.gameObject.SetActive(true);
-                m_HoldingGoldSprite.gameObject.SetActive(false);
+                m_Animator.SetFloat("CarryType", (float)CarryType.Wood);
             }
             else if (IsHoldingGold)
             {
-                m_HoldingWoodSprite.gameObject.SetActive(false);
-                m_HoldingGoldSprite.gameObject.SetActive(true);
+                m_Animator.SetFloat("CarryType", (float)CarryType.Gold);
+            }
+            else if (IsHoldingMeat)
+            {
+                m_Animator.SetFloat("CarryType", (float)CarryType.Meat);
             }
         }
         else
         {
-            m_HoldingWoodSprite.gameObject.SetActive(false);
-            m_HoldingGoldSprite.gameObject.SetActive(false);
+
         }
     }
+
     void HandleChoppingTask()
     {
         var treeBottomPosition = m_AssignedTree.GetBottomPosition();
