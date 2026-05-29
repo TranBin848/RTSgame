@@ -137,12 +137,22 @@ public class WorkerUnit : HumanoidUnit
             if (m_WoodCollected >= m_WoodCapacity)
             {
                 m_WoodCollected = m_WoodCapacity;
-                m_Animator.SetBool("isChopping", false);
-                SetState(UnitState.Idle);
-                Debug.Log($"Worker {name} has reached wood capacity. Total wood collected: {m_WoodCollected}/{m_WoodCapacity}");
+                HandleChoppingFinished();
             }
             Debug.Log($"Worker {name} gathered wood. Total wood collected: {m_WoodCollected}/{m_WoodCapacity}");
         }
+    }
+    void HandleChoppingFinished()
+    {
+        m_Animator.SetBool("isChopping", false);
+
+        var storage = m_GameManager.FindClosetWoodStorage(transform.position);
+        if (storage != null)
+        {
+            MoveTo(storage.transform.position);
+        }
+        SetState(UnitState.Idle);
+        SetTask(UnitTask.ReturnResource);
     }
     void CheckForConstruction()
     {

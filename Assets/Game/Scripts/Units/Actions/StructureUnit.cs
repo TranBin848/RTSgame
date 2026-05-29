@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class StructureUnit : Unit
 {
+    [SerializeField] private bool m_CanStoreWood = false;
+    [SerializeField] private bool m_CanStoreGold = false;
+    [SerializeField] private bool m_CanStoreMeat = false;
     private BuildingProcess m_BuildingProcess;
     public override bool IsBuilding => true;
     private TilemapManager m_TilemapManager;
+    public bool CanStoreWood => m_CanStoreWood;
+    public bool CanStoreGold => m_CanStoreGold;
+    public bool CanStoreMeat => m_CanStoreMeat;
     void Start()
     {
         base.Start();

@@ -17,6 +17,7 @@ public class GameManager : SingletonManager<GameManager>
     public Unit ActiveUnit;
     private List<Unit> m_PlayerUnits = new();
     private List<Unit> m_EnemyUnits = new();
+    private List<StructureUnit> m_PlayerStructures = new();
     private CameraController m_CameraController;
     public bool HasActiveUnit => ActiveUnit != null;
     void Start()
@@ -44,7 +45,14 @@ public class GameManager : SingletonManager<GameManager>
     {
         if (unit.IsPlayer)
         {
-            m_PlayerUnits.Add(unit);
+            if (unit.IsBuilding)
+            {
+                m_PlayerStructures.Add((StructureUnit)unit);
+            }
+            else
+            {
+                m_PlayerUnits.Add(unit);
+            }
         }
         else
         {
@@ -67,7 +75,15 @@ public class GameManager : SingletonManager<GameManager>
                 ActiveUnit = null;
             }
             unit.StopMovement();
-            m_PlayerUnits.Remove(unit);
+            if (unit.IsBuilding)
+            {
+                m_PlayerStructures.Remove((StructureUnit)unit);
+            }
+            else
+            {
+                m_PlayerUnits.Remove(unit);
+            }
+
         }
         else
         {
@@ -101,6 +117,26 @@ public class GameManager : SingletonManager<GameManager>
             }
         }
         return closestUnit;
+    }
+    public StructureUnit FindClosetWoodStorage(Vector3 originPoint)
+    {
+        float closetDistanceSqr = float.MaxValue;
+        StructureUnit closestStorage = null;
+
+        foreach (var structure in m_PlayerStructures)
+        {
+            if (!structure.CanStoreWood || structure.CurrentState == UnitState.Dead)
+            {
+                continue;
+            }
+            float distanceSqr = (structure.transform.position - originPoint).sqrMagnitude;
+            if (distanceSqr < closetDistanceSqr)
+            {
+                closetDistanceSqr = distanceSqr;
+                closestStorage = structure;
+            }
+        }
+        return closestStorage;
     }
     public List<Unit> GetFriendlyUnits(bool isPlayer)
     {
