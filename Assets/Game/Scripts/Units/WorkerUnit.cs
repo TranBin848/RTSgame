@@ -6,12 +6,20 @@ public class WorkerUnit : HumanoidUnit
 {
     [SerializeField] private float m_WoodGatherTickTime = 1f;
     [SerializeField] private int m_WoodPerTick = 1;
+    [SerializeField] private float m_HitTreeFrequency = 0.3f;
+
+    [SerializeField] private SpriteRenderer m_HoldingWoodSprite;
+    [SerializeField] private SpriteRenderer m_HoldingGoldSprite;
     private float m_ChoppingTimer;
+    private float m_HitTreeTimer;
     private int m_WoodCollected;
     private int m_GoldCollected;
     private int m_WoodCapacity = 5;
     private int m_GoldCapacity = 10;
     public Tree m_AssignedTree;
+    public bool IsHoldingWood => m_WoodCollected > 0;
+    public bool IsHoldingGold => m_GoldCollected > 0;
+    public bool IsHoldingResource => IsHoldingWood || IsHoldingGold;
     protected override void UpdateBehaviour()
     {
         if (CurrentTask == UnitTask.Build && hasTarget)
@@ -28,6 +36,7 @@ public class WorkerUnit : HumanoidUnit
             StartChopping();
         }
         Debug.Log(m_WoodCollected);
+        HandleResourcePlay();
     }
     protected override void OnSetDestination(DestinationSource source)
     {
@@ -62,6 +71,27 @@ public class WorkerUnit : HumanoidUnit
             m_AssignedTree.Release();
         }
     }
+    void HandleResourcePlay()
+    {
+        if (IsHoldingResource)
+        {
+            if (IsHoldingWood)
+            {
+                m_HoldingWoodSprite.gameObject.SetActive(true);
+                m_HoldingGoldSprite.gameObject.SetActive(false);
+            }
+            else if (IsHoldingGold)
+            {
+                m_HoldingWoodSprite.gameObject.SetActive(false);
+                m_HoldingGoldSprite.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            m_HoldingWoodSprite.gameObject.SetActive(false);
+            m_HoldingGoldSprite.gameObject.SetActive(false);
+        }
+    }
     void HandleChoppingTask()
     {
         var treeBottomPosition = m_AssignedTree.GetBottomPosition();
@@ -79,6 +109,15 @@ public class WorkerUnit : HumanoidUnit
     {
         m_Animator.SetBool("isChopping", true);
         m_ChoppingTimer += Time.deltaTime;
+        m_HitTreeTimer += Time.deltaTime;
+
+        if (m_HitTreeTimer >= m_HitTreeFrequency)
+        {
+            m_HitTreeTimer = 0f;
+            // Here you can add code to play a chopping sound or trigger a hit effect on the tree
+            m_AssignedTree.Hit();
+        }
+
 
         if (m_ChoppingTimer >= m_WoodGatherTickTime)
         {
