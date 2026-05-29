@@ -278,13 +278,28 @@ public class GameManager : SingletonManager<GameManager>
             cancelActiveUnit();
             return;
         }
-        else if (WorkerClickedOnUnfinishedBuilding(unit))
+        else if (ActiveUnit is WorkerUnit worker)
         {
-            ((WorkerUnit)ActiveUnit).SendToBuild((StructureUnit)unit);
-            return;
+            if (WorkerClickedOnUnfinishedBuilding(unit))
+            {
+                worker.SendToBuild((StructureUnit)unit);
+                return;
+            }
+            else if (worker.IsHoldingWood && WorkerClickedOnWoodStorage(unit))
+            {
+                var closetPoint = unit.Collider.ClosestPoint(worker.transform.position);
+                worker.MoveTo(closetPoint, DestinationSource.PlayerClick);
+                worker.SetTask(UnitTask.ReturnResource);
+                worker.SetWoodStorage((StructureUnit)unit);
+                return;
+            }
         }
-
         SelectNewUnit(unit);
+    }
+    bool WorkerClickedOnWoodStorage(Unit clickedUnit)
+    {
+        return (clickedUnit is StructureUnit structure && structure.CanStoreWood);
+
     }
     void handleClickOnEnemyUnit(Unit unit)
     {
