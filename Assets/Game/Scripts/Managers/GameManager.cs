@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class GameManager : SingletonManager<GameManager>
@@ -8,6 +9,9 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
     [SerializeField] private TextPopupController m_TextPopupController;
+
+    [Header("Resources")]
+    [SerializeField] private Transform m_TreeContainer;
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 1000;
     private int m_Wood = 1000;
@@ -15,6 +19,7 @@ public class GameManager : SingletonManager<GameManager>
     public int Wood => m_Wood;
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
+    private Tree[] m_Trees = new Tree[0];
     private List<Unit> m_PlayerUnits = new();
     private List<Unit> m_EnemyUnits = new();
     private List<StructureUnit> m_PlayerStructures = new();
@@ -93,6 +98,44 @@ public class GameManager : SingletonManager<GameManager>
     public void ShowTextPopup(string text, Color color, Vector3 position)
     {
         m_TextPopupController.Spam(text, color, position);
+    }
+    public Tree FindClosetUnclaimedTree(Vector3 originPosition)
+    {
+        Tree closestTree = null;
+        float closestDistanceSqr = float.MaxValue;
+
+        if (m_Trees.Length == 0)
+        {
+            m_Trees = new Tree[m_TreeContainer.childCount];
+
+            for (int i = 0; i < m_TreeContainer.childCount; i++)
+            {
+                //Get the empty object first and then get the Tree component from it, to avoid potential issues with missing Tree components
+                var treeObject = m_TreeContainer.GetChild(i).gameObject;
+                var treeComponent = treeObject.GetComponentInChildren<Tree>();
+                if (treeComponent != null)
+                {
+                    m_Trees[i] = treeComponent;
+                    Debug.Log($"Found tree: {treeComponent.name} at position {treeComponent.transform.position}");
+                }
+            }
+        }
+
+        //Debug.Log(m_Trees.Length + " trees found in the scene.");
+        foreach (var tree in m_Trees)
+        {
+            if (tree == null || tree.Claimed)
+            {
+                continue;
+            }
+            float distanceSqr = (tree.transform.position - originPosition).sqrMagnitude;
+            if (distanceSqr < closestDistanceSqr)
+            {
+                closestDistanceSqr = distanceSqr;
+                closestTree = tree;
+            }
+        }
+        return closestTree;
     }
 
     public Unit FindClosetUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
@@ -203,7 +246,7 @@ public class GameManager : SingletonManager<GameManager>
             var treeLayerMask = LayerMask.GetMask("Tree");
             if (HasActiveUnit && ActiveUnit is WorkerUnit && ((1 << hit.collider.gameObject.layer & treeLayerMask) != 0))
             {
-                tree = hit.collider.GetComponent<Tree>();
+                tree = hit.collider.GetComponentInChildren<Tree>();
                 return true;
             }
         }

@@ -47,6 +47,7 @@ public class WorkerUnit : HumanoidUnit
             if (distance <= 0.5f)
             {
                 m_WoodCollected = 0;
+                TryMoveToClosetTree();
                 //Debug.Log($"Worker {name} delivered wood to storage {m_AssignedWoodStorage.name}. Wood collected reset to 0.");
             }
         }
@@ -185,6 +186,14 @@ public class WorkerUnit : HumanoidUnit
         SetState(UnitState.Building);
         m_Animator.SetBool("isBuilding", true);
         structure.AssignWorkerToBuildProcess(this);
+    }
+    void TryMoveToClosetTree()
+    {
+        var closetTree = m_GameManager.FindClosetUnclaimedTree(transform.position);
+        if (closetTree != null)
+        {
+            SendToChop(closetTree);
+        }
     }
     void ResetState()
     {
