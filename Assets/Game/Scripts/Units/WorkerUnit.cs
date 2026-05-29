@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class WorkerUnit : HumanoidUnit
 {
+    [SerializeField] private float m_WoodGatherTickTime = 1f;
+    [SerializeField] private int m_WoodPerTick = 1;
+    private float m_ChoppingTimer;
+    private int m_WoodCollected;
+    private int m_GoldCollected;
+    private int m_WoodCapacity = 5;
+    private int m_GoldCapacity = 10;
     public Tree m_AssignedTree;
     protected override void UpdateBehaviour()
     {
@@ -11,17 +18,23 @@ public class WorkerUnit : HumanoidUnit
         {
             CheckForConstruction();
         }
-        else if (CurrentTask == UnitTask.Chop && m_AssignedTree != null)
+        else if (CurrentTask == UnitTask.Chop && m_AssignedTree != null && m_WoodCollected < m_WoodCapacity)
         {
             HandleChoppingTask();
         }
 
-        if (CurrentState == UnitState.Chopping)
+        if (CurrentState == UnitState.Chopping && m_WoodCollected < m_WoodCapacity)
         {
             StartChopping();
         }
+        Debug.Log(m_WoodCollected);
     }
-    protected override void OnSetDestination(DestinationSource source) => ResetState();
+    protected override void OnSetDestination(DestinationSource source)
+    {
+        SetState(UnitState.Moving);
+        ResetState();
+    }
+
 
     public void OnBuildingFinished() => ResetState();
 
@@ -65,6 +78,22 @@ public class WorkerUnit : HumanoidUnit
     void StartChopping()
     {
         m_Animator.SetBool("isChopping", true);
+        m_ChoppingTimer += Time.deltaTime;
+
+        if (m_ChoppingTimer >= m_WoodGatherTickTime)
+        {
+            m_ChoppingTimer = 0f;
+            m_WoodCollected += m_WoodPerTick;
+
+            if (m_WoodCollected >= m_WoodCapacity)
+            {
+                m_WoodCollected = m_WoodCapacity;
+                m_Animator.SetBool("isChopping", false);
+                SetState(UnitState.Idle);
+                Debug.Log($"Worker {name} has reached wood capacity. Total wood collected: {m_WoodCollected}/{m_WoodCapacity}");
+            }
+            Debug.Log($"Worker {name} gathered wood. Total wood collected: {m_WoodCollected}/{m_WoodCapacity}");
+        }
     }
     void CheckForConstruction()
     {
@@ -93,6 +122,8 @@ public class WorkerUnit : HumanoidUnit
         }
         m_Animator.SetBool("isBuilding", false);
         m_Animator.SetBool("isChopping", false);
+
+        m_ChoppingTimer = 0f;
 
         if (m_AssignedTree != null)
         {
