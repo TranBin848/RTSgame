@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WorkerUnit : HumanoidUnit
 {
+    public Tree m_AssignedTree;
     protected override void UpdateBehaviour()
     {
         if (CurrentTask == UnitTask.Build && hasTarget)
@@ -20,6 +21,16 @@ public class WorkerUnit : HumanoidUnit
         MoveTo(structure.transform.position);
         SetTarget(structure);
         SetTask(UnitTask.Build);
+    }
+    public void SendToChop(Tree tree)
+    {
+        if (tree.TryOccupy())
+        {
+            MoveTo(tree.GetBottomPosition());
+            SetTask(UnitTask.Chop);
+            m_AssignedTree = tree;
+            Debug.Log($"Worker {name} assigned to chop tree {tree.name}");
+        }
     }
     void CheckForConstruction()
     {
@@ -47,6 +58,12 @@ public class WorkerUnit : HumanoidUnit
             CleanUpTarget();
         }
         m_Animator.SetBool("isBuilding", false);
+
+        if (m_AssignedTree != null)
+        {
+            m_AssignedTree.Unoccupy();
+            m_AssignedTree = null;
+        }
     }
     void CleanUpTarget()
     {

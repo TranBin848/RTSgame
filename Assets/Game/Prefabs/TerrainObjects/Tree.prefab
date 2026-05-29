@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b1177ba33c6964db8f29c3fb16dc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tree
+  m_Collider: {fileID: -7695743413920488008}
 --- !u!70 &-7695743413920488008
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
