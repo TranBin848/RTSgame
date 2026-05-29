@@ -177,7 +177,7 @@ public abstract class Unit : MonoBehaviour
         {
             m_NextUnitDetectionTime = Time.time + m_UnitDetectionCheckRate;
             foe = m_GameManager.FindClosetUnit(transform.position, m_ObjectDetectionRadius, !IsPlayer);
-            Debug.Log($"Found closet foe: {foe?.name ?? "None"}");
+            //Debug.Log($"Found closet foe: {foe?.name ?? "None"}");
             return foe != null;
         }
         else
@@ -204,7 +204,7 @@ public abstract class Unit : MonoBehaviour
             return true;
         }
 
-        Debug.Log("Attack is on CD");
+        //Debug.Log("Attack is on CD");
         return false;
     }
     protected virtual void PerformAttackAnimation()
@@ -240,7 +240,7 @@ public abstract class Unit : MonoBehaviour
             SetTarget(damager);
         }
 
-        Debug.Log($"{name} took {dmg} damage from {damager.name}");
+        //Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
 
         if (m_FlashCoroutine != null)

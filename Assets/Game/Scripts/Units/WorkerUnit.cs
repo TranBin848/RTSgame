@@ -17,6 +17,7 @@ public class WorkerUnit : HumanoidUnit
     private int m_GoldCapacity = 10;
     private int m_MeatCapacity = 5;
     public Tree m_AssignedTree;
+    private StructureUnit m_AssignedWoodStorage;
     public bool IsHoldingWood => m_WoodCollected > 0;
     public bool IsHoldingGold => m_GoldCollected > 0;
     public bool IsHoldingMeat => m_MeatCollected > 0;
@@ -38,12 +39,23 @@ public class WorkerUnit : HumanoidUnit
         {
             HandleChoppingTask();
         }
+        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedWoodStorage != null
+        && IsHoldingWood)
+        {
+            var closetPointOnStorge = m_AssignedWoodStorage.Collider.ClosestPoint(transform.position);
+            var distance = Vector3.Distance(transform.position, closetPointOnStorge);
+            if (distance <= 0.5f)
+            {
+                m_WoodCollected = 0;
+                //Debug.Log($"Worker {name} delivered wood to storage {m_AssignedWoodStorage.name}. Wood collected reset to 0.");
+            }
+        }
 
         if (CurrentState == UnitState.Chopping && m_WoodCollected < m_WoodCapacity)
         {
             StartChopping();
         }
-        Debug.Log(m_WoodCollected);
+        //Debug.Log(m_WoodCollected);
         HandleResourcePlay();
     }
     protected override void OnSetDestination(DestinationSource source)
@@ -68,7 +80,7 @@ public class WorkerUnit : HumanoidUnit
             MoveTo(tree.GetBottomPosition());
             SetTask(UnitTask.Chop);
             m_AssignedTree = tree;
-            Debug.Log($"Worker {name} assigned to chop tree {tree.name}");
+            //Debug.Log($"Worker {name} assigned to chop tree {tree.name}");
         }
     }
     protected override void Die()
@@ -98,7 +110,7 @@ public class WorkerUnit : HumanoidUnit
         }
         else
         {
-
+            m_Animator.SetFloat("CarryType", (float)CarryType.None);
         }
     }
 
@@ -146,10 +158,12 @@ public class WorkerUnit : HumanoidUnit
     {
         m_Animator.SetBool("isChopping", false);
 
-        var storage = m_GameManager.FindClosetWoodStorage(transform.position);
-        if (storage != null)
+        m_AssignedWoodStorage = m_GameManager.FindClosetWoodStorage(transform.position);
+        if (m_AssignedWoodStorage != null)
         {
-            MoveTo(storage.transform.position);
+            var closetPointOnStorge = m_AssignedWoodStorage.Collider.ClosestPoint(m_AssignedWoodStorage.transform.position);
+            MoveTo(closetPointOnStorge);
+            //Debug.Log($"Worker {name} is returning wood to storage {m_AssignedWoodStorage.name}");
         }
         SetState(UnitState.Idle);
         SetTask(UnitTask.ReturnResource);

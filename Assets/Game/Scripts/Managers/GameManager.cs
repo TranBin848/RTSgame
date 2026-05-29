@@ -58,7 +58,7 @@ public class GameManager : SingletonManager<GameManager>
         {
             m_EnemyUnits.Add(unit);
         }
-        Debug.Log($"Registered {(unit.IsPlayer ? "Player" : "Enemy")} Unit: {unit.name}");
+        //Debug.Log($"Registered {(unit.IsPlayer ? "Player" : "Enemy")} Unit: {unit.name}");
     }
     public void UnregisterUnit(Unit unit)
     {
@@ -109,7 +109,7 @@ public class GameManager : SingletonManager<GameManager>
                 continue;
             }
             float distance = (unit.transform.position - originPosition).sqrMagnitude;
-            Debug.Log($"Checking unit {unit.name} at distance {Mathf.Sqrt(distance)} (sqr: {distance}) against max distance {maxDistance} (sqr: {maxDistanceSqr})");
+            //Debug.Log($"Checking unit {unit.name} at distance {Mathf.Sqrt(distance)} (sqr: {distance}) against max distance {maxDistance} (sqr: {maxDistanceSqr})");
             if (distance <= maxDistanceSqr && distance <= closestDistanceSqr)
             {
                 closestDistanceSqr = distance;
@@ -136,6 +136,7 @@ public class GameManager : SingletonManager<GameManager>
                 closestStorage = structure;
             }
         }
+        Debug.Log($"Closest wood storage to point {originPoint} is {closestStorage?.name ?? "none"} at distance {Mathf.Sqrt(closetDistanceSqr)}");
         return closestStorage;
     }
     public List<Unit> GetFriendlyUnits(bool isPlayer)

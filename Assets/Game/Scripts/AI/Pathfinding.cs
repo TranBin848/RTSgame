@@ -57,7 +57,7 @@ public class Pathfinding
             if (currentNode == endNode)
             {
                 var path = RetracePath(startNode, endNode, startWorldPosition);
-                Debug.Log("Path found: " + string.Join(" -> ", path));
+                //Debug.Log("Path found: " + string.Join(" -> ", path));
                 ResetNodes(openList, closedList);
                 return path;
             }
@@ -65,8 +65,8 @@ public class Pathfinding
             openList.Remove(currentNode);
             closedList.Add(currentNode);
 
-            Debug.Log("OL: " + string.Join(", ", openList));
-            Debug.Log("CL: " + string.Join(", ", closedList));
+            //Debug.Log("OL: " + string.Join(", ", openList));
+            //Debug.Log("CL: " + string.Join(", ", closedList));
 
             foreach (Node neighbor in GetNeighbors(currentNode))
             {
