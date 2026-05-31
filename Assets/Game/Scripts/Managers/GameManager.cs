@@ -15,8 +15,10 @@ public class GameManager : SingletonManager<GameManager>
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 1000;
     private int m_Wood = 1000;
+    private int m_Meat = 1000;
     public int Gold => m_Gold;
     public int Wood => m_Wood;
+    public int Meat => m_Meat;
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
     private Tree[] m_Trees = new Tree[0];
@@ -94,6 +96,12 @@ public class GameManager : SingletonManager<GameManager>
         {
             m_EnemyUnits.Remove(unit);
         }
+    }
+    public void AddResources(int gold, int wood, int meat)
+    {
+        m_Gold += gold;
+        m_Wood += wood;
+        m_Meat += meat; // Assuming you have a similar variable for meat
     }
     public void ShowTextPopup(string text, Color color, Vector3 position)
     {

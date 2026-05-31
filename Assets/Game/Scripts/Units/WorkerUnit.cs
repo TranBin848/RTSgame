@@ -46,6 +46,8 @@ public class WorkerUnit : HumanoidUnit
             var distance = Vector3.Distance(transform.position, closetPointOnStorge);
             if (distance <= 0.5f)
             {
+                m_GameManager.ShowTextPopup(m_WoodCollected.ToString(), Color.green, GetTopPosition());
+                m_GameManager.AddResources(0, m_WoodCollected, 0);
                 m_WoodCollected = 0;
                 TryMoveToClosetTree();
                 //Debug.Log($"Worker {name} delivered wood to storage {m_AssignedWoodStorage.name}. Wood collected reset to 0.");
