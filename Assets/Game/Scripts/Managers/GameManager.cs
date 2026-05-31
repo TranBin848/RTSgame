@@ -224,12 +224,12 @@ public class GameManager : SingletonManager<GameManager>
 
         if (HasActiveUnit && ActiveUnit is WorkerUnit worker)
         {
-            if (workerHasClickedOnTree(hit, out Tree tree))
+            if (TryGetClickedResources(hit, out Tree tree))
             {
                 worker.SendToChop(tree);
                 return;
             }
-            else if (workerHasClickedOnGoldStone(hit, out GoldStone goldStone))
+            else if (TryGetClickedResources(hit, out GoldStone goldStone))
             {
                 worker.SendToMine(goldStone);
                 return;
@@ -257,36 +257,47 @@ public class GameManager : SingletonManager<GameManager>
     {
         m_ActionBar.FocusAction(idx);
     }
-    bool workerHasClickedOnTree(RaycastHit2D hit, out Tree tree)
+    bool TryGetClickedResources<T>(RaycastHit2D hit, out T resource) where T : MonoBehaviour
     {
-        tree = null;
+        resource = null;
+        if (hit.collider == null) return false;
         if (hit.collider != null)
         {
-            // Debug.Log("Clicked on: " + hit.collider.gameObject.name);
-            var treeLayerMask = LayerMask.GetMask("Tree");
-            if ((1 << hit.collider.gameObject.layer & treeLayerMask) != 0)
-            {
-                tree = hit.collider.GetComponentInChildren<Tree>();
-                return true;
-            }
+            resource = hit.collider.GetComponentInChildren<T>();
+            return resource != null;
         }
         return false;
     }
-    bool workerHasClickedOnGoldStone(RaycastHit2D hit, out GoldStone goldStone)
-    {
-        goldStone = null;
-        if (hit.collider != null)
-        {
-            // Debug.Log("Clicked on: " + hit.collider.gameObject.name);
-            var goldStoneLayerMask = LayerMask.GetMask("GoldStone");
-            if ((1 << hit.collider.gameObject.layer & goldStoneLayerMask) != 0)
-            {
-                goldStone = hit.collider.GetComponentInChildren<GoldStone>();
-                return true;
-            }
-        }
-        return false;
-    }
+    // bool workerHasClickedOnTree(RaycastHit2D hit, out Tree tree)
+    // {
+    //     tree = null;
+    //     if (hit.collider != null)
+    //     {
+    //         // Debug.Log("Clicked on: " + hit.collider.gameObject.name);
+    //         var treeLayerMask = LayerMask.GetMask("Tree");
+    //         if ((1 << hit.collider.gameObject.layer & treeLayerMask) != 0)
+    //         {
+    //             tree = hit.collider.GetComponentInChildren<Tree>();
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    // bool workerHasClickedOnGoldStone(RaycastHit2D hit, out GoldStone goldStone)
+    // {
+    //     goldStone = null;
+    //     if (hit.collider != null)
+    //     {
+    //         // Debug.Log("Clicked on: " + hit.collider.gameObject.name);
+    //         var goldStoneLayerMask = LayerMask.GetMask("GoldStone");
+    //         if ((1 << hit.collider.gameObject.layer & goldStoneLayerMask) != 0)
+    //         {
+    //             goldStone = hit.collider.GetComponentInChildren<GoldStone>();
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     bool HasClickedOnUnit(RaycastHit2D hit, out Unit unit)
     {
