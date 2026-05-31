@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6605354542096161317}
   - component: {fileID: 6782885581797616088}
   - component: {fileID: 6628146975313803110}
+  - component: {fileID: 382094624856839256}
   m_Layer: 8
   m_Name: GoldStone4
   m_TagString: Untagged
@@ -151,3 +152,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0.016575813, y: 0.1160332}
   m_Size: {x: 0.70705605, y: 0.8396661}
   m_Direction: 0
+--- !u!114 &382094624856839256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838363726271453333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff538e4f937e024db8cea3a93419878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoldStone
+  m_Collider: {fileID: 6628146975313803110}

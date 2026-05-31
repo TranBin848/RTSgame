@@ -17,6 +17,7 @@ public class WorkerUnit : HumanoidUnit
     private int m_GoldCapacity = 10;
     private int m_MeatCapacity = 5;
     public Tree m_AssignedTree;
+    public GoldStone m_AssignedGoldStone;
     private StructureUnit m_AssignedWoodStorage;
     public bool IsHoldingWood => m_WoodCollected > 0;
     public bool IsHoldingGold => m_GoldCollected > 0;
@@ -90,6 +91,17 @@ public class WorkerUnit : HumanoidUnit
             //Debug.Log($"Worker {name} assigned to chop tree {tree.name}");
         }
     }
+    public void SendToMine(GoldStone goldStone)
+    {
+        // if (goldStone.TryToClaim())
+        // {
+        MoveTo(goldStone.GetBottomPosition());
+        SetTask(UnitTask.Mine);
+        m_AssignedGoldStone = goldStone;
+        //Debug.Log($"Worker {name} assigned to mine gold stone {goldStone.name}");
+        //}
+    }
+
     protected override void Die()
     {
         base.Die();
