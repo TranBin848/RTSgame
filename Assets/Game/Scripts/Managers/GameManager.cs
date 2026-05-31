@@ -9,13 +9,14 @@ public class GameManager : SingletonManager<GameManager>
     [SerializeField] private ActionBar m_ActionBar;
     [SerializeField] private ConfirmationBar m_ConfirmationBar;
     [SerializeField] private TextPopupController m_TextPopupController;
+    [SerializeField] private ResourcesDataUI m_ResourcesDataUI;
 
     [Header("Resources")]
     [SerializeField] private Transform m_TreeContainer;
     private PlacementProcess m_PlacementProcess;
-    private int m_Gold = 1000;
-    private int m_Wood = 1000;
-    private int m_Meat = 1000;
+    private int m_Gold = 0;
+    private int m_Wood = 0;
+    private int m_Meat = 0;
     public int Gold => m_Gold;
     public int Wood => m_Wood;
     public int Meat => m_Meat;
@@ -36,6 +37,7 @@ public class GameManager : SingletonManager<GameManager>
             m_CameraController = Camera.main.gameObject.AddComponent<CameraController>();
         }
         ClearActionBarUI();
+        AddResources(100, 100, 100); // Starting resources for testing
     }
     void Update()
     {
@@ -102,6 +104,8 @@ public class GameManager : SingletonManager<GameManager>
         m_Gold += gold;
         m_Wood += wood;
         m_Meat += meat; // Assuming you have a similar variable for meat
+
+        m_ResourcesDataUI.UpdateResourcesData(m_Gold, m_Wood, m_Meat);
     }
     public void ShowTextPopup(string text, Color color, Vector3 position)
     {
@@ -402,15 +406,11 @@ public class GameManager : SingletonManager<GameManager>
         }
         else
         {
-            RevertResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost);
+            AddResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost, 0);
         }
 
     }
-    void RevertResources(int gold, int wood)
-    {
-        m_Gold += gold;
-        m_Wood += wood;
-    }
+
     void CancelBuildProcess()
     {
         m_ConfirmationBar.Hide();
@@ -423,17 +423,13 @@ public class GameManager : SingletonManager<GameManager>
     {
         if (m_Gold >= goldCost && m_Wood >= woodCost)
         {
-            m_Gold -= goldCost;
-            m_Wood -= woodCost;
+            AddResources(-goldCost, -woodCost, 0); // Update the UI with the new resource values
             return true;
         }
         return false;
     }
     void OnGUI()
     {
-        GUI.Label(new Rect(10, 40, 200, 20), "Gold: " + m_Gold.ToString(), new GUIStyle { fontSize = 30 });
-        GUI.Label(new Rect(10, 80, 200, 20), "Wood: " + m_Wood.ToString(), new GUIStyle { fontSize = 30 });
-
         if (ActiveUnit != null)
         {
             GUI.Label(new Rect(10, 120, 200, 20), "State: " + ActiveUnit.CurrentState.ToString(), new GUIStyle { fontSize = 30 });
