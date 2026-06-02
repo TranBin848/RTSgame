@@ -13,6 +13,7 @@ public class GameManager : SingletonManager<GameManager>
 
     [Header("Resources")]
     [SerializeField] private Transform m_TreeContainer;
+    [SerializeField] private Transform m_GoldStoneContainer;
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 0;
     private int m_Wood = 0;
@@ -23,6 +24,7 @@ public class GameManager : SingletonManager<GameManager>
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
     private Tree[] m_Trees = new Tree[0];
+    private GoldStone[] m_GoldStones = new GoldStone[0];
     private List<Unit> m_PlayerUnits = new();
     private List<Unit> m_EnemyUnits = new();
     private List<StructureUnit> m_PlayerStructures = new();
@@ -149,6 +151,44 @@ public class GameManager : SingletonManager<GameManager>
         }
         return closestTree;
     }
+    public GoldStone FindClosetUnclaimedGoldStone(Vector3 originPosition)
+    {
+        GoldStone closestGoldStone = null;
+        float closestDistanceSqr = float.MaxValue;
+
+        if (m_GoldStones.Length == 0)
+        {
+            m_GoldStones = new GoldStone[m_GoldStoneContainer.childCount];
+
+            for (int i = 0; i < m_GoldStoneContainer.childCount; i++)
+            {
+                //Get the empty object first and then get the GoldStone component from it, to avoid potential issues with missing GoldStone components
+                var goldStoneObject = m_GoldStoneContainer.GetChild(i).gameObject;
+                var goldStoneComponent = goldStoneObject.GetComponentInChildren<GoldStone>();
+                if (goldStoneComponent != null)
+                {
+                    m_GoldStones[i] = goldStoneComponent;
+                    Debug.Log($"Found gold stone: {goldStoneComponent.name} at position {goldStoneComponent.transform.position}");
+                }
+            }
+        }
+
+        //Debug.Log(m_GoldStones.Length + " gold stones found in the scene.");
+        foreach (var goldStone in m_GoldStones)
+        {
+            if (goldStone == null || goldStone.Claimed)
+            {
+                continue;
+            }
+            float distanceSqr = (goldStone.transform.position - originPosition).sqrMagnitude;
+            if (distanceSqr < closestDistanceSqr)
+            {
+                closestDistanceSqr = distanceSqr;
+                closestGoldStone = goldStone;
+            }
+        }
+        return closestGoldStone;
+    }
 
     public Unit FindClosetUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
     {
@@ -173,14 +213,14 @@ public class GameManager : SingletonManager<GameManager>
         }
         return closestUnit;
     }
-    public StructureUnit FindClosetWoodStorage(Vector3 originPoint)
+    public StructureUnit FindClosetStoragePit(Vector3 originPoint)
     {
         float closetDistanceSqr = float.MaxValue;
         StructureUnit closestStorage = null;
 
         foreach (var structure in m_PlayerStructures)
         {
-            if (!structure.CanStoreWood || structure.CurrentState == UnitState.Dead)
+            if (!structure.CanStoreWood || !structure.CanStoreGold || structure.CurrentState == UnitState.Dead)
             {
                 continue;
             }
@@ -191,7 +231,7 @@ public class GameManager : SingletonManager<GameManager>
                 closestStorage = structure;
             }
         }
-        Debug.Log($"Closest wood storage to point {originPoint} is {closestStorage?.name ?? "none"} at distance {Mathf.Sqrt(closetDistanceSqr)}");
+        //Debug.Log($"Closest wood storage to point {originPoint} is {closestStorage?.name ?? "none"} at distance {Mathf.Sqrt(closetDistanceSqr)}");
         return closestStorage;
     }
     public List<Unit> GetFriendlyUnits(bool isPlayer)

@@ -5,11 +5,21 @@ using UnityEngine;
 public class WorkerUnit : HumanoidUnit
 {
     [SerializeField] private float m_WoodGatherTickTime = 1f;
+    [SerializeField] private float m_GoldGatherTickTime = 1f;
+    [SerializeField] private float m_FoodGatherTickTime = 1f;
     [SerializeField] private int m_WoodPerTick = 1;
+    [SerializeField] private int m_GoldPerTick = 1;
+    [SerializeField] private int m_MeatPerTick = 1;
     [SerializeField] private float m_HitTreeFrequency = 0.3f;
+    [SerializeField] private float m_HitGoldStoneFrequency = 0.3f;
+    [SerializeField] private float m_HitAnimalFrequency = 0.3f;
 
     private float m_ChoppingTimer;
     private float m_HitTreeTimer;
+    private float m_MiningTimer;
+    private float m_HitGoldStoneTimer;
+    private float m_FoodingTimer;
+    private float m_HitAnimalTimer;
     private int m_WoodCollected;
     private int m_GoldCollected;
     private int m_MeatCollected;
@@ -18,7 +28,7 @@ public class WorkerUnit : HumanoidUnit
     private int m_MeatCapacity = 5;
     public Tree m_AssignedTree;
     public GoldStone m_AssignedGoldStone;
-    private StructureUnit m_AssignedWoodStorage;
+    private StructureUnit m_AssignedStoragePit;
     public bool IsHoldingWood => m_WoodCollected > 0;
     public bool IsHoldingGold => m_GoldCollected > 0;
     public bool IsHoldingMeat => m_MeatCollected > 0;
@@ -40,24 +50,49 @@ public class WorkerUnit : HumanoidUnit
         {
             HandleChoppingTask();
         }
-        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedWoodStorage != null
-        && IsHoldingWood)
+        else if (CurrentTask == UnitTask.Mine && m_AssignedGoldStone != null & m_GoldCollected < m_GoldCapacity)
         {
-            var closetPointOnStorge = m_AssignedWoodStorage.Collider.ClosestPoint(transform.position);
+            HandleMiningTask();
+        }
+        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedStoragePit != null
+        && (IsHoldingWood || IsHoldingGold || IsHoldingMeat))
+        {
+            var closetPointOnStorge = m_AssignedStoragePit.Collider.ClosestPoint(transform.position);
             var distance = Vector3.Distance(transform.position, closetPointOnStorge);
             if (distance <= 0.5f)
             {
-                m_GameManager.ShowTextPopup(m_WoodCollected.ToString(), Color.green, GetTopPosition());
-                m_GameManager.AddResources(0, m_WoodCollected, 0);
-                m_WoodCollected = 0;
-                TryMoveToClosetTree();
-                //Debug.Log($"Worker {name} delivered wood to storage {m_AssignedWoodStorage.name}. Wood collected reset to 0.");
+                if (IsHoldingWood)
+                {
+                    m_GameManager.ShowTextPopup(m_WoodCollected.ToString(), Color.green, GetTopPosition());
+                    m_GameManager.AddResources(0, m_WoodCollected, 0);
+                    m_WoodCollected = 0;
+                    TryMoveToClosetTree();
+                }
+                else if (IsHoldingGold)
+                {
+                    m_GameManager.ShowTextPopup(m_GoldCollected.ToString(), Color.yellow, GetTopPosition());
+                    m_GameManager.AddResources(m_GoldCollected, 0, 0);
+                    m_GoldCollected = 0;
+                    TryMoveToClosetGoldStone();
+                }
+                else if (IsHoldingMeat)
+                {
+                    m_GameManager.ShowTextPopup(m_MeatCollected.ToString(), Color.red, GetTopPosition());
+                    m_GameManager.AddResources(0, 0, m_MeatCollected);
+                    m_MeatCollected = 0;
+                    // No need to move to closet animal after delivering meat
+                }
+                //Debug.Log($"Worker {name} delivered wood to storage {m_AssignedStoragePit.name}. Wood collected reset to 0.");
             }
         }
 
         if (CurrentState == UnitState.Chopping && m_WoodCollected < m_WoodCapacity)
         {
             StartChopping();
+        }
+        else if (CurrentState == UnitState.Mining && m_GoldCollected < m_GoldCapacity)
+        {
+            StartMining();
         }
         //Debug.Log(m_WoodCollected);
         HandleResourcePlay();
@@ -72,7 +107,7 @@ public class WorkerUnit : HumanoidUnit
     public void OnBuildingFinished() => ResetState();
     public void SetWoodStorage(StructureUnit storage)
     {
-        m_AssignedWoodStorage = storage;
+        m_AssignedStoragePit = storage;
     }
 
     public void SendToBuild(StructureUnit structure)
@@ -132,6 +167,19 @@ public class WorkerUnit : HumanoidUnit
             m_Animator.SetFloat("CarryType", (float)CarryType.None);
         }
     }
+    void HandleMiningTask()
+    {
+        var goldStoneBottomPosition = m_AssignedGoldStone.GetBottomPosition();
+        var workerClosetPoint = Collider.ClosestPoint(goldStoneBottomPosition);
+
+        var distance = Vector3.Distance(workerClosetPoint, goldStoneBottomPosition);
+
+        if (distance <= m_AssignedGoldStone.ColliderRadius)
+        {
+            StopMovement();
+            SetState(UnitState.Mining);
+        }
+    }
 
     void HandleChoppingTask()
     {
@@ -145,6 +193,47 @@ public class WorkerUnit : HumanoidUnit
             StopMovement();
             SetState(UnitState.Chopping);
         }
+    }
+    void StartMining()
+    {
+        m_Animator.SetBool("isMining", true);
+        m_MiningTimer += Time.deltaTime;
+        m_HitGoldStoneTimer += Time.deltaTime;
+
+        if (m_HitGoldStoneTimer >= m_HitGoldStoneFrequency)
+        {
+            m_HitGoldStoneTimer = 0f;
+            // Here you can add code to play a mining sound or trigger a hit effect on the gold stone
+            m_AssignedGoldStone.Hit();
+        }
+
+
+        if (m_MiningTimer >= m_GoldGatherTickTime)
+        {
+            m_MiningTimer = 0f;
+            m_GoldCollected += m_GoldPerTick;
+
+            if (m_GoldCollected >= m_GoldCapacity)
+            {
+                m_GoldCollected = m_GoldCapacity;
+                HandleMiningFinished();
+            }
+            // Debug.Log($"Worker {name} gathered gold. Total gold collected: {m_GoldCollected}/{m_GoldCapacity}");
+        }
+    }
+    void HandleMiningFinished()
+    {
+        m_Animator.SetBool("isMining", false);
+
+        m_AssignedStoragePit = m_GameManager.FindClosetStoragePit(transform.position);
+        if (m_AssignedStoragePit != null && m_AssignedStoragePit.CanStoreGold)
+        {
+            var closetPointOnStorge = m_AssignedStoragePit.Collider.ClosestPoint(m_AssignedStoragePit.transform.position);
+            MoveTo(closetPointOnStorge);
+            //Debug.Log($"Worker {name} is returning wood to storage {m_AssignedStoragePit.name}");
+        }
+        SetState(UnitState.Idle);
+        SetTask(UnitTask.ReturnResource);
     }
     void StartChopping()
     {
@@ -177,12 +266,12 @@ public class WorkerUnit : HumanoidUnit
     {
         m_Animator.SetBool("isChopping", false);
 
-        m_AssignedWoodStorage = m_GameManager.FindClosetWoodStorage(transform.position);
-        if (m_AssignedWoodStorage != null)
+        m_AssignedStoragePit = m_GameManager.FindClosetStoragePit(transform.position);
+        if (m_AssignedStoragePit != null && m_AssignedStoragePit.CanStoreWood)
         {
-            var closetPointOnStorge = m_AssignedWoodStorage.Collider.ClosestPoint(m_AssignedWoodStorage.transform.position);
+            var closetPointOnStorge = m_AssignedStoragePit.Collider.ClosestPoint(m_AssignedStoragePit.transform.position);
             MoveTo(closetPointOnStorge);
-            //Debug.Log($"Worker {name} is returning wood to storage {m_AssignedWoodStorage.name}");
+            //Debug.Log($"Worker {name} is returning wood to storage {m_AssignedStoragePit.name}");
         }
         SetState(UnitState.Idle);
         SetTask(UnitTask.ReturnResource);
@@ -211,6 +300,14 @@ public class WorkerUnit : HumanoidUnit
         if (closetTree != null)
         {
             SendToChop(closetTree);
+        }
+    }
+    void TryMoveToClosetGoldStone()
+    {
+        var closetGoldStone = m_GameManager.FindClosetUnclaimedGoldStone(transform.position);
+        if (closetGoldStone != null)
+        {
+            SendToMine(closetGoldStone);
         }
     }
     void ResetState()
