@@ -34,12 +34,12 @@ MonoBehaviour:
     m_GatherAnimationBool: isMining
     m_DeliveryPopupColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   - m_ResourceType: 2
-    m_GatherTask: 0
-    m_GatherState: 0
+    m_GatherTask: 6
+    m_GatherState: 7
     m_GatherTickTime: 1
     m_ResourcePerTick: 1
     m_CarryCapacity: 5
     m_HitFrequency: 0.3
     m_CarryAnimatorValue: 3
-    m_GatherAnimationBool: 
+    m_GatherAnimationBool: isAttacking
     m_DeliveryPopupColor: {r: 1, g: 0, b: 0, a: 1}

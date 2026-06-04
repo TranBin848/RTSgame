@@ -4,6 +4,7 @@ using UnityEngine;
 public class WorkerUnit : HumanoidUnit
 {
     [SerializeField] private WorkerUnitDefinition m_Definition;
+    [SerializeField] private string m_AttackAnimatorBool = "isAttacking";
 
     private readonly Dictionary<ResourceType, int> m_CarriedResources = new();
 
@@ -40,6 +41,10 @@ public class WorkerUnit : HumanoidUnit
         {
             CheckForConstruction();
         }
+        else if (IsInResourceCombat(out var resourceUnit))
+        {
+            HandleResourceCombat(resourceUnit);
+        }
         else if (IsAssignedToResourceNode() && GetCarriedAmount(m_ActiveProfile.ResourceType) < m_ActiveProfile.CarryCapacity)
         {
             HandleGatheringTask();
@@ -60,6 +65,7 @@ public class WorkerUnit : HumanoidUnit
     protected override void OnSetDestination(DestinationSource source)
     {
         SetState(UnitState.Moving);
+        SetAttackAnimationActive(false);
         if (source == DestinationSource.PlayerClick)
         {
             CancelActiveWork();
@@ -70,6 +76,17 @@ public class WorkerUnit : HumanoidUnit
     {
         ReleaseAssignedResourceNode();
         base.Die();
+    }
+
+    protected override void PerformAttackAnimation()
+    {
+        if (Target == null)
+        {
+            return;
+        }
+
+        Vector3 direction = (Target.transform.position - transform.position).normalized;
+        m_SpriteRenderer.flipX = direction.x < 0;
     }
 
     public void OnBuildingFinished()
@@ -120,8 +137,18 @@ public class WorkerUnit : HumanoidUnit
         m_AssignedDepot = null;
         ResetGatherTimers();
 
-        MoveTo(resourceNode.GetInteractionPoint());
-        SetTask(profile.GatherTask);
+        if (resourceNode is Unit resourceUnit && resourceUnit.CurrentState != UnitState.Dead)
+        {
+            SetTarget(resourceUnit);
+            SetTask(UnitTask.Attack);
+            MoveTo(resourceUnit.transform.position);
+        }
+        else
+        {
+            MoveTo(resourceNode.GetInteractionPoint());
+            SetTask(profile.GatherTask);
+        }
+
         return true;
     }
 
@@ -135,6 +162,37 @@ public class WorkerUnit : HumanoidUnit
         {
             StopMovement();
             SetState(m_ActiveProfile.GatherState);
+        }
+    }
+
+    void HandleResourceCombat(Unit resourceUnit)
+    {
+        if (resourceUnit.CurrentState == UnitState.Dead)
+        {
+            SetAttackAnimationActive(false);
+            SetTarget(null);
+            MoveTo(m_AssignedResourceNode.GetInteractionPoint());
+            SetTask(m_ActiveProfile.GatherTask);
+            SetState(m_ActiveProfile.GatherState);
+            return;
+        }
+
+        if (Target != resourceUnit)
+        {
+            SetTarget(resourceUnit);
+        }
+
+        if (IsTargetInRange(resourceUnit))
+        {
+            StopMovement();
+            SetState(UnitState.Attacking);
+            SetAttackAnimationActive(true);
+            TryAttackCurrentTarget();
+        }
+        else
+        {
+            SetAttackAnimationActive(false);
+            MoveTo(resourceUnit.transform.position);
         }
     }
 
@@ -260,6 +318,14 @@ public class WorkerUnit : HumanoidUnit
             && CurrentTask == m_ActiveProfile.GatherTask;
     }
 
+    bool IsInResourceCombat(out Unit resourceUnit)
+    {
+        resourceUnit = m_AssignedResourceNode as Unit;
+        return m_HasActiveProfile
+            && resourceUnit != null
+            && CurrentTask == UnitTask.Attack;
+    }
+
     bool IsHoldingCurrentResource()
     {
         return m_HasActiveProfile && GetCarriedAmount(m_ActiveProfile.ResourceType) > 0;
@@ -292,6 +358,14 @@ public class WorkerUnit : HumanoidUnit
         if (!string.IsNullOrWhiteSpace(m_ActiveProfile.GatherAnimationBool))
         {
             m_Animator.SetBool(m_ActiveProfile.GatherAnimationBool, isActive);
+        }
+    }
+
+    void SetAttackAnimationActive(bool isActive)
+    {
+        if (!string.IsNullOrWhiteSpace(m_AttackAnimatorBool))
+        {
+            m_Animator.SetBool(m_AttackAnimatorBool, isActive);
         }
     }
 
@@ -332,6 +406,7 @@ public class WorkerUnit : HumanoidUnit
         SetTask(UnitTask.None);
         SetState(UnitState.Idle);
         m_Animator.SetBool("isBuilding", false);
+        SetAttackAnimationActive(false);
         SetGatherAnimationActive(false);
         ResetGatherTimers();
         ReleaseAssignedResourceNode();

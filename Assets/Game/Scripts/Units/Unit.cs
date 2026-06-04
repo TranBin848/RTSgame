@@ -3,11 +3,11 @@ using UnityEngine;
 
 public enum UnitState
 {
-    Idle, Moving, Attacking, Chopping, Mining, Building, Dead
+    Idle, Moving, Attacking, Chopping, Mining, Building, Dead, Collecting
 }
 public enum UnitTask
 {
-    None, Build, Chop, Mine, Attack, ReturnResource
+    None, Build, Chop, Mine, Attack, ReturnResource, Collect
 }
 public enum DestinationSource
 {

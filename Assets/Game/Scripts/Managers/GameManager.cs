@@ -13,6 +13,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     [Header("Resources")]
     [SerializeField] private Transform m_TreeContainer;
     [SerializeField] private Transform m_GoldStoneContainer;
+    [SerializeField] private Transform m_SheepContainer;
     private PlacementProcess m_PlacementProcess;
     private int m_Gold = 0;
     private int m_Wood = 0;
@@ -33,7 +34,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     protected override void Awake()
     {
         base.Awake();
-        m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer);
+        m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer, m_SheepContainer);
         m_ResourceDepotLocator = new SceneResourceDepotLocator(() => m_PlayerStructures);
     }
 
