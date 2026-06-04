@@ -1,31 +1,4 @@
-using UnityEngine;
-
-public class Tree : MonoBehaviour
+public class Tree : ResourceNodeBase
 {
-    [SerializeField] private CapsuleCollider2D m_Collider;
-    public Animator m_Animator;
-    private bool m_Claimed = false;
-    public bool Claimed => m_Claimed;
-
-    public bool TryToClaim()
-    {
-        if (!m_Claimed)
-        {
-            m_Claimed = true;
-            return true;
-        }
-        return false;
-    }
-    public void Release()
-    {
-        m_Claimed = false;
-    }
-    public void Hit()
-    {
-        m_Animator.SetTrigger("Hit");
-    }
-    public Vector3 GetBottomPosition()
-    {
-        return m_Collider.bounds.min;
-    }
+    public override ResourceType ResourceType => ResourceType.Wood;
 }

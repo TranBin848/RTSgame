@@ -1,339 +1,362 @@
-using System.Diagnostics.Tracing;
-using NUnit.Framework.Constraints;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkerUnit : HumanoidUnit
 {
-    [SerializeField] private float m_WoodGatherTickTime = 1f;
-    [SerializeField] private float m_GoldGatherTickTime = 1f;
-    [SerializeField] private float m_FoodGatherTickTime = 1f;
-    [SerializeField] private int m_WoodPerTick = 1;
-    [SerializeField] private int m_GoldPerTick = 1;
-    [SerializeField] private int m_MeatPerTick = 1;
-    [SerializeField] private float m_HitTreeFrequency = 0.3f;
-    [SerializeField] private float m_HitGoldStoneFrequency = 0.3f;
-    [SerializeField] private float m_HitAnimalFrequency = 0.3f;
+    [SerializeField] private WorkerUnitDefinition m_Definition;
 
-    private float m_ChoppingTimer;
-    private float m_HitTreeTimer;
-    private float m_MiningTimer;
-    private float m_HitGoldStoneTimer;
-    private float m_FoodingTimer;
-    private float m_HitAnimalTimer;
-    private int m_WoodCollected;
-    private int m_GoldCollected;
-    private int m_MeatCollected;
-    private int m_WoodCapacity = 5;
-    private int m_GoldCapacity = 10;
-    private int m_MeatCapacity = 5;
-    public Tree m_AssignedTree;
-    public GoldStone m_AssignedGoldStone;
-    private StructureUnit m_AssignedStoragePit;
-    public bool IsHoldingWood => m_WoodCollected > 0;
-    public bool IsHoldingGold => m_GoldCollected > 0;
-    public bool IsHoldingMeat => m_MeatCollected > 0;
-    public bool IsHoldingResource => IsHoldingWood || IsHoldingGold || IsHoldingMeat;
-    public enum CarryType
+    private readonly Dictionary<ResourceType, int> m_CarriedResources = new();
+
+    private IResourceNodeLocator m_ResourceNodeLocator;
+    private IResourceDepotLocator m_ResourceDepotLocator;
+    private IPlayerResourceWallet m_ResourceWallet;
+    private IResourceNode m_AssignedResourceNode;
+    private IResourceDepot m_AssignedDepot;
+    private WorkerUnitDefinition.GatheringProfile m_ActiveProfile;
+    private bool m_HasActiveProfile;
+    private float m_GatherTimer;
+    private float m_HitTimer;
+
+    public bool IsHoldingResource => TryGetCurrentCarryType(out _);
+
+    public void Inject(
+        IResourceNodeLocator resourceNodeLocator,
+        IResourceDepotLocator resourceDepotLocator,
+        IPlayerResourceWallet resourceWallet)
     {
-        None = 0,
-        Wood = 1,
-        Gold = 2,
-        Meat = 3
+        m_ResourceNodeLocator = resourceNodeLocator;
+        m_ResourceDepotLocator = resourceDepotLocator;
+        m_ResourceWallet = resourceWallet;
     }
+
     protected override void UpdateBehaviour()
     {
+        if (!HasGatheringDefinition())
+        {
+            return;
+        }
+
         if (CurrentTask == UnitTask.Build && hasTarget)
         {
             CheckForConstruction();
         }
-        else if (CurrentTask == UnitTask.Chop && m_AssignedTree != null && m_WoodCollected < m_WoodCapacity)
+        else if (IsAssignedToResourceNode() && GetCarriedAmount(m_ActiveProfile.ResourceType) < m_ActiveProfile.CarryCapacity)
         {
-            HandleChoppingTask();
+            HandleGatheringTask();
         }
-        else if (CurrentTask == UnitTask.Mine && m_AssignedGoldStone != null & m_GoldCollected < m_GoldCapacity)
+        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedDepot != null && IsHoldingCurrentResource())
         {
-            HandleMiningTask();
-        }
-        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedStoragePit != null
-        && (IsHoldingWood || IsHoldingGold || IsHoldingMeat))
-        {
-            var closetPointOnStorge = m_AssignedStoragePit.Collider.ClosestPoint(transform.position);
-            var distance = Vector3.Distance(transform.position, closetPointOnStorge);
-            if (distance <= 0.5f)
-            {
-                if (IsHoldingWood)
-                {
-                    m_GameManager.ShowTextPopup(m_WoodCollected.ToString(), Color.green, GetTopPosition());
-                    m_GameManager.AddResources(0, m_WoodCollected, 0);
-                    m_WoodCollected = 0;
-                    TryMoveToClosetTree();
-                }
-                else if (IsHoldingGold)
-                {
-                    m_GameManager.ShowTextPopup(m_GoldCollected.ToString(), Color.yellow, GetTopPosition());
-                    m_GameManager.AddResources(m_GoldCollected, 0, 0);
-                    m_GoldCollected = 0;
-                    TryMoveToClosetGoldStone();
-                }
-                else if (IsHoldingMeat)
-                {
-                    m_GameManager.ShowTextPopup(m_MeatCollected.ToString(), Color.red, GetTopPosition());
-                    m_GameManager.AddResources(0, 0, m_MeatCollected);
-                    m_MeatCollected = 0;
-                    // No need to move to closet animal after delivering meat
-                }
-                //Debug.Log($"Worker {name} delivered wood to storage {m_AssignedStoragePit.name}. Wood collected reset to 0.");
-            }
+            HandleDepositTask();
         }
 
-        if (CurrentState == UnitState.Chopping && m_WoodCollected < m_WoodCapacity)
+        if (m_HasActiveProfile && CurrentState == m_ActiveProfile.GatherState && GetCarriedAmount(m_ActiveProfile.ResourceType) < m_ActiveProfile.CarryCapacity)
         {
-            StartChopping();
+            ProcessGathering();
         }
-        else if (CurrentState == UnitState.Mining && m_GoldCollected < m_GoldCapacity)
-        {
-            StartMining();
-        }
-        //Debug.Log(m_WoodCollected);
+
         HandleResourcePlay();
     }
+
     protected override void OnSetDestination(DestinationSource source)
     {
         SetState(UnitState.Moving);
-        ResetState();
-    }
-
-
-    public void OnBuildingFinished() => ResetState();
-    public void SetWoodStorage(StructureUnit storage)
-    {
-        m_AssignedStoragePit = storage;
-    }
-
-    public void SendToBuild(StructureUnit structure)
-    {
-        MoveTo(structure.transform.position);
-        SetTarget(structure);
-        SetTask(UnitTask.Build);
-    }
-    public void SendToChop(Tree tree)
-    {
-        if (tree.TryToClaim())
+        if (source == DestinationSource.PlayerClick)
         {
-            MoveTo(tree.GetBottomPosition());
-            SetTask(UnitTask.Chop);
-            m_AssignedTree = tree;
-            //Debug.Log($"Worker {name} assigned to chop tree {tree.name}");
+            CancelActiveWork();
         }
-    }
-    public void SendToMine(GoldStone goldStone)
-    {
-        // if (goldStone.TryToClaim())
-        // {
-        MoveTo(goldStone.GetBottomPosition());
-        SetTask(UnitTask.Mine);
-        m_AssignedGoldStone = goldStone;
-        //Debug.Log($"Worker {name} assigned to mine gold stone {goldStone.name}");
-        //}
     }
 
     protected override void Die()
     {
+        ReleaseAssignedResourceNode();
         base.Die();
-        if (m_AssignedTree != null)
-        {
-            m_AssignedTree.Release();
-        }
     }
-    void HandleResourcePlay()
+
+    public void OnBuildingFinished()
     {
-        if (IsHoldingResource)
-        {
-            if (IsHoldingWood)
-            {
-                m_Animator.SetFloat("CarryType", (float)CarryType.Wood);
-            }
-            else if (IsHoldingGold)
-            {
-                m_Animator.SetFloat("CarryType", (float)CarryType.Gold);
-            }
-            else if (IsHoldingMeat)
-            {
-                m_Animator.SetFloat("CarryType", (float)CarryType.Meat);
-            }
-        }
-        else
-        {
-            m_Animator.SetFloat("CarryType", (float)CarryType.None);
-        }
+        CancelActiveWork();
     }
-    void HandleMiningTask()
+
+    public void SetWoodStorage(StructureUnit storage)
     {
-        var goldStoneBottomPosition = m_AssignedGoldStone.GetBottomPosition();
-        var workerClosetPoint = Collider.ClosestPoint(goldStoneBottomPosition);
+        m_AssignedDepot = storage;
+    }
 
-        var distance = Vector3.Distance(workerClosetPoint, goldStoneBottomPosition);
+    public void SendToBuild(StructureUnit structure)
+    {
+        CancelActiveWork();
+        MoveTo(structure.transform.position);
+        SetTarget(structure);
+        SetTask(UnitTask.Build);
+    }
 
-        if (distance <= m_AssignedGoldStone.ColliderRadius)
+    public bool TryAssignResourceNode(IResourceNode resourceNode)
+    {
+        if (resourceNode == null || !HasGatheringDefinition())
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(m_AssignedResourceNode, resourceNode))
+        {
+            return true;
+        }
+
+        if (!m_Definition.TryGetProfile(resourceNode.ResourceType, out var profile))
+        {
+            return false;
+        }
+
+        if (!resourceNode.TryClaim())
+        {
+            return false;
+        }
+
+        CancelActiveWork();
+
+        m_AssignedResourceNode = resourceNode;
+        m_ActiveProfile = profile;
+        m_HasActiveProfile = true;
+        m_AssignedDepot = null;
+        ResetGatherTimers();
+
+        MoveTo(resourceNode.GetInteractionPoint());
+        SetTask(profile.GatherTask);
+        return true;
+    }
+
+    void HandleGatheringTask()
+    {
+        Vector3 interactionPoint = m_AssignedResourceNode.GetInteractionPoint();
+        Vector3 workerClosestPoint = Collider.ClosestPoint(interactionPoint);
+        float distance = Vector3.Distance(workerClosestPoint, interactionPoint);
+
+        if (distance <= m_AssignedResourceNode.InteractionRadius)
         {
             StopMovement();
-            SetState(UnitState.Mining);
+            SetState(m_ActiveProfile.GatherState);
         }
     }
 
-    void HandleChoppingTask()
+    void HandleDepositTask()
     {
-        var treeBottomPosition = m_AssignedTree.GetBottomPosition();
-        var workerClosetPoint = Collider.ClosestPoint(treeBottomPosition);
+        Vector3 deliveryPoint = m_AssignedDepot.GetDeliveryPoint(transform.position);
+        float distance = Vector3.Distance(transform.position, deliveryPoint);
 
-        var distance = Vector3.Distance(workerClosetPoint, treeBottomPosition);
-
-        if (distance <= 0.1f)
-        {
-            StopMovement();
-            SetState(UnitState.Chopping);
-        }
-    }
-    void StartMining()
-    {
-        m_Animator.SetBool("isMining", true);
-        m_MiningTimer += Time.deltaTime;
-        m_HitGoldStoneTimer += Time.deltaTime;
-
-        if (m_HitGoldStoneTimer >= m_HitGoldStoneFrequency)
-        {
-            m_HitGoldStoneTimer = 0f;
-            // Here you can add code to play a mining sound or trigger a hit effect on the gold stone
-            m_AssignedGoldStone.Hit();
-        }
-
-
-        if (m_MiningTimer >= m_GoldGatherTickTime)
-        {
-            m_MiningTimer = 0f;
-            m_GoldCollected += m_GoldPerTick;
-
-            if (m_GoldCollected >= m_GoldCapacity)
-            {
-                m_GoldCollected = m_GoldCapacity;
-                HandleMiningFinished();
-            }
-            // Debug.Log($"Worker {name} gathered gold. Total gold collected: {m_GoldCollected}/{m_GoldCapacity}");
-        }
-    }
-    void HandleMiningFinished()
-    {
-        m_Animator.SetBool("isMining", false);
-
-        m_AssignedStoragePit = m_GameManager.FindClosetStoragePit(transform.position);
-        if (m_AssignedStoragePit != null && m_AssignedStoragePit.CanStoreGold)
-        {
-            var closetPointOnStorge = m_AssignedStoragePit.Collider.ClosestPoint(m_AssignedStoragePit.transform.position);
-            MoveTo(closetPointOnStorge);
-            //Debug.Log($"Worker {name} is returning wood to storage {m_AssignedStoragePit.name}");
-        }
-        SetState(UnitState.Idle);
-        SetTask(UnitTask.ReturnResource);
-    }
-    void StartChopping()
-    {
-        m_Animator.SetBool("isChopping", true);
-        m_ChoppingTimer += Time.deltaTime;
-        m_HitTreeTimer += Time.deltaTime;
-
-        if (m_HitTreeTimer >= m_HitTreeFrequency)
-        {
-            m_HitTreeTimer = 0f;
-            // Here you can add code to play a chopping sound or trigger a hit effect on the tree
-            m_AssignedTree.Hit();
-        }
-
-
-        if (m_ChoppingTimer >= m_WoodGatherTickTime)
-        {
-            m_ChoppingTimer = 0f;
-            m_WoodCollected += m_WoodPerTick;
-
-            if (m_WoodCollected >= m_WoodCapacity)
-            {
-                m_WoodCollected = m_WoodCapacity;
-                HandleChoppingFinished();
-            }
-            Debug.Log($"Worker {name} gathered wood. Total wood collected: {m_WoodCollected}/{m_WoodCapacity}");
-        }
-    }
-    void HandleChoppingFinished()
-    {
-        m_Animator.SetBool("isChopping", false);
-
-        m_AssignedStoragePit = m_GameManager.FindClosetStoragePit(transform.position);
-        if (m_AssignedStoragePit != null && m_AssignedStoragePit.CanStoreWood)
-        {
-            var closetPointOnStorge = m_AssignedStoragePit.Collider.ClosestPoint(m_AssignedStoragePit.transform.position);
-            MoveTo(closetPointOnStorge);
-            //Debug.Log($"Worker {name} is returning wood to storage {m_AssignedStoragePit.name}");
-        }
-        SetState(UnitState.Idle);
-        SetTask(UnitTask.ReturnResource);
-    }
-    void CheckForConstruction()
-    {
-        if (Target == null || !(Target is StructureUnit structure))
+        if (distance > 0.5f)
         {
             return;
         }
-        var distanceToTarget = Vector2.Distance(transform.position, Target.transform.position);
+
+        int amount = GetCarriedAmount(m_ActiveProfile.ResourceType);
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        m_GameManager.ShowTextPopup(amount.ToString(), m_ActiveProfile.DeliveryPopupColor, GetTopPosition());
+        m_ResourceWallet?.AddResource(m_ActiveProfile.ResourceType, amount);
+        SetCarriedAmount(m_ActiveProfile.ResourceType, 0);
+
+        if (!TryAssignClosestResourceNode(m_ActiveProfile.ResourceType))
+        {
+            m_AssignedDepot = null;
+            SetTask(UnitTask.None);
+            SetState(UnitState.Idle);
+        }
+    }
+
+    void ProcessGathering()
+    {
+        SetGatherAnimationActive(true);
+        m_GatherTimer += Time.deltaTime;
+        m_HitTimer += Time.deltaTime;
+
+        if (m_HitTimer >= m_ActiveProfile.HitFrequency)
+        {
+            m_HitTimer = 0f;
+            m_AssignedResourceNode?.Hit();
+        }
+
+        if (m_GatherTimer < m_ActiveProfile.GatherTickTime)
+        {
+            return;
+        }
+
+        m_GatherTimer = 0f;
+        int updatedAmount = Mathf.Min(
+            GetCarriedAmount(m_ActiveProfile.ResourceType) + m_ActiveProfile.ResourcePerTick,
+            m_ActiveProfile.CarryCapacity);
+        SetCarriedAmount(m_ActiveProfile.ResourceType, updatedAmount);
+
+        if (updatedAmount >= m_ActiveProfile.CarryCapacity)
+        {
+            HandleGatheringFinished();
+        }
+    }
+
+    void HandleGatheringFinished()
+    {
+        SetGatherAnimationActive(false);
+
+        if (m_ResourceDepotLocator != null &&
+            m_ResourceDepotLocator.TryFindClosestDepot(transform.position, m_ActiveProfile.ResourceType, out var depot))
+        {
+            m_AssignedDepot = depot;
+            MoveTo(depot.GetDeliveryPoint(transform.position));
+            SetState(UnitState.Idle);
+            SetTask(UnitTask.ReturnResource);
+            return;
+        }
+
+        m_AssignedDepot = null;
+        SetState(UnitState.Idle);
+        SetTask(UnitTask.None);
+    }
+
+    void CheckForConstruction()
+    {
+        if (Target is not StructureUnit structure)
+        {
+            return;
+        }
+
+        float distanceToTarget = Vector2.Distance(transform.position, Target.transform.position);
         if (distanceToTarget <= m_ObjectDetectionRadius)
         {
             StartedBuilding(structure);
         }
     }
+
     void StartedBuilding(StructureUnit structure)
     {
         SetState(UnitState.Building);
         m_Animator.SetBool("isBuilding", true);
         structure.AssignWorkerToBuildProcess(this);
     }
-    void TryMoveToClosetTree()
+
+    bool TryAssignClosestResourceNode(ResourceType resourceType)
     {
-        var closetTree = m_GameManager.FindClosetUnclaimedTree(transform.position);
-        if (closetTree != null)
+        return m_ResourceNodeLocator != null
+            && m_ResourceNodeLocator.TryFindClosestAvailable(transform.position, resourceType, out var resourceNode)
+            && TryAssignResourceNode(resourceNode);
+    }
+
+    bool HasGatheringDefinition()
+    {
+        if (m_Definition != null)
         {
-            SendToChop(closetTree);
+            return true;
+        }
+
+        Debug.LogError($"WorkerUnit '{name}' is missing a WorkerUnitDefinition reference.");
+        return false;
+    }
+
+    bool IsAssignedToResourceNode()
+    {
+        return m_HasActiveProfile
+            && m_AssignedResourceNode != null
+            && CurrentTask == m_ActiveProfile.GatherTask;
+    }
+
+    bool IsHoldingCurrentResource()
+    {
+        return m_HasActiveProfile && GetCarriedAmount(m_ActiveProfile.ResourceType) > 0;
+    }
+
+    int GetCarriedAmount(ResourceType resourceType)
+    {
+        return m_CarriedResources.TryGetValue(resourceType, out var amount) ? amount : 0;
+    }
+
+    void SetCarriedAmount(ResourceType resourceType, int amount)
+    {
+        if (amount <= 0)
+        {
+            m_CarriedResources.Remove(resourceType);
+            return;
+        }
+
+        m_CarriedResources[resourceType] = amount;
+    }
+
+    void ResetGatherTimers()
+    {
+        m_GatherTimer = 0f;
+        m_HitTimer = 0f;
+    }
+
+    void SetGatherAnimationActive(bool isActive)
+    {
+        if (!string.IsNullOrWhiteSpace(m_ActiveProfile.GatherAnimationBool))
+        {
+            m_Animator.SetBool(m_ActiveProfile.GatherAnimationBool, isActive);
         }
     }
-    void TryMoveToClosetGoldStone()
+
+    void HandleResourcePlay()
     {
-        var closetGoldStone = m_GameManager.FindClosetUnclaimedGoldStone(transform.position);
-        if (closetGoldStone != null)
+        if (TryGetCurrentCarryType(out var carryType) && m_Definition.TryGetProfile(carryType, out var profile))
         {
-            SendToMine(closetGoldStone);
+            m_Animator.SetFloat("CarryType", profile.CarryAnimatorValue);
+            return;
         }
+
+        m_Animator.SetFloat("CarryType", 0f);
     }
-    void ResetState()
+
+    bool TryGetCurrentCarryType(out ResourceType resourceType)
+    {
+        if (m_HasActiveProfile && GetCarriedAmount(m_ActiveProfile.ResourceType) > 0)
+        {
+            resourceType = m_ActiveProfile.ResourceType;
+            return true;
+        }
+
+        foreach (var resourceEntry in m_CarriedResources)
+        {
+            if (resourceEntry.Value > 0)
+            {
+                resourceType = resourceEntry.Key;
+                return true;
+            }
+        }
+
+        resourceType = default;
+        return false;
+    }
+
+    void CancelActiveWork()
     {
         SetTask(UnitTask.None);
-        if (hasTarget)
-        {
-            CleanUpTarget();
-        }
+        SetState(UnitState.Idle);
         m_Animator.SetBool("isBuilding", false);
-        m_Animator.SetBool("isChopping", false);
-
-        m_ChoppingTimer = 0f;
-
-        if (m_AssignedTree != null)
-        {
-            m_AssignedTree.Release();
-            m_AssignedTree = null;
-        }
+        SetGatherAnimationActive(false);
+        ResetGatherTimers();
+        ReleaseAssignedResourceNode();
+        m_AssignedDepot = null;
+        CleanUpTarget();
     }
+
+    void ReleaseAssignedResourceNode()
+    {
+        if (m_AssignedResourceNode != null)
+        {
+            m_AssignedResourceNode.Release();
+            m_AssignedResourceNode = null;
+        }
+
+        m_HasActiveProfile = false;
+    }
+
     void CleanUpTarget()
     {
         if (Target is StructureUnit structure)
         {
             structure.UnassignWorkerFromBuildProcess();
         }
+
         SetTarget(null);
     }
 }

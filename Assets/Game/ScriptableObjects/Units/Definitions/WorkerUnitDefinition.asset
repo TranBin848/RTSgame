@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7f2dc728d3493d8c6cb4e89c886b10, type: 3}
+  m_Name: WorkerUnitDefinition
+  m_EditorClassIdentifier: Assembly-CSharp::WorkerUnitDefinition
+  m_GatheringProfiles:
+  - m_ResourceType: 0
+    m_GatherTask: 2
+    m_GatherState: 3
+    m_GatherTickTime: 1
+    m_ResourcePerTick: 1
+    m_CarryCapacity: 5
+    m_HitFrequency: 0.3
+    m_CarryAnimatorValue: 1
+    m_GatherAnimationBool: isChopping
+    m_DeliveryPopupColor: {r: 0, g: 1, b: 0, a: 1}
+  - m_ResourceType: 1
+    m_GatherTask: 3
+    m_GatherState: 4
+    m_GatherTickTime: 1
+    m_ResourcePerTick: 1
+    m_CarryCapacity: 10
+    m_HitFrequency: 0.3
+    m_CarryAnimatorValue: 2
+    m_GatherAnimationBool: isMining
+    m_DeliveryPopupColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - m_ResourceType: 2
+    m_GatherTask: 0
+    m_GatherState: 0
+    m_GatherTickTime: 1
+    m_ResourcePerTick: 1
+    m_CarryCapacity: 5
+    m_HitFrequency: 0.3
+    m_CarryAnimatorValue: 3
+    m_GatherAnimationBool: 
+    m_DeliveryPopupColor: {r: 1, g: 0, b: 0, a: 1}

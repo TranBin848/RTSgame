@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1b656707e5d734b811c476c1b668b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkerUnit
+  m_Definition: {fileID: 11400000, guid: 33ca23884f74462d855e524749ded0df, type: 2}
   m_Actions:
   - {fileID: 11400000, guid: 6556196f813f88344a5e3c5eb214b3b9, type: 2}
   m_ObjectDetectionRadius: 0.5
