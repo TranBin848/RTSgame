@@ -262,7 +262,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
                 worker.SendToBuild((StructureUnit)unit);
                 return;
             }
-            else if (worker.IsHoldingResource && WorkerClickedOnWoodStorage(unit))
+            else if (WorkerClickedOnValidDepot(worker, unit))
             {
                 var closetPoint = unit.Collider.ClosestPoint(worker.transform.position);
                 worker.MoveTo(closetPoint);
@@ -273,10 +273,13 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         }
         SelectNewUnit(unit);
     }
-    bool WorkerClickedOnWoodStorage(Unit clickedUnit)
+    bool WorkerClickedOnValidDepot(WorkerUnit worker, Unit clickedUnit)
     {
-        return (clickedUnit is StructureUnit structure && structure.CanStoreWood);
-
+        if (clickedUnit is StructureUnit structure && worker.TryGetCurrentCarryType(out var carryType))
+        {
+            return structure.CanStore(carryType);
+        }
+        return false;
     }
     void handleClickOnEnemyUnit(Unit unit)
     {

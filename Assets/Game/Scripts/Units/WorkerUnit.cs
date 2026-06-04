@@ -49,7 +49,7 @@ public class WorkerUnit : HumanoidUnit
         {
             HandleGatheringTask();
         }
-        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedDepot != null && IsHoldingCurrentResource())
+        else if (CurrentTask == UnitTask.ReturnResource && m_AssignedDepot != null && IsHoldingResource)
         {
             HandleDepositTask();
         }
@@ -199,24 +199,39 @@ public class WorkerUnit : HumanoidUnit
     void HandleDepositTask()
     {
         Vector3 deliveryPoint = m_AssignedDepot.GetDeliveryPoint(transform.position);
-        float distance = Vector3.Distance(transform.position, deliveryPoint);
+        Vector3 workerClosestPoint = Collider.ClosestPoint(deliveryPoint);
+        float distance = Vector3.Distance(workerClosestPoint, deliveryPoint);
 
-        if (distance > 0.5f)
+        if (distance > 0.15f)
         {
             return;
         }
 
-        int amount = GetCarriedAmount(m_ActiveProfile.ResourceType);
+        if (!TryGetCurrentCarryType(out var carryType) || !m_Definition.TryGetProfile(carryType, out var profile))
+        {
+            return;
+        }
+
+        int amount = GetCarriedAmount(carryType);
         if (amount <= 0)
         {
             return;
         }
 
-        m_GameManager.ShowTextPopup(amount.ToString(), m_ActiveProfile.DeliveryPopupColor, GetTopPosition());
-        m_ResourceWallet?.AddResource(m_ActiveProfile.ResourceType, amount);
-        SetCarriedAmount(m_ActiveProfile.ResourceType, 0);
+        m_GameManager.ShowTextPopup(amount.ToString(), profile.DeliveryPopupColor, GetTopPosition());
+        m_ResourceWallet?.AddResource(carryType, amount);
+        SetCarriedAmount(carryType, 0);
 
-        if (!TryAssignClosestResourceNode(m_ActiveProfile.ResourceType))
+        if (m_AssignedResourceNode != null)
+        {
+            m_AssignedDepot = null;
+            ResetGatherTimers();
+            MoveTo(m_AssignedResourceNode.GetInteractionPoint());
+            SetTask(profile.GatherTask);
+            return;
+        }
+
+        if (!TryAssignClosestResourceNode(carryType))
         {
             m_AssignedDepot = null;
             SetTask(UnitTask.None);
@@ -380,7 +395,7 @@ public class WorkerUnit : HumanoidUnit
         m_Animator.SetFloat("CarryType", 0f);
     }
 
-    bool TryGetCurrentCarryType(out ResourceType resourceType)
+    public bool TryGetCurrentCarryType(out ResourceType resourceType)
     {
         if (m_HasActiveProfile && GetCarriedAmount(m_ActiveProfile.ResourceType) > 0)
         {

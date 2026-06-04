@@ -113,12 +113,12 @@ TextureImporter:
       name: Tree1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 37
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -135,12 +135,12 @@ TextureImporter:
       name: Tree1_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 230
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -157,12 +157,12 @@ TextureImporter:
       name: Tree1_2
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 423
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -179,12 +179,12 @@ TextureImporter:
       name: Tree1_3
       rect:
         serializedVersion: 2
-        x: 576
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 615
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -201,12 +201,12 @@ TextureImporter:
       name: Tree1_4
       rect:
         serializedVersion: 2
-        x: 768
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 806
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -223,12 +223,12 @@ TextureImporter:
       name: Tree1_5
       rect:
         serializedVersion: 2
-        x: 960
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 998
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -245,12 +245,12 @@ TextureImporter:
       name: Tree1_6
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1189
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -267,12 +267,12 @@ TextureImporter:
       name: Tree1_7
       rect:
         serializedVersion: 2
-        x: 1344
-        y: 0
-        width: 192
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1381
+        y: 15
+        width: 119
+        height: 190
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -299,7 +299,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":1.0},"gridSpriteSize":{"x":192.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Tree1_0: 1828851199
       Tree1_1: -932819483

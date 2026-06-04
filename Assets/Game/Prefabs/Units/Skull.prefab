@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   m_Actions: []
-  m_ObjectDetectionRadius: 4
+  m_ObjectDetectionRadius: 2
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0.5
   m_AutoAttackFrequency: 1.5

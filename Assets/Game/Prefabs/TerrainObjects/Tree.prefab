@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tree
   m_Collider: {fileID: -7695743413920488008}
+  m_Animator: {fileID: 0}
+  m_InteractionRadius: 0.1
 --- !u!70 &-7695743413920488008
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -162,6 +164,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.02149582, y: -0.43419588}
-  m_Size: {x: 1.1514435, y: 2.5125573}
+  m_Offset: {x: 0.023356885, y: 0.21042585}
+  m_Size: {x: 0.65779275, y: 0.8047013}
   m_Direction: 0

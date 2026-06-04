@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7092611187026238676}
   - component: {fileID: 7419170060573677900}
   m_Layer: 6
-  m_Name: StoragePit
+  m_Name: Granary
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
-  m_Sprite: {fileID: -1957754898, guid: 68630a90c0a051b459dcb5c6bafc94de, type: 3}
+  m_Sprite: {fileID: 1451592735, guid: d4277975dafcf1640b86c53b6e0ea923, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,8 +126,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.029914856, y: -0.025561452}
-  m_Size: {x: 1.3855095, y: 1.5470169}
+  m_Offset: {x: -0.029914856, y: 0}
+  m_Size: {x: 1.590004, y: 2.109375}
   m_Direction: 0
 --- !u!114 &7419170060573677900
 MonoBehaviour:
@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Health: 300
   m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
-  m_CanStoreWood: 1
-  m_CanStoreGold: 1
-  m_CanStoreMeat: 0
+  m_CanStoreWood: 0
+  m_CanStoreGold: 0
+  m_CanStoreMeat: 1

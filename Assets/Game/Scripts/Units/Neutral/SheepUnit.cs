@@ -43,11 +43,6 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public void Release()
     {
-        if (CurrentState == UnitState.Dead)
-        {
-            return;
-        }
-
         m_IsClaimed = false;
     }
 
