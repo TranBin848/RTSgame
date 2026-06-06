@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8867428183447470448}
   - component: {fileID: -5442613664031399580}
   - component: {fileID: -7695743413920488008}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tree
   m_Collider: {fileID: -7695743413920488008}
   m_Animator: {fileID: 0}
-  m_InteractionRadius: 0.1
+  m_InteractionRadius: 0.6
 --- !u!70 &-7695743413920488008
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -164,6 +164,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.023356885, y: 0.21042585}
-  m_Size: {x: 0.65779275, y: 0.8047013}
+  m_Offset: {x: -0.009350374, y: 0.15106836}
+  m_Size: {x: 0.398558, y: 0.5406212}
   m_Direction: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -356565134047082739}
   m_Layer: 8
   m_Name: GoldStone2
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,3 +165,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoldStone
   m_Collider: {fileID: 1781402206414681772}
+  m_Animator: {fileID: 0}
+  m_InteractionRadius: 0.8

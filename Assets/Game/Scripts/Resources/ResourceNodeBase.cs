@@ -5,6 +5,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     [SerializeField] private CapsuleCollider2D m_Collider;
     [SerializeField] private Animator m_Animator;
     [SerializeField] private float m_InteractionRadius = 0.1f;
+    [SerializeField] private Transform m_InteractionPoint;
 
     private bool m_IsClaimed;
 
@@ -55,7 +56,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public Vector3 GetInteractionPoint()
     {
-        return m_Collider != null ? m_Collider.bounds.min : transform.position;
+        return m_Collider != null ? m_Collider.bounds.max : transform.position;
     }
 
     protected void SetInteractionRadius(float radius)
@@ -66,4 +67,12 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     protected virtual void OnInitialize()
     {
     }
+
+#if UNITY_EDITOR
+    protected virtual void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(GetInteractionPoint(), m_InteractionRadius);
+    }
+#endif
 }

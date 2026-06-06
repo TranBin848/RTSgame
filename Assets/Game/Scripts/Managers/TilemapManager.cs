@@ -109,13 +109,14 @@ public class TilemapManager : SingletonManager<TilemapManager>
             return false;
         }
 
-        Vector3 worldPosition = m_WalkableTilemap.CellToWorld(tilePosition) + m_WalkableTilemap.cellSize / 2;
-        int buildingLayerMask = 1 << LayerMask.NameToLayer("Unit");
-        Collider2D[] collider = Physics2D.OverlapPointAll(worldPosition, buildingLayerMask);
+        Vector3 tileSize = m_WalkableTilemap.cellSize;
+        Vector3 worldPosition = m_WalkableTilemap.CellToWorld(tilePosition) + tileSize / 2;
+        int buildingLayerMask = LayerMask.GetMask("Unit", "GoldStone", "Tree");
+        Collider2D[] collider = Physics2D.OverlapBoxAll(worldPosition, tileSize * 0.9f, 0f, buildingLayerMask);
 
         foreach (var col in collider)
         {
-            if (col.CompareTag("Building")) return true;
+            if (col.CompareTag("Building") || col.CompareTag("Resource")) return true;
         }
 
         return false;
@@ -129,7 +130,7 @@ public class TilemapManager : SingletonManager<TilemapManager>
         }
 
         Vector3 tileSize = m_WalkableTilemap.cellSize;
-        int unitLayerMask = 1 << LayerMask.NameToLayer("Unit");
+        int unitLayerMask = LayerMask.GetMask("Unit", "GoldStone", "Tree");
         Collider2D[] colliders = Physics2D.OverlapBoxAll(
             new Vector2(tilePosition.x + tileSize.x / 2, tilePosition.y + tileSize.y / 2),
             tileSize * 0.9f,

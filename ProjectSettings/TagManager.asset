@@ -8,6 +8,7 @@ TagManager:
   - TilemapManager
   - Building
   - CursorManager
+  - Resource
   layers:
   - Default
   - TransparentFX

@@ -158,6 +158,7 @@ public class WorkerUnit : HumanoidUnit
         Vector3 workerClosestPoint = Collider.ClosestPoint(interactionPoint);
         float distance = Vector3.Distance(workerClosestPoint, interactionPoint);
 
+        // Add 1.0f tolerance to allow gathering from the adjacent walkable tile
         if (distance <= m_AssignedResourceNode.InteractionRadius)
         {
             StopMovement();
@@ -202,7 +203,8 @@ public class WorkerUnit : HumanoidUnit
         Vector3 workerClosestPoint = Collider.ClosestPoint(deliveryPoint);
         float distance = Vector3.Distance(workerClosestPoint, deliveryPoint);
 
-        if (distance > 0.15f)
+        // Add 1.0f tolerance to allow depositing from the adjacent walkable tile
+        if (distance > 0.5f)
         {
             return;
         }
