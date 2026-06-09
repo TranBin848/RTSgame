@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0b2974d7ff70f44935c36aeb558719, type: 3}
+  m_Name: BuildStoragePitAction
+  m_EditorClassIdentifier: Assembly-CSharp::BuildActionSo
+  Icon: {fileID: -1957754898, guid: 68630a90c0a051b459dcb5c6bafc94de, type: 3}
+  ActionName: Build Storage Pit
+  Guid: 38a2517c-bed8-45bb-a9a2-9cb5ff506bf6
+  m_StructureUnitPrefab: {fileID: 7419170060573677900, guid: bc288b0ec713f5e41b09e3f9b903cf92, type: 3}
+  m_ConstructionTime: 10
+  m_PlacementSprite: {fileID: -1957754898, guid: 68630a90c0a051b459dcb5c6bafc94de, type: 3}
+  m_FoundationSprite: {fileID: 21300000, guid: bc4bb691fcf543941b512358178bedda, type: 3}
+  m_MiddleSprite: {fileID: 21300000, guid: bc4bb691fcf543941b512358178bedda, type: 3}
+  m_CompleteSprite: {fileID: -1957754898, guid: 68630a90c0a051b459dcb5c6bafc94de, type: 3}
+  m_BuildingSize: {x: 2, y: 2, z: 0}
+  m_OriginalOffset: {x: -1, y: -1, z: 0}
+  m_GoldCost: 100
+  m_WoodCost: 100

@@ -166,4 +166,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoldStone
   m_Collider: {fileID: 8041147428506445789}
   m_Animator: {fileID: 0}
-  m_InteractionRadius: 0.6
+  m_InteractionRadius: 0.2
+  m_InteractionPoint: {fileID: 0}

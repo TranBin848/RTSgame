@@ -36,7 +36,11 @@ public class HumanoidUnit : Unit
         m_lastPosition = transform.position;
         m_SmoothSpeed = Mathf.Lerp(m_SmoothSpeed, CurrentSpeed, Time.deltaTime * m_SmoothFactor);
 
-        if (CurrentState != UnitState.Attacking)
+        if (CurrentState != UnitState.Attacking
+            && CurrentState != UnitState.Chopping
+            && CurrentState != UnitState.Mining
+            && CurrentState != UnitState.Building
+            && CurrentState != UnitState.Collecting)
         {
             var state = m_SmoothSpeed > 0.1f ? UnitState.Moving : UnitState.Idle;
             SetState(state);

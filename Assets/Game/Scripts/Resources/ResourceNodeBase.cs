@@ -38,12 +38,22 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         }
 
         m_IsClaimed = true;
+        // When claimed, disable collider so worker can pathfind through resource tile
+        if (m_Collider != null)
+        {
+            m_Collider.enabled = false;
+        }
         return true;
     }
 
     public void Release()
     {
         m_IsClaimed = false;
+        // When released, re-enable collider to block pathfinding again
+        if (m_Collider != null)
+        {
+            m_Collider.enabled = true;
+        }
     }
 
     public void Hit()
@@ -56,7 +66,15 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public Vector3 GetInteractionPoint()
     {
-        return m_Collider != null ? m_Collider.bounds.max : transform.position;
+        if (m_InteractionPoint != null)
+        {
+
+            return m_InteractionPoint.position;
+        }
+
+
+
+        return transform.position;
     }
 
     protected void SetInteractionRadius(float radius)
@@ -68,11 +86,11 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     {
     }
 
-#if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(GetInteractionPoint(), m_InteractionRadius);
+        Vector3 position = GetInteractionPoint();
+        Gizmos.DrawWireSphere(position, m_InteractionRadius);
     }
-#endif
+
 }

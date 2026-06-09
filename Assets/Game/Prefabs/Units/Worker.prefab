@@ -150,8 +150,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.011772633, y: -0.011772394}
-  m_Size: {x: 0.85740757, y: 1.218432}
+  m_Offset: {x: -0.011772633, y: -0.057766795}
+  m_Size: {x: 0.85740757, y: 0.9283135}
   m_Direction: 0
 --- !u!114 &410456894944863150
 MonoBehaviour:
@@ -183,9 +183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorkerUnit
   m_Actions:
   - {fileID: 11400000, guid: 6556196f813f88344a5e3c5eb214b3b9, type: 2}
-  m_ObjectDetectionRadius: 0.8
+  - {fileID: 11400000, guid: 7197915df293cbe46a35c4b783cff4a2, type: 2}
+  - {fileID: 11400000, guid: 50171f6f1fd15b542a5c78c392ee2705, type: 2}
+  m_ObjectDetectionRadius: 0.7
   m_UnitDetectionCheckRate: 0.5
-  m_AttackRange: 0.5
+  m_AttackRange: 0.4
   m_AutoAttackFrequency: 1.5
   m_AutoAttackDamageDelay: 0.5
   m_AutoAttackDamage: 4

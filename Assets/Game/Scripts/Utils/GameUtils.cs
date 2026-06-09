@@ -53,6 +53,27 @@ public static class GameUtils
         worldPosition = Vector3.zero;
         return false;
     }
+
+    public static bool TryGetPointerWorldPosition(out Vector3 worldPosition)
+    {
+        if (Camera.main == null)
+        {
+            worldPosition = Vector3.zero;
+            return false;
+        }
+
+        if (Input.touchCount > 0)
+        {
+            worldPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            worldPosition.z = 0f;
+            return true;
+        }
+
+        worldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
+        worldPosition.z = 0f;
+        return true;
+    }
+
     public static bool iSPointOverUIElelement()
     {
         if (Input.touchCount > 0)

@@ -8,6 +8,7 @@ public class ActionBar : MonoBehaviour
 {
     [SerializeField] private Image m_BackgroundImage;
     [SerializeField] private ActionButton m_ActionButtonPrefab;
+    [SerializeField] private ResourceRequirementsDisplay m_ResourceRequirementsDisplay;
     private Color m_OriginalBackgroundColor;
     private List<ActionButton> m_ActionButtons = new();
 
@@ -15,12 +16,13 @@ public class ActionBar : MonoBehaviour
     {
         m_OriginalBackgroundColor = m_BackgroundImage.color;
         Hide();
+        HideRequirements();
     }
     public void RegisterAction(Sprite icon, UnityAction action)
     {
         var actionButton = Instantiate(m_ActionButtonPrefab, transform);
-        actionButton.Init(icon, action);
         m_ActionButtons.Add(actionButton);
+        actionButton.Init(icon, action, () => FocusAction(m_ActionButtons.IndexOf(actionButton)));
     }
     public void ClearActions()
     {
@@ -29,6 +31,7 @@ public class ActionBar : MonoBehaviour
             Destroy(button.gameObject);
         }
         m_ActionButtons.Clear();
+        HideRequirements();
     }
     public void FocusAction(int idx)
     {
@@ -48,5 +51,21 @@ public class ActionBar : MonoBehaviour
     public void Hide()
     {
         m_BackgroundImage.color = new Color(0, 0, 0, 0);
+    }
+    public void ShowRequirements(int gold, int wood)
+    {
+        if (m_ResourceRequirementsDisplay == null)
+        {
+            return;
+        }
+        m_ResourceRequirementsDisplay.Show(gold, wood);
+    }
+    public void HideRequirements()
+    {
+        if (m_ResourceRequirementsDisplay == null)
+        {
+            return;
+        }
+        m_ResourceRequirementsDisplay.Hide();
     }
 }

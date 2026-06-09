@@ -149,8 +149,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.026117325, y: 0.10447109}
-  m_Size: {x: 1.0493126, y: 1.1015499}
+  m_Offset: {x: -0.0290308, y: 0.039714575}
+  m_Size: {x: 0.93901634, y: 0.94936323}
   m_Direction: 0
 --- !u!114 &6056038057991287470
 MonoBehaviour:
@@ -165,5 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoldStone
   m_Collider: {fileID: 8469300749199524348}
-  m_Animator: {fileID: 0}
-  m_InteractionRadius: 1
+  m_Animator: {fileID: 4474360355562698194}
+  m_InteractionRadius: 0.3
+  m_InteractionPoint: {fileID: 0}

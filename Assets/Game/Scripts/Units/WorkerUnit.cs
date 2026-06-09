@@ -145,7 +145,9 @@ public class WorkerUnit : HumanoidUnit
         }
         else
         {
-            MoveTo(resourceNode.GetInteractionPoint());
+            Vector3 gatherPoint = resourceNode.GetInteractionPoint();
+            Debug.Log($"Worker '{name}' assigned to gather. gatherPoint={gatherPoint}, interactionRadius={resourceNode.InteractionRadius}, resourceNode={resourceNode}");
+            MoveTo(gatherPoint);
             SetTask(profile.GatherTask);
         }
 
@@ -158,10 +160,11 @@ public class WorkerUnit : HumanoidUnit
         Vector3 workerClosestPoint = Collider.ClosestPoint(interactionPoint);
         float distance = Vector3.Distance(workerClosestPoint, interactionPoint);
 
-        // Add 1.0f tolerance to allow gathering from the adjacent walkable tile
         if (distance <= m_AssignedResourceNode.InteractionRadius)
         {
             StopMovement();
+            // Ensure task and state are set so ProcessGathering() runs
+            SetTask(m_ActiveProfile.GatherTask);
             SetState(m_ActiveProfile.GatherState);
         }
     }

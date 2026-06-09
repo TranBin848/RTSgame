@@ -6,7 +6,6 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
-    [SerializeField] private ConfirmationBar m_ConfirmationBar;
     [SerializeField] private TextPopupController m_TextPopupController;
     [SerializeField] private ResourcesDataUI m_ResourcesDataUI;
 
@@ -54,6 +53,10 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         if (m_PlacementProcess != null)
         {
             m_PlacementProcess.Update();
+            if (GameUtils.TryGetShortClickPosition(out Vector2 inputPosition))
+            {
+                TryPlaceCurrentBuild(inputPosition);
+            }
         }
         else if (GameUtils.TryGetShortClickPosition(out Vector2 inputPosition))
         {
@@ -178,11 +181,10 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             return;
         }
         var tilemapManager = TilemapManager.Get();
-        m_PlacementProcess = new PlacementProcess(buildAction, tilemapManager);
+        Vector3 startPosition = ActiveUnit != null ? ActiveUnit.transform.position + Vector3.right : Vector3.zero;
+        m_PlacementProcess = new PlacementProcess(buildAction, tilemapManager, startPosition);
         m_PlacementProcess.ShowPlacementOutline();
-        m_ConfirmationBar.Show(m_PlacementProcess.BuildAction.GoldCost, m_PlacementProcess.BuildAction.WoodCost);
-        m_ConfirmationBar.SetupHooks(ConfirmBuildProcess, CancelBuildProcess);
-        m_CameraController.LockCamera = true;
+        m_ActionBar.ShowRequirements(m_PlacementProcess.BuildAction.GoldCost, m_PlacementProcess.WoodCost);
     }
     void DetectClick(Vector2 inputPosition)
     {
@@ -340,52 +342,73 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         m_ActionBar.Show();
         foreach (var action in unit.Actions)
         {
+            ActionSO capturedAction = action;
             m_ActionBar.RegisterAction(action.Icon,
-                () => action.Excute(this));
+                () => ExecuteUnitAction(capturedAction));
         }
 
         m_ActionBar.FocusAction(0);
+    }
+
+    void ExecuteUnitAction(ActionSO action)
+    {
+        if (m_PlacementProcess != null)
+        {
+            CancelBuildProcess();
+        }
+        action.Excute(this);
     }
     void ClearActionBarUI()
     {
         m_ActionBar.ClearActions();
         m_ActionBar.Hide();
-    }
-
-    void ConfirmBuildProcess()
-    {
-        if (!TryDeductResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost))
-        {
-            Debug.Log("Not enough resources");
-            return;
-        }
-        if (m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
-        {
-            m_ConfirmationBar.Hide();
-
-            new BuildingProcess(
-                m_PlacementProcess.BuildAction,
-                 buildPosition,
-                 (WorkerUnit)ActiveUnit
-                 );
-
-            m_PlacementProcess = null;
-            m_CameraController.LockCamera = false;
-        }
-        else
-        {
-            AddResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost, 0);
-        }
-
+        m_ActionBar.HideRequirements();
     }
 
     void CancelBuildProcess()
     {
-        m_ConfirmationBar.Hide();
+        if (m_PlacementProcess == null)
+        {
+            return;
+        }
         m_PlacementProcess.CleanUp();
         m_PlacementProcess = null;
-        m_CameraController.LockCamera = false;
+        m_ActionBar.HideRequirements();
         Debug.Log("Build Process Canceled");
+    }
+
+    void TryPlaceCurrentBuild(Vector2 inputPosition)
+    {
+        if (Camera.main == null || GameUtils.iSPointOverUIElelement() || !GameUtils.IsScreenPositionInBounds(inputPosition))
+        {
+            return;
+        }
+
+        if (m_PlacementProcess == null)
+        {
+            return;
+        }
+
+        if (!m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
+        {
+            m_PlacementProcess.Shake();
+            return;
+        }
+
+        if (!TryDeductResources(m_PlacementProcess.GoldCost, m_PlacementProcess.WoodCost))
+        {
+            m_PlacementProcess.Shake();
+            return;
+        }
+
+        new BuildingProcess(
+            m_PlacementProcess.BuildAction,
+            buildPosition,
+            (WorkerUnit)ActiveUnit
+        );
+
+        m_PlacementProcess = null;
+        m_ActionBar.HideRequirements();
     }
     bool TryDeductResources(int goldCost, int woodCost)
     {

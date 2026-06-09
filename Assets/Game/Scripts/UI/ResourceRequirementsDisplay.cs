@@ -9,7 +9,12 @@ public class ResourceRequirementsDisplay : MonoBehaviour
     {
         m_GoldText.text = reqGold.ToString();
         m_WoodText.text = reqWood.ToString();
+        gameObject.SetActive(true);
         UpdateColorRequirement(reqGold, reqWood);
+    }
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
     void UpdateColorRequirement(int reqGold, int reqWood)
     {

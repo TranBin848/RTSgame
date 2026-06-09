@@ -14,10 +14,14 @@ public class ActionButton : MonoBehaviour
     {
         m_Button.onClick.RemoveAllListeners();
     }
-    public void Init(Sprite icon, UnityAction action)
+    public void Init(Sprite icon, UnityAction action, UnityAction onSelected)
     {
         m_IconImage.sprite = icon;
-        m_Button.onClick.AddListener(action);
+        m_Button.onClick.AddListener(() =>
+        {
+            action?.Invoke();
+            onSelected?.Invoke();
+        });
     }
     public void Focus()
     {

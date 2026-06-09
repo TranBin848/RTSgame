@@ -7,6 +7,10 @@ public class PlacementProcess
     private Vector3Int[] m_HighlightPositions;
     private Sprite m_PlaceholderTileSprite;
     private TilemapManager m_TilemapManager;
+    private Vector3 m_InitialPlacementPosition;
+    private float m_ShakeTime;
+    private readonly float m_ShakeDuration = 0.15f;
+    private readonly float m_ShakeMagnitude = 0.15f;
     private Color m_HightlightColor = new Color(1f, 1f, 1f, 0.5f);
     private Color m_BlockColor = new Color(1f, 0f, 0f, 0.8f);
 
@@ -14,30 +18,44 @@ public class PlacementProcess
     public int GoldCost => BuildAction.GoldCost;
     public int WoodCost => BuildAction.WoodCost;
 
-    public PlacementProcess(BuildActionSo buildAction, TilemapManager tilemapManager)
+    public PlacementProcess(BuildActionSo buildAction, TilemapManager tilemapManager, Vector3 initialPlacementPosition)
     {
         m_PlaceholderTileSprite = Resources.Load<Sprite>("Images/PlaceholderTileSprite");
         m_BuildAction = buildAction;
         m_TilemapManager = tilemapManager;
+        m_InitialPlacementPosition = initialPlacementPosition;
     }
     public void Update()
     {
-        if (m_PlacementOutline != null)
+        if (m_PlacementOutline == null)
         {
-            HighLightTiles(m_PlacementOutline.transform.position);
+            return;
         }
+
         if (GameUtils.iSPointOverUIElelement())
         {
             return;
         }
-        if (GameUtils.TryGetHoldPosition(out Vector3 worldPosition))
+
+        if (GameUtils.TryGetPointerWorldPosition(out Vector3 worldPosition))
         {
-            m_PlacementOutline.transform.position = SnapToGrid(worldPosition);
+            m_InitialPlacementPosition = SnapToGrid(worldPosition);
+            m_PlacementOutline.transform.position = m_InitialPlacementPosition;
         }
+
+        if (m_ShakeTime > 0f)
+        {
+            m_ShakeTime -= Time.deltaTime;
+            Vector2 shakeOffset = Random.insideUnitCircle * m_ShakeMagnitude * (m_ShakeTime / m_ShakeDuration);
+            m_PlacementOutline.transform.position = m_InitialPlacementPosition + (Vector3)shakeOffset;
+        }
+
+        HighLightTiles(m_PlacementOutline.transform.position);
     }
     public void ShowPlacementOutline()
     {
         m_PlacementOutline = new GameObject("PlacementOutline");
+        m_PlacementOutline.transform.position = SnapToGrid(m_InitialPlacementPosition);
         var spriteRenderer = m_PlacementOutline.AddComponent<SpriteRenderer>();
         spriteRenderer.sortingOrder = 999;
         spriteRenderer.color = new Color(1f, 1f, 1f, 0.7f);
@@ -56,7 +74,7 @@ public class PlacementProcess
         if (isPlacementAreaValid())
         {
             ClearHighlight();
-            placementPosition = m_PlacementOutline.transform.position;
+            placementPosition = m_InitialPlacementPosition;
             GameObject.Destroy(m_PlacementOutline);
             return true;
         }
@@ -64,6 +82,12 @@ public class PlacementProcess
         placementPosition = Vector3Int.zero;
         return false;
     }
+
+    public void Shake()
+    {
+        m_ShakeTime = m_ShakeDuration;
+    }
+
     bool isPlacementAreaValid()
     {
         foreach (var tilePosition in m_HighlightPositions)
