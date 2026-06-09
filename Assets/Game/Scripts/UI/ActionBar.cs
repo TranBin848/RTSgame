@@ -11,6 +11,7 @@ public class ActionBar : MonoBehaviour
     [SerializeField] private ResourceRequirementsDisplay m_ResourceRequirementsDisplay;
     private Color m_OriginalBackgroundColor;
     private List<ActionButton> m_ActionButtons = new();
+    private List<ActionSO> m_ActionSOList = new();
 
     void Awake()
     {
@@ -18,11 +19,12 @@ public class ActionBar : MonoBehaviour
         Hide();
         HideRequirements();
     }
-    public void RegisterAction(Sprite icon, UnityAction action)
+    public void RegisterAction(Sprite icon, ActionSO action, UnityAction actionCallback)
     {
         var actionButton = Instantiate(m_ActionButtonPrefab, transform);
         m_ActionButtons.Add(actionButton);
-        actionButton.Init(icon, action, () => FocusAction(m_ActionButtons.IndexOf(actionButton)));
+        m_ActionSOList.Add(action);
+        actionButton.Init(icon, actionCallback, () => FocusAction(m_ActionButtons.IndexOf(actionButton)));
     }
     public void ClearActions()
     {
@@ -31,6 +33,7 @@ public class ActionBar : MonoBehaviour
             Destroy(button.gameObject);
         }
         m_ActionButtons.Clear();
+        m_ActionSOList.Clear();
         HideRequirements();
     }
     public void FocusAction(int idx)
@@ -43,6 +46,12 @@ public class ActionBar : MonoBehaviour
         }
 
         m_ActionButtons[idx].Focus();
+
+        // Show requirements for the focused action
+        if (idx < m_ActionSOList.Count && m_ActionSOList[idx] != null)
+        {
+            ShowRequirements(m_ActionSOList[idx]);
+        }
     }
     public void Show()
     {
@@ -52,14 +61,26 @@ public class ActionBar : MonoBehaviour
     {
         m_BackgroundImage.color = new Color(0, 0, 0, 0);
     }
-    public void ShowRequirements(int gold, int wood)
+    public void ShowRequirements(Dictionary<ResourceType, int> resourceCosts)
     {
         if (m_ResourceRequirementsDisplay == null)
         {
             return;
         }
-        m_ResourceRequirementsDisplay.Show(gold, wood);
+        m_ResourceRequirementsDisplay.Show(resourceCosts);
     }
+
+    public void ShowRequirements(ActionSO action)
+    {
+        if (m_ResourceRequirementsDisplay == null || action == null)
+        {
+            return;
+        }
+
+        var resourceCosts = ExtractResourceCosts(action);
+        m_ResourceRequirementsDisplay.Show(resourceCosts);
+    }
+
     public void HideRequirements()
     {
         if (m_ResourceRequirementsDisplay == null)
@@ -67,5 +88,25 @@ public class ActionBar : MonoBehaviour
             return;
         }
         m_ResourceRequirementsDisplay.Hide();
+    }
+
+    private Dictionary<ResourceType, int> ExtractResourceCosts(ActionSO action)
+    {
+        var costs = new Dictionary<ResourceType, int>();
+
+        if (action is BuildActionSo buildAction)
+        {
+            if (buildAction.GoldCost > 0)
+                costs[ResourceType.Gold] = buildAction.GoldCost;
+            if (buildAction.WoodCost > 0)
+                costs[ResourceType.Wood] = buildAction.WoodCost;
+        }
+        else if (action is SpawnVillagerActionSO spawnAction)
+        {
+            if (spawnAction.MeatCost > 0)
+                costs[ResourceType.Meat] = spawnAction.MeatCost;
+        }
+
+        return costs;
     }
 }

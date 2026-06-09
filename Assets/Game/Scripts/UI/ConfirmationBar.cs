@@ -2,6 +2,8 @@ using System.Security;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
 public class ConfirmationBar : MonoBehaviour
 {
     [SerializeField] private ResourceRequirementsDisplay m_ResourceDisplay;
@@ -15,7 +17,12 @@ public class ConfirmationBar : MonoBehaviour
     public void Show(int gold, int wood)
     {
         gameObject.SetActive(true);
-        m_ResourceDisplay.Show(gold, wood);
+        var resourceCosts = new Dictionary<ResourceType, int>();
+        if (gold > 0)
+            resourceCosts[ResourceType.Gold] = gold;
+        if (wood > 0)
+            resourceCosts[ResourceType.Wood] = wood;
+        m_ResourceDisplay.Show(resourceCosts);
     }
     public void Hide()
     {

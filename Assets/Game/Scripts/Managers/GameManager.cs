@@ -184,7 +184,6 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         Vector3 startPosition = ActiveUnit != null ? ActiveUnit.transform.position + Vector3.right : Vector3.zero;
         m_PlacementProcess = new PlacementProcess(buildAction, tilemapManager, startPosition);
         m_PlacementProcess.ShowPlacementOutline();
-        m_ActionBar.ShowRequirements(m_PlacementProcess.BuildAction.GoldCost, m_PlacementProcess.WoodCost);
     }
     void DetectClick(Vector2 inputPosition)
     {
@@ -343,7 +342,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         foreach (var action in unit.Actions)
         {
             ActionSO capturedAction = action;
-            m_ActionBar.RegisterAction(action.Icon,
+            m_ActionBar.RegisterAction(action.Icon, action,
                 () => ExecuteUnitAction(capturedAction));
         }
 
