@@ -17,6 +17,7 @@ public class ActionButton : MonoBehaviour
     public void Init(Sprite icon, UnityAction action, UnityAction onSelected)
     {
         m_IconImage.sprite = icon;
+        m_Button.onClick.RemoveAllListeners();
         m_Button.onClick.AddListener(() =>
         {
             action?.Invoke();

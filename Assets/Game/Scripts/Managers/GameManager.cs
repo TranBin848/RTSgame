@@ -6,6 +6,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
+    [SerializeField] private ActionQueuePanel m_ActionQueuePanel;
     [SerializeField] private TextPopupController m_TextPopupController;
     [SerializeField] private ResourcesDataUI m_ResourcesDataUI;
 
@@ -145,6 +146,36 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     public void ShowTextPopup(string text, Color color, Vector3 position)
     {
         m_TextPopupController.Spam(text, color, position);
+    }
+
+    public string EnqueueActionUI(ActionSO action)
+    {
+        if (m_ActionQueuePanel == null || action == null)
+        {
+            return string.Empty;
+        }
+
+        return m_ActionQueuePanel.Enqueue(action);
+    }
+
+    public void UpdateActionUIProgress(string queueId, float normalizedProgress)
+    {
+        if (m_ActionQueuePanel == null)
+        {
+            return;
+        }
+
+        m_ActionQueuePanel.SetProgress(queueId, normalizedProgress);
+    }
+
+    public void CompleteActionUI(string queueId)
+    {
+        if (m_ActionQueuePanel == null)
+        {
+            return;
+        }
+
+        m_ActionQueuePanel.Complete(queueId);
     }
     public Unit FindClosetUnit(Vector3 originPosition, float maxDistance, bool isPlayer)
     {

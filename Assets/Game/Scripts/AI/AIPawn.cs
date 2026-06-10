@@ -21,8 +21,7 @@ public class AIPawn : MonoBehaviour
 
     private void Start()
     {
-        m_GameManager = GameManager.Get();
-        m_TilemapManager = TilemapManager.Get();
+        EnsureDependencies();
     }
 
     void Update()
@@ -64,6 +63,11 @@ public class AIPawn : MonoBehaviour
 
     public void SetDestination(Vector3 destination)
     {
+        if (!EnsureDependencies())
+        {
+            return;
+        }
+
         if (m_CurrentDestination.HasValue && Vector3.Distance(m_CurrentDestination.Value, destination) < 0.1f)
         {
             return;
@@ -99,6 +103,11 @@ public class AIPawn : MonoBehaviour
     }
     Vector3 CalculateSeperation()
     {
+        if (!EnsureDependencies())
+        {
+            return Vector3.zero;
+        }
+
         Vector3 separationVector = Vector3.zero;
         float separationRadiusSqr = m_SeparationRadius * m_SeparationRadius;
         List<Unit> units = m_GameManager.GetFriendlyUnits(GetPlayerStatus());
@@ -121,5 +130,20 @@ public class AIPawn : MonoBehaviour
     bool isPathValid()
     {
         return m_CurrentPath.Count > 0 && m_CurrentNodeIndex < m_CurrentPath.Count;
+    }
+
+    bool EnsureDependencies()
+    {
+        if (m_GameManager == null)
+        {
+            m_GameManager = GameManager.Get();
+        }
+
+        if (m_TilemapManager == null)
+        {
+            m_TilemapManager = TilemapManager.Get();
+        }
+
+        return m_GameManager != null && m_TilemapManager != null;
     }
 }

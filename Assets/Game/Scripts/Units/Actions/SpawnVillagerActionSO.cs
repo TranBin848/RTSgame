@@ -4,8 +4,10 @@ using UnityEngine;
 public class SpawnVillagerActionSO : ActionSO
 {
     [SerializeField] private int m_MeatCost = 0;
+    [SerializeField] private float m_TrainDuration = 8f;
 
     public int MeatCost => m_MeatCost;
+    public float TrainDuration => m_TrainDuration;
 
     public override void Excute(GameManager manager)
     {
@@ -33,9 +35,8 @@ public class SpawnVillagerActionSO : ActionSO
             // Deduct resources
             manager.AddResources(0, 0, -m_MeatCost);
 
-            // Spawn villager
-            townHall.SpawnVillager();
-            manager.ShowTextPopup("Villager spawned", Color.green, townHall.transform.position);
+            townHall.EnqueueVillagerSpawn(this);
+            manager.ShowTextPopup("Villager queued", Color.green, townHall.transform.position);
         }
         else
         {
