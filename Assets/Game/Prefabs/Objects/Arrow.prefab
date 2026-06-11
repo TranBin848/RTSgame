@@ -152,6 +152,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   m_Speed: 10
+  m_ProjectileRotatable: 0
+  m_UseArcTrajectory: 1
+  m_ArcHeight: 1.5
+  m_MinTravelDuration: 0.2
+  m_MaxTravelDuration: 0.75
+  m_DistanceToDurationMultiplier: 0.08
   m_Damage: 10
 --- !u!50 &2082579070876823720
 Rigidbody2D:
