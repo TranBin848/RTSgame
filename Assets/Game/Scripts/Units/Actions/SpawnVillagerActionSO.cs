@@ -1,11 +1,13 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SpawnVillagerAction", menuName = "Game/Actions/SpawnVillager")]
-public class SpawnVillagerActionSO : ActionSO
+public class SpawnVillagerActionSO : ActionSO, IResourceCostAction
 {
     [SerializeField] private int m_MeatCost = 0;
     [SerializeField] private float m_TrainDuration = 8f;
 
+    public int GoldCost => 0;
+    public int WoodCost => 0;
     public int MeatCost => m_MeatCost;
     public float TrainDuration => m_TrainDuration;
 

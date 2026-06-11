@@ -101,10 +101,14 @@ public class ActionBar : MonoBehaviour
             if (buildAction.WoodCost > 0)
                 costs[ResourceType.Wood] = buildAction.WoodCost;
         }
-        else if (action is SpawnVillagerActionSO spawnAction)
+        else if (action is IResourceCostAction costAction)
         {
-            if (spawnAction.MeatCost > 0)
-                costs[ResourceType.Meat] = spawnAction.MeatCost;
+            if (costAction.GoldCost > 0)
+                costs[ResourceType.Gold] = costAction.GoldCost;
+            if (costAction.WoodCost > 0)
+                costs[ResourceType.Wood] = costAction.WoodCost;
+            if (costAction.MeatCost > 0)
+                costs[ResourceType.Meat] = costAction.MeatCost;
         }
 
         return costs;

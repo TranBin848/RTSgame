@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26208303054891439b5a26958edd8c8, type: 3}
+  m_Name: SpawnArcherAction
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnArcherActionSO
+  Icon: {fileID: -361249243, guid: e674a415e1516d745bf0f5641e280cdc, type: 3}
+  ActionName: Spam Archer
+  Guid: 4ef8c3be-75ea-47c9-8fbf-8bd3fc55626b
+  m_GoldCost: 20
+  m_WoodCost: 0
+  m_MeatCost: 30
+  m_TrainDuration: 8

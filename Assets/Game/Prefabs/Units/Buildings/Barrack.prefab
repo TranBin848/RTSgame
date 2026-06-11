@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2617397312206691719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.71, y: -0.3, z: 0}
+  m_LocalPosition: {x: -2.24, y: -2.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 5646707852783550}
   - component: {fileID: 2449827443807053345}
   - component: {fileID: 3879325628708303296}
-  - component: {fileID: 5643201212717265951}
+  - component: {fileID: 2827744819402569022}
   m_Layer: 0
-  m_Name: TownHall
+  m_Name: Barrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
-  m_Sprite: {fileID: -1174591232, guid: 2f9070d40a0dfdb489502c749bab23c5, type: 3}
+  m_Sprite: {fileID: 1484225930, guid: 8a91fa4e7a1831641915d7bd53e6858e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,7 +189,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.015820503, y: -0.3539995}
   m_Size: {x: 1.9937458, y: 3.045097}
   m_Direction: 0
---- !u!114 &5643201212717265951
+--- !u!114 &2827744819402569022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,17 +198,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6211948813076933638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a32db82c415fdf44fa77861a495ef173, type: 3}
+  m_Script: {fileID: 11500000, guid: 83f8a1183928b6948a0e77502681019f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TownHall
+  m_EditorClassIdentifier: Assembly-CSharp::Barrack
   m_Actions:
-  - {fileID: 11400000, guid: c62272bde22d74a499c15007b34672d8, type: 2}
-  m_ObjectDetectionRadius: 3
+  - {fileID: 11400000, guid: dd8ab255d2fcf194887dc0d8dc184d19, type: 2}
+  m_ObjectDetectionRadius: 0.5
   m_UnitDetectionCheckRate: 0.5
-  m_AttackRange: 0
-  m_AutoAttackFrequency: 0
-  m_AutoAttackDamageDelay: 0
-  m_AutoAttackDamage: 0
+  m_AttackRange: 1
+  m_AutoAttackFrequency: 1.5
+  m_AutoAttackDamageDelay: 0.5
+  m_AutoAttackDamage: 10
   m_Health: 100
   m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
@@ -218,4 +218,4 @@ MonoBehaviour:
   m_SpawnPoint: {fileID: 3265954861476522269}
   m_SpawnScatterRadius: 0.75
   m_SpawnExitDistance: 1.5
-  m_VillagerPrefab: {fileID: 0}
+  m_WarriorPrefab: {fileID: 5633659407228824928, guid: 259183a3370284940a0a50673c3edb62, type: 3}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8a91fa4e7a1831641915d7bd53e6858e
+guid: 92f809228735c4643a3ea77bd4339a9b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Barracks_0
+      name: Warriror_Icon_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 11
-        width: 184
-        height: 187
+        x: 0
+        y: 0
+        width: 79
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f60be3792b1fe7488dff149e86f1b17
-      internalID: 1484225930
+      spriteID: f32682454c6775146be6e185acd9ff95
+      internalID: 2013895763
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4472e33248a7f4c45a616b473541f9f9
+    spriteID: 08c14a1217a24ba46a85f4e988a310c0
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Barracks_0: 1484225930
+      Warriror_Icon_0: 2013895763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
