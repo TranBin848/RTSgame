@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8867428183447470448}
   - component: {fileID: -5442613664031399580}
   - component: {fileID: -7695743413920488008}
+  - component: {fileID: 3765281661786680202}
   m_Layer: 7
   m_Name: Tree
   m_TagString: Resource
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_Collider: {fileID: -7695743413920488008}
   m_Animator: {fileID: 0}
   m_InteractionRadius: 0.6
+  m_InteractionPoint: {fileID: 0}
 --- !u!70 &-7695743413920488008
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -167,3 +169,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.009350374, y: 0.15106836}
   m_Size: {x: 0.398558, y: 0.5406212}
   m_Direction: 0
+--- !u!114 &3765281661786680202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033367934460242905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers:
+  - {fileID: 6616702023791178031}
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0

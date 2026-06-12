@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8943907133963709065}
   - component: {fileID: 917236745294544977}
   - component: {fileID: 5696124603996004655}
+  - component: {fileID: 3788267712310513374}
   m_Layer: 6
   m_Name: Tower
   m_TagString: Building
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerUnit
   m_Actions: []
+  m_UnitIcon: {fileID: 0}
   m_ObjectDetectionRadius: 3
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 2
@@ -151,4 +153,24 @@ MonoBehaviour:
   m_Health: 100
   m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
+  m_CanStoreWood: 0
+  m_CanStoreGold: 0
+  m_CanStoreMeat: 0
   m_ProjectilePrefab: {fileID: 1316424008226827497, guid: 1c465b84dce2aaa4ca79838f45c7a936, type: 3}
+--- !u!114 &3788267712310513374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527654185206737124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers:
+  - {fileID: 8943907133963709065}
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0

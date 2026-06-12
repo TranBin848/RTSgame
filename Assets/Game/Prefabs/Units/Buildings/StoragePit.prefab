@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4652021948500386757}
   - component: {fileID: 7092611187026238676}
   - component: {fileID: 7419170060573677900}
+  - component: {fileID: -4836939370736325652}
   m_Layer: 6
   m_Name: StoragePit
   m_TagString: Building
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StructureUnit
   m_Actions: []
+  m_UnitIcon: {fileID: 0}
   m_ObjectDetectionRadius: 0
   m_UnitDetectionCheckRate: 0
   m_AttackRange: 0
@@ -154,3 +156,20 @@ MonoBehaviour:
   m_CanStoreWood: 1
   m_CanStoreGold: 1
   m_CanStoreMeat: 0
+--- !u!114 &-4836939370736325652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076002598291468573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers:
+  - {fileID: 4652021948500386757}
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0

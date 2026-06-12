@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2058619210311714395}
   - component: {fileID: 8177478908112036132}
   - component: {fileID: 3836549393012518842}
+  - component: {fileID: 8980260808014099142}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Untagged
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SheepUnit
   m_Actions: []
+  m_UnitIcon: {fileID: 0}
   m_ObjectDetectionRadius: 0.5
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0
@@ -200,3 +202,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.019856453, y: 0.06354046}
   m_Size: {x: 0.6735935, y: 0.697422}
   m_Direction: 0
+--- !u!114 &8980260808014099142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8226707104923068619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers:
+  - {fileID: 886468010951931335}
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0

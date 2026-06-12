@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2449827443807053345}
   - component: {fileID: 3879325628708303296}
   - component: {fileID: 2827744819402569022}
+  - component: {fileID: 1676627551513983904}
   m_Layer: 0
   m_Name: Barrack
   m_TagString: Untagged
@@ -203,6 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Barrack
   m_Actions:
   - {fileID: 11400000, guid: dd8ab255d2fcf194887dc0d8dc184d19, type: 2}
+  m_UnitIcon: {fileID: 0}
   m_ObjectDetectionRadius: 0.5
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 1
@@ -219,3 +221,20 @@ MonoBehaviour:
   m_SpawnScatterRadius: 0.75
   m_SpawnExitDistance: 1.5
   m_WarriorPrefab: {fileID: 5633659407228824928, guid: 259183a3370284940a0a50673c3edb62, type: 3}
+--- !u!114 &1676627551513983904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211948813076933638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers:
+  - {fileID: 5646707852783550}
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0

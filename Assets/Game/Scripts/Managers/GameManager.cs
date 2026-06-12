@@ -246,6 +246,11 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         return isPlayer ? m_PlayerUnits : m_EnemyUnits;
     }
 
+    public IReadOnlyList<StructureUnit> GetPlayerStructures()
+    {
+        return m_PlayerStructures;
+    }
+
     public bool TryFindClosestTownHall(Vector3 originPosition, out TownHall townHall)
     {
         townHall = null;

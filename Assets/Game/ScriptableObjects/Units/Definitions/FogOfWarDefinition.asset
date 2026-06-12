@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad81492a0ecf284f8ade5b9a93f2bdc, type: 3}
+  m_Name: FogOfWarDefinition
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarDefinition
+  m_UnitVisionRadius: 3
+  m_StructureVisionRadius: 5
+  m_SoftEdgeSize: 1.5
+  m_RefreshInterval: 0.15
+  m_UnexploredColor: {r: 0, g: 0, b: 0, a: 1}
+  m_ExploredColor: {r: 0, g: 0, b: 0, a: 0.55}
+  m_VisibleColor: {r: 0, g: 0, b: 0, a: 0}
