@@ -185,6 +185,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6556196f813f88344a5e3c5eb214b3b9, type: 2}
   - {fileID: 11400000, guid: 7197915df293cbe46a35c4b783cff4a2, type: 2}
   - {fileID: 11400000, guid: 50171f6f1fd15b542a5c78c392ee2705, type: 2}
+  m_UnitIcon: {fileID: 1609299063, guid: a1a3f41d2705fda448331b55ccf2ddd7, type: 3}
   m_ObjectDetectionRadius: 0.7
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0.4

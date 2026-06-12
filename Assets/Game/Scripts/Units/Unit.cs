@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum UnitState
 {
@@ -16,6 +17,7 @@ public enum DestinationSource
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField] private ActionSO[] m_Actions;
+    [SerializeField] private Sprite m_UnitIcon;
     [SerializeField] protected float m_ObjectDetectionRadius = 0.5f;
     [SerializeField] protected float m_UnitDetectionCheckRate = 0.5f;
     [SerializeField] protected float m_AttackRange = 1f;
@@ -46,8 +48,11 @@ public abstract class Unit : MonoBehaviour
     public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
     public bool hasTarget => Target != null;
     public int CurrentHealth => m_CurrentHealth;
+    public int MaxHealth => m_Health;
+    public int AttackDamage => m_AutoAttackDamage;
     public UnitStance CurrentStance => m_CurrentStance;
     public CapsuleCollider2D Collider => m_Collider;
+    public Sprite UnitIcon => m_UnitIcon != null ? m_UnitIcon : (m_SpriteRenderer != null ? m_SpriteRenderer.sprite : null);
 
     protected void Awake()
     {

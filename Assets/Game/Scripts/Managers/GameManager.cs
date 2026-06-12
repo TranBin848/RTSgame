@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 {
@@ -9,6 +10,8 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     [SerializeField] private ActionQueuePanel m_ActionQueuePanel;
     [SerializeField] private TextPopupController m_TextPopupController;
     [SerializeField] private ResourcesDataUI m_ResourcesDataUI;
+    [Header("Selection")]
+    [SerializeField] private SelectionSettingsDefinition m_SelectionSettings;
 
     [Header("Resources")]
     [SerializeField] private Transform m_TreeContainer;
@@ -23,19 +26,31 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     public int Meat => m_Meat;
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
+    public IReadOnlyList<Unit> SelectedUnits => m_SelectedUnits;
     private List<Unit> m_PlayerUnits = new();
     private List<Unit> m_EnemyUnits = new();
     private List<StructureUnit> m_PlayerStructures = new();
+    private readonly List<Unit> m_SelectedUnits = new();
     private CameraController m_CameraController;
     private IResourceNodeLocator m_ResourceNodeLocator;
     private IResourceDepotLocator m_ResourceDepotLocator;
     public bool HasActiveUnit => ActiveUnit != null;
+    public UnityAction<IReadOnlyList<Unit>> OnSelectionChanged = delegate { };
+    private bool m_IsSelectionPointerDown;
+    private bool m_IsSelectionDragging;
+    private Vector2 m_SelectionStartScreenPosition;
+    private Vector2 m_SelectionCurrentScreenPosition;
+    private float m_SelectionPointerDownTime;
+    private Texture2D m_SelectionTexture;
 
     protected override void Awake()
     {
         base.Awake();
         m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer, m_SheepContainer);
         m_ResourceDepotLocator = new SceneResourceDepotLocator(() => m_PlayerStructures);
+        m_SelectionTexture = new Texture2D(1, 1);
+        m_SelectionTexture.SetPixel(0, 0, Color.white);
+        m_SelectionTexture.Apply();
     }
 
     void Start()
@@ -59,9 +74,10 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
                 TryPlaceCurrentBuild(inputPosition);
             }
         }
-        else if (GameUtils.TryGetShortClickPosition(out Vector2 inputPosition))
+        else
         {
-            DetectClick(inputPosition);
+            HandleSelectionCancelInput();
+            UpdateSelectionInput();
         }
     }
     public void RegisterUnit(Unit unit)
@@ -99,8 +115,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             if (ActiveUnit == unit)
             {
                 ClearActionBarUI();
-                ActiveUnit.Deselect();
+                DeselectUnit(unit);
                 ActiveUnit = null;
+            }
+            else
+            {
+                DeselectUnit(unit);
             }
             unit.StopMovement();
             if (unit.IsBuilding)
@@ -226,7 +246,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
-        if (HasActiveUnit && ActiveUnit is WorkerUnit worker)
+        if (HasExactlyOneUnitSelected() && ActiveUnit is WorkerUnit worker)
         {
             if (TryGetClickedResourceNode(hit, out var resourceNode))
             {
@@ -274,6 +294,13 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void handleClickOnGround(Vector2 worldPoint)
     {
+        if (m_SelectedUnits.Count > 1)
+        {
+            MoveSelectedUnits(worldPoint);
+            DisplayClickEffect(worldPoint);
+            return;
+        }
+
         if (HasActiveUnit && isHumanUnit(ActiveUnit))
         {
             DisplayClickEffect(worldPoint);
@@ -287,7 +314,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             cancelActiveUnit();
             return;
         }
-        else if (ActiveUnit is WorkerUnit worker)
+        else if (HasExactlyOneUnitSelected() && ActiveUnit is WorkerUnit worker)
         {
             if (WorkerClickedOnUnfinishedBuilding(unit))
             {
@@ -315,6 +342,29 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void handleClickOnEnemyUnit(Unit unit)
     {
+        if (m_SelectedUnits.Count > 1)
+        {
+            bool hasIssuedAttack = false;
+            foreach (var selectedUnit in m_SelectedUnits)
+            {
+                if (selectedUnit == null || selectedUnit.CurrentState == UnitState.Dead || selectedUnit.IsBuilding)
+                {
+                    continue;
+                }
+
+                selectedUnit.SetTarget(unit);
+                selectedUnit.SetTask(UnitTask.Attack);
+                hasIssuedAttack = true;
+            }
+
+            if (hasIssuedAttack)
+            {
+                DisplayClickEffect(unit.GetTopPosition());
+            }
+
+            return;
+        }
+
         if (HasActiveUnit)
         {
             ActiveUnit.SetTarget(unit);
@@ -335,14 +385,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         {
             return;
         }
-        if (HasActiveUnit)
-        {
-            ActiveUnit.Deselect();
-        }
-        ShowUnitAction(unit);
-        ActiveUnit = unit;
-        ActiveUnit.Select();
-
+        SetSelectedUnits(new List<Unit> { unit });
     }
     bool isClickedOnActiveUnit(Unit unit)
     {
@@ -354,9 +397,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void cancelActiveUnit()
     {
-        ActiveUnit.Deselect();
-        ActiveUnit = null;
-        ClearActionBarUI();
+        DeselectAllUnits();
     }
     void DisplayClickEffect(Vector2 worldPoint)
     {
@@ -378,6 +419,277 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         }
 
         m_ActionBar.FocusAction(0);
+    }
+
+    void UpdateSelectionInput()
+    {
+        if (Camera.main == null)
+        {
+            return;
+        }
+
+        if (GameUtils.isLeftClickOrTapDown)
+        {
+            m_IsSelectionPointerDown = !GameUtils.iSPointOverUIElelement();
+            m_IsSelectionDragging = false;
+            m_SelectionStartScreenPosition = GameUtils.InputPosition;
+            m_SelectionCurrentScreenPosition = m_SelectionStartScreenPosition;
+            m_SelectionPointerDownTime = Time.time;
+        }
+
+        if (!m_IsSelectionPointerDown)
+        {
+            return;
+        }
+
+        if (Input.GetMouseButton(0) || Input.touchCount > 0)
+        {
+            m_SelectionCurrentScreenPosition = GameUtils.InputPosition;
+            if (!m_IsSelectionDragging
+                && Time.time - m_SelectionPointerDownTime >= GetSelectionDragMinHoldTime()
+                && Vector2.Distance(m_SelectionStartScreenPosition, m_SelectionCurrentScreenPosition) >= GetSelectionDragThreshold())
+            {
+                m_IsSelectionDragging = true;
+            }
+        }
+
+        if (!GameUtils.isLeftClickOrTapUp)
+        {
+            return;
+        }
+
+        Vector2 releasePosition = GameUtils.InputPosition;
+        bool wasDragging = m_IsSelectionDragging;
+        m_IsSelectionPointerDown = false;
+        m_IsSelectionDragging = false;
+        m_SelectionCurrentScreenPosition = releasePosition;
+
+        if (wasDragging)
+        {
+            SelectUnitsInRectangle(GetScreenSelectionRect(m_SelectionStartScreenPosition, releasePosition));
+            return;
+        }
+
+        if (GameUtils.IsScreenPositionInBounds(releasePosition))
+        {
+            DetectClick(releasePosition);
+        }
+    }
+
+    void HandleSelectionCancelInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DeselectAllUnits();
+        }
+    }
+
+    void SelectUnitsInRectangle(Rect selectionRect)
+    {
+        if (Camera.main == null || selectionRect.width <= 0f || selectionRect.height <= 0f)
+        {
+            return;
+        }
+
+        var unitsToSelect = new List<Unit>();
+        foreach (var unit in m_PlayerUnits)
+        {
+            if (unit == null || unit.CurrentState == UnitState.Dead || unit.IsBuilding)
+            {
+                continue;
+            }
+
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(unit.transform.position);
+            if (screenPosition.z < 0f)
+            {
+                continue;
+            }
+
+            screenPosition.y = Screen.height - screenPosition.y;
+            if (selectionRect.Contains(screenPosition))
+            {
+                unitsToSelect.Add(unit);
+            }
+        }
+
+        SetSelectedUnits(unitsToSelect);
+    }
+
+    void SetSelectedUnits(List<Unit> units)
+    {
+        DeselectAllUnits(false);
+
+        foreach (var unit in units)
+        {
+            if (unit == null || unit.CurrentState == UnitState.Dead)
+            {
+                continue;
+            }
+
+            if (!m_SelectedUnits.Contains(unit))
+            {
+                m_SelectedUnits.Add(unit);
+                unit.Select();
+            }
+        }
+
+        ActiveUnit = m_SelectedUnits.Count > 0 ? m_SelectedUnits[0] : null;
+        RefreshActionBarForSelection();
+        NotifySelectionChanged();
+    }
+
+    void DeselectAllUnits(bool clearActionBar = true)
+    {
+        foreach (var unit in m_SelectedUnits)
+        {
+            unit?.Deselect();
+        }
+
+        m_SelectedUnits.Clear();
+        ActiveUnit = null;
+
+        if (clearActionBar)
+        {
+            ClearActionBarUI();
+        }
+
+        NotifySelectionChanged();
+    }
+
+    void DeselectUnit(Unit unit)
+    {
+        if (unit == null)
+        {
+            return;
+        }
+
+        unit.Deselect();
+        m_SelectedUnits.Remove(unit);
+        ActiveUnit = m_SelectedUnits.Count > 0 ? m_SelectedUnits[0] : null;
+        RefreshActionBarForSelection();
+        NotifySelectionChanged();
+    }
+
+    void RefreshActionBarForSelection()
+    {
+        if (m_SelectedUnits.Count == 1 && ActiveUnit != null)
+        {
+            ShowUnitAction(ActiveUnit);
+            return;
+        }
+
+        ClearActionBarUI();
+    }
+
+    void NotifySelectionChanged()
+    {
+        OnSelectionChanged.Invoke(m_SelectedUnits);
+    }
+
+    bool HasExactlyOneUnitSelected()
+    {
+        return m_SelectedUnits.Count == 1 && ActiveUnit != null;
+    }
+
+    void MoveSelectedUnits(Vector2 centerPoint)
+    {
+        var movableUnits = new List<Unit>();
+        foreach (var selectedUnit in m_SelectedUnits)
+        {
+            if (selectedUnit != null && !selectedUnit.IsBuilding && isHumanUnit(selectedUnit))
+            {
+                movableUnits.Add(selectedUnit);
+            }
+        }
+
+        if (movableUnits.Count == 0)
+        {
+            return;
+        }
+
+        int columns = Mathf.CeilToInt(Mathf.Sqrt(movableUnits.Count));
+        for (int i = 0; i < movableUnits.Count; i++)
+        {
+            int row = i / columns;
+            int column = i % columns;
+            Vector2 offset = new Vector2(
+                (column - (columns - 1) * 0.5f) * GetGroupMoveSpacing(),
+                -(row * GetGroupMoveSpacing())
+            );
+
+            movableUnits[i].MoveTo(centerPoint + offset, DestinationSource.PlayerClick);
+        }
+    }
+
+    Rect GetScreenSelectionRect(Vector2 startScreenPosition, Vector2 endScreenPosition)
+    {
+        Vector2 startGui = ToGuiPoint(startScreenPosition);
+        Vector2 endGui = ToGuiPoint(endScreenPosition);
+
+        float xMin = Mathf.Min(startGui.x, endGui.x);
+        float yMin = Mathf.Min(startGui.y, endGui.y);
+        float xMax = Mathf.Max(startGui.x, endGui.x);
+        float yMax = Mathf.Max(startGui.y, endGui.y);
+        return Rect.MinMaxRect(xMin, yMin, xMax, yMax);
+    }
+
+    Vector2 ToGuiPoint(Vector2 screenPoint)
+    {
+        return new Vector2(screenPoint.x, Screen.height - screenPoint.y);
+    }
+
+    void DrawSelectionRectangle()
+    {
+        if (!m_IsSelectionDragging || m_SelectionTexture == null)
+        {
+            return;
+        }
+
+        Rect selectionRect = GetScreenSelectionRect(m_SelectionStartScreenPosition, m_SelectionCurrentScreenPosition);
+        if (selectionRect.width <= 0f || selectionRect.height <= 0f)
+        {
+            return;
+        }
+
+        Color previousColor = GUI.color;
+        GUI.color = GetSelectionFillColor();
+        GUI.DrawTexture(selectionRect, m_SelectionTexture);
+
+        GUI.color = GetSelectionBorderColor();
+        GUI.DrawTexture(new Rect(selectionRect.xMin, selectionRect.yMin, selectionRect.width, 2f), m_SelectionTexture);
+        GUI.DrawTexture(new Rect(selectionRect.xMin, selectionRect.yMax - 2f, selectionRect.width, 2f), m_SelectionTexture);
+        GUI.DrawTexture(new Rect(selectionRect.xMin, selectionRect.yMin, 2f, selectionRect.height), m_SelectionTexture);
+        GUI.DrawTexture(new Rect(selectionRect.xMax - 2f, selectionRect.yMin, 2f, selectionRect.height), m_SelectionTexture);
+        GUI.color = previousColor;
+    }
+
+    float GetSelectionDragThreshold()
+    {
+        return m_SelectionSettings != null ? m_SelectionSettings.SelectionDragThreshold : 12f;
+    }
+
+    float GetSelectionDragMinHoldTime()
+    {
+        return m_SelectionSettings != null ? m_SelectionSettings.SelectionDragMinHoldTime : 0.08f;
+    }
+
+    float GetGroupMoveSpacing()
+    {
+        return m_SelectionSettings != null ? m_SelectionSettings.GroupMoveSpacing : 0.9f;
+    }
+
+    Color GetSelectionFillColor()
+    {
+        return m_SelectionSettings != null
+            ? m_SelectionSettings.SelectionFillColor
+            : new Color(0.2f, 0.8f, 0.2f, 0.15f);
+    }
+
+    Color GetSelectionBorderColor()
+    {
+        return m_SelectionSettings != null
+            ? m_SelectionSettings.SelectionBorderColor
+            : new Color(0.2f, 1f, 0.2f, 0.9f);
     }
 
     void ExecuteUnitAction(ActionSO action)
@@ -451,11 +763,14 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void OnGUI()
     {
+        DrawSelectionRectangle();
+
         if (ActiveUnit != null)
         {
             GUI.Label(new Rect(10, 120, 200, 20), "State: " + ActiveUnit.CurrentState.ToString(), new GUIStyle { fontSize = 30 });
             GUI.Label(new Rect(10, 160, 200, 20), "Task: " + ActiveUnit.CurrentTask.ToString(), new GUIStyle { fontSize = 30 });
             GUI.Label(new Rect(10, 200, 200, 20), "Stance: " + ActiveUnit.CurrentStance.ToString(), new GUIStyle { fontSize = 30 });
+            GUI.Label(new Rect(10, 240, 260, 20), "Selected: " + m_SelectedUnits.Count, new GUIStyle { fontSize = 30 });
         }
     }
 };
