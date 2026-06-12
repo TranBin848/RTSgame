@@ -10,6 +10,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     [SerializeField] private ActionQueuePanel m_ActionQueuePanel;
     [SerializeField] private TextPopupController m_TextPopupController;
     [SerializeField] private ResourcesDataUI m_ResourcesDataUI;
+    [SerializeField] private DayNightCycleManager m_DayNightCycleManager;
     [Header("Selection")]
     [SerializeField] private SelectionSettingsDefinition m_SelectionSettings;
 
@@ -63,6 +64,18 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         }
         ClearActionBarUI();
         AddResources(100, 100, 100); // Starting resources for testing
+
+        if (m_DayNightCycleManager != null)
+        {
+            m_DayNightCycleManager.OnPhaseChanged += HandleDayNightPhaseChanged;
+        }
+    }
+    void OnDestroy()
+    {
+        if (m_DayNightCycleManager != null)
+        {
+            m_DayNightCycleManager.OnPhaseChanged -= HandleDayNightPhaseChanged;
+        }
     }
     void Update()
     {
@@ -96,6 +109,14 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             else
             {
                 m_PlayerUnits.Add(unit);
+            }
+
+            if (unit is WorkerUnit workerUnit
+                && m_DayNightCycleManager != null
+                && m_DayNightCycleManager.CurrentPhase == DayNightPhase.Night
+                && TryFindClosestTownHall(workerUnit.transform.position, out var townHall))
+            {
+                workerUnit.ReturnToTownHall(townHall);
             }
         }
         else
@@ -223,6 +244,34 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     public List<Unit> GetFriendlyUnits(bool isPlayer)
     {
         return isPlayer ? m_PlayerUnits : m_EnemyUnits;
+    }
+
+    public bool TryFindClosestTownHall(Vector3 originPosition, out TownHall townHall)
+    {
+        townHall = null;
+        float closestDistanceSqr = float.MaxValue;
+
+        foreach (var structure in m_PlayerStructures)
+        {
+            if (structure == null || structure.CurrentState == UnitState.Dead)
+            {
+                continue;
+            }
+
+            if (structure is not TownHall currentTownHall)
+            {
+                continue;
+            }
+
+            float distanceSqr = (currentTownHall.transform.position - originPosition).sqrMagnitude;
+            if (distanceSqr < closestDistanceSqr)
+            {
+                closestDistanceSqr = distanceSqr;
+                townHall = currentTownHall;
+            }
+        }
+
+        return townHall != null;
     }
 
     public void StartBuildProcess(BuildActionSo buildAction)
@@ -584,6 +633,22 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     void NotifySelectionChanged()
     {
         OnSelectionChanged.Invoke(m_SelectedUnits);
+    }
+
+    void HandleDayNightPhaseChanged(DayNightPhase phase)
+    {
+        if (phase != DayNightPhase.Night)
+        {
+            return;
+        }
+
+        foreach (var unit in m_PlayerUnits)
+        {
+            if (unit is WorkerUnit worker && TryFindClosestTownHall(worker.transform.position, out var townHall))
+            {
+                worker.ReturnToTownHall(townHall);
+            }
+        }
     }
 
     bool HasExactlyOneUnitSelected()

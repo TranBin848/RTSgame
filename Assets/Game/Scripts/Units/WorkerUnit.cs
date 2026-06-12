@@ -107,6 +107,21 @@ public class WorkerUnit : HumanoidUnit
         SetTask(UnitTask.Build);
     }
 
+    public void ReturnToTownHall(TownHall townHall)
+    {
+        if (townHall == null)
+        {
+            CancelActiveWork();
+            return;
+        }
+
+        CancelActiveWork();
+        Vector3 destination = townHall.Collider != null
+            ? townHall.Collider.ClosestPoint(transform.position)
+            : townHall.transform.position;
+        MoveTo(destination);
+    }
+
     public bool TryAssignResourceNode(IResourceNode resourceNode)
     {
         if (resourceNode == null || !HasGatheringDefinition())

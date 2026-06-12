@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a112467eb58e50f4d89cf078513008ea, type: 3}
+  m_Name: DayNightCycleDefinition
+  m_EditorClassIdentifier: Assembly-CSharp::DayNightCycleDefinition
+  m_DayDuration: 10
+  m_DuskDuration: 20
+  m_NightDuration: 35
+  m_DayOverlayColor: {r: 0, g: 0, b: 0, a: 0}
+  m_DuskOverlayColor: {r: 0.05, g: 0.08, b: 0.15, a: 0.28}
+  m_NightOverlayColor: {r: 0.02, g: 0.04, b: 0.12, a: 0.8117647}
