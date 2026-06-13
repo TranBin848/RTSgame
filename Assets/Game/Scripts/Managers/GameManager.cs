@@ -258,6 +258,20 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         return m_PlayerStructures;
     }
 
+    public List<WorkerUnit> GetIdleWorkers()
+    {
+        var idleWorkers = new List<WorkerUnit>();
+        foreach (var unit in m_PlayerUnits)
+        {
+            if (unit is WorkerUnit worker && worker.IsIdleWorker)
+            {
+                idleWorkers.Add(worker);
+            }
+        }
+
+        return idleWorkers;
+    }
+
     public bool TryFindClosestTownHall(Vector3 originPosition, out TownHall townHall)
     {
         townHall = null;

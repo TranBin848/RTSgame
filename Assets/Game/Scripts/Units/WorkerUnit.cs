@@ -19,6 +19,10 @@ public class WorkerUnit : HumanoidUnit
     private float m_HitTimer;
 
     public bool IsHoldingResource => TryGetCurrentCarryType(out _);
+    public bool IsIdleWorker => CurrentState != UnitState.Dead
+        && CurrentTask == UnitTask.None
+        && !hasTarget
+        && !IsHoldingResource;
 
     public void Inject(
         IResourceNodeLocator resourceNodeLocator,

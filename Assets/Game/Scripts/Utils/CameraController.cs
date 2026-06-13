@@ -138,4 +138,25 @@ public class CameraController : MonoBehaviour
             m_MainCamera.transform.position = pos;
         }
     }
+
+    public void FocusWorldPosition(Vector3 worldPosition)
+    {
+        if (m_MainCamera == null)
+        {
+            m_MainCamera = GetComponent<Camera>();
+            if (m_MainCamera == null)
+            {
+                m_MainCamera = Camera.main;
+            }
+        }
+
+        if (m_MainCamera == null)
+        {
+            return;
+        }
+
+        Vector3 currentPosition = m_MainCamera.transform.position;
+        m_MainCamera.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentPosition.z);
+        m_CurrentVelocity = Vector3.zero;
+    }
 }
