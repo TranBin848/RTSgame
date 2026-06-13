@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5022149450928730842}
   - component: {fileID: 1781402206414681772}
   - component: {fileID: -356565134047082739}
+  - component: {fileID: -6573922550911448909}
   m_Layer: 8
   m_Name: GoldStone2
   m_TagString: Resource
@@ -168,3 +169,19 @@ MonoBehaviour:
   m_Animator: {fileID: 0}
   m_InteractionRadius: 0.2
   m_InteractionPoint: {fileID: 0}
+--- !u!114 &-6573922550911448909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420879337359334982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers: []
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0

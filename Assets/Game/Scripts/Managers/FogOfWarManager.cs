@@ -1,5 +1,13 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Events;
+
+public enum FogCellState
+{
+    Unexplored,
+    Explored,
+    Visible
+}
 
 public class FogOfWarManager : MonoBehaviour
 {
@@ -17,6 +25,10 @@ public class FogOfWarManager : MonoBehaviour
     private float m_NextRefreshTime;
     private bool m_IsInitialized;
     private FogOfWarAffectable[] m_Affectables;
+    public UnityAction OnFogUpdated = delegate { };
+    public bool IsInitialized => m_IsInitialized;
+    public BoundsInt Bounds => m_Bounds;
+    public Tilemap FogTilemap => m_FogTilemap;
 
     void Start()
     {
@@ -49,9 +61,7 @@ public class FogOfWarManager : MonoBehaviour
             return;
         }
 
-        Tilemap baseTilemap = m_TilemapManager.PathfindingTilemap;
-        baseTilemap.CompressBounds();
-        m_Bounds = baseTilemap.cellBounds;
+        m_Bounds = m_TilemapManager.GetWorldMapBounds();
 
         if (m_Bounds.size.x <= 0 || m_Bounds.size.y <= 0)
         {
@@ -66,6 +76,11 @@ public class FogOfWarManager : MonoBehaviour
         m_FogTilemap.ClearAllTiles();
         foreach (var position in m_Bounds.allPositionsWithin)
         {
+            if (!m_TilemapManager.HasAnyMapTile(position))
+            {
+                continue;
+            }
+
             m_FogTilemap.SetTile(position, m_FogTile);
             m_FogTilemap.SetTileFlags(position, TileFlags.None);
             m_FogTilemap.SetColor(position, m_Definition.UnexploredColor);
@@ -85,6 +100,7 @@ public class FogOfWarManager : MonoBehaviour
         RevealVisionSources();
         ApplyFogColors();
         m_NextRefreshTime = Time.time + m_Definition.RefreshInterval;
+        OnFogUpdated.Invoke();
     }
 
     void ClearVisibility()
@@ -259,5 +275,40 @@ public class FogOfWarManager : MonoBehaviour
                 affectable.ApplyVisibility(affectable.UnexploredAlpha);
             }
         }
+    }
+
+    public bool TryGetCellState(Vector3Int cellPosition, out FogCellState cellState, out float visibilityStrength)
+    {
+        visibilityStrength = 0f;
+        cellState = FogCellState.Unexplored;
+
+        if (!m_IsInitialized || !TryGetFogIndices(cellPosition, out int fogX, out int fogY))
+        {
+            return false;
+        }
+
+        visibilityStrength = m_VisibilityStrengths[fogX, fogY];
+        if (m_VisibilityCounts[fogX, fogY] > 0)
+        {
+            cellState = FogCellState.Visible;
+        }
+        else if (m_Explored[fogX, fogY])
+        {
+            cellState = FogCellState.Explored;
+        }
+
+        return true;
+    }
+
+    public bool IsWorldPositionExplored(Vector3 worldPosition)
+    {
+        if (!m_IsInitialized || m_TilemapManager == null || m_TilemapManager.PathfindingTilemap == null)
+        {
+            return true;
+        }
+
+        Vector3Int cellPosition = m_TilemapManager.PathfindingTilemap.WorldToCell(worldPosition);
+        return TryGetCellState(cellPosition, out var cellState, out _)
+            && cellState != FogCellState.Unexplored;
     }
 }

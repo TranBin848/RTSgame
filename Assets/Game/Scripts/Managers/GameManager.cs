@@ -11,6 +11,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     [SerializeField] private TextPopupController m_TextPopupController;
     [SerializeField] private ResourcesDataUI m_ResourcesDataUI;
     [SerializeField] private DayNightCycleManager m_DayNightCycleManager;
+    [SerializeField] private FogOfWarManager m_FogOfWarManager;
     [Header("Selection")]
     [SerializeField] private SelectionSettingsDefinition m_SelectionSettings;
 
@@ -62,6 +63,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             Debug.LogWarning("CameraController not found in scene. Automatically adding to Main Camera.");
             m_CameraController = Camera.main.gameObject.AddComponent<CameraController>();
         }
+
+        if (m_FogOfWarManager == null)
+        {
+            m_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
+        }
+
         ClearActionBarUI();
         AddResources(100, 100, 100); // Starting resources for testing
 
@@ -299,17 +306,18 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+        bool isExploredPoint = m_FogOfWarManager == null || m_FogOfWarManager.IsWorldPositionExplored(worldPoint);
 
         if (HasExactlyOneUnitSelected() && ActiveUnit is WorkerUnit worker)
         {
-            if (TryGetClickedResourceNode(hit, out var resourceNode))
+            if (isExploredPoint && TryGetClickedResourceNode(hit, out var resourceNode))
             {
                 worker.TryAssignResourceNode(resourceNode);
                 return;
             }
         }
 
-        if (HasClickedOnUnit(hit, out var unit))
+        if (isExploredPoint && HasClickedOnUnit(hit, out var unit))
         {
             if (unit.IsPlayer)
             {
@@ -348,17 +356,22 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void handleClickOnGround(Vector2 worldPoint)
     {
+        if (!TryResolveGroundDestination(worldPoint, out Vector3 resolvedDestination))
+        {
+            return;
+        }
+
         if (m_SelectedUnits.Count > 1)
         {
-            MoveSelectedUnits(worldPoint);
-            DisplayClickEffect(worldPoint);
+            MoveSelectedUnits(resolvedDestination);
+            DisplayClickEffect(resolvedDestination);
             return;
         }
 
         if (HasActiveUnit && isHumanUnit(ActiveUnit))
         {
-            DisplayClickEffect(worldPoint);
-            ActiveUnit.MoveTo(worldPoint, DestinationSource.PlayerClick);
+            DisplayClickEffect(resolvedDestination);
+            ActiveUnit.MoveTo(resolvedDestination, DestinationSource.PlayerClick);
         }
     }
     void handleClickOnPlayerUnit(Unit unit)
@@ -689,6 +702,23 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
             movableUnits[i].MoveTo(centerPoint + offset, DestinationSource.PlayerClick);
         }
+    }
+
+    bool TryResolveGroundDestination(Vector2 requestedPoint, out Vector3 resolvedDestination)
+    {
+        resolvedDestination = requestedPoint;
+        TilemapManager tilemapManager = TilemapManager.Get();
+        if (tilemapManager == null)
+        {
+            return true;
+        }
+
+        if (tilemapManager.TryResolveWalkableDestination(requestedPoint, out resolvedDestination))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     Rect GetScreenSelectionRect(Vector2 startScreenPosition, Vector2 endScreenPosition)

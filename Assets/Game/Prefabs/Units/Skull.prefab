@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6390653063655871277}
   - component: {fileID: 8982844406718523801}
   - component: {fileID: 6246186588244588888}
+  - component: {fileID: -7541716955649331598}
   m_Layer: 6
   m_Name: Skull
   m_TagString: Untagged
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   m_Actions: []
+  m_UnitIcon: {fileID: 0}
   m_ObjectDetectionRadius: 2
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0.5
@@ -191,3 +193,19 @@ CapsuleCollider2D:
   m_Offset: {x: -0.029397726, y: 0.036746383}
   m_Size: {x: 1.000998, y: 1.1626813}
   m_Direction: 0
+--- !u!114 &-7541716955649331598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2925490060328344811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
+  m_TargetRenderers: []
+  m_AlwaysVisible: 0
+  m_ExploredAlpha: 0.45
+  m_UnexploredAlpha: 0
