@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92675de0f7e39b344a5ddcb5fbb62570, type: 3}
+  m_Name: MinimapSettingsDefinition
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapSettingsDefinition
+  m_UnexploredColor: {r: 0, g: 0, b: 0, a: 1}
+  m_ExploredWaterColor: {r: 0.08, g: 0.18, b: 0.32, a: 1}
+  m_VisibleWaterColor: {r: 0.18, g: 0.42, b: 0.72, a: 1}
+  m_ExploredGroundColor: {r: 0.3877898, g: 0.6603774, b: 0.2629049, a: 1}
+  m_VisibleGroundColor: {r: 0.54983264, g: 1, b: 0.1566037, a: 1}
+  m_UnwalkableColor: {r: 0.1, g: 0.1, b: 0.12, a: 1}
+  m_ViewportWidthScale: 0.8
+  m_ViewportHeightScale: 0.8
+  m_ViewportPadding: 0
