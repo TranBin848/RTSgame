@@ -184,16 +184,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangerUnit
   m_Actions: []
   m_UnitIcon: {fileID: 0}
-  m_ObjectDetectionRadius: 4
+  m_ObjectDetectionRadius: 3
   m_UnitDetectionCheckRate: 0.5
-  m_AttackRange: 3
-  m_AutoAttackFrequency: 2
+  m_AttackRange: 4
+  m_AutoAttackFrequency: 0.5
   m_AutoAttackDamageDelay: 0.5
-  m_AutoAttackDamage: 10
-  m_Health: 100
+  m_AutoAttackDamage: 2
+  m_Health: 1000
   m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
-  m_ProjectilePrefab: {fileID: 0}
+  m_ProjectilePrefab: {fileID: 3822240181381683003, guid: 1398d6628bbdc3644a152304939ddf09, type: 3}
   m_ProjectileSpawnPoint: {fileID: 0}
   m_MirrorSpawnPointWithFacing: 1
   m_FireByAnimationEvent: 0
@@ -210,7 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e03de7b7cd3d8649877d1bdd1d3a110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarAffectable
-  m_TargetRenderers: []
+  m_TargetRenderers:
+  - {fileID: 1375954080922052586}
   m_AlwaysVisible: 0
   m_ExploredAlpha: 0.45
   m_UnexploredAlpha: 0

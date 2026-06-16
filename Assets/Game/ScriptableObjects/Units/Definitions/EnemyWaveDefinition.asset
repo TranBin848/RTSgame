@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd0d6401ea5ef74ea6c62816c2dff89, type: 3}
+  m_Name: EnemyWaveDefinition
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWaveDefinition
+  m_MinimumTownHallRange: 8
+  m_StructureRangePadding: 2
+  m_EnemyPrefabs:
+  - {fileID: 2925490060328344811, guid: 3bd289a753d575e4cac9347588a6e5e6, type: 3}
+  - {fileID: 2502138810622728140, guid: 540a644c92dfc2940b26a4acaa86602b, type: 3}
+  m_BaseEnemyCountPerWave: 8
+  m_AdditionalEnemiesPerWave: 2
+  m_EnemyCountIncreasePerDay: 1.5
+  m_SpawnInterval: 1
+  m_SpawnIntervalReductionPerDay: 0.05
+  m_MinimumSpawnInterval: 0.35
+  m_SpawnExtraRange: 6
+  m_SpawnWalkableSearchRadius: 16
+  m_BaseWavesPerNight: 3
+  m_WaveCountIncreasePerDay: 0.25
+  m_DelayBetweenWaves: 5
+  m_ShowRangeOnlyAtNight: 1
+  m_RangeCircleSegments: 96
+  m_RangeLineWidth: 0.08
+  m_DayRangeColor: {r: 1, g: 0.9, b: 0.35, a: 0.15}
+  m_NightRangeColor: {r: 1, g: 0.9, b: 0.35, a: 0.9}

@@ -305,8 +305,12 @@ public abstract class Unit : MonoBehaviour
     }
     void TurnToPosition(Vector3 position)
     {
-        if (hasTarget && !IsPlayer) return;
         var direction = (position - transform.position).normalized;
+        if (Mathf.Abs(direction.x) <= 0.001f)
+        {
+            return;
+        }
+
         m_SpriteRenderer.flipX = direction.x < 0;
     }
     protected virtual void OnDestinationReached()

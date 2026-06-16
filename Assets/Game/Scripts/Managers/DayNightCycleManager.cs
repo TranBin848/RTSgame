@@ -14,18 +14,25 @@ public class DayNightCycleManager : MonoBehaviour
     [SerializeField] private DayNightCycleDefinition m_Definition;
     [SerializeField] private Image m_ScreenOverlayImage;
     [SerializeField] private DayNightPhase m_StartingPhase = DayNightPhase.Day;
+    [SerializeField] private int m_StartingDay = 1;
 
     public UnityAction<DayNightPhase> OnPhaseChanged = delegate { };
+    public UnityAction<int> OnDayChanged = delegate { };
     public DayNightPhase CurrentPhase { get; private set; }
+    public int CurrentDay { get; private set; } = 1;
     public float CurrentPhaseProgress { get; private set; }
     public DayNightCycleDefinition Definition => m_Definition;
     public float CycleNormalizedProgress => GetCycleNormalizedProgress();
 
     private float m_PhaseTimer;
+    private bool m_HasStarted;
 
     void Start()
     {
+        CurrentDay = Mathf.Max(1, m_StartingDay);
+        OnDayChanged.Invoke(CurrentDay);
         SetPhase(m_StartingPhase, true);
+        m_HasStarted = true;
     }
 
     void Update()
@@ -60,9 +67,16 @@ public class DayNightCycleManager : MonoBehaviour
 
     void SetPhase(DayNightPhase phase, bool instant = false)
     {
+        DayNightPhase previousPhase = CurrentPhase;
         CurrentPhase = phase;
         m_PhaseTimer = 0f;
         CurrentPhaseProgress = 0f;
+
+        if (!instant && m_HasStarted && previousPhase == DayNightPhase.Night && phase == DayNightPhase.Day)
+        {
+            CurrentDay++;
+            OnDayChanged.Invoke(CurrentDay);
+        }
 
         if (instant)
         {
