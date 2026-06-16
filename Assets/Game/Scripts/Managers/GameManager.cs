@@ -669,16 +669,31 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void HandleDayNightPhaseChanged(DayNightPhase phase)
     {
-        if (phase != DayNightPhase.Night)
+        if (phase == DayNightPhase.Night)
+        {
+            DeselectAllUnits();
+
+            foreach (var unit in m_PlayerUnits)
+            {
+                if (unit is WorkerUnit worker && TryFindClosestTownHall(worker.transform.position, out var townHall))
+                {
+                    worker.ReturnToTownHall(townHall);
+                }
+            }
+
+            return;
+        }
+
+        if (phase != DayNightPhase.Day)
         {
             return;
         }
 
         foreach (var unit in m_PlayerUnits)
         {
-            if (unit is WorkerUnit worker && TryFindClosestTownHall(worker.transform.position, out var townHall))
+            if (unit is WorkerUnit worker && worker.IsSheltered)
             {
-                worker.ReturnToTownHall(townHall);
+                worker.LeaveTownHallAtDaybreak();
             }
         }
     }

@@ -30,6 +30,18 @@ public abstract class ProductionBuilding : StructureUnit
         m_SpawnQueue.Enqueue(new ProductionRequest(unitPrefab, Mathf.Max(0.01f, trainDuration), queueUiId, completionMessage));
     }
 
+    public Vector3 GetSpawnOrigin()
+    {
+        return m_SpawnPoint != null ? m_SpawnPoint.position : (transform.position + Vector3.right);
+    }
+
+    public Vector3 GetSpawnExitDestination()
+    {
+        Vector3 spawnOrigin = GetSpawnOrigin();
+        Vector3 exitDirection = GetDefaultSpawnDirection();
+        return spawnOrigin + (exitDirection * Mathf.Max(0f, m_SpawnExitDistance));
+    }
+
     protected override void AfterConstructionUpdate()
     {
         base.AfterConstructionUpdate();

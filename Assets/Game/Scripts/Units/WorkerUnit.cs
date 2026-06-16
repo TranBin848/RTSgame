@@ -17,12 +17,18 @@ public class WorkerUnit : HumanoidUnit
     private bool m_HasActiveProfile;
     private float m_GatherTimer;
     private float m_HitTimer;
+    private TownHall m_ShelterTownHall;
+    private bool m_IsReturningToShelter;
+    private bool m_IsSheltered;
 
     public bool IsHoldingResource => TryGetCurrentCarryType(out _);
     public bool IsIdleWorker => CurrentState != UnitState.Dead
         && CurrentTask == UnitTask.None
         && !hasTarget
-        && !IsHoldingResource;
+        && !IsHoldingResource
+        && !m_IsSheltered
+        && !m_IsReturningToShelter;
+    public bool IsSheltered => m_IsSheltered;
 
     public void Inject(
         IResourceNodeLocator resourceNodeLocator,
@@ -36,6 +42,11 @@ public class WorkerUnit : HumanoidUnit
 
     protected override void UpdateBehaviour()
     {
+        if (m_IsSheltered)
+        {
+            return;
+        }
+
         if (!HasGatheringDefinition())
         {
             return;
@@ -120,10 +131,26 @@ public class WorkerUnit : HumanoidUnit
         }
 
         CancelActiveWork();
+        ShowFromShelter();
+        m_ShelterTownHall = townHall;
+        m_IsReturningToShelter = true;
         Vector3 destination = townHall.Collider != null
             ? townHall.Collider.ClosestPoint(transform.position)
             : townHall.transform.position;
         MoveTo(destination);
+    }
+
+    public void LeaveTownHallAtDaybreak()
+    {
+        if (m_ShelterTownHall == null)
+        {
+            return;
+        }
+
+        ShowFromShelter();
+        m_IsReturningToShelter = false;
+        transform.position = m_ShelterTownHall.GetSpawnOrigin();
+        MoveTo(m_ShelterTownHall.GetSpawnExitDestination());
     }
 
     public bool TryAssignResourceNode(IResourceNode resourceNode)
@@ -472,5 +499,54 @@ public class WorkerUnit : HumanoidUnit
         }
 
         SetTarget(null);
+    }
+
+    protected override void OnDestinationReached()
+    {
+        base.OnDestinationReached();
+
+        if (m_IsReturningToShelter)
+        {
+            EnterShelter();
+        }
+    }
+
+    void EnterShelter()
+    {
+        m_IsReturningToShelter = false;
+        m_IsSheltered = true;
+        StopMovement();
+        SetTask(UnitTask.None);
+        SetState(UnitState.Idle);
+
+        if (m_ShelterTownHall != null)
+        {
+            transform.position = m_ShelterTownHall.transform.position;
+        }
+
+        if (m_SpriteRenderer != null)
+        {
+            m_SpriteRenderer.enabled = false;
+        }
+
+        if (m_Collider != null)
+        {
+            m_Collider.enabled = false;
+        }
+    }
+
+    void ShowFromShelter()
+    {
+        m_IsSheltered = false;
+
+        if (m_SpriteRenderer != null)
+        {
+            m_SpriteRenderer.enabled = true;
+        }
+
+        if (m_Collider != null)
+        {
+            m_Collider.enabled = true;
+        }
     }
 }
