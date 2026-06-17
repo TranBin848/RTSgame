@@ -66,11 +66,11 @@ public class RangerUnit : WarriorUnit
         m_HasPendingShot = false;
         m_PendingShotTarget = null;
 
-        if (target != null && target.CurrentState != UnitState.Dead)
+        if (target != null && target.IsTargetable)
         {
             Vector3 spawnPosition = GetProjectileSpawnPosition();
-            var projectile = Instantiate(m_ProjectilePrefab, spawnPosition, Quaternion.identity);
-            projectile.Initialize(this, target, damage, spawnPosition);
+            var projectile = RuntimeObjectPool.Spawn(m_ProjectilePrefab, spawnPosition, Quaternion.identity);
+            projectile?.Initialize(this, target, damage, spawnPosition);
         }
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPooledRuntimeObject
 {
     [Header("Linear")]
     [SerializeField] private float m_Speed = 10f;
@@ -35,6 +35,8 @@ public class Projectile : MonoBehaviour
         m_Target = target;
         m_Damage = damage;
         m_StartPosition = launchPosition;
+        m_TravelTimer = 0f;
+        m_HasAppliedDamage = false;
         transform.position = launchPosition;
 
         if (m_Target == null)
@@ -51,9 +53,9 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (m_Target == null || m_Target.CurrentState == UnitState.Dead)
+        if (m_Target == null || !m_Target.IsTargetable)
         {
-            Destroy(gameObject);
+            ReleaseProjectile();
             return;
         }
 
@@ -112,12 +114,12 @@ public class Projectile : MonoBehaviour
 
         m_HasAppliedDamage = true;
 
-        if (m_Target != null && m_Target.CurrentState != UnitState.Dead)
+        if (m_Target != null && m_Target.IsTargetable)
         {
             m_Target.TakeDamage(m_Damage, m_Owner);
         }
 
-        Destroy(gameObject);
+        ReleaseProjectile();
     }
 
     private Vector3 GetTargetAimPosition()
@@ -149,5 +151,26 @@ public class Projectile : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    public void OnSpawnedFromPool(bool isReused)
+    {
+        m_Target = null;
+        m_Owner = null;
+        m_TravelTimer = 0f;
+        m_HasAppliedDamage = false;
+    }
+
+    public void OnReturnedToPool()
+    {
+        m_Target = null;
+        m_Owner = null;
+        m_TravelTimer = 0f;
+        m_HasAppliedDamage = false;
+    }
+
+    private void ReleaseProjectile()
+    {
+        RuntimeObjectPool.Release(gameObject);
     }
 }

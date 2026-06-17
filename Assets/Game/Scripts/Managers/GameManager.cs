@@ -234,7 +234,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
         foreach (var unit in units)
         {
-            if (unit.CurrentState == UnitState.Dead)
+            if (unit == null || !unit.IsTargetable)
             {
                 continue;
             }
@@ -362,6 +362,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     {
         if (hit.collider != null && hit.collider.TryGetComponent<Unit>(out var clickedUnit))
         {
+            if (!clickedUnit.IsSelectable)
+            {
+                unit = null;
+                return false;
+            }
+
             unit = clickedUnit;
             return true;
         }
@@ -423,12 +429,17 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void handleClickOnEnemyUnit(Unit unit)
     {
+        if (unit == null || !unit.IsTargetable)
+        {
+            return;
+        }
+
         if (m_SelectedUnits.Count > 1)
         {
             bool hasIssuedAttack = false;
             foreach (var selectedUnit in m_SelectedUnits)
             {
-                if (selectedUnit == null || selectedUnit.CurrentState == UnitState.Dead || selectedUnit.IsBuilding)
+                if (selectedUnit == null || !selectedUnit.IsSelectable || selectedUnit.IsBuilding)
                 {
                     continue;
                 }
@@ -462,7 +473,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void SelectNewUnit(Unit unit)
     {
-        if (unit.CurrentState == UnitState.Dead)
+        if (!unit.IsSelectable)
         {
             return;
         }
@@ -575,7 +586,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         var unitsToSelect = new List<Unit>();
         foreach (var unit in m_PlayerUnits)
         {
-            if (unit == null || unit.CurrentState == UnitState.Dead || unit.IsBuilding)
+            if (unit == null || !unit.IsSelectable || unit.IsBuilding)
             {
                 continue;
             }
@@ -602,7 +613,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
         foreach (var unit in units)
         {
-            if (unit == null || unit.CurrentState == UnitState.Dead)
+            if (unit == null || !unit.IsSelectable)
             {
                 continue;
             }
@@ -708,7 +719,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         var movableUnits = new List<Unit>();
         foreach (var selectedUnit in m_SelectedUnits)
         {
-            if (selectedUnit != null && !selectedUnit.IsBuilding && isHumanUnit(selectedUnit))
+            if (selectedUnit != null && selectedUnit.IsSelectable && !selectedUnit.IsBuilding && isHumanUnit(selectedUnit))
             {
                 movableUnits.Add(selectedUnit);
             }

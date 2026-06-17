@@ -66,6 +66,13 @@ public class HumanoidUnit : Unit
     private IEnumerator LateObjectDestroy(float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        if (TryGetComponent<PooledRuntimeObject>(out _))
+        {
+            RuntimeObjectPool.Release(gameObject);
+            yield break;
+        }
+
         Destroy(gameObject);
     }
 }

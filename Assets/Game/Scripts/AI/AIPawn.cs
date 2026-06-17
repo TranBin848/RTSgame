@@ -114,7 +114,7 @@ public class AIPawn : MonoBehaviour
 
         foreach (var unit in units)
         {
-            if (unit.gameObject == gameObject) continue;
+            if (unit == null || unit.gameObject == gameObject || !unit.IsTargetable) continue;
 
             Vector3 opositeDirection = -unit.transform.position + transform.position;
             float sqrDistance = opositeDirection.sqrMagnitude;

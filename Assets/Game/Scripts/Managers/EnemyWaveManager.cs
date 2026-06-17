@@ -82,6 +82,11 @@ public class EnemyWaveManager : MonoBehaviour
             return;
         }
 
+        if (phase == DayNightPhase.Day)
+        {
+            RetreatActiveEnemiesToSpawnRing();
+        }
+
         UpdateRangeVisual(false);
     }
 
@@ -161,10 +166,15 @@ public class EnemyWaveManager : MonoBehaviour
             return false;
         }
 
-        GameObject enemyObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        GameObject enemyObject = RuntimeObjectPool.Spawn(enemyPrefab, spawnPosition, Quaternion.identity);
+        if (enemyObject == null)
+        {
+            return false;
+        }
+
         if (!enemyObject.TryGetComponent<Unit>(out var enemyUnit))
         {
-            Destroy(enemyObject);
+            RuntimeObjectPool.Release(enemyObject);
             return false;
         }
 
@@ -172,6 +182,33 @@ public class EnemyWaveManager : MonoBehaviour
         enemyUnit.SetTask(UnitTask.Attack);
         enemyUnit.MoveTo(townHall.transform.position);
         return true;
+    }
+
+    void RetreatActiveEnemiesToSpawnRing()
+    {
+        if (m_GameManager == null || !TryGetTownHall(out var townHall))
+        {
+            return;
+        }
+
+        m_CurrentTownHallRange = CalculateTownHallRange(townHall);
+        var enemyUnits = new System.Collections.Generic.List<Unit>(m_GameManager.GetFriendlyUnits(false));
+        foreach (var unit in enemyUnits)
+        {
+            if (unit == null || unit.CurrentState == UnitState.Dead || unit is not EnemyUnit enemyUnit)
+            {
+                continue;
+            }
+
+            if (TryGetEnemyRetreatPosition(townHall.transform.position, enemyUnit.transform.position, out Vector3 retreatPosition))
+            {
+                enemyUnit.ReturnToSpawnRingAndDespawn(retreatPosition);
+            }
+            else
+            {
+                enemyUnit.DespawnToPool();
+            }
+        }
     }
 
     GameObject GetRandomEnemyPrefab()
@@ -208,22 +245,43 @@ public class EnemyWaveManager : MonoBehaviour
         }
 
         float startAngle = Random.Range(0f, Mathf.PI * 2f);
-        float angleStep = (Mathf.PI * 2f) / m_Definition.SpawnRingSearchSteps;
+        return TryGetWalkablePointOnSpawnRingNearAngle(townHallPosition, spawnRadius, startAngle, out spawnPosition);
+    }
 
-        if (TryGetWalkablePointOnSpawnRing(townHallPosition, spawnRadius, startAngle, out spawnPosition))
+    bool TryGetEnemyRetreatPosition(Vector3 townHallPosition, Vector3 enemyPosition, out Vector3 retreatPosition)
+    {
+        Vector3 direction = enemyPosition - townHallPosition;
+        float angle = direction.sqrMagnitude <= 0.001f
+            ? Random.Range(0f, Mathf.PI * 2f)
+            : Mathf.Atan2(direction.y, direction.x);
+
+        float spawnRadius = m_CurrentTownHallRange + m_Definition.SpawnExtraRange;
+        if (m_TilemapManager == null || m_TilemapManager.WalkableTilemap == null)
+        {
+            retreatPosition = GetPointOnSpawnRing(townHallPosition, spawnRadius, angle);
+            return true;
+        }
+
+        return TryGetWalkablePointOnSpawnRingNearAngle(townHallPosition, spawnRadius, angle, out retreatPosition);
+    }
+
+    bool TryGetWalkablePointOnSpawnRingNearAngle(Vector3 center, float radius, float startAngle, out Vector3 spawnPosition)
+    {
+        if (TryGetWalkablePointOnSpawnRing(center, radius, startAngle, out spawnPosition))
         {
             return true;
         }
 
+        float angleStep = (Mathf.PI * 2f) / m_Definition.SpawnRingSearchSteps;
         for (int offsetIndex = 1; offsetIndex <= m_Definition.SpawnRingSearchSteps / 2; offsetIndex++)
         {
             float angleOffset = angleStep * offsetIndex;
-            if (TryGetWalkablePointOnSpawnRing(townHallPosition, spawnRadius, startAngle + angleOffset, out spawnPosition))
+            if (TryGetWalkablePointOnSpawnRing(center, radius, startAngle + angleOffset, out spawnPosition))
             {
                 return true;
             }
 
-            if (TryGetWalkablePointOnSpawnRing(townHallPosition, spawnRadius, startAngle - angleOffset, out spawnPosition))
+            if (TryGetWalkablePointOnSpawnRing(center, radius, startAngle - angleOffset, out spawnPosition))
             {
                 return true;
             }

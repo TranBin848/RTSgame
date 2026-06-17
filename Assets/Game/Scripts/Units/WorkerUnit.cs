@@ -29,6 +29,8 @@ public class WorkerUnit : HumanoidUnit
         && !m_IsSheltered
         && !m_IsReturningToShelter;
     public bool IsSheltered => m_IsSheltered;
+    public override bool IsSelectable => base.IsSelectable && !m_IsSheltered;
+    public override bool IsTargetable => base.IsTargetable && !m_IsSheltered;
 
     public void Inject(
         IResourceNodeLocator resourceNodeLocator,

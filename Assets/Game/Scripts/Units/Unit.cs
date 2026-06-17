@@ -14,7 +14,7 @@ public enum DestinationSource
 {
     CodeTriggered, PlayerClick
 }
-public abstract class Unit : MonoBehaviour
+public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
 {
     [SerializeField] private ActionSO[] m_Actions;
     [SerializeField] private Sprite m_UnitIcon;
@@ -38,12 +38,15 @@ public abstract class Unit : MonoBehaviour
     protected float m_NextUnitDetectionTime = 0f;
     protected float m_NextAutoAttackTime;
     protected int m_CurrentHealth;
+    private bool m_IsRegistered;
     protected UnitStance m_CurrentStance = UnitStance.Offensive;
     public UnitState CurrentState { get; protected set; } = UnitState.Idle;
     public UnitTask CurrentTask { get; protected set; } = UnitTask.None;
     public Unit Target { get; protected set; }
     public virtual bool IsPlayer => true;
     public virtual bool IsBuilding => false;
+    public virtual bool IsSelectable => CurrentState != UnitState.Dead;
+    public virtual bool IsTargetable => CurrentState != UnitState.Dead;
     public ActionSO[] Actions => m_Actions;
     public SpriteRenderer SpriteRenderer => m_SpriteRenderer;
     public bool hasTarget => Target != null;
@@ -170,11 +173,28 @@ public abstract class Unit : MonoBehaviour
     }
     protected virtual void RegisterUnit(Unit unit)
     {
+        if (m_IsRegistered)
+        {
+            return;
+        }
+
+        if (m_GameManager == null)
+        {
+            m_GameManager = GameManager.Get();
+        }
+
         m_GameManager.RegisterUnit(unit);
+        m_IsRegistered = true;
     }
     protected virtual void UnregisterUnit(Unit unit)
     {
+        if (!m_IsRegistered)
+        {
+            return;
+        }
+
         m_GameManager.UnregisterUnit(unit);
+        m_IsRegistered = false;
     }
     protected virtual bool TryFindClosetFoe(out Unit foe)
     {
@@ -198,8 +218,9 @@ public abstract class Unit : MonoBehaviour
     }
     protected virtual bool TryAttackCurrentTarget()
     {
-        if (Target == null || Target.CurrentState == UnitState.Dead)
+        if (Target == null || !Target.IsTargetable)
         {
+            SetTarget(null);
             return false;
         }
         if (Time.time >= m_NextAutoAttackTime)
@@ -231,10 +252,71 @@ public abstract class Unit : MonoBehaviour
         RunDeadEffect();
         UnregisterUnit(this);
     }
+
+    public virtual void OnSpawnedFromPool(bool isReused)
+    {
+        ResetRuntimeState();
+        if (isReused)
+        {
+            RegisterUnit(this);
+        }
+    }
+
+    public virtual void OnReturnedToPool()
+    {
+        StopMovement();
+        SetTarget(null);
+        CurrentTask = UnitTask.None;
+        CurrentState = UnitState.Idle;
+
+        if (m_FlashCoroutine != null)
+        {
+            StopCoroutine(m_FlashCoroutine);
+            m_FlashCoroutine = null;
+        }
+
+        if (m_SpriteRenderer != null)
+        {
+            m_SpriteRenderer.color = m_OriginalColor;
+            m_SpriteRenderer.enabled = true;
+        }
+
+        if (m_Collider != null)
+        {
+            m_Collider.enabled = true;
+        }
+    }
+
+    public void DespawnToPool()
+    {
+        UnregisterUnit(this);
+        RuntimeObjectPool.Release(gameObject);
+    }
+
+    protected virtual void ResetRuntimeState()
+    {
+        CurrentState = UnitState.Idle;
+        CurrentTask = UnitTask.None;
+        Target = null;
+        m_CurrentHealth = m_Health;
+        m_NextAutoAttackTime = 0f;
+        isTargeted = false;
+
+        if (m_SpriteRenderer != null)
+        {
+            m_SpriteRenderer.enabled = true;
+            m_SpriteRenderer.color = m_OriginalColor;
+        }
+
+        if (m_Collider != null)
+        {
+            m_Collider.enabled = true;
+        }
+    }
     private Coroutine m_FlashCoroutine;
     public virtual void TakeDamage(int dmg, Unit damager)
     {
-        if (CurrentState == UnitState.Dead)
+        if (!IsTargetable)
         {
             return;
         }
@@ -294,6 +376,11 @@ public abstract class Unit : MonoBehaviour
 
     protected bool IsTargetInRange(Unit target)
     {
+        if (target == null || !target.IsTargetable || target.Collider == null)
+        {
+            return false;
+        }
+
         var targetCollider = target.Collider;
         var targetClosetPoint = targetCollider.ClosestPoint(transform.position);
 

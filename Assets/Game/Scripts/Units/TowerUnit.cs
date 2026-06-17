@@ -24,8 +24,8 @@ public class TowerUnit : StructureUnit
     }
     protected override void OnAttackReady(Unit target)
     {
-        var projectile = Instantiate(m_ProjectilePrefab, transform.position, Quaternion.identity);
-        projectile.Initialize(this, target, m_AutoAttackDamage);
+        var projectile = RuntimeObjectPool.Spawn(m_ProjectilePrefab, transform.position, Quaternion.identity);
+        projectile?.Initialize(this, target, m_AutoAttackDamage);
     }
     protected override void RunDeadEffect()
     {
