@@ -13,8 +13,17 @@ MonoBehaviour:
   m_Name: DayNightCycleDefinition
   m_EditorClassIdentifier: Assembly-CSharp::DayNightCycleDefinition
   m_DayDuration: 5
-  m_DuskDuration: 5
+  m_DuskDuration: 30
   m_NightDuration: 60
-  m_DayOverlayColor: {r: 0, g: 0, b: 0, a: 0}
-  m_DuskOverlayColor: {r: 0.05, g: 0.08, b: 0.15, a: 0.28}
-  m_NightOverlayColor: {r: 0.02, g: 0.04, b: 0.12, a: 0.8117647}
+  m_DayLightColor: {r: 1, g: 1, b: 1, a: 1}
+  m_DuskLightColor: {r: 1, g: 0.6, b: 0.4, a: 1}
+  m_NightLightColor: {r: 0.2, g: 0.2, b: 0.4, a: 1}
+  m_DayLightIntensity: 1
+  m_DuskLightIntensity: 0.6
+  m_NightLightIntensity: 0.1
+  m_DayVignette: 0
+  m_DuskVignette: 0.25
+  m_NightVignette: 0.5
+  m_DayColorFilter: {r: 1, g: 1, b: 1, a: 1}
+  m_DuskColorFilter: {r: 1, g: 0.9, b: 0.8, a: 1}
+  m_NightColorFilter: {r: 0.6, g: 0.7, b: 1, a: 1}

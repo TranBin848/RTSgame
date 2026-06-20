@@ -305,7 +305,9 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         if (m_SpriteRenderer != null)
         {
             m_SpriteRenderer.enabled = true;
-            m_SpriteRenderer.color = m_OriginalColor;
+            Color restoredColor = m_OriginalColor;
+            restoredColor.a = m_SpriteRenderer.color.a;
+            m_SpriteRenderer.color = restoredColor;
         }
 
         if (m_Collider != null)
@@ -327,13 +329,14 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
             SetTarget(damager);
         }
 
-        //Debug.Log($"{name} took {dmg} damage from {damager.name}");
         m_GameManager.ShowTextPopup(dmg.ToString(), Color.red, GetTopPosition());
 
         if (m_FlashCoroutine != null)
         {
             StopCoroutine(m_FlashCoroutine);
-            m_SpriteRenderer.color = m_OriginalColor;
+            Color resetColor = m_OriginalColor;
+            resetColor.a = m_SpriteRenderer.color.a;
+            m_SpriteRenderer.color = resetColor;
         }
         m_FlashCoroutine = StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
 
@@ -342,22 +345,27 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
             Die();
         }
     }
+
     protected IEnumerator FlashEffect(Color color, int flashCount, float duration)
     {
         Color originalColor = m_SpriteRenderer.color;
         for (int i = 0; i < flashCount; i++)
         {
+            color.a = m_SpriteRenderer.color.a;
             m_SpriteRenderer.color = color;
             yield return new WaitForSeconds(duration / 2f);
 
+            originalColor.a = m_SpriteRenderer.color.a;
             m_SpriteRenderer.color = originalColor;
             yield return new WaitForSeconds(duration / 2f);
         }
 
-        m_SpriteRenderer.color = m_OriginalColor;
+        Color finalColor = m_OriginalColor;
+        finalColor.a = m_SpriteRenderer.color.a;
+        m_SpriteRenderer.color = finalColor;
         m_FlashCoroutine = null;
-
     }
+
     protected IEnumerator DelayDamage(float delay, int damage, Unit target)
     {
         yield return new WaitForSeconds(delay);

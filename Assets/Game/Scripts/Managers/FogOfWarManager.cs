@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public enum FogCellState
 {
@@ -24,7 +25,7 @@ public class FogOfWarManager : MonoBehaviour
     private float[,] m_VisibilityStrengths;
     private float m_NextRefreshTime;
     private bool m_IsInitialized;
-    private FogOfWarAffectable[] m_Affectables;
+    private List<FogOfWarAffectable> m_Affectables = new();
     public UnityAction OnFogUpdated = delegate { };
     public bool IsInitialized => m_IsInitialized;
     public BoundsInt Bounds => m_Bounds;
@@ -71,7 +72,9 @@ public class FogOfWarManager : MonoBehaviour
         m_Explored = new bool[m_Bounds.size.x, m_Bounds.size.y];
         m_VisibilityCounts = new int[m_Bounds.size.x, m_Bounds.size.y];
         m_VisibilityStrengths = new float[m_Bounds.size.x, m_Bounds.size.y];
-        m_Affectables = FindObjectsByType<FogOfWarAffectable>(FindObjectsSortMode.None);
+        
+        m_Affectables.Clear();
+        m_Affectables.AddRange(FindObjectsByType<FogOfWarAffectable>(FindObjectsSortMode.None));
 
         m_FogTilemap.ClearAllTiles();
         foreach (var position in m_Bounds.allPositionsWithin)
@@ -241,39 +244,63 @@ public class FogOfWarManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < m_Affectables.Length; i++)
+        for (int i = 0; i < m_Affectables.Count; i++)
         {
-            FogOfWarAffectable affectable = m_Affectables[i];
-            if (affectable == null)
-            {
-                continue;
-            }
+            ApplyVisibilityToAffectable(m_Affectables[i]);
+        }
+    }
 
-            if (affectable.AlwaysVisible)
-            {
-                affectable.ApplyVisibility(1f);
-                continue;
-            }
+    public void ApplyVisibilityToAffectable(FogOfWarAffectable affectable)
+    {
+        if (affectable == null)
+        {
+            return;
+        }
 
-            Vector3Int cellPosition = m_TilemapManager.PathfindingTilemap.WorldToCell(affectable.transform.position);
-            if (!TryGetFogIndices(cellPosition, out int fogX, out int fogY))
-            {
-                affectable.ApplyVisibility(1f);
-                continue;
-            }
+        if (affectable.AlwaysVisible)
+        {
+            affectable.ApplyVisibility(1f);
+            return;
+        }
 
-            if (m_VisibilityCounts[fogX, fogY] > 0)
+        Vector3Int cellPosition = m_TilemapManager.PathfindingTilemap.WorldToCell(affectable.transform.position);
+        if (!TryGetFogIndices(cellPosition, out int fogX, out int fogY))
+        {
+            affectable.ApplyVisibility(1f);
+            return;
+        }
+
+        if (m_VisibilityCounts[fogX, fogY] > 0)
+        {
+            affectable.ApplyVisibility(1f);
+        }
+        else if (m_Explored[fogX, fogY])
+        {
+            affectable.ApplyVisibility(affectable.ExploredAlpha);
+        }
+        else
+        {
+            affectable.ApplyVisibility(affectable.UnexploredAlpha);
+        }
+    }
+
+    public void RegisterAffectable(FogOfWarAffectable affectable)
+    {
+        if (affectable != null && !m_Affectables.Contains(affectable))
+        {
+            m_Affectables.Add(affectable);
+            if (m_IsInitialized)
             {
-                affectable.ApplyVisibility(1f);
+                ApplyVisibilityToAffectable(affectable);
             }
-            else if (m_Explored[fogX, fogY])
-            {
-                affectable.ApplyVisibility(affectable.ExploredAlpha);
-            }
-            else
-            {
-                affectable.ApplyVisibility(affectable.UnexploredAlpha);
-            }
+        }
+    }
+
+    public void UnregisterAffectable(FogOfWarAffectable affectable)
+    {
+        if (affectable != null)
+        {
+            m_Affectables.Remove(affectable);
         }
     }
 
