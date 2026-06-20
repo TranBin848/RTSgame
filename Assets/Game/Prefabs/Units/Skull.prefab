@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   m_Actions: []
-  m_UnitIcon: {fileID: 0}
+  m_UnitIcon: {fileID: -565768047, guid: 30a1a4d605eedb64aa8fe7f3133c41f5, type: 3}
   m_ObjectDetectionRadius: 2
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0.5

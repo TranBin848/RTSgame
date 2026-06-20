@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyWaveManager : MonoBehaviour
 {
@@ -15,6 +16,16 @@ public class EnemyWaveManager : MonoBehaviour
     private float m_WaveDelayTimer;
     private int m_CurrentWaveIndex;
     private int m_SpawnedInCurrentWave;
+    private int m_StartedWaveCount;
+
+    public UnityAction OnWaveScheduleChanged = delegate { };
+    public UnityAction<int> OnWaveStarted = delegate { };
+    public bool IsNightWaveActive => m_DayNightCycleManager != null
+        && m_DayNightCycleManager.CurrentPhase == DayNightPhase.Night;
+    public float NightProgress => IsNightWaveActive ? m_DayNightCycleManager.CurrentPhaseProgress : 0f;
+    public int CurrentWaveIndex => m_CurrentWaveIndex;
+    public int StartedWaveCount => m_StartedWaveCount;
+    public int CurrentWaveCount => m_Definition != null ? m_Definition.GetWaveCountForDay(GetCurrentDay()) : 0;
 
     void Awake()
     {
@@ -78,7 +89,9 @@ public class EnemyWaveManager : MonoBehaviour
             m_WaveDelayTimer = 0f;
             m_CurrentWaveIndex = 0;
             m_SpawnedInCurrentWave = 0;
+            m_StartedWaveCount = 0;
             UpdateRangeVisual(true);
+            OnWaveScheduleChanged.Invoke();
             return;
         }
 
@@ -87,6 +100,7 @@ public class EnemyWaveManager : MonoBehaviour
             RetreatActiveEnemiesToSpawnRing();
         }
 
+        OnWaveScheduleChanged.Invoke();
         UpdateRangeVisual(false);
     }
 
@@ -140,6 +154,11 @@ public class EnemyWaveManager : MonoBehaviour
 
         if (SpawnEnemy(townHall))
         {
+            if (m_SpawnedInCurrentWave == 0)
+            {
+                MarkWaveStarted(m_CurrentWaveIndex);
+            }
+
             m_SpawnedInCurrentWave++;
             m_SpawnTimer = m_Definition.GetSpawnIntervalForDay(currentDay);
             return;
@@ -151,6 +170,73 @@ public class EnemyWaveManager : MonoBehaviour
     int GetCurrentDay()
     {
         return m_DayNightCycleManager != null ? m_DayNightCycleManager.CurrentDay : 1;
+    }
+
+    void MarkWaveStarted(int waveIndex)
+    {
+        if (waveIndex < m_StartedWaveCount)
+        {
+            return;
+        }
+
+        m_StartedWaveCount = waveIndex + 1;
+        OnWaveStarted.Invoke(waveIndex);
+    }
+
+    public float GetWaveStartNormalized(int waveIndex)
+    {
+        if (m_Definition == null)
+        {
+            return 0f;
+        }
+
+        int safeWaveIndex = Mathf.Max(0, waveIndex);
+        float nightDuration = GetNightDurationForSchedule();
+        if (nightDuration <= 0.0001f)
+        {
+            return 0f;
+        }
+
+        return Mathf.Clamp01(GetWaveStartTime(GetCurrentDay(), safeWaveIndex) / nightDuration);
+    }
+
+    float GetWaveStartTime(int day, int waveIndex)
+    {
+        float waveStartTime = 0f;
+        float spawnInterval = m_Definition.GetSpawnIntervalForDay(day);
+
+        for (int i = 0; i < waveIndex; i++)
+        {
+            int enemyCount = m_Definition.GetEnemyCountForWave(day, i);
+            if (enemyCount > 0)
+            {
+                waveStartTime += Mathf.Max(0, enemyCount - 1) * spawnInterval;
+            }
+
+            waveStartTime += m_Definition.DelayBetweenWaves;
+        }
+
+        return waveStartTime;
+    }
+
+    float GetNightDurationForSchedule()
+    {
+        if (m_DayNightCycleManager != null && m_DayNightCycleManager.Definition != null)
+        {
+            return m_DayNightCycleManager.Definition.NightDuration;
+        }
+
+        int currentDay = GetCurrentDay();
+        int waveCount = m_Definition.GetWaveCountForDay(currentDay);
+        if (waveCount <= 0)
+        {
+            return 1f;
+        }
+
+        int lastWaveIndex = waveCount - 1;
+        int lastEnemyCount = m_Definition.GetEnemyCountForWave(currentDay, lastWaveIndex);
+        float lastWaveDuration = Mathf.Max(0, lastEnemyCount - 1) * m_Definition.GetSpawnIntervalForDay(currentDay);
+        return Mathf.Max(1f, GetWaveStartTime(currentDay, lastWaveIndex) + lastWaveDuration);
     }
 
     bool SpawnEnemy(TownHall townHall)

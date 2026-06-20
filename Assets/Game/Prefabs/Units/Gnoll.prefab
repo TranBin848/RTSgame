@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangerUnit
   m_Actions: []
-  m_UnitIcon: {fileID: 0}
+  m_UnitIcon: {fileID: 1343593608, guid: 37b07bd79293b634883f1d61c1a4de3d, type: 3}
   m_ObjectDetectionRadius: 3
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 4
