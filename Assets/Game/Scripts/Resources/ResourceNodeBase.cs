@@ -8,6 +8,10 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     [SerializeField] private Transform[] m_InteractionPoints;
 
     private bool m_IsClaimed;
+    private SpriteRenderer m_SpriteRenderer;
+    private Material m_OriginalMaterial;
+    private Material m_InstanceFlashMaterial;
+    private Coroutine m_FlashCoroutine;
 
     public abstract ResourceType ResourceType { get; }
     public bool IsClaimed => m_IsClaimed;
@@ -25,6 +29,12 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         if (m_Animator == null)
         {
             m_Animator = GetComponent<Animator>();
+        }
+
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        if (m_SpriteRenderer != null)
+        {
+            m_OriginalMaterial = m_SpriteRenderer.material;
         }
 
         OnInitialize();
@@ -92,6 +102,56 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         {
             m_Animator.SetTrigger("Hit");
         }
+
+        TriggerHitFlash();
+    }
+
+    private void TriggerHitFlash()
+    {
+        if (m_SpriteRenderer == null)
+        {
+            return;
+        }
+
+        if (m_InstanceFlashMaterial == null)
+        {
+            Shader flashShader = Shader.Find("Custom/SpriteFlash");
+            if (flashShader != null)
+            {
+                m_InstanceFlashMaterial = new Material(flashShader);
+            }
+        }
+
+        if (m_InstanceFlashMaterial == null)
+        {
+            return; // Fallback nếu không load được shader
+        }
+
+        if (m_FlashCoroutine != null)
+        {
+            StopCoroutine(m_FlashCoroutine);
+        }
+        m_FlashCoroutine = StartCoroutine(FlashCoroutine());
+    }
+
+    private System.Collections.IEnumerator FlashCoroutine()
+    {
+        m_SpriteRenderer.material = m_InstanceFlashMaterial;
+        m_InstanceFlashMaterial.SetColor("_FlashColor", Color.white);
+
+        float elapsed = 0f;
+        float duration = 0.15f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float amount = Mathf.Lerp(1f, 0f, elapsed / duration);
+            m_InstanceFlashMaterial.SetFloat("_FlashAmount", amount);
+            yield return null;
+        }
+
+        m_SpriteRenderer.material = m_OriginalMaterial;
+        m_FlashCoroutine = null;
     }
 
     public Vector3 GetInteractionPoint(Vector3 requesterPosition)

@@ -16,7 +16,6 @@ public class WorkerUnit : HumanoidUnit
     private WorkerUnitDefinition.GatheringProfile m_ActiveProfile;
     private bool m_HasActiveProfile;
     private float m_GatherTimer;
-    private float m_HitTimer;
     private TownHall m_ShelterTownHall;
     private bool m_IsReturningToShelter;
     private bool m_IsSheltered;
@@ -316,13 +315,6 @@ public class WorkerUnit : HumanoidUnit
     {
         SetGatherAnimationActive(true);
         m_GatherTimer += Time.deltaTime;
-        m_HitTimer += Time.deltaTime;
-
-        if (m_HitTimer >= m_ActiveProfile.HitFrequency)
-        {
-            m_HitTimer = 0f;
-            m_AssignedResourceNode?.Hit();
-        }
 
         if (m_GatherTimer < m_ActiveProfile.GatherTickTime)
         {
@@ -338,6 +330,15 @@ public class WorkerUnit : HumanoidUnit
         if (updatedAmount >= m_ActiveProfile.CarryCapacity)
         {
             HandleGatheringFinished();
+        }
+    }
+
+    // Được gọi bởi Unity Animation Event khi hoạt ảnh chặt cây/đào vàng vung rìu/cuốc trúng cây/đá
+    public void TriggerGatherHit()
+    {
+        if (m_HasActiveProfile && m_AssignedResourceNode != null)
+        {
+            m_AssignedResourceNode.Hit();
         }
     }
 
@@ -438,7 +439,6 @@ public class WorkerUnit : HumanoidUnit
     void ResetGatherTimers()
     {
         m_GatherTimer = 0f;
-        m_HitTimer = 0f;
     }
 
     void SetGatherAnimationActive(bool isActive)
