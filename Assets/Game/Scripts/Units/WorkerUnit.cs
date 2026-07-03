@@ -193,7 +193,7 @@ public class WorkerUnit : HumanoidUnit
         }
         else
         {
-            Vector3 gatherPoint = resourceNode.GetInteractionPoint();
+            Vector3 gatherPoint = resourceNode.GetInteractionPoint(transform.position);
             Debug.Log($"Worker '{name}' assigned to gather. gatherPoint={gatherPoint}, interactionRadius={resourceNode.InteractionRadius}, resourceNode={resourceNode}");
             MoveTo(gatherPoint);
             SetTask(profile.GatherTask);
@@ -204,16 +204,36 @@ public class WorkerUnit : HumanoidUnit
 
     void HandleGatheringTask()
     {
-        Vector3 interactionPoint = m_AssignedResourceNode.GetInteractionPoint();
+        if (CurrentState == UnitState.Moving)
+        {
+            return;
+        }
+
+        Vector3 interactionPoint = m_AssignedResourceNode.GetInteractionPoint(transform.position);
         Vector3 workerClosestPoint = Collider.ClosestPoint(interactionPoint);
         float distance = Vector3.Distance(workerClosestPoint, interactionPoint);
 
         if (distance <= m_AssignedResourceNode.InteractionRadius)
         {
             StopMovement();
+
+            // Quay mặt Worker về phía cây/bãi vàng
+            if (m_AssignedResourceNode is Component resourceComponent)
+            {
+                Vector3 direction = resourceComponent.transform.position - transform.position;
+                if (Mathf.Abs(direction.x) > 0.01f)
+                {
+                    m_SpriteRenderer.flipX = direction.x < 0;
+                }
+            }
+
             // Ensure task and state are set so ProcessGathering() runs
             SetTask(m_ActiveProfile.GatherTask);
             SetState(m_ActiveProfile.GatherState);
+        }
+        else
+        {
+            Debug.LogWarning($"[Worker] Stopped near resource but distance ({distance}) > radius ({m_AssignedResourceNode.InteractionRadius}). Worker Pos: {transform.position}, Target Pos: {interactionPoint}");
         }
     }
 
@@ -223,7 +243,7 @@ public class WorkerUnit : HumanoidUnit
         {
             SetAttackAnimationActive(false);
             SetTarget(null);
-            MoveTo(m_AssignedResourceNode.GetInteractionPoint());
+            MoveTo(m_AssignedResourceNode.GetInteractionPoint(transform.position));
             SetTask(m_ActiveProfile.GatherTask);
             SetState(m_ActiveProfile.GatherState);
             return;
@@ -279,7 +299,7 @@ public class WorkerUnit : HumanoidUnit
         {
             m_AssignedDepot = null;
             ResetGatherTimers();
-            MoveTo(m_AssignedResourceNode.GetInteractionPoint());
+            MoveTo(m_AssignedResourceNode.GetInteractionPoint(transform.position));
             SetTask(profile.GatherTask);
             return;
         }

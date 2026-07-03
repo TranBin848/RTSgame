@@ -50,9 +50,9 @@ public class SheepUnit : HumanoidUnit, IResourceNode
     {
     }
 
-    public Vector3 GetInteractionPoint()
+    public Vector3 GetInteractionPoint(Vector3 requesterPosition)
     {
-        return Collider != null ? Collider.ClosestPoint(transform.position) : transform.position;
+        return Collider != null ? Collider.ClosestPoint(requesterPosition) : transform.position;
     }
 
     public override void TakeDamage(int dmg, Unit damager)

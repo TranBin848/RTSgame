@@ -5,7 +5,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     [SerializeField] private CapsuleCollider2D m_Collider;
     [SerializeField] private Animator m_Animator;
     [SerializeField] private float m_InteractionRadius = 0.1f;
-    [SerializeField] private Transform m_InteractionPoint;
+    [SerializeField] private Transform[] m_InteractionPoints;
 
     private bool m_IsClaimed;
 
@@ -43,6 +43,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         {
             m_Collider.enabled = false;
         }
+        UpdatePathfindingNode();
         return true;
     }
 
@@ -54,6 +55,35 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         {
             m_Collider.enabled = true;
         }
+        UpdatePathfindingNode();
+    }
+
+    private void UpdatePathfindingNode()
+    {
+        var tilemapManager = TilemapManager.Get();
+        if (tilemapManager != null && tilemapManager.CanServePathfindingRequests())
+        {
+            if (m_Collider != null)
+            {
+                Bounds bounds = m_Collider.bounds;
+                Vector3Int min = tilemapManager.WalkableTilemap.WorldToCell(bounds.min);
+                Vector3Int max = tilemapManager.WalkableTilemap.WorldToCell(bounds.max);
+
+                // Thêm padding 1 ô để bao phủ tất cả các ô bị đè lên
+                min.x -= 1; min.y -= 1;
+                max.x += 1; max.y += 1;
+
+                int width = max.x - min.x + 1;
+                int height = max.y - min.y + 1;
+
+                tilemapManager.UpdateNodesInArea(min, width, height);
+            }
+            else
+            {
+                Vector3Int tilePos = tilemapManager.WalkableTilemap.WorldToCell(transform.position);
+                tilemapManager.UpdateNodesInArea(tilePos, 1, 1);
+            }
+        }
     }
 
     public void Hit()
@@ -64,15 +94,27 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         }
     }
 
-    public Vector3 GetInteractionPoint()
+    public Vector3 GetInteractionPoint(Vector3 requesterPosition)
     {
-        if (m_InteractionPoint != null)
+        if (m_InteractionPoints != null && m_InteractionPoints.Length > 0)
         {
-
-            return m_InteractionPoint.position;
+            Transform closestPoint = null;
+            float closestDistanceSqr = float.MaxValue;
+            foreach (var point in m_InteractionPoints)
+            {
+                if (point == null) continue;
+                float distSqr = (point.position - requesterPosition).sqrMagnitude;
+                if (distSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distSqr;
+                    closestPoint = point;
+                }
+            }
+            if (closestPoint != null)
+            {
+                return closestPoint.position;
+            }
         }
-
-
 
         return transform.position;
     }
@@ -89,8 +131,16 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Vector3 position = GetInteractionPoint();
-        Gizmos.DrawWireSphere(position, m_InteractionRadius);
+        if (m_InteractionPoints != null)
+        {
+            foreach (var point in m_InteractionPoints)
+            {
+                if (point != null)
+                {
+                    Gizmos.DrawWireSphere(point.position, m_InteractionRadius);
+                }
+            }
+        }
     }
 
 }

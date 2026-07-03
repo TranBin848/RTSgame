@@ -56,7 +56,7 @@ public class Pathfinding
             Node currentNode = GetLowerFCostNode(openList);
             if (currentNode == endNode)
             {
-                var path = RetracePath(startNode, endNode, startWorldPosition);
+                var path = RetracePath(startNode, endNode, startWorldPosition, endWorldPosition);
                 //Debug.Log("Path found: " + string.Join(" -> ", path));
                 ResetNodes(openList, closedList);
                 return path;
@@ -97,7 +97,7 @@ public class Pathfinding
             }
 
         }
-        var unFinishedPath = RetracePath(startNode, closetNode, startWorldPosition);
+        var unFinishedPath = RetracePath(startNode, closetNode, startWorldPosition, new Vector3(closetNode.centerX, closetNode.centerY));
         ResetNodes(openList, closedList);
         return unFinishedPath;
     }
@@ -113,9 +113,10 @@ public class Pathfinding
         }
         return lowerFCostNode;
     }
-    List<Vector3> RetracePath(Node startNode, Node endNode, Vector3 startPosition)
+    List<Vector3> RetracePath(Node startNode, Node endNode, Vector3 startPosition, Vector3 endWorldPosition)
     {
         List<Vector3> path = new();
+        path.Add(endWorldPosition);
         Node currentNode = endNode;
 
         while (currentNode != startNode)
