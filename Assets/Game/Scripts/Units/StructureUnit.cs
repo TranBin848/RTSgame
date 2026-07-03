@@ -16,6 +16,7 @@ public class StructureUnit : Unit, IResourceDepot
     {
         base.Start();
         m_TilemapManager = TilemapManager.Get();
+        UpdateWalkability();
     }
     public bool isUnderConstruction => m_BuildingProcess != null;
 
@@ -40,6 +41,12 @@ public class StructureUnit : Unit, IResourceDepot
         if (m_IsQuitting)
         {
             return;
+        }
+        
+        var col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = false;
         }
 
         UpdateWalkability();
@@ -99,17 +106,37 @@ public class StructureUnit : Unit, IResourceDepot
             return;
         }
 
-        int buildingWidthInTiles = 4;
-        int buildingHeightInTiles = 4;
+        var col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            Bounds bounds = col.bounds;
+            Vector3Int min = m_TilemapManager.WalkableTilemap.WorldToCell(bounds.min);
+            Vector3Int max = m_TilemapManager.WalkableTilemap.WorldToCell(bounds.max);
 
-        float halfWidth = buildingHeightInTiles * 0.5f;
-        float halfHeight = buildingHeightInTiles * 0.5f;
+            // Thêm padding để bao phủ chắc chắn cả những ô rìa
+            min.x -= 2; min.y -= 2;
+            max.x += 2; max.y += 2;
 
-        Vector3Int startPosition = new Vector3Int(
-            Mathf.RoundToInt(transform.position.x - halfWidth),
-            Mathf.RoundToInt(transform.position.y - halfHeight),
-            0);
+            int width = max.x - min.x + 1;
+            int height = max.y - min.y + 1;
 
-        m_TilemapManager.UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
+            m_TilemapManager.UpdateNodesInArea(min, width, height);
+        }
+        else
+        {
+            // Fallback nếu nhà không có collider (mặc dù nên có)
+            int buildingWidthInTiles = 6;
+            int buildingHeightInTiles = 6;
+
+            float halfWidth = buildingWidthInTiles * 0.5f;
+            float halfHeight = buildingHeightInTiles * 0.5f;
+
+            Vector3Int startPosition = new Vector3Int(
+                Mathf.RoundToInt(transform.position.x - halfWidth),
+                Mathf.RoundToInt(transform.position.y - halfHeight),
+                0);
+
+            m_TilemapManager.UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
+        }
     }
 }

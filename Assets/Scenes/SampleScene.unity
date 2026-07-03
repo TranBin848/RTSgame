@@ -652,6 +652,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Granary
       objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: 399ff30bcd7984e4c87f6e0f5b7724fb, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4606552
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: 399ff30bcd7984e4c87f6e0f5b7724fb, type: 3}
+      propertyPath: m_Size.y
+      value: 1.9094698
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: 399ff30bcd7984e4c87f6e0f5b7724fb, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.035793304
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: 399ff30bcd7984e4c87f6e0f5b7724fb, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.09995258
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3829,6 +3845,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2617397312206691719, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_Size.x
+      value: 2.4595394
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_Size.y
+      value: 2.4595394
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.017827034
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.07254267
+      objectReference: {fileID: 0}
     - target: {fileID: 5417473147834800053, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.59
@@ -3872,6 +3908,14 @@ PrefabInstance:
     - target: {fileID: 6211948813076933638, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
       propertyPath: m_Name
       value: ArcheryRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211948813076933638, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211948813076933638, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4498,6 +4542,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2617397312206691719, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5479336
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_Size.y
+      value: 2.8214715
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.015286446
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879325628708303296, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.104432225
+      objectReference: {fileID: 0}
     - target: {fileID: 5417473147834800053, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.418205
@@ -4541,6 +4605,14 @@ PrefabInstance:
     - target: {fileID: 6211948813076933638, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
       propertyPath: m_Name
       value: Barrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211948813076933638, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211948813076933638, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33533,6 +33605,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 917236745294544977, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_Size.x
+      value: 1.168705
+      objectReference: {fileID: 0}
+    - target: {fileID: 917236745294544977, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5815449
+      objectReference: {fileID: 0}
+    - target: {fileID: 917236745294544977, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0036888123
+      objectReference: {fileID: 0}
+    - target: {fileID: 917236745294544977, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.098834515
+      objectReference: {fileID: 0}
     - target: {fileID: 917236745294544977, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -124848,6 +124936,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoragePit
       objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: bc288b0ec713f5e41b09e3f9b903cf92, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4232693
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: bc288b0ec713f5e41b09e3f9b903cf92, type: 3}
+      propertyPath: m_Size.y
+      value: 1.787059
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: bc288b0ec713f5e41b09e3f9b903cf92, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.016322136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092611187026238676, guid: bc288b0ec713f5e41b09e3f9b903cf92, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0721125
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -125032,6 +125136,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2617397312206691719, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5417473147834800053, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.974669
@@ -125087,6 +125195,14 @@ PrefabInstance:
     - target: {fileID: 6211948813076933638, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
       propertyPath: m_Name
       value: TownHall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211948813076933638, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211948813076933638, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

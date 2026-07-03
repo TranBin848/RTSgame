@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a112467eb58e50f4d89cf078513008ea, type: 3}
   m_Name: DayNightCycleDefinition
   m_EditorClassIdentifier: Assembly-CSharp::DayNightCycleDefinition
-  m_DayDuration: 5
+  m_DayDuration: 100
   m_DuskDuration: 30
   m_NightDuration: 60
   m_DayLightColor: {r: 1, g: 1, b: 1, a: 1}
