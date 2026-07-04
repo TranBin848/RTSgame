@@ -93,6 +93,10 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             {
                 TryPlaceCurrentBuild(inputPosition);
             }
+            else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                CancelBuildProcess();
+            }
         }
         else
         {

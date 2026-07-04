@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3265954861476522269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 3879325628708303296}
   - component: {fileID: -2902776402685046962}
   - component: {fileID: 985767260862630959}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArcheryRange
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +187,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015820503, y: -0.3539995}
-  m_Size: {x: 1.9937458, y: 3.045097}
+  m_Offset: {x: -0.017827034, y: -0.07254267}
+  m_Size: {x: 2.4595394, y: 2.4595394}
   m_Direction: 0
 --- !u!114 &-2902776402685046962
 MonoBehaviour:

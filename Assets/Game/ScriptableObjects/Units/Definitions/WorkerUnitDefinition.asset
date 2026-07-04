@@ -18,7 +18,7 @@ MonoBehaviour:
     m_GatherState: 3
     m_GatherTickTime: 1
     m_ResourcePerTick: 1
-    m_CarryCapacity: 5
+    m_CarryCapacity: 20
     m_HitFrequency: 0.3
     m_CarryAnimatorValue: 1
     m_GatherAnimationBool: isChopping
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_GatherState: 4
     m_GatherTickTime: 1
     m_ResourcePerTick: 1
-    m_CarryCapacity: 10
+    m_CarryCapacity: 20
     m_HitFrequency: 0.3
     m_CarryAnimatorValue: 2
     m_GatherAnimationBool: isMining
@@ -38,7 +38,7 @@ MonoBehaviour:
     m_GatherState: 7
     m_GatherTickTime: 1
     m_ResourcePerTick: 1
-    m_CarryCapacity: 5
+    m_CarryCapacity: 15
     m_HitFrequency: 0.3
     m_CarryAnimatorValue: 3
     m_GatherAnimationBool: isAttacking
