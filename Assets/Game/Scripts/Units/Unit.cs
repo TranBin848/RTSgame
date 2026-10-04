@@ -318,7 +318,7 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     private Coroutine m_FlashCoroutine;
     public virtual void TakeDamage(int dmg, Unit damager)
     {
-        if (!IsTargetable)
+        if (!gameObject.activeInHierarchy || !IsTargetable)
         {
             return;
         }

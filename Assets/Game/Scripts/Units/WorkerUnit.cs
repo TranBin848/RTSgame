@@ -489,7 +489,7 @@ public class WorkerUnit : HumanoidUnit
         return false;
     }
 
-    void CancelActiveWork()
+    public void CancelActiveWork()
     {
         SetTask(UnitTask.None);
         SetState(UnitState.Idle);

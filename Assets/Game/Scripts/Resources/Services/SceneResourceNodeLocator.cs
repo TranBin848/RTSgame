@@ -12,6 +12,12 @@ public class SceneResourceNodeLocator : IResourceNodeLocator
         m_ResourceContainers = resourceContainers;
     }
 
+    public void ClearCache()
+    {
+        m_IsCacheBuilt = false;
+        m_ResourceNodes.Clear();
+    }
+
     public bool TryFindClosestAvailable(Vector3 originPosition, ResourceType resourceType, out IResourceNode resourceNode)
     {
         BuildCacheIfNeeded();

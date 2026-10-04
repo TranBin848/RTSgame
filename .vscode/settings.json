@@ -67,5 +67,8 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "RTSgame2026.slnx"
+    "dotnet.defaultSolution": "RTSgame2026.slnx",
+    "dotrush.roslyn.projectOrSolutionFiles": [
+        "e:\\Unity project\\RTSgame2026\\RTSgame2026.sln"
+    ]
 }

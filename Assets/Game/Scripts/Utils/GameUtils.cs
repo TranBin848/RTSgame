@@ -76,6 +76,11 @@ public static class GameUtils
 
     public static bool iSPointOverUIElelement()
     {
+        if (UnityEngine.EventSystems.EventSystem.current == null)
+        {
+            return false;
+        }
+
         if (Input.touchCount > 0)
         {
             return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);

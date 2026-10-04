@@ -183,8 +183,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07553673, y: 0.09614968}
-  m_Size: {x: 0.7031822, y: 0.80118227}
+  m_Offset: {x: -0.0053043365, y: 0.09614968}
+  m_Size: {x: 0.843647, y: 0.843647}
   m_Direction: 0
 --- !u!114 &-5096968161026946780
 MonoBehaviour:
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1984796956585512212}
   m_Layer: 8
-  m_Name: InteractionPoinLt
+  m_Name: InteractionPointL
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

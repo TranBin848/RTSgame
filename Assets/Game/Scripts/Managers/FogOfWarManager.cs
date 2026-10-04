@@ -37,8 +37,15 @@ public class FogOfWarManager : MonoBehaviour
         RefreshFog();
     }
 
+    private bool m_FogOfWarDisabled = false;
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ToggleFogOfWar();
+        }
+
         if (!m_IsInitialized || m_Definition == null)
         {
             return;
@@ -50,6 +57,23 @@ public class FogOfWarManager : MonoBehaviour
         }
 
         RefreshFog();
+    }
+
+    private void ToggleFogOfWar()
+    {
+        m_FogOfWarDisabled = !m_FogOfWarDisabled;
+
+        if (m_FogTilemap != null)
+        {
+            var renderer = m_FogTilemap.GetComponent<TilemapRenderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = !m_FogOfWarDisabled;
+            }
+        }
+
+        ApplyAffectableVisibility();
+        Debug.Log($"[FogOfWar] Fog of War toggled: {(m_FogOfWarDisabled ? "DISABLED" : "ENABLED")}");
     }
 
     void Initialize()
@@ -257,7 +281,7 @@ public class FogOfWarManager : MonoBehaviour
             return;
         }
 
-        if (affectable.AlwaysVisible)
+        if (m_FogOfWarDisabled || affectable.AlwaysVisible)
         {
             affectable.ApplyVisibility(1f);
             return;
@@ -329,6 +353,11 @@ public class FogOfWarManager : MonoBehaviour
 
     public bool IsWorldPositionExplored(Vector3 worldPosition)
     {
+        if (m_FogOfWarDisabled)
+        {
+            return true;
+        }
+
         if (!m_IsInitialized || m_TilemapManager == null || m_TilemapManager.PathfindingTilemap == null)
         {
             return true;

@@ -23,6 +23,10 @@ public class TilemapManager : SingletonManager<TilemapManager>
     {
         m_Pathfinding = new Pathfinding(this);
     }
+    public void ReinitializePathfinding()
+    {
+        m_Pathfinding = new Pathfinding(this);
+    }
     void OnApplicationQuit()
     {
         m_IsShuttingDown = true;
@@ -120,6 +124,7 @@ public class TilemapManager : SingletonManager<TilemapManager>
 
         foreach (var col in collider)
         {
+            if (col == null) continue;
             if (col.CompareTag("Building") || col.CompareTag("Resource")) return true;
         }
 
@@ -141,7 +146,11 @@ public class TilemapManager : SingletonManager<TilemapManager>
             0f, unitLayerMask
             );
 
-        return colliders.Length > 0;
+        foreach (var col in colliders)
+        {
+            if (col != null) return true;
+        }
+        return false;
     }
     public void SetTileOverlay(Vector3Int tilePosition, Tile tile)
     {

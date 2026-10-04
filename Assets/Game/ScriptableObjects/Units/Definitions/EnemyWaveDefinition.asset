@@ -17,19 +17,22 @@ MonoBehaviour:
   m_EnemyPrefabs:
   - {fileID: 2925490060328344811, guid: 3bd289a753d575e4cac9347588a6e5e6, type: 3}
   - {fileID: 2502138810622728140, guid: 540a644c92dfc2940b26a4acaa86602b, type: 3}
-  m_BaseEnemyCountPerWave: 8
-  m_AdditionalEnemiesPerWave: 2
+  m_BaseEnemyCountPerWave: 3
+  m_AdditionalEnemiesPerWave: 1
   m_EnemyCountIncreasePerDay: 1.5
-  m_SpawnInterval: 1
-  m_SpawnIntervalReductionPerDay: 0.05
+  m_SpawnInterval: 2
+  m_SpawnIntervalReductionPerDay: 0.02
   m_MinimumSpawnInterval: 0.35
   m_SpawnExtraRange: 6
-  m_SpawnWalkableSearchRadius: 16
+  m_SpawnRingSearchSteps: 48
   m_BaseWavesPerNight: 3
   m_WaveCountIncreasePerDay: 0.25
-  m_DelayBetweenWaves: 5
+  m_DelayBetweenWaves: 10
   m_ShowRangeOnlyAtNight: 1
   m_RangeCircleSegments: 96
   m_RangeLineWidth: 0.08
   m_DayRangeColor: {r: 1, g: 0.9, b: 0.35, a: 0.15}
   m_NightRangeColor: {r: 1, g: 0.9, b: 0.35, a: 0.9}
+  m_ShowEnemySpawnRange: 1
+  m_SpawnRangeLineWidth: 0.06
+  m_EnemySpawnRangeColor: {r: 1, g: 0.25, b: 0.05, a: 0.9}

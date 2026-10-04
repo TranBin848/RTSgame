@@ -69,6 +69,16 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             m_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
         }
 
+        // Cache HUD Canvas khi nó còn đang active ở Start
+        if (m_HUDCanvas == null)
+        {
+            Canvas mainCanvas = FindFirstObjectByType<Canvas>();
+            if (mainCanvas != null)
+            {
+                m_HUDCanvas = mainCanvas.gameObject;
+            }
+        }
+
         ClearActionBarUI();
         AddResources(100, 100, 100); // Starting resources for testing
 
@@ -84,8 +94,15 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             m_DayNightCycleManager.OnPhaseChanged -= HandleDayNightPhaseChanged;
         }
     }
+    [SerializeField] private GameObject m_HUDCanvas;
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ToggleHUD();
+        }
+
         if (m_PlacementProcess != null)
         {
             m_PlacementProcess.Update();
@@ -102,6 +119,14 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         {
             HandleSelectionCancelInput();
             UpdateSelectionInput();
+        }
+    }
+
+    private void ToggleHUD()
+    {
+        if (m_HUDCanvas != null)
+        {
+            m_HUDCanvas.SetActive(!m_HUDCanvas.activeSelf);
         }
     }
     public void RegisterUnit(Unit unit)
@@ -907,6 +932,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void OnGUI()
     {
+        bool isHudActive = m_HUDCanvas == null || m_HUDCanvas.activeSelf;
+        if (!isHudActive)
+        {
+            return;
+        }
+
         DrawSelectionRectangle();
 
         if (ActiveUnit != null)
@@ -917,4 +948,17 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             GUI.Label(new Rect(10, 240, 260, 20), "Selected: " + m_SelectedUnits.Count, new GUIStyle { fontSize = 30 });
         }
     }
-};
+
+    public void ClearResourceNodeCache()
+    {
+        m_ResourceNodeLocator?.ClearCache();
+
+        foreach (var unit in m_PlayerUnits)
+        {
+            if (unit is WorkerUnit worker)
+            {
+                worker.CancelActiveWork();
+            }
+        }
+    }
+}

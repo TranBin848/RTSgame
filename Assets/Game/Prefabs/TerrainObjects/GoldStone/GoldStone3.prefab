@@ -232,7 +232,9 @@ MonoBehaviour:
   m_Collider: {fileID: 4574211163150461997}
   m_Animator: {fileID: 0}
   m_InteractionRadius: 0.2
-  m_InteractionPoints: []
+  m_InteractionPoints:
+  - {fileID: 1271805931790702886}
+  - {fileID: 2584005290077508074}
 --- !u!114 &-2075925098602402121
 MonoBehaviour:
   m_ObjectHideFlags: 0
