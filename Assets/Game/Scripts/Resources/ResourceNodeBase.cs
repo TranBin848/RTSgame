@@ -2,7 +2,14 @@ using UnityEngine;
 
 public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 {
+    [Header("Colliders")]
+    [Tooltip("Collider vật lý bóp nhỏ ở gốc cây/chân đá để chặn Pathfinding")]
     [SerializeField] private CapsuleCollider2D m_Collider;
+    
+    [Tooltip("Collider to (Is Trigger = true) bao trùm toàn bộ Sprite để bắt Click chuột")]
+    [SerializeField] private Collider2D m_ClickCollider;
+
+    [Header("Visuals & Interaction")]
     [SerializeField] private Animator m_Animator;
     [SerializeField] private float m_InteractionRadius = 0.1f;
     [SerializeField] private Transform[] m_InteractionPoints;
@@ -24,6 +31,11 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         if (m_Collider == null)
         {
             m_Collider = GetComponent<CapsuleCollider2D>();
+        }
+
+        if (m_ClickCollider == null)
+        {
+            m_ClickCollider = GetComponent<BoxCollider2D>();
         }
 
         if (m_Animator == null)

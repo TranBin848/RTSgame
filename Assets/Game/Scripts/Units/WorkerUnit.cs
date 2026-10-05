@@ -212,7 +212,12 @@ public class WorkerUnit : HumanoidUnit
         Vector3 workerClosestPoint = Collider.ClosestPoint(interactionPoint);
         float distance = Vector3.Distance(workerClosestPoint, interactionPoint);
 
-        if (distance <= m_AssignedResourceNode.InteractionRadius)
+        // Thêm sai số 0.5f (tolerance) tương tự như khi nộp tài nguyên (HandleDepositTask). 
+        // Lý do: Thuật toán A* chỉ cho phép Unit dừng lại ở TÂM của ô lưới, 
+        // trong khi InteractionPoint có thể nằm lệch ở góc hoặc mép của tài nguyên.
+        float allowedDistance = m_AssignedResourceNode.InteractionRadius + 0.5f;
+
+        if (distance <= allowedDistance)
         {
             StopMovement();
 
@@ -232,7 +237,9 @@ public class WorkerUnit : HumanoidUnit
         }
         else
         {
-            Debug.LogWarning($"[Worker] Stopped near resource but distance ({distance}) > radius ({m_AssignedResourceNode.InteractionRadius}). Worker Pos: {transform.position}, Target Pos: {interactionPoint}");
+            // Worker bị kẹt xa hơn mức cho phép, tự động tìm đường lại hoặc sửa lỗi
+            Debug.LogWarning($"[Worker] Stopped near resource but distance ({distance}) > allowed ({allowedDistance}).");
+            MoveTo(interactionPoint); // Thử ép đi tiếp
         }
     }
 
