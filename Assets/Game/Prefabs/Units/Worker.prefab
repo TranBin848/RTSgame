@@ -38,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9147093911599635298
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,6 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 6240580, guid: d3aeb1b39bb3d5042afa89c0e49bc129, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,7 +94,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &3672512278953359097
 Animator:
@@ -186,7 +187,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7197915df293cbe46a35c4b783cff4a2, type: 2}
   - {fileID: 11400000, guid: 50171f6f1fd15b542a5c78c392ee2705, type: 2}
   m_UnitIcon: {fileID: 1609299063, guid: a1a3f41d2705fda448331b55ccf2ddd7, type: 3}
-  m_ObjectDetectionRadius: 0.9
+  m_ObjectDetectionRadius: 0.55
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0.4
   m_AutoAttackFrequency: 1.5

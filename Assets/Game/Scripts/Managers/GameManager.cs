@@ -351,11 +351,24 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
         bool isExploredPoint = m_FogOfWarManager == null || m_FogOfWarManager.IsWorldPositionExplored(worldPoint);
 
-        if (HasExactlyOneUnitSelected() && ActiveUnit is WorkerUnit worker)
+        if (isExploredPoint && TryGetClickedResourceNode(hit, out var resourceNode))
         {
-            if (isExploredPoint && TryGetClickedResourceNode(hit, out var resourceNode))
+            bool hasWorker = false;
+            foreach (var selectedUnit in m_SelectedUnits)
             {
-                worker.TryAssignResourceNode(resourceNode);
+                if (selectedUnit is WorkerUnit worker)
+                {
+                    worker.TryAssignResourceNode(resourceNode);
+                    hasWorker = true;
+                }
+            }
+
+            if (hasWorker)
+            {
+                if (resourceNode is Component comp)
+                {
+                    DisplayClickEffect(comp.transform.position);
+                }
                 return;
             }
         }

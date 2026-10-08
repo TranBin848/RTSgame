@@ -12,16 +12,20 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     [Header("Visuals & Interaction")]
     [SerializeField] private Animator m_Animator;
     [SerializeField] private float m_InteractionRadius = 0.1f;
-    [SerializeField] private Transform[] m_InteractionPoints;
+    [Tooltip("Số lượng Nông dân tối đa có thể khai thác cùng lúc")]
+    [SerializeField] private int m_MaxWorkers = 4;
 
-    private bool m_IsClaimed;
+    private int m_ClaimedCount = 0;
     private SpriteRenderer m_SpriteRenderer;
     private Material m_OriginalMaterial;
     private Material m_InstanceFlashMaterial;
     private Coroutine m_FlashCoroutine;
 
     public abstract ResourceType ResourceType { get; }
-    public bool IsClaimed => m_IsClaimed;
+    
+    // IsClaimed giờ mang ý nghĩa là "Đã hết chỗ trống" (Full)
+    public bool IsClaimed => m_ClaimedCount >= m_MaxWorkers;
+    
     public float InteractionRadius => m_InteractionRadius;
     protected CapsuleCollider2D Collider => m_Collider;
     protected Animator Animator => m_Animator;
@@ -54,30 +58,37 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public bool TryClaim()
     {
-        if (m_IsClaimed)
+        if (IsClaimed)
         {
             return false;
         }
 
-        m_IsClaimed = true;
-        // When claimed, disable collider so worker can pathfind through resource tile
-        if (m_Collider != null)
+        m_ClaimedCount++;
+        // Khi người đầu tiên bước vào khai thác, tắt Collider chặn đường
+        if (m_ClaimedCount == 1)
         {
-            m_Collider.enabled = false;
+            if (m_Collider != null)
+            {
+                m_Collider.enabled = false;
+            }
+            UpdatePathfindingNode();
         }
-        UpdatePathfindingNode();
+        
         return true;
     }
 
     public void Release()
     {
-        m_IsClaimed = false;
-        // When released, re-enable collider to block pathfinding again
-        if (m_Collider != null)
+        m_ClaimedCount = Mathf.Max(0, m_ClaimedCount - 1);
+        // Khi người cuối cùng rời đi, bật lại Collider chặn đường
+        if (m_ClaimedCount == 0)
         {
-            m_Collider.enabled = true;
+            if (m_Collider != null)
+            {
+                m_Collider.enabled = true;
+            }
+            UpdatePathfindingNode();
         }
-        UpdatePathfindingNode();
     }
 
     private void UpdatePathfindingNode()
@@ -168,27 +179,15 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public Vector3 GetInteractionPoint(Vector3 requesterPosition)
     {
-        if (m_InteractionPoints != null && m_InteractionPoints.Length > 0)
-        {
-            Transform closestPoint = null;
-            float closestDistanceSqr = float.MaxValue;
-            foreach (var point in m_InteractionPoints)
-            {
-                if (point == null) continue;
-                float distSqr = (point.position - requesterPosition).sqrMagnitude;
-                if (distSqr < closestDistanceSqr)
-                {
-                    closestDistanceSqr = distSqr;
-                    closestPoint = point;
-                }
-            }
-            if (closestPoint != null)
-            {
-                return closestPoint.position;
-            }
-        }
+        // Lấy tâm thực sự của mỏ tài nguyên dựa trên Collider vật lý thay vì gốc Transform (do lệch tâm Custom Axis)
+        Vector3 centerPoint = m_Collider != null ? transform.TransformPoint(m_Collider.offset) : transform.position;
 
-        return transform.position;
+        // Toán học đường tròn: Trả về một điểm nằm trên viền đường tròn.
+        // Hướng từ tâm thực sự về phía con Worker (requesterPosition).
+        Vector3 directionToRequester = (requesterPosition - centerPoint).normalized;
+        
+        // Vị trí = Tâm + (Hướng * Bán kính)
+        return centerPoint + directionToRequester * m_InteractionRadius;
     }
 
     protected void SetInteractionRadius(float radius)
@@ -203,16 +202,20 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        if (m_InteractionPoints != null)
+        
+        // Vẽ Gizmo vòng tròn dựa trên tâm của Collider
+        Vector3 centerPoint = transform.position;
+        if (m_Collider != null)
         {
-            foreach (var point in m_InteractionPoints)
-            {
-                if (point != null)
-                {
-                    Gizmos.DrawWireSphere(point.position, m_InteractionRadius);
-                }
-            }
+            centerPoint = transform.TransformPoint(m_Collider.offset);
         }
+        else
+        {
+            var col = GetComponent<CapsuleCollider2D>();
+            if (col != null) centerPoint = transform.TransformPoint(col.offset);
+        }
+
+        Gizmos.DrawWireSphere(centerPoint, m_InteractionRadius);
     }
 
 }

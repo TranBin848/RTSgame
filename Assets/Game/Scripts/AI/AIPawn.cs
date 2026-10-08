@@ -15,6 +15,7 @@ public class AIPawn : MonoBehaviour
     private List<Vector3> m_CurrentPath = new();
     private TilemapManager m_TilemapManager;
     private int m_CurrentNodeIndex = 0;
+    private float m_TimeAtCurrentNode = 0f;
     private GameManager m_GameManager;
     public UnityAction<Vector3> OnNewPositionSelected = delegate { };
     public UnityAction OnDestinationReached = delegate { };
@@ -45,8 +46,18 @@ public class AIPawn : MonoBehaviour
 
         transform.position += combinedDirection * m_Speed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        m_TimeAtCurrentNode += Time.deltaTime;
+
+        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+        bool isLastNode = m_CurrentNodeIndex == m_CurrentPath.Count - 1;
+        
+        // Nới lỏng khoảng cách chạm mốc trung gian, bắt chặt mốc cuối
+        float reachTolerance = isLastNode ? 0.05f : 0.4f;
+
+        // Cơ chế Gỡ kẹt (Unstuck): Nếu kẹt ở 1 điểm quá 1.5 giây do đông đúc, ép chuyển sang mốc tiếp theo
+        if (distanceToTarget < reachTolerance || m_TimeAtCurrentNode > 1.5f)
         {
+            m_TimeAtCurrentNode = 0f;
             if (m_CurrentNodeIndex == m_CurrentPath.Count - 1)
             {
                 m_CurrentPath = new();
@@ -76,6 +87,7 @@ public class AIPawn : MonoBehaviour
         m_CurrentDestination = destination;
         m_CurrentPath = m_TilemapManager.FindPath(transform.position, destination);
         m_CurrentNodeIndex = 0;
+        m_TimeAtCurrentNode = 0f;
 
         if (m_CurrentPath == null || m_CurrentPath.Count == 0)
         {
@@ -84,11 +96,20 @@ public class AIPawn : MonoBehaviour
             return;
         }
 
+        // Bứt ra khỏi Grid ở bước cuối cùng:
+        // A* trả về tâm các ô lưới. Ta thêm tọa độ chính xác của destination vào cuối danh sách
+        // để con Worker bước thêm 1 bước nhỏ tới đúng sát viền của mỏ tài nguyên.
+        if (Vector3.Distance(m_CurrentPath.Last(), destination) > 0.05f)
+        {
+            m_CurrentPath.Add(destination);
+        }
+
         OnNewPositionSelected.Invoke(m_CurrentPath[m_CurrentNodeIndex]);
     }
     public void Stop()
     {
         m_CurrentPath.Clear();
+        m_TimeAtCurrentNode = 0f;
         m_CurrentNodeIndex = 0;
     }
     private Unit m_Unit;
