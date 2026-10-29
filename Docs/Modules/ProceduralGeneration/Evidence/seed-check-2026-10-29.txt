@@ -1,0 +1,13 @@
+Procedural Generation Core seed check
+Date: 2026-10-29
+Runtime: .NET SDK 9.0.309 on Windows
+Command: dotnet run --project Tools/ProceduralGenerationSeedCheck/ProceduralGenerationSeedCheck.csproj -- 1000
+
+Seeds checked: 1000
+Failures: 0
+Mean generation time: 16.73 ms
+Worst generation time: 321 ms (seed 0)
+
+The tool generated every seed twice and compared terrain, reserved cells, attempt,
+resource kinds, gold variant IDs, coordinates, cluster IDs, and starting flags.
+It also checked quotas, reachable grass, and balanced use of all six gold variants.

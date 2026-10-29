@@ -16,6 +16,13 @@ public class Projectile : MonoBehaviour, IPooledRuntimeObject
     [SerializeField] private float m_DistanceToDurationMultiplier = 0.08f;
 
     [SerializeField] private int m_Damage = 10;
+    public float Speed => m_Speed;
+    public bool UsesArc => m_UseArcTrajectory;
+    public float ArcHeight => m_ArcHeight;
+    public bool IsSpinning => m_ProjectileRotatable;
+    public float MinTravelDuration => m_MinTravelDuration;
+    public float MaxTravelDuration => m_MaxTravelDuration;
+    public float DistanceDurationFactor => m_DistanceToDurationMultiplier;
     private Unit m_Target;
     private Unit m_Owner;
     private Vector3 m_StartPosition;
@@ -31,6 +38,11 @@ public class Projectile : MonoBehaviour, IPooledRuntimeObject
 
     public void Initialize(Unit owner, Unit target, int damage, Vector3 launchPosition)
     {
+        if (SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.ConvertLegacyProjectile(owner, target, damage, launchPosition, this))
+        {
+            RuntimeObjectPool.Release(gameObject);
+            return;
+        }
         m_Owner = owner;
         m_Target = target;
         m_Damage = damage;

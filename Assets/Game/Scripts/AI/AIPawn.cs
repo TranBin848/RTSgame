@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class AIPawn : MonoBehaviour
 {
     [SerializeField] private float m_Speed = 8.0f;
+    public float Speed => m_Speed;
 
     [Header("Seperation")]
     [SerializeField] private float m_SeparationRadius = 1f;
@@ -27,6 +28,7 @@ public class AIPawn : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled) return;
         if (!isPathValid())
         {
             m_CurrentDestination = null;
@@ -74,6 +76,8 @@ public class AIPawn : MonoBehaviour
 
     public void SetDestination(Vector3 destination)
     {
+        if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled)
+        { SwarmGameBridge.Instance.MoveActor(actor, destination, false); return; }
         if (!EnsureDependencies())
         {
             return;
@@ -108,6 +112,8 @@ public class AIPawn : MonoBehaviour
     }
     public void Stop()
     {
+        if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled)
+        { SwarmGameBridge.Instance.Gameplay.Stop(actor.DotsEntity); return; }
         m_CurrentPath.Clear();
         m_TimeAtCurrentNode = 0f;
         m_CurrentNodeIndex = 0;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using RTS.DOTS;
 
 public class WorkerUnit : HumanoidUnit
 {
@@ -21,15 +22,42 @@ public class WorkerUnit : HumanoidUnit
     private bool m_IsSheltered;
 
     public bool IsHoldingResource => TryGetCurrentCarryType(out _);
-    public bool IsIdleWorker => CurrentState != UnitState.Dead
+    public bool IsIdleWorker => IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var dotsWorker)
+        ? CurrentState != UnitState.Dead && dotsWorker.Phase == WorkPhase.None && dotsWorker.Carried == 0 && CurrentState != UnitState.Moving
+        : CurrentState != UnitState.Dead
         && CurrentTask == UnitTask.None
         && !hasTarget
         && !IsHoldingResource
         && !m_IsSheltered
         && !m_IsReturningToShelter;
-    public bool IsSheltered => m_IsSheltered;
-    public override bool IsSelectable => base.IsSelectable && !m_IsSheltered;
-    public override bool IsTargetable => base.IsTargetable && !m_IsSheltered;
+    public bool IsSheltered => IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker) ? worker.Phase == WorkPhase.Sheltered : m_IsSheltered;
+    public override bool IsSelectable => base.IsSelectable && !IsSheltered;
+    public override bool IsTargetable => base.IsTargetable && !IsSheltered;
+
+    public GatheringProfileData[] GetDotsGatheringProfiles()
+    {
+        var profiles = new List<GatheringProfileData>();
+        if (m_Definition == null) { Debug.LogError($"Worker '{name}' has no gathering definition.", this); return profiles.ToArray(); }
+        for (int type = 0; type < 3; type++)
+            if (m_Definition.TryGetProfile((ResourceType)type, out var p))
+                profiles.Add(new GatheringProfileData { ResourceType = type, Amount = p.ResourcePerTick, Capacity = p.CarryCapacity,
+                    TickTime = p.GatherTickTime, State = (GameplayState)p.GatherState, Task = (GameplayTask)p.GatherTask });
+        return profiles.ToArray();
+    }
+    public void ApplyDotsWorkerPresentation()
+    {
+        if (!SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker)) return;
+        bool hidden = worker.Phase == WorkPhase.Sheltered;
+        m_SpriteRenderer.enabled = !hidden; m_Collider.enabled = !hidden;
+        m_Animator.SetBool("isBuilding", CurrentState == UnitState.Building);
+        SetAttackAnimationActive(CurrentState == UnitState.Attacking);
+        for (int type = 0; type < 3; type++)
+            if (m_Definition != null && m_Definition.TryGetProfile((ResourceType)type, out var p) && !string.IsNullOrEmpty(p.GatherAnimationBool))
+                m_Animator.SetBool(p.GatherAnimationBool, worker.Phase == WorkPhase.Gathering && CurrentState == p.GatherState && worker.ResourceType == type);
+        float carry = 0;
+        if (worker.Carried > 0 && m_Definition != null && m_Definition.TryGetProfile((ResourceType)worker.ResourceType, out var profile)) carry = profile.CarryAnimatorValue;
+        m_Animator.SetFloat("CarryType", carry);
+    }
 
     public void Inject(
         IResourceNodeLocator resourceNodeLocator,
@@ -107,16 +135,19 @@ public class WorkerUnit : HumanoidUnit
 
     public void OnBuildingFinished()
     {
+        if (IsDotsControlled) return;
         CancelActiveWork();
     }
 
     public void SetWoodStorage(StructureUnit storage)
     {
+        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.SetDepot(DotsEntity, SwarmGameBridge.Instance.ProxyFor(storage)); return; }
         m_AssignedDepot = storage;
     }
 
     public void SendToBuild(StructureUnit structure)
     {
+        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.AssignConstruction(DotsEntity, SwarmGameBridge.Instance.ProxyFor(structure)); return; }
         CancelActiveWork();
         MoveTo(structure.transform.position);
         SetTarget(structure);
@@ -125,6 +156,8 @@ public class WorkerUnit : HumanoidUnit
 
     public void ReturnToTownHall(TownHall townHall)
     {
+        if (IsDotsControlled)
+        { m_ShelterTownHall = townHall; SwarmGameBridge.Instance.Gameplay.Shelter(DotsEntity, SwarmGameBridge.Instance.ProxyFor(townHall)); return; }
         if (townHall == null)
         {
             CancelActiveWork();
@@ -143,6 +176,11 @@ public class WorkerUnit : HumanoidUnit
 
     public void LeaveTownHallAtDaybreak()
     {
+        if (IsDotsControlled)
+        {
+            if (m_ShelterTownHall != null) SwarmGameBridge.Instance.Gameplay.LeaveShelter(DotsEntity, (Vector2)m_ShelterTownHall.GetSpawnOrigin(), (Vector2)m_ShelterTownHall.GetSpawnExitDestination());
+            return;
+        }
         if (m_ShelterTownHall == null)
         {
             return;
@@ -156,6 +194,7 @@ public class WorkerUnit : HumanoidUnit
 
     public bool TryAssignResourceNode(IResourceNode resourceNode)
     {
+        if (IsDotsControlled) return SwarmGameBridge.Instance.AssignResource(this, resourceNode);
         if (resourceNode == null || !HasGatheringDefinition())
         {
             return false;
@@ -343,6 +382,7 @@ public class WorkerUnit : HumanoidUnit
     // Được gọi bởi Unity Animation Event khi hoạt ảnh chặt cây/đào vàng vung rìu/cuốc trúng cây/đá
     public void TriggerGatherHit()
     {
+        if (IsDotsControlled) return;
         if (m_HasActiveProfile && m_AssignedResourceNode != null)
         {
             m_AssignedResourceNode.Hit();
@@ -477,6 +517,8 @@ public class WorkerUnit : HumanoidUnit
 
     public bool TryGetCurrentCarryType(out ResourceType resourceType)
     {
+        if (IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker))
+        { resourceType = (ResourceType)worker.ResourceType; return worker.Carried > 0; }
         if (m_HasActiveProfile && GetCarriedAmount(m_ActiveProfile.ResourceType) > 0)
         {
             resourceType = m_ActiveProfile.ResourceType;
@@ -498,6 +540,7 @@ public class WorkerUnit : HumanoidUnit
 
     public void CancelActiveWork()
     {
+        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.CancelWork(DotsEntity); return; }
         SetTask(UnitTask.None);
         SetState(UnitState.Idle);
         m_Animator.SetBool("isBuilding", false);

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e035ad7db02af5c45b594d728090b934, type: 3}
+  m_Name: DefaultProceduralMapSettings
+  m_EditorClassIdentifier: Assembly-CSharp::ProceduralMapSettings
+  m_Width: 128
+  m_Height: 128
+  m_Seed: 1
+  m_MaxAttempts: 8
+  m_Octaves: 4
+  m_NoiseScale: 34
+  m_Persistence: 0.5
+  m_Lacunarity: 2
+  m_WaterThreshold: -0.22
+  m_BorderLandWidth: 3
+  m_StartClearRadius: 7
+  m_RequiredCorridorHalfWidth: 2
+  m_StartingTreeCount: 30
+  m_TotalTreeCount: 120
+  m_StartingGoldCount: 3
+  m_TotalGoldCount: 12
+  m_StartingSheepCount: 6
+  m_TotalSheepCount: 18
+  m_StartingTreeMinDistance: 8
+  m_StartingTreeMaxDistance: 16
+  m_StartingGoldMinDistance: 12
+  m_StartingGoldMaxDistance: 22
+  m_StartingSheepMinDistance: 6
+  m_StartingSheepMaxDistance: 12
+  m_ResourcePlacementAttempts: 12000

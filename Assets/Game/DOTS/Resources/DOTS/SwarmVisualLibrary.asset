@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f9c613a8de13d448001ff2027df72f, type: 3}
+  m_Name: SwarmVisualLibrary
+  m_EditorClassIdentifier: RTS.DOTS::RTS.DOTS.SwarmVisualLibrary
+  Visuals:
+  - Name: Skull
+    Idle:
+    - {fileID: -31617048, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: 1854856969, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: 1048791062, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: 1891246247, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: 1087261116, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: -537687753, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: -1671325229, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    - {fileID: -889008, guid: 4368de02ed3c48a4ab2437450eabe087, type: 3}
+    Move:
+    - {fileID: -1201107112, guid: 12cde3bbb34758c44a50530dbace9cd5, type: 3}
+    - {fileID: -1885060505, guid: 12cde3bbb34758c44a50530dbace9cd5, type: 3}
+    - {fileID: 1870172163, guid: 12cde3bbb34758c44a50530dbace9cd5, type: 3}
+    - {fileID: -1271302731, guid: 12cde3bbb34758c44a50530dbace9cd5, type: 3}
+    - {fileID: 1819980616, guid: 12cde3bbb34758c44a50530dbace9cd5, type: 3}
+    - {fileID: -2006473084, guid: 12cde3bbb34758c44a50530dbace9cd5, type: 3}
+    Attack:
+    - {fileID: 1226066011, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    - {fileID: -881181416, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    - {fileID: -313107397, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    - {fileID: -1283573414, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    - {fileID: -687064423, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    - {fileID: -1936305955, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    - {fileID: 1077258565, guid: ce4628b7d265b6844a1d5deb2ab479ca, type: 3}
+    Dead:
+    - {fileID: -1597505463, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 2028759949, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -344749413, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 860903010, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 1084385816, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -29987417, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 459730421, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -2088479680, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -1436557651, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -749130703, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -2034068510, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 1258331216, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 1329678930, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 801729375, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    FramesPerSecond: 10
+    Scale: 1
+    RotateWithVelocity: 0
+  - Name: Gnoll
+    Idle:
+    - {fileID: 461987962, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
+    - {fileID: 1966597744, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
+    - {fileID: -1268769423, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
+    - {fileID: -977788142, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
+    - {fileID: 450073974, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
+    - {fileID: -1572471922, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
+    Move:
+    - {fileID: 1560972119, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: 1425180334, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: 625029613, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: -1016435469, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: -256990202, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: 518093525, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: -274394614, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    - {fileID: 2026384662, guid: c72a1fcaa8eefca439e9e7d2a28db382, type: 3}
+    Attack:
+    - {fileID: -978496777, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -1127094229, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -1406573874, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -1656222680, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -59054287, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -367096912, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -747323462, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    - {fileID: -1118594805, guid: df55fd803deeb7a4f8a26651290b68e5, type: 3}
+    Dead:
+    - {fileID: -1597505463, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 2028759949, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -344749413, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 860903010, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 1084385816, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -29987417, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 459730421, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -2088479680, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -1436557651, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -749130703, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: -2034068510, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 1258331216, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 1329678930, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    - {fileID: 801729375, guid: 02a36951f7b954547977eef0520eaeb5, type: 3}
+    FramesPerSecond: 10
+    Scale: 1
+    RotateWithVelocity: 0
+  - Name: Arrow
+    Idle:
+    - {fileID: -1639804127, guid: 5944c6adc565f364588a6a84158ace24, type: 3}
+    Move: []
+    Attack: []
+    Dead: []
+    FramesPerSecond: 10
+    Scale: 1
+    RotateWithVelocity: 1
+  - Name: Bone
+    Idle:
+    - {fileID: 1603127091, guid: 4af3674af66980540bc5b186e3b6ca6a, type: 3}
+    - {fileID: 1935730892, guid: 4af3674af66980540bc5b186e3b6ca6a, type: 3}
+    - {fileID: -337670372, guid: 4af3674af66980540bc5b186e3b6ca6a, type: 3}
+    - {fileID: 1636468861, guid: 4af3674af66980540bc5b186e3b6ca6a, type: 3}
+    Move: []
+    Attack: []
+    Dead: []
+    FramesPerSecond: 10
+    Scale: 1
+    RotateWithVelocity: 1

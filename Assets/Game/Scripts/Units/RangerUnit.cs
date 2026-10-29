@@ -3,6 +3,8 @@ using System.Collections;
 public class RangerUnit : WarriorUnit
 {
     [SerializeField] private Projectile m_ProjectilePrefab;
+    public Projectile DotsProjectilePrefab => m_ProjectilePrefab;
+    public Vector3 DotsProjectileSpawnPosition => GetProjectileSpawnPosition();
     [SerializeField] private Transform m_ProjectileSpawnPoint;
     [SerializeField] private bool m_MirrorSpawnPointWithFacing = true;
     [SerializeField] private bool m_FireByAnimationEvent = true;
@@ -34,6 +36,7 @@ public class RangerUnit : WarriorUnit
 
     public void FireArrowFromAnimationEvent()
     {
+        if (IsDotsControlled) return;
         if (!m_FireByAnimationEvent)
         {
             return;

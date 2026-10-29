@@ -18,6 +18,7 @@ public class TilemapManager : SingletonManager<TilemapManager>
     public Tilemap[] UnreachableTilemaps => m_UnreachableTilemaps;
     private Pathfinding m_Pathfinding;
     private bool m_IsShuttingDown;
+    public int NavigationVersion { get; private set; }
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class TilemapManager : SingletonManager<TilemapManager>
     }
     public void ReinitializePathfinding()
     {
+        NavigationVersion++;
         m_Pathfinding = new Pathfinding(this);
     }
     void OnApplicationQuit()
@@ -65,6 +67,7 @@ public class TilemapManager : SingletonManager<TilemapManager>
     }
     public void UpdateNodesInArea(Vector3Int startPosition, int width, int height)
     {
+        NavigationVersion++;
         if (!CanServePathfindingRequests())
         {
             return;
@@ -125,6 +128,8 @@ public class TilemapManager : SingletonManager<TilemapManager>
         foreach (var col in collider)
         {
             if (col == null) continue;
+            // Resource click triggers cover the canopy/sprite; only the physical base blocks navigation.
+            if (col.isTrigger && col.CompareTag("Resource")) continue;
             if (col.CompareTag("Building") || col.CompareTag("Resource")) return true;
         }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using RTS.DOTS;
 
 public class BuildingProcess
 {
@@ -21,14 +22,18 @@ public class BuildingProcess
         m_BuildAction = buildAction;
         m_GameManager = GameManager.Get();
         m_QueueUiId = m_GameManager != null ? m_GameManager.EnqueueActionUI(m_BuildAction) : string.Empty;
-        m_Structure = GameObject.Instantiate(m_BuildAction.StructureUnitPrefab);
+        m_Structure = SwarmGameBridge.Instance != null
+            ? SwarmGameBridge.Instance.SpawnGameplay(m_BuildAction.StructureUnitPrefab.gameObject, placementPosition, Quaternion.identity).GetComponent<StructureUnit>()
+            : GameObject.Instantiate(m_BuildAction.StructureUnitPrefab);
         m_Structure.SpriteRenderer.sprite = m_BuildAction.FoundationSprite;
         m_Structure.transform.position = placementPosition;
         m_Structure.RegisterBuildingProcess(this);
+        if (m_Structure.IsDotsControlled) SwarmGameBridge.Instance.BeginConstruction(m_Structure, this, m_BuildAction.ConstructionTime);
         worker.SendToBuild(m_Structure);
     }
     public void Update()
     {
+        if (m_Structure.IsDotsControlled) { UpdateDotsPresentation(); return; }
         if (m_isFinished)
         {
             return;
@@ -57,6 +62,20 @@ public class BuildingProcess
                 Debug.Log("Building construction completed.");
             }
         }
+    }
+    public void UpdateDotsPresentation()
+    {
+        if (m_Structure == null || !m_Structure.IsDotsControlled) return;
+        var build = SwarmGameBridge.Instance.Gameplay.EntityManager.GetComponentData<GameplayConstruction>(m_Structure.DotsEntity);
+        m_ProgressTimer = build.Elapsed;
+        m_GameManager?.UpdateActionUIProgress(m_QueueUiId, build.Elapsed / Mathf.Max(0.01f, build.Duration));
+    }
+    public void ApplyDotsStage(bool complete)
+    {
+        if (m_Structure == null || m_Structure.CurrentState == UnitState.Dead) return;
+        if (!complete) { m_isMiddle = true; m_Structure.SpriteRenderer.sprite = m_BuildAction.MiddleSprite; return; }
+        m_isFinished = true; m_GameManager?.CompleteActionUI(m_QueueUiId);
+        m_Structure.SpriteRenderer.sprite = m_BuildAction.CompleteSprite; m_Structure.OnConstructionFinished();
     }
     public void AddWorker(WorkerUnit worker)
     {

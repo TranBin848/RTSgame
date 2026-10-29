@@ -38,6 +38,7 @@ public class FogOfWarManager : MonoBehaviour
     }
 
     private bool m_FogOfWarDisabled = false;
+    public bool IsDisabled => m_FogOfWarDisabled;
 
     void Update()
     {

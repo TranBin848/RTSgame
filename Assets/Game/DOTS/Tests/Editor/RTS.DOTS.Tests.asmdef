@@ -1,0 +1,7 @@
+{
+  "name": "RTS.DOTS.Tests",
+  "references": ["RTS.DOTS", "Unity.Entities", "Unity.Mathematics", "Unity.Collections", "Unity.Burst", "Unity.Physics"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

@@ -1,0 +1,8 @@
+{
+  "name": "RTS.ProceduralGeneration.Tests",
+  "rootNamespace": "RTS.ProceduralGeneration.Tests",
+  "references": ["RTS.ProceduralGeneration.Core"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": false
+}

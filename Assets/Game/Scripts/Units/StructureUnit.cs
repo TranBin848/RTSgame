@@ -22,6 +22,11 @@ public class StructureUnit : Unit, IResourceDepot
 
     void Update()
     {
+        if (IsDotsControlled)
+        {
+            m_BuildingProcess?.UpdateDotsPresentation();
+            return;
+        }
         if (isUnderConstruction)
         {
             m_BuildingProcess.Update();
@@ -36,8 +41,9 @@ public class StructureUnit : Unit, IResourceDepot
         m_IsQuitting = true;
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (m_IsQuitting)
         {
             return;
@@ -81,6 +87,12 @@ public class StructureUnit : Unit, IResourceDepot
     protected virtual void AfterConstructionUpdate()
     {
 
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        UpdateWalkability();
     }
 
     public bool CanStore(ResourceType resourceType)

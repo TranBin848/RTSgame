@@ -24,7 +24,19 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     public abstract ResourceType ResourceType { get; }
     
     // IsClaimed giờ mang ý nghĩa là "Đã hết chỗ trống" (Full)
-    public bool IsClaimed => m_ClaimedCount >= m_MaxWorkers;
+    public bool IsClaimed => SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryResourceClaimState(this, out var resource)
+        ? resource.Claims >= resource.Capacity : m_ClaimedCount >= m_MaxWorkers;
+    public int MaxWorkers => m_MaxWorkers;
+    public Vector3 DotsCenter => m_Collider != null ? transform.TransformPoint(m_Collider.offset) : transform.position;
+    protected virtual void Start() { SwarmGameBridge.Instance?.RegisterResource(this); }
+    protected virtual void OnDestroy() { SwarmGameBridge.Instance?.UnregisterResource(this); }
+    public void ApplyDotsClaims(int claims)
+    {
+        if (claims == m_ClaimedCount) return;
+        m_ClaimedCount = claims;
+        if (m_Collider != null) m_Collider.enabled = claims == 0;
+        UpdatePathfindingNode();
+    }
     
     public float InteractionRadius => m_InteractionRadius;
     protected CapsuleCollider2D Collider => m_Collider;
@@ -58,6 +70,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public bool TryClaim()
     {
+        if (SwarmGameBridge.Instance != null) return SwarmGameBridge.Instance.ClaimResource(this);
         if (IsClaimed)
         {
             return false;
@@ -79,6 +92,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public void Release()
     {
+        if (SwarmGameBridge.Instance != null) { SwarmGameBridge.Instance.ReleaseResource(this); return; }
         m_ClaimedCount = Mathf.Max(0, m_ClaimedCount - 1);
         // Khi người cuối cùng rời đi, bật lại Collider chặn đường
         if (m_ClaimedCount == 0)
@@ -98,7 +112,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         {
             if (m_Collider != null)
             {
-                Bounds bounds = m_Collider.bounds;
+                Bounds bounds = new Bounds(DotsCenter, Vector3.Scale(m_Collider.size, transform.lossyScale));
                 Vector3Int min = tilemapManager.WalkableTilemap.WorldToCell(bounds.min);
                 Vector3Int max = tilemapManager.WalkableTilemap.WorldToCell(bounds.max);
 

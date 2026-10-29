@@ -1,0 +1,76 @@
+{
+    "name":  "rts-integration",
+    "captureUtc":  "2026-10-14T19:32:21.1521240Z",
+    "unity":  "6000.3.11f1",
+    "cpu":  "11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz",
+    "gpu":  "NVIDIA GeForce GTX 1650",
+    "scenario":  "RTS integration",
+    "offscreenRender":  true,
+    "cameraPosition":  "(-7.78, -2.84, -10.00)",
+    "configuration":  "# UTC: 2026-10-14T19:32:21.1521240Z\r\n# CPU: 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz; logical cores: 8\r\n# GPU: NVIDIA GeForce GTX 1650; RAM MB: 16179\r\n# Unity: 6000.3.11f1; Editor: False; resolution: 1920x1080\r\n# vSync: 1; target FPS: -1\r\n# rendering: True\r\n# offscreen render request: True",
+    "framesMs":  {
+                     "count":  4447,
+                     "minimum":  1.1731,
+                     "maximum":  28.1995,
+                     "average":  2.2486,
+                     "median":  1.6058,
+                     "p95":  4.8521,
+                     "p99":  13.5143
+                 },
+    "uniqueTicksMs":  {
+                          "count":  600,
+                          "minimum":  2.4482,
+                          "maximum":  5.1562,
+                          "average":  2.6586,
+                          "median":  2.5637,
+                          "p95":  3.2673,
+                          "p99":  3.923
+                      },
+    "sampledAgentEntities":  {
+                                 "count":  4447,
+                                 "minimum":  79,
+                                 "maximum":  79,
+                                 "average":  79,
+                                 "median":  79,
+                                 "p95":  79,
+                                 "p99":  79
+                             },
+    "sampledProjectileEntities":  {
+                                      "count":  4447,
+                                      "minimum":  0,
+                                      "maximum":  1,
+                                      "average":  0.0859,
+                                      "median":  0,
+                                      "p95":  1,
+                                      "p99":  1
+                                  },
+    "sampledUnityAllocatedBytes":  {
+                                       "count":  4447,
+                                       "minimum":  170819384,
+                                       "maximum":  171337196,
+                                       "average":  171143837.9065,
+                                       "median":  171186843,
+                                       "p95":  171337196,
+                                       "p99":  171337196
+                                   },
+    "gcCounterAvailable":  false,
+    "endOfRun":  {
+                     "agents":  79,
+                     "projectiles":  0,
+                     "hits":  287,
+                     "submittedInstances":  79,
+                     "drawSubmissions":  2
+                 },
+    "runtimeErrors":  [
+
+                      ],
+    "rawCsv":  "rts-integration.csv",
+    "screenshot":  "rts-integration.png",
+    "measurementNotes":  [
+                             "Short offscreen smoke capture, not a certified interactive FPS benchmark.",
+                             "Entity counts are sampled in MonoBehaviour.Update after population refill; render/end-of-run snapshots can be lower after collision cleanup.",
+                             "Agent entity counts include the short death-animation lifetime.",
+                             "Tick percentiles deduplicate ecs_tick_id; memory is sampled at 1 Hz, not process RSS or GPU VRAM.",
+                             "Percentiles use sorted samples at floor(N*p), clamped to N-1."
+                         ]
+}

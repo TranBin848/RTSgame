@@ -26,6 +26,8 @@ public abstract class ProductionBuilding : StructureUnit
         }
 
         m_LastQueuedFrame = Time.frameCount;
+        if (IsDotsControlled)
+        { SwarmGameBridge.Instance.EnqueueTraining(this, action, unitPrefab, trainDuration, completionMessage); return; }
         string queueUiId = m_GameManager != null ? m_GameManager.EnqueueActionUI(action) : string.Empty;
         m_SpawnQueue.Enqueue(new ProductionRequest(unitPrefab, Mathf.Max(0.01f, trainDuration), queueUiId, completionMessage));
     }
@@ -100,7 +102,9 @@ public abstract class ProductionBuilding : StructureUnit
         Vector3 spawnOrigin = m_SpawnPoint != null ? m_SpawnPoint.position : (transform.position + Vector3.right);
         Vector3 spawnOffset = GetSpawnOffset();
         Vector3 spawnPos = spawnOrigin + spawnOffset;
-        var go = Instantiate(unitPrefab, spawnPos, Quaternion.identity);
+        var go = SwarmGameBridge.Instance != null ? SwarmGameBridge.Instance.SpawnGameplay(unitPrefab, spawnPos, Quaternion.identity)
+            : Instantiate(unitPrefab, spawnPos, Quaternion.identity);
+        if (go == null) return;
 
         AIPawn aiPawn = go.GetComponent<AIPawn>();
         if (aiPawn != null)
@@ -110,6 +114,8 @@ public abstract class ProductionBuilding : StructureUnit
             aiPawn.SetDestination(exitDestination);
         }
     }
+
+    public void SpawnDotsView(GameObject prefab) { SpawnUnit(prefab); }
 
     private Vector3 GetSpawnOffset()
     {

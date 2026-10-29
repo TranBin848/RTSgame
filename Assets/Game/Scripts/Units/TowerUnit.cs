@@ -4,11 +4,13 @@ using System.Collections;
 public class TowerUnit : StructureUnit
 {
     [SerializeField] private Projectile m_ProjectilePrefab;
+    public Projectile DotsProjectilePrefab => m_ProjectilePrefab;
     public override bool IsPlayer => true;
     protected override void AfterConstructionUpdate()
     {
         base.AfterConstructionUpdate();
         if (CurrentState == UnitState.Dead) return;
+        if (UpdateDotsCombat(true, false)) return;
         if (hasTarget)
         {
             TryAttackCurrentTarget();

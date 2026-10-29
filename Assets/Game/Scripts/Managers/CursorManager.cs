@@ -175,6 +175,8 @@ public class CursorManager : SingletonManager<CursorManager>
 
         // 3. Hover-based cursor: Check if hovering over interactive objects
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(GameUtils.InputPosition);
+        if ((activeUnit is WarriorUnit || activeUnit is TowerUnit) && SwarmGameBridge.Instance != null
+            && SwarmGameBridge.Instance.TryFindEnemy(worldPoint, 0.65f, out _)) return UnitTask.Attack;
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
         if (hit.collider != null && hit.collider.TryGetComponent<Unit>(out var hoveredUnit))

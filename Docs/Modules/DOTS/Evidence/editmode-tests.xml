@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="12" result="Passed" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.6292496">
+  <test-suite type="TestSuite" id="1000" name="RTSgame2026" fullname="RTSgame2026" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.629250" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1014" name="RTS.DOTS.Tests.dll" fullname="E:/Unity project/RTSgame2026/.utmp/dots-validation/Library/ScriptAssemblies/RTS.DOTS.Tests.dll" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.619612" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="10108" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1015" name="RTS" fullname="RTS" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.618696" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1016" name="DOTS" fullname="RTS.DOTS" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.618284" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1017" name="Tests" fullname="RTS.DOTS.Tests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.617945" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="SwarmSimulationTests" fullname="RTS.DOTS.Tests.SwarmSimulationTests" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:48Z" duration="1.616334" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1003" name="DamageIsAggregatedAndAppliedExactlyOnce" fullname="RTS.DOTS.Tests.SwarmSimulationTests.DamageIsAggregatedAndAppliedExactlyOnce" methodname="DamageIsAggregatedAndAppliedExactlyOnce" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="2128935873" result="Passed" start-time="2026-10-14 19:21:46Z" end-time="2026-10-14 19:21:47Z" duration="1.443136" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="DestroyedTargetInvalidatesProjectileAndEntityHandle" fullname="RTS.DOTS.Tests.SwarmSimulationTests.DestroyedTargetInvalidatesProjectileAndEntityHandle" methodname="DestroyedTargetInvalidatesProjectileAndEntityHandle" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="359084455" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.007190" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits" fullname="RTS.DOTS.Tests.SwarmSimulationTests.EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits" methodname="EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="409206503" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.026968" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="ExternalDamageCanBeDrainedOnce" fullname="RTS.DOTS.Tests.SwarmSimulationTests.ExternalDamageCanBeDrainedOnce" methodname="ExternalDamageCanBeDrainedOnce" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1613543013" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.005075" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="FastProjectileSweepsThroughTargetWithoutTunnelling" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FastProjectileSweepsThroughTargetWithoutTunnelling" methodname="FastProjectileSweepsThroughTargetWithoutTunnelling" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1268593168" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.007173" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="FiveThousandAgentsAndTwoThousandProjectilesStayFinite" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FiveThousandAgentsAndTwoThousandProjectilesStayFinite" methodname="FiveThousandAgentsAndTwoThousandProjectilesStayFinite" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1103399289" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.043856" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="FlowFieldFindsRouteAroundWallAndDoesNotCutCorner" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FlowFieldFindsRouteAroundWallAndDoesNotCutCorner" methodname="FlowFieldFindsRouteAroundWallAndDoesNotCutCorner" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="689903989" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.008689" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="FriendlyProjectileDoesNotDamageSameFaction" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FriendlyProjectileDoesNotDamageSameFaction" methodname="FriendlyProjectileDoesNotDamageSameFaction" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1929454555" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.005410" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory" fullname="RTS.DOTS.Tests.SwarmSimulationTests.RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory" methodname="RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="467326401" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.006621" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="ResetRemovesAllAgentAndProjectileState" fullname="RTS.DOTS.Tests.SwarmSimulationTests.ResetRemovesAllAgentAndProjectileState" methodname="ResetRemovesAllAgentAndProjectileState" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1956617567" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:47Z" duration="0.008067" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn" fullname="RTS.DOTS.Tests.SwarmSimulationTests.RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn" methodname="RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="450566507" result="Passed" start-time="2026-10-14 19:21:47Z" end-time="2026-10-14 19:21:48Z" duration="0.024950" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="StaticObstacleConsumesProjectileBeforeEnemy" fullname="RTS.DOTS.Tests.SwarmSimulationTests.StaticObstacleConsumesProjectileBeforeEnemy" methodname="StaticObstacleConsumesProjectileBeforeEnemy" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1624396169" result="Passed" start-time="2026-10-14 19:21:48Z" end-time="2026-10-14 19:21:48Z" duration="0.006164" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/ACER/AppData/LocalLow/DefaultCompany/RTSgame2026\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

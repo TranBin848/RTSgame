@@ -52,6 +52,7 @@ public class CameraController : MonoBehaviour
 
     private void HandleMouseAndKeyboardPanning()
     {
+        if (!Application.isFocused) { m_CurrentVelocity = Vector3.zero; return; }
         if (Input.touchCount > 0) return;
 
         Vector3 moveDirection = Vector3.zero;

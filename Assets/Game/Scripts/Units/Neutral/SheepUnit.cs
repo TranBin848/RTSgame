@@ -1,4 +1,5 @@
 using UnityEngine;
+using RTS.DOTS;
 
 public class SheepUnit : HumanoidUnit, IResourceNode
 {
@@ -20,8 +21,15 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public override bool IsPlayer => false;
     public ResourceType ResourceType => m_ResourceType;
-    public bool IsClaimed => m_IsClaimed;
+    public bool IsClaimed => IsDotsControlled && SwarmGameBridge.Instance.TryResourceClaimState(this, out var resource) ? resource.Claims >= resource.Capacity : m_IsClaimed;
     public float InteractionRadius => m_InteractionRadius;
+    public void ConfigureDotsActor(ref GameplayActor actor)
+    {
+        actor.MinIdle = Mathf.Max(0.01f, m_MinIdleBeforeGrazing); actor.MaxIdle = Mathf.Max(actor.MinIdle, m_MaxIdleBeforeGrazing);
+        actor.MinGraze = Mathf.Max(0.01f, m_MinGrazingDuration); actor.MaxGraze = Mathf.Max(actor.MinGraze, m_MaxGrazingDuration);
+        actor.GrazeTimer = actor.MinIdle; actor.FleeDistance = m_FleeDistance; actor.FleeJitter = m_FleeJitterRadius;
+    }
+    public void ApplyDotsGrazing(bool grazing) { SetGrazingAnimator(grazing); }
 
     protected override void Start()
     {
@@ -31,6 +39,7 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public bool TryClaim()
     {
+        if (IsDotsControlled) return SwarmGameBridge.Instance.ClaimResource(this);
         if (m_IsClaimed)
         {
             return false;
@@ -43,6 +52,7 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public void Release()
     {
+        if (IsDotsControlled) { SwarmGameBridge.Instance.ReleaseResource(this); return; }
         m_IsClaimed = false;
     }
 
@@ -57,6 +67,7 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public override void TakeDamage(int dmg, Unit damager)
     {
+        if (IsDotsControlled) { base.TakeDamage(dmg, damager); return; }
         if (CurrentState == UnitState.Dead)
         {
             return;

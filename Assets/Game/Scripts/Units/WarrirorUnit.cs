@@ -6,6 +6,7 @@ public class WarriorUnit : HumanoidUnit
     public override void SetStance(UnitStanceActionSO stance)
     {
         base.SetStance(stance);
+        if (IsDotsControlled) return;
         if (CurrentStance == UnitStance.Defensive)
         {
             SetState(UnitState.Idle);
@@ -33,6 +34,10 @@ public class WarriorUnit : HumanoidUnit
 
     protected override void OnSetDestination(DestinationSource source)
     {
+        if (source == DestinationSource.PlayerClick && HasDotsTarget)
+        {
+            ClearDotsTarget(); m_IsRetreating = true; SetTask(UnitTask.None); SetState(UnitState.Moving);
+        }
         if (hasTarget && source == DestinationSource.PlayerClick && (CurrentTask == UnitTask.Attack || CurrentState == UnitState.Attacking))
         {
             m_IsRetreating = true;
@@ -46,6 +51,7 @@ public class WarriorUnit : HumanoidUnit
     }
     protected override void UpdateBehaviour()
     {
+        if (UpdateDotsCombat(!m_IsRetreating && CurrentStance == UnitStance.Offensive, CurrentStance == UnitStance.Offensive)) return;
         if (CurrentState == UnitState.Idle || CurrentState == UnitState.Moving)
         {
             if (hasTarget)

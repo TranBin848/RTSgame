@@ -24,6 +24,12 @@ public class ResourceSpawner : MonoBehaviour
 
     private void Awake()
     {
+        if (ProceduralMapRuntime.IsActive)
+        {
+            enabled = false;
+            return;
+        }
+
         m_SpawnArea = GetComponent<BoxCollider2D>();
         m_SpawnArea.isTrigger = true;
         gameObject.layer = 2; // Gán Layer là 2 (Ignore Raycast) để tia click đi xuyên qua
@@ -36,10 +42,18 @@ public class ResourceSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (ProceduralMapRuntime.IsActive) return;
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             RegenerateResources();
         }
+    }
+
+    public void DisableForProceduralGeneration()
+    {
+        ClearExistingResources();
+        enabled = false;
     }
 
     private void RegenerateResources()
@@ -137,7 +151,8 @@ public class ResourceSpawner : MonoBehaviour
                 // Căn giữa ô gạch
                 Vector3 spawnPos = tilemapManager.WalkableTilemap.GetCellCenterWorld(tilePos);
                 
-                Instantiate(prefab, spawnPos, Quaternion.identity, container);
+                if (SwarmGameBridge.Instance != null) SwarmGameBridge.Instance.SpawnGameplay(prefab, spawnPos, Quaternion.identity, container);
+                else Instantiate(prefab, spawnPos, Quaternion.identity, container);
                 
                 // Đồng bộ vật lý ngay lập tức để OverlapBox của ô tiếp theo nhận diện được vật thể vừa sinh ra
                 Physics2D.SyncTransforms();

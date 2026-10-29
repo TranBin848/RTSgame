@@ -103,6 +103,21 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
             }
         }
 
+        var bridge = SwarmGameBridge.Instance;
+        if (bridge != null && bridge.Simulation != null)
+        {
+            var entities = bridge.Simulation.RenderData;
+            for (int i = 0; i < entities.Length; i++)
+            {
+                var entity = entities[i];
+                if (entity.Projectile != 0 || entity.State == RTS.DOTS.SwarmState.Dead) continue;
+                var cell = m_TilemapManager.WalkableTilemap.WorldToCell(new Vector3(entity.Position.x, entity.Position.y));
+                int x = cell.x - bounds.xMin, y = cell.y - bounds.yMin;
+                if (x >= 0 && y >= 0 && x < bounds.size.x && y < bounds.size.y
+                    && (m_FogOfWarManager.IsDisabled || (m_FogOfWarManager.TryGetCellState(cell, out var state, out _) && state == FogCellState.Visible)))
+                    m_MinimapTexture.SetPixel(x, y, Color.red);
+            }
+        }
         m_MinimapTexture.Apply();
     }
 

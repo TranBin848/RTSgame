@@ -14,6 +14,7 @@ public class HumanoidUnit : Unit
     }
     void Update()
     {
+        if (IsDotsControlled) return;
         if (CurrentState == UnitState.Dead)
         {
             return;

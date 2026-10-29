@@ -24,6 +24,7 @@ public class EnemyWaveManager : MonoBehaviour
         && m_DayNightCycleManager.CurrentPhase == DayNightPhase.Night;
     public float NightProgress => IsNightWaveActive ? m_DayNightCycleManager.CurrentPhaseProgress : 0f;
     public int CurrentWaveIndex => m_CurrentWaveIndex;
+    public EnemyWaveDefinition Definition => m_Definition;
     public int StartedWaveCount => m_StartedWaveCount;
     public int CurrentWaveCount => m_Definition != null ? m_Definition.GetWaveCountForDay(GetCurrentDay()) : 0;
 
@@ -63,6 +64,11 @@ public class EnemyWaveManager : MonoBehaviour
 
     void Update()
     {
+        if (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady)
+        {
+            return;
+        }
+
         ResolveManagers();
 
         if (m_Definition == null || m_DayNightCycleManager == null)
@@ -239,8 +245,9 @@ public class EnemyWaveManager : MonoBehaviour
         return Mathf.Max(1f, GetWaveStartTime(currentDay, lastWaveIndex) + lastWaveDuration);
     }
 
-    bool SpawnEnemy(TownHall townHall)
+    public bool SpawnEnemy(TownHall townHall)
     {
+        if (townHall == null || m_Definition == null) return false;
         GameObject enemyPrefab = GetRandomEnemyPrefab();
         if (enemyPrefab == null)
         {
@@ -250,6 +257,11 @@ public class EnemyWaveManager : MonoBehaviour
         if (!TryGetEnemySpawnPosition(townHall.transform.position, out Vector3 spawnPosition))
         {
             return false;
+        }
+
+        if (SwarmGameBridge.Instance != null)
+        {
+            return SwarmGameBridge.Instance.SpawnEnemy(enemyPrefab, spawnPosition);
         }
 
         GameObject enemyObject = RuntimeObjectPool.Spawn(enemyPrefab, spawnPosition, Quaternion.identity);
@@ -278,6 +290,7 @@ public class EnemyWaveManager : MonoBehaviour
         }
 
         m_CurrentTownHallRange = CalculateTownHallRange(townHall);
+        SwarmGameBridge.Instance?.Retreat(townHall.transform.position, m_CurrentTownHallRange + m_Definition.SpawnExtraRange);
         var enemyUnits = new System.Collections.Generic.List<Unit>(m_GameManager.GetFriendlyUnits(false));
         foreach (var unit in enemyUnits)
         {

@@ -3,6 +3,7 @@ using System.Collections;
 public class EnemyRangerUnit : EnemyUnit
 {
     [SerializeField] private Projectile m_ProjectilePrefab;
+    public Projectile DotsProjectilePrefab => m_ProjectilePrefab;
     [SerializeField] private Transform m_ProjectileSpawnPoint;
     [SerializeField] private bool m_MirrorSpawnPointWithFacing = true;
     [SerializeField] private bool m_FireByAnimationEvent = false;

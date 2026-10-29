@@ -23,9 +23,9 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     private int m_Gold = 0;
     private int m_Wood = 0;
     private int m_Meat = 0;
-    public int Gold => m_Gold;
-    public int Wood => m_Wood;
-    public int Meat => m_Meat;
+    public int Gold => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Gold : m_Gold;
+    public int Wood => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Wood : m_Wood;
+    public int Meat => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Meat : m_Meat;
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
     public IReadOnlyList<Unit> SelectedUnits => m_SelectedUnits;
@@ -131,6 +131,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     public void RegisterUnit(Unit unit)
     {
+        SwarmGameBridge.Instance?.Register(unit);
         if (unit is WorkerUnit worker)
         {
             worker.Inject(m_ResourceNodeLocator, m_ResourceDepotLocator, this);
@@ -163,6 +164,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     public void UnregisterUnit(Unit unit)
     {
+        SwarmGameBridge.Instance?.Unregister(unit);
         if (unit.IsPlayer)
         {
             if (m_PlacementProcess != null)
@@ -197,11 +199,20 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     public void AddResources(int gold, int wood, int meat)
     {
+        if (SwarmGameBridge.Instance?.Gameplay != null)
+        { SwarmGameBridge.Instance.Gameplay.AddResources(wood, gold, meat); RefreshDotsWallet(SwarmGameBridge.Instance.Gameplay.Wallet); return; }
         m_Gold += gold;
         m_Wood += wood;
         m_Meat += meat; // Assuming you have a similar variable for meat
 
         m_ResourcesDataUI.UpdateResourcesData(m_Gold, m_Wood, m_Meat);
+    }
+
+    public void RefreshDotsWallet(RTS.DOTS.PlayerWallet wallet)
+    {
+        if (wallet.Gold == m_Gold && wallet.Wood == m_Wood && wallet.Meat == m_Meat) return;
+        m_Gold = wallet.Gold; m_Wood = wallet.Wood; m_Meat = wallet.Meat;
+        m_ResourcesDataUI?.UpdateResourcesData(m_Gold, m_Wood, m_Meat);
     }
 
     public void AddResource(ResourceType resourceType, int amount)
@@ -371,6 +382,14 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
                 }
                 return;
             }
+        }
+
+        if (isExploredPoint && (!HasClickedOnUnit(hit, out var legacyClicked) || !legacyClicked.IsPlayer)
+            && SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryFindEnemy(worldPoint, 0.65f, out var dotsEnemy))
+        {
+            foreach (var selected in m_SelectedUnits) if (selected != null && selected.IsSelectable) selected.SetDotsTarget(dotsEnemy);
+            DisplayClickEffect(worldPoint);
+            return;
         }
 
         if (isExploredPoint && HasClickedOnUnit(hit, out var unit))
@@ -936,7 +955,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     bool TryDeductResources(int goldCost, int woodCost)
     {
-        if (m_Gold >= goldCost && m_Wood >= woodCost)
+        if (Gold >= goldCost && Wood >= woodCost)
         {
             AddResources(-goldCost, -woodCost, 0); // Update the UI with the new resource values
             return true;

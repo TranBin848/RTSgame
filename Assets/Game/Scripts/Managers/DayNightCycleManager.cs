@@ -26,6 +26,7 @@ public class DayNightCycleManager : MonoBehaviour
     public int CurrentDay { get; private set; } = 1;
     public float CurrentPhaseProgress { get; private set; }
     public DayNightCycleDefinition Definition => m_Definition;
+    public Color EnvironmentTint => m_GlobalLight != null ? m_GlobalLight.color * Mathf.Max(0.35f, m_GlobalLight.intensity) : Color.white;
     public float CycleNormalizedProgress => GetCycleNormalizedProgress();
 
     private float m_PhaseTimer;
@@ -48,6 +49,11 @@ public class DayNightCycleManager : MonoBehaviour
 
     void Update()
     {
+        if (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady)
+        {
+            return;
+        }
+
         if (m_Definition == null)
         {
             return;

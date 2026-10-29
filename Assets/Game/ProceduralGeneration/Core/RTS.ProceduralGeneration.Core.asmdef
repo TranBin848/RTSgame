@@ -1,0 +1,6 @@
+{
+  "name": "RTS.ProceduralGeneration.Core",
+  "rootNamespace": "RTS.ProceduralGeneration",
+  "references": ["Unity.Mathematics"],
+  "autoReferenced": true
+}

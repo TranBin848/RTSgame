@@ -1,0 +1,76 @@
+{
+    "name":  "swarm-10000",
+    "captureUtc":  "2026-10-14T19:30:30.8913593Z",
+    "unity":  "6000.3.11f1",
+    "cpu":  "11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz",
+    "gpu":  "NVIDIA GeForce GTX 1650",
+    "scenario":  "Swarm demo",
+    "offscreenRender":  true,
+    "cameraPosition":  "(0.00, 0.00, -10.00)",
+    "configuration":  "# UTC: 2026-10-14T19:30:30.8913593Z\r\n# CPU: 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz; logical cores: 8\r\n# GPU: NVIDIA GeForce GTX 1650; RAM MB: 16179\r\n# Unity: 6000.3.11f1; Editor: False; resolution: 1920x1080\r\n# vSync: 1; target FPS: -1\r\n# scenario: BaseSiege; seed: 2026; enemy goal: 10000; projectile goal: 2000\r\n# rendering: True\r\n# offscreen render request: True",
+    "framesMs":  {
+                     "count":  1302,
+                     "minimum":  4.0295,
+                     "maximum":  39.3096,
+                     "average":  7.6785,
+                     "median":  5.2739,
+                     "p95":  12.624,
+                     "p99":  14.3045
+                 },
+    "uniqueTicksMs":  {
+                          "count":  597,
+                          "minimum":  4.9565,
+                          "maximum":  33.9626,
+                          "average":  6.3566,
+                          "median":  6.0715,
+                          "p95":  7.9091,
+                          "p99":  8.9368
+                      },
+    "sampledAgentEntities":  {
+                                 "count":  1302,
+                                 "minimum":  10000,
+                                 "maximum":  10000,
+                                 "average":  10000,
+                                 "median":  10000,
+                                 "p95":  10000,
+                                 "p99":  10000
+                             },
+    "sampledProjectileEntities":  {
+                                      "count":  1302,
+                                      "minimum":  2000,
+                                      "maximum":  2000,
+                                      "average":  2000,
+                                      "median":  2000,
+                                      "p95":  2000,
+                                      "p99":  2000
+                                  },
+    "sampledUnityAllocatedBytes":  {
+                                       "count":  1302,
+                                       "minimum":  180003230,
+                                       "maximum":  180234910,
+                                       "average":  180175585.9816,
+                                       "median":  180234670,
+                                       "p95":  180234910,
+                                       "p99":  180234910
+                                   },
+    "gcCounterAvailable":  false,
+    "endOfRun":  {
+                     "agents":  9986,
+                     "projectiles":  1184,
+                     "hits":  61384,
+                     "submittedInstances":  11127,
+                     "drawSubmissions":  14
+                 },
+    "runtimeErrors":  [
+
+                      ],
+    "rawCsv":  "swarm-10000.csv",
+    "screenshot":  "swarm-10000.png",
+    "measurementNotes":  [
+                             "Short offscreen smoke capture, not a certified interactive FPS benchmark.",
+                             "Entity counts are sampled in MonoBehaviour.Update after population refill; render/end-of-run snapshots can be lower after collision cleanup.",
+                             "Agent entity counts include the short death-animation lifetime.",
+                             "Tick percentiles deduplicate ecs_tick_id; memory is sampled at 1 Hz, not process RSS or GPU VRAM.",
+                             "Percentiles use sorted samples at floor(N*p), clamped to N-1."
+                         ]
+}

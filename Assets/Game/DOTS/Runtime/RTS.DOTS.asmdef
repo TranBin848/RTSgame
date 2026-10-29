@@ -1,0 +1,7 @@
+{
+  "name": "RTS.DOTS",
+  "rootNamespace": "RTS.DOTS",
+  "references": ["Unity.Entities", "Unity.Transforms", "Unity.Collections", "Unity.Mathematics", "Unity.Burst", "Unity.Physics"],
+  "allowUnsafeCode": true,
+  "autoReferenced": true
+}
