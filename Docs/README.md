@@ -26,6 +26,7 @@ Các tài liệu này phục vụ phát triển tiếp dự án, bàn giao và g
 | Procedural Generation | [Nghiên cứu và đề xuất](Modules/ProceduralGeneration/Research.md) | Lựa chọn thuật toán sinh cỏ/nước, phân bố cây/vàng/cừu và ràng buộc đường đi |
 | Procedural Generation | [Kế hoạch triển khai](Modules/ProceduralGeneration/ImplementationPlan.md) | Sáu mốc và trạng thái lát cắt đầu tiên |
 | Procedural Generation | [Kiến trúc](Modules/ProceduralGeneration/Architecture.md) · [Cách chạy](Modules/ProceduralGeneration/Usage.md) · [Kiểm chứng](Modules/ProceduralGeneration/Validation.md) | Core xác định theo seed, scene integration, quét 1.000 seed và phần còn phải kiểm chứng trong Unity |
+| Game Flow | [Kiến trúc](Modules/GameFlow/Architecture.md) · [Cách chạy](Modules/GameFlow/Usage.md) · [Kiểm chứng](Modules/GameFlow/Validation.md) | MainMenu, vào ProceduralGame, tạm dừng, tùy chọn âm lượng và thoát |
 
 `DOTS` và `DOTSGameplay` là hai phần tài liệu của cùng nền runtime tại `Assets/Game/DOTS`: phần đầu tập trung Swarm/quái/đạn, phần sau giải thích gameplay RTS. Không coi chúng là hai implementation tách rời cần tự lắp lại.
 

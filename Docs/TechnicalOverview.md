@@ -1,6 +1,6 @@
 # Tech docs — tổng quan và bàn giao RTSgame2026
 
-Đối chiếu mã nguồn ngày **26/10/2026**. Đây là trang bắt đầu đọc khi quay lại phát triển dự án. Các chi tiết thuật toán và bằng chứng thực thi nằm trong tài liệu module được liên kết bên dưới.
+Đối chiếu nền DOTS ngày **26/10/2026**; cập nhật luồng menu/gameplay ngày **05/11/2026**. Đây là trang bắt đầu đọc khi quay lại phát triển dự án. Các chi tiết thuật toán và bằng chứng thực thi nằm trong tài liệu module được liên kết bên dưới.
 
 ## 1. Trạng thái kiến trúc hiện tại
 
@@ -17,7 +17,9 @@ UI, camera, chọn quân, fog, lịch ngày/đêm, lịch wave và thao tác pla
 | Unity Editor | `6000.3.11f1`, xem `ProjectSettings/ProjectVersion.txt` |
 | Render pipeline | URP 2D; dependency Universal RP `17.3.0` |
 | Package DOTS | Entities `1.4.8`, Physics `1.4.7`, Burst `1.8.29`, Collections `2.6.8`, Mathematics `1.3.3` |
-| Scene gameplay | `Assets/Scenes/SampleScene.unity` |
+| Scene khởi động bản build | `Assets/Scenes/MainMenu.unity` |
+| Scene gameplay từ menu | `Assets/Scenes/ProceduralGame.unity` |
+| Scene gameplay tham chiếu | `Assets/Scenes/SampleScene.unity` |
 | Scene mô phỏng tải | `Assets/Scenes/SwarmSimulation.unity` |
 | Cấu hình dependency | `Packages/manifest.json`, `Packages/packages-lock.json` |
 
@@ -43,6 +45,7 @@ Các đường dẫn trong bảng tính từ thư mục gốc repository.
 | `Assets/Game/DOTS/Tests/Editor/` | `GameplaySimulationTests`, `SwarmSimulationTests`, assembly `RTS.DOTS.Tests` |
 | `Assets/Game/Scripts/Units/` | Prefab configuration, API của Unit và presentation; `WarrirorUnit.cs` chứa class `WarriorUnit` |
 | `Assets/Game/Scripts/Managers/` | Input, selection, Tilemap, fog, ngày/đêm và wave orchestration |
+| `Assets/Game/Scripts/UI/GameFlowMenu.cs` | Menu chính, chuyển scene, tạm dừng và âm lượng |
 | `Assets/Game/Scripts/Resources/`, `Utils/BuildingProcess.cs` | Adapter nguồn tài nguyên, placement/xây và tích hợp sản xuất |
 | `Docs/Modules/`, `Tools/` | Tài liệu từng module, bằng chứng và script thu thập kết quả |
 
@@ -101,7 +104,7 @@ Xem [hướng dẫn phát triển DOTS](Modules/DOTS/DevelopmentGuide.md) để 
 
 ## 7. Chạy và kiểm chứng
 
-Để thử gameplay: mở `SampleScene`, đợi compile rồi Play. Để thử tải quái/đạn: mở `SwarmSimulation` hoặc menu `RTS/DOTS/Open swarm simulation`. Các menu và cờ smoke được mô tả trong [Swarm Usage](Modules/DOTS/Usage.md) và [Gameplay Usage](Modules/DOTSGameplay/Usage.md).
+Để thử luồng game: mở `MainMenu`, đợi compile rồi Play; nút Chơi mở `ProceduralGame`. Xem [Game Flow Usage](Modules/GameFlow/Usage.md). Để thử gameplay tham chiếu: mở `SampleScene`. Để thử tải quái/đạn: mở `SwarmSimulation` hoặc menu `RTS/DOTS/Open swarm simulation`. Các menu và cờ smoke được mô tả trong [Swarm Usage](Modules/DOTS/Usage.md) và [Gameplay Usage](Modules/DOTSGameplay/Usage.md).
 
 Chạy EditMode trong Test Runner với assembly `RTS.DOTS.Tests` khi thay đổi simulation. Với thay đổi bridge/prefab/command, bổ sung kiểm tra tích hợp Player bằng `--gameplay-smoke` và kiểm tra thủ công phần UI liên quan.
 
