@@ -53,7 +53,11 @@ public class WorkerUnit : HumanoidUnit
         SetAttackAnimationActive(CurrentState == UnitState.Attacking);
         for (int type = 0; type < 3; type++)
             if (m_Definition != null && m_Definition.TryGetProfile((ResourceType)type, out var p) && !string.IsNullOrEmpty(p.GatherAnimationBool))
-                m_Animator.SetBool(p.GatherAnimationBool, worker.Phase == WorkPhase.Gathering && CurrentState == p.GatherState && worker.ResourceType == type);
+            {
+                bool gathering = worker.Phase == WorkPhase.Gathering && CurrentState == p.GatherState && worker.ResourceType == type;
+                bool attackingTarget = CurrentState == UnitState.Attacking && p.GatherAnimationBool == m_AttackAnimatorBool;
+                m_Animator.SetBool(p.GatherAnimationBool, gathering || attackingTarget);
+            }
         float carry = 0;
         if (worker.Carried > 0 && m_Definition != null && m_Definition.TryGetProfile((ResourceType)worker.ResourceType, out var profile)) carry = profile.CarryAnimatorValue;
         m_Animator.SetFloat("CarryType", carry);
@@ -382,7 +386,11 @@ public class WorkerUnit : HumanoidUnit
     // Được gọi bởi Unity Animation Event khi hoạt ảnh chặt cây/đào vàng vung rìu/cuốc trúng cây/đá
     public void TriggerGatherHit()
     {
-        if (IsDotsControlled) return;
+        if (IsDotsControlled)
+        {
+            SwarmGameBridge.Instance.FlashWorkerResource(this);
+            return;
+        }
         if (m_HasActiveProfile && m_AssignedResourceNode != null)
         {
             m_AssignedResourceNode.Hit();

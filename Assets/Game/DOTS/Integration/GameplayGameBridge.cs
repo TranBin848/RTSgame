@@ -113,6 +113,13 @@ public sealed partial class SwarmGameBridge
         SynchronizeResourceClaims(); // Collider state must match before the next navigation capture.
         return assigned;
     }
+    public void FlashWorkerResource(WorkerUnit worker)
+    {
+        if (Gameplay == null || !Gameplay.TryGetWorker(worker.DotsEntity, out var data)
+            || data.Phase != WorkPhase.Gathering || data.Node == Entity.Null) return;
+        foreach (var pair in m_ResourceEntities)
+            if (pair.Value == data.Node && pair.Key != null && pair.Key is IResourceNode visual) { visual.Hit(); break; }
+    }
     public bool TryResourceClaimState(IResourceNode node, out GameplayResource resource)
     { resource = default; return Gameplay != null && Gameplay.TryGetResource(ResourceEntity(node), out resource); }
     public bool ClaimResource(IResourceNode node)
@@ -162,12 +169,6 @@ public sealed partial class SwarmGameBridge
             {
                 process.ApplyDotsStage(evt.Kind == GameplayEventKind.ConstructionComplete);
                 if (evt.Kind == GameplayEventKind.ConstructionComplete) m_ConstructionViews.Remove(evt.RequestId);
-            }
-            else if (evt.Kind == GameplayEventKind.ResourceHit)
-            {
-                if (Gameplay.TryGetResource(evt.Entity, out var node))
-                    foreach (var pair in m_ResourceEntities)
-                        if (pair.Value == evt.Entity && pair.Key is IResourceNode visual) { visual.Hit(); break; }
             }
             else if (evt.Kind == GameplayEventKind.Deposit && Gameplay.TryGetActor(evt.Entity, out _, out var body))
                 m_Game.ShowTextPopup(evt.Amount.ToString(), Color.yellow, new Vector3(body.Position.x, body.Position.y + 0.5f));

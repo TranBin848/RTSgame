@@ -58,6 +58,9 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public void Hit()
     {
+        var flash = GetComponent<SpriteHitFlash>();
+        if (flash == null) flash = gameObject.AddComponent<SpriteHitFlash>();
+        flash.Play();
     }
 
     public Vector3 GetInteractionPoint(Vector3 requesterPosition)

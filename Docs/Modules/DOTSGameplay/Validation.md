@@ -28,6 +28,10 @@ Chạy kèm toàn bộ `SwarmSimulationTests` để tránh hồi quy va chạm v
 
 Thay đổi ngày 05/11/2026: `GameplayEconomyJob` điều hướng worker tới mép vùng `InteractionRadius` của cây/mỏ và bắt đầu khai thác khi chạm vùng đó (sai số 0,08 đơn vị bằng ngưỡng kết thúc waypoint). Không dùng khoảng bù theo kích thước ô lưới. Đã biên dịch `RTS.DOTS.Tests.csproj` bằng `dotnet build` (0 lỗi); chưa chạy lại Unity EditMode hoặc Play Mode. Kết quả lịch sử ở bảng dưới không bao gồm thay đổi này.
 
+Kiểm tra tiếp ngày 05/11/2026 cho nhịp flash: trong `ProceduralGame` Play Mode có 3 worker, 120 cây, 12 mỏ vàng và 18 cừu. Sau khi gán một worker lần lượt tới từng loại node, gọi `TriggerGatherHit` (cùng method với Animation Event) làm material đổi ngay sang `Custom/SpriteFlash` với `_FlashAmount = 1` ở cả ba mục tiêu. Cừu vẫn giữ 20 máu sau lời gọi; tắt component flash khôi phục material gốc. `RTS.DOTS.Tests` EditMode **34/34 Passed**. Chưa đo bằng video khung hình thực tế giữa vung dao/rìu/cuốc và flash trong bản Player.
+
+Kiểm tra ngày 05/11/2026 cho animation worker săn cừu: `Pawn.controller` chuyển sang clip `PawnInteractKnife` khi `isAttacking = true`. Lỗi là profile thịt dùng cùng parameter `isAttacking` nhưng `GatherState = Collecting`, khiến vòng presentation ghi đè parameter về `false` sau khi ECS đặt state `Attacking`. Đã sửa điều kiện để state đánh được ưu tiên; Unity runtime xác nhận `isAttacking = true` và clip hiện tại là `PawnInteractKnife`. EditMode vẫn **34/34 Passed**.
+
 ## Kết quả đã thực thi ngày 16/10/2026
 
 | Bài kiểm chứng | Kết quả |

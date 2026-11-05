@@ -127,7 +127,6 @@ namespace RTS.DOTS
                                 {
                                     worker.Timer -= math.max(0.01f, profile.TickTime);
                                     worker.Carried = math.min(profile.Capacity, worker.Carried + profile.Amount);
-                                    Events.Enqueue(new GameplayEvent { Kind = GameplayEventKind.ResourceHit, Entity = worker.Node });
                                     if (worker.Carried >= profile.Capacity)
                                     { worker.Phase = WorkPhase.Depositing; actor.Task = GameplayTask.ReturnResource; actor.State = GameplayState.Idle; worker.Timer = 0; }
                                 }

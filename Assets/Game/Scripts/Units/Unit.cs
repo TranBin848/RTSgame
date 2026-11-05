@@ -98,8 +98,11 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         }
         if (m_CurrentHealth < previousHealth && m_SpriteRenderer != null)
         {
-            if (m_FlashCoroutine != null) StopCoroutine(m_FlashCoroutine);
-            m_FlashCoroutine = StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
+            if (ShouldFlashOnDamage())
+            {
+                if (m_FlashCoroutine != null) StopCoroutine(m_FlashCoroutine);
+                m_FlashCoroutine = StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
+            }
             m_GameManager?.ShowTextPopup((previousHealth - m_CurrentHealth).ToString(), Color.red, GetTopPosition());
         }
         m_ApplyingDotsSnapshot = false;
@@ -460,6 +463,7 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         }
     }
     private Coroutine m_FlashCoroutine;
+    bool ShouldFlashOnDamage() => this is not SheepUnit || !TryGetComponent<SpriteHitFlash>(out var flash) || !flash.PlayedRecently;
     public virtual void TakeDamage(int dmg, Unit damager)
     {
         if (IsDotsControlled && !m_ApplyingDotsSnapshot)
@@ -480,11 +484,12 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         if (m_FlashCoroutine != null)
         {
             StopCoroutine(m_FlashCoroutine);
+            m_FlashCoroutine = null;
             Color resetColor = m_OriginalColor;
             resetColor.a = m_SpriteRenderer.color.a;
             m_SpriteRenderer.color = resetColor;
         }
-        m_FlashCoroutine = StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
+        if (ShouldFlashOnDamage()) m_FlashCoroutine = StartCoroutine(FlashEffect(m_DamageFlashColor, 1, 0.2f));
 
         if (m_CurrentHealth <= 0)
         {

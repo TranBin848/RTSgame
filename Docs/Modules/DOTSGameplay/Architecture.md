@@ -61,7 +61,7 @@ Lính và cung thủ tìm mục tiêu faction quái từ spatial hash; không t�
 
 Cooldown, windup và thời điểm phát damage/đạn nằm trong ECS. Animator nhận `AttackSequence` để phát hoạt ảnh; Animation Event cũ không tạo thêm đạn cho actor đã bind ECS. Worker chỉ đánh mục tiêu được giao, ví dụ cừu đang săn.
 
-Tất cả sát thương đi qua `SwarmSimulationSystem.QueueDamage` và bộ tổng hợp damage chung. Với `GameplayActor`, hệ thống cập nhật `CombatBody.Health`, nguồn đánh và sequence. Bridge đọc số máu cuối cùng để phát flash/death; không gửi damage trở lại `TakeDamage`, tránh trừ máu hai lần. Collider blob Unity Physics thực hiện truy vấn khoảng cách/swept collision trong Burst. Module không dùng toàn bộ rigidbody solver, không có ragdoll/impulse/gravity. Collider2D còn lại phục vụ chọn đối tượng, placement và capture bản đồ, không phải nguồn tính sát thương đạn.
+Tất cả sát thương đi qua `SwarmSimulationSystem.QueueDamage` và bộ tổng hợp damage chung. Với `GameplayActor`, hệ thống cập nhật `CombatBody.Health`, nguồn đánh và sequence. Bridge đọc số máu cuối cùng để phát death và popup; cừu bị worker đánh nhận flash trắng từ Animation Event của worker. Flash màu theo snapshot máu được bỏ qua trong 0,5 giây sau flash trắng để tránh nháy thêm lần muộn; ngoài khoảng đó vẫn hoạt động. Không gửi damage trở lại `TakeDamage`, tránh trừ máu hai lần. Collider blob Unity Physics thực hiện truy vấn khoảng cách/swept collision trong Burst. Module không dùng toàn bộ rigidbody solver, không có ragdoll/impulse/gravity. Collider2D còn lại phục vụ chọn đối tượng, placement và capture bản đồ, không phải nguồn tính sát thương đạn.
 
 ### Khai thác và tài nguyên
 
@@ -69,7 +69,7 @@ Một writer quản lý `Claims`, lượng hàng và ví, tránh mất cập nh�
 
 Worker tiến đến node, chờ giết cừu nếu cần, khai thác theo profile, tìm kho phù hợp, di chuyển tới kho, nộp vào `PlayerWallet`, rồi quay lại node còn tồn tại. Khi đổi sang loại tài nguyên khác mà đang mang hàng, worker nộp hàng cũ trước; không đổi nhãn hàng đã mang. Cây/mỏ giữ hành vi nguồn vô hạn của game gốc; thịt có thể tiếp tục lấy từ xác cừu, chưa có cơ chế cạn kiệt mới.
 
-Claim của cây/mỏ được bridge phản chiếu sang collider vật cản và làm bẩn navigation grid. Hiệu ứng cây bị đánh là presentation event; Animation Event không cộng tài nguyên.
+Claim của cây/mỏ được bridge phản chiếu sang collider vật cản và làm bẩn navigation grid. `TriggerGatherHit` trong clip chặt/đào/dùng dao gọi bridge tìm node đang được worker khai thác và phát `SpriteHitFlash` ngay tại khung va chạm. Timer ECS vẫn quyết định lượng hàng; Animation Event chỉ điều khiển hình ảnh. Event `ResourceHit` theo timer đã bỏ để không có flash muộn hoặc trùng. Clip có thể vung nhiều lần trước một tick khai thác nên số flash không biểu thị số tài nguyên nhận được.
 
 ### Xây dựng, huấn luyện và trú nhà
 
