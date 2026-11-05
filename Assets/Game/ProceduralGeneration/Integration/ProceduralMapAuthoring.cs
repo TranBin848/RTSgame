@@ -168,6 +168,9 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
     void RestoreLegacyResourceSpawner()
     {
         foreach (ResourceSpawner spawner in FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            spawner.GetComponent<BoxCollider2D>().enabled = true;
             spawner.enabled = true;
+        }
     }
 }

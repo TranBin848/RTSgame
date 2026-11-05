@@ -28,6 +28,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
         ? resource.Claims >= resource.Capacity : m_ClaimedCount >= m_MaxWorkers;
     public int MaxWorkers => m_MaxWorkers;
     public Vector3 DotsCenter => m_Collider != null ? transform.TransformPoint(m_Collider.offset) : transform.position;
+    public Vector3 ClickCenter => m_ClickCollider != null ? m_ClickCollider.bounds.center : transform.position;
     protected virtual void Start() { SwarmGameBridge.Instance?.RegisterResource(this); }
     protected virtual void OnDestroy() { SwarmGameBridge.Instance?.UnregisterResource(this); }
     public void ApplyDotsClaims(int claims)

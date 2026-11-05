@@ -52,6 +52,9 @@ public class ResourceSpawner : MonoBehaviour
 
     public void DisableForProceduralGeneration()
     {
+        m_SpawnArea = GetComponent<BoxCollider2D>();
+        m_SpawnArea.enabled = false;
+        gameObject.layer = 2;
         ClearExistingResources();
         enabled = false;
     }

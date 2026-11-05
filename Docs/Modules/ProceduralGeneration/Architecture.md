@@ -53,7 +53,7 @@ Nếu quota hoặc đường tiếp cận không đạt, attempt bị loại. `M
 
 ## Tích hợp gameplay và DOTS
 
-`ProceduralMapAuthoring` chạy với execution order `-300`, bật trạng thái generating, dọn các container tài nguyên được lưu từ scene nguồn và tắt `ResourceSpawner` cũ trước `Awake` mặc định của spawner. Nếu generator thất bại, trạng thái procedural được bỏ và spawner cũ được bật lại. `DayNightCycleManager` và `EnemyWaveManager` chỉ tick trong lúc map đang tạo, sau đó chạy khi runtime báo `Ready` hoặc khi đã chuyển về fallback.
+`ProceduralMapAuthoring` chạy với execution order `-300`, bật trạng thái generating, dọn các container tài nguyên được lưu từ scene nguồn và tắt `ResourceSpawner` cũ trước `Awake` mặc định của spawner. Khi tắt spawner, collider vùng sinh tài nguyên cũng bị tắt và object chuyển sang layer `Ignore Raycast` để không chặn click cây/quân; nếu generator thất bại, collider được bật lại trước khi khôi phục spawner cũ. `DayNightCycleManager` và `EnemyWaveManager` chỉ tick trong lúc map đang tạo, sau đó chạy khi runtime báo `Ready` hoặc khi đã chuyển về fallback.
 
 Terrain được ghi theo batch bằng `Tilemap.SetTilesBlock`: ô cỏ chỉ nằm trong `WalkableTilemap`, ô nước chỉ nằm trong `WaterTilemap`. Với mỗi ô cỏ có nước trong tám ô lân cận, animated tile `Foam` được đặt tại cùng cell trên Foam Tilemap có sorting order thấp hơn đất; foam vì thế chỉ hiện quanh cạnh và góc bờ nước. Sau khi instantiate tài nguyên, integration gọi `Physics2D.SyncTransforms()` rồi `TilemapManager.ReinitializePathfinding()`. Các prefab gameplay hiện có tiếp tục tự đăng ký qua bridge/lifecycle hiện hành; module không tạo logic AI MonoBehaviour mới và không tạo Entity cho từng tile.
 

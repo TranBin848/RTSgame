@@ -378,7 +378,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             {
                 if (resourceNode is Component comp)
                 {
-                    DisplayClickEffect(comp.transform.position);
+                    DisplayClickEffect(resourceNode is ResourceNodeBase source ? source.ClickCenter : comp.transform.position);
                 }
                 return;
             }

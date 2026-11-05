@@ -16,6 +16,7 @@ Không đánh đồng một mức với mức khác. Kết quả đo performance
 - A* vượt vật cản, kết thúc đường đi, lệnh của người chơi và stance Defensive.
 - Quân tự tìm/đánh Entity, cung thủ/tháp tạo đạn ECS.
 - Khai thác và nộp gỗ/vàng/thịt, nhiều giao dịch cùng tick.
+- Cây/mỏ có tâm nằm trên ô bị chặn: sau khi claim mở ô, worker đi tới mép vùng tương tác và bắt đầu khai thác.
 - Capacity của node, hủy command, chết và giải phóng claim.
 - Xây dừng khi không có builder, nhận lại và hoàn tất một lần.
 - FIFO huấn luyện, chờ công trình xây xong.
@@ -24,6 +25,8 @@ Không đánh đồng một mức với mức khác. Kết quả đo performance
 - Node bị xóa không gây đọc Entity handle cũ.
 
 Chạy kèm toàn bộ `SwarmSimulationTests` để tránh hồi quy va chạm và tải quái/đạn. Bộ Swarm bổ sung test tìm ô sinh quái hợp lệ gần vị trí authoring bị chặn.
+
+Thay đổi ngày 05/11/2026: `GameplayEconomyJob` điều hướng worker tới mép vùng `InteractionRadius` của cây/mỏ và bắt đầu khai thác khi chạm vùng đó (sai số 0,08 đơn vị bằng ngưỡng kết thúc waypoint). Không dùng khoảng bù theo kích thước ô lưới. Đã biên dịch `RTS.DOTS.Tests.csproj` bằng `dotnet build` (0 lỗi); chưa chạy lại Unity EditMode hoặc Play Mode. Kết quả lịch sử ở bảng dưới không bao gồm thay đổi này.
 
 ## Kết quả đã thực thi ngày 16/10/2026
 
@@ -44,6 +47,7 @@ Các check Player xác nhận command di chuyển cập nhật Entity/view; clai
 
 - Chọn đơn/chọn nhóm/khung kéo, click nền/minimap và stance đều điều khiển Entity đúng.
 - Dân chặt cây, đào vàng, săn/lấy thịt và nộp đúng kho; khi thay lệnh không mất/đổi loại hàng.
+- Click cây/mỏ: biểu tượng lệnh nằm ở tâm collider nhận click; cây có pivot tại gốc nên không dùng `transform.position` cho biểu tượng.
 - Đặt nhà bằng placement UI, đổi sprite theo tiến độ, hủy giao builder rồi nhận lại.
 - Xếp hàng nhiều dân/lính/cung thủ, kiểm tra queue UI và lệnh đi ra cửa.
 - Quân và tháp đánh quái, projectile không bị tạo hai lần bởi Animation Event.

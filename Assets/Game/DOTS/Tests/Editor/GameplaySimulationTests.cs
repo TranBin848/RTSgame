@@ -104,6 +104,26 @@ namespace RTS.DOTS.Tests
             Assert.That(m_Gameplay.Wallet.Get(type), Is.GreaterThanOrEqualTo(4));
             Assert.That(m_Gameplay.Wallet.Get((type + 1) % 3), Is.Zero);
         }
+        [TestCase(0)] [TestCase(1)]
+        public void WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(int type)
+        {
+            var map = new byte[32 * 32]; System.Array.Fill(map, (byte)1);
+            for (int y = 3; y <= 4; y++)
+                for (int x = 3; x <= 4; x++) map[y * 32 + x] = 0;
+            Configure(map);
+            Entity worker = Actor(GameplayKind.Worker, new float2(8.5f, 4.5f));
+            Entity node = Resource(new float2(4, 4), type);
+
+            Assert.That(m_Gameplay.AssignResource(worker, node), Is.True);
+            System.Array.Fill(map, (byte)1);
+            Configure(map); // The bridge refreshes navigation after the claim disables the physical collider.
+            Tick();
+            var destination = EM.GetComponentData<GameplayActor>(worker).Destination;
+            Assert.That(math.distance(destination, new float2(4, 4)), Is.EqualTo(0.3f).Within(0.001f));
+            Tick(180);
+
+            Assert.That(EM.GetComponentData<GameplayWorker>(worker).Carried, Is.GreaterThan(0));
+        }
         [Test] public void SimultaneousDepositsKeepAllTransactions()
         {
             Building(new float2(4, 4)); Entity node = Resource(new float2(4.1f, 4));

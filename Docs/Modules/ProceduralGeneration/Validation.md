@@ -2,6 +2,12 @@
 
 Ngày kiểm chứng: **29/10/2026**.
 
+## Kiểm tra bổ sung ngày 05/11/2026
+
+Trên scene `ProceduralGame`, Unity MCP xác nhận trước khi sửa rằng BoxCollider2D trigger của `ResourceManager` phủ gần toàn bản đồ (59,83 × 49,09 đơn vị) và được `Physics2D.Raycast` chọn trước collider của cả ba Worker. Ở tâm collider nhận click, 18/39 cây cũng bị raycast chọn nhầm `ResourceManager` hoặc cây chồng lấn khác. Khi click rơi vào `ResourceManager`, `GameManager` xử lý như click nền và biểu tượng bị đặt tại ô đi được gần đó.
+
+Sau sửa, `Assembly-CSharp.csproj` biên dịch thành công với 0 lỗi/0 warning. Trong Play Mode, `ResourceManager` ở layer `Ignore Raycast`, collider vùng sinh đã tắt; raycast tại Worker và một cây procedural trả về đúng collider của chúng. Gọi `WorkerUnit.TryAssignResourceNode` trên một cây gần worker trả `true`; sau khi bỏ Pause của Editor, ECS ghi nhận worker ở state `Chopping`, đang mang 16 gỗ. Đã thoát Play Mode sau kiểm tra. Chưa tự động hóa thao tác click chuột thật hoặc chạy toàn bộ Unity Test Runner.
+
 ## Kết quả đã chạy
 
 Môi trường dòng lệnh: Windows, .NET SDK 9.0.309. Preset Core: 128 × 128, 4 octave, 120 cây, 12 vàng, 18 cừu, tối đa 8 attempt.
@@ -40,7 +46,7 @@ Unity Test Runner chưa được chạy trong lần này vì máy hiện tại k
 
 ## Phần chưa kiểm chứng
 
-Chưa tạo `ProceduralGame.unity` bằng menu và chưa chạy Play Mode. Vì vậy chưa xác nhận trực quan RuleTile/bờ nước, prefab anchor/collider, số Entity đăng ký, khai thác/xây/huấn luyện, wave, fog, minimap, camera hoặc tổng thời gian từ bắt đầu scene đến `Ready`.
+Tại thời điểm 29/10/2026, chưa tạo `ProceduralGame.unity` bằng menu và chưa chạy Play Mode. Vì vậy chưa xác nhận trực quan RuleTile/bờ nước, prefab anchor/collider, số Entity đăng ký, khai thác/xây/huấn luyện, wave, fog, minimap, camera hoặc tổng thời gian từ bắt đầu scene đến `Ready`. Phần kiểm tra bổ sung ngày 05/11 ở trên chỉ xác nhận các đường raycast và khai thác đã nêu.
 
 Số 16,73 ms chỉ đo Core trong process .NET có cả ảnh hưởng khởi động/JIT; không gồm ghi Tilemap, instantiate 150 GameObject, `Physics2D.SyncTransforms`, rebuild navigation, DOTS registration hoặc rendering. Chưa đo median/p95, allocation hay Player build nên không dùng con số này làm cam kết hiệu năng gameplay.
 

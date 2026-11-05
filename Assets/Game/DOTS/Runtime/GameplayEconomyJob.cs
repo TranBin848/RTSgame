@@ -118,7 +118,7 @@ namespace RTS.DOTS
                         {
                             actor.Target = Entity.Null;
                             float distance = math.max(0, math.distance(body.Position, point) - body.Radius - node.Radius);
-                            if (distance <= 0.55f)
+                            if (distance <= 0.08f)
                             {
                                 actor.Moving = 0; actor.State = profile.State; actor.Task = profile.Task;
                                 actor.Facing = math.normalizesafe(point - body.Position, actor.Facing);
@@ -132,7 +132,7 @@ namespace RTS.DOTS
                                     { worker.Phase = WorkPhase.Depositing; actor.Task = GameplayTask.ReturnResource; actor.State = GameplayState.Idle; worker.Timer = 0; }
                                 }
                             }
-                            else Approach(ref actor, point);
+                            else Approach(ref actor, point + math.normalizesafe(body.Position - point, new float2(1, 0)) * node.Radius);
                         }
                     }
                 }
