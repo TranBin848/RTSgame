@@ -28,6 +28,7 @@ public class AIPawn : MonoBehaviour
 
     void Update()
     {
+        if (ProceduralMapRuntime.IsCompositionBlocked) return;
         if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled) return;
         if (!isPathValid())
         {

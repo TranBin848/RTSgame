@@ -53,3 +53,6 @@ Số 16,73 ms chỉ đo Core trong process .NET có cả ảnh hưởng khởi �
 ## Cách hoàn tất nghiệm thu
 
 Mở đúng Unity version, chạy menu tạo scene, chạy EditMode tests, rồi thực hiện checklist trong [Usage](Usage.md). Với lỗi gameplay, ghi lại seed, settings, log `[ProceduralMap]`, ảnh scene và XML Test Runner. Đo Player build nhiều lần trước khi chốt quota/cân bằng hoặc ngân sách thời gian.
+# Kiểm chứng bổ sung S4 — 11/11/2026
+
+Unity procedural EditMode **10/10 pass**; Core tool quét và tái sinh **128 strategic +128 legacy**, mỗi preset 0 lỗi. Preview lỗi không giữ ảnh cũ; Generate hai preset và kiểm PNG, scene không dirty, default gameplay asset vẫn legacy. [Chi tiết S4](S4-Regions.md) ghi lệnh, thời gian Core, ảnh và các phần topology/gameplay chưa được kiểm chứng. Kết quả này không chứng nhận strategic gameplay scene hoặc budget theo vùng; chúng thuộc S5/S6.

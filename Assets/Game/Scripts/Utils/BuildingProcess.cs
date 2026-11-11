@@ -21,6 +21,8 @@ public class BuildingProcess
     {
         m_BuildAction = buildAction;
         m_GameManager = GameManager.Get();
+        if (m_GameManager != null && !m_GameManager.CanBuild(buildAction))
+            throw new System.InvalidOperationException("Construction requires research before it can begin.");
         m_QueueUiId = m_GameManager != null ? m_GameManager.EnqueueActionUI(m_BuildAction) : string.Empty;
         m_Structure = SwarmGameBridge.Instance != null
             ? SwarmGameBridge.Instance.SpawnGameplay(m_BuildAction.StructureUnitPrefab.gameObject, placementPosition, Quaternion.identity).GetComponent<StructureUnit>()

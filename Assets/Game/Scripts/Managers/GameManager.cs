@@ -23,9 +23,31 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     private int m_Gold = 0;
     private int m_Wood = 0;
     private int m_Meat = 0;
-    public int Gold => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Gold : m_Gold;
-    public int Wood => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Wood : m_Wood;
-    public int Meat => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Meat : m_Meat;
+    private SwarmGameBridge m_Bridge;
+    private TilemapManager m_Map;
+    private GameSceneCompositionRoot m_Composition;
+    public bool IsInitialized { get; private set; }
+    public Transform[] ResourceContainers => new[] { m_TreeContainer, m_GoldStoneContainer, m_SheepContainer };
+    public void Initialize(SwarmGameBridge bridge, TilemapManager map, CameraController camera,
+        FogOfWarManager fog, DayNightCycleManager dayNight, IResourceNodeLocator nodes, IResourceDepotLocator depots)
+    {
+        if (bridge == null || !bridge.IsInitialized || map == null || camera == null || nodes == null || depots == null)
+            throw new System.ArgumentException("GameManager requires an initialized bridge, map, camera and resource locators.");
+        if (IsInitialized)
+        {
+            if (m_Bridge != bridge || m_Map != map || m_CameraController != camera || m_FogOfWarManager != fog
+                || m_DayNightCycleManager != dayNight || m_ResourceNodeLocator != nodes || m_ResourceDepotLocator != depots)
+                throw new System.InvalidOperationException("GameManager already has different dependencies.");
+            return;
+        }
+        m_Bridge = bridge; m_Map = map; m_CameraController = camera;
+        m_FogOfWarManager = fog; m_DayNightCycleManager = dayNight;
+        m_ResourceNodeLocator = nodes; m_ResourceDepotLocator = depots;
+        IsInitialized = true;
+    }
+    public int Gold => m_Bridge?.Gameplay != null ? m_Bridge.Gameplay.Wallet.Gold : m_Gold;
+    public int Wood => m_Bridge?.Gameplay != null ? m_Bridge.Gameplay.Wallet.Wood : m_Wood;
+    public int Meat => m_Bridge?.Gameplay != null ? m_Bridge.Gameplay.Wallet.Meat : m_Meat;
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
     public IReadOnlyList<Unit> SelectedUnits => m_SelectedUnits;
@@ -48,8 +70,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     protected override void Awake()
     {
         base.Awake();
-        m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer, m_SheepContainer);
-        m_ResourceDepotLocator = new SceneResourceDepotLocator(() => m_PlayerStructures);
+        m_Composition = GetComponent<GameSceneCompositionRoot>();
+        if (m_Composition == null)
+        {
+            m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer, m_SheepContainer);
+            m_ResourceDepotLocator = new SceneResourceDepotLocator(() => m_PlayerStructures);
+        }
         m_SelectionTexture = new Texture2D(1, 1);
         m_SelectionTexture.SetPixel(0, 0, Color.white);
         m_SelectionTexture.Apply();
@@ -57,6 +83,17 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void Start()
     {
+        if (m_Composition != null && !m_Composition.IsReady) return;
+        if (m_Composition == null) InitializeLegacyDependencies();
+        ClearActionBarUI();
+        AddResources(100, 100, 100); // Starting resources for testing
+        if (m_DayNightCycleManager != null)
+            m_DayNightCycleManager.OnPhaseChanged += HandleDayNightPhaseChanged;
+    }
+    void InitializeLegacyDependencies()
+    {
+        m_Bridge = SwarmGameBridge.Instance;
+        m_Map = TilemapManager.Get();
         m_CameraController = FindFirstObjectByType<CameraController>();
         if (m_CameraController == null)
         {
@@ -79,13 +116,6 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             }
         }
 
-        ClearActionBarUI();
-        AddResources(100, 100, 100); // Starting resources for testing
-
-        if (m_DayNightCycleManager != null)
-        {
-            m_DayNightCycleManager.OnPhaseChanged += HandleDayNightPhaseChanged;
-        }
     }
     void OnDestroy()
     {
@@ -98,6 +128,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void Update()
     {
+        if (m_Composition != null && !m_Composition.IsReady) return;
         if (Input.GetKeyDown(KeyCode.F1))
         {
             ToggleHUD();
@@ -131,7 +162,8 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     public void RegisterUnit(Unit unit)
     {
-        SwarmGameBridge.Instance?.Register(unit);
+        if (m_Composition != null && !IsInitialized) return;
+        m_Bridge?.Register(unit);
         if (unit is WorkerUnit worker)
         {
             worker.Inject(m_ResourceNodeLocator, m_ResourceDepotLocator, this);
@@ -164,7 +196,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     public void UnregisterUnit(Unit unit)
     {
-        SwarmGameBridge.Instance?.Unregister(unit);
+        m_Bridge?.Unregister(unit);
         if (unit.IsPlayer)
         {
             if (m_PlacementProcess != null)
@@ -199,8 +231,8 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     public void AddResources(int gold, int wood, int meat)
     {
-        if (SwarmGameBridge.Instance?.Gameplay != null)
-        { SwarmGameBridge.Instance.Gameplay.AddResources(wood, gold, meat); RefreshDotsWallet(SwarmGameBridge.Instance.Gameplay.Wallet); return; }
+        if (m_Bridge?.Gameplay != null)
+        { m_Bridge.Gameplay.AddResources(wood, gold, meat); RefreshDotsWallet(m_Bridge.Gameplay.Wallet); return; }
         m_Gold += gold;
         m_Wood += wood;
         m_Meat += meat; // Assuming you have a similar variable for meat
@@ -340,13 +372,18 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         return townHall != null;
     }
 
+    public bool CanBuild(BuildActionSo action) => action != null && action.StructureUnitPrefab != null
+        && (m_Bridge == null || m_Bridge.CanUsePrefab(action.StructureUnitPrefab.gameObject));
+    public bool CanTrainArchers => m_Bridge == null || m_Bridge.Gameplay.CanUseArchery;
     public void StartBuildProcess(BuildActionSo buildAction)
     {
+        if (m_Composition != null && !m_Composition.IsReady) return;
+        if (!CanBuild(buildAction)) { ShowTextPopup("Research required", Color.red, Vector3.zero); return; }
         if (m_PlacementProcess != null)
         {
             return;
         }
-        var tilemapManager = TilemapManager.Get();
+        var tilemapManager = m_Map;
         Vector3 startPosition = ActiveUnit != null ? ActiveUnit.transform.position + Vector3.right : Vector3.zero;
         m_PlacementProcess = new PlacementProcess(buildAction, tilemapManager, startPosition);
         m_PlacementProcess.ShowPlacementOutline();
@@ -385,7 +422,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         }
 
         if (isExploredPoint && (!HasClickedOnUnit(hit, out var legacyClicked) || !legacyClicked.IsPlayer)
-            && SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryFindEnemy(worldPoint, 0.65f, out var dotsEnemy))
+            && m_Bridge != null && m_Bridge.TryFindEnemy(worldPoint, 0.65f, out var dotsEnemy))
         {
             foreach (var selected in m_SelectedUnits) if (selected != null && selected.IsSelectable) selected.SetDotsTarget(dotsEnemy);
             DisplayClickEffect(worldPoint);
@@ -808,7 +845,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     bool TryResolveGroundDestination(Vector2 requestedPoint, out Vector3 resolvedDestination)
     {
         resolvedDestination = requestedPoint;
-        TilemapManager tilemapManager = TilemapManager.Get();
+        TilemapManager tilemapManager = m_Map;
         if (tilemapManager == null)
         {
             return true;
@@ -931,6 +968,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         {
             return;
         }
+        if (!CanBuild(m_PlacementProcess.BuildAction)) return;
 
         if (!m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
         {

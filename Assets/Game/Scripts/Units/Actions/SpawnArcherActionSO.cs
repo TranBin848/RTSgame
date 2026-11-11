@@ -34,6 +34,11 @@ public class SpawnArcherActionSO : ActionSO, IResourceCostAction
             return;
         }
 
+        if (!manager.CanTrainArchers)
+        {
+            manager.ShowTextPopup("Research military_archery first", Color.red, archeryRange.transform.position);
+            return;
+        }
         if (manager.Gold < m_GoldCost || manager.Wood < m_WoodCost || manager.Meat < m_MeatCost)
         {
             manager.ShowTextPopup("Not enough resources", Color.red, archeryRange.transform.position);

@@ -51,3 +51,6 @@ Exit code `0` nghĩa là toàn bộ seed tạo thành công và lần sinh lặp
 - `SampleScene` vẫn chạy theo đường cũ khi không có `ProceduralMapAuthoring`.
 
 Kết quả nào đã thực sự chạy được ghi tại [Validation](Validation.md).
+# Preview chiến thuật S4 (11/11/2026)
+
+Menu **RTS/Procedural Generation/Preview Regions** mở cửa sổ sinh preview theo seed/preset; không ghi Tilemap hoặc sửa asset. Default scene vẫn LegacyMainland. [S4 Regions](S4-Regions.md) có legend, ảnh so sánh và lệnh quét `128 strategic`/`128 legacy`. Chưa chuyển scene sang StrategicRegions trước S5/S6.

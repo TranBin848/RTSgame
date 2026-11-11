@@ -49,7 +49,7 @@ public class DayNightCycleManager : MonoBehaviour
 
     void Update()
     {
-        if (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady)
+        if (ProceduralMapRuntime.IsCompositionBlocked || (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady))
         {
             return;
         }

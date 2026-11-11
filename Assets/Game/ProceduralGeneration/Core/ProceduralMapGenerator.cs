@@ -69,13 +69,15 @@ namespace RTS.ProceduralGeneration
                     frequency *= settings.Lacunarity;
                 }
 
-                bool border = x < settings.BorderLandWidth || y < settings.BorderLandWidth
-                    || x >= width - settings.BorderLandWidth || y >= height - settings.BorderLandWidth;
+                bool border = settings.Preset == MapLayoutPreset.LegacyMainland && (x < settings.BorderLandWidth || y < settings.BorderLandWidth
+                    || x >= width - settings.BorderLandWidth || y >= height - settings.BorderLandWidth);
                 terrain[y * width + x] = (byte)((border || total / amplitudeSum >= settings.WaterThreshold)
                     ? TerrainCell.Grass : TerrainCell.Water);
             }
 
-            ReserveStartAndCorridor(settings, terrain, reserved, startX, startY, report);
+            StrategicLayout layout = null;
+            if(settings.Preset == MapLayoutPreset.StrategicRegions) layout=StrategicLayout.Create(settings,attempt,terrain,reserved,report);
+            else ReserveStartAndCorridor(settings, terrain, reserved, startX, startY, report);
             RemoveUnreachableLand(terrain, width, height, startX, startY, report);
 
             int[] distances = BuildDistances(terrain, width, height, startX, startY, null);
@@ -106,7 +108,7 @@ namespace RTS.ProceduralGeneration
 
             Validate(settings, terrain, reserved, resources, width, height, startX, startY, report);
             CountTerrain(terrain, report);
-            return new MapData(width, height, settings.Seed, attempt, startX, startY, terrain, reserved, resources, report);
+            return new MapData(width, height, settings.Seed, attempt, startX, startY, terrain, reserved, resources, report, layout);
         }
 
         static void ReserveStartAndCorridor(MapGenerationSettingsData settings, byte[] terrain, byte[] reserved,

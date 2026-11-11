@@ -90,6 +90,10 @@ AI/movement/spatial/collision có Burst jobs. Kinh tế dùng một writer để
 
 ## 6. Những quyết định cần giữ khi phát triển tiếp
 
+Cập nhật 10/11/2026: D1 DI đã triển khai cho ProceduralGame. GameSceneCompositionRoot inject bridge, GameManager và resource locators; chỉ mở gameplay sau BindScene. SampleScene giữ adapter legacy. Xem [DI Usage](Modules/DependencyInjection/Usage.md) và [D1 Evidence](Modules/DependencyInjection/D1-Evidence-2026-11-10.md); các Unit/UI/factory còn lại sẽ chuyển ở D2–D4.
+
+Yêu cầu mới ngày 05/11/2026: chuyển mã do dự án sở hữu sang dependency injection theo [thiết kế DI](Modules/DependencyInjection/Architecture.md). Đây là lộ trình chưa triển khai: code hiện còn singleton/lookup. Module mới nhận dependency tường minh; thực hiện D0/D1 trước progression, theo dõi D0–D4 trong [Progress](Modules/Progression/Progress.md). Không truyền managed services vào Burst jobs và không làm mất nguồn dữ liệu authoritative ECS.
+
 | Quyết định đã áp dụng | Ý nghĩa khi sửa code |
 |---|---|
 | Flow field chung cho quái, A* riêng cho actor người chơi/cừu | Sửa đúng thuật toán của đúng nhóm; không thêm A* mỗi frame cho từng quái |
@@ -118,6 +122,14 @@ Lần cập nhật tài liệu ngày 26/10 chỉ đối chiếu code, link và a
 Khi đo mới, ghi số lượng từng loại thực thể, phần cứng, build, rendering, độ phân giải, seed và thời gian capture. `SwarmSimulationSystem.LastTickMilliseconds` chỉ đo tick Swarm; không dùng riêng counter này làm tổng thời gian mô phỏng RTS vì còn `GameplaySimulationSystem`, bridge và presentation.
 
 ## 8. Phần chưa triển khai và tài liệu liên quan
+
+Cập nhật S4 ngày 11/11/2026: [StrategicRegions + preview](Modules/ProceduralGeneration/S4-Regions.md) đã có dữ liệu ba vùng/hai gateway/landmark và generator version2; scene mặc định vẫn LegacyMainland/version1. Budget tài nguyên theo vùng, topology gameplay cuối và wave integration chờ S5/S6.
+
+Cập nhật S3 ngày 11/11/2026: sáu tech đã có modifiers và build/train gates, UI ba nhánh được inject; 58/58 DOTS tests và integration checks PASS. [S3 Evidence](Modules/Progression/S3-Evidence-2026-11-11.md) ghi đúng phạm vi/giới hạn; bước tiếp là S4 procedural regions, không coi đã cân bằng hoặc có save/load.
+
+Cập nhật 11/11/2026: S1/D2 đã có một research economy_tools trong ECS và service/panel được inject từ root. Ví/state do ECS sở hữu, config là EconomyTools.asset. [Usage](Modules/Progression/Usage.md) và [Evidence](Modules/Progression/S1-D2-Evidence-2026-11-11.md) ghi 43/43 tests và giới hạn; S2 còn nghiệm thu click/hình ảnh, catalog nhiều node thuộc S3.
+
+Đợt phát triển tiếp tech tree/incremental và procedural có vai trò chiến thuật đã có [Build plan S0–S9](Modules/Progression/BuildPlan.md). Đọc [Progress](Modules/Progression/Progress.md) để biết checkpoint và lát cắt tiếp theo; đây mới là kế hoạch, không phải chức năng đã triển khai.
 
 Chưa có module procedural generation hoàn chỉnh, save/load Entity, networking, baking/SubScene cho toàn bộ prefab hoặc instanced rendering cho toàn bộ quân người chơi. Ba layout của Swarm demo là kịch bản dựng sẵn. Presentation của dân/quân/cừu/công trình vẫn chịu chi phí GameObject/Animator/Collider2D; benchmark quái không chứng minh hiệu năng hàng nghìn worker.
 

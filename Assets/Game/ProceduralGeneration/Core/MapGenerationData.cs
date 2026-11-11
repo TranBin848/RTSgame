@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace RTS.ProceduralGeneration
 {
+    public enum MapLayoutPreset : byte { LegacyMainland, StrategicRegions }
     public enum TerrainCell : byte
     {
         Water = 0,
@@ -23,6 +24,8 @@ namespace RTS.ProceduralGeneration
         public int Height = 128;
         public int Seed = 1;
         public int MaxAttempts = 8;
+        public MapLayoutPreset Preset;
+        public int RegionRadius = 8;
         public int Octaves = 4;
         public float NoiseScale = 34f;
         public float Persistence = 0.5f;
@@ -96,9 +99,11 @@ namespace RTS.ProceduralGeneration
         public readonly byte[] Reserved;
         public readonly List<ResourcePlacement> Resources;
         public readonly MapValidationReport Validation;
+        public readonly StrategicLayout Layout;
+        public int GeneratorVersion => Layout == null ? 1 : 2;
 
         public MapData(int width, int height, int seed, int attempt, int startX, int startY,
-            byte[] terrain, byte[] reserved, List<ResourcePlacement> resources, MapValidationReport validation)
+            byte[] terrain, byte[] reserved, List<ResourcePlacement> resources, MapValidationReport validation, StrategicLayout layout = null)
         {
             Width = width;
             Height = height;
@@ -110,6 +115,7 @@ namespace RTS.ProceduralGeneration
             Reserved = reserved;
             Resources = resources;
             Validation = validation;
+            Layout = layout;
         }
 
         public int Index(int x, int y) => y * Width + x;
@@ -125,6 +131,11 @@ namespace RTS.ProceduralGeneration
             if (settings.Width < 32 || settings.Height < 32) return "Map size must be at least 32 x 32.";
             if (settings.Width > 1024 || settings.Height > 1024) return "Map size exceeds the supported 1024 x 1024 limit.";
             if (settings.MaxAttempts < 1) return "MaxAttempts must be positive.";
+            if (settings.Preset != MapLayoutPreset.LegacyMainland && settings.Preset != MapLayoutPreset.StrategicRegions) return "Unknown map layout preset.";
+            if (settings.Preset == MapLayoutPreset.StrategicRegions
+                && (settings.RegionRadius < 4 || settings.RequiredCorridorHalfWidth < 1 || settings.RequiredCorridorHalfWidth > settings.RegionRadius
+                    || settings.StartClearRadius + settings.RegionRadius * 2L + 6 >= Math.Min(settings.Width, settings.Height) / 2))
+                return "Strategic regions need more room between the start, outer regions and border; reduce radii or increase map size.";
             if (settings.Octaves < 1 || settings.Octaves > 8) return "Octaves must be between 1 and 8.";
             if (settings.NoiseScale <= 0f) return "NoiseScale must be positive.";
             if (settings.Persistence <= 0f || settings.Persistence > 1f) return "Persistence must be in (0, 1].";

@@ -7,6 +7,11 @@ public static class ProceduralMapRuntime
     public static bool HasFailed { get; private set; }
     public static string LastError { get; private set; }
     public static event Action Ready = delegate { };
+    public static bool IsCompositionBlocked { get; private set; }
+    public static void BeginComposition() { IsCompositionBlocked = true; }
+    public static void CompleteComposition() { IsCompositionBlocked = false; }
+    public static void FailComposition(string error) { IsCompositionBlocked = true; HasFailed = true; LastError = error; }
+    public static void EndComposition() { IsCompositionBlocked = false; }
 
     public static void Begin()
     {
@@ -34,6 +39,7 @@ public static class ProceduralMapRuntime
     [UnityEngine.RuntimeInitializeOnLoadMethod(UnityEngine.RuntimeInitializeLoadType.SubsystemRegistration)]
     static void Reset()
     {
+        IsCompositionBlocked = false;
         IsActive = false;
         IsReady = false;
         HasFailed = false;

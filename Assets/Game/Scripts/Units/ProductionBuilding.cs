@@ -19,6 +19,7 @@ public abstract class ProductionBuilding : StructureUnit
         {
             return;
         }
+        if (SwarmGameBridge.Instance != null && !SwarmGameBridge.Instance.CanUsePrefab(unitPrefab)) return;
 
         if (m_LastQueuedFrame == Time.frameCount)
         {

@@ -4,6 +4,11 @@ using RTS.ProceduralGeneration;
 int count = args.Length > 0 && int.TryParse(args[0], out int parsed) ? Math.Max(1, parsed) : 1000;
 var generator = new ProceduralMapGenerator();
 var settings = new MapGenerationSettingsData();
+if (args.Length > 1)
+{
+    if (args[1] != "strategic" && args[1] != "legacy") throw new ArgumentException("Preset must be strategic or legacy.");
+    settings.Preset = args[1] == "strategic" ? MapLayoutPreset.StrategicRegions : MapLayoutPreset.LegacyMainland;
+}
 var failures = new List<string>();
 long totalMilliseconds = 0;
 long worstMilliseconds = 0;
@@ -45,6 +50,7 @@ for (int seed = 0; seed < count; seed++)
 }
 
 Console.WriteLine($"Seeds checked: {count}");
+Console.WriteLine($"Preset: {settings.Preset}");
 Console.WriteLine($"Failures: {failures.Count}");
 Console.WriteLine($"Mean generation time: {(double)totalMilliseconds / count:F2} ms");
 Console.WriteLine($"Worst generation time: {worstMilliseconds} ms (seed {worstSeed})");
@@ -56,6 +62,11 @@ static bool Equivalent(MapData left, MapData right)
     if (left.Width != right.Width || left.Height != right.Height || left.Attempt != right.Attempt) return false;
     if (!left.Terrain.AsSpan().SequenceEqual(right.Terrain)) return false;
     if (!left.Reserved.AsSpan().SequenceEqual(right.Reserved)) return false;
+    if (left.GeneratorVersion != right.GeneratorVersion || (left.Layout == null) != (right.Layout == null)) return false;
+    if (left.Layout != null && (!left.Layout.RegionIds.AsSpan().SequenceEqual(right.Layout.RegionIds)
+        || !left.Layout.Routes.AsSpan().SequenceEqual(right.Layout.Routes)
+        || !left.Layout.Regions.SequenceEqual(right.Layout.Regions) || !left.Layout.Connections.SequenceEqual(right.Layout.Connections)
+        || !left.Layout.Gateways.SequenceEqual(right.Layout.Gateways) || !left.Layout.Landmark.Equals(right.Layout.Landmark))) return false;
     if (left.Resources.Count != right.Resources.Count) return false;
     for (int index = 0; index < left.Resources.Count; index++)
     {
@@ -74,6 +85,12 @@ static string ValidateExpectedMap(MapData map, MapGenerationSettingsData setting
     if (map.Validation.GoldCount != settings.TotalGoldCount) return "gold quota mismatch";
     if (map.Validation.SheepCount != settings.TotalSheepCount) return "sheep quota mismatch";
     if (map.Validation.ReachableGrassCells <= 0) return "no reachable grass";
+    if (settings.Preset == MapLayoutPreset.StrategicRegions)
+    {
+        if (map.Layout == null || map.Layout.Regions.Length != 3 || map.Layout.Gateways.Length != 2) return "strategic layout missing";
+        foreach (var gateway in map.Layout.Gateways)
+            if (!map.IsGrass(gateway.X, gateway.Y) || map.Reserved[map.Index(gateway.X, gateway.Y)] == 0) return "gateway not protected";
+    }
 
     var goldVariants = new int[6];
     foreach (ResourcePlacement resource in map.Resources)

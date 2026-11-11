@@ -1,0 +1,152 @@
+# D0 lookup snapshot — 2026-11-09
+# Candidate matches; review Inventory.md for classification.
+
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:37:        TilemapManager map = Object.FindFirstObjectByType<TilemapManager>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:38:        TownHall townHall = Object.FindFirstObjectByType<TownHall>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:39:        UnityEngine.Tilemaps.Tilemap foamTilemap = GameObject.Find("Foam")?.GetComponent<UnityEngine.Tilemaps.Tilemap>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:40:        ResourceSpawner legacySpawner = Object.FindFirstObjectByType<ResourceSpawner>(FindObjectsInactive.Include);
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:44:        ProceduralMapAuthoring authoring = Object.FindFirstObjectByType<ProceduralMapAuthoring>(FindObjectsInactive.Include);
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:68:        Transform resourceRoot = GameObject.Find("Procedural Resources")?.transform;
+Assets/Game\Scripts\Utils\Projectile.cs:41:        if (SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.ConvertLegacyProjectile(owner, target, damage, launchPosition, this))
+Assets/Game\Scripts\Utils\PlacementProcess.cs:23:        m_PlaceholderTileSprite = Resources.Load<Sprite>("Images/PlaceholderTileSprite");
+Assets/Game\ProceduralGeneration\Integration\ProceduralMapAuthoring.cs:164:        foreach (ResourceSpawner spawner in FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+Assets/Game\ProceduralGeneration\Integration\ProceduralMapAuthoring.cs:170:        foreach (ResourceSpawner spawner in FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+Assets/Game\Scripts\Utils\BuildingProcess.cs:23:        m_GameManager = GameManager.Get();
+Assets/Game\Scripts\Utils\BuildingProcess.cs:25:        m_Structure = SwarmGameBridge.Instance != null
+Assets/Game\Scripts\Utils\BuildingProcess.cs:26:            ? SwarmGameBridge.Instance.SpawnGameplay(m_BuildAction.StructureUnitPrefab.gameObject, placementPosition, Quaternion.identity).GetComponent<StructureUnit>()
+Assets/Game\Scripts\Utils\BuildingProcess.cs:31:        if (m_Structure.IsDotsControlled) SwarmGameBridge.Instance.BeginConstruction(m_Structure, this, m_BuildAction.ConstructionTime);
+Assets/Game\Scripts\Utils\BuildingProcess.cs:69:        var build = SwarmGameBridge.Instance.Gameplay.EntityManager.GetComponentData<GameplayConstruction>(m_Structure.DotsEntity);
+Assets/Game\Scripts\Units\WorkerUnit.cs:25:    public bool IsIdleWorker => IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var dotsWorker)
+Assets/Game\Scripts\Units\WorkerUnit.cs:33:    public bool IsSheltered => IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker) ? worker.Phase == WorkPhase.Sheltered : m_IsSheltered;
+Assets/Game\Scripts\Units\WorkerUnit.cs:49:        if (!SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker)) return;
+Assets/Game\Scripts\Units\WorkerUnit.cs:148:        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.SetDepot(DotsEntity, SwarmGameBridge.Instance.ProxyFor(storage)); return; }
+Assets/Game\Scripts\Units\WorkerUnit.cs:154:        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.AssignConstruction(DotsEntity, SwarmGameBridge.Instance.ProxyFor(structure)); return; }
+Assets/Game\Scripts\Units\WorkerUnit.cs:164:        { m_ShelterTownHall = townHall; SwarmGameBridge.Instance.Gameplay.Shelter(DotsEntity, SwarmGameBridge.Instance.ProxyFor(townHall)); return; }
+Assets/Game\Scripts\Units\WorkerUnit.cs:185:            if (m_ShelterTownHall != null) SwarmGameBridge.Instance.Gameplay.LeaveShelter(DotsEntity, (Vector2)m_ShelterTownHall.GetSpawnOrigin(), (Vector2)m_ShelterTownHall.GetSpawnExitDestination());
+Assets/Game\Scripts\Units\WorkerUnit.cs:201:        if (IsDotsControlled) return SwarmGameBridge.Instance.AssignResource(this, resourceNode);
+Assets/Game\Scripts\Units\WorkerUnit.cs:391:            SwarmGameBridge.Instance.FlashWorkerResource(this);
+Assets/Game\Scripts\Units\WorkerUnit.cs:528:        if (IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker))
+Assets/Game\Scripts\Units\WorkerUnit.cs:551:        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.CancelWork(DotsEntity); return; }
+Assets/Game\Scripts\Units\Unit.cs:63:    public bool IsDotsControlled => DotsEntity != Entity.Null && SwarmGameBridge.Instance != null;
+Assets/Game\Scripts\Units\Unit.cs:88:            Target = SwarmGameBridge.Instance.ViewFor(actor.Target);
+Assets/Game\Scripts\Units\Unit.cs:131:        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.Attack(DotsEntity, entity); return; }
+Assets/Game\Scripts\Units\Unit.cs:135:        if (this is HumanoidUnit && SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryGetEnemy(entity, out var position, out _)) MoveTo(position);
+Assets/Game\Scripts\Units\Unit.cs:140:        var bridge = SwarmGameBridge.Instance;
+Assets/Game\Scripts\Units\Unit.cs:209:        m_GameManager = GameManager.Get();
+Assets/Game\Scripts\Units\Unit.cs:210:        m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
+Assets/Game\Scripts\Units\Unit.cs:215:        if (SwarmGameBridge.Instance != null)
+Assets/Game\Scripts\Units\Unit.cs:217:            if (SwarmGameBridge.Instance.TryConvertEnemy(this)) return;
+Assets/Game\Scripts\Units\Unit.cs:218:            SwarmGameBridge.Instance.Register(this);
+Assets/Game\Scripts\Units\Unit.cs:224:        SwarmGameBridge.Instance?.Unregister(this);
+Assets/Game\Scripts\Units\Unit.cs:236:            var em = SwarmGameBridge.Instance.Gameplay.EntityManager;
+Assets/Game\Scripts\Units\Unit.cs:249:        { SwarmGameBridge.Instance.Gameplay.Attack(DotsEntity, SwarmGameBridge.Instance.ProxyFor(target)); return; }
+Assets/Game\Scripts\Units\Unit.cs:256:        if (IsDotsControlled) SwarmGameBridge.Instance.Gameplay.SetStance(DotsEntity, m_CurrentStance == UnitStance.Offensive);
+Assets/Game\Scripts\Units\Unit.cs:270:        { SwarmGameBridge.Instance.MoveActor(this, destination, source == DestinationSource.PlayerClick); return; }
+Assets/Game\Scripts\Units\Unit.cs:318:        if (SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryConvertEnemy(unit)) return;
+Assets/Game\Scripts\Units\Unit.cs:326:            m_GameManager = GameManager.Get();
+Assets/Game\Scripts\Units\Unit.cs:411:        { UnregisterUnit(this); SwarmGameBridge.Instance?.Unregister(this); }
+Assets/Game\Scripts\Units\Unit.cs:470:        { SwarmGameBridge.Instance.Simulation.QueueDamage(DotsEntity, dmg, SwarmGameBridge.Instance.ProxyFor(damager)); return; }
+Assets/Game\Scripts\Units\StructureUnit.cs:18:        m_TilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\UI\WaveProgressUI.cs:37:            m_WaveManager = FindFirstObjectByType<EnemyWaveManager>();
+Assets/Game\Scripts\Units\ProductionBuilding.cs:30:        { SwarmGameBridge.Instance.EnqueueTraining(this, action, unitPrefab, trainDuration, completionMessage); return; }
+Assets/Game\Scripts\Units\ProductionBuilding.cs:105:        var go = SwarmGameBridge.Instance != null ? SwarmGameBridge.Instance.SpawnGameplay(unitPrefab, spawnPos, Quaternion.identity)
+Assets/Game\Scripts\UI\SelectedUnitsInfoPanelUI.cs:24:        m_GameManager = GameManager.Get();
+Assets/Game\Scripts\Units\Neutral\SheepUnit.cs:24:    public bool IsClaimed => IsDotsControlled && SwarmGameBridge.Instance.TryResourceClaimState(this, out var resource) ? resource.Claims >= resource.Capacity : m_IsClaimed;
+Assets/Game\Scripts\Units\Neutral\SheepUnit.cs:42:        if (IsDotsControlled) return SwarmGameBridge.Instance.ClaimResource(this);
+Assets/Game\Scripts\Units\Neutral\SheepUnit.cs:55:        if (IsDotsControlled) { SwarmGameBridge.Instance.ReleaseResource(this); return; }
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:49:        var demo = FindFirstObjectByType<SwarmDemoController>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:50:        var bridge = SwarmGameBridge.Instance;
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:53:        var cameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:72:            var hall = FindFirstObjectByType<TownHall>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:82:                var warrior = FindFirstObjectByType<WarriorUnit>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:89:        recorder.Renderer = FindFirstObjectByType<SwarmInstancedRenderer>(); recorder.OffscreenCapture = true;
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:116:        var renderer = FindFirstObjectByType<SwarmInstancedRenderer>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:39:        var manager = FindFirstObjectByType<GameManager>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:45:        if (World.DefaultGameObjectInjectionWorld == null) return;
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:46:        Simulation = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<SwarmSimulationSystem>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:47:        Gameplay = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<GameplaySimulationSystem>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:49:        m_Map = FindFirstObjectByType<TilemapManager>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:50:        m_Fog = FindFirstObjectByType<FogOfWarManager>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:51:        m_DayNight = FindFirstObjectByType<DayNightCycleManager>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:59:        foreach (var resource in FindObjectsByType<ResourceNodeBase>(FindObjectsSortMode.None)) RegisterResource(resource);
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:60:        foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:141:        foreach (var resource in FindObjectsByType<ResourceNodeBase>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:46:        m_Bridge = SwarmGameBridge.Instance; m_Map = FindFirstObjectByType<TilemapManager>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:49:        var camera = FindFirstObjectByType<CameraController>(); if (camera != null) camera.LockCamera = true;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:50:        var dayNight = FindFirstObjectByType<DayNightCycleManager>(); if (dayNight != null) dayNight.enabled = false;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:51:        var waves = FindFirstObjectByType<EnemyWaveManager>(); if (waves != null) waves.enabled = false;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:53:        foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:60:        var worker = FindFirstObjectByType<WorkerUnit>(); var hall = FindFirstObjectByType<TownHall>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:67:        var tree = FindFirstObjectByType<Tree>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:72:            int woodBefore = GameManager.Get().Wood;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:78:            yield return WaitUntil(() => GameManager.Get().Wood > woodBefore, 8);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:79:            Record("worker_deposits_into_native_wallet_and_hud", GameManager.Get().Wood >= woodBefore + 4);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:102:        int workerCount = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:105:        yield return WaitUntil(() => FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length > workerCount, 5);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:107:        foreach (var unit in FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None)) if (unit != worker && unit.IsDotsControlled) trainedBound = true;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:108:        Record("townhall_training_spawns_bound_worker", FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length > workerCount && trainedBound);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:110:        var barrack = FindFirstObjectByType<Barrack>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:119:        var archery = FindFirstObjectByType<ArcheryRange>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:136:        var sheep = FindFirstObjectByType<SheepUnit>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:158:            Record("no_active_legacy_enemy_views", FindObjectsByType<EnemyUnit>(FindObjectsSortMode.None).Length == 0);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:171:        foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:200:        foreach (var tower in FindObjectsByType<TowerUnit>(FindObjectsSortMode.None))
+Assets/Game\Scripts\UI\ResourceRequirementsDisplay.cs:15:        m_GameManager = GameManager.Get();
+Assets/Game\Scripts\UI\ResourceRequirementsDisplay.cs:117:        Sprite icon = Resources.Load<Sprite>(iconPath);
+Assets/Game\Scripts\UI\MinimapFogUI.cs:22:            m_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
+Assets/Game\Scripts\UI\MinimapFogUI.cs:30:        m_CameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\Scripts\UI\MinimapFogUI.cs:70:        m_TilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\UI\MinimapFogUI.cs:106:        var bridge = SwarmGameBridge.Instance;
+Assets/Game\Scripts\UI\MinimapFogUI.cs:247:            m_CameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\Scripts\UI\IdleWorkerPanelUI.cs:36:        m_GameManager = GameManager.Get();
+Assets/Game\Scripts\UI\IdleWorkerPanelUI.cs:37:        m_CameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\Scripts\UI\IdleWorkerPanelUI.cs:125:            m_CameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\Scripts\Managers\CursorManager.cs:146:        GameManager gameManager = GameManager.Get();
+Assets/Game\Scripts\Managers\CursorManager.cs:178:        if ((activeUnit is WarriorUnit || activeUnit is TowerUnit) && SwarmGameBridge.Instance != null
+Assets/Game\Scripts\Managers\CursorManager.cs:179:            && SwarmGameBridge.Instance.TryFindEnemy(worldPoint, 0.65f, out _)) return UnitTask.Attack;
+Assets/Game\Scripts\Resources\Services\ResourceSpawner.cs:72:        var tilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Resources\Services\ResourceSpawner.cs:79:        var gameManager = GameManager.Get();
+Assets/Game\Scripts\Resources\Services\ResourceSpawner.cs:116:        var tilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Resources\Services\ResourceSpawner.cs:157:                if (SwarmGameBridge.Instance != null) SwarmGameBridge.Instance.SpawnGameplay(prefab, spawnPos, Quaternion.identity, container);
+Assets/Game\Scripts\UI\DayNightClockUI.cs:20:            m_DayNightCycleManager = FindFirstObjectByType<DayNightCycleManager>();
+Assets/Game\Scripts\AI\AIPawn.cs:80:        { SwarmGameBridge.Instance.MoveActor(actor, destination, false); return; }
+Assets/Game\Scripts\AI\AIPawn.cs:116:        { SwarmGameBridge.Instance.Gameplay.Stop(actor.DotsEntity); return; }
+Assets/Game\Scripts\AI\AIPawn.cs:166:            m_GameManager = GameManager.Get();
+Assets/Game\Scripts\AI\AIPawn.cs:171:            m_TilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Managers\FogOfWarAffectable.cs:23:            s_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
+Assets/Game\Scripts\Managers\SingletonManager.cs:8:        T[] managers = FindObjectsByType<T>(FindObjectsSortMode.None);
+Assets/Game\Scripts\Managers\SingletonManager.cs:19:        GameObject managerObject = GameObject.FindWithTag(tag);
+Assets/Game\Scripts\Resources\ResourceNodeBase.cs:23:    public bool IsClaimed => SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryResourceClaimState(this, out var resource)
+Assets/Game\Scripts\Resources\ResourceNodeBase.cs:28:    protected virtual void Start() { SwarmGameBridge.Instance?.RegisterResource(this); }
+Assets/Game\Scripts\Resources\ResourceNodeBase.cs:29:    protected virtual void OnDestroy() { SwarmGameBridge.Instance?.UnregisterResource(this); }
+Assets/Game\Scripts\Resources\ResourceNodeBase.cs:64:        if (SwarmGameBridge.Instance != null) return SwarmGameBridge.Instance.ClaimResource(this);
+Assets/Game\Scripts\Resources\ResourceNodeBase.cs:86:        if (SwarmGameBridge.Instance != null) { SwarmGameBridge.Instance.ReleaseResource(this); return; }
+Assets/Game\Scripts\Resources\ResourceNodeBase.cs:101:        var tilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Managers\EnemyWaveManager.cs:43:            m_DayNightCycleManager = FindFirstObjectByType<DayNightCycleManager>();
+Assets/Game\Scripts\Managers\EnemyWaveManager.cs:117:            m_GameManager = FindFirstObjectByType<GameManager>();
+Assets/Game\Scripts\Managers\EnemyWaveManager.cs:122:            m_TilemapManager = FindFirstObjectByType<TilemapManager>();
+Assets/Game\Scripts\Managers\EnemyWaveManager.cs:262:        if (SwarmGameBridge.Instance != null)
+Assets/Game\Scripts\Managers\EnemyWaveManager.cs:264:            return SwarmGameBridge.Instance.SpawnEnemy(enemyPrefab, spawnPosition);
+Assets/Game\Scripts\Managers\EnemyWaveManager.cs:293:        SwarmGameBridge.Instance?.Retreat(townHall.transform.position, m_CurrentTownHallRange + m_Definition.SpawnExtraRange);
+Assets/Game\Scripts\Managers\GameManager.cs:26:    public int Gold => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Gold : m_Gold;
+Assets/Game\Scripts\Managers\GameManager.cs:27:    public int Wood => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Wood : m_Wood;
+Assets/Game\Scripts\Managers\GameManager.cs:28:    public int Meat => SwarmGameBridge.Instance?.Gameplay != null ? SwarmGameBridge.Instance.Gameplay.Wallet.Meat : m_Meat;
+Assets/Game\Scripts\Managers\GameManager.cs:51:        m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer, m_SheepContainer);
+Assets/Game\Scripts\Managers\GameManager.cs:52:        m_ResourceDepotLocator = new SceneResourceDepotLocator(() => m_PlayerStructures);
+Assets/Game\Scripts\Managers\GameManager.cs:60:        m_CameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\Scripts\Managers\GameManager.cs:69:            m_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
+Assets/Game\Scripts\Managers\GameManager.cs:75:            Canvas mainCanvas = FindFirstObjectByType<Canvas>();
+Assets/Game\Scripts\Managers\GameManager.cs:134:        SwarmGameBridge.Instance?.Register(unit);
+Assets/Game\Scripts\Managers\GameManager.cs:167:        SwarmGameBridge.Instance?.Unregister(unit);
+Assets/Game\Scripts\Managers\GameManager.cs:202:        if (SwarmGameBridge.Instance?.Gameplay != null)
+Assets/Game\Scripts\Managers\GameManager.cs:203:        { SwarmGameBridge.Instance.Gameplay.AddResources(wood, gold, meat); RefreshDotsWallet(SwarmGameBridge.Instance.Gameplay.Wallet); return; }
+Assets/Game\Scripts\Managers\GameManager.cs:349:        var tilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Managers\GameManager.cs:388:            && SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryFindEnemy(worldPoint, 0.65f, out var dotsEnemy))
+Assets/Game\Scripts\Managers\GameManager.cs:811:        TilemapManager tilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Managers\FogOfWarManager.cs:82:        m_GameManager = GameManager.Get();
+Assets/Game\Scripts\Managers\FogOfWarManager.cs:83:        m_TilemapManager = TilemapManager.Get();
+Assets/Game\Scripts\Managers\FogOfWarManager.cs:102:        m_Affectables.AddRange(FindObjectsByType<FogOfWarAffectable>(FindObjectsSortMode.None));
+Assets/Game\Scripts\UI\DayCounterUI.cs:14:            m_DayNightCycleManager = FindFirstObjectByType<DayNightCycleManager>();
+Assets/Game\DOTS\Runtime\SwarmDemoController.cs:38:            var world = World.DefaultGameObjectInjectionWorld;
+Assets/Game\DOTS\Runtime\SwarmInstancedRenderer.cs:40:            if (Library == null) Library = Resources.Load<SwarmVisualLibrary>("DOTS/SwarmVisualLibrary");
+Assets/Game\DOTS\Runtime\SwarmInstancedRenderer.cs:41:            var retainedMaterial = Resources.Load<Material>("DOTS/SwarmSprite");

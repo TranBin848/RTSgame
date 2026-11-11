@@ -1,0 +1,101 @@
+{
+    "unity": "6000.3.11f1",
+    "scenario": "SampleScene / full gameplay ECS integration",
+    "passed": true,
+    "actors": 29,
+    "enemies": 5,
+    "ticks": 272,
+    "checks": [
+        {
+            "name": "bridge_initialized",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "all_scene_units_bound_and_legacy_movement_disabled",
+            "details": "views=25, actors=25",
+            "passed": true
+        },
+        {
+            "name": "player_move_command_moves_ecs_and_view",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "worker_claims_scene_tree",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "worker_gathers_native_cargo",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "worker_deposits_into_native_wallet_and_hud",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "construction_view_is_ecs",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "construction_completes_and_updates_sprite",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "townhall_training_spawns_bound_worker",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "barrack_training_spawns_bound_soldier",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "archery_training_spawns_bound_archer",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "worker_shelters_and_hides_view",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "daybreak_restores_worker",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "sheep_native_damage_and_flee",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "enemy_wave_manager_spawns_ecs",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "shared_wave_spawn_api_creates_entity",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "direct_enemy_prefab_converts_to_entity",
+            "details": "",
+            "passed": true
+        },
+        {
+            "name": "no_active_legacy_enemy_views",
+            "details": "",
+            "passed": true
+        }
+    ],
+    "errors": []
+}

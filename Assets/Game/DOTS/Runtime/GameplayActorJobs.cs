@@ -142,6 +142,7 @@ namespace RTS.DOTS
     [BurstCompile]
     public partial struct GameplayActorJob : IJobEntity
     {
+        public float TowerMultiplier;
         [ReadOnly] public NativeParallelHashMap<Entity, TargetSnapshot> Targets;
         [ReadOnly] public NativeParallelMultiHashMap<int2, TargetSnapshot> Grid;
         [ReadOnly] public ComponentLookup<GameplayResource> Resources;
@@ -262,7 +263,7 @@ namespace RTS.DOTS
                             var p = actor.Projectile; float2 offset = actor.ProjectileOffset;
                             offset.x = math.abs(offset.x) * (target.Body.Position.x < body.Position.x ? -1 : 1);
                             Shots.Enqueue(new ProjectileRequest { Owner = entity, Target = actor.Target, Position = body.Position + offset,
-                                Aim = target.Body.Position, Damage = actor.Damage, Faction = body.Faction, VisualId = 2,
+                                Aim = target.Body.Position, Damage = GameplaySimulationSystem.EffectiveGatherAmount(actor.Damage, actor.Kind == GameplayKind.Tower ? TowerMultiplier : 1), Faction = body.Faction, VisualId = 2,
                                 Speed = p.Speed, Arc = p.Arc, ArcHeight = p.ArcHeight, Spinning = p.Spinning, VisualScale = p.VisualScale,
                                 MinDuration = p.MinDuration, MaxDuration = p.MaxDuration, DurationFactor = p.DurationFactor });
                         }

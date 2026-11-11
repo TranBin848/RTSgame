@@ -14,6 +14,7 @@ public class HumanoidUnit : Unit
     }
     void Update()
     {
+        if (ProceduralMapRuntime.IsCompositionBlocked) return;
         if (IsDotsControlled) return;
         if (CurrentState == UnitState.Dead)
         {

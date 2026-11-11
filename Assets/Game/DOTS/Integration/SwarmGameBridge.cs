@@ -11,6 +11,8 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
 {
     public static SwarmGameBridge Instance { get; private set; }
     public SwarmSimulationSystem Simulation { get; private set; }
+    public bool IsInitialized => Simulation != null && Gameplay != null;
+    public bool IsSceneBound { get; private set; }
     readonly Dictionary<Unit, Entity> m_Proxies = new();
     readonly Dictionary<int, Unit> m_UnitsById = new();
     readonly List<Entity> m_Obstacles = new();
@@ -37,25 +39,57 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         var manager = FindFirstObjectByType<GameManager>();
+        if (manager != null && manager.GetComponent<GameSceneCompositionRoot>() != null) return;
         if (manager != null && manager.GetComponent<SwarmGameBridge>() == null) manager.gameObject.AddComponent<SwarmGameBridge>();
     }
     void Awake()
     {
-        Instance = this;
+        if (GetComponent<GameSceneCompositionRoot>() != null) return;
         if (World.DefaultGameObjectInjectionWorld == null) return;
-        Simulation = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<SwarmSimulationSystem>();
-        Gameplay = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<GameplaySimulationSystem>();
-        m_Game = GetComponent<GameManager>();
-        m_Map = FindFirstObjectByType<TilemapManager>();
-        m_Fog = FindFirstObjectByType<FogOfWarManager>();
-        m_DayNight = FindFirstObjectByType<DayNightCycleManager>();
-        m_Renderer = gameObject.AddComponent<SwarmInstancedRenderer>();
+        // Legacy composition until scene roots take over in D1.
+        Initialize(World.DefaultGameObjectInjectionWorld, GetComponent<GameManager>(),
+            FindFirstObjectByType<TilemapManager>(), FindFirstObjectByType<FogOfWarManager>(),
+            FindFirstObjectByType<DayNightCycleManager>());
+    }
+    public void Initialize(World world, GameManager game, TilemapManager map,
+        FogOfWarManager fog, DayNightCycleManager dayNight)
+    {
+        if (world == null || !world.IsCreated) throw new System.ArgumentException("A live ECS World is required.", nameof(world));
+        if (game == null) throw new System.ArgumentNullException(nameof(game));
+        if (map == null) throw new System.ArgumentNullException(nameof(map));
+        if (IsInitialized)
+        {
+            if (Simulation.World != world || m_Game != game || m_Map != map || m_Fog != fog || m_DayNight != dayNight)
+                throw new System.InvalidOperationException("Bridge is already initialized with different dependencies.");
+            return;
+        }
+        if (Instance != null && Instance != this)
+            throw new System.InvalidOperationException("Another gameplay bridge already owns the scene simulation.");
+        Simulation = world.GetOrCreateSystemManaged<SwarmSimulationSystem>();
+        Gameplay = world.GetOrCreateSystemManaged<GameplaySimulationSystem>();
+        m_Game = game;
+        m_Map = map;
+        m_Fog = fog;
+        m_DayNight = dayNight;
+        m_Renderer = GetComponent<SwarmInstancedRenderer>();
+        if (m_Renderer == null) m_Renderer = gameObject.AddComponent<SwarmInstancedRenderer>();
         m_Renderer.Simulation = Simulation;
+        Instance = this;
     }
     void Start()
     {
         if (Simulation == null || m_Map == null) { enabled = false; return; }
+        if (GetComponent<GameSceneCompositionRoot>() != null) return;
+        BindScene();
+    }
+    public void BindScene()
+    {
+        if (IsSceneBound) return;
+        if (!IsInitialized || m_Map.WalkableTilemap == null)
+            throw new System.InvalidOperationException("Bridge dependencies and map must be initialized before binding.");
         RefreshNavigation();
+        if (!Simulation.IsConfigured || !Gameplay.IsConfigured)
+            throw new System.InvalidOperationException("Navigation grid was not configured.");
         foreach (var resource in FindObjectsByType<ResourceNodeBase>(FindObjectsSortMode.None)) RegisterResource(resource);
         foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
         {
@@ -63,6 +97,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
         }
         UpdateGoal();
         if (m_Fog != null) { m_Fog.OnFogUpdated += RefreshFog; RefreshFog(); }
+        IsSceneBound = true;
     }
     public void Register(Unit unit)
     {
@@ -79,6 +114,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     }
     void Update()
     {
+        if (ProceduralMapRuntime.IsCompositionBlocked) return;
         if (Simulation == null || Simulation.World == null || !Simulation.World.IsCreated) return;
         SynchronizeGameplay();
         if (Time.unscaledTime >= m_NextMapRefresh && m_MapVersion != m_Map.NavigationVersion)
@@ -86,7 +122,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
         UpdateGoal();
         if (m_DayNight != null) m_Renderer.EnvironmentColor = m_DayNight.EnvironmentTint;
     }
-    void LateUpdate() { SynchronizeGameplay(); }
+    void LateUpdate() { if (!ProceduralMapRuntime.IsCompositionBlocked) SynchronizeGameplay(); }
     void UpdateGoal()
     {
         if (m_Game != null && m_Game.TryFindClosestTownHall(Vector3.zero, out var hall))
@@ -228,6 +264,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
         {
             Gameplay.ResetGameplay();
             Simulation.ResetSimulation();
+            Simulation.Paused = false;
             foreach (var entity in m_Proxies.Values) Simulation.Remove(entity);
             foreach (var entity in m_Obstacles) Simulation.Remove(entity);
         }

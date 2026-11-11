@@ -1,6 +1,6 @@
 # Kiến trúc Procedural Generation
 
-Cập nhật: **29/10/2026**. Tài liệu này mô tả implementation hiện có của lát cắt đầu tiên.
+Cập nhật: **11/11/2026**. Lát cắt đầu tiên bên dưới vẫn là preset gameplay mặc định. [S4 Regions](S4-Regions.md) bổ sung preset chiến thuật v2, dữ liệu region/gateway/landmark và preview, chưa áp vào gameplay scene.
 
 ## Mục tiêu và phạm vi
 

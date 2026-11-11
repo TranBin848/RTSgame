@@ -25,6 +25,8 @@ namespace RTS.DOTS
         public NativeQueue<GameplayEvent> Events;
         public Entity Wallet;
         public float DeltaTime;
+        public float WoodMultiplier;
+        public float CargoMultiplier;
         [ReadOnly] public NativeArray<byte> Walkable;
         public float2 Origin;
         public float CellSize;
@@ -126,8 +128,10 @@ namespace RTS.DOTS
                                 if (worker.Timer >= math.max(0.01f, profile.TickTime))
                                 {
                                     worker.Timer -= math.max(0.01f, profile.TickTime);
-                                    worker.Carried = math.min(profile.Capacity, worker.Carried + profile.Amount);
-                                    if (worker.Carried >= profile.Capacity)
+                                    int amount = GameplaySimulationSystem.EffectiveGatherAmount(profile.Amount, profile.ResourceType == 0 ? WoodMultiplier : 1);
+                                    int capacity = GameplaySimulationSystem.EffectiveGatherAmount(profile.Capacity, CargoMultiplier);
+                                    worker.Carried = math.min(capacity, worker.Carried + amount);
+                                    if (worker.Carried >= capacity)
                                     { worker.Phase = WorkPhase.Depositing; actor.Task = GameplayTask.ReturnResource; actor.State = GameplayState.Idle; worker.Timer = 0; }
                                 }
                             }

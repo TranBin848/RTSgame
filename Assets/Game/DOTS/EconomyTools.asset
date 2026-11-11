@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63dbd60ead741a408c31c014d9a6f33, type: 3}
+  m_Name: EconomyTools
+  m_EditorClassIdentifier: Assembly-CSharp::EconomyResearchDefinition
+  Id: economy_tools
+  Wood: 40
+  Gold: 15
+  Meat: 0
+  Duration: 20
+  WoodMultiplier: 1.25
+  AdditionalTechnologies:
+  - Id: economy_cargo
+    Prerequisite: economy_tools
+    Wood: 80
+    Gold: 30
+    Meat: 0
+    Duration: 30
+    WoodMultiplier: 1
+    CargoMultiplier: 1.5
+    TrainingMultiplier: 0
+    TowerMultiplier: 0
+  - Id: military_archery
+    Prerequisite: 
+    Wood: 50
+    Gold: 30
+    Meat: 10
+    Duration: 25
+    WoodMultiplier: 1
+    CargoMultiplier: 0
+    TrainingMultiplier: 0
+    TowerMultiplier: 0
+  - Id: military_training
+    Prerequisite: military_archery
+    Wood: 80
+    Gold: 60
+    Meat: 20
+    Duration: 35
+    WoodMultiplier: 1
+    CargoMultiplier: 0
+    TrainingMultiplier: 0.8
+    TowerMultiplier: 0
+  - Id: expansion_tower
+    Prerequisite: 
+    Wood: 60
+    Gold: 25
+    Meat: 0
+    Duration: 25
+    WoodMultiplier: 1
+    CargoMultiplier: 0
+    TrainingMultiplier: 0
+    TowerMultiplier: 0
+  - Id: expansion_fortify
+    Prerequisite: expansion_tower
+    Wood: 100
+    Gold: 60
+    Meat: 0
+    Duration: 40
+    WoodMultiplier: 1
+    CargoMultiplier: 0
+    TrainingMultiplier: 0
+    TowerMultiplier: 1.25

@@ -58,10 +58,10 @@ namespace RTS.DOTS
         public Entity Worker;
         public float Duration, Elapsed;
         public int RequestId;
-        public byte Active, Middle, Finished;
+        public byte Active, Middle, Finished, RequiredTechnology;
     }
 
-    public struct GameplayProducer : IComponentData { public float Elapsed; public int CurrentRequest; }
+    public struct GameplayProducer : IComponentData { public float Elapsed; public int CurrentRequest; public byte RequiresArchery; }
 
     [InternalBufferCapacity(4)]
     public struct TrainingRequest : IBufferElementData { public int RequestId; public float Duration; }

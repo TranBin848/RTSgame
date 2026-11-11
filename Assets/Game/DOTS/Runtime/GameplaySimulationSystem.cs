@@ -43,7 +43,7 @@ namespace RTS.DOTS
             m_Events = new NativeQueue<GameplayEvent>(Allocator.Persistent);
             m_Damage = new NativeQueue<DamageEvent>(Allocator.Persistent);
             m_Shots = new NativeQueue<ProjectileRequest>(Allocator.Persistent);
-            WalletEntity = EntityManager.CreateEntity(typeof(PlayerWallet));
+            WalletEntity = EntityManager.CreateEntity(typeof(PlayerWallet), typeof(PlayerResearch));
         }
 
         public void ConfigureGrid(float2 origin, int2 size, float cellSize, byte[] walkable)
@@ -74,11 +74,11 @@ namespace RTS.DOTS
             var buffer = EntityManager.AddBuffer<GatheringProfileData>(entity);
             if (profiles != null) foreach (var profile in profiles) buffer.Add(profile);
         }
-        public void AttachBuilding(Entity entity, int resourceMask, bool townHall, bool producer)
+        public void AttachBuilding(Entity entity, int resourceMask, bool townHall, bool producer, byte requiredTechnology = 0)
         {
-            EntityManager.AddComponentData(entity, new GameplayConstruction());
+            EntityManager.AddComponentData(entity, new GameplayConstruction { RequiredTechnology = requiredTechnology });
             EntityManager.AddComponentData(entity, new GameplayDepot { ResourceMask = resourceMask, TownHall = (byte)(townHall ? 1 : 0) });
-            if (producer) { EntityManager.AddComponentData(entity, new GameplayProducer()); EntityManager.AddBuffer<TrainingRequest>(entity); }
+            if (producer) { EntityManager.AddComponentData(entity, new GameplayProducer { RequiresArchery = (byte)(requiredTechnology == 1 ? 1 : 0) }); EntityManager.AddBuffer<TrainingRequest>(entity); }
         }
         public Entity CreateResource(GameplayResource resource)
         { Entity entity = EntityManager.CreateEntity(typeof(GameplayResource)); EntityManager.SetComponentData(entity, resource); return entity; }
@@ -190,10 +190,19 @@ namespace RTS.DOTS
             body.Position = body.PreviousPosition = GameplayMath.NearestWalkable(origin, body.Radius, m_Origin, m_CellSize, m_Size, m_Walkable); body.Targetable = 1;
             EntityManager.SetComponentData(entity, body); SetDestination(entity, exit);
         }
-        public void BeginConstruction(Entity entity, float duration, int requestId)
-        { EntityManager.SetComponentData(entity, new GameplayConstruction { Active = 1, Duration = math.max(0.01f, duration), RequestId = requestId }); }
-        public void EnqueueTraining(Entity entity, int requestId, float duration)
-        { EntityManager.GetBuffer<TrainingRequest>(entity).Add(new TrainingRequest { RequestId = requestId, Duration = math.max(0.01f, duration) }); }
+        public bool BeginConstruction(Entity entity, float duration, int requestId)
+        {
+            if (!EntityManager.Exists(entity) || !EntityManager.HasComponent<GameplayConstruction>(entity)) return false;
+            byte required = EntityManager.GetComponentData<GameplayConstruction>(entity).RequiredTechnology;
+            if ((required == 1 && !CanUseArchery) || (required == 2 && !CanUseTowers)) return false;
+            EntityManager.SetComponentData(entity, new GameplayConstruction { RequiredTechnology = required, Active = 1, Duration = math.max(0.01f, duration), RequestId = requestId }); return true;
+        }
+        public bool EnqueueTraining(Entity entity, int requestId, float duration)
+        {
+            if (!EntityManager.Exists(entity) || !EntityManager.HasComponent<GameplayProducer>(entity)) return false;
+            if (EntityManager.GetComponentData<GameplayProducer>(entity).RequiresArchery != 0 && !CanUseArchery) return false;
+            EntityManager.GetBuffer<TrainingRequest>(entity).Add(new TrainingRequest { RequestId = requestId, Duration = math.max(0.01f, duration * TrainingMultiplier) }); return true;
+        }
         public void AddResources(int wood, int gold, int meat)
         {
             var wallet = Wallet; wallet.Wood += wood; wallet.Gold += gold; wallet.Meat += meat;
@@ -209,6 +218,7 @@ namespace RTS.DOTS
         {
             Dependency.Complete(); EntityManager.DestroyEntity(m_Actors); EntityManager.DestroyEntity(m_Resources);
             EntityManager.SetComponentData(WalletEntity, new PlayerWallet()); m_Events.Clear(); m_Damage.Clear(); m_Shots.Clear(); TickCount = 0;
+            EntityManager.SetComponentData(WalletEntity, new PlayerResearch()); m_ResearchConfigured = false;
         }
 
         protected override void OnUpdate()
@@ -217,6 +227,7 @@ namespace RTS.DOTS
             m_Combat ??= World.GetOrCreateSystemManaged<SwarmSimulationSystem>();
             if (m_Combat.Paused) return;
             float dt = math.min(SystemAPI.Time.DeltaTime, 0.05f);
+            TickResearch(dt);
             using var workers = m_Workers.ToEntityArray(Allocator.TempJob);
             using var buildings = m_Buildings.ToEntityArray(Allocator.TempJob);
             using var depots = m_Depots.ToEntityArray(Allocator.TempJob);
@@ -228,7 +239,8 @@ namespace RTS.DOTS
                 Construction = GetComponentLookup<GameplayConstruction>(), Producers = GetComponentLookup<GameplayProducer>(),
                 Wallets = GetComponentLookup<PlayerWallet>(), DepotData = GetComponentLookup<GameplayDepot>(true),
                 Profiles = GetBufferLookup<GatheringProfileData>(true), Requests = GetBufferLookup<TrainingRequest>(),
-                Events = m_Events, Wallet = WalletEntity, DeltaTime = dt, Walkable = m_Walkable, Origin = m_Origin, CellSize = m_CellSize, Size = m_Size
+                Events = m_Events, Wallet = WalletEntity, DeltaTime = dt, Walkable = m_Walkable, Origin = m_Origin, CellSize = m_CellSize, Size = m_Size,
+                WoodMultiplier = Research.Unlocked != 0 ? m_ResearchDefinition.WoodMultiplier : 1, CargoMultiplier = CargoMultiplier
             }.Schedule(Dependency);
             Dependency.Complete();
 
@@ -239,6 +251,7 @@ namespace RTS.DOTS
             Dependency = new BuildSwarmSpatialJob { Targets = m_Targets.AsParallelWriter(), Grid = m_Spatial.AsParallelWriter() }.ScheduleParallel(Dependency);
             Dependency = new GameplayActorJob
             {
+                TowerMultiplier = TowerMultiplier,
                 Targets = m_Targets, Grid = m_Spatial, Resources = GetComponentLookup<GameplayResource>(true),
                 Construction = GetComponentLookup<GameplayConstruction>(true), Walkable = m_Walkable,
                 Damage = m_Damage.AsParallelWriter(), Shots = m_Shots.AsParallelWriter(),

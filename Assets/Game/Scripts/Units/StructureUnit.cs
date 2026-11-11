@@ -22,6 +22,7 @@ public class StructureUnit : Unit, IResourceDepot
 
     void Update()
     {
+        if (ProceduralMapRuntime.IsCompositionBlocked) return;
         if (IsDotsControlled)
         {
             m_BuildingProcess?.UpdateDotsPresentation();

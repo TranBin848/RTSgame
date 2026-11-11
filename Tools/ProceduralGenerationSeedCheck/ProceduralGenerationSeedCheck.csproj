@@ -8,6 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="../../Assets/Game/ProceduralGeneration/Core/StrategicLayout.cs" Link="Core/StrategicLayout.cs" />
     <Compile Include="../../Assets/Game/ProceduralGeneration/Core/MapGenerationData.cs" Link="Core/MapGenerationData.cs" />
     <Compile Include="../../Assets/Game/ProceduralGeneration/Core/DeterministicRandom.cs" Link="Core/DeterministicRandom.cs" />
     <Compile Include="../../Assets/Game/ProceduralGeneration/Core/ProceduralMapGenerator.cs" Link="Core/ProceduralMapGenerator.cs" />

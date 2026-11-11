@@ -76,7 +76,7 @@ public sealed partial class SwarmGameBridge
         if (unit is StructureUnit structure)
         {
             int mask = (structure.CanStoreWood ? 1 : 0) | (structure.CanStoreGold ? 2 : 0) | (structure.CanStoreMeat ? 4 : 0);
-            Gameplay.AttachBuilding(entity, mask, unit is TownHall, unit is ProductionBuilding);
+            Gameplay.AttachBuilding(entity, mask, unit is TownHall, unit is ProductionBuilding, (byte)(unit is ArcheryRange ? 1 : unit is TowerUnit ? 2 : 0));
         }
         if (unit is SheepUnit node)
         {
@@ -186,17 +186,26 @@ public sealed partial class SwarmGameBridge
 
     public void EnqueueTraining(ProductionBuilding building, ActionSO action, GameObject prefab, float duration, string message)
     {
+        if (!CanUsePrefab(prefab)) return;
         int id = m_NextRequestId++;
+        if (!Gameplay.EnqueueTraining(ProxyFor(building), id, duration)) return;
         m_TrainingViews[id] = new TrainingView { Building = building, Prefab = prefab, UiId = m_Game.EnqueueActionUI(action), Message = message };
-        Gameplay.EnqueueTraining(ProxyFor(building), id, duration);
     }
     public void BeginConstruction(StructureUnit structure, BuildingProcess process, float duration)
     {
-        int id = m_NextRequestId++; m_ConstructionViews[id] = process;
-        Gameplay.BeginConstruction(ProxyFor(structure), duration, id);
+        int id = m_NextRequestId++;
+        if (Gameplay.BeginConstruction(ProxyFor(structure), duration, id)) m_ConstructionViews[id] = process;
+    }
+    public bool CanUsePrefab(GameObject prefab)
+    {
+        if (prefab == null || Gameplay == null) return false;
+        if (prefab.GetComponent<EnemyUnit>() != null) return true;
+        if ((prefab.GetComponent<ArcheryRange>() != null || prefab.GetComponent<RangerUnit>() != null) && !Gameplay.CanUseArchery) return false;
+        return prefab.GetComponent<TowerUnit>() == null || Gameplay.CanUseTowers;
     }
     public GameObject SpawnGameplay(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent = null)
     {
+        if (!CanUsePrefab(prefab)) return null;
         if (prefab.TryGetComponent<EnemyUnit>(out _)) { SpawnEnemy(prefab, position); return null; }
         var view = Instantiate(prefab, position, rotation, parent);
         if (view.TryGetComponent<Unit>(out var unit)) Register(unit);
