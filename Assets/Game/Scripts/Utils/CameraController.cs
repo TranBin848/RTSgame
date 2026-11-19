@@ -18,14 +18,18 @@ public class CameraController : MonoBehaviour
     private Vector3 m_CurrentVelocity;
 
     public bool LockCamera { get; set; }
+    public Camera ViewCamera => m_MainCamera;
+
+    public void Initialize(Camera camera)
+    {
+        if (camera == null || camera.gameObject.scene != gameObject.scene) throw new System.ArgumentException("Camera controller requires its scene camera.");
+        if (m_MainCamera != null && m_MainCamera != camera) throw new System.InvalidOperationException("Camera controller already has a camera.");
+        m_MainCamera = camera;
+    }
 
     private void Start()
     {
-        m_MainCamera = GetComponent<Camera>();
-        if (m_MainCamera == null)
-        {
-            m_MainCamera = Camera.main;
-        }
+        if (m_MainCamera == null) m_MainCamera = GetComponent<Camera>();
     }
 
     private void LateUpdate()
@@ -145,10 +149,6 @@ public class CameraController : MonoBehaviour
         if (m_MainCamera == null)
         {
             m_MainCamera = GetComponent<Camera>();
-            if (m_MainCamera == null)
-            {
-                m_MainCamera = Camera.main;
-            }
         }
 
         if (m_MainCamera == null)

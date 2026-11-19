@@ -1,6 +1,18 @@
 # Dependency Injection — thiết kế và lộ trình chuyển đổi
 
-Ngày: **11/11/2026**. Trạng thái: **D0–D2 hoàn thành trong phạm vi hiện tại; D3–D4 chưa triển khai**. [ADR-001](ADR-001-ManualDI.md) là quyết định nền.
+**17/11 — D0–D4 DONE trong phạm vi inventory và ngoại lệ:** UI/cursor/fog/camera/input/bootstrap đã chuyển, pool nhận fog mới, scene tham chiếu giữ hoạt động. [D4 Validation](D4-Validation.md) ghi luồng,81tests, integration, scan và các giới hạn single-active-scene/engine/asset/tooling. Các checkpoint cũ dưới đây là lịch sử, không dùng làm trạng thái hiện tại.
+
+Cập nhật **15/11/2026 — D3c2:** ProceduralMapAuthoring giữ explicit spawner refs; root và legacy bootstrap inject game/map/bridge vào ResourceSpawner, Awake không tìm service hoặc sinh resource. Suppression/initial-regenerate/Entity cleanup/worker deposit/menu reload PASS; [D3c2 Evidence](D3c2-ProceduralSpawners.md). Manual P/click đang chờ người dùng; D3 tổng thể PARTIAL, tiếp production/train/factory/pool.
+
+Tiếp nối cuối **13/11/2026 — D3c1:** BuildingProcess dùng constructor injection game/bridge; GameManager sở hữu truyền deps, process không Get/Instance và nhánh ECS không gọi Worker.SendToBuild để lấy lại bridge global. Các caller/tools đã cập nhật, validation/construction/queue/removed-view và SampleScene checks PASS; [D3c1 Evidence](D3c1-Construction.md). D3 tổng thể vẫn PARTIAL, tiếp procedural/spawner/production/train/factory/pool.
+
+Cuối **13/11/2026 — lifecycle S6c:** EndComposition xóa Active/Ready/error flags thay vì giữ state procedural ở MainMenu. Menu→game→menu→game đã kiểm registry/Entity/ví/listener reset; [Evidence](../ProceduralGeneration/S6c-WavesLifecycle.md). D3c chưa migrate procedural/spawner/build/train/factory/pool; không đổi trạng thái D3 thành DONE chỉ vì lifecycle đạt.
+
+Cập nhật mới nhất **13/11/2026 — D3b resource nodes:** bridge RegisterResource inject bridge/map vào cây/mỏ; unregister và scene teardown unbind. Node không lookup service nữa. Lifecycle/claims/nav và kinh tế hai vùng trên3seed PASS; [S6b Evidence](../ProceduralGeneration/S6b-EconomyResourceDI.md). D3 tổng thể vẫn PARTIAL; procedural/spawner/build/train/factory/pool chưa hoàn tất.
+
+Ngày: **12/11/2026**. Trạng thái: **D0–D2 hoàn thành; D3 PARTIAL (wave D3a đã kiểm); D4 chưa triển khai**. [ADR-001](ADR-001-ManualDI.md) là quyết định nền.
+
+D3a: root inject game/map/day-night/bridge/generator vào EnemyWaveManager; lookup legacy ở bridge bootstrap. Init/listener/readiness, ba seed strategic spawn/path và SampleScene legacy PASS; [S6 Integration](../ProceduralGeneration/S6-Integration.md). Resource/procedural/factory/build/train/pool vẫn theo inventory, chưa coi toàn project đạt DI.
 
 D2: root tạo ResearchService bằng constructor với bridge, inject IResearchService/GameManager vào panel. State và ví ở ECS; panel chỉ query/command, không lookup. Fake-service và listener close/reopen checks PASS; [Evidence](../Progression/S1-D2-Evidence-2026-11-11.md). S2 vẫn cần kiểm chứng click/hình ảnh UI trước khi phát triển thêm node.
 
@@ -14,7 +26,7 @@ Dependency của một đối tượng được truyền từ bên ngoài, thể
 
 Áp dụng cho mã do dự án sở hữu trong Assets/Game: gameplay MonoBehaviour, manager, UI, resource services, progression và các adapter procedural/DOTS. Không sửa package bên thứ ba chỉ để áp quy ước. ECS giữ cơ chế World/system/component/job riêng; DI áp dụng tại cầu nối vào World, không truyền managed interface vào Burst job.
 
-## 2. Hiện trạng đối chiếu
+## 2. Baseline D0 lịch sử — đã được D1–D4 thay thế
 
 - GameManager đọc ví và đăng ký Unit qua SwarmGameBridge.Instance; Start còn tìm camera/fog/canvas.
 - EnemyWaveManager tìm manager/map/day-night rồi gọi bridge static để spawn/retreat.
@@ -77,6 +89,12 @@ Trong giai đoạn chuyển tiếp, scene có root phải vô hiệu bootstrap t
 - Tests fake query/command ở UI boundary; tests nghiệp vụ phải chạy command/system thật để kiểm tra ví và hiệu ứng. Fake không thay cho integration test.
 
 ## 6. Lộ trình thực hiện
+
+Cập nhật đóng16/11 — **D3 DONE**: bridge inject Unit(game,map,bridge) trước BindDots/RegisterWithGame; Worker/Sheep và AIPawn dùng refs đã cấp, Structure cập nhật nav lúc acquire/return. Raw pool chỉ reset local state; caller phải Register sau acquire. Unregister dọn registry/Entity; teardown chỉ unbind, không sửa dictionary khi duyệt. Worker pool qua menu→game mới/command/return và17procedural PASS. [Evidence](D3c4b-UnitLifecycle.md), [S6 final](../ProceduralGeneration/S6-FinalValidation.md) ghi phạm vi; D4 toàn project chưa triển khai.
+
+Cập nhật15/11 — D3c4a: GameManager factory dùng dependency đã nhận, Projectile chỉ legacy không lookup; native tạo Entity trực tiếp, không view tạm/ProxyFor ngầm bind. Root gọi BeginGameplay idempotent sau BindScene thay vì trông thứ tự Start của manager. [Evidence](D3c4a-ProjectileFactory.md) ghi startup/reload và damage/pool/callers PASS. Unit mẹ còn cấp manager bằng Get, cùng Worker/Sheep/Structure/AIPawn là D3c4b; chưa hoàn tất toàn graph DI.
+
+Cập nhật15/11/2026: D3c3 đã inject producer tại bind, action debit sau enqueue accepted và cleanup khi unregister/return/destroy. Pool Spawn nhận owner Scene; chưa migrate toàn graph Unit/Projectile/static pool. [D3c3 evidence](D3c3-Production.md) ghi training/FIFO/pool API PASS và regression59+17; D3 tổng thể vẫn PARTIAL, tiếp D3c4 theo Inventory, rồi D4 consumer còn lại.
 
 | Lát cắt | Phụ thuộc | Công việc và tiêu chí DONE |
 |---|---|---|

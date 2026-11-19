@@ -19,14 +19,19 @@ public class SelectedUnitsInfoPanelUI : MonoBehaviour
         // SetVisible(false);
     }
 
-    void Start()
+    bool m_IsInitialized;
+    public void Initialize(GameManager game)
     {
-        m_GameManager = GameManager.Get();
-        if (m_GameManager != null)
+        if (game == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
         {
-            m_GameManager.OnSelectionChanged += HandleSelectionChanged;
-            HandleSelectionChanged(m_GameManager.SelectedUnits);
+            if (m_GameManager != game) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
         }
+        m_GameManager = game;
+        m_GameManager.OnSelectionChanged += HandleSelectionChanged;
+        HandleSelectionChanged(m_GameManager.SelectedUnits);
+        m_IsInitialized = true;
     }
 
     void OnDestroy()

@@ -1,6 +1,20 @@
 # Kiến trúc Procedural Generation
 
+Cập nhật **16/11 — S7 DONE:** [Presentation](S7-Presentation.md) nhận MapData/map/origin/fog từ root; tint tile và decor SpriteRenderer không collider/Unit, path/pad/region identity và minimap glyph sau explored. Root/Minimap dùng Initialize refs, scene generator wire cùng code; Fog toggle notify cập nhật ngay. Shared night palette đổi readability, timing/Core/Resources/navigation không đổi.3seed checks, ảnh cùng camera/seed ngày-đêm và user acceptance PASS;59DOTS+17procedural. Tiếp S8; D4 không được coi đã hoàn tất.
+
+Cập nhật đóng **16/11/2026 — S6/D3 DONE:** pipeline Unit sau map Ready dùng explicit scene injection tại bridge.Register; Awake không tra manager, return/unload clear refs, raw pool cần explicit register. Hai grids/fog-camera/input/economy/build và3chu kỳ đêm trên0/1/1543, worker pool qua menu→game mới và17procedural đã PASS. [S6 final](S6-FinalValidation.md) mô tả dữ liệu/cách chạy/kết quả/giới hạn; tiếp S7, D4/UI/fog toàn project chưa được coi đã migrate.
+
+Cập nhật **15/11/2026 — D3c2:** Authoring không Find spawner; scene/editor generator cấp mảng LegacySpawners, root Initialize các spawner bị suppress. Spawner initial legacy được bootstrap inject rồi sinh view trước BindScene; regenerate bound dùng factory bridge. [D3c2 Evidence](../DependencyInjection/D3c2-ProceduralSpawners.md) ghi pipeline mới, kiểm chứng và manual còn chờ. Các mô tả Awake lookup/fallback bên dưới mang tính lịch sử, không thay trạng thái mới này.
+
+Cập nhật cuối **13/11/2026 — S6c:** wave dùng điểm trên tuyến tiếp cận gateway tại bán kính spawn legacy để giữ thời gian tiếp cận, không còn bắt buộc sinh sát biên. Core/MapData vẫn version3; API gateway biên cũ giữ cho topology. EndComposition xóa cờ map khi unload. [S6c Waves/lifecycle](S6c-WavesLifecycle.md) ghi thuật toán/timing/so legacy3seed và phần chưa nghiệm thu.
+
+Cập nhật **13/11/2026 — S6b:** đã kiểm kinh tế hai vùng/StoragePit/claims-navigation qua collider và fog-minimap-camera API trên3seed. ResourceNodeBase nhận bridge/map từ RegisterResource, không tự tìm service hoặc tự Start-register; factory resource động phải dùng SpawnGameplay/RegisterResource. [S6b Evidence](S6b-EconomyResourceDI.md) ghi kết quả và giới hạn; S6 tổng thể PARTIAL.
+
+Trạng thái mới nhất **12/11/2026 — S6a/D3a:** ProceduralGame đã dùng strategic version3 và wave spawn qua gateway, wave nhận dependency từ root. Ba seed spawn/radius/path checks PASS; S6 tổng thể còn PARTIAL. Xem [S6 Integration](S6-Integration.md) trước các mô tả default legacy mang tính lịch sử bên dưới.
+
 Cập nhật: **11/11/2026**. Lát cắt đầu tiên bên dưới vẫn là preset gameplay mặc định. [S4 Regions](S4-Regions.md) bổ sung preset chiến thuật v2, dữ liệu region/gateway/landmark và preview, chưa áp vào gameplay scene.
+
+Cập nhật **12/11/2026 — S5:** StrategicRegions hiện version3, có resource budget theo vùng, ba vàng landmark, pad/clearance/final-topology validator và hai lối biên được đăng ký; [S5 ResourcesTopology](S5-ResourcesTopology.md) là trạng thái mới nhất. Legacy vẫn version1/default gameplay. Không coi nội dung S4 hoặc mô tả legacy bên dưới là strategic gameplay đã được nghiệm thu.
 
 ## Mục tiêu và phạm vi
 

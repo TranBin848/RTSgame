@@ -1,0 +1,25 @@
+Date: 2026-11-12 (Asia/Saigon)
+Project: RTSgame2026
+Core-only .NET tool, existing project Mathematics DLL reference.
+Command: dotnet run --project Tools/ProceduralGenerationSeedCheck/ProceduralGenerationSeedCheck.csproj -- 1000 strategic
+Seeds checked: 1000
+Preset: StrategicRegions
+Failures: 0
+Accepted attempt histogram (0-based): 822,146,27,4,1,0,0,0
+Mean generation time: 25.25 ms
+Worst generation time: 142 ms (seed 204)
+
+Command: dotnet run --project Tools/ProceduralGenerationSeedCheck/ProceduralGenerationSeedCheck.csproj -- 1000 legacy
+Seeds checked: 1000
+Preset: LegacyMainland
+Failures: 0
+Accepted attempt histogram (0-based): 901,90,8,1,0,0,0,0
+Mean generation time: 14.55 ms
+Worst generation time: 61 ms (seed 0)
+
+Each seed 0..999 generated again and compared for terrain, reserved, resources,
+generator version, region IDs, routes, regions, connections, gateways, landmark.
+Strategic final validator rerun on accepted maps. No failed seed to list.
+Timings include process/JIT effects and are diagnostics, not a Player benchmark.
+An earlier 1000 strategic run also passed, before histogram output was added.
+A Unity script-execute batch timed out before producing its report and is NOT evidence of a completed sweep.

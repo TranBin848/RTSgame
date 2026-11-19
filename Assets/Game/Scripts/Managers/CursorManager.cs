@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CursorManager : SingletonManager<CursorManager>
+public class CursorManager : MonoBehaviour
 {
     [System.Serializable]
     public struct CursorMapping
@@ -24,11 +24,27 @@ public class CursorManager : SingletonManager<CursorManager>
     private Texture2D m_ScaledDefaultTexture;
     private Vector2 m_ScaledDefaultHotspot;
     private List<Texture2D> m_ScaledTextures = new();
+    private GameManager m_Game;
+    private SwarmGameBridge m_Bridge;
+    private Camera m_ViewCamera;
+    bool m_IsInitialized;
+    public void Initialize(GameManager game, SwarmGameBridge bridge, Camera camera)
+    {
+        if (game == null || bridge == null || camera == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
+        {
+            if (m_Game != game || m_Bridge != bridge || m_ViewCamera != camera) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
+        }
+        m_Game = game; m_Bridge = bridge; m_ViewCamera = camera;
+
+        m_IsInitialized = true;
+    }
+
     private UnitTask m_CurrentTask = UnitTask.None;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         InitializeMappings();
     }
 
@@ -138,12 +154,12 @@ public class CursorManager : SingletonManager<CursorManager>
 
     private UnitTask DetermineHoverTask()
     {
-        if (GameUtils.iSPointOverUIElelement() || Camera.main == null)
+        if (GameUtils.iSPointOverUIElelement() || m_ViewCamera == null)
         {
             return UnitTask.None;
         }
 
-        GameManager gameManager = GameManager.Get();
+        GameManager gameManager = m_Game;
         if (gameManager == null)
         {
             return UnitTask.None;
@@ -174,9 +190,9 @@ public class CursorManager : SingletonManager<CursorManager>
         }
 
         // 3. Hover-based cursor: Check if hovering over interactive objects
-        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(GameUtils.InputPosition);
-        if ((activeUnit is WarriorUnit || activeUnit is TowerUnit) && SwarmGameBridge.Instance != null
-            && SwarmGameBridge.Instance.TryFindEnemy(worldPoint, 0.65f, out _)) return UnitTask.Attack;
+        Vector2 worldPoint = m_ViewCamera.ScreenToWorldPoint(GameUtils.InputPosition);
+        if ((activeUnit is WarriorUnit || activeUnit is TowerUnit) && m_Bridge != null
+            && m_Bridge.TryFindEnemy(worldPoint, 0.65f, out _)) return UnitTask.Attack;
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
         if (hit.collider != null && hit.collider.TryGetComponent<Unit>(out var hoveredUnit))

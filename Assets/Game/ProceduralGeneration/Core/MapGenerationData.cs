@@ -78,6 +78,8 @@ namespace RTS.ProceduralGeneration
         public int GoldCount { get; internal set; }
         public int SheepCount { get; internal set; }
         public int Repairs { get; internal set; }
+        public int ReachableGateways { get; internal set; }
+        public int MaxResourcePathDistance { get; internal set; }
         public IReadOnlyList<string> Errors => m_Errors;
         public bool IsValid => m_Errors.Count == 0;
 
@@ -100,7 +102,7 @@ namespace RTS.ProceduralGeneration
         public readonly List<ResourcePlacement> Resources;
         public readonly MapValidationReport Validation;
         public readonly StrategicLayout Layout;
-        public int GeneratorVersion => Layout == null ? 1 : 2;
+        public int GeneratorVersion => Layout == null ? 1 : 3;
 
         public MapData(int width, int height, int seed, int attempt, int startX, int startY,
             byte[] terrain, byte[] reserved, List<ResourcePlacement> resources, MapValidationReport validation, StrategicLayout layout = null)
@@ -133,9 +135,11 @@ namespace RTS.ProceduralGeneration
             if (settings.MaxAttempts < 1) return "MaxAttempts must be positive.";
             if (settings.Preset != MapLayoutPreset.LegacyMainland && settings.Preset != MapLayoutPreset.StrategicRegions) return "Unknown map layout preset.";
             if (settings.Preset == MapLayoutPreset.StrategicRegions
-                && (settings.RegionRadius < 4 || settings.RequiredCorridorHalfWidth < 1 || settings.RequiredCorridorHalfWidth > settings.RegionRadius
+                && (settings.RegionRadius < 8 || settings.RequiredCorridorHalfWidth < 1 || settings.RequiredCorridorHalfWidth > settings.RegionRadius
                     || settings.StartClearRadius + settings.RegionRadius * 2L + 6 >= Math.Min(settings.Width, settings.Height) / 2))
                 return "Strategic regions need more room between the start, outer regions and border; reduce radii or increase map size.";
+            if (settings.Preset == MapLayoutPreset.StrategicRegions && settings.TotalGoldCount - settings.StartingGoldCount < 3)
+                return "Strategic landmark requires at least three outer gold nodes.";
             if (settings.Octaves < 1 || settings.Octaves > 8) return "Octaves must be between 1 and 8.";
             if (settings.NoiseScale <= 0f) return "NoiseScale must be positive.";
             if (settings.Persistence <= 0f || settings.Persistence > 1f) return "Persistence must be in (0, 1].";

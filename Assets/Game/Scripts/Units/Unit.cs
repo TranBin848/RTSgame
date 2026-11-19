@@ -30,6 +30,35 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     [SerializeField] protected Color m_DamageFlashColor = new Color(1f, 0.27f, 0.25f, 1f);
     public bool isTargeted = false;
     protected GameManager m_GameManager;
+    protected SwarmGameBridge m_Bridge;
+    protected TilemapManager m_UnitMap;
+    public bool IsSceneInitialized { get; private set; }
+    public SwarmGameBridge SceneBridge => m_Bridge;
+
+    public virtual void InitializeScene(GameManager game, TilemapManager map, SwarmGameBridge bridge)
+    {
+        if (game == null || map == null || game.gameObject.scene != gameObject.scene || map.gameObject.scene != gameObject.scene
+            || (bridge != null && (!bridge.IsInitialized || bridge.gameObject != game.gameObject)))
+            throw new System.ArgumentException("Unit requires dependencies from its owner scene.");
+        if (IsSceneInitialized && (m_GameManager != game || m_UnitMap != map || m_Bridge != bridge))
+            throw new System.InvalidOperationException("Unit already belongs to another scene context.");
+        m_GameManager = game; m_UnitMap = map; m_Bridge = bridge; IsSceneInitialized = true;
+        m_AIPawn?.Initialize(game, map);
+        if (bridge != null && bridge.Fog != null)
+            foreach (var affectable in GetComponentsInChildren<FogOfWarAffectable>(true)) affectable.Initialize(bridge.Fog);
+    }
+
+    internal void RegisterWithGame() => RegisterUnit(this);
+    internal void UnregisterFromGame() => UnregisterUnit(this);
+    internal void UnbindScene(SwarmGameBridge bridge)
+    {
+        if (m_Bridge != bridge) return;
+        foreach (var affectable in GetComponentsInChildren<FogOfWarAffectable>(true)) affectable.Unbind();
+        UnbindDots(); m_Bridge = null; m_GameManager = null; m_UnitMap = null;
+        IsSceneInitialized = false; m_IsRegistered = false;
+        m_AIPawn?.Unbind();
+        if (this is WorkerUnit worker) worker.Inject(null, null, null);
+    }
     protected Animator m_Animator;
     protected AIPawn m_AIPawn;
     protected SpriteRenderer m_SpriteRenderer;
@@ -60,11 +89,13 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     public Sprite UnitIcon => m_UnitIcon != null ? m_UnitIcon : (m_SpriteRenderer != null ? m_SpriteRenderer.sprite : null);
     public Entity DotsTarget { get; private set; }
     public Entity DotsEntity { get; private set; }
-    public bool IsDotsControlled => DotsEntity != Entity.Null && SwarmGameBridge.Instance != null;
+    public bool IsDotsControlled => DotsEntity != Entity.Null && m_Bridge != null;
     bool m_ApplyingDotsSnapshot;
     int m_DotsAttackSequence;
     public void BindDots(Entity entity)
     {
+        if (!IsSceneInitialized || m_Bridge == null || !m_Bridge.Gameplay.EntityManager.Exists(entity))
+            throw new System.InvalidOperationException("Inject scene dependencies before binding a Unit Entity.");
         m_AIPawn?.Stop();
         DotsEntity = entity;
         if (m_AIPawn != null) m_AIPawn.enabled = false;
@@ -85,12 +116,12 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         {
             CurrentState = (UnitState)actor.State; CurrentTask = (UnitTask)actor.Task;
             DotsTarget = actor.Target;
-            Target = SwarmGameBridge.Instance.ViewFor(actor.Target);
+            Target = m_Bridge.ViewFor(actor.Target);
             if (m_SpriteRenderer != null && Mathf.Abs(actor.Facing.x) > 0.001f) m_SpriteRenderer.flipX = actor.Facing.x < 0;
             if (m_Animator != null)
             {
                 m_Animator.SetFloat("Speed", actor.Moving != 0 ? Mathf.Clamp01(actor.Speed) : 0);
-                if (actor.Kind != GameplayKind.Sheep && actor.AttackSequence != m_DotsAttackSequence) m_Animator.SetTrigger("Attack");
+                if (actor.Kind != GameplayKind.Sheep && actor.Kind != GameplayKind.Worker && actor.AttackSequence != m_DotsAttackSequence) m_Animator.SetTrigger("Attack");
             }
             m_DotsAttackSequence = actor.AttackSequence;
             if (this is WorkerUnit worker) worker.ApplyDotsWorkerPresentation();
@@ -128,16 +159,16 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     }
     public void SetDotsTarget(Entity entity)
     {
-        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.Attack(DotsEntity, entity); return; }
+        if (IsDotsControlled) { m_Bridge.Gameplay.Attack(DotsEntity, entity); return; }
         if (this is not WarriorUnit && this is not TowerUnit) return;
         Target = null; DotsTarget = entity; m_DotsWindup = -1;
         SetTask(UnitTask.Attack);
-        if (this is HumanoidUnit && SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryGetEnemy(entity, out var position, out _)) MoveTo(position);
+        if (this is HumanoidUnit && m_Bridge != null && m_Bridge.TryGetEnemy(entity, out var position, out _)) MoveTo(position);
     }
     protected void ClearDotsTarget() { DotsTarget = Entity.Null; m_DotsWindup = -1; }
     protected bool UpdateDotsCombat(bool acquire, bool chase)
     {
-        var bridge = SwarmGameBridge.Instance;
+        var bridge = m_Bridge;
         if (bridge == null || CurrentState == UnitState.Dead) return false;
         m_DotsCooldown = Mathf.Max(0, m_DotsCooldown - Time.deltaTime);
         if (DotsTarget == Entity.Null && acquire && Target == null && Time.time >= m_NextUnitDetectionTime)
@@ -206,22 +237,17 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         {
             m_OriginalMaterial = m_SpriteRenderer.material;
         }
-        m_GameManager = GameManager.Get();
         m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
         m_CurrentHealth = m_Health;
     }
     protected virtual void Start()
     {
-        if (SwarmGameBridge.Instance != null)
-        {
-            if (SwarmGameBridge.Instance.TryConvertEnemy(this)) return;
-            SwarmGameBridge.Instance.Register(this);
-        }
-        RegisterUnit(this);
     }
     protected virtual void OnDestroy()
     {
-        SwarmGameBridge.Instance?.Unregister(this);
+        var bridge = m_Bridge;
+        UnregisterUnit(this);
+        bridge?.Unregister(this);
         if (m_AIPawn != null)
         {
             m_AIPawn.OnNewPositionSelected -= TurnToPosition;
@@ -233,7 +259,7 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     {
         if (IsDotsControlled && !m_ApplyingDotsSnapshot)
         {
-            var em = SwarmGameBridge.Instance.Gameplay.EntityManager;
+            var em = m_Bridge.Gameplay.EntityManager;
             var actor = em.GetComponentData<GameplayActor>(DotsEntity); actor.Task = (GameplayTask)task; em.SetComponentData(DotsEntity, actor); return;
         }
         OnSetTask(CurrentTask, task);
@@ -246,14 +272,14 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     public void SetTarget(Unit target)
     {
         if (IsDotsControlled && !m_ApplyingDotsSnapshot)
-        { SwarmGameBridge.Instance.Gameplay.Attack(DotsEntity, SwarmGameBridge.Instance.ProxyFor(target)); return; }
+        { m_Bridge.Gameplay.Attack(DotsEntity, m_Bridge.ProxyFor(target)); return; }
         ClearDotsTarget();
         Target = target;
     }
     public virtual void SetStance(UnitStanceActionSO stance)
     {
         m_CurrentStance = stance.UnitStance;
-        if (IsDotsControlled) SwarmGameBridge.Instance.Gameplay.SetStance(DotsEntity, m_CurrentStance == UnitStance.Offensive);
+        if (IsDotsControlled) m_Bridge.Gameplay.SetStance(DotsEntity, m_CurrentStance == UnitStance.Offensive);
 
         for (int i = 0; i < m_Actions.Length; i++)
         {
@@ -267,7 +293,7 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     public void MoveTo(Vector3 destination, DestinationSource source = DestinationSource.CodeTriggered)
     {
         if (IsDotsControlled && !m_ApplyingDotsSnapshot)
-        { SwarmGameBridge.Instance.MoveActor(this, destination, source == DestinationSource.PlayerClick); return; }
+        { m_Bridge.MoveActor(this, destination, source == DestinationSource.PlayerClick); return; }
         if (m_AIPawn != null)
         {
             m_AIPawn.SetDestination(destination);
@@ -315,15 +341,10 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     }
     protected virtual void RegisterUnit(Unit unit)
     {
-        if (SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryConvertEnemy(unit)) return;
+        if (!IsSceneInitialized) return;
         if (m_IsRegistered)
         {
             return;
-        }
-
-        if (m_GameManager == null)
-        {
-            m_GameManager = GameManager.Get();
         }
 
         m_GameManager.RegisterUnit(unit);
@@ -336,8 +357,8 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
             return;
         }
 
-        m_GameManager.UnregisterUnit(unit);
         m_IsRegistered = false;
+        m_GameManager?.UnregisterUnit(unit);
     }
     protected virtual bool TryFindClosetFoe(out Unit foe)
     {
@@ -399,17 +420,15 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     public virtual void OnSpawnedFromPool(bool isReused)
     {
         ResetRuntimeState();
-        if (isReused)
-        {
-            RegisterUnit(this);
-        }
     }
 
     public virtual void OnReturnedToPool()
     {
-        if (IsDotsControlled)
-        { UnregisterUnit(this); SwarmGameBridge.Instance?.Unregister(this); }
         StopMovement();
+        var bridge = m_Bridge;
+        UnregisterUnit(this);
+        bridge?.Unregister(this);
+        if (IsSceneInitialized) UnbindScene(bridge);
         SetTarget(null);
         CurrentTask = UnitTask.None;
         CurrentState = UnitState.Idle;
@@ -467,7 +486,7 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
     public virtual void TakeDamage(int dmg, Unit damager)
     {
         if (IsDotsControlled && !m_ApplyingDotsSnapshot)
-        { SwarmGameBridge.Instance.Simulation.QueueDamage(DotsEntity, dmg, SwarmGameBridge.Instance.ProxyFor(damager)); return; }
+        { m_Bridge.Simulation.QueueDamage(DotsEntity, dmg, m_Bridge.ProxyFor(damager)); return; }
         if (!gameObject.activeInHierarchy || !IsTargetable)
         {
             return;

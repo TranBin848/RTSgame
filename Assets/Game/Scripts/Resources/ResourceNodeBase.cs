@@ -16,17 +16,41 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
     [SerializeField] private int m_MaxWorkers = 4;
 
     private int m_ClaimedCount = 0;
+    private SwarmGameBridge m_Bridge;
+    private TilemapManager m_Map;
+    public bool IsInitialized => m_Bridge != null;
+
+    public void Initialize(SwarmGameBridge bridge, TilemapManager map)
+    {
+        if (bridge == null || !bridge.IsInitialized || map == null)
+            throw new System.ArgumentException("Resource node requires an initialized bridge and map.");
+        if (IsInitialized && (m_Bridge != bridge || m_Map != map))
+            throw new System.InvalidOperationException("Resource node is already bound to different dependencies.");
+        m_Bridge = bridge;
+        m_Map = map;
+        if (bridge.Fog != null)
+            foreach (var affectable in GetComponentsInChildren<FogOfWarAffectable>(true)) affectable.Initialize(bridge.Fog);
+    }
+
+    internal void Unbind(SwarmGameBridge bridge)
+    {
+        if (m_Bridge != bridge) return;
+        foreach (var affectable in GetComponentsInChildren<FogOfWarAffectable>(true)) affectable.Unbind();
+        m_Bridge = null;
+        m_Map = null;
+        m_ClaimedCount = 0;
+        if (m_Collider != null) m_Collider.enabled = true;
+    }
 
     public abstract ResourceType ResourceType { get; }
     
     // IsClaimed giờ mang ý nghĩa là "Đã hết chỗ trống" (Full)
-    public bool IsClaimed => SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.TryResourceClaimState(this, out var resource)
+    public bool IsClaimed => m_Bridge != null && m_Bridge.TryResourceClaimState(this, out var resource)
         ? resource.Claims >= resource.Capacity : m_ClaimedCount >= m_MaxWorkers;
     public int MaxWorkers => m_MaxWorkers;
     public Vector3 DotsCenter => m_Collider != null ? transform.TransformPoint(m_Collider.offset) : transform.position;
     public Vector3 ClickCenter => m_ClickCollider != null ? m_ClickCollider.bounds.center : transform.position;
-    protected virtual void Start() { SwarmGameBridge.Instance?.RegisterResource(this); }
-    protected virtual void OnDestroy() { SwarmGameBridge.Instance?.UnregisterResource(this); }
+    protected virtual void OnDestroy() { if (m_Bridge != null) m_Bridge.UnregisterResource(this); }
     public void ApplyDotsClaims(int claims)
     {
         if (claims == m_ClaimedCount) return;
@@ -61,7 +85,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public bool TryClaim()
     {
-        if (SwarmGameBridge.Instance != null) return SwarmGameBridge.Instance.ClaimResource(this);
+        if (m_Bridge != null) return m_Bridge.ClaimResource(this);
         if (IsClaimed)
         {
             return false;
@@ -83,7 +107,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     public void Release()
     {
-        if (SwarmGameBridge.Instance != null) { SwarmGameBridge.Instance.ReleaseResource(this); return; }
+        if (m_Bridge != null) { m_Bridge.ReleaseResource(this); return; }
         m_ClaimedCount = Mathf.Max(0, m_ClaimedCount - 1);
         // Khi người cuối cùng rời đi, bật lại Collider chặn đường
         if (m_ClaimedCount == 0)
@@ -98,7 +122,7 @@ public abstract class ResourceNodeBase : MonoBehaviour, IResourceNode
 
     private void UpdatePathfindingNode()
     {
-        var tilemapManager = TilemapManager.Get();
+        var tilemapManager = m_Map;
         if (tilemapManager != null && tilemapManager.CanServePathfindingRequests())
         {
             if (m_Collider != null)

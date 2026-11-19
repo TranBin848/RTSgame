@@ -1,0 +1,76 @@
+Assets/Game\Scripts\Utils\PlacementProcess.cs:23:        m_PlaceholderTileSprite = Resources.Load<Sprite>("Images/PlaceholderTileSprite");
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:40:        TilemapManager map = Object.FindFirstObjectByType<TilemapManager>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:41:        TownHall townHall = Object.FindFirstObjectByType<TownHall>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:42:        UnityEngine.Tilemaps.Tilemap foamTilemap = GameObject.Find("Foam")?.GetComponent<UnityEngine.Tilemaps.Tilemap>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:43:        var legacySpawners = Object.FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:47:        ProceduralMapAuthoring authoring = Object.FindFirstObjectByType<ProceduralMapAuthoring>(FindObjectsInactive.Include);
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:74:        Transform resourceRoot = GameObject.Find("Procedural Resources")?.transform;
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:85:        var manager = Object.FindFirstObjectByType<GameManager>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:99:        compositionData.FindProperty("m_Camera").objectReferenceValue = Object.FindFirstObjectByType<CameraController>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:102:        compositionData.FindProperty("m_Fog").objectReferenceValue = Object.FindFirstObjectByType<FogOfWarManager>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:103:        compositionData.FindProperty("m_DayNight").objectReferenceValue = Object.FindFirstObjectByType<DayNightCycleManager>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:104:        compositionData.FindProperty("m_Waves").objectReferenceValue = Object.FindFirstObjectByType<EnemyWaveManager>();
+Assets/Game\ProceduralGeneration\Editor\ProceduralMapEditorTools.cs:183:        refs.FindProperty("m_Minimap").objectReferenceValue=Object.FindFirstObjectByType<MinimapFogUI>();
+Assets/Game\Scripts\Units\Unit.cs:240:        m_HighlightMaterial = Resources.Load<Material>("Materials/Outline");
+Assets/Game\DOTS\Editor\MatchSessionEditorTools.cs:12:        var menu = Object.FindFirstObjectByType<GameFlowMenu>(FindObjectsInactive.Include);
+Assets/Game\DOTS\Editor\MatchSessionEditorTools.cs:14:        var existing = GameObject.Find("Match UI");
+Assets/Game\Scripts\UI\ResourceRequirementsDisplay.cs:131:        Sprite icon = Resources.Load<Sprite>(iconPath);
+Assets/Game\DOTS\Integration\GameSceneCompositionRoot.cs:76:        var world = World.DefaultGameObjectInjectionWorld;
+Assets/Game\DOTS\Integration\GameSceneCompositionRoot.cs:107:        if (viewCamera == null) viewCamera = Camera.main;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:46:        m_Bridge = SwarmGameBridge.Instance; m_Map = FindFirstObjectByType<TilemapManager>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:49:        var camera = FindFirstObjectByType<CameraController>(); if (camera != null) camera.LockCamera = true;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:50:        var dayNight = FindFirstObjectByType<DayNightCycleManager>(); if (dayNight != null) dayNight.enabled = false;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:51:        var waves = FindFirstObjectByType<EnemyWaveManager>(); if (waves != null) waves.enabled = false;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:53:        foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:60:        var worker = FindFirstObjectByType<WorkerUnit>(); var hall = FindFirstObjectByType<TownHall>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:67:        var tree = FindFirstObjectByType<Tree>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:88:            var process = new BuildingProcess(buildAction, placement, worker, FindFirstObjectByType<GameManager>(), m_Bridge);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:102:        int workerCount = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:105:        yield return WaitUntil(() => FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length > workerCount, 5);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:107:        foreach (var unit in FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None)) if (unit != worker && unit.IsDotsControlled) trainedBound = true;
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:108:        Record("townhall_training_spawns_bound_worker", FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length > workerCount && trainedBound);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:110:        var barrack = FindFirstObjectByType<Barrack>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:119:        var archery = FindFirstObjectByType<ArcheryRange>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:136:        var sheep = FindFirstObjectByType<SheepUnit>();
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:158:            Record("no_active_legacy_enemy_views", FindObjectsByType<EnemyUnit>(FindObjectsSortMode.None).Length == 0);
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:171:        foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\GameplaySmokeAutomation.cs:200:        foreach (var tower in FindObjectsByType<TowerUnit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Runtime\SwarmInstancedRenderer.cs:40:            if (Library == null) Library = Resources.Load<SwarmVisualLibrary>("DOTS/SwarmVisualLibrary");
+Assets/Game\DOTS\Runtime\SwarmInstancedRenderer.cs:41:            var retainedMaterial = Resources.Load<Material>("DOTS/SwarmSprite");
+Assets/Game\DOTS\Runtime\SwarmInstancedRenderer.cs:94:            if (m_Camera == null) m_Camera = Camera.main;
+Assets/Game\DOTS\Runtime\SwarmDemoController.cs:38:            var world = World.DefaultGameObjectInjectionWorld;
+Assets/Game\DOTS\Runtime\SwarmDemoController.cs:44:            m_Camera = Camera.main;
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:42:        var manager = FindFirstObjectByType<GameManager>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:48:            var map = FindFirstObjectByType<TilemapManager>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:50:            var camera = FindFirstObjectByType<CameraController>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:51:            if (camera == null && Camera.main != null) camera = Camera.main.gameObject.AddComponent<CameraController>();
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:54:            foreach (var spawner in FindObjectsByType<ResourceSpawner>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:56:            foreach (var wave in FindObjectsByType<EnemyWaveManager>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:57:                wave.Initialize(manager, map, FindFirstObjectByType<DayNightCycleManager>(), bridge);
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:59:                FindFirstObjectByType<EnemyWaveManager>(), camera, bridge);
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:65:        if (World.DefaultGameObjectInjectionWorld == null) return;
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:67:        Initialize(World.DefaultGameObjectInjectionWorld, GetComponent<GameManager>(),
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:68:            FindFirstObjectByType<TilemapManager>(), FindFirstObjectByType<FogOfWarManager>(),
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:69:            FindFirstObjectByType<DayNightCycleManager>());
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:110:        foreach (var resource in FindObjectsByType<ResourceNodeBase>(FindObjectsSortMode.None)) RegisterResource(resource);
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:111:        foreach (var unit in FindObjectsByType<Unit>(FindObjectsSortMode.None))
+Assets/Game\DOTS\Integration\SwarmGameBridge.cs:203:        foreach (var resource in FindObjectsByType<ResourceNodeBase>(FindObjectsSortMode.None))
+Assets/Game\Scripts\Managers\SingletonManager.cs:8:        T[] managers = FindObjectsByType<T>(FindObjectsSortMode.None);
+Assets/Game\Scripts\Managers\SingletonManager.cs:19:        GameObject managerObject = GameObject.FindWithTag(tag);
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:56:        var demo = FindFirstObjectByType<SwarmDemoController>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:57:        var bridge = SwarmGameBridge.Instance;
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:60:        var cameraController = FindFirstObjectByType<CameraController>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:62:        m_CaptureCamera = Camera.main;
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:79:            var hall = FindFirstObjectByType<TownHall>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:89:                var warrior = FindFirstObjectByType<WarriorUnit>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:96:            var root = FindFirstObjectByType<GameSceneCompositionRoot>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:98:            var workers = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None);
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:99:            var tree = FindFirstObjectByType<Tree>(); var gold = FindFirstObjectByType<GoldStone>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:103:            var hall = FindFirstObjectByType<TownHall>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:108:                if (game == null) game = FindFirstObjectByType<GameManager>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:116:        recorder.Renderer = FindFirstObjectByType<SwarmInstancedRenderer>(); recorder.OffscreenCapture = true;
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:143:        var renderer = FindFirstObjectByType<SwarmInstancedRenderer>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:155:            var generator = FindFirstObjectByType<ProceduralMapAuthoring>(); var root = FindFirstObjectByType<GameSceneCompositionRoot>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:156:            var bridge = FindFirstObjectByType<SwarmGameBridge>();
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:167:            result.workers = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length;
+Assets/Game\DOTS\Integration\SwarmSmokeAutomation.cs:168:            result.day = FindFirstObjectByType<DayNightCycleManager>().CurrentDay;

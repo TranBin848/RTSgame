@@ -11,6 +11,9 @@ public class EnemyWaveManager : MonoBehaviour
 
     private GameManager m_GameManager;
     private TilemapManager m_TilemapManager;
+    private SwarmGameBridge m_Bridge;
+    private ProceduralMapAuthoring m_Generator;
+    public bool IsInitialized { get; private set; }
     private float m_CurrentTownHallRange;
     private float m_SpawnTimer;
     private float m_WaveDelayTimer;
@@ -30,46 +33,47 @@ public class EnemyWaveManager : MonoBehaviour
 
     void Awake()
     {
-        ResolveManagers();
         EnsureRangeRenderer();
     }
 
-    void Start()
+    public void Initialize(GameManager game, TilemapManager map, DayNightCycleManager dayNight,
+        SwarmGameBridge bridge, ProceduralMapAuthoring generator = null)
     {
-        ResolveManagers();
-
-        if (m_DayNightCycleManager == null)
+        if (game == null || map == null || dayNight == null || bridge == null || !bridge.IsInitialized)
+            throw new System.ArgumentException("Wave initialization requires game, map, day/night and an initialized bridge.");
+        if (IsInitialized)
         {
-            m_DayNightCycleManager = FindFirstObjectByType<DayNightCycleManager>();
+            if (m_GameManager != game || m_TilemapManager != map || m_DayNightCycleManager != dayNight || m_Bridge != bridge || m_Generator != generator)
+                throw new System.InvalidOperationException("Waves are already initialized with different dependencies.");
+            return;
         }
-
-        if (m_DayNightCycleManager != null)
-        {
-            m_DayNightCycleManager.OnPhaseChanged += HandlePhaseChanged;
-            HandlePhaseChanged(m_DayNightCycleManager.CurrentPhase);
-        }
-        else
-        {
-            UpdateRangeVisual(false);
-        }
+        m_GameManager = game;
+        m_TilemapManager = map;
+        m_DayNightCycleManager = dayNight;
+        m_Bridge = bridge;
+        m_Generator = generator;
+        IsInitialized = true;
+        m_DayNightCycleManager.OnPhaseChanged += HandlePhaseChanged;
+        HandlePhaseChanged(m_DayNightCycleManager.CurrentPhase);
     }
 
     void OnDestroy()
     {
-        if (m_DayNightCycleManager != null)
+        if (IsInitialized && m_DayNightCycleManager != null)
         {
             m_DayNightCycleManager.OnPhaseChanged -= HandlePhaseChanged;
         }
     }
 
-    void Update()
+    void Update() => Tick(Time.deltaTime);
+
+    void Tick(float deltaTime)
     {
-        if (ProceduralMapRuntime.IsCompositionBlocked || (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady))
+        if (deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
+        if (!IsInitialized || m_Bridge.Gameplay.IsMatchOver || ProceduralMapRuntime.IsCompositionBlocked || (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady))
         {
             return;
         }
-
-        ResolveManagers();
 
         if (m_Definition == null || m_DayNightCycleManager == null)
         {
@@ -84,7 +88,7 @@ public class EnemyWaveManager : MonoBehaviour
             return;
         }
 
-        UpdateNightEnemySpawning();
+        UpdateNightEnemySpawning(deltaTime);
     }
 
     void HandlePhaseChanged(DayNightPhase phase)
@@ -110,21 +114,9 @@ public class EnemyWaveManager : MonoBehaviour
         UpdateRangeVisual(false);
     }
 
-    void ResolveManagers()
+    void UpdateNightEnemySpawning(float deltaTime)
     {
-        if (m_GameManager == null)
-        {
-            m_GameManager = FindFirstObjectByType<GameManager>();
-        }
-
-        if (m_TilemapManager == null)
-        {
-            m_TilemapManager = FindFirstObjectByType<TilemapManager>();
-        }
-    }
-
-    void UpdateNightEnemySpawning()
-    {
+        // Dawn ends reinforcements; wave quotas are upper bounds within the night duration.
         if (!TryGetTownHall(out var townHall))
         {
             return;
@@ -142,17 +134,18 @@ public class EnemyWaveManager : MonoBehaviour
         {
             m_CurrentWaveIndex++;
             m_SpawnedInCurrentWave = 0;
+            m_SpawnTimer = 0f;
             m_WaveDelayTimer = m_Definition.DelayBetweenWaves;
             return;
         }
 
         if (m_WaveDelayTimer > 0f)
         {
-            m_WaveDelayTimer -= Time.deltaTime;
+            m_WaveDelayTimer -= deltaTime;
             return;
         }
 
-        m_SpawnTimer -= Time.deltaTime;
+        m_SpawnTimer -= deltaTime;
         if (m_SpawnTimer > 0f)
         {
             return;
@@ -247,50 +240,36 @@ public class EnemyWaveManager : MonoBehaviour
 
     public bool SpawnEnemy(TownHall townHall)
     {
-        if (townHall == null || m_Definition == null) return false;
+        if (!IsInitialized || m_Bridge.Gameplay.IsMatchOver || ProceduralMapRuntime.IsCompositionBlocked || !m_Bridge.IsSceneBound || townHall == null || m_Definition == null) return false;
+        m_CurrentTownHallRange = CalculateTownHallRange(townHall);
         GameObject enemyPrefab = GetRandomEnemyPrefab();
         if (enemyPrefab == null)
         {
             return false;
         }
 
-        if (!TryGetEnemySpawnPosition(townHall.transform.position, out Vector3 spawnPosition))
+        if (m_Generator != null && m_Generator.GatewayCount > 0)
         {
+            int start = Random.Range(0, m_Generator.GatewayCount);
+            for (int i = 0; i < m_Generator.GatewayCount; i++)
+                if (m_Generator.TryGetGatewayApproachPosition((start + i) % m_Generator.GatewayCount,
+                        townHall.transform.position, m_CurrentTownHallRange + m_Definition.SpawnExtraRange, out var gateway)
+                    && m_Bridge.SpawnEnemy(enemyPrefab, gateway)) return true;
             return false;
         }
-
-        if (SwarmGameBridge.Instance != null)
-        {
-            return SwarmGameBridge.Instance.SpawnEnemy(enemyPrefab, spawnPosition);
-        }
-
-        GameObject enemyObject = RuntimeObjectPool.Spawn(enemyPrefab, spawnPosition, Quaternion.identity);
-        if (enemyObject == null)
-        {
-            return false;
-        }
-
-        if (!enemyObject.TryGetComponent<Unit>(out var enemyUnit))
-        {
-            RuntimeObjectPool.Release(enemyObject);
-            return false;
-        }
-
-        enemyUnit.SetTarget(townHall);
-        enemyUnit.SetTask(UnitTask.Attack);
-        enemyUnit.MoveTo(townHall.transform.position);
-        return true;
+        return TryGetEnemySpawnPosition(townHall.transform.position, out Vector3 spawnPosition)
+            && m_Bridge.SpawnEnemy(enemyPrefab, spawnPosition);
     }
 
     void RetreatActiveEnemiesToSpawnRing()
     {
-        if (m_GameManager == null || !TryGetTownHall(out var townHall))
+        if (m_Definition == null || m_GameManager == null || !TryGetTownHall(out var townHall))
         {
             return;
         }
 
         m_CurrentTownHallRange = CalculateTownHallRange(townHall);
-        SwarmGameBridge.Instance?.Retreat(townHall.transform.position, m_CurrentTownHallRange + m_Definition.SpawnExtraRange);
+        m_Bridge.Retreat(townHall.transform.position, m_CurrentTownHallRange + m_Definition.SpawnExtraRange);
         var enemyUnits = new System.Collections.Generic.List<Unit>(m_GameManager.GetFriendlyUnits(false));
         foreach (var unit in enemyUnits)
         {
@@ -423,7 +402,7 @@ public class EnemyWaveManager : MonoBehaviour
         m_TownHallRangeRenderer.endWidth = m_Definition.RangeLineWidth;
         DrawCircle(m_TownHallRangeRenderer, townHall.transform.position, m_CurrentTownHallRange);
 
-        bool shouldShowSpawnRange = isNight && m_Definition.ShowEnemySpawnRange;
+        bool shouldShowSpawnRange = isNight && m_Definition.ShowEnemySpawnRange && (m_Generator == null || m_Generator.GatewayCount == 0);
         SetRendererVisible(m_EnemySpawnRangeRenderer, shouldShowSpawnRange);
         if (shouldShowSpawnRange)
         {

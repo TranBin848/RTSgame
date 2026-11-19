@@ -10,6 +10,8 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
     [SerializeField] ProceduralMapSettings m_Settings;
     [SerializeField] TilemapManager m_TilemapManager;
     [SerializeField] Transform m_MapCenter;
+    [SerializeField] ResourceSpawner[] m_LegacySpawners = Array.Empty<ResourceSpawner>();
+    public System.Collections.Generic.IReadOnlyList<ResourceSpawner> LegacySpawners => m_LegacySpawners;
 
     [Header("Tiles")]
     [SerializeField] TileBase m_GrassTile;
@@ -25,11 +27,64 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
 
     public MapData GeneratedMap { get; private set; }
     public bool IsReady => GeneratedMap != null && GeneratedMap.Validation.IsValid;
+    public int GatewayCount => IsReady && GeneratedMap.Layout != null ? GeneratedMap.Layout.Gateways.Length : 0;
+    Vector3Int m_Origin;
+    public Vector3Int OriginCell => m_Origin;
+    public double BuildStartedRealtime { get; private set; }
+    public double CoreMilliseconds { get; private set; }
+    public double TerrainMilliseconds { get; private set; }
+    public double ResourceMilliseconds { get; private set; }
+    public double NavigationMilliseconds { get; private set; }
+
+    public bool TryGetGatewaySpawnPosition(int index, out Vector3 position)
+    {
+        position = default;
+        if (index < 0 || index >= GatewayCount) return false;
+        var map = GeneratedMap;
+        var gateway = map.Layout.Gateways[index];
+        // Keep the body inside the map; the bridge still checks its actual radius against navigation.
+        int x = gateway.X == 0 ? 2 : gateway.X == map.Width - 1 ? map.Width - 3 : gateway.X;
+        int y = gateway.Y == 0 ? 2 : gateway.Y == map.Height - 1 ? map.Height - 3 : gateway.Y;
+        position = m_TilemapManager.WalkableTilemap.GetCellCenterWorld(m_Origin + new Vector3Int(x, y, 0));
+        return true;
+    }
+
+    public bool TryGetGatewayApproachPosition(int index, Vector3 center, float radius, out Vector3 position)
+    {
+        position = default;
+        if (index < 0 || index >= GatewayCount || radius < 0 || float.IsNaN(radius) || float.IsInfinity(radius)) return false;
+        var map = GeneratedMap;
+        var gate = map.Layout.Gateways[index];
+        var region = map.Layout.Regions[gate.Region];
+        float minimum = radius * radius, best = float.PositiveInfinity;
+        Vector3 candidate = default;
+        // Follow the same protected L centerlines as StrategicLayout, keeping the legacy spawn radius.
+        Visit(map.StartX, map.StartY, region.X, region.Y);
+        Visit(region.X, region.Y, gate.X, gate.Y);
+        position = candidate;
+        return !float.IsPositiveInfinity(best);
+
+        void Visit(int x, int y, int targetX, int targetY)
+        {
+            while (true)
+            {
+                if (map.Layout.Routes[map.Index(x, y)] != 0)
+                {
+                    Vector3 point = m_TilemapManager.WalkableTilemap.GetCellCenterWorld(m_Origin + new Vector3Int(x, y, 0));
+                    float distance = ((Vector2)(point - center)).sqrMagnitude;
+                    if (distance >= minimum && distance < best) { best = distance; candidate = point; }
+                }
+                if (x == targetX && y == targetY) break;
+                if (x != targetX) x += x < targetX ? 1 : -1;
+                else y += y < targetY ? 1 : -1;
+            }
+        }
+    }
 
     void Awake()
     {
+        BuildStartedRealtime = Time.realtimeSinceStartupAsDouble;
         ProceduralMapRuntime.Begin();
-        DisableLegacyResourceSpawner();
         if (!TryGenerateAndApply(out string error))
         {
             ProceduralMapRuntime.Fail(error);
@@ -48,22 +103,41 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
 
     public bool TryGenerateAndApply(out string error)
     {
+        if (GeneratedMap != null)
+        {
+            error = "Map has already been applied. Reload the scene to generate another map.";
+            return false;
+        }
         error = ValidateAuthoring();
         if (error != null) return false;
 
         var generator = new ProceduralMapGenerator();
+        var timer = System.Diagnostics.Stopwatch.StartNew();
         if (!generator.TryGenerate(m_Settings.ToData(), out MapData map, out error)) return false;
+        CoreMilliseconds = timer.Elapsed.TotalMilliseconds;
 
+        DisableLegacyResourceSpawner();
         GeneratedMap = map;
+        timer.Restart();
         ApplyTerrain(map);
+        TerrainMilliseconds = timer.Elapsed.TotalMilliseconds;
+        timer.Restart();
         SpawnResources(map);
+        ResourceMilliseconds = timer.Elapsed.TotalMilliseconds;
+        timer.Restart();
         Physics2D.SyncTransforms();
         m_TilemapManager.ReinitializePathfinding();
+        NavigationMilliseconds = timer.Elapsed.TotalMilliseconds;
         return true;
     }
 
     string ValidateAuthoring()
     {
+        if (m_LegacySpawners == null) return "Legacy spawner references are missing.";
+        var unique = new System.Collections.Generic.HashSet<ResourceSpawner>();
+        foreach (var spawner in m_LegacySpawners)
+            if (spawner == null || spawner.gameObject.scene != gameObject.scene || !unique.Add(spawner))
+                return "Legacy spawner references must be unique, non-null and in the same scene.";
         if (m_Settings == null) return "Map settings asset is missing.";
         if (m_TilemapManager == null) return "TilemapManager reference is missing.";
         if (m_TilemapManager.WalkableTilemap == null || m_TilemapManager.WaterTilemap == null)
@@ -85,6 +159,7 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
         Vector3 centerWorld = m_MapCenter != null ? m_MapCenter.position : transform.position;
         Vector3Int centerCell = walkable.WorldToCell(centerWorld);
         Vector3Int origin = new Vector3Int(centerCell.x - map.StartX, centerCell.y - map.StartY, 0);
+        m_Origin = origin;
         var bounds = new BoundsInt(origin.x, origin.y, 0, map.Width, map.Height, 1);
         var grassTiles = new TileBase[map.Terrain.Length];
         var waterTiles = new TileBase[map.Terrain.Length];
@@ -140,9 +215,6 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
         }
 
         Tilemap walkable = m_TilemapManager.WalkableTilemap;
-        Vector3 centerWorld = m_MapCenter != null ? m_MapCenter.position : transform.position;
-        Vector3Int centerCell = walkable.WorldToCell(centerWorld);
-        Vector3Int origin = new Vector3Int(centerCell.x - map.StartX, centerCell.y - map.StartY, 0);
 
         foreach (ResourcePlacement placement in map.Resources)
         {
@@ -154,23 +226,23 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
                 _ => null
             };
             if (prefab == null) continue;
-            Vector3Int cell = new Vector3Int(origin.x + placement.X, origin.y + placement.Y, 0);
+            Vector3Int cell = m_Origin + new Vector3Int(placement.X, placement.Y, 0);
             Instantiate(prefab, walkable.GetCellCenterWorld(cell), Quaternion.identity, m_GeneratedResourceRoot);
         }
     }
 
     void DisableLegacyResourceSpawner()
     {
-        foreach (ResourceSpawner spawner in FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        foreach (ResourceSpawner spawner in m_LegacySpawners)
             spawner.DisableForProceduralGeneration();
     }
 
     void RestoreLegacyResourceSpawner()
     {
-        foreach (ResourceSpawner spawner in FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        if (m_LegacySpawners == null) return;
+        foreach (ResourceSpawner spawner in m_LegacySpawners)
         {
-            spawner.GetComponent<BoxCollider2D>().enabled = true;
-            spawner.enabled = true;
+            if (spawner != null && spawner.gameObject.scene == gameObject.scene) spawner.RestoreLegacyGeneration();
         }
     }
 }

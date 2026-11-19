@@ -14,24 +14,30 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
     private TilemapManager m_TilemapManager;
     private CameraController m_CameraController;
     private Camera m_MainCamera;
-
-    void Start()
+    private SwarmGameBridge m_Bridge;
+    private ProceduralMapPresentation m_MapPresentation;
+    public void InitializeLandmarks(ProceduralMapPresentation presentation)
     {
-        if (m_FogOfWarManager == null)
-        {
-            m_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
-        }
+        if(presentation==null||!presentation.IsInitialized||presentation.gameObject.scene!=gameObject.scene)
+            throw new System.ArgumentException("Minimap requires its initialized scene presentation.");
+        if(m_MapPresentation!=null&&m_MapPresentation!=presentation)throw new System.InvalidOperationException("Minimap already has another map presentation.");
+        m_MapPresentation=presentation;
+    }
 
-        if (m_FogOfWarManager == null)
+    bool m_IsInitialized;
+    public void Initialize(FogOfWarManager fog, TilemapManager map, CameraController camera, Camera viewCamera, SwarmGameBridge bridge)
+    {
+        if (fog == null || map == null || camera == null || viewCamera == null || bridge == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
         {
+            if (m_FogOfWarManager != fog || m_TilemapManager != map || m_CameraController != camera || m_MainCamera != viewCamera || m_Bridge != bridge) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
             return;
         }
-
-        m_CameraController = FindFirstObjectByType<CameraController>();
-        m_MainCamera = Camera.main;
+        m_FogOfWarManager = fog; m_TilemapManager = map; m_CameraController = camera; m_MainCamera = viewCamera; m_Bridge = bridge;
         m_FogOfWarManager.OnFogUpdated += RefreshMinimap;
         InitializeTextureIfNeeded();
         RefreshMinimap();
+        m_IsInitialized = true;
     }
 
     void Update()
@@ -45,6 +51,7 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
         {
             m_FogOfWarManager.OnFogUpdated -= RefreshMinimap;
         }
+        if (m_MinimapTexture != null) Destroy(m_MinimapTexture);
     }
 
     void InitializeTextureIfNeeded()
@@ -67,7 +74,7 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
             return;
         }
 
-        m_TilemapManager = TilemapManager.Get();
+        if (m_MinimapTexture != null) Destroy(m_MinimapTexture);
         m_MinimapTexture = new Texture2D(bounds.size.x, bounds.size.y, TextureFormat.RGBA32, false);
         m_MinimapTexture.filterMode = FilterMode.Point;
         m_MinimapTexture.wrapMode = TextureWrapMode.Clamp;
@@ -103,7 +110,8 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
             }
         }
 
-        var bridge = SwarmGameBridge.Instance;
+        m_MapPresentation?.DrawMinimapMarkers(m_MinimapTexture,bounds);
+        var bridge = m_Bridge;
         if (bridge != null && bridge.Simulation != null)
         {
             var entities = bridge.Simulation.RenderData;
@@ -166,11 +174,6 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
         if (m_CameraViewportRect == null || m_MinimapImage == null || m_FogOfWarManager == null || !m_FogOfWarManager.IsInitialized)
         {
             return;
-        }
-
-        if (m_MainCamera == null)
-        {
-            m_MainCamera = Camera.main;
         }
 
         if (m_MainCamera == null || !m_MainCamera.orthographic)
@@ -240,11 +243,6 @@ public class MinimapFogUI : MonoBehaviour, IPointerDownHandler, IDragHandler
         if (m_MinimapImage == null || m_FogOfWarManager == null || !m_FogOfWarManager.IsInitialized)
         {
             return;
-        }
-
-        if (m_CameraController == null)
-        {
-            m_CameraController = FindFirstObjectByType<CameraController>();
         }
 
         if (m_CameraController == null)

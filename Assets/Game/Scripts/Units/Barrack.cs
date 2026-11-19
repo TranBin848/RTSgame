@@ -4,13 +4,13 @@ public class Barrack : ProductionBuilding
 {
     [SerializeField] private GameObject m_WarriorPrefab;
 
-    public void EnqueueWarriorSpawn(SpawnWarriorActionSO action)
+    public bool EnqueueWarriorSpawn(SpawnWarriorActionSO action)
     {
         if (action == null)
         {
-            return;
+            return false;
         }
 
-        EnqueueProduction(action, m_WarriorPrefab, action.TrainDuration, "Warrior spawned");
+        return EnqueueProduction(action, m_WarriorPrefab, action.TrainDuration, "Warrior spawned");
     }
 }

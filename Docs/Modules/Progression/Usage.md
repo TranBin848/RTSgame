@@ -1,5 +1,9 @@
 # Progression — cách chạy baseline S0
 
+**Bàn giao17/11:** Play MainMenu→ProceduralGame, chọn TownHall/nghiên cứu/build/train như cũ; sống5đêm→Victory ngày6, mất hall cuối→Defeat, Play again/Main menu reset trận. DI UI/fog/input hiện được composition cấp; không gọi Get/Instance trong consumer mới. Windows build đã test ở `.utmp/s9-build-2026-11-17/RTSgame2026.exe`, cần giữ Data đi kèm. Cách tái lập smoke/perf và giới hạn xem [S9](S9-Acceptance.md); kiểm map/research config qua Inspector trước thay số. Không nâng pipeline để chạy. Các trạng thái manual-chờ phía dưới là lịch sử trước user xác nhận17/11.
+
+**S8 —16/11:** ProceduralGame hiện có objective sống5đêm, thắng khi sang ngày6, thua khi mất hall cuối. Result chặn lệnh, có Play again/Main menu; trận mới reset ví/research. [MatchFlow/cách chạy và playtest](../MatchFlow/Architecture.md). Manual S8 đang chờ theo người dùng, chưa nghiệm thu balance.
+
 Ngày 11/11/2026. Đã có sáu công nghệ, UI ba nhánh hai cấp và capability gates.
 
 S2 đã được người dùng xác nhận checklist thủ công đạt. S3 đã mở catalog/UI; xem [S3 Evidence](S3-Evidence-2026-11-11.md).

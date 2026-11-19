@@ -14,30 +14,48 @@ public class FogOfWarAffectable : MonoBehaviour
     public float UnexploredAlpha => Mathf.Clamp01(m_UnexploredAlpha);
     public SpriteRenderer[] TargetRenderers => m_TargetRenderers;
 
-    private static FogOfWarManager s_FogOfWarManager;
+    private FogOfWarManager m_FogOfWarManager;
+
+    public void Initialize(FogOfWarManager fog)
+    {
+        if (fog == null || fog.gameObject.scene != gameObject.scene)
+            throw new System.ArgumentException("Affectable requires fog from its owner scene.");
+        if (m_FogOfWarManager != null && m_FogOfWarManager != fog)
+            throw new System.InvalidOperationException("Unbind affectable before changing its fog owner.");
+        EnsureRenderers();
+        m_FogOfWarManager = fog;
+        if (isActiveAndEnabled) fog.RegisterAffectable(this);
+    }
+
+    public void Unbind()
+    {
+        if (m_FogOfWarManager != null) m_FogOfWarManager.UnregisterAffectable(this);
+        m_FogOfWarManager = null;
+        ApplyVisibility(1);
+    }
 
     void OnEnable()
     {
-        if (s_FogOfWarManager == null)
+        if (m_FogOfWarManager != null && m_FogOfWarManager.gameObject.scene == gameObject.scene)
         {
-            s_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
-        }
-        if (s_FogOfWarManager != null)
-        {
-            s_FogOfWarManager.RegisterAffectable(this);
+            m_FogOfWarManager.RegisterAffectable(this);
         }
     }
 
     void OnDisable()
     {
-        if (s_FogOfWarManager != null)
+        if (m_FogOfWarManager != null)
         {
-            s_FogOfWarManager.UnregisterAffectable(this);
+            m_FogOfWarManager.UnregisterAffectable(this);
         }
     }
 
-    void Awake()
+    void Awake() => EnsureRenderers();
+    void OnDestroy() => Unbind();
+
+    void EnsureRenderers()
     {
+        if (m_OriginalColors != null) return;
         if (m_TargetRenderers == null || m_TargetRenderers.Length == 0)
         {
             m_TargetRenderers = GetComponentsInChildren<SpriteRenderer>(true);
@@ -52,6 +70,7 @@ public class FogOfWarAffectable : MonoBehaviour
 
     public void ApplyVisibility(float alphaMultiplier)
     {
+        EnsureRenderers();
         if (m_TargetRenderers == null) return;
         
         for (int i = 0; i < m_TargetRenderers.Length; i++)

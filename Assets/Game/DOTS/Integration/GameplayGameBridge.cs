@@ -12,6 +12,7 @@ public sealed partial class SwarmGameBridge
     readonly List<KeyValuePair<Unit, Entity>> m_ViewSnapshot = new();
     readonly List<MonoBehaviour> m_DeletedResources = new();
     readonly Dictionary<int, TrainingView> m_TrainingViews = new();
+    readonly List<int> m_RemovedTraining = new();
     readonly Dictionary<int, BuildingProcess> m_ConstructionViews = new();
     int m_NextRequestId = 1;
     struct TrainingView
@@ -85,11 +86,13 @@ public sealed partial class SwarmGameBridge
             m_ResourceEntities[node] = entity;
         }
         unit.BindDots(entity);
+        if (unit is ProductionBuilding production) production.InitializeProduction(m_Game, this);
     }
 
     public Entity RegisterResource(ResourceNodeBase node)
     {
         if (node == null || Gameplay == null) return Entity.Null;
+        node.Initialize(this, m_Map);
         if (m_ResourceEntities.TryGetValue(node, out var known) && Gameplay.EntityManager.Exists(known)) return known;
         Entity entity = Gameplay.CreateResource(new GameplayResource { Position = (Vector2)node.DotsCenter,
             Radius = node.InteractionRadius, Type = (int)node.ResourceType, Capacity = node.MaxWorkers, ExternalId = node.GetInstanceID() });
@@ -105,6 +108,7 @@ public sealed partial class SwarmGameBridge
     {
         if (Gameplay != null && Gameplay.World != null && Gameplay.World.IsCreated && m_ResourceEntities.TryGetValue(node, out var entity)) Gameplay.Remove(entity);
         m_ResourceEntities.Remove(node);
+        if (node is ResourceNodeBase resource) resource.Unbind(this);
     }
     public bool AssignResource(WorkerUnit worker, IResourceNode node)
     {
@@ -176,20 +180,41 @@ public sealed partial class SwarmGameBridge
         foreach (var pair in m_TrainingViews)
         {
             var building = pair.Value.Building;
-            if (building == null || !Gameplay.TryGetActor(building.DotsEntity, out _, out _)) continue;
+            if (building == null || !Gameplay.TryGetActor(building.DotsEntity, out _, out var body) || body.Health <= 0)
+            { m_RemovedTraining.Add(pair.Key); continue; }
             var producer = Gameplay.EntityManager.GetComponentData<GameplayProducer>(building.DotsEntity);
             var queue = Gameplay.EntityManager.GetBuffer<TrainingRequest>(building.DotsEntity);
             if (queue.Length > 0 && producer.CurrentRequest == pair.Key) m_Game.UpdateActionUIProgress(pair.Value.UiId, producer.Elapsed / queue[0].Duration);
         }
+        foreach (int id in m_RemovedTraining)
+        {
+            if (m_Game != null) m_Game.CompleteActionUI(m_TrainingViews[id].UiId);
+            m_TrainingViews.Remove(id);
+        }
+        m_RemovedTraining.Clear();
         m_Game?.RefreshDotsWallet(Gameplay.Wallet);
     }
 
-    public void EnqueueTraining(ProductionBuilding building, ActionSO action, GameObject prefab, float duration, string message)
+    void RemoveTrainingFor(ProductionBuilding building)
     {
-        if (!CanUsePrefab(prefab)) return;
+        foreach (var pair in m_TrainingViews)
+            if (pair.Value.Building == building) m_RemovedTraining.Add(pair.Key);
+        foreach (int id in m_RemovedTraining)
+        {
+            if (m_Game != null) m_Game.CompleteActionUI(m_TrainingViews[id].UiId);
+            m_TrainingViews.Remove(id);
+        }
+        m_RemovedTraining.Clear();
+    }
+
+    public bool EnqueueTraining(ProductionBuilding building, ActionSO action, GameObject prefab, float duration, string message)
+    {
+        if (!IsSceneBound || building == null || !building.IsProductionOwner(m_Game) || action == null
+            || Simulation.Paused || !CanUsePrefab(prefab)) return false;
         int id = m_NextRequestId++;
-        if (!Gameplay.EnqueueTraining(ProxyFor(building), id, duration)) return;
+        if (!Gameplay.EnqueueTraining(building.DotsEntity, id, duration)) return false;
         m_TrainingViews[id] = new TrainingView { Building = building, Prefab = prefab, UiId = m_Game.EnqueueActionUI(action), Message = message };
+        return true;
     }
     public void BeginConstruction(StructureUnit structure, BuildingProcess process, float duration)
     {
@@ -198,7 +223,7 @@ public sealed partial class SwarmGameBridge
     }
     public bool CanUsePrefab(GameObject prefab)
     {
-        if (prefab == null || Gameplay == null) return false;
+        if (prefab == null || Gameplay == null || Gameplay.IsMatchOver) return false;
         if (prefab.GetComponent<EnemyUnit>() != null) return true;
         if ((prefab.GetComponent<ArcheryRange>() != null || prefab.GetComponent<RangerUnit>() != null) && !Gameplay.CanUseArchery) return false;
         return prefab.GetComponent<TowerUnit>() == null || Gameplay.CanUseTowers;

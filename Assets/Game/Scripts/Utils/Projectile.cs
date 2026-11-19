@@ -38,11 +38,9 @@ public class Projectile : MonoBehaviour, IPooledRuntimeObject
 
     public void Initialize(Unit owner, Unit target, int damage, Vector3 launchPosition)
     {
-        if (SwarmGameBridge.Instance != null && SwarmGameBridge.Instance.ConvertLegacyProjectile(owner, target, damage, launchPosition, this))
-        {
-            RuntimeObjectPool.Release(gameObject);
-            return;
-        }
+        if (owner == null || target == null || damage <= 0 || owner.IsDotsControlled || target.IsDotsControlled
+            || owner.gameObject.scene != gameObject.scene || target.gameObject.scene != gameObject.scene)
+            throw new System.ArgumentException("Legacy projectile requires same-scene, non-DOTS owner and target.");
         m_Owner = owner;
         m_Target = target;
         m_Damage = damage;

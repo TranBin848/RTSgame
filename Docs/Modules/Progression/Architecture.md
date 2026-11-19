@@ -1,5 +1,7 @@
 # Progression — hợp đồng kiến trúc ban đầu
 
+**Bản bàn giao17/11:** [MatchFlow S8](../MatchFlow/Architecture.md) mô tả native outcome/goal5đêm/terminal gates và UI qua DI; [D4](../DependencyInjection/D4-Validation.md) mô tả presentation/fog/camera/input và ngoại lệ; [S9](S9-Acceptance.md) ghi startup timers, immutable research UI cache và bằng chứng Player. S0–S9/D0–D4 đã hoàn thành phạm vi; các mục S0–S3 bên dưới là lịch sử thiết kế, không là checkpoint còn lại.
+
 Ngày 11/11/2026. **S1–S3 và D2 hoàn tất phạm vi kỹ thuật; S2 được người dùng nghiệm thu.** Kế hoạch chi tiết: [BuildPlan](BuildPlan.md); điểm tiếp tục: [Progress](Progress.md).
 
 ## Trạng thái mới nhất S3

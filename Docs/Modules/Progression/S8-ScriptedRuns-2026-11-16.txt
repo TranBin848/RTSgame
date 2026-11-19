@@ -1,0 +1,60 @@
+seed=1;policy=economy-first;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=140/15/8;workers=6;soldiers=4;hallHP=9774.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=320/25/24;workers=6;soldiers=5;hallHP=9326.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=470/15/33;workers=6;soldiers=7;hallHP=8838.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=530/15/79;workers=6;soldiers=7;hallHP=8302.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=590/15/148;workers=6;soldiers=7;hallHP=8110.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=590/15/148;workers=6;soldiers=7;hallHP=8110.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=economy_tools:20.05,economy_cargo:55.05,military_archery:85.05;gatheredW/G/M=720/140/277;depositedW/G/M=660/110/268;spentW/G/M=170/195/220;trainingAccepted=9;peakWorkers=6;peakSoldiers=7;expansion=not affordable yet;expansionAt=-1.00
+
+seed=1;policy=military-first;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=90/10/0;workers=4;soldiers=3;hallHP=9774.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=110/5/0;workers=4;soldiers=3;hallHP=9328.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=200/40/0;workers=4;soldiers=3;hallHP=8842.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=250/10/0;workers=4;soldiers=3;hallHP=8306.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=370/70/0;workers=4;soldiers=3;hallHP=8114.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=370/70/0;workers=4;soldiers=3;hallHP=8114.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=military_archery:25.05,military_training:100.05,economy_tools:180.05,economy_cargo:230.05,expansion_tower:330.05,expansion_fortify:495.05;gatheredW/G/M=725/241/0;depositedW/G/M=680/230/0;spentW/G/M=410/260/100;trainingAccepted=3;peakWorkers=4;peakSoldiers=3;expansion=not affordable yet;expansionAt=-1.00
+
+seed=0;policy=economy-first;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=110/15/8;workers=6;soldiers=4;hallHP=9900.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=290/55/24;workers=6;soldiers=5;hallHP=9826.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=420/5/20;workers=6;soldiers=6;hallHP=9370.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=570/0/6;workers=6;soldiers=8;hallHP=8958.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=680/0/52;workers=6;soldiers=8;hallHP=8592.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=680/0/52;workers=6;soldiers=8;hallHP=8592.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=economy_tools:20.05,economy_cargo:60.05,military_archery:90.05,military_training:385.05,expansion_tower:455.05,expansion_fortify:650.05;gatheredW/G/M=1081/275/236;depositedW/G/M=990/260/222;spentW/G/M=410/360/270;trainingAccepted=10;peakWorkers=6;peakSoldiers=8;expansion=not affordable yet;expansionAt=-1.00
+
+seed=0;policy=military-first;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=170/50/20;workers=4;soldiers=4;hallHP=9900.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=150/15/15;workers=4;soldiers=5;hallHP=9824.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=110/0/68;workers=4;soldiers=5;hallHP=9376.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=230/0/24;workers=4;soldiers=8;hallHP=8964.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=350/20/10;workers=4;soldiers=10;hallHP=8598.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=350/20/10;workers=4;soldiers=10;hallHP=8598.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=military_archery:25.05,military_training:225.05,economy_tools:250.05,economy_cargo:340.05,expansion_tower:370.05;gatheredW/G/M=609/260/236;depositedW/G/M=560/260/220;spentW/G/M=310/340/310;trainingAccepted=10;peakWorkers=4;peakSoldiers=10;expansion=not affordable yet;expansionAt=-1.00
+
+seed=1543;policy=economy-first;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=140/15/8;workers=6;soldiers=3;hallHP=10000.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=350/55/24;workers=6;soldiers=4;hallHP=9764.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=450/10/20;workers=6;soldiers=5;hallHP=9684.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=720/30/6;workers=6;soldiers=7;hallHP=9620.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=800/10/45;workers=6;soldiers=8;hallHP=9414.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=800/10/45;workers=6;soldiers=8;hallHP=9414.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=economy_tools:20.05,economy_cargo:55.05,military_archery:85.05,military_training:375.05,expansion_tower:405.05,expansion_fortify:630.05;gatheredW/G/M=1118/290/245;depositedW/G/M=1110/290/245;spentW/G/M=410/380/300;trainingAccepted=11;peakWorkers=6;peakSoldiers=8;expansion=not affordable yet;expansionAt=-1.00
+
+seed=1543;policy=military-first;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=170/50/20;workers=4;soldiers=3;hallHP=10000.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=210/10/0;workers=4;soldiers=5;hallHP=9764.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=230/5/45;workers=4;soldiers=5;hallHP=9684.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=290/0/54;workers=4;soldiers=7;hallHP=9620.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=440/0/10;workers=4;soldiers=10;hallHP=9414.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=440/0/10;workers=4;soldiers=10;hallHP=9414.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=military_archery:25.05,military_training:220.05,economy_tools:325.05,economy_cargo:370.05,expansion_tower:460.05;gatheredW/G/M=673/267/272;depositedW/G/M=650/260/250;spentW/G/M=310/360/340;trainingAccepted=11;peakWorkers=4;peakSoldiers=10;expansion=not affordable yet;expansionAt=-1.00
+

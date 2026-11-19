@@ -1,5 +1,9 @@
 # Progression — kiểm chứng S0
 
+**Nghiệm thu17/11 — S0–S9/D0–D4 DONE theo phạm vi:** [S9](S9-Acceptance.md) có81tests XML,18/18Player smoke/errors=[],Windows build report, CSV19191frames/89.998s,phase startup/GC/PNG/hash416files. S8 user xác nhận chung; D4 runtime/caller/pool/reload assertions đã có. Không dùng số cũ bên dưới cho code hiện tại hoặc coi benchmark offscreen một seed là kết quả mọi máy/onscreen. Known limits được ghi, đặc biệt baseline không thao tác vẫn thắng và GC spike chưa profile attribution.
+
+**S8 —16/11:** final64/64DOTS+17/17procedural PASS; outcome/terminal/menu/replay/DI checks PASS,6policy0/1/1543 có raw data và ảnh. [MatchFlow/report](../MatchFlow/Architecture.md) là cập nhật hiện tại: S8PARTIAL vì manual/cân bằng chờ theo user; không tái dùng acceptance S7 để đóngS8. Các phần dưới là lịch sử.
+
 Ngày 05/11/2026. Trạng thái S0 **DONE** theo phạm vi baseline; không có tính năng progression mới trong project.
 
 Cập nhật 11/11/2026: S1/D2 có economy_tools trong ECS, config asset và panel được inject. Code cuối đạt **43/43 DOTS EditMode**, service transaction, fake UI lifecycle và accelerated completion PASS. Xem [S1-D2 Evidence](S1-D2-Evidence-2026-11-11.md). S2 chưa nghiệm thu click/hình ảnh và thời gian tự nhiên; không dùng baseline S0 bên dưới làm bằng chứng cho UI mới.

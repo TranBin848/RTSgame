@@ -13,6 +13,7 @@ var failures = new List<string>();
 long totalMilliseconds = 0;
 long worstMilliseconds = 0;
 int worstSeed = 0;
+var attemptHistogram = new int[settings.MaxAttempts];
 
 for (int seed = 0; seed < count; seed++)
 {
@@ -32,6 +33,7 @@ for (int seed = 0; seed < count; seed++)
         failures.Add($"seed={seed}: {error}");
         continue;
     }
+    attemptHistogram[map.Attempt]++;
 
     string validationError = ValidateExpectedMap(map, settings);
     if (validationError != null)
@@ -52,9 +54,10 @@ for (int seed = 0; seed < count; seed++)
 Console.WriteLine($"Seeds checked: {count}");
 Console.WriteLine($"Preset: {settings.Preset}");
 Console.WriteLine($"Failures: {failures.Count}");
+Console.WriteLine($"Accepted attempt histogram (0-based): {string.Join(",", attemptHistogram)}");
 Console.WriteLine($"Mean generation time: {(double)totalMilliseconds / count:F2} ms");
 Console.WriteLine($"Worst generation time: {worstMilliseconds} ms (seed {worstSeed})");
-foreach (string failure in failures.Take(20)) Console.WriteLine(failure);
+foreach (string failure in failures) Console.WriteLine(failure);
 return failures.Count == 0 ? 0 : 1;
 
 static bool Equivalent(MapData left, MapData right)
@@ -90,6 +93,7 @@ static string ValidateExpectedMap(MapData map, MapGenerationSettingsData setting
         if (map.Layout == null || map.Layout.Regions.Length != 3 || map.Layout.Gateways.Length != 2) return "strategic layout missing";
         foreach (var gateway in map.Layout.Gateways)
             if (!map.IsGrass(gateway.X, gateway.Y) || map.Reserved[map.Index(gateway.X, gateway.Y)] == 0) return "gateway not protected";
+        if (!ProceduralMapGenerator.ValidateStrategicMap(settings,map).IsValid) return "final strategic validator failed";
     }
 
     var goldVariants = new int[6];

@@ -1,0 +1,518 @@
+{
+  "checks": "PASS",
+  "count": 12,
+  "rows": [
+    {
+      "file": "20261118T162243809-control-0.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 0,
+      "policy": "control",
+      "outcome": "Victory",
+      "hallHP": 8534,
+      "attacks": 0,
+      "firstAttack": -1,
+      "rally": 0,
+      "workers": 3,
+      "soldiers": 1,
+      "peakWorkers": 3,
+      "peakSoldiers": 1,
+      "deposited": [
+        0,
+        0,
+        0
+      ],
+      "spend": [
+        0,
+        0,
+        0
+      ],
+      "final": [
+        100,
+        100,
+        100
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 42,
+      "hallAttackers": 33,
+      "retreatBeforeLine": 36,
+      "expansion": "not attempted (control)",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 0,
+      "rallyTravelMin": null,
+      "rallyTravelMax": null,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162501303-economy-0.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 0,
+      "policy": "economy",
+      "outcome": "Victory",
+      "hallHP": 9936,
+      "attacks": 395,
+      "firstAttack": 96.35,
+      "rally": 9,
+      "workers": 6,
+      "soldiers": 9,
+      "peakWorkers": 6,
+      "peakSoldiers": 9,
+      "deposited": [
+        900,
+        250,
+        222
+      ],
+      "spend": [
+        310,
+        320,
+        300
+      ],
+      "final": [
+        690,
+        30,
+        22
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 12,
+      "hallAttackers": 4,
+      "retreatBeforeLine": 64,
+      "expansion": "not attempted",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 8,
+      "rallyTravelMin": 3.7,
+      "rallyTravelMax": 25.7,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162559172-expansion-0.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 0,
+      "policy": "expansion",
+      "outcome": "Victory",
+      "hallHP": 10000,
+      "attacks": 165,
+      "firstAttack": 109.9,
+      "rally": 9,
+      "workers": 4,
+      "soldiers": 9,
+      "peakWorkers": 4,
+      "peakSoldiers": 9,
+      "deposited": [
+        480,
+        240,
+        165
+      ],
+      "spend": [
+        150,
+        290,
+        260
+      ],
+      "final": [
+        430,
+        50,
+        5
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 9,
+      "hallAttackers": 1,
+      "retreatBeforeLine": 68,
+      "expansion": "landmark depot ordered",
+      "expansionAt": 30.05,
+      "stalls": [
+        "stalled t=320.05;worker=Entity(922:253);node=Entity(815:27);position=float2(-10.43431f, -6.053238f);nodePosition=float2(-19.48353f, -11.34893f);distanceToCollider=9.684886;range=0.4;moving=1;path=13;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node"
+      ],
+      "rallyObserved": 8,
+      "rallyTravelMin": 3.7,
+      "rallyTravelMax": 4.4,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162400617-military-0.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 0,
+      "policy": "military",
+      "outcome": "Victory",
+      "hallHP": 9936,
+      "attacks": 379,
+      "firstAttack": 96.35,
+      "rally": 10,
+      "workers": 4,
+      "soldiers": 10,
+      "peakWorkers": 4,
+      "peakSoldiers": 10,
+      "deposited": [
+        320,
+        240,
+        309
+      ],
+      "spend": [
+        310,
+        340,
+        310
+      ],
+      "final": [
+        110,
+        0,
+        99
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 10,
+      "hallAttackers": 3,
+      "retreatBeforeLine": 65,
+      "expansion": "not attempted",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 9,
+      "rallyTravelMin": 3.7,
+      "rallyTravelMax": 4.75,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T161718652-control-1.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1,
+      "policy": "control",
+      "outcome": "Victory",
+      "hallHP": 8190,
+      "attacks": 0,
+      "firstAttack": -1,
+      "rally": 0,
+      "workers": 3,
+      "soldiers": 1,
+      "peakWorkers": 3,
+      "peakSoldiers": 1,
+      "deposited": [
+        0,
+        0,
+        0
+      ],
+      "spend": [
+        0,
+        0,
+        0
+      ],
+      "final": [
+        100,
+        100,
+        100
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 54,
+      "hallAttackers": 36,
+      "retreatBeforeLine": 24,
+      "expansion": "not attempted (control)",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 0,
+      "rallyTravelMin": null,
+      "rallyTravelMax": null,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162036094-economy-1.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1,
+      "policy": "economy",
+      "outcome": "Victory",
+      "hallHP": 9890,
+      "attacks": 211,
+      "firstAttack": 102.75,
+      "rally": 8,
+      "workers": 6,
+      "soldiers": 8,
+      "peakWorkers": 6,
+      "peakSoldiers": 8,
+      "deposited": [
+        1230,
+        260,
+        176
+      ],
+      "spend": [
+        410,
+        360,
+        270
+      ],
+      "final": [
+        920,
+        0,
+        6
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 20,
+      "hallAttackers": 7,
+      "retreatBeforeLine": 56,
+      "expansion": "not attempted",
+      "expansionAt": -1,
+      "stalls": [
+        "stalled t=195.05;worker=Entity(905:21);node=Entity(865:17);position=float2(-18.65f, -2.5f);nodePosition=float2(-20.48353f, -2.348932f);distanceToCollider=1.039743;range=0.4;moving=1;path=2;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node",
+        "stalled t=465.05;worker=Entity(884:17);node=Entity(865:17);position=float2(-18.65f, -2.5f);nodePosition=float2(-20.48353f, -2.348932f);distanceToCollider=1.039743;range=0.4;moving=1;path=2;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node"
+      ],
+      "rallyObserved": 7,
+      "rallyTravelMin": 5.75,
+      "rallyTravelMax": 8.2,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162132331-expansion-1.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1,
+      "policy": "expansion",
+      "outcome": "Victory",
+      "hallHP": 9780,
+      "attacks": 122,
+      "firstAttack": 120.75,
+      "rally": 9,
+      "workers": 4,
+      "soldiers": 9,
+      "peakWorkers": 4,
+      "peakSoldiers": 9,
+      "deposited": [
+        680,
+        200,
+        225
+      ],
+      "spend": [
+        150,
+        290,
+        260
+      ],
+      "final": [
+        630,
+        10,
+        65
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 21,
+      "hallAttackers": 13,
+      "retreatBeforeLine": 57,
+      "expansion": "landmark depot ordered",
+      "expansionAt": 30.05,
+      "stalls": [],
+      "rallyObserved": 8,
+      "rallyTravelMin": 5.45,
+      "rallyTravelMax": 7.1,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T161917784-military-1.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1,
+      "policy": "military",
+      "outcome": "Victory",
+      "hallHP": 9898,
+      "attacks": 240,
+      "firstAttack": 101.25,
+      "rally": 13,
+      "workers": 4,
+      "soldiers": 13,
+      "peakWorkers": 4,
+      "peakSoldiers": 13,
+      "deposited": [
+        680,
+        200,
+        300
+      ],
+      "spend": [
+        50,
+        270,
+        380
+      ],
+      "final": [
+        730,
+        30,
+        20
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 13,
+      "hallAttackers": 4,
+      "retreatBeforeLine": 63,
+      "expansion": "not attempted",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 12,
+      "rallyTravelMin": 4.6,
+      "rallyTravelMax": 7.1,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162703902-control-1543.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1543,
+      "policy": "control",
+      "outcome": "Victory",
+      "hallHP": 8274,
+      "attacks": 14,
+      "firstAttack": 93.15,
+      "rally": 0,
+      "workers": 3,
+      "soldiers": 0,
+      "peakWorkers": 3,
+      "peakSoldiers": 1,
+      "deposited": [
+        0,
+        0,
+        0
+      ],
+      "spend": [
+        0,
+        0,
+        0
+      ],
+      "final": [
+        100,
+        100,
+        100
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 38,
+      "hallAttackers": 32,
+      "retreatBeforeLine": 40,
+      "expansion": "not attempted (control)",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 0,
+      "rallyTravelMin": null,
+      "rallyTravelMax": null,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162901083-economy-1543.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1543,
+      "policy": "economy",
+      "outcome": "Victory",
+      "hallHP": 9212,
+      "attacks": 59,
+      "firstAttack": 228.35,
+      "rally": 9,
+      "workers": 6,
+      "soldiers": 9,
+      "peakWorkers": 6,
+      "peakSoldiers": 9,
+      "deposited": [
+        1260,
+        290,
+        222
+      ],
+      "spend": [
+        410,
+        380,
+        300
+      ],
+      "final": [
+        950,
+        10,
+        22
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 15,
+      "hallAttackers": 15,
+      "retreatBeforeLine": 59,
+      "expansion": "not attempted",
+      "expansionAt": -1,
+      "stalls": [
+        "stalled t=165.05;worker=Entity(912:329);node=Entity(762:57);position=float2(-14.5f, -9.5f);nodePosition=float2(-14.48353f, -11.34893f);distanceToCollider=1.049006;range=0.4;moving=1;path=2;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node",
+        "stalled t=195.05;worker=Entity(897:51);node=Entity(762:57);position=float2(-14.5f, -9.5f);nodePosition=float2(-14.48353f, -11.34893f);distanceToCollider=1.049006;range=0.4;moving=1;path=2;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node"
+      ],
+      "rallyObserved": 4,
+      "rallyTravelMin": 2.15,
+      "rallyTravelMax": 4.05,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T163000488-expansion-1543.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1543,
+      "policy": "expansion",
+      "outcome": "Victory",
+      "hallHP": 9802,
+      "attacks": 42,
+      "firstAttack": 249.05,
+      "rally": 11,
+      "workers": 4,
+      "soldiers": 11,
+      "peakWorkers": 4,
+      "peakSoldiers": 11,
+      "deposited": [
+        640,
+        240,
+        225
+      ],
+      "spend": [
+        150,
+        330,
+        320
+      ],
+      "final": [
+        590,
+        10,
+        5
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 14,
+      "hallAttackers": 12,
+      "retreatBeforeLine": 60,
+      "expansion": "landmark depot ordered",
+      "expansionAt": 30.05,
+      "stalls": [],
+      "rallyObserved": 6,
+      "rallyTravelMin": 2.15,
+      "rallyTravelMax": 4.65,
+      "initialEnemies": 2
+    },
+    {
+      "file": "20261118T162759729-military-1543.txt",
+      "config": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+      "seed": 1543,
+      "policy": "military",
+      "outcome": "Victory",
+      "hallHP": 9140,
+      "attacks": 56,
+      "firstAttack": 228.2,
+      "rally": 11,
+      "workers": 4,
+      "soldiers": 11,
+      "peakWorkers": 4,
+      "peakSoldiers": 11,
+      "deposited": [
+        660,
+        260,
+        250
+      ],
+      "spend": [
+        310,
+        360,
+        340
+      ],
+      "final": [
+        450,
+        0,
+        10
+      ],
+      "spawn": 76,
+      "eligible": 76,
+      "arrivals": 17,
+      "hallAttackers": 15,
+      "retreatBeforeLine": 57,
+      "expansion": "not attempted",
+      "expansionAt": -1,
+      "stalls": [],
+      "rallyObserved": 6,
+      "rallyTravelMin": 2.15,
+      "rallyTravelMax": 6.1,
+      "initialEnemies": 2
+    }
+  ]
+}

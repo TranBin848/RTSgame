@@ -2,7 +2,7 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TilemapManager : SingletonManager<TilemapManager>
+public class TilemapManager : MonoBehaviour
 {
     [Header("Tilemaps")]
     [SerializeField] private Tilemap m_WalkableTilemap;

@@ -1,5 +1,7 @@
 # Kiến trúc ECS cho toàn bộ thực thể gameplay
 
+**Bàn giao17/11:** gameplay adapters/scene UI/fog/camera/input hiện nhận dependency theo [D4](../DependencyInjection/D4-Validation.md). Root/legacy composition là ranh giới discovery; native Runtime vẫn độc lập. [MatchFlow](../MatchFlow/Architecture.md) bổ sung outcome/terminal gates, [S9](../Progression/S9-Acceptance.md) có Player chức năng và số liệu riêng phạm vi. Không suy benchmark Swarm thành chi phí toàn GameplaySimulationSystem.
+
 Điểm vào khi quay lại dự án: [Tech Overview](../../TechnicalOverview.md). Khi sửa hoặc thêm tính năng, xem [DOTS Development Guide](../DOTS/DevelopmentGuide.md) để chọn đúng system, command và lifecycle.
 
 ## Mục tiêu và phạm vi

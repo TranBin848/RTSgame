@@ -1,5 +1,9 @@
 # Tài liệu kỹ thuật RTSgame2026
 
+**Đợt mới18/11:** đã duyệt G0–G1 theo [NextPhasePlan](Modules/Progression/NextPhasePlan.md), đang chạy baseline/policy theo [hợp đồng đoG01](Modules/Progression/G01-MeasurementContract.md). G2–G7 chưa triển khai. Plan S0–S9/D0–D4 giữ DONE theo phạm vi nghiệm thu cũ.
+
+**Bàn giao17/11:** build plan S0–S9 và D0–D4 DONE trong phạm vi đã chốt. Bắt đầu ở [Progress](Modules/Progression/Progress.md), [S9 nghiệm thu/artifacts/giới hạn](Modules/Progression/S9-Acceptance.md) và [D4 DI](Modules/DependencyInjection/D4-Validation.md); các trạng thái trước đó dưới đây là lịch sử.
+
 Các tài liệu này phục vụ phát triển tiếp dự án, bàn giao và giải thích kiến trúc trong khóa luận tốt nghiệp. **Logic thực thể đã có DOTS; các lớp Unit MonoBehaviour hiện có cả vai trò adapter/presentation.** Đọc trạng thái tích hợp trước khi thêm logic vào script cũ.
 
 ## Bắt đầu từ đâu?
@@ -12,15 +16,21 @@ Các tài liệu này phục vụ phát triển tiếp dự án, bàn giao và g
 | Chạy game/demo, kiểm tra Entity hoặc build | Usage của module tương ứng trong bảng bên dưới |
 | Trích kết quả cho khóa luận | Validation và artifact Evidence, kèm ngày và điều kiện thực thi |
 
+**S8:** [Luồng trận, DI và báo cáo kiểm thử](Modules/MatchFlow/Architecture.md) — mục tiêu5đêm, game-over/restart, số liệu scripted/manual tách riêng.
+
 ## Tài liệu module
 
-**Progression + Procedural mở rộng:** [Build plan](Modules/Progression/BuildPlan.md) và [sổ tiến độ](Modules/Progression/Progress.md). Mới lập kế hoạch ngày 05/11/2026, chưa triển khai gameplay mới; trạng thái từng lát cắt được cập nhật trong sổ tiến độ.
+[D4 Validation và ngoại lệ DI17/11](Modules/DependencyInjection/D4-Validation.md) là trạng thái mới nhất; S8 đã được người dùng xác nhận checklist, S9 đang build/đo. Giữ các ghi chú draft bên dưới như lịch sử.
+
+[D4 còn lại và chuẩn bị S9 ngày17/11](Modules/DependencyInjection/D4-RemainingWork.md): audit/draft, chưa áp dụng trong lúc người dùng testS8.
+
+**Progression + Procedural mở rộng:** [Build plan](Modules/Progression/BuildPlan.md) và [sổ tiến độ](Modules/Progression/Progress.md). Đã hoàn tất S0–S9/D0–D4 ngày17/11/2026; [S9 nghiệm thu](Modules/Progression/S9-Acceptance.md) liên kết dữ liệu và giới hạn.
 
 S0 có [hợp đồng kiến trúc](Modules/Progression/Architecture.md), [cách chạy](Modules/Progression/Usage.md) và [kiểm chứng](Modules/Progression/Validation.md); baseline đã chốt, D0 đang triển khai.
 
 | Module | Tài liệu | Nội dung |
 |---|---|---|
-| Dependency Injection | [Thiết kế và lộ trình](Modules/DependencyInjection/Architecture.md) | Manual DI, composition root, lifecycle Unity/ECS, chuyển đổi D0–D4 và tiêu chí khóa luận; chưa triển khai |
+| Dependency Injection | [Thiết kế và lộ trình](Modules/DependencyInjection/Architecture.md) | Manual DI, composition root, lifecycle Unity/ECS; D0–D4 hoàn tất, bằng chứng/ngoại lệ ở D4-Validation |
 | Dependency Injection | [Inventory D0](Modules/DependencyInjection/Inventory.md) | Baseline 149 vị trí ứng viên/31 file, owner/lifetime, ngoại lệ và lộ trình D1–D4; D0 hoàn tất |
 | Dependency Injection | [ADR-001](Modules/DependencyInjection/ADR-001-ManualDI.md) · [Lookup scan](Modules/DependencyInjection/LookupScan-2026-11-09.txt) | Quyết định manual DI và snapshot D0 ngày 09/11/2026 |
 | Dependency Injection | [Usage](Modules/DependencyInjection/Usage.md) · [Kiểm chứng](Modules/DependencyInjection/Validation.md) · [D1 Evidence](Modules/DependencyInjection/D1-Evidence-2026-11-10.md) | D1 root/lifecycle và D2 research service đã có; D3–D4 còn lại |
@@ -38,7 +48,18 @@ S0 có [hợp đồng kiến trúc](Modules/Progression/Architecture.md), [cách
 | Procedural Generation | [Kế hoạch triển khai](Modules/ProceduralGeneration/ImplementationPlan.md) | Sáu mốc và trạng thái lát cắt đầu tiên |
 | Procedural Generation | [Kiến trúc](Modules/ProceduralGeneration/Architecture.md) · [Cách chạy](Modules/ProceduralGeneration/Usage.md) · [Kiểm chứng](Modules/ProceduralGeneration/Validation.md) | Core xác định theo seed, scene integration, quét 1.000 seed và phần còn phải kiểm chứng trong Unity |
 | Procedural Generation / S4 | [Regions + preview](Modules/ProceduralGeneration/S4-Regions.md) | StrategicRegions v2, graph ba vùng/hai cửa/landmark, preview không sửa scene; 10/10 tests, 128 seed mỗi preset |
+| Procedural Generation / S5 | [Resources/topology](Modules/ProceduralGeneration/S5-ResourcesTopology.md) · [Log seedcheck](Modules/ProceduralGeneration/S5-SeedCheck-2026-11-12.txt) | Strategic v3, budget vùng/3 vàng landmark/clearance; 17/17 tests,1000 seed mỗi preset không lỗi; gameplay chờ S6 |
 | Game Flow | [Kiến trúc](Modules/GameFlow/Architecture.md) · [Cách chạy](Modules/GameFlow/Usage.md) · [Kiểm chứng](Modules/GameFlow/Validation.md) | MainMenu, vào ProceduralGame, tạm dừng, tùy chọn âm lượng và thoát |
+| Procedural Generation / S6a + D3a | [Scene, gateway và wave DI](Modules/ProceduralGeneration/S6-Integration.md) | Strategic scene, ba seed spawn/path/radius checks và legacy bootstrap PASS; S6/D3 tổng thể PARTIAL |
+| Procedural Generation / S6b + D3b | [Kinh tế vùng và resource binding](Modules/ProceduralGeneration/S6b-EconomyResourceDI.md) |3seed worker/nộp/StoragePit/fog-minimap-camera API; cây/mỏ qua DI và lifecycle checks PASS; còn wave/DI để hoàn tất S6/D3 |
+| Procedural Generation / S6c | [Wave và lifecycle](Modules/ProceduralGeneration/S6c-WavesLifecycle.md) · [Raw checks](Modules/ProceduralGeneration/S6c-WaveChecks-2026-11-13.txt) | Sửa trễ wave, approach radius so legacy3seed, retreat và menu reload PASS; S6/D3 vẫn PARTIAL |
+| Dependency Injection / D3c1 | [Construction process](Modules/DependencyInjection/D3c1-Construction.md) | BuildingProcess constructor DI, caller/placement guards và construction/UI checks PASS; D3 tổng thể PARTIAL |
+| Dependency Injection / D3c2 | [Procedural/spawners](Modules/DependencyInjection/D3c2-ProceduralSpawners.md) | Explicit refs/Initialize, suppression và legacy regeneration/cleanup/deposit/menu checks PASS; manual P/click được người dùng xác nhận15/11 |
+| Dependency Injection / D3c3 | [Production/lifecycle](Modules/DependencyInjection/D3c3-Production.md) | Producer DI, debit sau accepted, training/FIFO/pool lifecycle API PASS;59/59 DOTS+17/17 procedural, manual được người dùng xác nhận15/11 |
+| Dependency Injection / D3c4a | [Projectile factory/startup](Modules/DependencyInjection/D3c4a-ProjectileFactory.md) | Đạn dùng factory được cấp bridge, native/legacy damage/pool/caller checks PASS; root khởi động gameplay idempotent sau bind; tiếp D3c4b Unit graph |
+| Dependency Injection / D3c4b | [Unit DI/lifecycle](Modules/DependencyInjection/D3c4b-UnitLifecycle.md) | D3 DONE: binding/global-null/pool/nav/SampleScene/direct unregister và worker pool qua menu→game mới PASS; D4 toàn project còn lại |
+| Procedural Generation / S6 final | [Nghiệm thu16/11](Modules/ProceduralGeneration/S6-FinalValidation.md) · [Raw log](Modules/ProceduralGeneration/S6-FinalChecks-2026-11-16.txt) | S6 DONE: matrix0/1/1543 +manual +pool reload +17procedural PASS;59DOTS sau code cuối giữ nguyên; tiếp S7 |
+| Procedural Generation / S7 | [Presentation/khám phá/ảnh](Modules/ProceduralGeneration/S7-Presentation.md) | DONE: vùng/đường/landmark, decor không collider, glyph sau explored, night readability;3seed/API/ảnh/user acceptance,59+17 PASS; tiếp S8 |
 
 `DOTS` và `DOTSGameplay` là hai phần tài liệu của cùng nền runtime tại `Assets/Game/DOTS`: phần đầu tập trung Swarm/quái/đạn, phần sau giải thích gameplay RTS. Không coi chúng là hai implementation tách rời cần tự lắp lại.
 

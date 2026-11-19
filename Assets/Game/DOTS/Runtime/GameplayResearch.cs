@@ -113,7 +113,7 @@ namespace RTS.DOTS
         public ResearchResult StartResearch(string id, Entity townHall)
         {
             Dependency.Complete();
-            if (!IsConfigured || !m_ResearchConfigured || World.GetOrCreateSystemManaged<SwarmSimulationSystem>().Paused)
+            if (IsMatchOver || !IsConfigured || !m_ResearchConfigured || World.GetOrCreateSystemManaged<SwarmSimulationSystem>().Paused)
                 return ResearchResult.Unavailable;
             int technology = FindTechnology(id);
             if (technology < 0) return ResearchResult.InvalidTechnology;

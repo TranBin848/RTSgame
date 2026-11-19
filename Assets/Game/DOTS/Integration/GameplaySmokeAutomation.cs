@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using RTS.DOTS;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -69,14 +70,14 @@ public sealed class GameplaySmokeAutomation : MonoBehaviour
         {
             var profiles = m_Bridge.Gameplay.EntityManager.GetBuffer<GatheringProfileData>(worker.DotsEntity);
             for (int i = 0; i < profiles.Length; i++) { var p = profiles[i]; p.TickTime = 0.03f; p.Amount = 2; p.Capacity = 4; profiles[i] = p; }
-            int woodBefore = GameManager.Get().Wood;
+            int woodBefore = m_Bridge.GetComponent<GameManager>().Wood;
             Record("worker_claims_scene_tree", worker.TryAssignResourceNode(tree));
             TeleportNear(worker, tree.DotsCenter, tree.InteractionRadius + 0.25f);
             yield return WaitUntil(() => m_Bridge.Gameplay.TryGetWorker(worker.DotsEntity, out var w) && w.Carried >= 4, 6);
             Record("worker_gathers_native_cargo", m_Bridge.Gameplay.TryGetWorker(worker.DotsEntity, out var cargo) && cargo.Carried >= 4);
             worker.SetWoodStorage(hall); TeleportNear(worker, hall.Collider.ClosestPoint(worker.transform.position), 0.2f);
-            yield return WaitUntil(() => GameManager.Get().Wood > woodBefore, 8);
-            Record("worker_deposits_into_native_wallet_and_hud", GameManager.Get().Wood >= woodBefore + 4);
+            yield return WaitUntil(() => m_Bridge.GetComponent<GameManager>().Wood > woodBefore, 8);
+            Record("worker_deposits_into_native_wallet_and_hud", m_Bridge.GetComponent<GameManager>().Wood >= woodBefore + 4);
             worker.CancelActiveWork();
         }
         else Record("scene_tree_exists", false);
@@ -85,7 +86,7 @@ public sealed class GameplaySmokeAutomation : MonoBehaviour
         foreach (var action in worker.Actions) if (action is BuildActionSo build && build.StructureUnitPrefab is TowerUnit) { buildAction = build; break; }
         if (buildAction != null && TryPlacement(buildAction, out var placement))
         {
-            var process = new BuildingProcess(buildAction, placement, worker);
+            var process = new BuildingProcess(buildAction, placement, worker, FindFirstObjectByType<GameManager>(), m_Bridge);
             var tower = ClosestTower(placement);
             Record("construction_view_is_ecs", tower != null && tower.IsDotsControlled);
             if (tower != null)
@@ -142,7 +143,7 @@ public sealed class GameplaySmokeAutomation : MonoBehaviour
         }
         else Record("scene_sheep_exists", false);
 
-        // Spawn using an original wave prefab, then also exercise direct Instantiate lifecycle conversion.
+        // A raw Instantiate must be registered explicitly by its caller after the DI migration.
         GameObject enemyPrefab = null;
         if (waves != null && waves.Definition != null && waves.Definition.EnemyPrefabs.Length > 0) enemyPrefab = waves.Definition.EnemyPrefabs[0];
         if (enemyPrefab != null)
@@ -153,8 +154,9 @@ public sealed class GameplaySmokeAutomation : MonoBehaviour
             Record("shared_wave_spawn_api_creates_entity", m_Bridge.SpawnEnemy(enemyPrefab, enemyPosition));
             m_Map.TryResolveWalkableDestination(enemyPosition + Vector3.up, out var secondPosition);
             var directView = Instantiate(enemyPrefab, secondPosition, Quaternion.identity);
+            m_Bridge.Register(directView.GetComponent<Unit>());
             yield return null; yield return null;
-            Record("direct_enemy_prefab_converts_to_entity", (directView == null || !directView.activeInHierarchy) && m_Bridge.Simulation.AgentCount >= nativeBefore + 3);
+            Record("direct_enemy_prefab_converts_to_entity", (directView == null || !directView.activeInHierarchy) && m_Bridge.Simulation.AgentCount >= nativeBefore + 3, "Raw Instantiate followed by explicit bridge.Register");
             Record("no_active_legacy_enemy_views", FindObjectsByType<EnemyUnit>(FindObjectsSortMode.None).Length == 0);
         }
         else Record("wave_prefab_available", false);
@@ -185,7 +187,11 @@ public sealed class GameplaySmokeAutomation : MonoBehaviour
     bool TryPlacement(BuildActionSo action, out Vector3 position)
     {
         var bounds = m_Map.WalkableTilemap.cellBounds;
-        foreach (var cell in bounds.allPositionsWithin)
+        var hall = FindFirstObjectByType<TownHall>();
+        var cells = new List<Vector3Int>();
+        foreach (var cell in bounds.allPositionsWithin) cells.Add(cell);
+        // Keep this construction fixture near the base; a corner placement changes the legacy wave ring beyond the finite map.
+        foreach (var cell in cells.OrderBy(c => (m_Map.WalkableTilemap.GetCellCenterWorld(c) - hall.transform.position).sqrMagnitude))
         {
             bool valid = true;
             for (int y = -3; y <= 3 && valid; y++)

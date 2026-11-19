@@ -57,6 +57,72 @@ namespace RTS.DOTS.Tests
             new ResearchDefinition { Id="economy_cargo",Prerequisite="economy_tools",Wood=80,Gold=30,Duration=0.05f,WoodMultiplier=1 },
             new ResearchDefinition { Id="economy_tools",Wood=40,Gold=15,Duration=0.05f,WoodMultiplier=1.25f }
         };
+        [Test] public void MatchSurvivesFiveNightsAndOutcomeCannotChange()
+        {
+            var hall = Building(new float2(15)); m_Gameplay.ConfigureMatch(5);
+            Assert.That(m_Gameplay.EvaluateMatch(5), Is.EqualTo(MatchOutcome.Running));
+            Assert.That(m_Gameplay.EvaluateMatch(6), Is.EqualTo(MatchOutcome.Victory));
+            m_Gameplay.Remove(hall);
+            Assert.That(m_Gameplay.EvaluateMatch(6), Is.EqualTo(MatchOutcome.Victory));
+        }
+        [Test] public void MatchIgnoresDeadAndEnemyHallsAndPrioritizesDefeatAtDawn()
+        {
+            var hall = Building(new float2(15)); var other = Building(new float2(20));
+            var body = EM.GetComponentData<CombatBody>(hall); body.Health = 0; EM.SetComponentData(hall, body);
+            body = EM.GetComponentData<CombatBody>(other); body.Faction = 1; EM.SetComponentData(other, body);
+            m_Gameplay.ConfigureMatch(5);
+            Assert.That(m_Gameplay.EvaluateMatch(6), Is.EqualTo(MatchOutcome.Defeat));
+        }
+        [Test] public void MatchRemainsRunningWhileAnyPlayerHallLivesAndResetClearsResult()
+        {
+            var first = Building(new float2(15)); Building(new float2(20)); m_Gameplay.ConfigureMatch(5);
+            m_Gameplay.Remove(first);
+            Assert.That(m_Gameplay.EvaluateMatch(2), Is.EqualTo(MatchOutcome.Running));
+            m_Gameplay.EvaluateMatch(6); m_Gameplay.ResetGameplay(); m_Combat.ResetSimulation();
+            Assert.That(m_Gameplay.Outcome, Is.EqualTo(MatchOutcome.Running));
+            Assert.That(m_Gameplay.SurvivalNights, Is.Zero);
+            Assert.That(m_Gameplay.Wallet.Wood, Is.Zero);
+            Assert.That(m_Gameplay.EvaluateMatch(1), Is.EqualTo(MatchOutcome.Running));
+            m_Gameplay.ConfigureMatch(5);
+            Assert.That(m_Gameplay.EvaluateMatch(1), Is.EqualTo(MatchOutcome.Defeat));
+        }
+        [Test] public void MatchValidatesConfigurationAndKeepsLegacyScenesOptIn()
+        {
+            Assert.That(m_Gameplay.EvaluateMatch(9), Is.EqualTo(MatchOutcome.Running));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => m_Gameplay.ConfigureMatch(0));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => m_Gameplay.EvaluateMatch(0));
+            m_Gameplay.ConfigureMatch(5); m_Gameplay.ConfigureMatch(5);
+            Assert.Throws<System.InvalidOperationException>(() => m_Gameplay.ConfigureMatch(3));
+        }
+        [Test] public void TerminalMatchRejectsCommandsAndFreezesSimulationEvenIfUnpaused()
+        {
+            ConfigureResearch(20); var hall = Building(new float2(15), true);
+            var worker = Actor(GameplayKind.Worker, new float2(16)); var node = Resource(new float2(17));
+            m_Gameplay.AddResources(100,100,100);
+            Assert.That(m_Gameplay.StartResearch("economy_tools",hall),Is.EqualTo(ResearchResult.Started));
+            m_Gameplay.ConfigureMatch(5); m_Gameplay.EvaluateMatch(6);
+            Assert.That(m_Gameplay.Research.Active, Is.Zero);
+            Assert.That(m_Gameplay.Research.UnlockMask, Is.Zero);
+            Assert.That(m_Gameplay.Wallet.Wood, Is.EqualTo(60)); // No refund at match end.
+            m_Gameplay.AddResources(-60,0,0);
+            Assert.That(m_Gameplay.Wallet.Wood, Is.EqualTo(60));
+            Assert.That(m_Gameplay.StartResearch("economy_tools",hall),Is.EqualTo(ResearchResult.Unavailable));
+            Assert.That(m_Gameplay.EnqueueTraining(hall,1,1), Is.False);
+            Assert.That(m_Gameplay.BeginConstruction(hall,1,1), Is.False);
+            Assert.That(m_Gameplay.AssignResource(worker,node), Is.False);
+            Assert.That(m_Gameplay.TryClaim(node), Is.False);
+            m_Gameplay.SetDestination(worker,new float2(20),true); m_Gameplay.Attack(worker,hall);
+            m_Gameplay.AssignConstruction(worker,hall); m_Gameplay.Shelter(worker,hall);
+            Assert.That(EM.GetComponentData<GameplayActor>(worker).Moving, Is.Zero);
+            Assert.That(EM.GetComponentData<GameplayWorker>(worker).Phase, Is.EqualTo(WorkPhase.None));
+            Assert.That(m_Combat.SpawnEnemy(new float2(10),EnemySpawnSettings.Default),Is.EqualTo(Entity.Null));
+            Assert.That(m_Combat.SpawnProjectile(new ProjectileRequest()),Is.EqualTo(Entity.Null));
+            m_Combat.QueueDamage(hall,999); var ticks = m_Gameplay.TickCount; var combatTicks=m_Combat.TickCount;
+            m_Combat.Paused=false; Tick(10);
+            Assert.That(m_Gameplay.TickCount,Is.EqualTo(ticks));
+            Assert.That(m_Combat.TickCount,Is.EqualTo(combatTicks));
+            Assert.That(EM.GetComponentData<CombatBody>(hall).Health,Is.EqualTo(100));
+        }
         [Test] public void ResearchCatalogPrerequisitesRejectWithoutDebitAndUnlockInAnyCatalogOrder()
         {
             var catalog=ResearchCatalog(); m_Gameplay.ConfigureResearchCatalog(catalog);
@@ -321,6 +387,19 @@ namespace RTS.DOTS.Tests
             Tick(8); var ids = new System.Collections.Generic.List<int>();
             while (m_Gameplay.TryTakeEvent(out var evt)) if (evt.Kind == GameplayEventKind.TrainComplete) ids.Add(evt.RequestId);
             CollectionAssert.AreEqual(new[] { 21, 22 }, ids);
+        }
+        [Test] public void TrainingRejectsInvalidDurationAndDeadProducerWithoutAppending()
+        {
+            var producer = Building(new float2(4), true);
+            foreach (float duration in new[] { 0f, -1f, float.NaN, float.PositiveInfinity })
+                Assert.That(m_Gameplay.EnqueueTraining(producer, 1, duration), Is.False);
+            Assert.That(EM.GetBuffer<TrainingRequest>(producer).Length, Is.Zero);
+            var body = EM.GetComponentData<CombatBody>(producer); body.Health = 0; EM.SetComponentData(producer, body);
+            Assert.That(m_Gameplay.EnqueueTraining(producer, 2, 1), Is.False);
+            Assert.That(EM.GetBuffer<TrainingRequest>(producer).Length, Is.Zero);
+            body.Health = 100; EM.SetComponentData(producer, body);
+            Assert.That(m_Gameplay.EnqueueTraining(producer, 3, 1), Is.True);
+            Assert.That(EM.GetBuffer<TrainingRequest>(producer).Length, Is.EqualTo(1));
         }
         [Test] public void SheepGrazesAndFleesOnNativeDamage()
         {

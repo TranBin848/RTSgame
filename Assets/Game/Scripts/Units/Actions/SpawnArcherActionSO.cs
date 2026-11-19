@@ -34,6 +34,7 @@ public class SpawnArcherActionSO : ActionSO, IResourceCostAction
             return;
         }
 
+        if (!archeryRange.IsProductionOwner(manager)) return;
         if (!manager.CanTrainArchers)
         {
             manager.ShowTextPopup("Research military_archery first", Color.red, archeryRange.transform.position);
@@ -45,8 +46,8 @@ public class SpawnArcherActionSO : ActionSO, IResourceCostAction
             return;
         }
 
+        if (!archeryRange.EnqueueArcherSpawn(this)) return;
         manager.AddResources(-m_GoldCost, -m_WoodCost, -m_MeatCost);
-        archeryRange.EnqueueArcherSpawn(this);
         manager.ShowTextPopup("Archer queued", Color.green, archeryRange.transform.position);
     }
 }

@@ -70,8 +70,7 @@ public class EnemyRangerUnit : EnemyUnit
         if (target != null && target.IsTargetable)
         {
             Vector3 spawnPosition = GetProjectileSpawnPosition();
-            var projectile = RuntimeObjectPool.Spawn(m_ProjectilePrefab, spawnPosition, Quaternion.identity);
-            projectile?.Initialize(this, target, damage, spawnPosition);
+            m_GameManager?.TrySpawnProjectile(m_ProjectilePrefab, this, target, damage, spawnPosition);
         }
     }
 

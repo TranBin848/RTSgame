@@ -22,6 +22,8 @@ namespace RTS.ProceduralGeneration
         {
             int w=settings.Width,h=settings.Height,cx=w/2,cy=h/2;
             var result = new StrategicLayout(w*h);
+            for(int y=0;y<h;y++)for(int x=0;x<w;x++)
+                if(x<2||y<2||x>=w-2||y>=h-2)terrain[y*w+x]=(byte)TerrainCell.Water;
             var random = new DeterministicRandom(DeterministicRandom.DeriveSeed(settings.Seed,0x5245474Eu,attempt));
             int rotation=random.NextInt(0,4);
             result.Regions[0]=new MapRegion {X=cx,Y=cy,Radius=settings.StartClearRadius,Role=RegionRole.Start};
@@ -48,7 +50,7 @@ namespace RTS.ProceduralGeneration
                 }
                 result.RegionIds[y*w+x]=(byte)nearest;
             }
-            // shortcut: protected L routes are a blockout; validate final topology and wave paths in S5/S6.
+            // shortcut: L routes define the blockout; S6 verifies actual collider/navigation mappings.
             foreach(var connection in result.Connections)
             {
                 var from=result.Regions[connection.From];var to=result.Regions[connection.To];

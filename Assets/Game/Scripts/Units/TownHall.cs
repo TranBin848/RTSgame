@@ -4,13 +4,13 @@ public class TownHall : ProductionBuilding
 {
     [SerializeField] private GameObject m_VillagerPrefab;
 
-    public void EnqueueVillagerSpawn(SpawnVillagerActionSO action)
+    public bool EnqueueVillagerSpawn(SpawnVillagerActionSO action)
     {
         if (action == null)
         {
-            return;
+            return false;
         }
 
-        EnqueueProduction(action, m_VillagerPrefab, action.TrainDuration, "Villager spawned");
+        return EnqueueProduction(action, m_VillagerPrefab, action.TrainDuration, "Villager spawned");
     }
 }

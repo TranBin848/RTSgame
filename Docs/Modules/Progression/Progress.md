@@ -1,18 +1,32 @@
 # Tiến độ và bàn giao — Progression + Procedural mở rộng
 
-Cập nhật: **11/11/2026**. Kế hoạch: [BuildPlan.md](BuildPlan.md).
+Cập nhật: **18/11/2026**. Kế hoạch đã nghiệm thu: [BuildPlan.md](BuildPlan.md).
 
 ## Đọc ngay khi tiếp tục
 
-**S0–S4 và D0–D2 DONE theo phạm vi đã ghi. S4 có Core/preview chiến thuật; gameplay preset mới chờ S5/S6.**
+**18/11 — đã duyệt, đang triển khai G0–G1:** UnityMCP đúng project6000.3.11f1/ProceduralGame; có snapshot authoring/fingerprint và harness riêng [G01 contract](G01-MeasurementContract.md). Pilot xác nhận rally giúp quân tham chiến; giữ rawS8, rawpilot và faildiagnostic. Matrixv3 đang chạy, chưa chốt kết quả; chưa đổi HP/wave/giá/tech/runtime hoặc mở G2–G7. S0–S9/D0–D4 bên dưới giữ DONE.
 
-**Việc tiếp theo: S5 — budget tài nguyên theo vùng và kiểm topology sau placement.** Đọc [S4 Regions](../ProceduralGeneration/S4-Regions.md), BuildPlan mục S5 và Core generator trước khi sửa.
+**17/11 — BUILD PLAN HOÀN TẤT trong phạm vi đã chốt: S0–S9 và D0–D4 DONE.** [S9 nghiệm thu/bàn giao](S9-Acceptance.md):81/81EditMode,18/18Player smoke/errors=[], build Windows cuối47.625s/0error-warning; CSV19191frames/89.998s/seed1/v3,world render đã inspect, median3.7341ms/p958.5298ms, request→Ready836.3275ms. XML/JSON/CSV/PNG/416fileSHA được lưu. FinalMCP ProceduralGame sạch/seed1/ngoàiPlay-pause-compile,0Exception; không job/Player test/build pending, không commit. **Hướng tiếp ngoài plan:** profile frame/GCspike và tải lớn, benchmark Release/onscreen/nhiều seed; cải thiện áp lực sống sót vì control không thao tác vẫn thắng. Không tự mở prestige/save/offline hoặc tuyên bố đã tối ưu mọi nền tảng. Các checkpoint đang-làm bên dưới là lịch sử.
+
+**17/11 — cập nhật mới nhất:** người dùng test xong S8 và trả lời “oke mọi thứ ổn” cho checklist thắng/thua/replay/menu/lựa chọn. Đóng S8 ở phạm vi trận hoàn chỉnh và báo cáo cân bằng bước đầu; không suy thêm seed/ngày/độ khó cụ thể từ xác nhận chung. Đối chứng seed1 không thao tác vẫn thắng (hall8190/10000) giữ như giới hạn balance đã biết. **D4 đã triển khai/kiểm xong:** UI/cursor/fog/camera/input/bootstrap, pool4loại và worker qua menu/newfog, SampleScene/ProceduralGame;81/81regression PASS. [D4 evidence/exceptions](../DependencyInjection/D4-Validation.md). S9 đang tiếp tục: UI polling idle/busy1000lần mỗi loại đạt0B thread allocation, immutable definition đọc1lần; chưa frame benchmark/Player/startup phases. Không dùng draft cũ Temp/D4 để ghi đè source hiện tại.
+
+**17/11 — đang tiếp tục:** MCP cloud/CLI đã xác nhận đúng Editor; đối chứng seed1 không thao tác cũng thắng ngày6, hall8190/10000, ví100×3 và0research/train/deposit. Raw `S8-ControlRuns-2026-11-17.txt`; không suy thành cân bằng đạt. Người dùng nhận test S8 khi Editor rảnh; đã Exit Play/bàn giao. Trong lúc chờ chỉ audit và draft ngoài Assets, chưa compile/applyD4. [Phạm vi/draft D4 và chuẩn bịS9](../DependencyInjection/D4-RemainingWork.md). Không tự chiếm Editor/reload/compile trong lúc user đang chơi.
+
+**S8 PARTIAL —16/11/2026:** S8a hoàn thành luồng trận (sống5đêm→thắng ngày6; mất hall cuối→thua; terminal gates; result UI/replay/menu qua DI). Final64/64DOTS+17/17procedural PASS; fresh/repeat/6DI rejects/terminal/replay/menu PASS. S8b đã đo6policy trên0/1/1543, tất cả thắng với HP hall81–94%, chưa đặt kho landmark; giữ config baseline và ghi giới hạn. Người dùng báo “Chưa test được, để mục này chờ”; manual/cân bằng chưa nghiệm thu, không đánh dấu toànS8DONE. [Báo cáo đầy đủ](../MatchFlow/Architecture.md), raw `S8-ScriptedRuns-2026-11-16.txt`. Tiếp theo: nhận playtest thủ công, kiểm control/điều chỉnh một biến nếu xác nhận quá dễ, so lại6policy; sau khiS8DONE mớiD4/S9.
+
+Các checkpoint S7 bên dưới là trạng thái trước S8.
+
+**16/11 — S7 DONE trong phạm vi build plan.** Đã có region tint/path spine, cụm decor không collider, watchpost cạnh pad và glyph minimap sau khám phá; night palette dễ đọc hơn, timing không đổi. [S7 Evidence/ảnh](../ProceduralGeneration/S7-Presentation.md) ghi ảnh cùng seed/camera,3seed checks và xác nhận người dùng “Ổn, dễ nhận ra”. Regression59/59DOTS+17/17procedural PASS; tiếp S8, D4 toàn project vẫn TODO.
+
+**S0–S7 và D0–D3 DONE.** S7 giữ kết quả S6, không đổi Core/gen/quota/nav; decor mới nhận deps tường minh. Không đồng nhất kết quả này với toàn project đã đạt DI: UI/fog/input/camera/renderer và ngoại lệ còn theo D4.
+
+Bước tiếp **S8 — trận hoàn chỉnh/cân bằng bước đầu**: đọc S0 điều kiện thắng/thua và BuildPlan S8, kiểm game-over chặn command/restart, playtest3seed theo nhánh kinh tế/quân sự. Đo unlock/thu-nộp/quân/ngày thắng-thua rồi mới chỉnh config; xử lý48configured vs42spawn trong lịch đêm theo evidence S6. D4 toàn project trước S9; không lặp matrix S6/S7 nếu không có thay đổi/lỗi liên quan.
 
 Không cần hỏi lại người dùng về tên/giá thử trong plan khi được yêu cầu tiếp tục implementation; đó là mặc định thử nghiệm có thể điều chỉnh và ghi lý do. Quyết định thay đổi phạm vi như prestige/save/load phải được tách rõ.
 
 ## Bảng trạng thái
 
-Yêu cầu DI đã bổ sung vào [Architecture DI](../DependencyInjection/Architecture.md). Chưa migrate runtime. Thứ tự: S0 → D0 → D1 → S1/S2 + D2 → S3 → S4/S5 → S6 + D3 → S7/S8 → D4 → S9.
+Yêu cầu DI theo [Architecture DI](../DependencyInjection/Architecture.md); đã migrate D1/D2, wave/nodes/build/procedural/spawner/production/projectile và Unit/Worker/Sheep/Structure/AIPawn tới D3c4b, nghiệm thu worker pool qua reload PASS. UI/input/fog/camera/renderer và ngoại lệ còn lại theo Inventory/D4. Thứ tự: S0 → D0 → D1 → S1/S2 + D2 → S3 → S4/S5 → S6 + D3 → S7/S8 → D4 → S9.
 
 | Lát cắt | Trạng thái | Kết quả/bằng chứng | Bước tiếp |
 |---|---|---|---|
@@ -20,26 +34,98 @@ Yêu cầu DI đã bổ sung vào [Architecture DI](../DependencyInjection/Archi
 | D0 Inventory/ADR DI | DONE | 149 call site ứng viên/31 file, bảng owner/lifetime, ADR-001; xem DI Inventory | D1 root và lifecycle |
 | D1 Composition root/lifecycle | DONE | Inject manager/locators; Ready/failure gate; scene/domain reload và regression tests PASS; xem DI Evidence | S1 + D2 |
 | D2 Progression qua DI | DONE | Root→ResearchService→IResearchService panel; fake/lifecycle/transaction PASS | Giữ nguyên ranh giới khi mở thêm tech |
-| D3 Gameplay integration qua DI | TODO | Chưa triển khai | Sau S3, hoàn tất cùng S6 |
-| D4 Hoàn tất phạm vi DI | TODO | Chưa triển khai | Xử lý hết inventory trước S9 |
+| D3 Gameplay integration qua DI | DONE | D3a–D3c4b, binding/global-null/pool4loại/nav/SampleScene/direct unregister; worker pool qua menu→game PASS;59DOTS+17procedural | Giữ lifecycle; D4 audit UI/fog/input/camera/renderer và ngoại lệ toàn project |
+| D4 Hoàn tất phạm vi DI | DONE | UI/cursor/fog/camera/input/bootstrap;9views/8types,16DI rejects;fog153/71,6rejects,pool/reload PASS;81regression; audit ngoại lệ | S9; xem D4-Validation |
 | S1 Một tech trong ECS | DONE | economy_tools, wallet/state/tick/modifier; 43/43 DOTS tests và scene API checks | S2 manual/visual acceptance |
 | S2 UI nghiên cứu | DONE | Người dùng xác nhận toàn bộ checklist thủ công đạt; không có artifact kèm theo | S3 |
 | S3 Sáu tech | DONE | 58/58 DOTS tests, six-node integration, gates/debit, legacy và ảnh UI 1920×1080 | S4 vùng/preview map |
 | S4 Vùng và preview | DONE | StrategicRegions v2 + preview; 10/10 tests, 128 strategic và128 legacy seed không lỗi; ảnh đã kiểm | S5 budget/topology cuối |
-| S5 Budget và topology | TODO | — | Sau S4 |
-| S6 Map/wave/navigation | TODO | — | Sau S3 + S5 |
-| S7 Hình ảnh/khám phá | TODO | — | Sau S6 |
-| S8 Trận và cân bằng | TODO | — | Sau S3 + S6, hoàn thiện cùng S7 |
-| S9 Nghiệm thu | TODO | — | Sau S7 + S8 |
+| S5 Budget và topology | DONE | Strategic v3, budget/landmark/final validator;17/17 tests,1000seed mỗi preset0lỗi | S6/D3 scene integration |
+| S6 Map/wave/navigation | DONE | Matrix0/1/1543 economy/build/fog-camera/input +3chu kỳ/expanded base PASS; manual xác nhận; final pool reload+17procedural PASS, scene sạch seed1 | S7 nhận diện vùng/khám phá; quota ngoài đêm chuyển S8 |
+| S7 Hình ảnh/khám phá | DONE | Region/path/pad tint +decor/watchpost không collider, glyph sau khám phá;3seed checks/ảnh cùng seed ngày-đêm, user xác nhận;59+17 PASS | S8 trận/cân bằng, giữ artifact S7 |
+| S8 Trận và cân bằng | DONE | Luồng trận+6policy/report;user17/11 xác nhận checklist ổn;đối chứng không thao tác thắng là giới hạn balance đã biết | Không tuyên bố độ khó tối ưu |
+| S9 Nghiệm thu | DONE | 81tests XML;18Player smoke;Windows build;startup phases;19191frames/GC/PNG/CSV/hash;S9-Acceptance có giới hạn | Ngoài plan:balance sâu/Release/onscreen/tải lớn |
 
 ## Checkpoint hiện tại
 
-- **S4 DONE ngày 11/11:** MapLayoutPreset.LegacyMainland (default/version1) và StrategicRegions (version2). MapData.Layout gồm Regions, Connections, Gateways, Landmark, RegionIds, Routes. RNG phase riêng; hai nhánh vuông góc theo seed, carve terrain/reserved trước BFS/placement.
-- **Bằng chứng:** [S4 Regions](../ProceduralGeneration/S4-Regions.md), ba ảnh preview cùng thư mục Progression. Unity procedural tests 10/10; seedcheck 128 strategic và 128 legacy không lỗi, so sánh tái lập cả dữ liệu mới. Runtime asset DefaultProceduralMapSettings vẫn legacy, scene không dirty.
-- **Bước tiếp S5:** phân bổ resource budget theo role/path distance; landmark cụm vàng có footprint/chỗ xây; validator sau placement về resource access, clearance, start area và gateway topology thật. Quét 1000 seed theo plan S5. Đọc MapGenerationData.cs, StrategicLayout.cs, ProceduralMapGenerator.cs và S4-Regions.md.
-- **Giới hạn bắt buộc giữ:** gateway là cell đề xuất, chưa là spawn point hợp collider; noise vẫn có thể tạo đường phụ. Không gọi đây là đúng hai luồng quái, không nói vùng Economy đã giàu tài nguyên hơn. S6 mới áp scene/wave/cả hai navigation systems.
-- **Editor cuối:** preview Regions mở và sinh strategic seed1543; scene ProceduralGame giữ nguyên, không Play. Preview lỗi đã kiểm xóa ảnh cũ. Không Player build/benchmark mới. Runtime đúng phiên bản phải dùng ToData preset0 trước S6.
-- **Lịch sử:** S3 sáu tech đã DONE, 58/58 tests; D3/D4 migration legacy vẫn theo plan. Không làm lại tech hoặc ghi gameplay S4 đã kiểm chứng. Thay đổi plugin/font/package/ProjectSettings có sẵn vẫn giữ nguyên.
+- **Đóng plan17/11:** dùng S9-Acceptance và D4-Validation làm nguồn mới nhất. Code source hiện tại đã gồm D4 và timing/perf automation; không copy Temp/D4-Draft cũ đè source. Player chạy từ `.utmp/s9-build-2026-11-17/RTSgame2026.exe` với thư mục Data đi kèm; manifest416files đối chiếu binary đã test. CI smoke cũ đã sửa fixture explicit register/near-base placement, không đổi gameplay để chiều test.
+- **Known limits:** survival baseline5đêm còn dễ; single-active-gameplay-scene; offscreen Development/seed1, một startup sample; maxframe53.9553ms,GCspike1020544B chưa attribution. Không dùng S0benchmark quái hoặc testtime làm performance của worker; không coi fake-service polling0B là0GC toàn scene.
+- **Khi tiếp tục:** phát triển ngoài plan phải chốt scope mới; nếu user báo bug, đọc đúng module/caller trước sửa và kiểm Unity. Giữ prefab/package/pipeline/Editor và các thay đổi có sẵn; không cần lặp toàn bộ6policy/matrix khi không có thay đổi liên quan.
+
+- **S8 kỹ thuật đã kiểm:** `GameplayMatch.cs`, `MatchSession.cs`, `MatchSessionEditorTools.cs`, root/scene/generator wiring; gates ở gameplay/research/swarm/bridge/GameManager/clock/wave/menu. Native reset kết quả/goal về0 khi teardown; legacy opt-in không bị goal5 áp tự động.6DI rejects/repeat-init PASS; không thêm runtime global lookup ở consumer mới.
+- **Bằng chứng cuối:**64/64DOTS2.8412262s +17/17procedural7.0509617s,0fail/skip;6run675.75s mô phỏng mỗi run,76spawn (12/15/15/15/19),không shield/hoàn máu/cấp tiền. Ảnh `Evidence/S8-defeat.png` và `Evidence/S8-victory-final.png`; ảnh `S8-victory.png` là render cũ lúc paused, không dùng làm final.
+- **Cấu hình/giới hạn:** goal5đêm mới; timing60/30/45,giá6tech/quota/HP/prefab giữ nguyên. Quota là trần tiếp viện tới bình minh; UIwave là mốc bắt đầu. HP81–94% vàkhông expansion cho thấy balance chưa thuyết phục trong policy này; chưa kết luận độ vui/hai nhánh cân bằng. User yêu cầu để manual chờ.
+- **Điểm bàn giao:** ProceduralGame sạch/seed1/ngoàiPlay-pause-compile;0Exception sequence>4171;3filemới cómeta. Không commit/job/CLI đang chờ; không sửa pipeline/package/prefab. Chưa buildPlayer/FPS/GC hoặc tìm nguyên nhân crash Editor cũ. Giữ toàn bộ thay đổi tồn tại trước phiên.
+
+### Checkpoint S7 đã đóng (lịch sử)
+
+- **S7 đóng16/11:** [Presentation evidence](../ProceduralGeneration/S7-Presentation.md), `Tools/ValidateS7.cs`, ảnh4file `Evidence/S7-final-{before/after}-seed1-{day/night}.png`. Ghi nhận người dùng xác nhận “Ổn, dễ nhận ra” cho landmark/hướng mở rộng và độ sáng đêm; không tự coi manual S6 cũ là S7 mới.
+- **Implementation:** ProceduralMapPresentation nhận MapData/map/origin/fog từ root,3texture+material có sẵn qua refs. Tint region/path spine/pad;16điểm decor/vùng, ring đá và watchpost search4→10cell, không RNG toàn cục/collider/Unit, pad trống, sorting10 dưới actor/resource25. Minimap nhận presentation tường minh, vẽ tree/watchpost glyph chỉ sau explored, giữ khi ngoài vision; world silhouette dim0,5. Fog toggle phát OnFogUpdated ngay. Root scene+editor generator wire refs cùng code.
+- **Night presentation:** shared DayNightCycleDefinition đổi màu/intensity0,1→0,35/vignette0,5→0,28/filter; timing60/30/45 không đổi, ảnh finalđêm đọc được hơn. Không import art/package/pipeline mới; sourceTinySwords trong project, texture/material gốc không sửa.
+- **Kiểm S7:** seed1/0/1543 có16/15/14decor, mỗi seed1watchpost; actors25/resources150, no collider/Unit/pad occupied, nav/terrain/repeat init stable,1listener, missing-dependency reject. Unknown sites hidden → reveal glyph/world → explored memory/dim PASS cả3seed. Seed1 selection/ground/minimap pointer-drag PASS; nộp20wood50,50s và20gold61,20s; StoragePit landmark27,00s debit100/100,actor25→26 PASS.
+- **Regression cuối S7:**59/59DOTS,0fail/skip,2,1626465s;17/17procedural,0fail/skip,5,3338967s. Đã inspect ảnh1920×1080 trước/sau với camera lock/ortho9 cùng seed, debug fog-off chỉ dùng chụp. Baseline controlled tắt S7 visuals và palette đêm cũ trong bộ nhớ; restore authored values trước Exit Play. Không dùng các draft Evidence làm ảnh final.
+- **Môi trường cuối S7:** ProceduralGame sạch/seed1, isPlaying/isPaused/isCompiling=false; NightIntensity0,35 và NightDuration45,0Exception sequence>4134. Test-only reveal/camera/fog bỏ bằng Exit Play; không job/probe/commit mới. Chỉ scene refs và shared night visual asset thay đổi cùng implementation; giữ mọi thay đổi cũ của user.
+- **Tiếp S8:** hoàn chỉnh điều kiện kết thúc theo S0, chặn command khi game-over và restart;3seed ×ưu tiên kinh tế/quân sự, ghi số liệu thật trước balance. Còn D4 và S9 build/perf/thesis. Chưa đo allocation/FPS hoặc Player, chưa mọi seed/preset; watchpost search hữu hạn có thể không tìm được chỗ ngoài3seed đã kiểm, ghi limit trong evidence.
+
+### Checkpoint đóng S6/D3 — lịch sử, giữ bằng chứng nền
+
+- **Đóng S6/D3 ngày16/11:** MCP tools đã xuất hiện lại và hoạt động, không dùng CLI để vượt approval. ProceduralGame ban đầu sạch/ngoài Play/compile; chỉ có cảnh báo plugin về path spaces.17/17procedural PASS,0fail/skip,8,1212562s. Không sửa gameplay từ code đã có59/59DOTS PASS1,0734240s; không chạy lại DOTS/matrix khi không cần.
+- **Pool Unit qua unload/reload PASS:** CheckReady → PrepareReloadPool giữ worker inactive/unbound → GameFlowMenu.ReturnToMenu → CheckMenu (bridge/entities/projectiles/ví0/cờ sạch) → GameFlowMenu.Play/Editor Step → CheckReady (1bridge/25actors/132nodes/1wave listener/ví100x3, repeat BeginGameplay không nhân) → CheckReloadPool. Đúng cùng worker view vào scene mới, nhận bridge/game mới, nhận resource work, return không rò actor/dependency. Fixture tự tạo đã dọn.
+- **Bằng chứng nền S6 giữ nguyên:** raw matrix0/1/1543, kho landmark, fog/minimap/camera/input và3chu kỳ/seed đã PASS; manual16/11 do người dùng báo.42/42lượt đến hạn theo lịch, configured48/6lượt ngoài đêm chuyển S8. Harness bảo vệ máu TownHall, không coi là cân bằng trận/benchmark/Player.
+- **Môi trường đóng:** ProceduralGame sạch, seed1; isPlaying/isPaused/isCompiling=false. Console Exception sequence>4123=0; có log4128 plugin cảnh báo đường dẫn có spaces, không đổi tên/move project để né cảnh báo. Không job/probe/CLI còn chờ; không commit, không sửa scene/prefab/package/Editor/render pipeline hoặc thay đổi có sẵn của người dùng.
+- **Tiếp S7:** đọc BuildPlan S7 và Procedural Architecture/Usage; chụp baseline cùng seed ngày/đêm trước chỉnh hình ảnh; dùng tile/prefab có sẵn tạo nhận diện region/landmark/minimap sau khám phá; kiểm selection/gather/nav sau decor. S8 phải xử lý quota ngoài đêm và balance/endgame bằng playtest, D4 audit toàn project, S9 build/performance/bàn giao. Không báo toàn game/khóa luận hoàn tất.
+
+### Checkpoint trước khi đóng S6 — lịch sử, đã thay thế
+
+- **Mới nhất16/11 — implementation/API nghiệm thu S6 và D3c4b đã chạy:** [D3c4b Evidence](../DependencyInjection/D3c4b-UnitLifecycle.md), [S6 final](../ProceduralGeneration/S6-FinalValidation.md), [raw log](../ProceduralGeneration/S6-FinalChecks-2026-11-16.txt). Người dùng mở lại Editor/cho phép tiếp; MCP đúnginstance RTSgame2026, trạng thái ban đầu sạch/ngoài Play/compile, chỉ cảnh báo path có spaces. Không tuyên bố sửa native crash.
+- **Code đã chốt:** Unit.InitializeScene/SceneBridge/UnbindScene, AIPawn.Initialize/Unbind; không Get/Instance trong Unit/Worker/Sheep/Structure/AIPawn/Projectile. Bridge inject/bind/registry, raw pool acquire phải Register; worker clear carry/work/shelter, sheep reset claim/graze. Structure invalidate nav lúc bind/return/destroy. Direct bridge unregister dọn cả manager registry/Entity; teardown chỉ unbind, không callback xóa dictionary đang duyệt. Producer/projectile harness đã cập nhật callers.
+- **Kiểm D3 thật:** Procedural binding25/repeat/3rejects/registry đủ, commands khi static bridge=null, pool Worker/Ranger/Sheep/Barrack +nav PASS. SampleScene sau code cuối cùng PASS cùng4nhóm trên và direct unregister/rebind/destroy. Producer pending UI cleanup/reuse/destroy/20giây không ghost, projectile native/legacy damage/pool/3caller PASS lại tại SampleScene.
+- **Matrix S6 cuối:**0/1/1543 nộp20gỗ+20vàng; kho landmark hoàn tất30,00/27,00/32,50giây mô phỏng, đúng debit100/100, actor25→26; fog/minimap128×128/camera/selection-ground/minimap pointer-drag PASS. Ba chu kỳ/seed417,40giây mô phỏng, expanded radius60,80/59,15/60,86;42/42spawn đến hạn trong đêm,12/15/15,retreat0agents; actors26→26/26/25. Chỉ TownHall được bảo vệ máu trong harness, không phải balance/Player playtest.
+- **Đầu mối S8:** configured quota48 cho ba đêm nhưng6lượt nằm sau bình minh45giây, nên actual42 theo lịch là đúng trong scope hiện tại. Không đổi duration/quota để chiều test. Test so48 ban đầu fail, đã đối chiếu lịch để tính42eligible; raw final và giải thích giữ trong S6 evidence.
+- **Regression:** DOTS cuối59/59 PASS,0fail/skip,1,0734240s.17procedural chưa rerun sau D3c4b; kết quả17/17 ngày15/11 không được ghi thành mới. Raw logs/harness ngoài Assets đã lưu. Không benchmark hoặc Player build mới.
+- **Manual16/11:** sau checklist hai nhóm menu→game→menu→game/tài nguyên/selection/minimap và ngày đêm/cung-tháp, người dùng báo “oke chạy được”. Ghi manual PASS theo báo cáo, không ảnh/log kèm; không suy ra pool nội bộ đã đạt. Không cần hỏi lại checklist đó khi tiếp.
+- **Phần còn lại, thứ tự cụ thể:** (1) khi công cụ hoạt động, D3UnitValidation.PrepareReloadPool → MainMenu/CheckMenu → ProceduralGame/Start/CheckReady → CheckReloadPool; (2)17procedural, query Console, xác nhận Seed1/scene sạch/ngoài Play, cập nhật final evidence rồi mới đóng S6/D3. Không rerun matrix0/1/1543 nếu không có code/lỗi mới liên quan. Nếu muốn ảnh Game View làm artifact thêm thì capture/inspect, chưa có ảnh16/11 và không giả là đã chụp.
+- **Block công cụ/môi trường:** lệnh chuẩn bị reload bị automatic approval review từ chối trước thực thi vì usage limit; không phải phán quyết unsafe. Không bypass/retry qua đường khác. Lệnh đó không tạo pending job; không còn lượt seed-check chạy. Lần quan sát MCP cuối là SampleScene đang Play/pause; sau đó người dùng tự test, trạng thái Editor hiện tại chưa xác minh. Asset preset trên disk vẫn Seed1, không SaveAssets/scene/prefab/package/render/Editor trong slice; không commit. Giữ thay đổi có sẵn của người dùng.
+
+### Checkpoint trước khi restart16/11 — lịch sử, đã được thay thế bởi phần trên
+
+- **16/11 — D3c4b IMPLEMENTED_UNVERIFIED, dừng do người dùng báo Editor crash:** MCP list/select đúng instance RTSgame2026; phiên chat chỉ có discovery tools, đã dùng Unity MCP CLI1.11.3 để đọc Editor sạch/ngoài Play và refresh/test. CLI truy cập server được khi chạy ngoài sandbox; npm trong sandbox lỗi DNS. Không thêm package vào project.
+- **Code đang dở:** Unit.InitializeScene(game,map,bridge), SceneBridge, UnbindScene và BindDots guard; Awake bỏ Get, Start bỏ tự đăng ký. Bridge.Register inject rồi bind/đăng ký manager; Unregister/teardown unbind. Worker/Sheep dùng bridge đã truyền; Structure dùng map đã truyền, Humanoid/Structure guard trước Init; AIPawn Initialize/Unbind, bỏ Get/Instance. Worker return xóa carry/shelter/work refs; Sheep reset claim/graze. GameManager thêm guard danh sách trùng. Raw pool không tự re-register Unit, caller phải bridge.Register sau acquire; Tools/ValidateD3Production.cs đã cập nhật, projectile fixtures InitializeScene legacy rõ ràng.
+- **Files cần đọc khi tiếp:** Assets/Game/Scripts/Units/Unit.cs, WorkerUnit.cs, Neutral/SheepUnit.cs, StructureUnit.cs, HumanoidUnit.cs; Scripts/AI/AIPawn.cs; DOTS/Integration/SwarmGameBridge.cs; Managers/GameManager.cs. Harness mới Tools/ValidateD3Units.cs: CheckBindings, CheckWithoutGlobalBridge, CheckPool; cập nhật ValidateD3Production.cs và ValidateD3Projectiles.cs. Chưa có evidence module D3c4b hoàn chỉnh; phải viết cùng kết quả kiểm thật.
+- **Đã kiểm thật:** giữa slice DOTS59/59 PASS,0fail/skip,1,9146581s. Sau đó còn bổ sung Worker/Sheep reset và Structure teardown ordering; refresh cuối trả1, nhưng chưa có regression sau cùng. Console có lỗi compile giữa các lần sửa file khi caller chưa viết xong; không dùng log lịch sử đó làm kết luận compile hiện tại. Play entry trả accepted; hai CLI pause/check đang Connecting thì người dùng báo crash. Chưa có kết quả CheckBindings/CheckWithoutGlobalBridge/CheckPool, không suy đoán crash do code nào.
+- **Lệnh chờ khi dừng:** đã xác định bốn node CLI và gửi cleanup có kiểm tra PID/command line; tới lúc cleanup chúng đã kết thúc. Read-back sessions: pause đã trả accepted, CheckBindings trả NullReferenceException tại snippet line19, chưa điều tra; hai check sau không chạy vì loop dừng khi lỗi. Kiểm tra process cuối không còn Unity MCP CLI chờ. Không đóng Editor của người dùng hoặc tự gửi thêm lệnh Editor sau yêu cầu dừng. Không commit. Không sửa scene/prefab/config/preset/package/render pipeline trong D3c4b. Giữ mọi thay đổi có sẵn.
+- **Bước tiếp sau khi người dùng mở lại:** (1) kiểm MCP và lỗi compile hiện tại, không tự Enter Play ngay; xem log crash nếu có; (2) kiểm registration recursion/list duplicates, sheep không vào manager list, map teardown/return, explicit rebind, rồi chạy D3UnitValidation trên ProceduralGame và SampleScene cùng production/projectile/lifecycle regressions; (3) tiếp ba seed S6 kinh tế/xây/wave/input-camera-minimap/nhiều ngày, đủ bằng chứng mới đánh dấu S6/D3. Manual D3c4a chưa được xác nhận riêng. D4/S7/S8/S9 chưa thực hiện.
+
+- **Điểm tiếp mới nhất15/11 — D3c4a:** [Projectile factory/startup evidence](../DependencyInjection/D3c4a-ProjectileFactory.md), `Tools/ValidateD3Projectiles.cs`. Projectile không lookup bridge; Tower/Ranger/EnemyRanger gọi GameManager factory dùng bridge đã cấp. ECS sinh Entity trực tiếp, legacy pool nhận owner Scene; native dùng proxies đã bound, reject thiếu/dead/gate/pause/cross-scene, không ngầm register hoặc fallback legacy cho DOTS actor.
+- **Kiểm D3c4a:**10rejectcases/scene không tạo actor/đạn/view; native bắn1Entity/0legacy view, damage7 đúng một lần sau2giây mô phỏng tại ProceduralGame và SampleScene. Legacy fixture collision/reuse7+9damage, foreign-target reject và projectile pool về owner scene PASS; ba caller đúng context/pending callback lặp không duplicate. Đây chưa phải toànlegacy scene hoặc Unit cross-scene pool.
+- **Startup sửa theo evidence:** menu→game trước sửa rootReady/wallet0/listener0; root nay gọi GameManager.BeginGameplay sau BindScene, Start legacy riêng. Menu→game→menu→game sau sửa PASS25actors/132nodes/ví100x3/1wave+1manager listener, repeat BeginGameplay không nhân ví/listener; menu entity/projectile/ví0/cờ sạch.
+- **Regression cuối D3c4a:**59/59 DOTS (2,0068762s),17/17 procedural (6,9916392s),0fail/skip; không Exception mới sequence>3507 sau integration cuối. `ValidateS6Lifecycle.cs` thêm repeat-start assertions. Manual D3c3 train/pause/destroy được người dùng xác nhận “oke tất cả ổn tiếp tục đi”; không artifact kèm theo.
+- **Bước tiếp D3c4b:** Unit.Initialize/bind/registration/unbind/return và field manager/bridge/map; Worker/Sheep globals, Structure map, AIPawn Get/Instance và mọi caller. Giữ RTS.DOTS độc lập. Manual D3c4a: menu reload ví ban đầu + cung/tháp bắn/pause. S6 hình ảnh/input/nhiều ngày và D4 inventory vẫn còn; không chuyển S7 hoặc đánh dấu toàn D3/S6 DONE.
+- **Môi trường cuối D3c4a:** ProceduralGame sạch/ngoài Play/compile/pause; preset/seed không đổi, fixtures đã bỏ, không probe/job/commit mới. Không sửa scene/prefab/package/render/Editor. Các thay đổi plugin/package/skills có sẵn giữ nguyên. Chưa Player/benchmark/fullcombat/animation hoặc legacy không ECS trọn scene.
+
+- **Điểm tiếp mới nhất15/11 — D3c3:** [Production evidence](../DependencyInjection/D3c3-Production.md), `Tools/ValidateD3Production.cs`. ProductionBuilding nhận game/bridge tại bind; không tự lookup. Actions chỉ debit sau enqueue accepted. Native reject invalid duration/dead; queue khi đang xây vẫn chờ hoàn thành như contract cũ. Unregister/return/destroy dọn producer refs/UI/maps.
+- **Kiểm D3c3:** Procedural14rejectcases không side effect; villager+warrior8giây, archer sau unlock thật8giây, FIFO hai dân hai frame16giây; một debit/lệnh, duplicate không debit, bound views/AIPawn off/ECS exit command, UI/maps sạch. SampleScene training và producer pool lifecycle PASS. Pool Spawn nhận owner Scene bắt buộc, ba projectile callers cập nhật; sửa object reuse còn ở DDOL scene. Invalid scene/return/reuse/destroy/20giây không ghost spawn PASS. Fog thiếu runtime arrays/map defer/restore PASS; chưa migrate toàn fog/pool.
+- **Regressions cuối D3c3:**59/59 DOTS (2,1416279s),17/17 procedural (7,1246614s),0fail/skip. Menu cleanup/game reload Ready PASS; không Exception mới sau sequence3507 trong checks cuối, giữ log lịch sử. Test FIFO ban đầu assertion moving cuối queue không phù hợp vì quân đầu đã đến nơi; đã sửa kiểm ngay lúc spawn và rerun PASS, không sửa gameplay để chiều test.
+- **Bước kế tiếp sau D3c3 (đã tiến D3c4a ở trên):** D3c4b inventory/migrate Unit/Structure/Worker/Sheep/AIPawn và factory/pool refs còn lại. Manual D3c3 đã được xác nhận; S6 input/visual/nhiều ngày chưa nghiệm thu. Chưa Player/performance/Unit cross-scene pooled reuse hoặc legacy không ECS thuần. Không gọi D3/S6 DONE.
+- **Môi trường cuối D3c3:** ProceduralGame sạch, ngoài Play/compile/pause, preset/seed không đổi; không job/commit mới. Fixtures bỏ bằng Exit Play. Không sửa scene/prefab/package/Editor/render pipeline trong D3c3; giữ các thay đổi có sẵn từ trước.
+
+- **S6a/D3a ngày12/11:** ProceduralGame và scene generator dùng asset StrategicProceduralMapSettings mới, seed cuối1. Authoring dùng chung origin terrain/resource/gateway, spawn vào trong2cell và chặn reapply. Root bắt buộc Waves/day-night; EnemyWaveManager nhận dependency tường minh, không Find manager hoặc bridge.Instance, Init lặp không nhân listener. SampleScene được inject từ bootstrap legacy.
+- **Bằng chứng:** [S6 Integration](../ProceduralGeneration/S6-Integration.md), `Tools/ValidateS6.cs`. Seed0/1/1543 đều25actors,120cây/12vàng/18cừu,5spawn kiểm tra, hai gateway fit radius thật; root/binding lặp không duplicate, gate blocked từ chối spawn. Hai probe/seed tới phạm vi10 quanh TownHall khoảng25,65–26,90giây mô phỏng. SampleScene: một bridge/25actors/một listener/spawn ring PASS.
+- **S6b/D3b ngày13/11:** ResourceNodeBase nhận bridge/map từ RegisterResource, không còn Find/Get/Instance; query/claims/navigation/OnDestroy dùng deps này. Unregister và bridge teardown unbind view. Ba seed0/1/1543: hai worker đi khai thác Economy/GoldFrontier rồi nộp20gỗ+20vàng, ví120/120/100; StoragePit tại pad landmark thêm đúng1actor và trừ100/100. [Bằng chứng S6b](../ProceduralGeneration/S6b-EconomyResourceDI.md), `Tools/ValidateS6Economy.cs`.
+- **Kiểm mới nhất:**132resource node/seed đã inject; repeat/missing/capacity/collider/nav/unregister/rebind/destroy PASS. SampleScene50nodes/25actors/wave spawn PASS. Construction hoàn tất27/30/29,5giây mô phỏng; fog/minimap128×128/camera focus API PASS. Seed1 fog check ban đầu chạy trước Start không đạt, tách Editor Step rồi assert registry/fog PASS; không sửa fog để che precondition. DOTS58/58, procedural17/17 regression PASS.
+- **S6c ngày13/11:** sửa timer dư gây wave2/3 trễ hơn UI2/4giây; Tick nội bộ nhận deltaTime,0/invalid không spawn/advance. So seed1 thấy spawn biên chỉ6/12quái tới gần căn cứ, legacy11/12; wave nay sinh trên tuyến L của từng gateway tại radius legacy, không bắt buộc cửa biên. API cửa biên cũ giữ cho topology. SpawnEnemy tự tính lại radius, không phụ thuộc đã vẽ vòng range.
+- **Bằng chứng S6c:** [Waves/lifecycle](../ProceduralGeneration/S6c-WavesLifecycle.md), [raw log](../ProceduralGeneration/S6c-WaveChecks-2026-11-13.txt), `Tools/ValidateS6Waves.cs` và `ValidateS6Lifecycle.cs`. Seed0/1/1543 strategic12/12/9quái tới phạm vi10, legacy10/11/8; đợt đầu strategic5,42/5,50/5,82giây. Mỗi đêm45giây12spawn/3wave, mốc0,02/14,10/30,20giây, đủ quota; alive retreat/targetable/cleanup11,98giây PASS. Đây là orchestration tick thật clock/ECS, chưa Player playtest/damage balance.
+- **Lifecycle mới:** MainMenu còn Active/Ready cũ trước sửa dù entities/ví đã dọn. EndComposition nay xóa map/error flags; MainMenu→game→menu→game PASS một bridge/25actors/132nodes/một listener/ví100; menu entities/ví0/cờ sạch. S6 Run smoke PASS lại. Regression sau sửa58/58 DOTS (1,8726907s),17/17 procedural (5,1120699s).
+- **D3c1 cuối ngày13/11:** BuildingProcess nhận action/position/worker/game/bridge qua constructor5tham số; không Get/Instance/Find. GameManager và hai harness/tool callers đã cập nhật; branch ECS gửi AssignConstruction qua bridge được truyền. Constructor validate trước spawn/UI; GameManager chặn worker null/dead/unbound trước finalize/debit.
+- **Bằng chứng D3c1:** [Construction DI](../DependencyInjection/D3c1-Construction.md), `Tools/ValidateD3Construction.cs`, caller S6Economy đã cập nhật. ProceduralGame8rejectcases giữ actors25/queue0/ví100; placement3case không finalize/debit; StoragePit trừ100/100,25→26actor/sprite complete/queue xóa, fog-minimap-camera sauStart PASS; destroyed-view/Entity an toàn khi gọi Update. SampleScene7rejectcases (tech mở) và construction15giây mô phỏng PASS. Regression sau code cuối58/58 DOTS (1,9266349s),17/17 procedural (5,5503457s).
+- **D3c2 ngày15/11:** Authoring có mảng LegacySpawners Inspector, không Find runtime; scene/editor-generator wire một spawner. ResourceSpawner Awake chỉ local collider setup, Initialize nhận game/map/bridge, root inject suppressed procedural, legacy bootstrap inject trước grid/bind. API TryRegenerate chặn uninitialized/suppressed/dependency mất/gate, validate config trước clear; spawn ban đầu view-only rồi BindScene, regenerate bound dùng factory bridge.
+- **Bằng chứng mới nhất:** [D3c2 Evidence/checklist](../DependencyInjection/D3c2-ProceduralSpawners.md), `Tools/ValidateD3Spawners.cs`. Procedural seed1:120cây/12vàng/18cừu/25actors/150resourceEntities, suppressed/repeat/replacement validation PASS. SampleScene:30cây/20vàng/18cừu/25actors/68resourceEntities, initial/repeat/regenerate giữ count; view/Entity cũ dọn, worker hủy node cũ, nodes mới inject,nav version/cả hai grids và collider blocker PASS. Giao cây mới nộp20gỗ sau21,90giây mô phỏng. Invalid config/deps không clear resources.
+- **Lifecycle/regression sau D3c2:** menu→game→menu→game/Ready/cleanup PASS;58/58 DOTS (1,9211446s),17/17 procedural (5,2637561s),0fail/skip sau code cuối. Editor generator đã compile nhưng chưa chạy lại toàn menu refresh UI; hai consumer không còn Find/Get/Instance trực tiếp, bootstrap legacy là ngoại lệ có phạm vi.
+- **Manual D3c2 PASS theo báo cáo người dùng ngày15/11:** (1) ProceduralGame khai thác/P không regen hoặc nhân resource; (2) SampleScene khai thác→P→chọn quân/giao cây mới→nộp. Người dùng nói tất cả ổn; không ảnh/log đính kèm, không chuyển thành số đo hoặc nghiệm thu các mục khác.
+- **Điểm tiếp sau D3c3/S6:** Unit/Worker/Structure/Projectile adapters và factory/pool dependencies còn theo Inventory. Còn camera/minimap click/hình ảnh, nhiều ngày/expansion radius và wave tự nhiên. Có thể tiếp implementation độc lập khi chờ manual report, chưa đánh dấu D3/S6 DONE hoặc chuyển S7.
+- **Giới hạn:** S6b kiểm kinh tế riêng/StoragePit2×2/API fog-camera, không mọi prefab/click UI; resource pooling chưa nghiệm thu. S6c tiến clock ngày/đêm/wave và hai ECS cùng dt0,02, không gọi mọi MonoBehaviour/UI như Player. Seed1543 có3quái chưa tới phạm vi10 trước sáng; cleanup dựa timeout không chứng minh mọi quái đi ra cửa. Approach phụ thuộc tuyến L/Routes; căn cứ quá lớn có thể hết điểm spawn. Không Player build/benchmark mới.
+- **Crash/restart:** phiên trước người dùng yêu cầu dừng sau native crash. Sau mở lại, MCP kết nối và các Play checks chạy được. Stack cũ ở SerializationCache/clone WaveProgressUI, chưa biết root cause/chưa tuyên bố sửa crash; MCP mất tạm khi domain reload rồi nối lại là trạng thái khác.
+- **Điểm dừng ngày15/11 cuối D3c2:** code/docs/tools và reference array ProceduralGame đã lưu; Editor ProceduralGame sạch, không Play/compile/pause, preset strategic/seed1; không probe/job chạy. Không commit mới, không sửa SampleScene/prefab/package/render pipeline/Editor trong slice này. Những thay đổi plugin/package/skills có sẵn giữ nguyên; reconnect khi domain reload không được coi là native crash mới.
 
 ## Mẫu cập nhật bắt buộc khi kết thúc hoặc dừng giữa phiên
 
@@ -64,6 +150,88 @@ Thay nội dung Checkpoint hiện tại bằng trạng thái mới nhất, cập
 DONE yêu cầu implementation + kiểm chứng bắt buộc + tài liệu. Không có Unity thì ghi IMPLEMENTED_UNVERIFIED, lưu test cần chạy; không biến giả định thành kết quả.
 
 ## Nhật ký
+
+### 16/11/2026 — S7 DONE: nhận diện vùng/landmark và khám phá
+
+- Kiểm MCP đúngProceduralGame sạch, chụp baseline trước sửa. Tái dùng TinySwords bush/rock/black tower/material; thêm presentation DI, root/minimap/editor refs, region/path/pad tint, bounded decor không collider và explored markers. Fog toggle notify và shared night palette chỉnh readability, không đổi timing/Core/quota/combat/pipeline.
+- S7 checks3seed, glyph/world discovery memory, input/gather/build PASS.59/59DOTS+17/17procedural PASS sau code cuối.4ảnh final cùng seed/camera ngày/đêm đã inspect, người dùng xác nhận dễ nhận ra. Tài liệu module/README/Architecture/Inventory/Overview cập nhật cùng code.
+- Editor cuối ProceduralGame sạch/seed1/ngoài Play-pause-compile; restored night values, no newException/job/commit. Tiếp S8; chưa Player/performance hoặc fullSeed matrix mới.
+
+### 16/11/2026 — S6 và D3 DONE theo build plan
+
+- Công cụ MCP trực tiếp hoạt động lại. Chạy17/17procedural8,1212562s và bài worker pool qua menu/game mới PASS; Ready idempotent, menu cleanup và resource work sau rebind đều đạt. Không thay gameplay và không chạy lại59DOTS/matrix đã đạt vì không có thay đổi liên quan.
+- Final read-back: ProceduralGame sạch/seed1/ngoài Play-pause-compile; không Exception mới sequence>4123, chỉ cảnh báo path spaces. Không commit/job/CLI pending. Cập nhật S6/D3 evidence, Progress/BuildPlan/Overview/Inventory/README. Tiếp S7; S8/D4/S9 vẫn chưa làm, chưa Player/perf/crash-root-cause claim.
+
+### 16/11/2026 — D3c4b/API S6 PASS; chốt tài liệu, còn2kiểm cuối do tool review limit
+
+- Tiếp sau user restart, kiểm MCP và59DOTS trước Play. Fix test precondition/prefab lookup, chạy binding/global-null/pool/nav, tiếp matrix ba seed và nhiều ngày với raw log. Chốt direct unregister cleanup ở bridge, unbind chỉ clear refs khi teardown; regression59/59 sau code cuối và SampleScene/unit/producer/projectile checks PASS.
+- Người dùng xác nhận checklist menu/input/ngày đêm/cung-tháp chạy được. Đã viết D3c4b và S6 final evidence, cập nhật Inventory/Architecture/Overview/README cùng implementation. Không thêm package/scene/render changes, không Player/perf/crash-root-cause claim.
+- Lệnh PrepareReloadPool/menu-game bị automatic approval review chặn do usage limit, không thực thi; không bypass. Còn Unit pool qua reload +17procedural và environment read-back; S6/D3 PARTIAL, chưa S7. Hướng tiếp đầy đủ ở checkpoint đầu trang, không cần làm lại matrix đã PASS.
+
+### 16/11/2026 — D3c4b đang dở, người dùng yêu cầu dừng vì Editor crash
+
+- Người dùng yêu cầu hoàn thành S6; đã kiểm đúng MCP instance, dùng CLI do tools Editor không xuất hiện trong chat. Tiếp Unit dependency/lifecycle theo inventory, thay đổi code/harness như checkpoint trên. DOTS giữa slice59/59 PASS; code cuối mới refresh, Play checks chưa có kết quả.
+- Người dùng báo Editor vừa crash và sẽ mở lại. Đã dừng thao tác, hủy các CLI chờ; chưa xác định nguyên nhân crash. Không tiếp tục cho tới khi người dùng báo sẵn sàng; không gọi D3c4b hoặc S6 DONE. Tất cả thay đổi chưa commit còn trong workspace để review/test sau restart.
+
+### 15/11/2026 — D3c4a projectile factory/startup API PASS; D3/S6 — PARTIAL
+
+- Ghi nhận người dùng xác nhận toàn checklist D3c3; không artifact. MCP đúngproject/scene sạch trước làm. Rà Unit/Worker/Structure/Sheep/AIPawn và mọi projectile/pool caller; chọn slice nhỏ projectile factory, để Unit graph sang D3c4b.
+- GameManager nhận context shot và dùng bridge đã inject; Projectile bỏ static bridge, chỉ legacy movement/damage/pool. Ba caller cập nhật; native method đổi sang TrySpawnProjectile, không ProxyFor ngầm bind. Native/legacy damage, invalid/pause/gate, reuse/scene ownership và callers checks PASS tại Procedural/Sample theo [D3c4a evidence](../DependencyInjection/D3c4a-ProjectileFactory.md).
+- Phát hiện reload rootReady nhưng ví0/listener0; chuyển BeginGameplay idempotent về root sau BindScene. Rerun menu→game→menu→game PASS, ví/listener không nhân khi gọi lặp. Không Exception mới trong Console cuối; regression59/59+17/17 sau code cuối. Không sửa native crash cũ.
+- Dừng an toàn ở ProceduralGame ngoài Play/compile/pause, scene sạch, không job/commit mới; preset/seed/scene/prefab/package không đổi trong slice. Tiếp D3c4b Unit/Worker/Structure/Sheep/AIPawn lifecycle; manual D3c4a mới còn chờ, chưa Player/perf/fullcombat.
+
+### 15/11/2026 — D3c3 production API đã kiểm; D3/S6 — PARTIAL
+
+- ProductionBuilding Initialize/unbind qua bridge, wrappers enqueue trả bool; ba Actions owner guard và debit sau accepted. Giữ FIFO/duration/cost/tech và queue-during-construction, reject invalid duration/dead ở native. Spawn view gửi movement ECS; teardown/return/destroy dọn refs/UI/maps.
+- Pool Spawn nhận Scene tường minh, sửa producer reuse còn DDOL scene; cập nhật mọi caller. Fog guard map/arrays chưa ready được kiểm defer/restore. Đây chưa phải toàn pool/Unit/fog DI. Không sửa crash native cũ.
+- Procedural14rejects, worker/warrior/archer, hai dân FIFO16giây và producer pool lifecycle PASS; SampleScene training/pool PASS; menu/game reload PASS. Regression59/59+17/17 sau code cuối. [D3c3 Evidence](../DependencyInjection/D3c3-Production.md) ghi cách chạy, giới hạn và manual còn chờ.
+- Điểm dừng: Editor ProceduralGame sạch ngoài Play/compile/pause; không job/commit. Tiếp D3c4 inventory/factory/pool/adapters; chưa Player/perf hoặc manual D3c3. Thay đổi plugin/package/skills có sẵn giữ nguyên.
+
+### 15/11/2026 — Manual D3c2 được người dùng xác nhận
+
+- Người dùng báo “oke tất cả ổn nhe” sau checklist hai mục P/click/giao lại resource. Ghi nhận manual PASS theo báo cáo, không artifact đính kèm. Tiếp D3c3 production/train/factory/pool; D3/S6 tổng thể vẫn PARTIAL.
+
+### 15/11/2026 — D3c2 procedural/spawner API đã kiểm; D3/S6 — PARTIAL
+
+- Kiểm MCP đúng RTSgame2026, scene ProceduralGame sạch/ngoài Play/compile trước làm. Authoring dùng explicit LegacySpawners; root/legacy bootstrap inject ResourceSpawner, Awake không lookup/spawn; editor generator và scene refs cập nhật cùng code. Giữ quota/core/prefab/ECS runtime.
+- Procedural suppression/repeat/missing/replacement config checks PASS. SampleScene initial/regenerate nhiều lần giữ30/20/18resource views,25actors/68resourceEntities; dọn views/entities cũ, cancel work, bind nodes mới/nav/collider PASS; giao cây mới nộp20gỗ. Menu reload và regression58/58+17/17 PASS sau code cuối. [D3c2 Evidence](../DependencyInjection/D3c2-ProceduralSpawners.md) ghi method/timing/giới hạn.
+- Chưa keyboard P/click thực; đã gửi checklist2mục, chưa có xác nhận người dùng. Chưa Player/benchmark, failure fallback không root, mọi quota/area hoặc menu scene-generator UI refresh. Tiếp D3c3 production/train/factory/pool, không coi toàn project đạt DI.
+- Cuối phiên ProceduralGame sạch, ngoài Play/compile/pause/seed1; test views dọn bằng Exit Play, không job/commit mới. Scene chỉ cập nhật refs bằng Unity serialization; không chỉnh plugin/package/skills đang có thay đổi từ trước.
+
+### 13/11/2026 — D3c1 BuildingProcess đã kiểm; D3 — PARTIAL
+
+- MCP đúng RTSgame2026, ngoài Play/compile trước làm. Đọc overview/plan/DOTS/DI và mọi caller của BuildingProcess. Constructor nhận manager/bridge; bỏ service lookup, validate trước spawn/UI; GameManager guard worker trước finalize/debit. Cập nhật GameplaySmokeAutomation và S6Economy caller, không giữ overload lookup.
+- Unity ProceduralGame:8dependency/gate rejects không side effect;3placement worker cases không debit; StoragePit hoàn tất,actor25→26,chi phí100/100,queue xóa; fog/minimap/camera sauStart PASS; destroyed-view không dereference Entity cũ. SampleScene7rejects (capabilities mở), construction15giây mô phỏng vàqueue PASS.
+- Regression58/58 DOTS +17/17 procedural,0fail/skip, sau code cuối. Không Player smoke/build/benchmark hoặc scene không ECS mới. [D3c1 Evidence](../DependencyInjection/D3c1-Construction.md) có cách chạy và giới hạn. Còn procedural/spawner/production/train/factory/pool theo D3c2; không coi D3/S6 DONE.
+- Editor cuối ProceduralGame sạch/ngoài Play/compile/pause/seed1; không job/commit mới. Các object test được dọn bằng Exit Play, asset/prefab/scene không sửa.
+
+### 13/11/2026 — S6c wave/lifecycle đã kiểm; S6/D3 — PARTIAL
+
+- Unity MCP đúng dự án; đọc checkpoint/BuildPlan/DOTS trước làm. Tách tick timer và ngăn delta0/invalid sinh wave; sửa spawnTimer dư giữa wave. Đo border strategic seed1 yếu hơn legacy; chuyển wave sang approach centerline bảo vệ tại cùng radius legacy, giữ API biên và quotas/interval/night.
+- Ba seed0/1/1543, cả strategic/legacy:12spawn/3wave/45giây, mốcUI đúng trong0,2giây, retreat/untargetable/cleanup PASS. Arrival-count/delay cụ thể và các kết quả cũ trong [S6c Evidence](../ProceduralGeneration/S6c-WavesLifecycle.md) + raw log; chưa khẳng định cân bằng damage hoặc hết ùn quái.
+- Sửa cờ procedural còn Active/Ready khi về menu. Luồng menu→game→menu→game và S6 smoke PASS sau Start/EditorStep; regression58/58 DOTS,17/17 procedural,0fail/skip sau sửa. Không Player build/benchmark.
+- MCP có đợt handshake offline khi chuẩn bị lifecycle, chưa gửi lời gọi Play; tự nối lại rồi kiểm tiếp thành công. Cuối phiên ProceduralGame sạch, preset1/seed1, ngoài Play/compile/pause; không job/commit. Tiếp D3c và nghiệm thu UI/input S6; không đánh dấu S6 hoặc D3 DONE.
+
+### 13/11/2026 — S6b/D3b đã kiểm; S6/D3 — PARTIAL
+
+- Đã kiểm Unity MCP đúng RTSgame2026, Editor ngoài Play/compile. Đọc TechnicalOverview/BuildPlan/DOTS guide/DI trước tiếp; migrate ResourceNodeBase bridge/map injection tại RegisterResource và unbind khi unregister/teardown. Không sửa Runtime ECS/prefab/quota/giá.
+- Ba seed0/1/1543: cây/mỏ132node/seed init, claims/collider/nav/rebind/destroy PASS; worker tới hai vùng/nộp20gỗ+20vàng; StoragePit100/100 ở landmark xây xong, actors25→26; fog/minimap/camera API checks PASS theo giới hạn bằng chứng. SampleScene50nodes/25actors/wave spawn PASS.
+- Tests DOTS58/58 (1,9003524s), procedural17/17 (5,2850361s),0fail/skip. Không Player/benchmark mới. Tool/test [S6b Evidence](../ProceduralGeneration/S6b-EconomyResourceDI.md) ghi cách chạy, thông số, lần fog check trước view Start không đạt và cách kiểm lại đúng lifecycle.
+- Cuối phiên ProceduralGame sạch, seed1, ngoài Play/compile/pause; Exit Play dọn objects thử; không job/commit mới. Tiếp S6c/D3c; wave đêm/áp lực và các nhóm DI còn lại chưa hoàn tất. Không tuyên bố sửa native crash cũ.
+
+### 12/11/2026 — S6a/D3a đã kiểm; S6/D3 — PARTIAL
+
+- Đã lưu gateway world positions/chặn reapply trong Authoring, root→wave Initialize và legacy bootstrap trong bridge; scene/editor generator nhận Waves và asset strategic riêng (seed cuối1). Không đổi RTS.DOTS runtime, package hoặc prefab.
+- Unity MCP sau người dùng restart: ba seed0/1/1543 smoke spawn/resource/radius/DI/listener/readiness PASS; probe tới gần TownHall sau25,65–26,90giây; SampleScene legacy một bridge/25actors/spawn ring PASS. Có test chạy sau smoke seed1543 vượt120giây; đã ghi riêng, không tính pass hoặc kết luận sửa ùn quái.
+- Regression DOTS58/58 và procedural17/17 PASS, không fail/skip. [S6 Integration](../ProceduralGeneration/S6-Integration.md) và `Tools/ValidateS6.cs` ghi checks tái chạy được. Không Player build/benchmark mới; root cause crash phiên trước chưa xác định.
+- Editor cuối ProceduralGame sạch, không Play/compile/pause; không còn probe/job đang chạy. Chưa commit. Tiếp S6b/D3b theo checkpoint; không đánh dấu S6 hoặc toàn D3 DONE.
+
+### 12/11/2026 — S5 — DONE (Core/preview)
+
+- Unity MCP xác nhận đúng RTSgame2026, không Play/compile trước làm. Core strategic v3 có budget theo region, cluster3gold, pad/start exits, footprint checks,3×3clearance tới gateway/landmark và chặn cửa biên ngoài đăng ký. Legacy branch giữ nguyên.
+- Unity17/17 pass gồm fixtures tree-wall/gold-water/diagonal/landmark-island/extra-entrance và cấu hình thiếu vàng. Quét1000strategic +1000legacy không lỗi/tái lập; histogram và diagnostics trong S5-SeedCheck. CLI cần quyền ghi obj; một scan MCP timeout không được tính kết quả.
+- Preview seed0version3: gateways2,maxResourcePath118,gold12; ảnh đã kiểm. Default runtime asset vẫn LegacyMainland. Không test gameplay/collider/wave preset mới; phạm vi S6.
+- Cập nhật docs/preview/tool csproj/tests cùng code; không sửa prefab/package/scene gameplay. Tiếp S6/D3 theo checkpoint.
 
 ### 11/11/2026 — S4 — DONE (Core + preview)
 

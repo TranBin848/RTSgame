@@ -34,14 +34,15 @@ public class SpawnWarriorActionSO : ActionSO, IResourceCostAction
             return;
         }
 
+        if (!barrack.IsProductionOwner(manager)) return;
         if (manager.Gold < m_GoldCost || manager.Wood < m_WoodCost || manager.Meat < m_MeatCost)
         {
             manager.ShowTextPopup("Not enough resources", Color.red, barrack.transform.position);
             return;
         }
 
+        if (!barrack.EnqueueWarriorSpawn(this)) return;
         manager.AddResources(-m_GoldCost, -m_WoodCost, -m_MeatCost);
-        barrack.EnqueueWarriorSpawn(this);
         manager.ShowTextPopup("Warrior queued", Color.green, barrack.transform.position);
     }
 }

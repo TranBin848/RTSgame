@@ -9,7 +9,7 @@ public static class ProceduralMapEditorTools
 {
     const string SourceScene = "Assets/Scenes/SampleScene.unity";
     const string TargetScene = "Assets/Scenes/ProceduralGame.unity";
-    const string SettingsPath = "Assets/Game/ProceduralGeneration/Settings/DefaultProceduralMapSettings.asset";
+    const string SettingsPath = "Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset";
 
     [MenuItem("RTS/Procedural Generation/Create or Refresh Gameplay Scene")]
     public static void CreateOrRefreshGameplayScene()
@@ -19,6 +19,9 @@ public static class ProceduralMapEditorTools
         if (settings == null)
         {
             settings = ScriptableObject.CreateInstance<ProceduralMapSettings>();
+            var settingsData = new SerializedObject(settings);
+            settingsData.FindProperty("m_Preset").enumValueIndex = (int)RTS.ProceduralGeneration.MapLayoutPreset.StrategicRegions;
+            settingsData.ApplyModifiedPropertiesWithoutUndo();
             AssetDatabase.CreateAsset(settings, SettingsPath);
             AssetDatabase.SaveAssets();
             AssetDatabase.ImportAsset(SettingsPath, ImportAssetOptions.ForceUpdate);
@@ -37,7 +40,7 @@ public static class ProceduralMapEditorTools
         TilemapManager map = Object.FindFirstObjectByType<TilemapManager>();
         TownHall townHall = Object.FindFirstObjectByType<TownHall>();
         UnityEngine.Tilemaps.Tilemap foamTilemap = GameObject.Find("Foam")?.GetComponent<UnityEngine.Tilemaps.Tilemap>();
-        ResourceSpawner legacySpawner = Object.FindFirstObjectByType<ResourceSpawner>(FindObjectsInactive.Include);
+        var legacySpawners = Object.FindObjectsByType<ResourceSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         if (map == null || townHall == null || foamTilemap == null)
             throw new System.InvalidOperationException("Procedural scene requires the TilemapManager, TownHall and Foam Tilemap from SampleScene.");
 
@@ -52,6 +55,9 @@ public static class ProceduralMapEditorTools
         serialized.FindProperty("m_Settings").objectReferenceValue = settings;
         serialized.FindProperty("m_TilemapManager").objectReferenceValue = map;
         serialized.FindProperty("m_MapCenter").objectReferenceValue = townHall.transform;
+        var spawnerReferences = serialized.FindProperty("m_LegacySpawners");
+        spawnerReferences.arraySize = legacySpawners.Length;
+        for (int i = 0; i < legacySpawners.Length; i++) spawnerReferences.GetArrayElementAtIndex(i).objectReferenceValue = legacySpawners[i];
         serialized.FindProperty("m_GrassTile").objectReferenceValue = AssetDatabase.LoadAssetAtPath<UnityEngine.Tilemaps.TileBase>("Assets/Game/Tilemaps/RuleTile.asset");
         serialized.FindProperty("m_WaterTile").objectReferenceValue = AssetDatabase.LoadAssetAtPath<UnityEngine.Tilemaps.TileBase>("Assets/Game/Tilemaps/Tiles/Water Background color.asset");
         serialized.FindProperty("m_FoamTilemap").objectReferenceValue = foamTilemap;
@@ -95,10 +101,13 @@ public static class ProceduralMapEditorTools
         compositionData.FindProperty("m_Generator").objectReferenceValue = authoring;
         compositionData.FindProperty("m_Fog").objectReferenceValue = Object.FindFirstObjectByType<FogOfWarManager>();
         compositionData.FindProperty("m_DayNight").objectReferenceValue = Object.FindFirstObjectByType<DayNightCycleManager>();
+        compositionData.FindProperty("m_Waves").objectReferenceValue = Object.FindFirstObjectByType<EnemyWaveManager>();
         compositionData.ApplyModifiedPropertiesWithoutUndo();
         ConfigureResearchPanel(manager, composition);
+        ConfigureMapPresentation(composition,authoring);
+        MatchSessionEditorTools.Configure(composition);
 
-        if (legacySpawner != null) legacySpawner.enabled = true; // Authoring disables it before Awake only in this scene.
+        foreach (var spawner in legacySpawners) spawner.enabled = true; // Authoring suppresses only these configured spawners.
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, TargetScene);
         AddToBuildSettings();
@@ -156,6 +165,24 @@ public static class ProceduralMapEditorTools
     {
         if (!AssetDatabase.IsValidFolder("Assets/Game/ProceduralGeneration/Settings"))
             AssetDatabase.CreateFolder("Assets/Game/ProceduralGeneration", "Settings");
+    }
+
+    public static void ConfigureMapPresentation(GameSceneCompositionRoot root,ProceduralMapAuthoring authoring)
+    {
+        var presentation=authoring.GetComponent<ProceduralMapPresentation>();
+        if(presentation==null)presentation=authoring.gameObject.AddComponent<ProceduralMapPresentation>();
+        var data=new SerializedObject(presentation);
+        const string art="Assets/Game/Images/Tiny Swords/";
+        data.FindProperty("m_BushTexture").objectReferenceValue=AssetDatabase.LoadAssetAtPath<Texture2D>(art+"Terrain/Decorations/Bushes/Bushe1.png");
+        data.FindProperty("m_RockTexture").objectReferenceValue=AssetDatabase.LoadAssetAtPath<Texture2D>(art+"Terrain/Decorations/Rocks/Rock1.png");
+        data.FindProperty("m_WatchpostTexture").objectReferenceValue=AssetDatabase.LoadAssetAtPath<Texture2D>(art+"Buildings/Black Buildings/Tower.png");
+        data.FindProperty("m_WorldMaterial").objectReferenceValue=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Game/Prefabs/TerrainObjects/Tree.prefab").GetComponent<SpriteRenderer>().sharedMaterial;
+        data.ApplyModifiedPropertiesWithoutUndo();
+        var refs=new SerializedObject(root);
+        refs.FindProperty("m_MapPresentation").objectReferenceValue=presentation;
+        refs.FindProperty("m_Minimap").objectReferenceValue=Object.FindFirstObjectByType<MinimapFogUI>();
+        refs.ApplyModifiedPropertiesWithoutUndo();
+        EditorUtility.SetDirty(presentation);EditorUtility.SetDirty(root);
     }
 
     static void AddToBuildSettings()

@@ -22,7 +22,7 @@ public class WorkerUnit : HumanoidUnit
     private bool m_IsSheltered;
 
     public bool IsHoldingResource => TryGetCurrentCarryType(out _);
-    public bool IsIdleWorker => IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var dotsWorker)
+    public bool IsIdleWorker => IsDotsControlled && m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var dotsWorker)
         ? CurrentState != UnitState.Dead && dotsWorker.Phase == WorkPhase.None && dotsWorker.Carried == 0 && CurrentState != UnitState.Moving
         : CurrentState != UnitState.Dead
         && CurrentTask == UnitTask.None
@@ -30,7 +30,7 @@ public class WorkerUnit : HumanoidUnit
         && !IsHoldingResource
         && !m_IsSheltered
         && !m_IsReturningToShelter;
-    public bool IsSheltered => IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker) ? worker.Phase == WorkPhase.Sheltered : m_IsSheltered;
+    public bool IsSheltered => IsDotsControlled && m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker) ? worker.Phase == WorkPhase.Sheltered : m_IsSheltered;
     public override bool IsSelectable => base.IsSelectable && !IsSheltered;
     public override bool IsTargetable => base.IsTargetable && !IsSheltered;
 
@@ -46,7 +46,7 @@ public class WorkerUnit : HumanoidUnit
     }
     public void ApplyDotsWorkerPresentation()
     {
-        if (!SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker)) return;
+        if (!m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker)) return;
         bool hidden = worker.Phase == WorkPhase.Sheltered;
         m_SpriteRenderer.enabled = !hidden; m_Collider.enabled = !hidden;
         m_Animator.SetBool("isBuilding", CurrentState == UnitState.Building);
@@ -71,6 +71,15 @@ public class WorkerUnit : HumanoidUnit
         m_ResourceNodeLocator = resourceNodeLocator;
         m_ResourceDepotLocator = resourceDepotLocator;
         m_ResourceWallet = resourceWallet;
+    }
+
+    public override void OnReturnedToPool()
+    {
+        if (IsSceneInitialized) CancelActiveWork();
+        m_CarriedResources.Clear(); m_AssignedResourceNode = null; m_AssignedDepot = null;
+        m_ActiveProfile = default; m_HasActiveProfile = false; m_GatherTimer = 0;
+        m_ShelterTownHall = null; m_IsReturningToShelter = false; m_IsSheltered = false;
+        base.OnReturnedToPool();
     }
 
     protected override void UpdateBehaviour()
@@ -145,13 +154,13 @@ public class WorkerUnit : HumanoidUnit
 
     public void SetWoodStorage(StructureUnit storage)
     {
-        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.SetDepot(DotsEntity, SwarmGameBridge.Instance.ProxyFor(storage)); return; }
+        if (IsDotsControlled) { m_Bridge.Gameplay.SetDepot(DotsEntity, m_Bridge.ProxyFor(storage)); return; }
         m_AssignedDepot = storage;
     }
 
     public void SendToBuild(StructureUnit structure)
     {
-        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.AssignConstruction(DotsEntity, SwarmGameBridge.Instance.ProxyFor(structure)); return; }
+        if (IsDotsControlled) { m_Bridge.Gameplay.AssignConstruction(DotsEntity, m_Bridge.ProxyFor(structure)); return; }
         CancelActiveWork();
         MoveTo(structure.transform.position);
         SetTarget(structure);
@@ -161,7 +170,7 @@ public class WorkerUnit : HumanoidUnit
     public void ReturnToTownHall(TownHall townHall)
     {
         if (IsDotsControlled)
-        { m_ShelterTownHall = townHall; SwarmGameBridge.Instance.Gameplay.Shelter(DotsEntity, SwarmGameBridge.Instance.ProxyFor(townHall)); return; }
+        { m_ShelterTownHall = townHall; m_Bridge.Gameplay.Shelter(DotsEntity, m_Bridge.ProxyFor(townHall)); return; }
         if (townHall == null)
         {
             CancelActiveWork();
@@ -182,7 +191,7 @@ public class WorkerUnit : HumanoidUnit
     {
         if (IsDotsControlled)
         {
-            if (m_ShelterTownHall != null) SwarmGameBridge.Instance.Gameplay.LeaveShelter(DotsEntity, (Vector2)m_ShelterTownHall.GetSpawnOrigin(), (Vector2)m_ShelterTownHall.GetSpawnExitDestination());
+            if (m_ShelterTownHall != null) m_Bridge.Gameplay.LeaveShelter(DotsEntity, (Vector2)m_ShelterTownHall.GetSpawnOrigin(), (Vector2)m_ShelterTownHall.GetSpawnExitDestination());
             return;
         }
         if (m_ShelterTownHall == null)
@@ -198,7 +207,7 @@ public class WorkerUnit : HumanoidUnit
 
     public bool TryAssignResourceNode(IResourceNode resourceNode)
     {
-        if (IsDotsControlled) return SwarmGameBridge.Instance.AssignResource(this, resourceNode);
+        if (IsDotsControlled) return m_Bridge.AssignResource(this, resourceNode);
         if (resourceNode == null || !HasGatheringDefinition())
         {
             return false;
@@ -388,7 +397,7 @@ public class WorkerUnit : HumanoidUnit
     {
         if (IsDotsControlled)
         {
-            SwarmGameBridge.Instance.FlashWorkerResource(this);
+            m_Bridge.FlashWorkerResource(this);
             return;
         }
         if (m_HasActiveProfile && m_AssignedResourceNode != null)
@@ -525,7 +534,7 @@ public class WorkerUnit : HumanoidUnit
 
     public bool TryGetCurrentCarryType(out ResourceType resourceType)
     {
-        if (IsDotsControlled && SwarmGameBridge.Instance.Gameplay.TryGetWorker(DotsEntity, out var worker))
+        if (IsDotsControlled && m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker))
         { resourceType = (ResourceType)worker.ResourceType; return worker.Carried > 0; }
         if (m_HasActiveProfile && GetCarriedAmount(m_ActiveProfile.ResourceType) > 0)
         {
@@ -548,7 +557,7 @@ public class WorkerUnit : HumanoidUnit
 
     public void CancelActiveWork()
     {
-        if (IsDotsControlled) { SwarmGameBridge.Instance.Gameplay.CancelWork(DotsEntity); return; }
+        if (IsDotsControlled) { m_Bridge.Gameplay.CancelWork(DotsEntity); return; }
         SetTask(UnitTask.None);
         SetState(UnitState.Idle);
         m_Animator.SetBool("isBuilding", false);

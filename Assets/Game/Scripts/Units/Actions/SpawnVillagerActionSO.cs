@@ -28,16 +28,15 @@ public class SpawnVillagerActionSO : ActionSO, IResourceCostAction
 
         if (active is TownHall townHall)
         {
+            if (!townHall.IsProductionOwner(manager)) return;
             if (manager.Meat < m_MeatCost)
             {
                 manager.ShowTextPopup("Not enough resources", Color.red, townHall.transform.position);
                 return;
             }
 
-            // Deduct resources
+            if (!townHall.EnqueueVillagerSpawn(this)) return;
             manager.AddResources(0, 0, -m_MeatCost);
-
-            townHall.EnqueueVillagerSpawn(this);
             manager.ShowTextPopup("Villager queued", Color.green, townHall.transform.position);
         }
         else

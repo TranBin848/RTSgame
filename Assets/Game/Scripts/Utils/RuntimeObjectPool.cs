@@ -1,29 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class RuntimeObjectPool
 {
     private static readonly Dictionary<GameObject, Queue<GameObject>> s_Pools = new();
     private static Transform s_PoolRoot;
 
-    public static T Spawn<T>(T prefab, Vector3 position, Quaternion rotation) where T : Component
+    public static T Spawn<T>(T prefab, Vector3 position, Quaternion rotation, Scene scene) where T : Component
     {
         if (prefab == null)
         {
             return null;
         }
 
-        GameObject spawnedObject = Spawn(prefab.gameObject, position, rotation);
+        GameObject spawnedObject = Spawn(prefab.gameObject, position, rotation, scene);
         return spawnedObject != null ? spawnedObject.GetComponent<T>() : null;
     }
 
-    public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
+    public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation, Scene scene)
     {
         if (prefab == null)
         {
             return null;
         }
 
+        if (!scene.IsValid() || !scene.isLoaded) throw new System.ArgumentException("Pool spawn requires a loaded owner scene.", nameof(scene));
         EnsureRoot();
 
         bool isReused = false;
@@ -53,6 +55,7 @@ public static class RuntimeObjectPool
         }
 
         instance.transform.SetParent(null);
+        if (instance.scene != scene) SceneManager.MoveGameObjectToScene(instance, scene);
         instance.transform.SetPositionAndRotation(position, rotation);
         instance.SetActive(true);
 

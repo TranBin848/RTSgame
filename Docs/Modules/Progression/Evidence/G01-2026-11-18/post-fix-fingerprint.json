@@ -1,0 +1,25 @@
+{
+  "baselineId": "B4F61496CA56A0412C05A630F4857CC7B3935B17E7E03D0E424A8B6325CFAC44",
+  "onlyPresentationGuardChanged": true,
+  "changed": [
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Unit.cs",
+      "sha256": "7D9984512C4F78FB2F79F68ABB9932C8CA574B321DA6A11EB62947B059A3FA14",
+      "currentSha256": "BD3014E99A5C9A1AA064FE0A19491B2DCC801CA5660AB369B4BE0A326319FF96"
+    }
+  ],
+  "validators": [
+    {
+      "path": "Tools/PlaytestG01.cs",
+      "sha256": "6995AD76CEC0A02A522CF096A616705CD8375509F3E9ED1C8300049AE24C2C04"
+    },
+    {
+      "path": "Tools/SummarizeG01.mjs",
+      "sha256": "C60CD9C40BFE7E846E1A77405201280512A6CBEC4BA17ABED776E0840C2B5515"
+    },
+    {
+      "path": "Tools/ValidateG01Presentation.cs",
+      "sha256": "63A1E208296E7239137D2A065E55F2ADB2C1E0CAB40167F6AC62F863D26B0AB7"
+    }
+  ]
+}

@@ -12,15 +12,29 @@ public class ResourceRequirementsDisplay : MonoBehaviour
 
     private void Awake()
     {
-        m_GameManager = GameManager.Get();
         if (m_VerticalLayoutGroup == null)
         {
             m_VerticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
         }
     }
 
+    bool m_IsInitialized;
+    public void Initialize(GameManager game)
+    {
+        if (game == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
+        {
+            if (m_GameManager != game) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
+        }
+        m_GameManager = game;
+
+        m_IsInitialized = true;
+    }
+
     public void Show(Dictionary<ResourceType, int> resourceCosts)
     {
+        if (!m_IsInitialized) return;
         ClearRibbons();
 
         if (resourceCosts == null || resourceCosts.Count == 0)

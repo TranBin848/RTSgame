@@ -1,5 +1,6 @@
 using UnityEngine;
 using RTS.DOTS;
+using Unity.Entities;
 
 public class BuildingProcess
 {
@@ -7,6 +8,7 @@ public class BuildingProcess
     private WorkerUnit m_Worker;
     private StructureUnit m_Structure;
     private GameManager m_GameManager;
+    private readonly SwarmGameBridge m_Bridge;
     private string m_QueueUiId;
     public float m_ProgressTimer;
     public bool m_isMiddle;
@@ -16,30 +18,52 @@ public class BuildingProcess
     public BuildingProcess(
         BuildActionSo buildAction,
         Vector3 placementPosition,
-        WorkerUnit worker
+        WorkerUnit worker,
+        GameManager gameManager,
+        SwarmGameBridge bridge
     )
     {
+        if (buildAction == null || buildAction.StructureUnitPrefab == null)
+            throw new System.ArgumentException("Construction requires an action with a structure prefab.", nameof(buildAction));
+        if (worker == null) throw new System.ArgumentNullException(nameof(worker));
+        if (gameManager == null) throw new System.ArgumentNullException(nameof(gameManager));
+        if (worker.gameObject.scene != gameManager.gameObject.scene || worker.CurrentState == UnitState.Dead)
+            throw new System.ArgumentException("Construction requires a living worker from the same scene.", nameof(worker));
+        if (bridge == null && worker.DotsEntity != Entity.Null)
+            throw new System.ArgumentException("A bound worker requires its scene bridge.", nameof(bridge));
+        if (bridge != null && (!bridge.IsSceneBound || bridge.gameObject != gameManager.gameObject
+            || !bridge.Gameplay.TryGetWorker(worker.DotsEntity, out _)))
+            throw new System.ArgumentException("Construction requires the bound worker and bridge owned by this GameManager.", nameof(bridge));
         m_BuildAction = buildAction;
-        m_GameManager = GameManager.Get();
-        if (m_GameManager != null && !m_GameManager.CanBuild(buildAction))
+        m_GameManager = gameManager;
+        m_Bridge = bridge;
+        if (!m_GameManager.CanBuild(buildAction))
             throw new System.InvalidOperationException("Construction requires research before it can begin.");
-        m_QueueUiId = m_GameManager != null ? m_GameManager.EnqueueActionUI(m_BuildAction) : string.Empty;
-        m_Structure = SwarmGameBridge.Instance != null
-            ? SwarmGameBridge.Instance.SpawnGameplay(m_BuildAction.StructureUnitPrefab.gameObject, placementPosition, Quaternion.identity).GetComponent<StructureUnit>()
-            : GameObject.Instantiate(m_BuildAction.StructureUnitPrefab);
+        if (m_Bridge != null)
+        {
+            var view = m_Bridge.SpawnGameplay(m_BuildAction.StructureUnitPrefab.gameObject, placementPosition, Quaternion.identity);
+            if (view == null) throw new System.InvalidOperationException("Construction view could not be spawned.");
+            m_Structure = view.GetComponent<StructureUnit>();
+        }
+        else m_Structure = GameObject.Instantiate(m_BuildAction.StructureUnitPrefab);
+        m_QueueUiId = m_GameManager.EnqueueActionUI(m_BuildAction);
         m_Structure.SpriteRenderer.sprite = m_BuildAction.FoundationSprite;
         m_Structure.transform.position = placementPosition;
         m_Structure.RegisterBuildingProcess(this);
-        if (m_Structure.IsDotsControlled) SwarmGameBridge.Instance.BeginConstruction(m_Structure, this, m_BuildAction.ConstructionTime);
-        worker.SendToBuild(m_Structure);
+        if (m_Bridge != null)
+        {
+            m_Bridge.BeginConstruction(m_Structure, this, m_BuildAction.ConstructionTime);
+            m_Bridge.Gameplay.AssignConstruction(worker.DotsEntity, m_Structure.DotsEntity);
+        }
+        else worker.SendToBuild(m_Structure);
     }
     public void Update()
     {
-        if (m_Structure.IsDotsControlled) { UpdateDotsPresentation(); return; }
-        if (m_isFinished)
+        if (m_isFinished || m_Structure == null || m_Structure.CurrentState == UnitState.Dead)
         {
             return;
         }
+        if (m_Bridge != null) { UpdateDotsPresentation(); return; }
         if (InProgress)
         {
             m_ProgressTimer += Time.deltaTime;
@@ -67,8 +91,9 @@ public class BuildingProcess
     }
     public void UpdateDotsPresentation()
     {
-        if (m_Structure == null || !m_Structure.IsDotsControlled) return;
-        var build = SwarmGameBridge.Instance.Gameplay.EntityManager.GetComponentData<GameplayConstruction>(m_Structure.DotsEntity);
+        if (m_Structure == null || m_Bridge == null || m_Bridge.Gameplay == null
+            || !m_Bridge.Gameplay.World.IsCreated || !m_Bridge.Gameplay.EntityManager.Exists(m_Structure.DotsEntity)) return;
+        var build = m_Bridge.Gameplay.EntityManager.GetComponentData<GameplayConstruction>(m_Structure.DotsEntity);
         m_ProgressTimer = build.Elapsed;
         m_GameManager?.UpdateActionUIProgress(m_QueueUiId, build.Elapsed / Mathf.Max(0.01f, build.Duration));
     }

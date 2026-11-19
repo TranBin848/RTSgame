@@ -7,18 +7,19 @@ public class DayCounterUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_DayText;
     [SerializeField] private string m_DayFormat = "Day {0}";
 
-    void Start()
+    bool m_IsInitialized;
+    public void Initialize(DayNightCycleManager day)
     {
-        if (m_DayNightCycleManager == null)
+        if (day == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
         {
-            m_DayNightCycleManager = FindFirstObjectByType<DayNightCycleManager>();
+            if (m_DayNightCycleManager != day) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
         }
-
-        if (m_DayNightCycleManager != null)
-        {
-            m_DayNightCycleManager.OnDayChanged += UpdateDayText;
-            UpdateDayText(m_DayNightCycleManager.CurrentDay);
-        }
+        m_DayNightCycleManager = day;
+        m_DayNightCycleManager.OnDayChanged += UpdateDayText;
+        UpdateDayText(m_DayNightCycleManager.CurrentDay);
+        m_IsInitialized = true;
     }
 
     void OnDestroy()

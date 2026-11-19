@@ -1,0 +1,24 @@
+S9 final acceptance, client date2026-11-17 Asia/Saigon.
+MCP cloud Editor RTSgame2026, PID23928. CLI uses --no-start; no second Editor launched.
+81/81 EditMode Passed,0Failed/0Skipped,10.9443911s. XML saved.
+D4 both scenes:9views/8types,16null/different rejects,repeated listener/texture stable.
+Fog:153active affectables ProceduralGame,71SampleScene;6rejects,enable/disable/unbind/alpha PASS.
+Pool4types +worker menu/newscene/newfog PASS. Selection/ground/minimap pointer/drag PASS.
+Research polling1000idle+1000busy-other:0/0B managed thread allocation;definition once;not whole-frame GC.
+Build final Succeeded47.6252491s,226645394bytes,0errors/0warnings; MainMenu,ProceduralGame,SampleScene,SwarmSimulation.
+First build request fetch-failed but build report/log confirmed success374.8836195s;no blind retry/Editor kill.
+First Player smoke15/18 errors[];stale raw-Instantiate/edge-placement fixtures fixed;raw fail preserved.
+Final Player smoke18/18 Passed,errors[],actors29,enemies5,ticks208.
+Progression Player:seed1/v3,1920x1080,Development/offscreen world,30s warmup/90s capture.
+19191frames,89.9981691s;frame median3.7341ms,p958.5298ms,max53.9553ms;cap not reached.
+GC median144B,p95184B,max1020544B;counter available;no attribution or whole-game0GC claim.
+Scene request->Ready836.3275ms;generatorAwake->Ready533.7064ms;one sample only.
+Core102.3715ms,Terrain112.0096ms,Resources24.0047ms,Physics/pathfinding25.1017ms,Initialize133.4200ms,Bind82.6452ms.
+CSV captured enemies0..7,projectilesMax4. End snapshot enemies8/projectiles3/hits31/actors26/workers4/day1/spawned10.
+PNG inspected:world/structures/enemies/projectiles visible;overlay HUD not captured.4drawCalls/11renderSnapshots at end.
+Runtime log scan smoke+perf:0matches for Exception/errorCS/undisposed NativeCollection/Shader error.
+SHA-256 manifest416build files. No binary/cache copied into Docs.
+CSharp whitespace diff check exit0.
+Final MCP readback:ProceduralGame,seed1,matchWired=true,dirty=false,isPlaying=false,isPaused=false,isCompiling=false;Console Exception0.
+Owned Player test processes exited;user Editor left open/responsive;no build/CLI pending;no commit/reset.
+Known limits:baseline control no-actions still wins;single active gameplay scene;one seed/startup sample/offscreen Development;Release/onscreen/multidevice/high-load not measured;GC/frame spike not profiled;old Editor crash root cause not claimed fixed.

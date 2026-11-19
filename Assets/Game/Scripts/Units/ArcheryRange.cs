@@ -4,13 +4,13 @@ public class ArcheryRange : ProductionBuilding
 {
     [SerializeField] private GameObject m_ArcherPrefab;
 
-    public void EnqueueArcherSpawn(SpawnArcherActionSO action)
+    public bool EnqueueArcherSpawn(SpawnArcherActionSO action)
     {
         if (action == null)
         {
-            return;
+            return false;
         }
 
-        EnqueueProduction(action, m_ArcherPrefab, action.TrainDuration, "Archer spawned");
+        return EnqueueProduction(action, m_ArcherPrefab, action.TrainDuration, "Archer spawned");
     }
 }

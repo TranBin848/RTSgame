@@ -1,5 +1,7 @@
 # Hướng dẫn phát triển tiếp trên nền DOTS hiện có
 
+**Quy ước hiện tại17/11/2026:** D0–D4 đã triển khai. Dùng bridge/game/map/camera/fog được root hoặc factory cấp, không viết consumer mới dựa Get/Instance/Find. Raw Instantiate hoặc acquire pool **không tự đăng ký**: caller phải bridge.Register trước khi gửi command. Unit/resource bind/unbind fog theo owner scene. [D4 lifetime/exceptions](../DependencyInjection/D4-Validation.md), [S9 evidence/giới hạn](../Progression/S9-Acceptance.md) cập nhật các mô tả baseline cũ bên dưới.
+
 Đối chiếu code ngày **26/10/2026**. Đọc [Tech Overview](../../TechnicalOverview.md) trước, sau đó dùng trang này để chọn đúng điểm tích hợp. Các bước bên dưới là quy trình phát triển, không phải tuyên bố rằng những tính năng tương lai đã được triển khai.
 
 ## 1. Chọn chỗ sửa theo loại công việc
@@ -24,7 +26,7 @@
 Trong scene đã cấu hình, lấy bridge và kiểm tra trạng thái trước khi sử dụng:
 
 ```csharp
-var bridge = SwarmGameBridge.Instance;
+var bridge = m_Bridge; // Đã nhận từ composition root/factory qua Initialize.
 if (bridge == null || bridge.Simulation == null || !bridge.Simulation.IsConfigured)
     return; // Scene chưa sẵn sàng cho lệnh này.
 
@@ -39,7 +41,7 @@ GameObject view = bridge.SpawnGameplay(unitPrefab, position, Quaternion.identity
 
 Với Unit/resource thông thường, API tạo view và đăng ký dữ liệu ECS tương ứng. Với prefab enemy, nó chuyển sang `SpawnEnemy` và trả `null` dù spawn có thể đã thành công; không dùng `view != null` để kết luận việc sinh quái. Dùng API `SpawnEnemy` khi cần biết thành công/thất bại của đường enemy.
 
-Các đường hiện có: `EnemyWaveManager.SpawnEnemy` gọi bridge; `ProductionBuilding`, `BuildingProcess`, `ResourceSpawner` dùng `SpawnGameplay`. Direct `Instantiate` của enemy có đường chuyển đổi tại lifecycle khi bridge đã sẵn sàng, nhưng API trực tiếp tránh tạo view quái tạm. Các loại prefab hoàn toàn mới vẫn cần mapping riêng.
+Các đường hiện có: `EnemyWaveManager.SpawnEnemy` gọi bridge; `ProductionBuilding`, `BuildingProcess`, `ResourceSpawner` dùng `SpawnGameplay`. Nếu dùng raw `Instantiate` của enemy, caller phải `bridge.Register(view.GetComponent<Unit>())` để inject/convert; Unit.Start không còn tự tìm service và đăng ký. API SpawnEnemy trực tiếp tránh view quái tạm. Các loại prefab hoàn toàn mới vẫn cần mapping riêng.
 
 ### Command thay cho việc ghi view
 

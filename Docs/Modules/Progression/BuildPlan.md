@@ -173,6 +173,8 @@ Không bắt buộc Voronoi library hoặc WFC: vài tâm vùng, distance assign
 
 ### S6 — Tích hợp map, wave và navigation
 
+Checkpoint đóng16/11 — **S6/D3 DONE**: matrix0/1/1543 economy/build/fog-camera/input/3chu kỳ đêm PASS, manual được người dùng xác nhận; worker pool qua menu→game mới và17/17procedural đã PASS khi MCP hoạt động lại.59/59DOTS sau code cuối giữ nguyên. Editor sạch/seed1/ngoài Play-pause-compile,0Exception mới. [S6 final evidence](../ProceduralGeneration/S6-FinalValidation.md) và [Progress](Progress.md) ghi phạm vi/giới hạn; tiếp S7, không coi toàn project đạt DI hoặc balance/performance đã hoàn tất.
+
 - Phụ thuộc S3 + S5. Áp dụng region/landmark trong ProceduralGame; nối spawn wave với vị trí hợp lệ dẫn qua các hướng tiếp cận.
 - Đồng bộ navigation cho cả GameplaySimulationSystem và SwarmSimulationSystem sau terrain/resources. Kiểm tra fog/minimap/camera, input readiness và lifecycle khởi động lại scene.
 - Giữ mức áp lực wave tương đương khi đổi vị trí spawn; không tăng số quái ngẫu nhiên theo lượng đất.
@@ -181,6 +183,8 @@ Không bắt buộc Voronoi library hoặc WFC: vài tâm vùng, distance assign
 
 ### S7 — Nhận diện vùng và khoảnh khắc khám phá
 
+Đóng16/11 — **DONE**: [S7 evidence](../ProceduralGeneration/S7-Presentation.md) có implementation/3seed checks, input/gather/build,4ảnh cùng seed/camera ngày-đêm và người dùng xác nhận dễ nhận ra.59/59DOTS+17/17procedural PASS; giữ scope hình ảnh, timing/quota/Core không đổi, tiếp S8.
+
 - Phụ thuộc S6. Tận dụng tile/prefab hiện có để tạo mép vùng, cụm trang trí, silhouette landmark và icon trên minimap sau khi khám phá.
 - Chỉ thêm art còn thiếu thực sự; ghi nguồn/license của asset mới. Decoration không cản click, navigation hoặc che tài nguyên quan trọng.
 - Đặt mức sáng/màu theo ngày đêm vẫn đọc được quân/quái; không đổi pipeline toàn dự án.
@@ -188,13 +192,20 @@ Không bắt buộc Voronoi library hoặc WFC: vài tâm vùng, distance assign
 
 ### S8 — Một trận hoàn chỉnh và cân bằng bước đầu
 
+**17/11 — DONE phạm vi ban đầu:** có báo cáo6policy +control, luồng trận từ đầu tới kết thúc/replay/menu; user xác nhận checklist ổn. Baseline control không thao tác vẫn thắng được giữ như giới hạn balance, không gọi là độ khó đã tối ưu. [Báo cáo](../MatchFlow/Architecture.md). Checkpoint16/11bên dưới là lịch sử.
+
+**16/11 — PARTIAL:** S8a luồng trận/terminal gates/restart/DI đã triển khai và kiểm; S8b có6scripted policy run/report, chờ manual theo người dùng. Goal5đêm→thắng ngày6, mất hall cuối→thua ưu tiên. [MatchFlow + số liệu/cấu hình/giới hạn](../MatchFlow/Architecture.md). Giữ giá/timing/quota/HP baseline; không coi6run thắng là cân bằng đã đạt.
+
 - Phụ thuộc S3 + S6; S7 cần xong trước nghiệm thu hình ảnh. Hoàn thiện điều kiện kết thúc theo S0, ngăn command sau kết thúc và thử bắt đầu trận mới.
 - Playtest ít nhất ba seed cố định, mỗi seed thử ưu tiên kinh tế và ưu tiên quân sự; ghi thời gian unlock, tốc độ thu/nộp, lượng quân, ngày thua/thắng và lựa chọn mở rộng.
 - Mục tiêu đánh giá: có lý do đổi thứ tự nghiên cứu/hướng mở rộng; không có node bắt buộc mua ngay trong mọi tình huống vì quá rẻ; không có thời gian chờ dài mà không có quyết định khả dụng. Ghi nhận quan sát, không khẳng định vui chỉ bằng test tự động.
 - Chỉnh giá/duration/quota/wave dựa trên dữ liệu. Không mở rộng tree để che vòng chơi chưa hấp dẫn.
+- Đầu mối từ S6 ngày16/11: ba đêm cấu hình tổng48quái nhưng chỉ42mốc spawn nằm trước bình minh45giây (12/15/15). Đánh giá cắt wave/interval/quota/UI schedule trong S8 bằng playtest; S6 không đổi balance để đạt test.
 - DONE: có báo cáo playtest, config cuối và lỗi còn tồn tại; game có thể chơi từ đầu tới kết thúc theo điều kiện đã chốt.
 
 ### S9 — Hồi quy, đo hiệu năng và bàn giao khóa luận
+
+**17/11 — DONE:**81EditMode +18Player checks PASS, Windows Development build,phase startup/frame/GC với world render thật, rawCSV/JSON/XML/PNG/hash và [S9 nghiệm thu/giới hạn](S9-Acceptance.md). [D4](../DependencyInjection/D4-Validation.md) đã đóng trước đo. Toàn S0–S9/D0–D4 hoàn tất phạm vi, tiếp theo là scope ngoài plan theo known limits, không tự mở rộng tree/save/prestige.
 
 - Phụ thuộc S7 + S8. Chạy test Progression/Procedural/DOTS phù hợp; MainMenu, ProceduralGame, SampleScene; kiểm tra build Player nếu môi trường cho phép.
 - Đo tổng scene→Ready và tách Core, Tilemap/prefab, physics/navigation/binding; frame time trong gameplay có worker/quân/quái và render thật. Ghi máy, Editor/build, resolution, seed, số thực thể, warmup, thời lượng và median/p95 khi đủ mẫu.

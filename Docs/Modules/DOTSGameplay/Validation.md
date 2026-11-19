@@ -1,5 +1,7 @@
 # Kiểm chứng gameplay ECS
 
+**17/11 — cập nhật code hiện tại:**81/81EditMode (64DOTS+17procedural),18/18Player full-gameplay checks/errors=[] trên build mới; DI UI/fog/caller/pool/reload kiểm cả ProceduralGame/SampleScene. [S9 artifact và điều kiện đo](../Progression/S9-Acceptance.md) là nguồn hiện tại. Functional smoke có timers rút ngắn; performance route riêng realtime/offscreen, không đổi timer và không là benchmark toàn bộ quy mô DOTS.
+
 ## Các mức bằng chứng
 
 1. EditMode world độc lập: thuật toán và giao dịch dữ liệu ECS.

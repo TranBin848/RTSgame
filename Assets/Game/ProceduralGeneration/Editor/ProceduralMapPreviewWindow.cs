@@ -23,7 +23,8 @@ public sealed class ProceduralMapPreviewWindow : EditorWindow
         {m_Report=error;Repaint();return;}
         Map=map;m_Texture=Render(map);
         m_Report=$"Seed {map.Seed} / attempt {map.Attempt} / generator v{map.GeneratorVersion}\n"
-            + $"{map.Width}×{map.Height} / {map.Resources.Count} resources / repairs {map.Validation.Repairs}";
+            + $"{map.Width}×{map.Height} / {map.Resources.Count} resources / repairs {map.Validation.Repairs}\n"
+            + $"Gateways with clearance: {map.Validation.ReachableGateways}; longest resource path: {map.Validation.MaxResourcePathDistance}";
         Repaint();
     }
     void OnGUI()
@@ -37,7 +38,7 @@ public sealed class ProceduralMapPreviewWindow : EditorWindow
             data.Seed=m_Seed;data.Preset=m_Preset;Generate(data);
         }
         EditorGUILayout.HelpBox(m_Report,Map==null?MessageType.Info:MessageType.None);
-        GUILayout.Label("Vàng: xuất phát | xanh: kinh tế | cam: mỏ | trắng: đường đề xuất\nTím: landmark | đỏ: cửa đề xuất | xanh ngọc: tâm vùng\nChấm xanh đậm/vàng/trắng: cây/vàng/cừu; chưa phân bố theo budget vùng.",EditorStyles.wordWrappedLabel);
+        GUILayout.Label("Vàng: xuất phát | xanh: kinh tế (75% cây/cừu ngoài) | cam: mỏ (vàng ngoài)\nTrắng: đường | tím: landmark + 3 mỏ | đỏ: gateway | cyan: tâm\nChấm xanh đậm/vàng/trắng: cây/vàng/cừu. Strategic v3 kiểm topology sau placement.",EditorStyles.wordWrappedLabel);
         if(m_Texture!=null)
         {
             var rect=GUILayoutUtility.GetRect(100,10000,100,10000,GUILayout.ExpandWidth(true),GUILayout.ExpandHeight(true));

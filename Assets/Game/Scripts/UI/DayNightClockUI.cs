@@ -13,15 +13,19 @@ public class DayNightClockUI : MonoBehaviour
     [SerializeField] private bool m_UseEditorSliceRotation = false;
     [SerializeField] private float m_NeedleAngleOffset = 0f;
 
-    void Start()
+    bool m_IsInitialized;
+    public void Initialize(DayNightCycleManager day)
     {
-        if (m_DayNightCycleManager == null)
+        if (day == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
         {
-            m_DayNightCycleManager = FindFirstObjectByType<DayNightCycleManager>();
+            if (m_DayNightCycleManager != day) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
         }
-
+        m_DayNightCycleManager = day;
         ConfigureSlices();
         UpdateClockVisuals();
+        m_IsInitialized = true;
     }
 
     void Update()

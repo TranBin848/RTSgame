@@ -21,14 +21,24 @@ public class AIPawn : MonoBehaviour
     public UnityAction<Vector3> OnNewPositionSelected = delegate { };
     public UnityAction OnDestinationReached = delegate { };
 
-    private void Start()
+    public void Initialize(GameManager game, TilemapManager map)
     {
-        EnsureDependencies();
+        if (game == null || map == null || game.gameObject.scene != gameObject.scene || map.gameObject.scene != gameObject.scene)
+            throw new System.ArgumentException("AIPawn requires its scene's game and map.");
+        if ((m_GameManager != null && m_GameManager != game) || (m_TilemapManager != null && m_TilemapManager != map))
+            throw new System.InvalidOperationException("Unbind AIPawn before changing its dependencies.");
+        m_GameManager = game; m_TilemapManager = map;
+    }
+
+    public void Unbind()
+    {
+        m_CurrentPath.Clear(); m_CurrentDestination = null; m_CurrentNodeIndex = 0; m_TimeAtCurrentNode = 0;
+        m_GameManager = null; m_TilemapManager = null;
     }
 
     void Update()
     {
-        if (ProceduralMapRuntime.IsCompositionBlocked) return;
+        if (!EnsureDependencies() || ProceduralMapRuntime.IsCompositionBlocked) return;
         if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled) return;
         if (!isPathValid())
         {
@@ -78,7 +88,7 @@ public class AIPawn : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled)
-        { SwarmGameBridge.Instance.MoveActor(actor, destination, false); return; }
+        { actor.SceneBridge.MoveActor(actor, destination, false); return; }
         if (!EnsureDependencies())
         {
             return;
@@ -114,7 +124,7 @@ public class AIPawn : MonoBehaviour
     public void Stop()
     {
         if (GetComponent<Unit>() is Unit actor && actor.IsDotsControlled)
-        { SwarmGameBridge.Instance.Gameplay.Stop(actor.DotsEntity); return; }
+        { actor.SceneBridge.Gameplay.Stop(actor.DotsEntity); return; }
         m_CurrentPath.Clear();
         m_TimeAtCurrentNode = 0f;
         m_CurrentNodeIndex = 0;
@@ -162,16 +172,6 @@ public class AIPawn : MonoBehaviour
 
     bool EnsureDependencies()
     {
-        if (m_GameManager == null)
-        {
-            m_GameManager = GameManager.Get();
-        }
-
-        if (m_TilemapManager == null)
-        {
-            m_TilemapManager = TilemapManager.Get();
-        }
-
         return m_GameManager != null && m_TilemapManager != null;
     }
 }

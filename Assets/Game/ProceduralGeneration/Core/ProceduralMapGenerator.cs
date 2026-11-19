@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace RTS.ProceduralGeneration
 {
-    public sealed class ProceduralMapGenerator
+    public sealed partial class ProceduralMapGenerator
     {
         const uint TerrainPhase = 0x54455252u;
         const uint ResourcePhase = 0x5245534Fu;
@@ -96,6 +96,9 @@ namespace RTS.ProceduralGeneration
                 settings.StartingSheepMinDistance, settings.StartingSheepMaxDistance, true,
                 terrain, reserved, occupied, distances, resources, ref resourceRandom);
 
+            if (layout != null) PlaceStrategicResources(settings, layout, terrain, reserved, occupied, distances, resources, ref resourceRandom);
+            else
+            {
             PlaceQuota(settings, ProceduralResourceKind.Tree, settings.TotalTreeCount - settings.StartingTreeCount, 0,
                 settings.StartingTreeMaxDistance + 1, int.MaxValue, false,
                 terrain, reserved, occupied, distances, resources, ref resourceRandom);
@@ -105,8 +108,10 @@ namespace RTS.ProceduralGeneration
             PlaceQuota(settings, ProceduralResourceKind.Sheep, settings.TotalSheepCount - settings.StartingSheepCount, 0,
                 settings.StartingSheepMaxDistance + 1, int.MaxValue, false,
                 terrain, reserved, occupied, distances, resources, ref resourceRandom);
+            }
 
             Validate(settings, terrain, reserved, resources, width, height, startX, startY, report);
+            if (layout != null) ValidateStrategic(settings, layout, terrain, reserved, resources, report);
             CountTerrain(terrain, report);
             return new MapData(width, height, settings.Seed, attempt, startX, startY, terrain, reserved, resources, report, layout);
         }
@@ -154,7 +159,7 @@ namespace RTS.ProceduralGeneration
 
         static void PlaceQuota(MapGenerationSettingsData settings, ProceduralResourceKind kind, int requested, int footprintRadius,
             int minDistance, int maxDistance, bool starting, byte[] terrain, byte[] reserved, byte[] occupied,
-            int[] distances, List<ResourcePlacement> placements, ref DeterministicRandom random)
+            int[] distances, List<ResourcePlacement> placements, ref DeterministicRandom random, StrategicLayout layout = null, int region = -1)
         {
             if (requested <= 0) return;
             int width = settings.Width;
@@ -189,6 +194,7 @@ namespace RTS.ProceduralGeneration
                 }
 
                 if (!InBounds(x, y, width, height)) continue;
+                if (layout != null && layout.RegionIds[y * width + x] != region) continue;
                 int distance = distances[y * width + x];
                 if (distance < minDistance || distance > maxDistance) continue;
                 if (!CanPlace(x, y, footprintRadius, terrain, reserved, occupied, width, height)) continue;

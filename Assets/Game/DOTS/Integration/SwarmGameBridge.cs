@@ -19,6 +19,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     TilemapManager m_Map;
     GameManager m_Game;
     FogOfWarManager m_Fog;
+    public FogOfWarManager Fog => m_Fog;
     DayNightCycleManager m_DayNight;
     SwarmInstancedRenderer m_Renderer;
     Texture2D m_FogTexture;
@@ -41,6 +42,22 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
         var manager = FindFirstObjectByType<GameManager>();
         if (manager != null && manager.GetComponent<GameSceneCompositionRoot>() != null) return;
         if (manager != null && manager.GetComponent<SwarmGameBridge>() == null) manager.gameObject.AddComponent<SwarmGameBridge>();
+        // Legacy scene composition stays here, outside the migrated consumers.
+        if (manager != null)
+        {
+            var map = FindFirstObjectByType<TilemapManager>();
+            var bridge = manager.GetComponent<SwarmGameBridge>();
+            var camera = FindFirstObjectByType<CameraController>();
+            if (camera == null && Camera.main != null) camera = Camera.main.gameObject.AddComponent<CameraController>();
+            manager.Initialize(bridge, map, camera, bridge.m_Fog, bridge.m_DayNight,
+                new SceneResourceNodeLocator(manager.ResourceContainers), new SceneResourceDepotLocator(() => manager.GetPlayerStructures()));
+            foreach (var spawner in FindObjectsByType<ResourceSpawner>(FindObjectsSortMode.None))
+                if (spawner.gameObject.scene == scene) spawner.Initialize(manager, map, bridge);
+            foreach (var wave in FindObjectsByType<EnemyWaveManager>(FindObjectsSortMode.None))
+                wave.Initialize(manager, map, FindFirstObjectByType<DayNightCycleManager>(), bridge);
+            GameSceneCompositionRoot.ComposePresentation(manager, map, bridge.m_Fog, bridge.m_DayNight,
+                FindFirstObjectByType<EnemyWaveManager>(), camera, bridge);
+        }
     }
     void Awake()
     {
@@ -102,15 +119,24 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     public void Register(Unit unit)
     {
         if (unit == null || m_Proxies.ContainsKey(unit)) return;
+        unit.InitializeScene(m_Game, m_Map, this);
         if (TryConvertEnemy(unit)) return;
         RegisterGameplayUnit(unit);
+        unit.RegisterWithGame();
     }
     public void Unregister(Unit unit)
     {
+        if (unit.SceneBridge != this) return;
+        if (unit is ProductionBuilding production)
+        {
+            RemoveTrainingFor(production);
+            production.UnbindProduction(this);
+        }
         if (Simulation != null && Simulation.World != null && Simulation.World.IsCreated && m_Proxies.TryGetValue(unit, out var entity)) Gameplay.Remove(entity);
         m_Proxies.Remove(unit); m_UnitsById.Remove(unit.GetInstanceID());
         m_BodyOffsets.Remove(unit); m_ResourceEntities.Remove(unit);
-        unit.UnbindDots();
+        unit.UnregisterFromGame();
+        unit.UnbindScene(this);
     }
     void Update()
     {
@@ -222,18 +248,22 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
             VisualScale = settings.VisualScale, Spinning = settings.Spinning, MinDuration = settings.MinDuration,
             MaxDuration = settings.MaxDuration, DurationFactor = settings.DurationFactor });
     }
-    public bool ConvertLegacyProjectile(Unit owner, Unit target, int damage, Vector3 position, Projectile prefab)
+    public bool TrySpawnProjectile(Unit owner, Unit target, int damage, Vector3 position, Projectile prefab)
     {
-        if (Simulation == null || target == null || owner == null) return false;
-        Entity targetEntity = ProxyFor(target);
-        if (targetEntity == Entity.Null) return false;
-        Simulation.SpawnProjectile(new ProjectileRequest { Owner = ProxyFor(owner), Target = targetEntity,
+        if (!IsSceneBound || Simulation.Paused || ProceduralMapRuntime.IsCompositionBlocked || Time.timeScale <= 0
+            || target == null || owner == null || prefab == null || damage <= 0
+            || owner.gameObject.scene != gameObject.scene || target.gameObject.scene != gameObject.scene
+            || !owner.isActiveAndEnabled || !target.isActiveAndEnabled || !owner.IsTargetable || !target.IsTargetable
+            || !m_Proxies.TryGetValue(owner, out var ownerEntity) || !m_Proxies.TryGetValue(target, out var targetEntity)
+            || !Simulation.TryGetBody(ownerEntity, out var ownerBody) || ownerBody.Health <= 0
+            || !Simulation.TryGetBody(targetEntity, out var targetBody) || targetBody.Health <= 0) return false;
+        Entity projectile = Simulation.SpawnProjectile(new ProjectileRequest { Owner = ownerEntity, Target = targetEntity,
             Position = new float2(position.x, position.y), Aim = new float2(target.transform.position.x, target.transform.position.y),
             Damage = damage, Faction = owner.IsPlayer ? 0 : 1, Speed = prefab.Speed,
             VisualId = owner.IsPlayer ? 2 : 3, Arc = (byte)(prefab.UsesArc ? 1 : 0), ArcHeight = prefab.ArcHeight,
             VisualScale = Mathf.Abs(prefab.transform.lossyScale.x), Spinning = (byte)(prefab.IsSpinning ? 1 : 0),
             MinDuration = prefab.MinTravelDuration, MaxDuration = prefab.MaxTravelDuration, DurationFactor = prefab.DistanceDurationFactor });
-        return true;
+        return projectile != Entity.Null;
     }
     void RefreshFog()
     {
@@ -258,6 +288,14 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     }
     void OnDestroy()
     {
+        foreach (var unit in m_Proxies.Keys)
+            if (unit != null)
+            {
+                if (unit is ProductionBuilding production) production.UnbindProduction(this);
+                unit.UnbindScene(this);
+            }
+        foreach (var node in m_ResourceEntities.Keys)
+            if (node != null && node is ResourceNodeBase resource) resource.Unbind(this);
         if (m_Fog != null) m_Fog.OnFogUpdated -= RefreshFog;
         if (m_FogTexture != null) Destroy(m_FogTexture);
         if (Simulation != null && Simulation.World != null && Simulation.World.IsCreated)

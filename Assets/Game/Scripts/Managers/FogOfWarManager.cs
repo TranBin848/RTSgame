@@ -25,6 +25,7 @@ public class FogOfWarManager : MonoBehaviour
     private float[,] m_VisibilityStrengths;
     private float m_NextRefreshTime;
     private bool m_IsInitialized;
+    private bool m_HasStarted;
     private List<FogOfWarAffectable> m_Affectables = new();
     public UnityAction OnFogUpdated = delegate { };
     public bool IsInitialized => m_IsInitialized;
@@ -33,7 +34,7 @@ public class FogOfWarManager : MonoBehaviour
 
     void Start()
     {
-        Initialize();
+        m_HasStarted = true;
         RefreshFog();
     }
 
@@ -74,13 +75,21 @@ public class FogOfWarManager : MonoBehaviour
         }
 
         ApplyAffectableVisibility();
+        OnFogUpdated.Invoke();
         Debug.Log($"[FogOfWar] Fog of War toggled: {(m_FogOfWarDisabled ? "DISABLED" : "ENABLED")}");
     }
 
-    void Initialize()
+    public void Initialize(GameManager game, TilemapManager map)
     {
-        m_GameManager = GameManager.Get();
-        m_TilemapManager = TilemapManager.Get();
+        if (game == null || map == null || game.gameObject.scene != gameObject.scene || map.gameObject.scene != gameObject.scene)
+            throw new System.ArgumentException("Fog requires its scene game and map.");
+        if (m_IsInitialized)
+        {
+            if (m_GameManager != game || m_TilemapManager != map) throw new System.InvalidOperationException("Fog already belongs to another scene context.");
+            return;
+        }
+        m_GameManager = game;
+        m_TilemapManager = map;
 
         if (m_Definition == null || m_FogTilemap == null || m_FogTile == null || m_TilemapManager == null || m_TilemapManager.PathfindingTilemap == null)
         {
@@ -98,8 +107,6 @@ public class FogOfWarManager : MonoBehaviour
         m_VisibilityCounts = new int[m_Bounds.size.x, m_Bounds.size.y];
         m_VisibilityStrengths = new float[m_Bounds.size.x, m_Bounds.size.y];
         
-        m_Affectables.Clear();
-        m_Affectables.AddRange(FindObjectsByType<FogOfWarAffectable>(FindObjectsSortMode.None));
 
         m_FogTilemap.ClearAllTiles();
         foreach (var position in m_Bounds.allPositionsWithin)
@@ -288,6 +295,10 @@ public class FogOfWarManager : MonoBehaviour
             return;
         }
 
+        // Scene cloning/domain reload can retain the ready flag before runtime arrays are rebuilt in Start.
+        if (!m_IsInitialized || m_TilemapManager == null || m_TilemapManager.PathfindingTilemap == null
+            || m_VisibilityCounts == null || m_Explored == null) return;
+
         Vector3Int cellPosition = m_TilemapManager.PathfindingTilemap.WorldToCell(affectable.transform.position);
         if (!TryGetFogIndices(cellPosition, out int fogX, out int fogY))
         {
@@ -314,7 +325,7 @@ public class FogOfWarManager : MonoBehaviour
         if (affectable != null && !m_Affectables.Contains(affectable))
         {
             m_Affectables.Add(affectable);
-            if (m_IsInitialized)
+            if (m_IsInitialized && m_HasStarted)
             {
                 ApplyVisibilityToAffectable(affectable);
             }

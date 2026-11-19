@@ -100,6 +100,7 @@ namespace RTS.DOTS
         }
         public bool TryClaim(Entity entity)
         {
+            if (IsMatchOver) return false;
             if (!TryGetResource(entity, out var resource) || resource.Claims >= resource.Capacity) return false;
             resource.Claims++; EntityManager.SetComponentData(entity, resource); return true;
         }
@@ -125,6 +126,7 @@ namespace RTS.DOTS
         }
         public bool AssignResource(Entity entity, Entity node)
         {
+            if (IsMatchOver) return false;
             if (!TryGetWorker(entity, out var worker) || !TryGetResource(node, out var resource)) return false;
             if (worker.Node == node) return true;
             bool supported = false;
@@ -139,6 +141,7 @@ namespace RTS.DOTS
         }
         public void SetDestination(Entity entity, float2 destination, bool playerCommand = false)
         {
+            if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out var body) || body.Health <= 0 || actor.Speed <= 0) return;
             if (playerCommand) { CancelWork(entity); actor = EntityManager.GetComponentData<GameplayActor>(entity); actor.Target = Entity.Null; actor.Task = GameplayTask.None; actor.SuppressAcquire = 1; }
             if (actor.Moving != 0 && math.distancesq(actor.Destination, destination) < 0.01f) return;
@@ -147,11 +150,13 @@ namespace RTS.DOTS
         }
         public void Stop(Entity entity)
         {
+            if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out _)) return;
             actor.Moving = 0; actor.PathDirty = 0; EntityManager.SetComponentData(entity, actor); EntityManager.GetBuffer<GameplayWaypoint>(entity).Clear();
         }
         public void Attack(Entity entity, Entity target)
         {
+            if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out var body) || body.Health <= 0) return;
             CancelWork(entity); actor = EntityManager.GetComponentData<GameplayActor>(entity);
             actor.Target = target; actor.Task = target == Entity.Null ? GameplayTask.None : GameplayTask.Attack; actor.Windup = -1; actor.SuppressAcquire = 0;
@@ -159,6 +164,7 @@ namespace RTS.DOTS
         }
         public void SetStance(Entity entity, bool offensive)
         {
+            if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out _)) return;
             actor.Offensive = (byte)(offensive ? 1 : 0);
             if (!offensive) { actor.Target = Entity.Null; actor.Moving = 0; actor.State = GameplayState.Idle; actor.Task = GameplayTask.None; }
@@ -166,6 +172,7 @@ namespace RTS.DOTS
         }
         public void AssignConstruction(Entity entity, Entity structure)
         {
+            if (IsMatchOver) return;
             if (!TryGetWorker(entity, out _)) return;
             CancelWork(entity); var worker = EntityManager.GetComponentData<GameplayWorker>(entity); worker.Structure = structure; worker.Phase = WorkPhase.Constructing;
             EntityManager.SetComponentData(entity, worker);
@@ -173,11 +180,13 @@ namespace RTS.DOTS
         }
         public void SetDepot(Entity entity, Entity depot)
         {
+            if (IsMatchOver) return;
             if (!TryGetWorker(entity, out var worker) || worker.Carried <= 0) return;
             worker.Depot = depot; worker.Phase = WorkPhase.Depositing; EntityManager.SetComponentData(entity, worker);
         }
         public void Shelter(Entity entity, Entity hall)
         {
+            if (IsMatchOver) return;
             if (!TryGetWorker(entity, out _)) return;
             CancelWork(entity); var worker = EntityManager.GetComponentData<GameplayWorker>(entity); worker.Shelter = hall; worker.Phase = WorkPhase.ReturningToShelter;
             EntityManager.SetComponentData(entity, worker);
@@ -185,6 +194,7 @@ namespace RTS.DOTS
         }
         public void LeaveShelter(Entity entity, float2 origin, float2 exit)
         {
+            if (IsMatchOver) return;
             if (!TryGetWorker(entity, out _)) return;
             CancelWork(entity); var body = EntityManager.GetComponentData<CombatBody>(entity);
             body.Position = body.PreviousPosition = GameplayMath.NearestWalkable(origin, body.Radius, m_Origin, m_CellSize, m_Size, m_Walkable); body.Targetable = 1;
@@ -192,6 +202,7 @@ namespace RTS.DOTS
         }
         public bool BeginConstruction(Entity entity, float duration, int requestId)
         {
+            if (IsMatchOver) return false;
             if (!EntityManager.Exists(entity) || !EntityManager.HasComponent<GameplayConstruction>(entity)) return false;
             byte required = EntityManager.GetComponentData<GameplayConstruction>(entity).RequiredTechnology;
             if ((required == 1 && !CanUseArchery) || (required == 2 && !CanUseTowers)) return false;
@@ -199,12 +210,16 @@ namespace RTS.DOTS
         }
         public bool EnqueueTraining(Entity entity, int requestId, float duration)
         {
+            if (IsMatchOver) return false;
+            if (duration <= 0 || float.IsNaN(duration) || float.IsInfinity(duration)) return false;
             if (!EntityManager.Exists(entity) || !EntityManager.HasComponent<GameplayProducer>(entity)) return false;
+            if (!EntityManager.HasComponent<CombatBody>(entity) || EntityManager.GetComponentData<CombatBody>(entity).Health <= 0) return false;
             if (EntityManager.GetComponentData<GameplayProducer>(entity).RequiresArchery != 0 && !CanUseArchery) return false;
             EntityManager.GetBuffer<TrainingRequest>(entity).Add(new TrainingRequest { RequestId = requestId, Duration = math.max(0.01f, duration * TrainingMultiplier) }); return true;
         }
         public void AddResources(int wood, int gold, int meat)
         {
+            if (IsMatchOver) return;
             var wallet = Wallet; wallet.Wood += wood; wallet.Gold += gold; wallet.Meat += meat;
             EntityManager.SetComponentData(WalletEntity, wallet);
         }
@@ -219,11 +234,12 @@ namespace RTS.DOTS
             Dependency.Complete(); EntityManager.DestroyEntity(m_Actors); EntityManager.DestroyEntity(m_Resources);
             EntityManager.SetComponentData(WalletEntity, new PlayerWallet()); m_Events.Clear(); m_Damage.Clear(); m_Shots.Clear(); TickCount = 0;
             EntityManager.SetComponentData(WalletEntity, new PlayerResearch()); m_ResearchConfigured = false;
+            Outcome = MatchOutcome.Running; SurvivalNights = 0;
         }
 
         protected override void OnUpdate()
         {
-            if (!IsConfigured) return;
+            if (!IsConfigured || IsMatchOver) return;
             m_Combat ??= World.GetOrCreateSystemManaged<SwarmSimulationSystem>();
             if (m_Combat.Paused) return;
             float dt = math.min(SystemAPI.Time.DeltaTime, 0.05f);

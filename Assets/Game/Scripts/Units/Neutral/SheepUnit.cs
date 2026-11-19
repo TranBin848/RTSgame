@@ -21,7 +21,7 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public override bool IsPlayer => false;
     public ResourceType ResourceType => m_ResourceType;
-    public bool IsClaimed => IsDotsControlled && SwarmGameBridge.Instance.TryResourceClaimState(this, out var resource) ? resource.Claims >= resource.Capacity : m_IsClaimed;
+    public bool IsClaimed => IsDotsControlled && m_Bridge.TryResourceClaimState(this, out var resource) ? resource.Claims >= resource.Capacity : m_IsClaimed;
     public float InteractionRadius => m_InteractionRadius;
     public void ConfigureDotsActor(ref GameplayActor actor)
     {
@@ -31,6 +31,13 @@ public class SheepUnit : HumanoidUnit, IResourceNode
     }
     public void ApplyDotsGrazing(bool grazing) { SetGrazingAnimator(grazing); }
 
+    protected override void ResetRuntimeState()
+    {
+        base.ResetRuntimeState();
+        m_IsClaimed = false; m_IsGrazing = false; m_GrazingEndTime = 0;
+        ScheduleNextGrazing();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -39,7 +46,7 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public bool TryClaim()
     {
-        if (IsDotsControlled) return SwarmGameBridge.Instance.ClaimResource(this);
+        if (IsDotsControlled) return m_Bridge.ClaimResource(this);
         if (m_IsClaimed)
         {
             return false;
@@ -52,7 +59,7 @@ public class SheepUnit : HumanoidUnit, IResourceNode
 
     public void Release()
     {
-        if (IsDotsControlled) { SwarmGameBridge.Instance.ReleaseResource(this); return; }
+        if (IsDotsControlled) { m_Bridge.ReleaseResource(this); return; }
         m_IsClaimed = false;
     }
 

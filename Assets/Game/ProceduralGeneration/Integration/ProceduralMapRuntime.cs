@@ -11,7 +11,14 @@ public static class ProceduralMapRuntime
     public static void BeginComposition() { IsCompositionBlocked = true; }
     public static void CompleteComposition() { IsCompositionBlocked = false; }
     public static void FailComposition(string error) { IsCompositionBlocked = true; HasFailed = true; LastError = error; }
-    public static void EndComposition() { IsCompositionBlocked = false; }
+    public static void EndComposition()
+    {
+        IsCompositionBlocked = false;
+        IsActive = false;
+        IsReady = false;
+        HasFailed = false;
+        LastError = null;
+    }
 
     public static void Begin()
     {

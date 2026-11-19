@@ -1,0 +1,25 @@
+S6c wave checks — 2026-11-13
+Unity 6000.3.11f1; dt=0.02; Random.InitState(2026); night45; day1 3 waves of3/4/5.
+Before timer fix: seed1 strategic v3 wave starts0.02/16.10/34.20; twelve spawns; firstArrival22.08s;6/12 within10.
+After timer fix, before approach adjustment:
+
+waveStrategic1
+System.String: "PASS map=1/v3; dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=6/12; firstArrival=22.08s; peakAgents=12; retreatAlive=12; cleanupAfterDay=11.98s; perSpawn=0.02->25.84;2.04->28.66;4.06->22.08;14.10->40.66;16.12->42.68;18.14->35.38;20.16->none;30.20->none;32.22->none;34.24->none;36.26->none;38.28->none"
+
+waveLegacy1
+System.String: "PASS map=1/v1; dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=11/12; firstArrival=5.36s; peakAgents=12; retreatAlive=12; cleanupAfterDay=11.98s; perSpawn=0.02->5.36;2.04->8.74;4.06->11.96;14.10->25.18;16.12->22.12;18.14->21.92;20.16->26.24;30.20->37.40;32.22->37.54;34.24->38.50;36.26->none;38.28->43.26"
+
+waveApproach0
+System.String: "PASS map=0/v3; radius=20.13 gates=(-32.50, -3.50, 0.00)/(-11.50, -23.50, 0.00); dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=12/12; firstArrival=5.42s; peakAgents=12; retreatAlive=12; cleanupAfterDay=11.98s; perSpawn=0.02->5.42;2.04->8.18;4.06->8.58;14.10->20.24;16.12->22.26;18.14->21.76;20.16->25.56;30.20->34.32;32.22->37.62;34.24->37.96;36.26->41.66;38.28->42.40"
+
+waveLegacy0
+System.String: "PASS map=0/v1; dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=10/12; firstArrival=7.36s; peakAgents=12; retreatAlive=12; cleanupAfterDay=11.98s; perSpawn=0.02->7.36;2.04->10.02;4.06->7.70;14.10->20.24;16.12->24.56;18.14->22.08;20.16->26.86;30.20->none;32.22->39.66;34.24->37.98;36.26->none;38.28->42.00"
+
+waveApproach1
+System.String: "PASS map=1/v3; radius=20.13 gates=(-13.50, -23.50, 0.00)/(8.50, -3.50, 0.00); dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=12/12; firstArrival=5.50s; peakAgents=12; retreatAlive=12; cleanupAfterDay=11.98s; perSpawn=0.02->5.50;2.04->7.60;4.06->7.94;14.10->19.66;16.12->21.68;18.14->21.82;20.16->25.64;30.20->33.94;32.22->37.70;34.24->38.06;36.26->41.74;38.28->42.02"
+
+waveApproach1543
+System.String: "PASS map=1543/v3; radius=20.13 gates=(-11.50, 17.50, 0.00)/(-32.50, -3.50, 0.00); dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=9/12; firstArrival=5.82s; peakAgents=11; retreatAlive=11; cleanupAfterDay=11.98s; perSpawn=0.02->5.82;2.04->7.66;4.06->24.34;14.10->20.32;16.12->23.18;18.14->none;20.16->38.56;30.20->33.96;32.22->41.70;34.24->none;36.26->none;38.28->42.04"
+
+waveLegacy1543
+System.String: "PASS map=1543/v1; dt=0.0200; night=45.00s; spawned=12/12; waves=0@0.02s,1@14.10s,2@30.20s; arrivedWithin10=8/12; firstArrival=5.56s; peakAgents=12; retreatAlive=12; cleanupAfterDay=11.98s; perSpawn=0.02->5.56;2.04->10.96;4.06->none;14.10->20.50;16.12->21.54;18.14->21.62;20.16->25.94;30.20->34.28;32.22->37.76;34.24->none;36.26->none;38.28->none"

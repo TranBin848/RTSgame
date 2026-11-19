@@ -26,17 +26,26 @@ public class IdleWorkerPanelUI : MonoBehaviour
 
         if (m_Button != null)
         {
-            m_Button.onClick.RemoveAllListeners();
+            m_Button.onClick.RemoveListener(FocusNextIdleWorker);
             m_Button.onClick.AddListener(FocusNextIdleWorker);
         }
     }
 
-    void Start()
+    bool m_IsInitialized;
+    public void Initialize(GameManager game, CameraController camera)
     {
-        m_GameManager = GameManager.Get();
-        m_CameraController = FindFirstObjectByType<CameraController>();
-        RefreshIdleWorkers(true);
+        if (game == null || camera == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
+        {
+            if (m_GameManager != game || m_CameraController != camera) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
+        }
+        m_GameManager = game; m_CameraController = camera;
+
+        m_IsInitialized = true;
     }
+
+    void Start() { if (m_IsInitialized) RefreshIdleWorkers(true); }
 
     void OnDestroy()
     {
@@ -48,7 +57,7 @@ public class IdleWorkerPanelUI : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= m_NextRefreshTime)
+        if (m_IsInitialized && Time.time >= m_NextRefreshTime)
         {
             RefreshIdleWorkers();
         }
@@ -118,11 +127,6 @@ public class IdleWorkerPanelUI : MonoBehaviour
         {
             RefreshIdleWorkers(true);
             return;
-        }
-
-        if (m_CameraController == null)
-        {
-            m_CameraController = FindFirstObjectByType<CameraController>();
         }
 
         m_CameraController?.FocusWorldPosition(worker.transform.position);

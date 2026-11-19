@@ -29,6 +29,14 @@ public class DayNightCycleManager : MonoBehaviour
     public Color EnvironmentTint => m_GlobalLight != null ? m_GlobalLight.color * Mathf.Max(0.35f, m_GlobalLight.intensity) : Color.white;
     public float CycleNormalizedProgress => GetCycleNormalizedProgress();
 
+    RTS.DOTS.GameplaySimulationSystem m_Match;
+    public void InitializeMatch(RTS.DOTS.GameplaySimulationSystem match)
+    {
+        if (match == null) throw new System.ArgumentNullException(nameof(match));
+        if (m_Match != null && m_Match != match) throw new System.InvalidOperationException("Clock already belongs to another match.");
+        m_Match = match;
+    }
+
     private float m_PhaseTimer;
     private bool m_HasStarted;
 
@@ -47,8 +55,11 @@ public class DayNightCycleManager : MonoBehaviour
         m_HasStarted = true;
     }
 
-    void Update()
+    void Update() => Tick(Time.deltaTime);
+
+    void Tick(float deltaTime)
     {
+        if (m_Match?.IsMatchOver == true || deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
         if (ProceduralMapRuntime.IsCompositionBlocked || (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady))
         {
             return;
@@ -59,7 +70,7 @@ public class DayNightCycleManager : MonoBehaviour
             return;
         }
 
-        m_PhaseTimer += Time.deltaTime;
+        m_PhaseTimer += deltaTime;
         float phaseDuration = GetCurrentPhaseDuration();
         CurrentPhaseProgress = Mathf.Clamp01(m_PhaseTimer / phaseDuration);
         UpdateEnvironmentEffects();

@@ -44,6 +44,7 @@ namespace RTS.DOTS
         Entity m_PrimaryTarget;
         static readonly ProfilerMarker TickMarker = new("RTS.DOTS.Tick");
         public bool Paused { get; set; }
+        bool MatchOver => World.GetExistingSystemManaged<GameplaySimulationSystem>()?.IsMatchOver == true;
         public double LastTickMilliseconds { get; private set; }
         public int AgentCount => m_Agents.CalculateEntityCount();
         public int ProjectileCount => m_Projectiles.CalculateEntityCount();
@@ -97,6 +98,7 @@ namespace RTS.DOTS
 
         public Entity SpawnEnemy(float2 position, EnemySpawnSettings settings)
         {
+            if (MatchOver) return Entity.Null;
             if (!m_Configured || !SwarmMath.Fits(position, math.max(0.05f, settings.Radius), m_Origin, m_CellSize, m_Size, m_Walkable)) return Entity.Null;
             Entity entity = EntityManager.CreateEntity(m_AgentArchetype);
             EntityManager.SetComponentData(entity, new CombatBody
@@ -188,11 +190,15 @@ namespace RTS.DOTS
         }
 
         public void QueueDamage(Entity target, int amount, Entity source = default)
-        { if (amount > 0 && TryGetBody(target, out _)) m_Damage.Enqueue(new DamageEvent { Target = target, Source = source, Amount = amount }); }
+        {
+            if (MatchOver) return;
+            if (amount > 0 && TryGetBody(target, out _)) m_Damage.Enqueue(new DamageEvent { Target = target, Source = source, Amount = amount });
+        }
         public bool TryTakeExternalDamage(out ExternalDamage damage) => m_ExternalDamage.TryDequeue(out damage);
 
         public Entity SpawnProjectile(ProjectileRequest request)
         {
+            if (MatchOver) return Entity.Null;
             if (request.Target != Entity.Null && !TryGetBody(request.Target, out _)) return Entity.Null;
             Entity entity = EntityManager.CreateEntity(m_ProjectileArchetype);
             float speed = math.clamp(request.Speed, 0.1f, 200);
@@ -238,7 +244,7 @@ namespace RTS.DOTS
 
         protected override void OnUpdate()
         {
-            if (!m_Configured || Paused) return;
+            if (!m_Configured || Paused || MatchOver) return;
             using var marker = TickMarker.Auto();
             long started = Stopwatch.GetTimestamp();
             int bodyCount = m_Bodies.CalculateEntityCount(), projectileCount = ProjectileCount;

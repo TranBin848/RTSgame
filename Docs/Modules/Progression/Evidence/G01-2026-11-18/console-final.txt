@@ -1,0 +1,25 @@
+[1/2] console | where logType == "Error" or logType == "Exception" | select sequence logType message
+15 results
+sequence|logType|message
+4275|Error|The project path contains spaces, which may cause issues during usage of AI Game Developer. Please consider the move the project to a folder without spaces.
+4277|Error|The project path contains spaces, which may cause issues during usage of AI Game Developer. Please consider the move the project to a folder without spaces.
+4280|Error|The project path contains spaces, which may cause issues during usage of AI Game Developer. Please consider the move the project to a folder without spaces.
+4283|Error|The project path contains spaces, which may cause issues during usage of AI Game Developer. Please consider the move the project to a folder without spaces.
+4302|Exception|"SocketException: An existing connection was forcibly closed by the remote host.\r\n"
+4303|Error|fail: [23:18:12:7655] [AI] HubConnection The server connection was terminated with an error.
+4304|Error|fail: [23:18:12:7758] [AI] HubConnection Cloud mode: connecting to https://ai-game.dev/mcp. For a local MCP server, switch to Custom in AI Game Dev window. To stop seeing the error, please Stop the connection to MCP server in AI Game Dev window.
+4305|Exception|"SocketException: An existing connection was forcibly closed by the remote host.\r\n"
+4306|Error|fail: [23:18:12:7955] [AI] HubConnection HubConnection reconnecting due to an error.
+4307|Error|fail: [23:18:12:8127] [AI] HubConnection Cloud mode: connecting to https://ai-game.dev/mcp. For a local MCP server, switch to Custom in AI Game Dev window. To stop seeing the error, please Stop the connection to MCP server in AI Game Dev window.
+4308|Error|fail: [23:18:36:0935] [AI] HubConnection Received close message with an error: Connection closed with an error.
+4309|Error|fail: [23:18:36:0954] [AI] HubConnection Cloud mode: connecting to https://ai-game.dev/mcp. For a local MCP server, switch to Custom in AI Game Dev window. To stop seeing the error, please Stop the connection to MCP server in AI Game Dev window.
+4310|Exception|HubException: The server closed the connection with the following error: Connection closed with an error.
+4311|Error|fail: [23:18:36:5992] [AI] HubConnection HubConnection reconnecting due to an error.
+4312|Error|fail: [23:18:36:6165] [AI] HubConnection Cloud mode: connecting to https://ai-game.dev/mcp. For a local MCP server, switch to Custom in AI Game Dev window. To stop seeing the error, please Stop the connection to MCP server in AI Game Dev window.
+
+[2/2] console | where logType == "Warning" | group-by message | select key count
+3 results
+key|count
+This project uses Input Manager, which is marked for deprecation. To manage input in your project, use the Input System package instead.|1
+Material ‘Outline’ has _TexelSize / _ST texture properties which are not supported by 2D SRP Batcher. SRP batching will be disabled for 2D Renderers using this Material.”|2
+Parameter 'Attack' does not exist.|61

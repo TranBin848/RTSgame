@@ -8,21 +8,32 @@ public class StructureUnit : Unit, IResourceDepot
     private BuildingProcess m_BuildingProcess;
     private bool m_IsQuitting;
     public override bool IsBuilding => true;
-    private TilemapManager m_TilemapManager;
     public bool CanStoreWood => m_CanStoreWood;
     public bool CanStoreGold => m_CanStoreGold;
     public bool CanStoreMeat => m_CanStoreMeat;
+    public override void InitializeScene(GameManager game, TilemapManager map, SwarmGameBridge bridge)
+    {
+        bool firstBinding = !IsSceneInitialized;
+        base.InitializeScene(game, map, bridge);
+        if (firstBinding) UpdateWalkability();
+    }
+
+    public override void OnReturnedToPool()
+    {
+        if (m_Collider != null) m_Collider.enabled = false;
+        UpdateWalkability();
+        base.OnReturnedToPool();
+    }
     protected override void Start()
     {
         base.Start();
-        m_TilemapManager = TilemapManager.Get();
         UpdateWalkability();
     }
     public bool isUnderConstruction => m_BuildingProcess != null;
 
     void Update()
     {
-        if (ProceduralMapRuntime.IsCompositionBlocked) return;
+        if (!IsSceneInitialized || ProceduralMapRuntime.IsCompositionBlocked) return;
         if (IsDotsControlled)
         {
             m_BuildingProcess?.UpdateDotsPresentation();
@@ -44,9 +55,9 @@ public class StructureUnit : Unit, IResourceDepot
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
         if (m_IsQuitting)
         {
+            base.OnDestroy();
             return;
         }
         
@@ -57,6 +68,7 @@ public class StructureUnit : Unit, IResourceDepot
         }
 
         UpdateWalkability();
+        base.OnDestroy();
     }
     public virtual void OnConstructionFinished()
     {
@@ -114,7 +126,7 @@ public class StructureUnit : Unit, IResourceDepot
 
     void UpdateWalkability()
     {
-        if (m_TilemapManager == null || !m_TilemapManager.CanServePathfindingRequests())
+        if (m_UnitMap == null || !m_UnitMap.CanServePathfindingRequests())
         {
             return;
         }
@@ -123,8 +135,8 @@ public class StructureUnit : Unit, IResourceDepot
         if (col != null)
         {
             Bounds bounds = col.bounds;
-            Vector3Int min = m_TilemapManager.WalkableTilemap.WorldToCell(bounds.min);
-            Vector3Int max = m_TilemapManager.WalkableTilemap.WorldToCell(bounds.max);
+            Vector3Int min = m_UnitMap.WalkableTilemap.WorldToCell(bounds.min);
+            Vector3Int max = m_UnitMap.WalkableTilemap.WorldToCell(bounds.max);
 
             // Thêm padding để bao phủ chắc chắn cả những ô rìa
             min.x -= 2; min.y -= 2;
@@ -133,7 +145,7 @@ public class StructureUnit : Unit, IResourceDepot
             int width = max.x - min.x + 1;
             int height = max.y - min.y + 1;
 
-            m_TilemapManager.UpdateNodesInArea(min, width, height);
+            m_UnitMap.UpdateNodesInArea(min, width, height);
         }
         else
         {
@@ -149,7 +161,7 @@ public class StructureUnit : Unit, IResourceDepot
                 Mathf.RoundToInt(transform.position.y - halfHeight),
                 0);
 
-            m_TilemapManager.UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
+            m_UnitMap.UpdateNodesInArea(startPosition, buildingWidthInTiles, buildingHeightInTiles);
         }
     }
 }

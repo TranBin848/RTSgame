@@ -11,6 +11,14 @@ public sealed class GameFlowMenu : MonoBehaviour
     [SerializeField] GameObject m_OptionsPanel;
     [SerializeField] Slider m_VolumeSlider;
 
+    RTS.DOTS.GameplaySimulationSystem m_Match;
+    public void InitializeMatch(RTS.DOTS.GameplaySimulationSystem match)
+    {
+        if (match == null) throw new System.ArgumentNullException(nameof(match));
+        if (m_Match != null && m_Match != match) throw new System.InvalidOperationException("Menu already belongs to another match.");
+        m_Match = match;
+    }
+
     void Awake()
     {
         Time.timeScale = 1f;
@@ -22,6 +30,7 @@ public sealed class GameFlowMenu : MonoBehaviour
 
     void Update()
     {
+        if (m_Match?.IsMatchOver == true) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         if (m_OptionsPanel != null && m_OptionsPanel.activeSelf) Back();
         else if (m_PausePanel != null) { if (m_PausePanel.activeSelf) Resume(); else Pause(); }
@@ -33,8 +42,15 @@ public sealed class GameFlowMenu : MonoBehaviour
         SceneManager.LoadScene("ProceduralGame");
     }
 
+    public void ClosePausePanels()
+    {
+        if (m_PausePanel != null) m_PausePanel.SetActive(false);
+        if (m_OptionsPanel != null) m_OptionsPanel.SetActive(false);
+    }
+
     public void Pause()
     {
+        if (m_Match?.IsMatchOver == true) return;
         if (m_PausePanel == null) return;
         Time.timeScale = 0f;
         m_PausePanel.SetActive(true);
@@ -42,6 +58,7 @@ public sealed class GameFlowMenu : MonoBehaviour
 
     public void Resume()
     {
+        if (m_Match?.IsMatchOver == true) return;
         Time.timeScale = 1f;
         if (m_PausePanel != null) m_PausePanel.SetActive(false);
         if (m_OptionsPanel != null) m_OptionsPanel.SetActive(false);
@@ -49,6 +66,7 @@ public sealed class GameFlowMenu : MonoBehaviour
 
     public void ShowOptions()
     {
+        if (m_Match?.IsMatchOver == true) return;
         if (m_MainPanel != null) m_MainPanel.SetActive(false);
         if (m_PausePanel != null) m_PausePanel.SetActive(false);
         if (m_OptionsPanel != null) m_OptionsPanel.SetActive(true);
@@ -56,6 +74,7 @@ public sealed class GameFlowMenu : MonoBehaviour
 
     public void Back()
     {
+        if (m_Match?.IsMatchOver == true) return;
         if (m_OptionsPanel != null) m_OptionsPanel.SetActive(false);
         if (m_PausePanel != null) m_PausePanel.SetActive(true);
         else if (m_MainPanel != null) m_MainPanel.SetActive(true);

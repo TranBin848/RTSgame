@@ -1,0 +1,10 @@
+seed=1;policy=no-actions;dt=.05;normalHP;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0
+t=135.15;day=2;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=9774.0;spawned=12
+t=270.30;day=3;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=9326.0;spawned=27
+t=405.45;day=4;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8928.0;spawned=42
+t=540.60;day=5;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8382.0;spawned=57
+t=675.75;day=6;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8190.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8190.0;spawned=76
+outcome=Victory;elapsed=675.75;unlockSeconds=;gatheredW/G/M=0/0/0;depositedW/G/M=0/0/0;spentW/G/M=0/0/0;trainingAccepted=0;peakWorkers=0;peakSoldiers=0;expansion=not affordable yet;expansionAt=-1.00
+

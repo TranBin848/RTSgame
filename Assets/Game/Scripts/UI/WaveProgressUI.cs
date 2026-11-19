@@ -30,19 +30,20 @@ public class WaveProgressUI : MonoBehaviour
         SetRevealAmount(0f);
     }
 
-    void Start()
+    bool m_IsInitialized;
+    public void Initialize(EnemyWaveManager waves)
     {
-        if (m_WaveManager == null)
+        if (waves == null) throw new System.ArgumentException("Presentation dependencies are required.");
+        if (m_IsInitialized)
         {
-            m_WaveManager = FindFirstObjectByType<EnemyWaveManager>();
+            if (m_WaveManager != waves) throw new System.InvalidOperationException("Presentation already initialized with different dependencies.");
+            return;
         }
-
-        if (m_WaveManager != null)
-        {
-            m_WaveManager.OnWaveScheduleChanged += RebuildWaveIcons;
-            m_WaveManager.OnWaveStarted += HandleWaveStarted;
-            RebuildWaveIcons();
-        }
+        m_WaveManager = waves;
+        m_WaveManager.OnWaveScheduleChanged += RebuildWaveIcons;
+        m_WaveManager.OnWaveStarted += HandleWaveStarted;
+        RebuildWaveIcons();
+        m_IsInitialized = true;
     }
 
     void OnDestroy()

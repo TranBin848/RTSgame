@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
+public class GameManager : MonoBehaviour, IPlayerResourceWallet
 {
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
@@ -26,6 +26,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     private SwarmGameBridge m_Bridge;
     private TilemapManager m_Map;
     private GameSceneCompositionRoot m_Composition;
+    private bool m_HasStartedGameplay;
     public bool IsInitialized { get; private set; }
     public Transform[] ResourceContainers => new[] { m_TreeContainer, m_GoldStoneContainer, m_SheepContainer };
     public void Initialize(SwarmGameBridge bridge, TilemapManager map, CameraController camera,
@@ -48,6 +49,8 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     public int Gold => m_Bridge?.Gameplay != null ? m_Bridge.Gameplay.Wallet.Gold : m_Gold;
     public int Wood => m_Bridge?.Gameplay != null ? m_Bridge.Gameplay.Wallet.Wood : m_Wood;
     public int Meat => m_Bridge?.Gameplay != null ? m_Bridge.Gameplay.Wallet.Meat : m_Meat;
+    Camera ViewCamera => m_CameraController != null ? m_CameraController.ViewCamera : null;
+    Vector2 m_PlacementTouchStart;
     public bool IsPlacingStructure => m_PlacementProcess != null;
     public Unit ActiveUnit;
     public IReadOnlyList<Unit> SelectedUnits => m_SelectedUnits;
@@ -59,6 +62,21 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     private IResourceNodeLocator m_ResourceNodeLocator;
     private IResourceDepotLocator m_ResourceDepotLocator;
     public bool HasActiveUnit => ActiveUnit != null;
+
+    public bool TrySpawnProjectile(Projectile prefab, Unit owner, Unit target, int damage, Vector3 position)
+    {
+        if (prefab == null || owner == null || target == null || damage <= 0
+            || !owner.isActiveAndEnabled || !target.isActiveAndEnabled || !owner.IsTargetable || !target.IsTargetable
+            || owner.gameObject.scene != gameObject.scene || target.gameObject.scene != gameObject.scene
+            || ProceduralMapRuntime.IsCompositionBlocked || Time.timeScale <= 0) return false;
+        if (m_Bridge != null) return m_Bridge.TrySpawnProjectile(owner, target, damage, position, prefab);
+        // A missing DOTS dependency must not start a second, legacy damage writer.
+        if (owner.IsDotsControlled || target.IsDotsControlled) return false;
+        var projectile = RuntimeObjectPool.Spawn(prefab, position, Quaternion.identity, gameObject.scene);
+        projectile.Initialize(owner, target, damage, position);
+        return true;
+    }
+
     public UnityAction<IReadOnlyList<Unit>> OnSelectionChanged = delegate { };
     private bool m_IsSelectionPointerDown;
     private bool m_IsSelectionDragging;
@@ -67,15 +85,9 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     private float m_SelectionPointerDownTime;
     private Texture2D m_SelectionTexture;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         m_Composition = GetComponent<GameSceneCompositionRoot>();
-        if (m_Composition == null)
-        {
-            m_ResourceNodeLocator = new SceneResourceNodeLocator(m_TreeContainer, m_GoldStoneContainer, m_SheepContainer);
-            m_ResourceDepotLocator = new SceneResourceDepotLocator(() => m_PlayerStructures);
-        }
         m_SelectionTexture = new Texture2D(1, 1);
         m_SelectionTexture.SetPixel(0, 0, Color.white);
         m_SelectionTexture.Apply();
@@ -83,39 +95,21 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void Start()
     {
-        if (m_Composition != null && !m_Composition.IsReady) return;
-        if (m_Composition == null) InitializeLegacyDependencies();
+        if (m_Composition != null) return;
+        if (!IsInitialized) throw new System.InvalidOperationException("Initialize gameplay from scene composition before Start.");
+        BeginGameplay();
+    }
+
+    public void BeginGameplay()
+    {
+        if (m_HasStartedGameplay) return;
+        if (m_Composition != null && (!IsInitialized || m_Bridge == null || !m_Bridge.IsSceneBound))
+            throw new System.InvalidOperationException("Gameplay must begin after scene dependencies and actors are bound.");
         ClearActionBarUI();
         AddResources(100, 100, 100); // Starting resources for testing
         if (m_DayNightCycleManager != null)
             m_DayNightCycleManager.OnPhaseChanged += HandleDayNightPhaseChanged;
-    }
-    void InitializeLegacyDependencies()
-    {
-        m_Bridge = SwarmGameBridge.Instance;
-        m_Map = TilemapManager.Get();
-        m_CameraController = FindFirstObjectByType<CameraController>();
-        if (m_CameraController == null)
-        {
-            Debug.LogWarning("CameraController not found in scene. Automatically adding to Main Camera.");
-            m_CameraController = Camera.main.gameObject.AddComponent<CameraController>();
-        }
-
-        if (m_FogOfWarManager == null)
-        {
-            m_FogOfWarManager = FindFirstObjectByType<FogOfWarManager>();
-        }
-
-        // Cache HUD Canvas khi nó còn đang active ở Start
-        if (m_HUDCanvas == null)
-        {
-            Canvas mainCanvas = FindFirstObjectByType<Canvas>();
-            if (mainCanvas != null)
-            {
-                m_HUDCanvas = mainCanvas.gameObject;
-            }
-        }
-
+        m_HasStartedGameplay = true;
     }
     void OnDestroy()
     {
@@ -126,9 +120,11 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     [SerializeField] private GameObject m_HUDCanvas;
 
+    public bool IsMatchOver => m_Bridge != null && m_Bridge.Gameplay.IsMatchOver;
+
     void Update()
     {
-        if (m_Composition != null && !m_Composition.IsReady) return;
+        if (IsMatchOver || (m_Composition != null && !m_Composition.IsReady)) return;
         if (Input.GetKeyDown(KeyCode.F1))
         {
             ToggleHUD();
@@ -136,8 +132,8 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
         if (m_PlacementProcess != null)
         {
-            m_PlacementProcess.Update();
-            if (GameUtils.TryGetShortClickPosition(out Vector2 inputPosition))
+            m_PlacementProcess.Update(ViewCamera);
+            if (GameUtils.TryGetShortClickPosition(ref m_PlacementTouchStart, out Vector2 inputPosition))
             {
                 TryPlaceCurrentBuild(inputPosition);
             }
@@ -164,6 +160,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     {
         if (m_Composition != null && !IsInitialized) return;
         m_Bridge?.Register(unit);
+        if (m_PlayerUnits.Contains(unit) || m_PlayerStructures.Contains(unit as StructureUnit) || m_EnemyUnits.Contains(unit)) return;
         if (unit is WorkerUnit worker)
         {
             worker.Inject(m_ResourceNodeLocator, m_ResourceDepotLocator, this);
@@ -372,12 +369,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         return townHall != null;
     }
 
-    public bool CanBuild(BuildActionSo action) => action != null && action.StructureUnitPrefab != null
+    public bool CanBuild(BuildActionSo action) => !IsMatchOver && action != null && action.StructureUnitPrefab != null
         && (m_Bridge == null || m_Bridge.CanUsePrefab(action.StructureUnitPrefab.gameObject));
-    public bool CanTrainArchers => m_Bridge == null || m_Bridge.Gameplay.CanUseArchery;
+    public bool CanTrainArchers => !IsMatchOver && (m_Bridge == null || m_Bridge.Gameplay.CanUseArchery);
     public void StartBuildProcess(BuildActionSo buildAction)
     {
-        if (m_Composition != null && !m_Composition.IsReady) return;
+        if (IsMatchOver || (m_Composition != null && !m_Composition.IsReady)) return;
         if (!CanBuild(buildAction)) { ShowTextPopup("Research required", Color.red, Vector3.zero); return; }
         if (m_PlacementProcess != null)
         {
@@ -390,12 +387,12 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
     }
     void DetectClick(Vector2 inputPosition)
     {
-        if (Camera.main == null || GameUtils.iSPointOverUIElelement() || !GameUtils.IsScreenPositionInBounds(inputPosition))
+        if (ViewCamera == null || GameUtils.iSPointOverUIElelement() || !GameUtils.IsScreenPositionInBounds(inputPosition))
         {
             return;
         }
 
-        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(inputPosition);
+        Vector2 worldPoint = ViewCamera.ScreenToWorldPoint(inputPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
         bool isExploredPoint = m_FogOfWarManager == null || m_FogOfWarManager.IsWorldPositionExplored(worldPoint);
 
@@ -613,7 +610,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void UpdateSelectionInput()
     {
-        if (Camera.main == null)
+        if (ViewCamera == null)
         {
             return;
         }
@@ -676,7 +673,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void SelectUnitsInRectangle(Rect selectionRect)
     {
-        if (Camera.main == null || selectionRect.width <= 0f || selectionRect.height <= 0f)
+        if (ViewCamera == null || selectionRect.width <= 0f || selectionRect.height <= 0f)
         {
             return;
         }
@@ -689,7 +686,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
                 continue;
             }
 
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(unit.transform.position);
+            Vector3 screenPosition = ViewCamera.WorldToScreenPoint(unit.transform.position);
             if (screenPosition.z < 0f)
             {
                 continue;
@@ -945,7 +942,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         m_ActionBar.HideRequirements();
     }
 
-    void CancelBuildProcess()
+    public void CancelBuildProcess()
     {
         if (m_PlacementProcess == null)
         {
@@ -959,7 +956,7 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
 
     void TryPlaceCurrentBuild(Vector2 inputPosition)
     {
-        if (Camera.main == null || GameUtils.iSPointOverUIElelement() || !GameUtils.IsScreenPositionInBounds(inputPosition))
+        if (ViewCamera == null || GameUtils.iSPointOverUIElelement() || !GameUtils.IsScreenPositionInBounds(inputPosition))
         {
             return;
         }
@@ -969,6 +966,8 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
             return;
         }
         if (!CanBuild(m_PlacementProcess.BuildAction)) return;
+        if (ActiveUnit is not WorkerUnit worker || worker.CurrentState == UnitState.Dead) return;
+        if (m_Bridge != null && !m_Bridge.Gameplay.TryGetWorker(worker.DotsEntity, out _)) return;
 
         if (!m_PlacementProcess.TryFinalizePlacement(out Vector3 buildPosition))
         {
@@ -985,7 +984,9 @@ public class GameManager : SingletonManager<GameManager>, IPlayerResourceWallet
         new BuildingProcess(
             m_PlacementProcess.BuildAction,
             buildPosition,
-            (WorkerUnit)ActiveUnit
+            worker,
+            this,
+            m_Bridge
         );
 
         m_PlacementProcess = null;

@@ -1,0 +1,14 @@
+S8 Unity MCP verification, 2026-11-16
+Project E:/Unity project/RTSgame2026
+DOTS EditMode 64/64 Passed, 0Failed/0Skipped, 00:00:02.8412262
+Procedural EditMode 17/17 Passed, 0Failed/0Skipped, 00:00:07.0509617
+S8Validation: Fresh incl repeat init and 6 null/different DI rejects PASS before and after replay.
+Victory fixture: result visible; time0/nativePaused; menu/production/wallet/clock/wave gates PASS.
+Defeat fixture: same result/gates PASS.
+Actual Play again button -> Fresh PASS; terminal Main menu button -> actors/agents/wallet/goal0 -> Play PASS.
+Six scripted runs completed: seeds0,1,1543 x Economy/Military; all Victory day6,675.75s,76spawns,normalHP/no grants. See separate raw log and MatchFlow report.
+Evidence inspected: S8-defeat.png, S8-victory-final.png at1920x1080. S8-victory.png is stale paused render; excluded.
+Final readback: seed1, root matchWired=true, sceneProceduralGame, dirty=false, isPlaying=false,isPaused=false,isCompiling=false.
+Console: 0Exception sequence>4171. Known plugin project-path-spaces errors remain.
+Human S8 test: user explicitly deferred (Chưa test được, để mục này chờ). S8a complete, S8b/manual/balance PARTIAL.
+No Player/performance benchmark/S9 or D4 completion claim.

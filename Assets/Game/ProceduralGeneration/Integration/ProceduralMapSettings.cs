@@ -6,7 +6,7 @@ public sealed class ProceduralMapSettings : ScriptableObject
 {
     [Header("Map")]
     [SerializeField] MapLayoutPreset m_Preset;
-    [SerializeField, Min(4)] int m_RegionRadius = 8;
+    [SerializeField, Min(8)] int m_RegionRadius = 8;
     [SerializeField, Min(32)] int m_Width = 128;
     [SerializeField, Min(32)] int m_Height = 128;
     [SerializeField] int m_Seed = 1;

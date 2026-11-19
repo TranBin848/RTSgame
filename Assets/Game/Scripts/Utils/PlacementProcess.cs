@@ -25,7 +25,7 @@ public class PlacementProcess
         m_TilemapManager = tilemapManager;
         m_InitialPlacementPosition = initialPlacementPosition;
     }
-    public void Update()
+    public void Update(Camera camera)
     {
         if (m_PlacementOutline == null)
         {
@@ -37,7 +37,7 @@ public class PlacementProcess
             return;
         }
 
-        if (GameUtils.TryGetPointerWorldPosition(out Vector3 worldPosition))
+        if (GameUtils.TryGetPointerWorldPosition(camera, out Vector3 worldPosition))
         {
             m_InitialPlacementPosition = SnapToGrid(worldPosition);
             m_PlacementOutline.transform.position = m_InitialPlacementPosition;

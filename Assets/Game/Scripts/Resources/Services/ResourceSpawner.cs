@@ -21,68 +21,101 @@ public class ResourceSpawner : MonoBehaviour
     [SerializeField] private int m_MaxSpawnAttemptsPerItem = 100;
 
     private BoxCollider2D m_SpawnArea;
+    private GameManager m_Game;
+    private TilemapManager m_Map;
+    private SwarmGameBridge m_Bridge;
+    private bool m_Suppressed;
+    public bool IsInitialized { get; private set; }
+    public bool IsSuppressed => m_Suppressed;
 
     private void Awake()
     {
-        if (ProceduralMapRuntime.IsActive)
-        {
-            enabled = false;
-            return;
-        }
+        ConfigureSpawnArea();
+    }
 
+    private void ConfigureSpawnArea()
+    {
         m_SpawnArea = GetComponent<BoxCollider2D>();
         m_SpawnArea.isTrigger = true;
         gameObject.layer = 2; // Gán Layer là 2 (Ignore Raycast) để tia click đi xuyên qua
-
-        ClearExistingResources();
-        SpawnResources();
-
         m_SpawnArea.enabled = false; // Tắt collider sau khi dùng để tránh chặn click chuột vật lý
+    }
+
+    public void Initialize(GameManager game, TilemapManager map, SwarmGameBridge bridge)
+    {
+        if (game == null || map == null || map.WalkableTilemap == null || bridge == null || !bridge.IsInitialized)
+            throw new System.ArgumentException("ResourceSpawner requires game, map and an initialized bridge.");
+        if (bridge.gameObject != game.gameObject || game.gameObject.scene != gameObject.scene || map.gameObject.scene != gameObject.scene)
+            throw new System.ArgumentException("ResourceSpawner dependencies must belong to its scene and GameManager.");
+        if (IsInitialized)
+        {
+            if (m_Game != game || m_Map != map || m_Bridge != bridge)
+                throw new System.InvalidOperationException("ResourceSpawner already has different dependencies.");
+            return;
+        }
+        ConfigureSpawnArea();
+        ValidateConfiguration();
+        m_Game = game; m_Map = map; m_Bridge = bridge;
+        if (!m_Suppressed) GenerateResources();
+        IsInitialized = true;
+    }
+
+    private void ValidateConfiguration()
+    {
+        if (m_TreeCount < 0 || m_GoldStoneCount < 0 || m_SheepCount < 0 || m_MaxSpawnAttemptsPerItem < 1
+            || m_SpawnArea.size.x <= 0 || m_SpawnArea.size.y <= 0)
+            throw new System.InvalidOperationException("ResourceSpawner requires non-negative counts, positive attempts and area size.");
+        if ((m_TreeCount > 0 && (m_TreePrefab == null || m_TreeContainer == null))
+            || (m_GoldStoneCount > 0 && (m_GoldStonePrefab == null || m_GoldStoneContainer == null))
+            || (m_SheepCount > 0 && (m_SheepPrefab == null || m_SheepContainer == null)))
+            throw new System.InvalidOperationException("Every requested resource group requires its prefab and container.");
     }
 
     private void Update()
     {
-        if (ProceduralMapRuntime.IsActive) return;
+        if (!IsInitialized || m_Suppressed) return;
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            RegenerateResources();
+            TryRegenerateResources();
         }
     }
 
     public void DisableForProceduralGeneration()
     {
-        m_SpawnArea = GetComponent<BoxCollider2D>();
-        m_SpawnArea.enabled = false;
-        gameObject.layer = 2;
+        ConfigureSpawnArea();
+        m_Suppressed = true;
         ClearExistingResources();
         enabled = false;
     }
 
-    private void RegenerateResources()
+    internal void RestoreLegacyGeneration()
+    {
+        m_Suppressed = false;
+        enabled = true;
+    }
+
+    public bool TryRegenerateResources()
+    {
+        if (!IsInitialized || m_Suppressed || m_Game == null || m_Map == null || m_Map.WalkableTilemap == null
+            || m_Bridge == null || !m_Bridge.IsSceneBound || ProceduralMapRuntime.IsCompositionBlocked) return false;
+        ValidateConfiguration();
+        GenerateResources();
+        Debug.Log("[ResourceSpawner] Resources regenerated dynamically!");
+        return true;
+    }
+
+    private void GenerateResources()
     {
         m_SpawnArea.enabled = true;
-
-        ClearExistingResources();
-        SpawnResources();
-
-        m_SpawnArea.enabled = false;
-
-        // 1. Dựng lại lưới tìm đường A* từ đầu dựa trên tài nguyên mới sinh
-        var tilemapManager = TilemapManager.Get();
-        if (tilemapManager != null)
+        try
         {
-            tilemapManager.ReinitializePathfinding();
+            ClearExistingResources();
+            SpawnResources();
         }
-
-        // 2. Xóa cache định vị tài nguyên cũ và dừng công việc hiện tại của Worker tránh lỗi
-        var gameManager = GameManager.Get();
-        if (gameManager != null)
-        {
-            gameManager.ClearResourceNodeCache();
-        }
-
-        Debug.Log("[ResourceSpawner] Resources regenerated dynamically!");
+        finally { m_SpawnArea.enabled = false; Physics2D.SyncTransforms(); }
+        m_Map.ReinitializePathfinding();
+        m_Game.ClearResourceNodeCache();
     }
 
     private void ClearExistingResources()
@@ -113,18 +146,11 @@ public class ResourceSpawner : MonoBehaviour
 
     private void SpawnResources()
     {
-        var tilemapManager = TilemapManager.Get();
-        if (tilemapManager == null)
-        {
-            Debug.LogError("TilemapManager not found! Cannot spawn resources dynamically.");
-            return;
-        }
-
         Bounds bounds = m_SpawnArea.bounds;
 
-        SpawnResourceGroup(m_TreePrefab, m_TreeContainer, m_TreeCount, bounds, tilemapManager);
-        SpawnResourceGroup(m_GoldStonePrefab, m_GoldStoneContainer, m_GoldStoneCount, bounds, tilemapManager);
-        SpawnResourceGroup(m_SheepPrefab, m_SheepContainer, m_SheepCount, bounds, tilemapManager);
+        SpawnResourceGroup(m_TreePrefab, m_TreeContainer, m_TreeCount, bounds, m_Map);
+        SpawnResourceGroup(m_GoldStonePrefab, m_GoldStoneContainer, m_GoldStoneCount, bounds, m_Map);
+        SpawnResourceGroup(m_SheepPrefab, m_SheepContainer, m_SheepCount, bounds, m_Map);
     }
 
     private void SpawnResourceGroup(GameObject prefab, Transform container, int count, Bounds bounds, TilemapManager tilemapManager)
@@ -154,8 +180,10 @@ public class ResourceSpawner : MonoBehaviour
                 // Căn giữa ô gạch
                 Vector3 spawnPos = tilemapManager.WalkableTilemap.GetCellCenterWorld(tilePos);
                 
-                if (SwarmGameBridge.Instance != null) SwarmGameBridge.Instance.SpawnGameplay(prefab, spawnPos, Quaternion.identity, container);
-                else Instantiate(prefab, spawnPos, Quaternion.identity, container);
+                // Initial scene composition binds these views after the first navigation capture.
+                var view = m_Bridge.IsSceneBound ? m_Bridge.SpawnGameplay(prefab, spawnPos, Quaternion.identity, container)
+                    : Instantiate(prefab, spawnPos, Quaternion.identity, container);
+                if (view == null) continue;
                 
                 // Đồng bộ vật lý ngay lập tức để OverlapBox của ô tiếp theo nhận diện được vật thể vừa sinh ra
                 Physics2D.SyncTransforms();

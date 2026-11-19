@@ -1,0 +1,2082 @@
+[
+  {
+    "path": "D3D12\\D3D12Core.dll",
+    "bytes": 4725304,
+    "sha256": "625BD40005B1C3708695D5256ECF230D278E6B8EDBA5A88AF70F3D91324F3052"
+  },
+  {
+    "path": "D3D12\\d3d12SDKLayers.dll",
+    "bytes": 4930104,
+    "sha256": "C0730CC70D3250D3DE19C04C17845BA9E70EECAF502D684D1409195EBC5B5959"
+  },
+  {
+    "path": "MonoBleedingEdge\\EmbedRuntime\\mono-2.0-bdwgc.dll",
+    "bytes": 7828912,
+    "sha256": "9BB6FCAE95D7A361CF1A57808954FE214565447CD03FD96C92B3897D988D2AD5"
+  },
+  {
+    "path": "MonoBleedingEdge\\EmbedRuntime\\MonoPosixHelper.dll",
+    "bytes": 611240,
+    "sha256": "869EDF52CC6B0CD30C7838E151D82C6474A667967C99F7E13BA1DF990FE62616"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\2.0\\Browsers\\Compat.browser",
+    "bytes": 1605,
+    "sha256": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\2.0\\DefaultWsdlHelpGenerator.aspx",
+    "bytes": 60575,
+    "sha256": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\2.0\\machine.config",
+    "bytes": 29066,
+    "sha256": "E91782A27FA39FC6C1D6EE8B08529F5D35052310D0006034B878EB04B8F2AF30"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\2.0\\settings.map",
+    "bytes": 2622,
+    "sha256": "49C6160F9D54AF4270A3B4E997FC4A8301F79B9E2070118FA46DDBCBBC44F9A2"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\2.0\\web.config",
+    "bytes": 11635,
+    "sha256": "CF2B54339E069B9E42F7D6795EECBF562C50C1011F4CA8F65F578FE52D97FF92"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.0\\Browsers\\Compat.browser",
+    "bytes": 1605,
+    "sha256": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.0\\DefaultWsdlHelpGenerator.aspx",
+    "bytes": 60575,
+    "sha256": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.0\\machine.config",
+    "bytes": 33598,
+    "sha256": "E60AEC2C5115D65B3ACB3C55EA21576DBD770F579166C017125571E46AE560ED"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.0\\settings.map",
+    "bytes": 2622,
+    "sha256": "CE1DB1AD8A9512073164E3ECCDC193F7EDA036E1A9733CAEC4635DE21B2865C8"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.0\\web.config",
+    "bytes": 18802,
+    "sha256": "E38BB8CC68FE5B4EDECDFD288D094B9E8CED7629039B2A347682ABA0D8BD7492"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.5\\Browsers\\Compat.browser",
+    "bytes": 1605,
+    "sha256": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.5\\DefaultWsdlHelpGenerator.aspx",
+    "bytes": 60575,
+    "sha256": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.5\\machine.config",
+    "bytes": 34056,
+    "sha256": "EE950004B576FB28DC85F4B0435ED04BF96612DE2E8B53BE84D07AFE85A0DE6C"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.5\\settings.map",
+    "bytes": 2622,
+    "sha256": "CE1DB1AD8A9512073164E3ECCDC193F7EDA036E1A9733CAEC4635DE21B2865C8"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\4.5\\web.config",
+    "bytes": 18811,
+    "sha256": "C4CBDDD4FD9347B58CC5A72B36DC4BA1AD2BB699E65869D05CD3FB9865F0D824"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\browscap.ini",
+    "bytes": 311984,
+    "sha256": "4DDD50F31FB968F30BEDEFC253A46DC3F2890192D05CDAA9E0A64A056EEE807E"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\config",
+    "bytes": 3815,
+    "sha256": "5776169973A26A387B8B3E5C0F2301A7AB9A6DD7C7D3EFA22A96ABC47FBF8662"
+  },
+  {
+    "path": "MonoBleedingEdge\\etc\\mono\\mconfig\\config.xml",
+    "bytes": 25817,
+    "sha256": "0C56E34C69124510FA8C19E7B4C2CA6C1C4FF460AE19F798DD0CA035809E396D"
+  },
+  {
+    "path": "RTSgame2026_BurstDebugInformation_DoNotShip\\Data\\Plugins\\x86_64\\lib_burst_generated.txt",
+    "bytes": 684876,
+    "sha256": "50FA22FB54B310640B3B6BB200921F4D9F45DA643C1681FD6E5E2DF2C22D3020"
+  },
+  {
+    "path": "RTSgame2026_Data\\app.info",
+    "bytes": 26,
+    "sha256": "4F3F7197AABC7EEA0B18124A735733CCE51834B1A0F6A55956105BB51EC81151"
+  },
+  {
+    "path": "RTSgame2026_Data\\boot.config",
+    "bytes": 322,
+    "sha256": "179DD63D32B21369602CBC3504CBB12F472A34FED94179A7DE79C886D4F7A459"
+  },
+  {
+    "path": "RTSgame2026_Data\\globalgamemanagers",
+    "bytes": 222804,
+    "sha256": "186F43799A9CE933E591A5A8ADF33A0CE770D4FDDE81B01E72F8F84BE2E464DE"
+  },
+  {
+    "path": "RTSgame2026_Data\\globalgamemanagers.assets",
+    "bytes": 1157376,
+    "sha256": "CA5E759C472D9AD66753CD1993331B89D5B179F8EFA58EDB8A900B55D9BD2542"
+  },
+  {
+    "path": "RTSgame2026_Data\\globalgamemanagers.assets.resS",
+    "bytes": 5718240,
+    "sha256": "9D5CD592A38D46BD823A36366B1F5B84CF0A2B3ACE58DEC6A6374CA0D50FE6EC"
+  },
+  {
+    "path": "RTSgame2026_Data\\level0",
+    "bytes": 17912,
+    "sha256": "876703806203E5DDD779DFE14C9BA0EAD912F3C5DAAC55C8DE6DFBC78E1EC3B3"
+  },
+  {
+    "path": "RTSgame2026_Data\\level1",
+    "bytes": 1206492,
+    "sha256": "AC804024F2E2D3133B56322397938827F6959066DBE20CCBB0116EE606C599BD"
+  },
+  {
+    "path": "RTSgame2026_Data\\level2",
+    "bytes": 1174172,
+    "sha256": "B8086F90ACF96232EE8CD8A45BCDD94FAD5A34522B07FA8572696CBF482C5812"
+  },
+  {
+    "path": "RTSgame2026_Data\\level3",
+    "bytes": 1864,
+    "sha256": "F29C8DA9D38FDA1D10D011FECA3B8E25DD5EB11AA7740F0F26F3663CE22D52E8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Assembly-CSharp.dll",
+    "bytes": 270336,
+    "sha256": "52A4B151AF5CFA0DC11612F10F3C9EFF4BBB8F09A0B1A523BC3CA91736F89C7C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Assembly-CSharp.pdb",
+    "bytes": 143936,
+    "sha256": "4347E779F609D530A7F1D04B5F8977E4E10D562414E8043E98A07E1459809950"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\com.IvanMurzak.Unity.MCP.Runtime.dll",
+    "bytes": 193536,
+    "sha256": "EBEF75B6851EA8E243B01D118AA40086A004229DBD7A4742D75CBB47D1A74990"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\com.IvanMurzak.Unity.MCP.Runtime.pdb",
+    "bytes": 87440,
+    "sha256": "22645BCE5904C58220D0ECA9101468D677CEF7FEF7AE4AA6FC06FBAE7D04C652"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\com.IvanMurzak.Unity.MCP.TestFiles.dll",
+    "bytes": 14336,
+    "sha256": "EFB4C34B6F8840ED00523B84D199A9FF053BE9FD49F36A1CE2CAD2652D617655"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\com.IvanMurzak.Unity.MCP.TestFiles.pdb",
+    "bytes": 22132,
+    "sha256": "42114F5DAF5F4E5166D731E5ABC1BA8430468581DB5A00F5C0AF2C24BC77D19A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Extensions.Unity.PlayerPrefsEx.dll",
+    "bytes": 31232,
+    "sha256": "0A4DEFF0D0CDFEBED32BB668CD9DAD9D5873B7AEBC8749F93A716FFA18859604"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Extensions.Unity.PlayerPrefsEx.pdb",
+    "bytes": 32492,
+    "sha256": "33F0EF287D8D683F4AF7F5350A1F858DA2BA843A3F7B9C0824DC5500824FCBA0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\McpPlugin.Common.dll",
+    "bytes": 66560,
+    "sha256": "6CE8C6C41A1AFC0B5405004165098E0532D1613DA663670E6C1C53B893AD23A0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\McpPlugin.dll",
+    "bytes": 438272,
+    "sha256": "B5F2314C067EDC8F7D2EA9EDBBEDE3360011A6F79CCC971C78B03D289F0AEF1A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.Connections.Abstractions.dll",
+    "bytes": 40744,
+    "sha256": "F44503DDD0044163852B43E6BBB827846F3309540B06842C0DBF98726933424E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.Http.Connections.Client.dll",
+    "bytes": 121128,
+    "sha256": "C18029F7889D257E79A7973F3313FDD870CEC7D055EFA645688F6C5489D01445"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.Http.Connections.Common.dll",
+    "bytes": 31016,
+    "sha256": "5857F84A99DC89A8A31B87A1A47AD9BDC868D17EB8E030A7EC76AC14463D5963"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.SignalR.Client.Core.dll",
+    "bytes": 201000,
+    "sha256": "DF603A4581ADAEF09DE7BA35551BD612776DA3EE8578849A7A1D6F8DD1101F23"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.SignalR.Client.dll",
+    "bytes": 23848,
+    "sha256": "FEB664A39475C88ED103E9AB53EF21CEDFD0368B14BA6B11A5BA324D8C9B0734"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.SignalR.Common.dll",
+    "bytes": 44368,
+    "sha256": "4B3745A3647CFC35896A64B0417B072C4CF01E2AA9EA6556A48A5C7041DEEFFD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.AspNetCore.SignalR.Protocols.Json.dll",
+    "bytes": 39208,
+    "sha256": "E2C234DD82B4433C96C1EB1BFF9748E9BCEDE916DA8F88D22B003976A7A768B4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Bcl.AsyncInterfaces.dll",
+    "bytes": 19104,
+    "sha256": "136D5965CF4768E8420B547A8BDDEA882921F426C371833D558A858A2F0C235A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Bcl.TimeProvider.dll",
+    "bytes": 32432,
+    "sha256": "44CF869C35153C510505052AD85364F7591A791342BD5E4F52C8DC6DD181D84F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.CodeAnalysis.dll",
+    "bytes": 4706480,
+    "sha256": "AAB3674134122F9C04FCB55A2D1AF2D19342CF92A1E593159236DFBCE05DE59C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Caching.Abstractions.dll",
+    "bytes": 34576,
+    "sha256": "C2597940E5CA6D717B378456905FEC1945C30D7989D65F6A0E712A747DF0C85C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Configuration.Abstractions.dll",
+    "bytes": 30992,
+    "sha256": "01BC4348BE66184EE5C453157E078D11BE6451D7E684DB9D38035149CD2212D9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+    "bytes": 63648,
+    "sha256": "6C479C61BD03AC7CAC4421E5A5689359CB83634E06895EB2D93B4B6DF2773DC0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.DependencyInjection.dll",
+    "bytes": 96040,
+    "sha256": "E23DF94FC2BCA057BD88D87C18AFC22FB41281F41D3B38430C483EE6FC95D53B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Diagnostics.Abstractions.dll",
+    "bytes": 34600,
+    "sha256": "ADB1206B247F42FB5611D8798D9F44B7BE1BD6D2A6976D87FF95EF2E6C17B6DB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Features.dll",
+    "bytes": 29480,
+    "sha256": "DC32DBAA554E385DC503D47C11BB8E6AEAF8246F6FBFC2B43C575AD682DACEE6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.FileProviders.Abstractions.dll",
+    "bytes": 25864,
+    "sha256": "E6074CF1392C6D77D379EFCB241CC8E0AC984D27EBF16AD17B979BD49AB2B4C3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Hosting.Abstractions.dll",
+    "bytes": 54568,
+    "sha256": "D39CFC54D4B0419A5C05BBC4915553BB6295134C66F904AE546E8FDBCEC7C23D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Logging.Abstractions.dll",
+    "bytes": 67864,
+    "sha256": "79F67FF002712D6589370DB25F751D3F53FB49EF1A6D750D1C62419EF3A4392C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Logging.dll",
+    "bytes": 52896,
+    "sha256": "64C8CBE07B84A8B319EE37B444386C67308178517C86DE366A9A45C668CEEC23"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Options.dll",
+    "bytes": 68880,
+    "sha256": "4F80160A712EF065A64EC3C23E87746130462377FE39F82B35673D1567281001"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Microsoft.Extensions.Primitives.dll",
+    "bytes": 49936,
+    "sha256": "6D492E7919789C7AB3D4AFB5D2E5841CC0E2F28B07BF561BD1FCF8945E2170B3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Mono.Security.dll",
+    "bytes": 241152,
+    "sha256": "618009319DBF3AE374F9B5DC0D0522E1E1BDD172200C120A5471747B7991A584"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\mscorlib.dll",
+    "bytes": 4632064,
+    "sha256": "6C76E06E6D44CF0F39BF59E6A90770968B70093AD4C1572DFBC5E46E431C5FBF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\netstandard.dll",
+    "bytes": 90112,
+    "sha256": "6AE62E082DC494A2433984177F60CA4DB5FAE69B1F360A8B33754172B310B8C5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Newtonsoft.Json.dll",
+    "bytes": 691712,
+    "sha256": "A56146202232958F46BD6A28B5A7DA166AEA123EE0D646735A46E5C341DFBF1F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Newtonsoft.Json.pdb",
+    "bytes": 2174464,
+    "sha256": "17CBAB4D4207187ED94173C0D59D7A39FABED7C9035B73634C1F02188DD60168"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\R3.dll",
+    "bytes": 601600,
+    "sha256": "4AC9EC66B56F4CBD139E4C7F99A6E0DF6E4BB4C2707635880DF8DD04ACE291EB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\ReflectorNet.dll",
+    "bytes": 249344,
+    "sha256": "B5C9923F6DE05901132032F74B9CF75F081B4FC565605CAEFEB12B9E0128E25C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\RTS.DOTS.dll",
+    "bytes": 121344,
+    "sha256": "C22C5CDBB4B154F2BFE7B1F068D9E7DC08C0C16BEBEB8395941B1D84B9A1176D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\RTS.DOTS.pdb",
+    "bytes": 71176,
+    "sha256": "9FA08A8FCD0209150A94FDF4CC42241828983479C9F8A150E489FFFF7CF0A5DF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\RTS.ProceduralGeneration.Core.dll",
+    "bytes": 27648,
+    "sha256": "976EF676E607E1B912B41A487D20F71F32F76CA97B8903D2FEC9C1A71BF014CD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\RTS.ProceduralGeneration.Core.pdb",
+    "bytes": 30540,
+    "sha256": "26E28379024E1B37941CA6801606D7E78764BE8E458E1F83F082B8323CA65BBE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Buffers.dll",
+    "bytes": 4608,
+    "sha256": "762F8FDBE975E05B76BE5FE996C53CE7C75E4A2830F2F50B02A5948EF6BA0AEB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Collections.Immutable.dll",
+    "bytes": 198776,
+    "sha256": "1255194F6EC9C1874085CDAB24495FCD1430958018350D7B6630FD04B44BCB81"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.ComponentModel.Annotations.dll",
+    "bytes": 89992,
+    "sha256": "C46069E29AD23FEE7F5D2CED736FFEA27B0177F82341296D9AF6325ACF821C69"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.ComponentModel.Composition.dll",
+    "bytes": 257024,
+    "sha256": "0C3E81771A5FE9657BEA02887996DE72606C3CB247E4FBE413F743F40E2AF244"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Configuration.dll",
+    "bytes": 124928,
+    "sha256": "04907729E87A101E62D3A5C93CFA16688BEE745D05440D6DAA0C541964BE27AB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Core.dll",
+    "bytes": 1113088,
+    "sha256": "A5E7D47313DA0ECA0B92A901A30498F5E970916FAF63B70B74DD62B09760ED72"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Data.DataSetExtensions.dll",
+    "bytes": 29696,
+    "sha256": "498F14C37D83F946A47A79E01DE777E62F269EE9C3820F2026B59AB1C1B9222F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Data.dll",
+    "bytes": 2125312,
+    "sha256": "427478545CE66B632414CA838088EA073F250ED16B21C70005F48CB571350E47"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Diagnostics.DiagnosticSource.dll",
+    "bytes": 175280,
+    "sha256": "989B1797B5CACDF19E7130EDDD8AE51F0D79595D6020CBAF51910C1C3637CEC9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.dll",
+    "bytes": 2641920,
+    "sha256": "7019D6B6DBFA07CF30F62E7D3CCB969F70CBF001FD72112938FFB535C7F75D81"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Drawing.dll",
+    "bytes": 489984,
+    "sha256": "E182E688223ACEDB8135227E8FBFF17D5ED22F47F81141AA9CB96EF1AB9926FC"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.EnterpriseServices.dll",
+    "bytes": 44544,
+    "sha256": "84AF394AD863E31407EB2B9555CA7E96A9F1966630F5D7F0EEC54F0011F6BABC"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.IO.Compression.dll",
+    "bytes": 114688,
+    "sha256": "80421A67B4162A5F1B4AAD6A8327C6D1FB4B04DEDD39DAE14A770B812594FAE2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.IO.Compression.FileSystem.dll",
+    "bytes": 18432,
+    "sha256": "2730D2A27F9362259A406EA14727E5F0A71BC21A6825BE94F8623A84BD9F9C79"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.IO.Pipelines.dll",
+    "bytes": 84128,
+    "sha256": "3702E2403CF265588D1544A292EA17C01D337CDB91B5BDD64690894331345AD4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Memory.dll",
+    "bytes": 4608,
+    "sha256": "C4F030A2CBA7DA7CDCF493257C24560E203D355904AEE490D645A935842F834A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Net.Http.dll",
+    "bytes": 122880,
+    "sha256": "3CD3AC19050D5031C13644CD87958AD8029B79CE16C7747FAF3D0542E7FB45A3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Numerics.dll",
+    "bytes": 119296,
+    "sha256": "AC9224B32355A09F09B706CAB568384F64CF8116825C5911CEF1E13221C61C38"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Numerics.Vectors.dll",
+    "bytes": 12288,
+    "sha256": "1C3395A5F0C7AA066C19EE5F6FCD44B64F5BD4D76D476D5D62C4F0BB53517989"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Reflection.Metadata.dll",
+    "bytes": 466560,
+    "sha256": "C03B73B3AE01363313D151AD9FB77C3DFF378814BDEB12B9B435A6D50F40B833"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Runtime.CompilerServices.Unsafe.dll",
+    "bytes": 19256,
+    "sha256": "FD67ABC4C4AF10AFFBCD42FD68A2A7BC361B26714AFE6965D4D0D139459D8297"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Runtime.dll",
+    "bytes": 12288,
+    "sha256": "E0A7334B7BA419AAAB6BD3BB6992D693E689341A9178172C9BF99C2AA6A085BD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Runtime.Serialization.dll",
+    "bytes": 934400,
+    "sha256": "1152EF687DBE39E0CCB6B9A68F6501004415A729072DF29ABAB3BC7C66840217"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Security.dll",
+    "bytes": 320000,
+    "sha256": "2101A4DD4475285F96B1AC3BA1715A52AA8067690709E675CC49A9EB8ED901A4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.ServiceModel.Internals.dll",
+    "bytes": 215040,
+    "sha256": "888EC94A59C127854871B76AFA49FDCEFDF723C0F0B6FD78E87F73A8495B63B5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Text.Encoding.CodePages.dll",
+    "bytes": 760976,
+    "sha256": "EAF68151619943AB2DC46247F2D22A29DE0EA3805A56DE0C32B75AF12F89E74C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Text.Encodings.Web.dll",
+    "bytes": 79120,
+    "sha256": "5AD1F348223F281C34B9B857445A1C3412A430026EF049AEAC641C53A92408BE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Text.Json.dll",
+    "bytes": 608552,
+    "sha256": "F80C939BE592939CA3BBBC9DDF61BB137CE201EC38D70005915CB70ACF2D4CC3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Threading.Channels.dll",
+    "bytes": 75952,
+    "sha256": "31C7E3704C0477C53D9306362DC6ABE741088EFB7A7B4E46CDED0169CF7BB0B2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Threading.Tasks.Extensions.dll",
+    "bytes": 5120,
+    "sha256": "96150ABDCA5DF4446B376560E069D59B3550212DEDA8CBDD316272F6B834F597"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Transactions.dll",
+    "bytes": 35328,
+    "sha256": "F65DBC257D26A361DCC01EDD58BF3E542D186C8EE492A4F7A62B0DD7D59F7050"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Xml.dll",
+    "bytes": 3160064,
+    "sha256": "79194220ADFCF027A334C87B1ADCC6D07B9660A4061E04B3D9500C10D30F7D49"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\System.Xml.Linq.dll",
+    "bytes": 136704,
+    "sha256": "4F5D6BF313CBF091E7BFF83D07DD03ED93D0ECB3DDB025AE786AADD6B5F477FB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.2D.Tilemap.Extras.dll",
+    "bytes": 43008,
+    "sha256": "D98AEA79FF1BEB95F09BE5C207D6A3ABC97DD0E979E1B09DCF22B512671CB6F6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.2D.Tilemap.Extras.pdb",
+    "bytes": 36208,
+    "sha256": "72668ABCE8B0F942E93555A68F920535E0AD29174C79E3BC087B8E47E60561C7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.AI.Navigation.dll",
+    "bytes": 26112,
+    "sha256": "138ED81F7F30A7587E889A2414678790ACFB4F4366C44D23CB1366CFF89B1015"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.AI.Navigation.pdb",
+    "bytes": 28424,
+    "sha256": "03F0000732C6AF35ACFC5F3D80CA91057F33074B0D92C52E9AAE3199A450A8ED"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Analytics.DataPrivacy.dll",
+    "bytes": 9216,
+    "sha256": "8B4E19EBEDA30C1CBD128026A9BFB5225DFD8CFEF60CACE28250786312522193"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Analytics.DataPrivacy.pdb",
+    "bytes": 20440,
+    "sha256": "4628EAB57D229087422A4BB789BEC4EA7E6F367C0D124277C2AE21B374E564E0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Burst.dll",
+    "bytes": 335360,
+    "sha256": "94D3EDF8C552BC54EA677B4668C7704DCFD1D7A9DB15A5886D5692B0BC770805"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Burst.pdb",
+    "bytes": 221916,
+    "sha256": "B9A8F521E758EC82E3E55B6E84E0079E079551AF85A5E4F354268A3E8156C035"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Burst.Unsafe.dll",
+    "bytes": 5632,
+    "sha256": "9D9C1FF52411DECBEE5D9F0D1CD61EBEAA222077AA77A52101EA3DEBAFAE98E2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Collections.dll",
+    "bytes": 500224,
+    "sha256": "1E287607BC912E7018E68BBC3C2FF37FEFA36DE69BC48429FF32F9B09F341A7A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Collections.LowLevel.ILSupport.dll",
+    "bytes": 5120,
+    "sha256": "FF50383F807F9692E4913B97E47D86FEFCB8FAA33D6D48CD3E3FD6FC7FFB448D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Collections.pdb",
+    "bytes": 317480,
+    "sha256": "DBE06E55422C625BCB6A5E4BC3F3EA66370AA0F1831615A5B5A0D254886B75C2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Deformations.dll",
+    "bytes": 8192,
+    "sha256": "EADA52069D0E832D9C5667A88EECEEA0586CB5685ED83B637F06B3971197C256"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Deformations.pdb",
+    "bytes": 19072,
+    "sha256": "568B6F8F808C46A39E36F5A90C72D13A1901242F31C3BEEF523AAEF563BE7A4F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.dll",
+    "bytes": 1499648,
+    "sha256": "5401E8B595569EC56ECF64806D5EAF4565C5FDA9163F2C89E431FC11011D0CB5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.Hybrid.dll",
+    "bytes": 209920,
+    "sha256": "48F7EDFC302249F215519215CDD2B08C3CFAE88B71F218A281E4035673337E61"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.Hybrid.HybridComponents.dll",
+    "bytes": 19968,
+    "sha256": "280DF56CE5D62CDB7837CDCBA21763081840A67DA7581DC8091DF5FE8A90B7D4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.Hybrid.HybridComponents.pdb",
+    "bytes": 19744,
+    "sha256": "EA8BA709CE172150D26B1F6350C3D3A5E93913034CD5C11347D9CA95A491BEBD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.Hybrid.pdb",
+    "bytes": 111952,
+    "sha256": "5731B250C63DA8869A8AADEA122AAAC050F74B13E7A3D2CBD8101FF4629390AA"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.pdb",
+    "bytes": 703376,
+    "sha256": "6E8B0DE652B3C268249565CCDB7843B6764EC2D382BCDFA009C1C6E033F1A926"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.UI.dll",
+    "bytes": 12800,
+    "sha256": "D8BDEF95CC3A840C00246ECF97BC96F4C696ED27778458D9306A41AC3D4FA727"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Entities.UI.pdb",
+    "bytes": 22068,
+    "sha256": "95A6F1E9B9FF7891554DFF16EC33C9D476AC25CF5519E37C8B979A2D5457A7D0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.InternalAPIEngineBridge.002.dll",
+    "bytes": 48128,
+    "sha256": "E46AD7C3A1AEAED0A2337EC1AD17F32175F4D2AFE5A30CF9B39191ABADADF817"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.InternalAPIEngineBridge.002.pdb",
+    "bytes": 37604,
+    "sha256": "09EB4626BFA0FC9DCDEC8331C701D060D1780A9566D6C0BE7387BD6E2892C484"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.InternalAPIEngineBridge.004.dll",
+    "bytes": 4608,
+    "sha256": "E21728C645AF9075DCF9495D6DA485832ECB5DE65E0CE2AB23563079BF396C8F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.InternalAPIEngineBridge.004.pdb",
+    "bytes": 19104,
+    "sha256": "5C22BE25DB6D3B535B73502856EB19A0F34478B30CCDAC8B6653C661D0B03832"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Mathematics.dll",
+    "bytes": 886784,
+    "sha256": "4140BB8E01209D2170311C2D8839491E44E46062EFEDBAF1AA3F3A15F34D5D07"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Mathematics.Extensions.dll",
+    "bytes": 8704,
+    "sha256": "47FBDF8CD647BF88E0D9EDAB307240CB22FFDECFC2C6FBDDD082FEF64146FE81"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Mathematics.Extensions.Hybrid.dll",
+    "bytes": 5120,
+    "sha256": "1262C7819DA1DBCFE8BC8BF598270F5244FD2AFC276F8E3F2AD899C25785181C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Mathematics.Extensions.Hybrid.pdb",
+    "bytes": 19368,
+    "sha256": "234EF1A8234C127876D9F4816F296A880F0320311E5922F55BAD7E4B088EA594"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Mathematics.Extensions.pdb",
+    "bytes": 20968,
+    "sha256": "E08AD082EA7CDE287DDB73E1ECDEDE50A75B5D1533C7BFD485AE149C72B525AC"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Mathematics.pdb",
+    "bytes": 518444,
+    "sha256": "5159D571B083EE297D77CF11D990D1783F5E4D8492220ED79283CCF166BB4AF9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Multiplayer.Center.Common.dll",
+    "bytes": 10752,
+    "sha256": "B2B16E8DBF1680C06B0DE4ABAFA0B3757048A1151E331A1FC7DB6309EB85C7C5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Multiplayer.Center.Common.pdb",
+    "bytes": 20768,
+    "sha256": "06963E6209256861358750A479514C3325F5CA687D870295024A54C8956D1905"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.Dense.dll",
+    "bytes": 37376,
+    "sha256": "EAEE8956247EAE7FF8A61708DB5B1B746C3066E2B8FC5C5A5BFCA81AA829660C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.Dense.pdb",
+    "bytes": 43488,
+    "sha256": "D19384CC179F84B9B4DEC2E67A7CD81E74E8CC85BCA55057DC3ECEC48FDE3E4C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.dll",
+    "bytes": 7168,
+    "sha256": "A4A44CED9EF199DEA2D2BF2A4B5A7B757618EDCFBFC942F46196583FF3052223"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.pdb",
+    "bytes": 20212,
+    "sha256": "D5AE47181F18A9B5D268DD3E373D52F64F03D93099C789E7B630EFED320291D0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.Solvers.Lowlevel.dll",
+    "bytes": 27136,
+    "sha256": "54F49807A2205B654C1B3FC17D3CC6C0CC2F7C9CC8BD78BC0C35F42DB110F2FD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.Solvers.Lowlevel.pdb",
+    "bytes": 36728,
+    "sha256": "968A2479B785559A4E80538805F7CA43B6E376E5DB55FE30B1B75EE43F467062"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.Sparse.dll",
+    "bytes": 16384,
+    "sha256": "F2CA83C4FBC3B506984D621CAEB1351F93E9C83178AA627D2455B656898F62DB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Linear.Sparse.pdb",
+    "bytes": 26388,
+    "sha256": "03E21DC108EF1DDB631D6939CF21982477952AF69D47D3690C4ED59288B1ED87"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Memory.dll",
+    "bytes": 12800,
+    "sha256": "5A1D3954071924E8790CD9BBABB627407632A7DD0E0B6B70C1150F08F603E24E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Memory.pdb",
+    "bytes": 23520,
+    "sha256": "B8A45584F6F897C82C731F84C54DB94B6F95EDB947235E50E97AD4709CF003C5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Random.dll",
+    "bytes": 6144,
+    "sha256": "5C01DFEF99C1622E13038D4D32A57B2396AAB5BAE791581A175DFABF62A0EA24"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Numerics.Random.pdb",
+    "bytes": 19612,
+    "sha256": "1A2FD97ED314A3C9FCB24E338CD45844A8B21140427CA29D543D6C1BCCE0DA51"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Physics.dll",
+    "bytes": 730112,
+    "sha256": "E0704963434685B18017CDCD7FEEB091A9FDDB3A8A5F3B16297F18A41F052160"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Physics.Hybrid.dll",
+    "bytes": 181248,
+    "sha256": "50EA3862FA2EA277B9098A98016C1B5F2CC8332B4F392B0869CA2A2E5442DA06"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Physics.Hybrid.pdb",
+    "bytes": 71016,
+    "sha256": "2C494825C622425A5815883E905E557E956B2164AC848D84A9F948B46AE78B7C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Physics.pdb",
+    "bytes": 371680,
+    "sha256": "48833EE023251E2F706CEAC974B902F9E11EA851687F35E064FEE72E63B4DCDE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Profiling.Core.dll",
+    "bytes": 12288,
+    "sha256": "FD0E818208727B7C67D894C3F213CD801CAB89C14660AB73985879B6B54FFE50"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Profiling.Core.pdb",
+    "bytes": 22664,
+    "sha256": "04F4AE544EA26BDB1B383CDBADEB9DF6319C4E24B0746A358E77F8643234818E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+    "bytes": 9216,
+    "sha256": "1B5C3B4EAB3AE989B6FC5CE6D3079E4154730E82A96B6D7D100CE103C80A4009"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipeline.Universal.ShaderLibrary.pdb",
+    "bytes": 19512,
+    "sha256": "A2932C3023D83721AB8138A5700B6C7466A7027882E562AEFD6D4EAC812182F0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Core.Runtime.dll",
+    "bytes": 1288192,
+    "sha256": "D4E3360DDC9256BF254FC2D470A998679CDAF8221AD748DECA3FB11C63C3464A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Core.Runtime.pdb",
+    "bytes": 482924,
+    "sha256": "9247D01C8A3E7979B6974DD5A5B11BD685506DF288B5B726A034FC52F5F860D2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Core.Runtime.Shared.dll",
+    "bytes": 5632,
+    "sha256": "10DA82378BBD390A274383CEA9462406A07D762C452FDA6B70DD80F22878D643"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Core.Runtime.Shared.pdb",
+    "bytes": 19276,
+    "sha256": "FE68902476F87BCC12E4D964B03DEF07971BA833A546203DD93C3625B6A98A80"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Core.ShaderLibrary.dll",
+    "bytes": 4608,
+    "sha256": "1A1A6781383E05EC8F6BE7AF0883B22A792AE63F3CC8F39FFEA43D23DF421C3C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Core.ShaderLibrary.pdb",
+    "bytes": 19016,
+    "sha256": "43A5D61918980D2A3C495BC6739BF724F902F6AF1C014A12B73B94AAC50B56CF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.GPUDriven.Runtime.dll",
+    "bytes": 258560,
+    "sha256": "55C5D3BA40E0E849C88A4E08AF28921C9362189B3FE39CE9EA8C097988967AEF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.GPUDriven.Runtime.pdb",
+    "bytes": 132284,
+    "sha256": "CB0ED2F06EB7D41260F27D9B4CDDF5E2CC7DB62527EE17BB3C50CDAAEB2C0EBE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+    "bytes": 4608,
+    "sha256": "82D16D2F9A88D13D1E9F7A5A522F499CC7E67D2D748EED9E74F39FCADBE77309"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.pdb",
+    "bytes": 19008,
+    "sha256": "2D19D678F6EAC134076F5B1E069BFA3B3706F476723155811043B92CC06B9016"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.2D.Runtime.dll",
+    "bytes": 256000,
+    "sha256": "F2B4FADDBFE1391EEAC29A4B221ED7640022AD3B067F7A228E0095034FB90D85"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.2D.Runtime.pdb",
+    "bytes": 159724,
+    "sha256": "4824C03CCE09F5082C6DA015C8B22DA42222DCCEF39A1521BE98AC17AB055B4B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.Config.Runtime.dll",
+    "bytes": 5632,
+    "sha256": "DD9A46F89FAC424ECB4645AFAD4B7573ACDBC47859884C363B25E5E771891096"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.Config.Runtime.pdb",
+    "bytes": 19176,
+    "sha256": "0F975A7C2388F19243D8E56887AB09F261A46C3700430FB9DBECAF3D174E46C4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.Runtime.dll",
+    "bytes": 801792,
+    "sha256": "E9EEB88EC9930F2D89FC5DE33D4A50A638034EFB341EB06BCC96EC1C44E01685"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.Runtime.pdb",
+    "bytes": 327968,
+    "sha256": "D8FA8064574074EE0F77CE1ABAC0F46A486D3B3E06D879E545A1BFA5EC510DF7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.Shaders.dll",
+    "bytes": 4608,
+    "sha256": "AFDFBC1AE4910A31450587D07D451B98E99A1664725585DCDED301EFDCDE60AF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.RenderPipelines.Universal.Shaders.pdb",
+    "bytes": 19012,
+    "sha256": "7777A1EEAE3636B7BFDC6FD2A5BF19FB6AF893AE38E685EC118A4C4E2915BDB7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Scenes.dll",
+    "bytes": 101376,
+    "sha256": "E4924D3B69A7FC18A1720937C1D3AADE2F8F42126A79D49C1519F7892FA6C108"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Scenes.pdb",
+    "bytes": 56708,
+    "sha256": "B81127AB2A71F5A187155B4BAE6D58C3DF185236B24CD549DF5C4E93050D4AF1"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.ScriptableBuildPipeline.dll",
+    "bytes": 9728,
+    "sha256": "1F055415461E66AC15DA2E3AF32709481D8C3FB0166616C211AFA80A0D64102A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.ScriptableBuildPipeline.pdb",
+    "bytes": 21292,
+    "sha256": "8D8D9490BDC70B9684939F7E0F4CA0CAE7D3BF4E46694F8F5B14138066A10AE3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Serialization.dll",
+    "bytes": 186880,
+    "sha256": "259CC2D3EE5E526E073F78C4FF14F0BE29682CFA38A96047DD9AFAEC05E84159"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Serialization.pdb",
+    "bytes": 117792,
+    "sha256": "611E07F8869B2E38C30A632FEF9DEDE23599E3C622AFB82BB13C19CDC9247487"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Analytics.dll",
+    "bytes": 83968,
+    "sha256": "D21F6019DB78E9E55BDFD3B55605ACEAAC4D0D881AEA1C617B0DD3974831D76B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Analytics.pdb",
+    "bytes": 46616,
+    "sha256": "00FC6B30A970FA91C77ACFDED33E0F2609E2CB724B98948E6EA00CC48B5FAD0D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Analytics.dll",
+    "bytes": 5632,
+    "sha256": "78FEDF5FF939E478C47BA93878F4D32F6D7486998DCC0E11687F0F10714DB221"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Analytics.pdb",
+    "bytes": 19264,
+    "sha256": "ED7EB5997C975EA9D70BFFA24C4CA2BA2C4700F64512AF87EBE66694D490C96D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Components.dll",
+    "bytes": 11264,
+    "sha256": "104F7AF73E5D2EBFDEF2EC21F5E13FC4280B2CDC4B17385D168C87D512539064"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Components.pdb",
+    "bytes": 21084,
+    "sha256": "5C58DBE6FF9849461E7DD34CC72D59D2FB97493D193987EA848D9690BB755423"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Configuration.dll",
+    "bytes": 14848,
+    "sha256": "334C130141022D2690D3C03F58761001C74103014BD7F3AC5556B28280420E6E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Configuration.pdb",
+    "bytes": 23576,
+    "sha256": "6A35727BF8B81B5EB2868C6466DC369CDCF2913AA595B32C96A545327038720E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Device.dll",
+    "bytes": 7680,
+    "sha256": "2B5C4EEAA125A64452DAA22170AC77E151F63AE3098438117A644511F0B11F48"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Device.pdb",
+    "bytes": 20876,
+    "sha256": "1938E5CFF62F9E2B945E46B996ED53C1F17FA7E699690B4E8D2BB0D22F577C95"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.dll",
+    "bytes": 18432,
+    "sha256": "CE167E44B3DE3ACFF6640E503D901FCE14D10A28345A5FD531E0E16EF2CA4CCB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Environments.dll",
+    "bytes": 5632,
+    "sha256": "68F85036D92499FE87B3DDE88C25AAC6808F5F36B42C4F24A2E2978637C04D72"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Environments.Internal.dll",
+    "bytes": 5120,
+    "sha256": "DD643D1A10CAA77CD0D6C20172B37D142DF072E52B9D23074D240F8F2DAD6DB3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Environments.Internal.pdb",
+    "bytes": 19272,
+    "sha256": "0AB03AB799AAA34BD96922D2E6AB21C610A279B6F4D3AA9D01D0E6DDDB010BAE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Environments.pdb",
+    "bytes": 19356,
+    "sha256": "73D804A6529D941642E2EAC7632AD65E1692B491C6E54420F5997B286D3A57BB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Internal.dll",
+    "bytes": 78848,
+    "sha256": "BFAD4F0DA63FFB4B29D67C6CC7A8CE1FAF1B271F4D7BD3969D0D87A816D81C3C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Internal.pdb",
+    "bytes": 51008,
+    "sha256": "47FE5032E1BCE18A815BB8469DBF8276030545AD5DC51B7F16E5423F8840F0FD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Networking.dll",
+    "bytes": 8192,
+    "sha256": "6CE6D8F5E8C7FE3BC0699EC19589FD1872BACC5E2D8FDD9554D36A8363971230"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Networking.pdb",
+    "bytes": 20520,
+    "sha256": "247D63D562341A791233B8EF48E1C9BFF022D652C7997F1033D653CF864F1694"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.pdb",
+    "bytes": 24516,
+    "sha256": "3CCE329CAD5C3000D2E970312D74FA2860D3CB482AFF72A6BD8B3E4BA2241979"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Registration.dll",
+    "bytes": 19968,
+    "sha256": "B7A113BEB0B97AA821D1F2E2FFC81423C5CA25AC9874E9F7F7EE06DD2AC257D8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Registration.pdb",
+    "bytes": 23512,
+    "sha256": "67695BA5D2A455679C358D681F98CCC897974C37EAF6E47A606C91B09211C981"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Scheduler.dll",
+    "bytes": 13312,
+    "sha256": "F1E2F8D21FB4C711BBCE13B974A23C930DAED854746544E8D090F300D2845734"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Scheduler.pdb",
+    "bytes": 23188,
+    "sha256": "98E2213E76111AF972E2F779785FAEE1C586916D6A84DE5283A47A4FAAD01128"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Telemetry.dll",
+    "bytes": 8704,
+    "sha256": "55FD9D8D2A63A20C561BA593EAA1F47A7A443F79CE452570930966A5AB5BCD91"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Telemetry.pdb",
+    "bytes": 20936,
+    "sha256": "3D424FA2CF28F0B5C09A40B08F2AE3FE85847BA883EB082AB2CC07DD68C79780"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Threading.dll",
+    "bytes": 7168,
+    "sha256": "108638D3E2E620CA9B1E75735B30251532465A6E3D90175419CCA9B69E04C2E3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Services.Core.Threading.pdb",
+    "bytes": 20088,
+    "sha256": "8C3BE376AB61E5E6E40B3E50D35F2599C567DFAF57DDD05866ADA4B828B0EAC9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.TextMeshPro.dll",
+    "bytes": 506880,
+    "sha256": "DF23DF187262289E6E35CD426F6190E7B2F4176EADD97A7126F3619A022F644B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.TextMeshPro.pdb",
+    "bytes": 259732,
+    "sha256": "26AEC8E80A1C0121B58C56C8D11171B4EFE84F9C7197B63D7A8A20087870EC93"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Timeline.dll",
+    "bytes": 148992,
+    "sha256": "3FB226361CB2CF13B3424270028A85B79F50ACA1A60C0DCF2C04D0723B6BEBB9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Timeline.pdb",
+    "bytes": 93572,
+    "sha256": "E21139A35C062412D6EC3D2E2FF4EFD9D98C3BC4987F06B75160C8F3BE65A5EC"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Transforms.dll",
+    "bytes": 38912,
+    "sha256": "3F257EC9E248BCB152F95F748CAC668DDFB3238DE28C19EBBFCC519612F6102F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Transforms.Hybrid.dll",
+    "bytes": 29184,
+    "sha256": "3C1B4EF75075F9889B018C726C0BFD71EF86E339CEECC9187710F6DF86E48C57"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Transforms.Hybrid.pdb",
+    "bytes": 25376,
+    "sha256": "B6978A70234775D6C786EDCE3C7E2810EE33821E78B57C2EC58A5C5346526B6B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.Transforms.pdb",
+    "bytes": 29852,
+    "sha256": "160A12885CA387E277C9A6677B93DCBAFE2D90F4B7CE7EF954FFF78A522B5A99"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.UnifiedRayTracing.Runtime.dll",
+    "bytes": 111104,
+    "sha256": "34127CBD24A9DB22088F9BAA058B9638DA226390FCA443F02654CF5A8A8722ED"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\Unity.UnifiedRayTracing.Runtime.pdb",
+    "bytes": 62244,
+    "sha256": "D6D229BC6713B4EE34870095EB5FD5D799F02A1C10EC4993062367F085B69039"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AccessibilityModule.dll",
+    "bytes": 50088,
+    "sha256": "8A7D6800D62413423E9BB6EC2AF87EDA9BAE762B08AABC7345F18FB4C1D0EB4C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AccessibilityModule.pdb",
+    "bytes": 22684,
+    "sha256": "4F7287DC3BB85743F02D249AC87395FCA533960BEAC021269DB9B2E8EF23BE2E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AdaptivePerformanceModule.dll",
+    "bytes": 124328,
+    "sha256": "34316EFF025CCDC7BE76E3671A7BC1FC02D507C5734C3CE43E9A8844FC190DC4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AdaptivePerformanceModule.pdb",
+    "bytes": 52712,
+    "sha256": "DDC1982836EED5B98A2A5B85817533A97B4D101D8ACE59650B978B3C60F21080"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.Advertisements.dll",
+    "bytes": 41472,
+    "sha256": "05F54B6E898BF6EAB0266F8D2CBAD0A0742B6295F7785600040F1F668BBE6078"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.Advertisements.pdb",
+    "bytes": 37604,
+    "sha256": "C9EB4770F0CB2A49109C47D3B5DC3BE914D61C77B1ABEC5E33B7788DBE898B0F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AIModule.dll",
+    "bytes": 77232,
+    "sha256": "4AADD8305F54C7B5889D75BDE6750717FFB17DBF5DB3CB92FC2DD7521D117E32"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AIModule.pdb",
+    "bytes": 20628,
+    "sha256": "17875E76EE0EDD07CC25B8A69A32FBD83BAA0B68B2CDD26DAC2A8A5169C7A287"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AMDModule.dll",
+    "bytes": 21928,
+    "sha256": "280750E510454CB16478521E7FFF89B1724C8DDF66D4D703FC3FE159BA4B5EF0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AMDModule.pdb",
+    "bytes": 11996,
+    "sha256": "1473DC15D2215CFBFCC4DEDF463A4F0607E6E165783AE1A7E26F6C2604934A9B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AndroidJNIModule.dll",
+    "bytes": 121256,
+    "sha256": "E33FDF721A3B5DD680D870EBDFA73E94D9B44CEA45A4F6DA5C40FD11EEC5009E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AndroidJNIModule.pdb",
+    "bytes": 50196,
+    "sha256": "81643BC6B0C9A17116E28F28F3FC42197773F9F963DC27F33D347E1A1696A778"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AnimationModule.dll",
+    "bytes": 225192,
+    "sha256": "008753C45BEBF40ABBE9606307247AE7B3B3E67964E2542D0ED33F8E79CA392D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AnimationModule.pdb",
+    "bytes": 60740,
+    "sha256": "76F01C802CDC21B21CBD3F11B71641AED9DE7A47E2FF210B21A36461A54FE153"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ARModule.dll",
+    "bytes": 25512,
+    "sha256": "72731AEF55639C4365A8B45948BE27578CA239C2E38E22CC8E7A642F89DF946C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ARModule.pdb",
+    "bytes": 9976,
+    "sha256": "0D2F5692C76C85CE4D4BA3983FDF6FFCF1746F212123D93531DA9DCB0E43DA60"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AssetBundleModule.dll",
+    "bytes": 41896,
+    "sha256": "73B5FB9E8C41C8D9BE1DD7C1561FC87E5EA9C738B3DEA9398DCC2AE25162E9F9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AssetBundleModule.pdb",
+    "bytes": 14116,
+    "sha256": "C179EAAA36AF48CE784E9C58A83AFD93541C0CC50D1E7D14AE9E031F5C71DB93"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AudioModule.dll",
+    "bytes": 142248,
+    "sha256": "1DF8646D65F68E1723F8F016B00505BC3EA6622FE3E935B667A256B422956B3E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.AudioModule.pdb",
+    "bytes": 35052,
+    "sha256": "B63A2F95FF34C3A71CC021A28AB88B75D6A882E92E86A4BF2D77E8C47CD82539"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ClothModule.dll",
+    "bytes": 36272,
+    "sha256": "5982A557A201FF09A327D7207EA96B343D01C6CAC39F306D30D06ED97CAF1E71"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ClothModule.pdb",
+    "bytes": 10560,
+    "sha256": "BE3C77DB4796A224E3F138854B15149D96FF295ACD8EF46760E0D6CECDA14E77"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ClusterInputModule.dll",
+    "bytes": 28080,
+    "sha256": "5DF372F2C71F7492779EEE968C812AC8D4391DBA3D77D011E51B15992980B27B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ClusterInputModule.pdb",
+    "bytes": 9360,
+    "sha256": "77CAE2D2148923EA52248BA41349F19645BBB451E279595945DDE96D9242F2B5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ClusterRendererModule.dll",
+    "bytes": 26536,
+    "sha256": "61FD7640635D91D39DB90BD12622186F7113B84DD544739CC6C025945F6A2FEC"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ClusterRendererModule.pdb",
+    "bytes": 9968,
+    "sha256": "8D9D8ED47EBBCD553FC20FB4F4A0332B251A4A67B60EEA0827451EC218E5BC3D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ContentLoadModule.dll",
+    "bytes": 32680,
+    "sha256": "C4BCDF5F71715EFAC2F5C583C2D3922EC30B8CB4E416096D38AC18B8090649D3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ContentLoadModule.pdb",
+    "bytes": 11140,
+    "sha256": "364E934779CC82A05C8B55869861EA8EDFDD91988F3652F2724A95790D3CCB07"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.CoreModule.dll",
+    "bytes": 1982376,
+    "sha256": "7DE56D1259F25D8B0CFDC9F4C77030056886BB9AC119854D3155BD87A54C0AF7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.CoreModule.pdb",
+    "bytes": 572204,
+    "sha256": "59F7B00C179E2B1F2610987493620CCBE7B4D66A0FD551BBE52FCC153AD372A8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.CrashReportingModule.dll",
+    "bytes": 26544,
+    "sha256": "FC740563B94F895F4F837490FB5712EE0F1F4FF82B8B54FF718DDFE67058005D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.CrashReportingModule.pdb",
+    "bytes": 9972,
+    "sha256": "8410057774E0091B5DAF25BF1357CA500BBD8FA9563FBA4C2EAEA68AEF33E7CA"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.DirectorModule.dll",
+    "bytes": 41384,
+    "sha256": "8FED23041F8F5C24745F5CB89CF10D0CC31408CDCE2D3980234D952C88D11392"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.DirectorModule.pdb",
+    "bytes": 13888,
+    "sha256": "DA6FB123BF6FBC41BBD1617F5AC7916C650FA5E9191048832B4F3CAAB29C15D1"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.dll",
+    "bytes": 197032,
+    "sha256": "B12B4CFD78EF40386959E28966B9E96ED2F4B2BB438908994FA35731F1E1AEE7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.DSPGraphModule.dll",
+    "bytes": 31664,
+    "sha256": "FEDA09B22583DA44C76C1644A387FE6C1013A7741AE7C5BC6E43042A981F8EB6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.DSPGraphModule.pdb",
+    "bytes": 9568,
+    "sha256": "2C5F552394C328F7B3374B36B767A478F023E95A1E94CA4A57112E56CAD7B2E5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GameCenterModule.dll",
+    "bytes": 45480,
+    "sha256": "60C7B69CFA6AEF59A7C4D8DDFA20285D324CA0C1A332D4EF8A561257B0A7945F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GameCenterModule.pdb",
+    "bytes": 17452,
+    "sha256": "24A16AE030F5C8472F5FC8D8062540A281DA1EA1FE457576DD2CF33732CAA7D2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GIModule.dll",
+    "bytes": 24488,
+    "sha256": "2A24153E84E3EC1E0BF599637D487D55F623660E035BA40405CDA11F20621115"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GIModule.pdb",
+    "bytes": 9240,
+    "sha256": "1F85D4C1BED01A7CB79451B1E9046E03E6C0868969055B695517F34AEECC28DC"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+    "bytes": 14248,
+    "sha256": "04600AF02941031611BDC371F459C51CDEF344D4AE0FFD8F73763B083667FB42"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GraphicsStateCollectionSerializerModule.pdb",
+    "bytes": 9268,
+    "sha256": "C8D0E8E2F312B43EB06667FF148FFAB4DED2F050F781EFB69FBADCB742065C14"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GridModule.dll",
+    "bytes": 30120,
+    "sha256": "424FF6BFCFC3C27EA074809A5E77413E9F4C7BA379A81F8AE924A24BF033E6D2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.GridModule.pdb",
+    "bytes": 9996,
+    "sha256": "F4DC845DC5587535DCEC856D0D125A53F52A6CC961BF48133A7B1FF963644FB4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.HierarchyCoreModule.dll",
+    "bytes": 109480,
+    "sha256": "83BB4BFB97DA1B629EF0A4C262C08C33A7B7F9D5D36FDE0D0E30C2E5016E6E4E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.HierarchyCoreModule.pdb",
+    "bytes": 36404,
+    "sha256": "AF998B3C532BFF7F67C97830439E2F9F16C9D4348BCF3E6E4617F1B5DC06D657"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.HierarchyModule.dll",
+    "bytes": 102320,
+    "sha256": "F85E894C1588E95AF4DEAE1ED8704874FE0C0764700B05C178F1F60B2FACBDEE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.HierarchyModule.pdb",
+    "bytes": 47624,
+    "sha256": "105D070A1433FF628E6890F9E08C6510447BC6D8806AB477426F1B72A74616EA"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.HotReloadModule.dll",
+    "bytes": 24496,
+    "sha256": "516A300CFFD8C03B623225BF103FA07B7792FEB41064DFA3E17B2B631B8BF1E6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.HotReloadModule.pdb",
+    "bytes": 9240,
+    "sha256": "3A6538207D4DCBC147BDE8B3F81BD93618A157ADF37A92789E9F3B619E0E128C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.IdentifiersModule.dll",
+    "bytes": 14768,
+    "sha256": "228E6A653A1B4A0499A13267E06846773B6E3BE6B02BCFCA3838F8CFA4C9F7E5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.IdentifiersModule.pdb",
+    "bytes": 9504,
+    "sha256": "4540F05D520298C92D0699133A024FFA13E0E34FC1ED3F24358E64DC58C5F183"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ImageConversionModule.dll",
+    "bytes": 31144,
+    "sha256": "FA36E41F29EF7351E087286CA590305E8A613861E604CD93977514396FB544A1"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ImageConversionModule.pdb",
+    "bytes": 10580,
+    "sha256": "5EA96AE058404F5B9B10E73F55D46640697483F146F585101C432EB04C57D903"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.IMGUIModule.dll",
+    "bytes": 213424,
+    "sha256": "577712FB19F217F2E9DCC870E6CF430D4A5836C5C4A745AE89466877DFBB9745"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.IMGUIModule.pdb",
+    "bytes": 89996,
+    "sha256": "10866F541DA172C33E366789A9E93C08A2A55FC08308C21DEEBE69E2053884F6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InputForUIModule.dll",
+    "bytes": 57768,
+    "sha256": "978899464C6719184F17AC1AA28E4A20F6D74BC5E7219B8B885851398C0BC57B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InputForUIModule.pdb",
+    "bytes": 26072,
+    "sha256": "733D0A40B2C6195D6F7CA28B6BA4D5ED7E015130A983FEACEB174C8B6C183C8B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InputLegacyModule.dll",
+    "bytes": 45480,
+    "sha256": "392D2FC69B06F6102D3215FB4BF49A2ABE6B0256A2FF86AFDA9EA1BC61AEA0E2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InputLegacyModule.pdb",
+    "bytes": 15348,
+    "sha256": "333989036AD5917B16E93C3C3945AD90D802A1D63B647BFB78FEBDE6AAF594E1"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InputModule.dll",
+    "bytes": 28080,
+    "sha256": "096F29F53B639959D392EACF8F94B44CE12ADC8F2DA46D35F722E86CE0127916"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InputModule.pdb",
+    "bytes": 10612,
+    "sha256": "66126232616522E4242C2A43A479437ED2D8656296A65DB0BD4DA0E0A2FC5F13"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InsightsModule.dll",
+    "bytes": 14248,
+    "sha256": "D621D49E218476F49C2F70F66C9B5A3BC7E7484BA70DCF583E85C40DA2AD006C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.InsightsModule.pdb",
+    "bytes": 9564,
+    "sha256": "30E8D58F58BF07DBA97D60BC8CA8EAF69D77377CAD58D04A8097ABA0A74F32D7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.JSONSerializeModule.dll",
+    "bytes": 27056,
+    "sha256": "14FB2CB2AA2B460E1D8924368F8747C08E81F9D8DB90373CB6537A9ED3C82728"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.JSONSerializeModule.pdb",
+    "bytes": 9864,
+    "sha256": "1A2F2328EAD14E1AE51C31770AFCD51F539FDDB43A96D54B1AC7C4E2426EE891"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.LocalizationModule.dll",
+    "bytes": 27048,
+    "sha256": "D32820F90848F871C0E138969CF8B0B140B27FA6DAD42C61CE3FF753E3D235E7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.LocalizationModule.pdb",
+    "bytes": 9660,
+    "sha256": "5E4EFA5EBB97987D08BF35D1AB4CD2D1E04602F5895216149010491731601A09"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.MarshallingModule.dll",
+    "bytes": 83368,
+    "sha256": "8BFD18D750FDA9F8C3FBAF600EDD673034D9EDE0498F0C36C117ACFD24BD4A1D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.MarshallingModule.pdb",
+    "bytes": 14252,
+    "sha256": "3812B160E16A8B840037C5AB059CC0E68B89E03EEA162629D4B058B0365D2F93"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.MultiplayerModule.dll",
+    "bytes": 17840,
+    "sha256": "361E7815AB75F99817CBA6940D4CCED8864011ABD91432D0E4F918B827B91CF8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.MultiplayerModule.pdb",
+    "bytes": 10332,
+    "sha256": "DDD9AC47DF1E93260BDFF762D7883E69238E9EF1B5B49DC4DF6BB060B0368BD1"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.NVIDIAModule.dll",
+    "bytes": 40360,
+    "sha256": "FFAEF80F2422FFE3B293ABE93851C5D451C82C97AF6D9B8C70A266FF650D82F4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.NVIDIAModule.pdb",
+    "bytes": 16200,
+    "sha256": "8AE15E69E4687E95512265D44F75DAB4AD8C2C9154A3DA3CCC9F080A3D02CE96"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ParticleSystemModule.dll",
+    "bytes": 171440,
+    "sha256": "FEDF012EB30AB6B74B4B19F227733C621B619FF0F234C4D95B8BD04588A6AA0C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ParticleSystemModule.pdb",
+    "bytes": 40428,
+    "sha256": "A52D6610AFAC659D2A6A246664F69A5525BE17D57A704C1D5E13566751709BBB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.pdb",
+    "bytes": 12676,
+    "sha256": "66F04A254195102A9C030B1779231E218696D50646BC6123538672D3D7C9DF43"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PerformanceReportingModule.dll",
+    "bytes": 25000,
+    "sha256": "EE91E4FB6FBD4344014679F837CE65B4D5D8F9BCBF233098D70045445A8815BE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PerformanceReportingModule.pdb",
+    "bytes": 9448,
+    "sha256": "FE0F1B7C997D9B9525BA3F7BB8DAF0CA8DC8F4CB97D615A0C0C97966453F8375"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.Physics2DModule.dll",
+    "bytes": 578992,
+    "sha256": "614CCDC5623B52A6ED1C233E15DAA00A74C010298CE321C1091B076E7E89C14F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.Physics2DModule.pdb",
+    "bytes": 133648,
+    "sha256": "DA97EA85B90D0ACC8F5D1527DCD4AA17D33F196069718CF74A379B3153CF3BC0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PhysicsBackendPhysXModule.dll",
+    "bytes": 14256,
+    "sha256": "2CF5DB024B21BCFE7ED05BF2DD717193CF18EB5788DAD96471FA85FC71C98E42"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PhysicsBackendPhysXModule.pdb",
+    "bytes": 9260,
+    "sha256": "3EEAFDB1A8CBDFA5D4D7530D75E4B5AAE0F945ADFEE96BF76119345E3E95E042"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PhysicsModule.dll",
+    "bytes": 182184,
+    "sha256": "7A2817369078B9BFEB5A7D806A24CE135073B4459D87BC70A89E3308C3BB4575"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PhysicsModule.pdb",
+    "bytes": 45660,
+    "sha256": "95A7183D7D963A406D4360DA56EB91EA758E5BDB96937CBEB4AFCF3D0286E43B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PropertiesModule.dll",
+    "bytes": 133032,
+    "sha256": "42E9E2F41987A6BD61087378F7255F23CC9178FCD4E8100FEA6B93D6EF966BC0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.PropertiesModule.pdb",
+    "bytes": 62156,
+    "sha256": "0FC2B91FB4ECF7633F4E48F39969A37CFDBCF97BCEDA7A741C646CB06D9481BD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.RenderAs2DModule.dll",
+    "bytes": 25520,
+    "sha256": "A4EA39E89D9EA3D49879A97654743E382582BFF4499948D5E00B12762B2AE285"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.RenderAs2DModule.pdb",
+    "bytes": 9288,
+    "sha256": "5318CBA1CF6CC81D24EF2F9C025301167E14D8E8D2F7E4FE06BE7C26700A66E9"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+    "bytes": 24496,
+    "sha256": "063E3A7F293B3725B9C05719CA0FAC5A28EFB47396AD5F2A78EFAA88CC073BBF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.pdb",
+    "bytes": 9304,
+    "sha256": "B80654A4466684EF3442B7799DE5C4286C02CAA709990D923BE5B4280C24E9A0"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ScreenCaptureModule.dll",
+    "bytes": 26024,
+    "sha256": "CE286CA8FC641183B7159D0BAB488100E85C900E887908D9303DA6D50B11573E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ScreenCaptureModule.pdb",
+    "bytes": 9844,
+    "sha256": "45CDA027DBD3E8786141E399239962B941A12CCA17B0CB3F4F1A6B6DD6D628E4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ShaderRuntimeModule.dll",
+    "bytes": 25512,
+    "sha256": "BA43CBE234C150A447A9AEC35F8C554CB33F3AEF50E1C8442BA246F6AF98BD4F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ShaderRuntimeModule.pdb",
+    "bytes": 9280,
+    "sha256": "D0CDAB7ABAA7C75C55FB210E1D447A11B96194D453FAC694C156D9DED8CFCDD2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ShaderVariantAnalyticsModule.dll",
+    "bytes": 24488,
+    "sha256": "4875BAADA4EE36877FB0D77055DD808F05C918E9269F7ED33B6A9254648E791F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.ShaderVariantAnalyticsModule.pdb",
+    "bytes": 9364,
+    "sha256": "9B777BCF5AA160172F3AB6B868DD5CBA10E17E49A5C23160D081971A4DB5A31C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SharedInternalsModule.dll",
+    "bytes": 37800,
+    "sha256": "69E234A4A346106A23B8F82C936621D08E7CC407BA1CA793098613BB1078B44C"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SharedInternalsModule.pdb",
+    "bytes": 14252,
+    "sha256": "6E7C17A8CF1E6DAB8F8E1F032075F28D5B6667E7FACB4CD9198EDBDECD6679A5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SpatialTracking.dll",
+    "bytes": 12288,
+    "sha256": "52B8C29211D9B8353D8FBFE2B0F001B506ADE28E67202F1D18D8017D4DA3F8D7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SpatialTracking.pdb",
+    "bytes": 22064,
+    "sha256": "EB9184EBC51500A2A96BC604F0F247640D88F588376BB819C40D4B0B28FF587A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SpriteMaskModule.dll",
+    "bytes": 28592,
+    "sha256": "06DDDCFF8B20949215B46BCE3B7692379E16DC6A13CBF9899624FC1734F98FEE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SpriteMaskModule.pdb",
+    "bytes": 9572,
+    "sha256": "68F2253A62C816A6285BA118393C8C68D3EF59108BA25697995FF38D4E76ABB8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SpriteShapeModule.dll",
+    "bytes": 31664,
+    "sha256": "0F6F7F44A078B65A778281721F24CC2C413EB1203FD60AE03B1BDB11EE407DA3"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SpriteShapeModule.pdb",
+    "bytes": 10800,
+    "sha256": "3E6F73099F44E56298E42ED9D790009BA512828074162A4704F57BC3EE57EADE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.StreamingModule.dll",
+    "bytes": 25520,
+    "sha256": "E33BC70F2449CE288270DD33855E63C117ABF0EA9E4614DC737C7DAC7BA47BAB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.StreamingModule.pdb",
+    "bytes": 9316,
+    "sha256": "AC2778AE999F5E15BD66BAEB29D3088824888ADD097F5A143A51333679C78375"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SubstanceModule.dll",
+    "bytes": 29104,
+    "sha256": "B249790BD635E0640B97455A37A10B4A79177F6CF8E716E4266094C3E677BB0D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SubstanceModule.pdb",
+    "bytes": 11444,
+    "sha256": "59785686D7789313B74270FD95818B4BF4EBEDB26DED32E65102FAB71DF5AA32"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SubsystemsModule.dll",
+    "bytes": 41896,
+    "sha256": "F25824D57C5F394B514DF03BAB7ACE58D9E6EB8B55F52C5895404CB591EACF49"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.SubsystemsModule.pdb",
+    "bytes": 15984,
+    "sha256": "37B1F03AD73111B004126717DD21877236C9588D319CA9F477BBC77261C816CD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TerrainModule.dll",
+    "bytes": 133552,
+    "sha256": "3B3C39EA0383EFFEF29D600B203789B45BCD3F308F5BD67650057306A2DCC530"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TerrainModule.pdb",
+    "bytes": 33936,
+    "sha256": "F5FB803C669F1B8F35EDD9137355F537BED20D8CB24C4C59A0EE31C7AF6E805F"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TerrainPhysicsModule.dll",
+    "bytes": 25520,
+    "sha256": "F9D3CC596E1ED6C6AF31D1D874C64C44B0C1B6C37D4BE9552831A355A7AD5265"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TerrainPhysicsModule.pdb",
+    "bytes": 9704,
+    "sha256": "88F4764D83F0E16F986821CF523C947323DFF8AB9960D589CB743F18E88B5226"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TextCoreFontEngineModule.dll",
+    "bytes": 81832,
+    "sha256": "FF444583B096DAC46A7F166F4B31F4DFDEC8215DDB0C194A642E0D556022EE45"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TextCoreFontEngineModule.pdb",
+    "bytes": 29276,
+    "sha256": "84B2F2EA655553F0F337BE5625E277CF863D651613671082205E584B3E851976"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TextCoreTextEngineModule.dll",
+    "bytes": 331688,
+    "sha256": "7D22466042F90EBCF1B4EDD3B1899B7A648396736A835789A6B3682B9BF03EE6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TextCoreTextEngineModule.pdb",
+    "bytes": 151940,
+    "sha256": "E30DD94E259B3112FE06B081EECB2E05A5EF5FBDAA159D5FA165D9034E352896"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TextRenderingModule.dll",
+    "bytes": 39344,
+    "sha256": "08101957CBAC2A025D98722F19B7BE6397A493055D4FE1C71921DBAD1A6FF5F5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TextRenderingModule.pdb",
+    "bytes": 15344,
+    "sha256": "1AFE1BDACE588151F262300EF04A7A85DAA05F715B86D70B1F7F2EC7FB766771"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TilemapModule.dll",
+    "bytes": 58280,
+    "sha256": "20417BD172680153CEBBB8A627FE8F3FD1BCD53AD6ED7ECD66F406F3C25EE6BB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TilemapModule.pdb",
+    "bytes": 18976,
+    "sha256": "940C708337EDDF1F56A272B28BA7CF5FA5CCE76E652147DFABEA09CBB73DBD2A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TLSModule.dll",
+    "bytes": 31144,
+    "sha256": "1640AAE47DC1EB5B9B92B862DDC13CC11AC46F24AA0C3D4557D1D486B4C39A39"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.TLSModule.pdb",
+    "bytes": 9260,
+    "sha256": "B2B55000C8CD859CA7AB8B9A13D61F1BB17BBB5C12A4A600BD5484537670195E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UI.dll",
+    "bytes": 309248,
+    "sha256": "5F393A9D20B91BBE1C2A9C0A76CDDACDCAA669759CA82F470F5392250131313B"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UI.pdb",
+    "bytes": 190124,
+    "sha256": "2AECAA0A31F4B9061881A749B7D42C4D64DB17DCFDD9A860570B773CF3306D04"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UIElementsModule.dll",
+    "bytes": 2443184,
+    "sha256": "17665E29B26331DE4EA8D55A0CB179CAADED9392E502E830639746DE7A2C0FF8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UIElementsModule.pdb",
+    "bytes": 1094136,
+    "sha256": "2F0F5A075599E340EF9DED04C70AC437720AA29CE5EEBDE11B06ED42C2AEF50A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UIModule.dll",
+    "bytes": 49576,
+    "sha256": "FF6BD636BAE03824036846DE78FE508A93511AD9326026EE7D6045EA62304559"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UIModule.pdb",
+    "bytes": 13832,
+    "sha256": "D0DBBD886B934846FEE7834FA6BF1C8BD99FE91FC1E67800E72C8711202D9F35"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UmbraModule.dll",
+    "bytes": 24496,
+    "sha256": "B5CDCA42E0C9C6D76B0CD81AB74949AFE517463432498C65EF894F650BD1C8B6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UmbraModule.pdb",
+    "bytes": 9240,
+    "sha256": "EACE71129DC9024E4A71889B2FCB9BE685535FA5752B5880D1ECCDD8548DD796"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityAnalyticsCommonModule.dll",
+    "bytes": 35760,
+    "sha256": "E2C977632A6AF6C2494787D3E0270398AB76F4BDAEAFB8B4035996E0EE7AC743"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityAnalyticsCommonModule.pdb",
+    "bytes": 13720,
+    "sha256": "4AA7D55F7312DB8E797AE2514FD334F870044932E2E7F0E1B686FE7545DB7EB8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityAnalyticsModule.dll",
+    "bytes": 60848,
+    "sha256": "305FE38F6B4859AA68E69778DCE6B349E3E072AC2652DCC9AD5288C96593667A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityAnalyticsModule.pdb",
+    "bytes": 17964,
+    "sha256": "F389DE57FF0BFEF88E3D66921388D5F3F57544449E886B0E7E977AAA9BBDB6C2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityConnectModule.dll",
+    "bytes": 27568,
+    "sha256": "4D85E209723E6DC2DC88B13F4F0AB72D8F152B3DA8E3E50E2231EDDE14C10F79"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityConnectModule.pdb",
+    "bytes": 9836,
+    "sha256": "8080B4C2D2CCABC560ED5FF01F226D4731EB6E9193C981D7617C24E76545EAA2"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityConsentModule.dll",
+    "bytes": 16296,
+    "sha256": "07FEDC3B5D2EF2EC7050E46A25DFD23C5A3611CB6DE84ED214E081C71001D539"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityConsentModule.pdb",
+    "bytes": 9868,
+    "sha256": "259AEB0152121EA63A0DF20D48B30B5315894DD3DCE4ABFE6D2B00670E5222AE"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityCurlModule.dll",
+    "bytes": 26024,
+    "sha256": "4B127FD008A7396304CD6E213719AB629C4BA9D0D10DC23A5712AB49414BB58E"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityCurlModule.pdb",
+    "bytes": 9632,
+    "sha256": "F61773656CB55DFCE640567C39480E7470AE4B026CBB0CC0C4BB84B54433A689"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestAssetBundleModule.dll",
+    "bytes": 28592,
+    "sha256": "564CEDEB2E15DD24729F096ADEE910CDB2C9328755E8491BB3A9D99D914975F8"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestAssetBundleModule.pdb",
+    "bytes": 10812,
+    "sha256": "7E1E80C463FF553368A29555C6A8D8B787BA2D113D00FF34BB09FE4DC4DAB6A6"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestAudioModule.dll",
+    "bytes": 28072,
+    "sha256": "1E605943BE8901CC5D5489423039F9A43ED913BE8E56391D6AE38E1480659FEF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestAudioModule.pdb",
+    "bytes": 10616,
+    "sha256": "E917D33576E662B92DDD4974EAA9EE5CDF6342C96C8B873884AB11025A677DE7"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestModule.dll",
+    "bytes": 69040,
+    "sha256": "226EED6B554A778C6A1AF6154DA7A87563C3C113DD4B3B02D0344C4EB90C8D14"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestModule.pdb",
+    "bytes": 28308,
+    "sha256": "BE0E5A366C651B6324530A1779744FFDB66DCCB7AA5705697B2253F6C6505CDD"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestTextureModule.dll",
+    "bytes": 27568,
+    "sha256": "3E2DAE58B362347E1A13E9E72988756CFC273254B3F57F178B6363911545FE53"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestTextureModule.pdb",
+    "bytes": 10780,
+    "sha256": "CA00C2B532BEA93F660A34397932A124CB79EC1735E5277707DB25DA298B8B4A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestWWWModule.dll",
+    "bytes": 36272,
+    "sha256": "EF5F352D7910FD6E11FC7563523AD5E15389222D07AAAF8FF322634BCEBBDF4A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.UnityWebRequestWWWModule.pdb",
+    "bytes": 13684,
+    "sha256": "99BC4402231788CF5B2B4A4AF4872E7699CE20DFD7E298F67F58C728C08EF662"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VectorGraphicsModule.dll",
+    "bytes": 252336,
+    "sha256": "16699575D6A87F2937D4117E08DA2749452F30A53CE2B496DE065BCC0C73C810"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VectorGraphicsModule.pdb",
+    "bytes": 142692,
+    "sha256": "5A4214F64281EDF989008F772C6AD77FD50ED6C8CA7DFF53C8F92ABFAFA709ED"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VehiclesModule.dll",
+    "bytes": 31144,
+    "sha256": "947FB814D69E7A716038FA4A596EC8EE85AA22EF97AEE4DE9772C7BDF840E514"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VehiclesModule.pdb",
+    "bytes": 10484,
+    "sha256": "BBEE64F04CF5A1D94DB8DE79441067AF5BBF27DBC4C5A3C5D4D7754FE3DC8928"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VFXModule.dll",
+    "bytes": 78248,
+    "sha256": "D4069B37AF15C756AB95D6BC8480DE804486B5403EB21E4A31F7806545E147BB"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VFXModule.pdb",
+    "bytes": 18748,
+    "sha256": "4F9CC68D3917619F808EA9A83EAA41356E74328E2CD50BC6DDC505FBAA772403"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VideoModule.dll",
+    "bytes": 49072,
+    "sha256": "558FC72602C7E4DFFD5C1921E931047C6C9968009C3C3BCFABC9242E852D881D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VideoModule.pdb",
+    "bytes": 14128,
+    "sha256": "B42CD098068AB52E986760CD58D573DB262F7DB93E538E30C3B8B40CA739D367"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VirtualTexturingModule.dll",
+    "bytes": 42928,
+    "sha256": "A169678E1B5E1C50BCDCB52F15609AB3EEC8069F9A9AF80F0B67DCF150D98B16"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VirtualTexturingModule.pdb",
+    "bytes": 13488,
+    "sha256": "7F522A3CADDDD5B380264AA9B0AF867986705EE3C9041C4FD8108637ADE6D9E5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VRModule.dll",
+    "bytes": 31656,
+    "sha256": "1F592610BAF060823FFD2E5D7428FADAA69628DE5FC299F83918D791C9CF052D"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.VRModule.pdb",
+    "bytes": 10368,
+    "sha256": "3793F9D3DFCE9C7D80A28C503B288042371D7D277B5FA3DE277D8CA7EF77FD52"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.WindModule.dll",
+    "bytes": 26536,
+    "sha256": "6FAB10A1A8759596FBBCEB6831249B3158D007D6AB0F9E0584FB687C561202AF"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.WindModule.pdb",
+    "bytes": 9376,
+    "sha256": "A145711EB39883630786D3F6B204C9CF9D417D84B4EE9351960F0D01ED641211"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.XR.LegacyInputHelpers.dll",
+    "bytes": 25088,
+    "sha256": "20BA989A39A92B790CA5FC8B4CA6F9404CF37B78AC3CCCDE141867207443373A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.XR.LegacyInputHelpers.pdb",
+    "bytes": 28384,
+    "sha256": "B691376E40A20319A5481C7F6E7BCC281FA1B655020F6AECFA7E2B69C23F29DA"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.XRModule.dll",
+    "bytes": 88488,
+    "sha256": "2B930C1F84E8E30DF154DB52F1EFC0B2327401A75D1B91FFECC408A509922AF5"
+  },
+  {
+    "path": "RTSgame2026_Data\\Managed\\UnityEngine.XRModule.pdb",
+    "bytes": 24256,
+    "sha256": "2E31A69EBB0D9A3FC7A1822ED4584D654A738DD3FDC1DF925BAE971ECFDD4126"
+  },
+  {
+    "path": "RTSgame2026_Data\\Plugins\\x86_64\\lib_burst_generated.dll",
+    "bytes": 4213760,
+    "sha256": "EAEFFEF8B1E821F9165A94DB4569EAB1FAD1F85E3A37FDA0001DE0B38D3E717A"
+  },
+  {
+    "path": "RTSgame2026_Data\\Plugins\\x86_64\\lib_burst_generated.pdb",
+    "bytes": 23248896,
+    "sha256": "90E18607EA69E26CFA45B7299217CCD56D2AAFC5F04D83CABA8D63405BF7D8B6"
+  },
+  {
+    "path": "RTSgame2026_Data\\resources.assets",
+    "bytes": 1095128,
+    "sha256": "7C30D792539E9164FDCA9D619E97DD371979CCFC8ABA3390F06B466E143FACE5"
+  },
+  {
+    "path": "RTSgame2026_Data\\resources.assets.resS",
+    "bytes": 7952592,
+    "sha256": "264ED673F11D669802ECC32458DE2980C1DF23130B2119D867D15669A9CBC243"
+  },
+  {
+    "path": "RTSgame2026_Data\\Resources\\unity default resources",
+    "bytes": 5923140,
+    "sha256": "FB2492CD1AD7C38DDA8A4CE5F1A1FB57EDCFF44E3AE250B263E44BEAE3660EC4"
+  },
+  {
+    "path": "RTSgame2026_Data\\Resources\\unity_builtin_extra",
+    "bytes": 401736,
+    "sha256": "4532F22993FE9E2935C4247F7D4F11AC5B93EBD437C9B4148CB7839656979AB2"
+  },
+  {
+    "path": "RTSgame2026_Data\\RuntimeInitializeOnLoads.json",
+    "bytes": 10777,
+    "sha256": "1E7CDB3AEA1918B0CEEA86242C7311BD9B456DF23DF4DC67BA165C0900B8515F"
+  },
+  {
+    "path": "RTSgame2026_Data\\ScriptingAssemblies.json",
+    "bytes": 7242,
+    "sha256": "7F81B52C40211C3957F4A776B21828303314620E223C2AEEE1218A97C475A7BA"
+  },
+  {
+    "path": "RTSgame2026_Data\\sharedassets0.assets",
+    "bytes": 28052,
+    "sha256": "12FF26410A9260D9ABEE78C1EE8F09BFF3D425F1053829179138E6383972C22D"
+  },
+  {
+    "path": "RTSgame2026_Data\\sharedassets0.assets.resS",
+    "bytes": 1781760,
+    "sha256": "0B6D2A581D9ACA95DCABCD58BB48764C17BF75D034C80303015C2DAB68A0E90B"
+  },
+  {
+    "path": "RTSgame2026_Data\\sharedassets1.assets",
+    "bytes": 523704,
+    "sha256": "9C644DF64525CBD58B787AE5E6D3B8AA480998AA504997C75DA9285AB9C0CFE8"
+  },
+  {
+    "path": "RTSgame2026_Data\\sharedassets1.assets.resS",
+    "bytes": 8646480,
+    "sha256": "C7288A5C13C1CF8494A948F05275B10A28F06D5EE5119B233F990B7C3ED4737D"
+  },
+  {
+    "path": "RTSgame2026_Data\\sharedassets2.assets",
+    "bytes": 10905,
+    "sha256": "E2B87432BE942B6F78716F6007FFDD2D28828F4ADDF15ED078C902876C34ED5E"
+  },
+  {
+    "path": "RTSgame2026_Data\\sharedassets3.assets",
+    "bytes": 1281,
+    "sha256": "F8DC0910C6CB22DE9A6FDC15CE6774022841A104E0B24590AAADCBFB1CFA4800"
+  },
+  {
+    "path": "RTSgame2026_Data\\StreamingAssets\\EntityScenes\\scene_info.bin",
+    "bytes": 308,
+    "sha256": "1D0968BF4B3E6EB4DB3B6C21420B6B123CF8E7D5A0E9D6976DC6046614939D48"
+  },
+  {
+    "path": "RTSgame2026_Data\\StreamingAssets\\UnityServicesProjectConfiguration.json",
+    "bytes": 1203,
+    "sha256": "9339A9309CD281E010EFA93E52BF7C90FBD8C118C05D4E64ED2D7B29AC07CDEF"
+  },
+  {
+    "path": "RTSgame2026.exe",
+    "bytes": 667648,
+    "sha256": "E3852A92C8D4350B2595C7086432A3350E25D7141FD6097BCC47D5F2D368A522"
+  },
+  {
+    "path": "UnityCrashHandler64.exe",
+    "bytes": 1674152,
+    "sha256": "10369E4E3902B03E7FAFA9712CB2524D83BAD349983FC9A9B79BCAE5BD9366D5"
+  },
+  {
+    "path": "UnityPlayer.dll",
+    "bytes": 83737008,
+    "sha256": "4EB8A6554D3A67ABE9E6E6A90FCC94129FDD008EF19448FC15AE12326472E7C6"
+  },
+  {
+    "path": "WinPixEventRuntime.dll",
+    "bytes": 58368,
+    "sha256": "81ADCFD8253C3489BE720DA7E30F16004DC9A1F02A8B418C6C3AEF4993032E6D"
+  }
+]
