@@ -1,5 +1,9 @@
 # Progression — cách chạy baseline S0
 
+**Cấu hình sau G2 ngày19/11:** `MainMenu` → `ProceduralGame` dùng Hall1600HP, vẫn sống5đêm/thắngngày6; prefabTownHall và SampleScene không đổi. Đây là shortlist để kiểmG3, chưa xác nhận mọiseed đều không tựthắng. [G2 report/recipe/restore](G2-PressurePilot.md). Runner tạm đãgỡ, có thể Play bìnhthường; các lệnh harnessG01 bên dưới cần baseline10000 đãđóngbăng, không chạy thẳng vào trận1600 rồi trộn số liệu.
+
+**Harness G0–G1, chốt19/11:** [MeasurementContract](G01-MeasurementContract.md) mô tả paused Ready Play, scene mới/seed, class G01Playtest và bốn method policy, khôi phục Seed=1/thoát Play. Kiểm raw offline từ project root: `node Tools/SummarizeG01.mjs --complete --compact`. [Báo cáo và giới hạn](G01-Validation.md) tách pilot/fail, matrix trước guard và self-check presentation sau guard; không chạy harness này để đo FPS hoặc tiếp tục trận người dùng đang chơi.
+
 **Bàn giao17/11:** Play MainMenu→ProceduralGame, chọn TownHall/nghiên cứu/build/train như cũ; sống5đêm→Victory ngày6, mất hall cuối→Defeat, Play again/Main menu reset trận. DI UI/fog/input hiện được composition cấp; không gọi Get/Instance trong consumer mới. Windows build đã test ở `.utmp/s9-build-2026-11-17/RTSgame2026.exe`, cần giữ Data đi kèm. Cách tái lập smoke/perf và giới hạn xem [S9](S9-Acceptance.md); kiểm map/research config qua Inspector trước thay số. Không nâng pipeline để chạy. Các trạng thái manual-chờ phía dưới là lịch sử trước user xác nhận17/11.
 
 **S8 —16/11:** ProceduralGame hiện có objective sống5đêm, thắng khi sang ngày6, thua khi mất hall cuối. Result chặn lệnh, có Play again/Main menu; trận mới reset ví/research. [MatchFlow/cách chạy và playtest](../MatchFlow/Architecture.md). Manual S8 đang chờ theo người dùng, chưa nghiệm thu balance.

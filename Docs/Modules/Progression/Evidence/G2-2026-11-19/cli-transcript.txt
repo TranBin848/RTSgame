@@ -1,0 +1,959 @@
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: candidate set in memory before Awake",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {},
+    "dialogs": [
+      {
+        "id": "265452",
+        "pid": 11344,
+        "title": "Running managed callbacks",
+        "message": "Initializing InitializeOnLoad Types",
+        "buttons": []
+      }
+    ]
+  },
+  "errors": [
+    {
+      "code": "AWAITING_INPUT",
+      "message": "The Unity Editor is blocked by a modal dialog: \"Running managed callbacks\": Initializing InitializeOnLoad Types []. Answer it in the editor, or with `unity-mcp-cli dialog --press <button>`."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "error": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor."
+    },
+    "httpStatus": 503,
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor.",
+      "httpStatus": 503
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: candidate set in memory before Awake",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "error": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor."
+    },
+    "httpStatus": 503,
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor.",
+      "httpStatus": 503
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: startup frame",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: \"schema=G2-v1;hallMax=10000;runId=20261119T093931968-hp10000-control-1;configId=72594D7C7743BB376D040CF5D4B42CD58CE37362AE85AD09F4B7B5DE2B7BA2EC;mapSeed=1;waveSeed=8001;policy=control;dt=.05;normalHP;noResourceGrant;objective=5nights\\r\\nt=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0\\r\\nt=135.15;day=2;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=9774.0;spawned=12\\r\\nt=270.30;day=3;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=9326.0;spawned=27\\r\\nt=405.45;day=4;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8928.0;spawned=42\\r\\nt=540.60;day=5;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8382.0;spawned=57\\r\\nt=675.75;day=6;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8190.0;spawned=76\\r\\nt=675.75;day=6;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=8190.0;spawned=76\\r\\nledger=PASS;researchSpend=0/0/0;trainSpend=0/0/0;buildSpend=0/0/0;attacks=0;firstAttack=-1;rallyCommands=0;lineArrivals=47;hallAttackers=36;retreatBeforeLine=31;assignmentAccepted=0;noNode=0;damageAttribution=unavailable;gather=positiveCargoDeltaSameType\\r\\noutcome=Victory;elapsed=675.75;unlockSeconds=;gatheredW/G/M=0/0/0;depositedW/G/M=0/0/0;spentW/G/M=0/0/0;trainingAccepted=0;peakWorkers=3;peakSoldiers=1;expansion=not attempted (control);expansionAt=-1.00\\r\"",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: exit requested",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "<>f__AnonymousType0(System.Int32,System.Int32,System.Boolean,System.Boolean): {}\nhallMax: 10000\nseed: 1\nplaying: false\ndirty: false",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: candidate set in memory before Awake",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {},
+    "dialogs": [
+      {
+        "id": "789388",
+        "pid": 11344,
+        "title": "Running managed callbacks (busy for 13s)...",
+        "message": "Processing InitializeOnLoadMethod Attributes",
+        "buttons": []
+      }
+    ]
+  },
+  "errors": [
+    {
+      "code": "AWAITING_INPUT",
+      "message": "The Unity Editor is blocked by a modal dialog: \"Running managed callbacks (busy for 13s)...\": Processing InitializeOnLoadMethod Attributes []. Answer it in the editor, or with `unity-mcp-cli dialog --press <button>`."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "error": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor."
+    },
+    "httpStatus": 503,
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor.",
+      "httpStatus": 503
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: startup frame",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: \"schema=G2-v1;hallMax=10000;runId=20261119T094230419-hp10000-economy-1;configId=72594D7C7743BB376D040CF5D4B42CD58CE37362AE85AD09F4B7B5DE2B7BA2EC;mapSeed=1;waveSeed=8001;policy=economy;dt=.05;normalHP;noResourceGrant;objective=5nights\\r\\nt=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0\\r\\nt=135.15;day=2;phase=Day;W/G/M=170/35/15;workers=6;soldiers=3;hallHP=9980.0;spawned=12\\r\\nt=270.30;day=3;phase=Day;W/G/M=350/55/1;workers=6;soldiers=5;hallHP=9928.0;spawned=27\\r\\nt=405.45;day=4;phase=Day;W/G/M=480/0/27;workers=6;soldiers=5;hallHP=9928.0;spawned=42\\r\\nt=540.60;day=5;phase=Day;W/G/M=690/40/20;workers=6;soldiers=6;hallHP=9928.0;spawned=57\\r\\nt=675.75;day=6;phase=Day;W/G/M=920/0/6;workers=6;soldiers=8;hallHP=9928.0;spawned=76\\r\\nt=675.75;day=6;phase=Day;W/G/M=920/0/6;workers=6;soldiers=8;hallHP=9928.0;spawned=76\\r\\nledger=PASS;researchSpend=410/220/30;trainSpend=0/140/240;buildSpend=0/0/0;attacks=213;firstAttack=101.3;rallyCommands=8;lineArrivals=20;hallAttackers=7;retreatBeforeLine=56;assignmentAccepted=32;noNode=0;damageAttribution=unavailable;gather=positiveCargoDeltaSameType\\r\\noutcome=Victory;elapsed=675.75;unlockSeconds=economy_tools:20.05,economy_cargo:55.05,military_archery:85.05,military_training:360.05,expansion_tower:390.05,expansion_fortify:670.05;gatheredW/G/M=1277/260/185;depositedW/G/M=1230/260/176;spentW/G/M=410/360/270;trainingAccepted=10;peakWorkers=6;peakSoldiers=8;expansion=not attempted;expansionAt=-1.00\\r\"",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: exit requested",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "<>f__AnonymousType0(System.Int32,System.Int32,System.Boolean,System.Boolean): {}\nhallMax: 10000\nseed: 1\nplaying: false\ndirty: false",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: candidate set in memory before Awake",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "error": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor."
+    },
+    "httpStatus": 503,
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor.",
+      "httpStatus": 503
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: exit requested",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "<>f__AnonymousType0(System.Int32,System.Int32,System.Boolean,System.Boolean): {}\nhallMax: 10000\nseed: 1\nplaying: false\ndirty: false",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: enter warm Play",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {},
+    "dialogs": [
+      {
+        "id": "1182310",
+        "pid": 11344,
+        "title": "Hold on... (busy for 11s)...",
+        "message": "Importing assets",
+        "buttons": []
+      }
+    ]
+  },
+  "errors": [
+    {
+      "code": "AWAITING_INPUT",
+      "message": "The Unity Editor is blocked by a modal dialog: \"Hold on... (busy for 11s)...\": Importing assets []. Answer it in the editor, or with `unity-mcp-cli dialog --press <button>`."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "error": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor."
+    },
+    "httpStatus": 503,
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "No game engine is connected for your account. To set up: call enroll_engine_plugin with your engine's identifier, follow the returned install instructions, then open the project in the editor.",
+      "httpStatus": 503
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: reload with one-shot prebind HP callback",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: warm scene startup",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: \"schema=G2-v1;hallMax=10000;runId=20261119T094913804-hp10000-military-1;configId=72594D7C7743BB376D040CF5D4B42CD58CE37362AE85AD09F4B7B5DE2B7BA2EC;mapSeed=1;waveSeed=8001;policy=military;dt=.05;normalHP;noResourceGrant;objective=5nights\\r\\nt=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=10000.0;spawned=0\\r\\nt=135.15;day=2;phase=Day;W/G/M=170/30/5;workers=4;soldiers=5;hallHP=9904.0;spawned=12\\r\\nt=270.30;day=3;phase=Day;W/G/M=330/30/5;workers=4;soldiers=7;hallHP=9898.0;spawned=27\\r\\nt=405.45;day=4;phase=Day;W/G/M=370/10/15;workers=4;soldiers=7;hallHP=9898.0;spawned=42\\r\\nt=540.60;day=5;phase=Day;W/G/M=410/5/75;workers=4;soldiers=7;hallHP=9898.0;spawned=57\\r\\nt=675.75;day=6;phase=Day;W/G/M=470/0/61;workers=4;soldiers=9;hallHP=9898.0;spawned=76\\r\\nt=675.75;day=6;phase=Day;W/G/M=470/0/61;workers=4;soldiers=9;hallHP=9898.0;spawned=76\\r\\nledger=PASS;researchSpend=310/160/30;trainSpend=0/160/250;buildSpend=0/0/0;attacks=240;firstAttack=101.25;rallyCommands=9;lineArrivals=11;hallAttackers=4;retreatBeforeLine=65;assignmentAccepted=20;noNode=0;damageAttribution=unavailable;gather=positiveCargoDeltaSameType\\r\\noutcome=Victory;elapsed=675.75;unlockSeconds=military_archery:25.05,military_training:370.05,economy_tools:450.05,economy_cargo:500.05,expansion_tower:600.05;gatheredW/G/M=711/222/257;depositedW/G/M=680/220/241;spentW/G/M=310/320/280;trainingAccepted=9;peakWorkers=4;peakSoldiers=9;expansion=not attempted;expansionAt=-1.00\\r\"",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: reload with one-shot prebind HP callback",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: warm scene startup",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}
+{
+  "success": true,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "result": {
+      "status": "success",
+      "content": [
+        {
+          "type": "text",
+          "text": "System.String: Editor connected",
+          "data": null,
+          "mimeType": "text/plain",
+          "resource": null
+        }
+      ]
+    },
+    "editor": {}
+  },
+  "errors": [],
+  "warnings": []
+}
+{
+  "success": false,
+  "command": "run-tool",
+  "data": {
+    "tool": "script-execute",
+    "editor": {}
+  },
+  "errors": [
+    {
+      "code": "UNREACHABLE",
+      "message": "Cannot reach https://ai-game.dev/mcp/api/tools/script-execute. Check your network connection and server URL."
+    }
+  ],
+  "warnings": []
+}

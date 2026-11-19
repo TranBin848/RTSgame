@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "sceneByteComparison": "Exactly one m_Health override10000->1600",
+  "baselineFileCount": 269,
+  "changes": [
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "F6034FFCE0DACBB2D4F3E977D2FF90ECD51729C3E7D3BA4459CF080775924BFF",
+      "current": "E03C987DD46DCDCCD4C177E998E65A295D004F6E90C778815E4838C5AD39520C"
+    }
+  ],
+  "prefabAndSampleSceneUnchanged": true
+}

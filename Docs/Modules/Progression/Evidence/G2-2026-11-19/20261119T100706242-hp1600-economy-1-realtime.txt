@@ -1,0 +1,119 @@
+schema=G2-realtime-v1;runId=20261119T100706242-hp1600-economy-1-realtime;configId=844F0697145B7BF27046B95B2BF1A420F46396951C55D2BE81AB46676A241007;hallMax=1600;mapSeed=1;waveSeed=8001;policy=economy;rng=normal-shared-UnityRandom;speed=1;nativeTicks=UnityPlayerLoop;noResourceGrant;objective=5nights
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=1600.0;spawned=0
+army firstSeen=0.00;entity=Entity(904:15);position=float2(-10.08161f, 5.56189f);range=5;detection=4
+enemy firstSeen=0.00;entity=Entity(882:15);pos=float2(2.799982f, -2.299398f);visual=1;state=Retreating;initial=True
+enemy firstSeen=0.00;entity=Entity(887:15);pos=float2(1.326337f, 1.202071f);visual=0;state=Retreating;initial=True
+army firstSeen=7.99;entity=Entity(747:41);position=float2(-25.70518f, -5.904453f);range=1;detection=3
+army atHallLine=14.43;entity=Entity(747:41);sinceRally=6.44;position=float2(-10.50038f, -6.651269f);target=Entity.Null
+army firstSeen=18.09;entity=Entity(749:41);position=float2(-26.33062f, -5.611914f);range=1;detection=3
+army atHallLine=23.72;entity=Entity(749:41);sinceRally=5.63;position=float2(-14.545f, -6.250476f);target=Entity.Null
+t=60.02;day=1;phase=Dusk;W/G/M=50/5/15;workers=6;soldiers=3;hallHP=1600.0;spawned=0
+enemy firstSeen=90.06;entity=Entity(912:215);pos=float2(8.461383f, -3.538617f);visual=0;state=Moving;initial=False
+t=90.06;day=1;phase=Night;W/G/M=170/35/15;workers=6;soldiers=3;hallHP=1600.0;spawned=1
+enemy firstSeen=92.05;entity=Entity(913:137);pos=float2(-13.4753f, -23.4753f);visual=0;state=Moving;initial=False
+enemy firstSeen=94.04;entity=Entity(914:97);pos=float2(8.492929f, -3.507071f);visual=1;state=Moving;initial=False
+army firstAttack=98.61;entity=Entity(747:41);position=float2(-9.292942f, -5.41114f);target=Entity(912:215);sinceRally=90.62
+enemy firstSeen=104.11;entity=Entity(916:187);pos=float2(8.475299f, -3.524702f);visual=0;state=Moving;initial=False
+enemy firstSeen=106.11;entity=Entity(917:299);pos=float2(-13.46295f, -23.46295f);visual=1;state=Moving;initial=False
+enemy firstSeen=108.08;entity=Entity(918:247);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=110.10;entity=Entity(919:205);pos=float2(8.462947f, -3.537052f);visual=1;state=Moving;initial=False
+enemy firstSeen=120.14;entity=Entity(920:255);pos=float2(-13.49293f, -23.49293f);visual=1;state=Moving;initial=False
+enemy firstSeen=122.15;entity=Entity(921:275);pos=float2(-13.4868f, -23.4868f);visual=0;state=Moving;initial=False
+enemy firstSeen=124.22;entity=Entity(922:165);pos=float2(-13.44207f, -23.44207f);visual=1;state=Moving;initial=False
+enemy firstSeen=126.17;entity=Entity(923:207);pos=float2(8.492929f, -3.507071f);visual=1;state=Moving;initial=False
+enemy firstSeen=128.21;entity=Entity(925:211);pos=float2(8.475299f, -3.524702f);visual=0;state=Moving;initial=False
+t=135.03;day=2;phase=Day;W/G/M=170/35/15;workers=6;soldiers=3;hallHP=1566.0;spawned=12
+t=195.04;day=2;phase=Dusk;W/G/M=240/5/18;workers=6;soldiers=3;hallHP=1560.0;spawned=12
+enemy firstSeen=225.03;entity=Entity(912:239);pos=float2(-13.49293f, -23.49293f);visual=1;state=Moving;initial=False
+t=225.03;day=2;phase=Night;W/G/M=270/10/41;workers=6;soldiers=3;hallHP=1560.0;spawned=13
+enemy firstSeen=227.06;entity=Entity(913:145);pos=float2(8.486801f, -3.513199f);visual=0;state=Moving;initial=False
+enemy firstSeen=229.01;entity=Entity(914:99);pos=float2(-13.4802f, -23.4802f);visual=1;state=Moving;initial=False
+enemy firstSeen=231.00;entity=Entity(916:189);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=241.08;entity=Entity(918:249);pos=float2(-13.46138f, -23.46138f);visual=0;state=Moving;initial=False
+enemy firstSeen=243.01;entity=Entity(919:207);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=245.01;entity=Entity(920:257);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=247.03;entity=Entity(921:277);pos=float2(8.442073f, -3.557926f);visual=1;state=Moving;initial=False
+enemy firstSeen=248.98;entity=Entity(922:167);pos=float2(-13.4802f, -23.4802f);visual=1;state=Moving;initial=False
+enemy firstSeen=259.02;entity=Entity(917:323);pos=float2(8.480201f, -3.519799f);visual=1;state=Moving;initial=False
+enemy firstSeen=261.06;entity=Entity(923:215);pos=float2(8.442073f, -3.557926f);visual=1;state=Moving;initial=False
+enemy firstSeen=262.99;entity=Entity(924:301);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=264.99;entity=Entity(925:217);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=267.03;entity=Entity(913:163);pos=float2(8.445536f, -3.554464f);visual=0;state=Moving;initial=False
+enemy firstSeen=269.00;entity=Entity(928:217);pos=float2(8.475299f, -3.524702f);visual=0;state=Moving;initial=False
+t=270.02;day=3;phase=Day;W/G/M=270/10/41;workers=6;soldiers=3;hallHP=1416.0;spawned=27
+army firstSeen=323.11;entity=Entity(910:219);position=float2(-25.96515f, -6.432765f);range=1;detection=3
+army firstSeen=328.18;entity=Entity(911:93);position=float2(-2.434767f, -12.4516f);range=5;detection=4
+army atHallLine=329.48;entity=Entity(910:219);sinceRally=6.37;position=float2(-10.50063f, -6.751264f);target=Entity.Null
+t=330.05;day=3;phase=Dusk;W/G/M=510/0/4;workers=6;soldiers=5;hallHP=1410.0;spawned=27
+army atHallLine=332.55;entity=Entity(911:93);sinceRally=4.37;position=float2(-9.898459f, -6.501597f);target=Entity.Null
+enemy firstSeen=360.08;entity=Entity(914:101);pos=float2(8.462947f, -3.537052f);visual=1;state=Moving;initial=False
+t=360.08;day=3;phase=Night;W/G/M=630/0/27;workers=6;soldiers=5;hallHP=1410.0;spawned=28
+enemy firstSeen=362.01;entity=Entity(915:397);pos=float2(-13.4802f, -23.4802f);visual=1;state=Moving;initial=False
+enemy firstSeen=363.97;entity=Entity(916:195);pos=float2(8.5f, -3.5f);visual=0;state=Moving;initial=False
+enemy firstSeen=365.98;entity=Entity(918:251);pos=float2(-13.46295f, -23.46295f);visual=1;state=Moving;initial=False
+enemy firstSeen=367.95;entity=Entity(920:259);pos=float2(-13.4753f, -23.4753f);visual=0;state=Moving;initial=False
+enemy firstSeen=369.92;entity=Entity(921:279);pos=float2(8.475299f, -3.524702f);visual=0;state=Moving;initial=False
+army firstAttack=376.90;entity=Entity(910:219);position=float2(-10.35686f, -5.98315f);target=Entity(920:259);sinceRally=53.79
+enemy firstSeen=379.93;entity=Entity(923:217);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=381.93;entity=Entity(924:303);pos=float2(-13.4753f, -23.4753f);visual=0;state=Moving;initial=False
+enemy firstSeen=383.88;entity=Entity(925:219);pos=float2(-13.5f, -23.5f);visual=1;state=Moving;initial=False
+enemy firstSeen=385.85;entity=Entity(917:345);pos=float2(8.480201f, -3.519799f);visual=1;state=Moving;initial=False
+enemy firstSeen=387.86;entity=Entity(919:229);pos=float2(8.462947f, -3.537052f);visual=1;state=Moving;initial=False
+enemy firstSeen=389.79;entity=Entity(926:227);pos=float2(-13.4868f, -23.4868f);visual=0;state=Moving;initial=False
+enemy firstSeen=391.75;entity=Entity(927:161);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=401.80;entity=Entity(929:177);pos=float2(8.492929f, -3.507071f);visual=1;state=Moving;initial=False
+enemy firstSeen=403.78;entity=Entity(930:165);pos=float2(8.480201f, -3.519799f);visual=1;state=Moving;initial=False
+t=405.03;day=4;phase=Day;W/G/M=630/0/27;workers=6;soldiers=5;hallHP=1342.0;spawned=42
+stalled t=457.555;worker=Entity(887:17);node=Entity(810:15);position=float2(-18.80813f, -2.587204f);nodePosition=float2(-20.48353f, -2.348932f);distanceToCollider=0.8922563;range=0.4;moving=1;path=2;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node
+t=465.12;day=4;phase=Dusk;W/G/M=810/10/20;workers=6;soldiers=5;hallHP=1338.0;spawned=42
+army firstSeen=469.03;entity=Entity(909:61);position=float2(-25.63858f, -5.418626f);range=1;detection=3
+army atHallLine=475.64;entity=Entity(909:61);sinceRally=6.61;position=float2(-10.50724f, -6.65134f);target=Entity.Null
+t=495.05;day=4;phase=Night;W/G/M=840/40/20;workers=6;soldiers=6;hallHP=1338.0;spawned=42
+enemy firstSeen=495.14;entity=Entity(915:399);pos=float2(8.418303f, -3.581696f);visual=1;state=Moving;initial=False
+enemy firstSeen=497.04;entity=Entity(916:197);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=499.03;entity=Entity(917:347);pos=float2(-13.4753f, -23.4753f);visual=0;state=Moving;initial=False
+enemy firstSeen=500.97;entity=Entity(918:255);pos=float2(8.461383f, -3.538617f);visual=0;state=Moving;initial=False
+enemy firstSeen=502.91;entity=Entity(919:233);pos=float2(8.492929f, -3.507071f);visual=1;state=Moving;initial=False
+enemy firstSeen=504.87;entity=Entity(921:281);pos=float2(-13.49293f, -23.49293f);visual=1;state=Moving;initial=False
+enemy firstSeen=506.84;entity=Entity(922:207);pos=float2(-13.4868f, -23.4868f);visual=0;state=Moving;initial=False
+army firstAttack=507.91;entity=Entity(909:61);position=float2(-10.46819f, -6.315879f);target=Entity(917:347);sinceRally=38.88
+enemy firstSeen=516.85;entity=Entity(924:311);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=518.79;entity=Entity(925:221);pos=float2(-13.49293f, -23.49293f);visual=1;state=Moving;initial=False
+enemy firstSeen=520.73;entity=Entity(926:229);pos=float2(-13.49293f, -23.49293f);visual=1;state=Moving;initial=False
+enemy firstSeen=522.69;entity=Entity(923:233);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=524.67;entity=Entity(927:165);pos=float2(-13.4753f, -23.4753f);visual=0;state=Moving;initial=False
+enemy firstSeen=526.63;entity=Entity(928:243);pos=float2(8.442073f, -3.557926f);visual=1;state=Moving;initial=False
+enemy firstSeen=528.57;entity=Entity(929:183);pos=float2(-13.46295f, -23.46295f);visual=1;state=Moving;initial=False
+enemy firstSeen=530.55;entity=Entity(930:171);pos=float2(-13.42814f, -23.42814f);visual=0;state=Moving;initial=False
+t=540.11;day=5;phase=Day;W/G/M=840/40/20;workers=6;soldiers=6;hallHP=1338.0;spawned=57
+army firstSeen=559.60;entity=Entity(912:245);position=float2(-26.72877f, -6.048599f);range=1;detection=3
+army atHallLine=565.05;entity=Entity(912:245);sinceRally=5.45;position=float2(-14.50198f, -6.251376f);target=Entity.Null
+stalled t=568.254;worker=Entity(748:41);node=Entity(908:17);position=float2(-19.72221f, -2.449723f);nodePosition=float2(-21.48868f, -1.554144f);distanceToCollider=1.643728;range=0.4;moving=1;path=4;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node
+t=600.07;day=5;phase=Dusk;W/G/M=1050/50/13;workers=6;soldiers=7;hallHP=1338.0;spawned=57
+army firstSeen=624.97;entity=Entity(913:169);position=float2(-25.37882f, -6.307428f);range=1;detection=3
+t=630.08;day=5;phase=Night;W/G/M=1070/0/6;workers=6;soldiers=8;hallHP=1338.0;spawned=57
+enemy firstSeen=630.16;entity=Entity(917:383);pos=float2(8.445536f, -3.554464f);visual=0;state=Moving;initial=False
+army atHallLine=630.82;entity=Entity(913:169);sinceRally=5.85;position=float2(-11.52967f, -7.050651f);target=Entity.Null
+enemy firstSeen=632.04;entity=Entity(918:257);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=633.98;entity=Entity(919:235);pos=float2(-13.4868f, -23.4868f);visual=0;state=Moving;initial=False
+enemy firstSeen=635.92;entity=Entity(920:315);pos=float2(-13.4868f, -23.4868f);visual=0;state=Moving;initial=False
+enemy firstSeen=637.86;entity=Entity(921:283);pos=float2(-13.4802f, -23.4802f);visual=1;state=Moving;initial=False
+enemy firstSeen=639.79;entity=Entity(922:209);pos=float2(8.475299f, -3.524702f);visual=0;state=Moving;initial=False
+enemy firstSeen=641.70;entity=Entity(923:235);pos=float2(8.486801f, -3.513199f);visual=0;state=Moving;initial=False
+enemy firstSeen=643.62;entity=Entity(925:223);pos=float2(8.5f, -3.5f);visual=0;state=Moving;initial=False
+enemy firstSeen=645.58;entity=Entity(924:315);pos=float2(8.462947f, -3.537052f);visual=1;state=Moving;initial=False
+enemy firstSeen=655.62;entity=Entity(917:389);pos=float2(8.492929f, -3.507071f);visual=1;state=Moving;initial=False
+enemy firstSeen=657.55;entity=Entity(920:317);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=659.48;entity=Entity(926:237);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=661.45;entity=Entity(928:245);pos=float2(8.461383f, -3.538617f);visual=0;state=Moving;initial=False
+enemy firstSeen=663.34;entity=Entity(929:185);pos=float2(-13.49529f, -23.49529f);visual=0;state=Moving;initial=False
+enemy firstSeen=665.28;entity=Entity(930:173);pos=float2(8.486801f, -3.513199f);visual=0;state=Moving;initial=False
+enemy firstSeen=667.23;entity=Entity(918:259);pos=float2(-13.46138f, -23.46138f);visual=0;state=Moving;initial=False
+enemy firstSeen=669.13;entity=Entity(931:159);pos=float2(8.495286f, -3.504714f);visual=0;state=Moving;initial=False
+enemy firstSeen=671.05;entity=Entity(932:133);pos=float2(8.480201f, -3.519799f);visual=1;state=Moving;initial=False
+enemy firstSeen=673.02;entity=Entity(933:125);pos=float2(8.475299f, -3.524702f);visual=0;state=Moving;initial=False
+t=675.08;day=6;phase=Day;W/G/M=1070/0/6;workers=6;soldiers=8;hallHP=1338.0;spawned=76
+t=675.08;day=6;phase=Day;W/G/M=1070/0/6;workers=6;soldiers=8;hallHP=1338.0;spawned=76
+ledger=PASS;researchSpend=410/220/30;trainSpend=0/140/240;buildSpend=0/0/0;attacks=236;firstAttack=98.61256;rallyCommands=8;lineArrivals=28;hallAttackers=12;retreatBeforeLine=47
+outcome=Victory;elapsed=675.08;depositedW/G/M=1380/260/176;spentW/G/M=410/360/270;peakWorkers=6;peakSoldiers=8;trainingAccepted=10
+finished wallSeconds=675.37;error=

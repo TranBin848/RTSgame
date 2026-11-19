@@ -1,0 +1,2 @@
+System.Exception: Edit baseline changed unexpectedly.
+  at G2EditorRunner.Pump () [0x00561] in E:\Unity project\RTSgame2026\Assets\Game\DOTS\Editor\G2EditorRunner.cs:137 

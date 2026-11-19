@@ -1,0 +1,37 @@
+// Failed compile-only probe: this Unity version has no Get/SetAnimationSpeed. No mutation ran.
+if(EditorApplication.isPlaying||UnityEngine.SceneManagement.SceneManager.GetActiveScene().path!="Assets/Scenes/ProceduralGame.unity")throw new Exception("Expected Edit scene.");
+var request=Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/restore-fields-request.json"));
+var rects=UnityEngine.Object.FindObjectsByType<RectTransform>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+var maps=UnityEngine.Object.FindObjectsByType<UnityEngine.Tilemaps.Tilemap>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+var readback=new System.Collections.Generic.List<object>();
+foreach(var row in request["animations"])
+{
+    ulong id=(ulong)row["id"];
+    var map=maps.Single(m=>GlobalObjectId.GetGlobalObjectIdSlow(m).targetObjectId==id);
+    var cell=new Vector3Int((int)row["x"],(int)row["y"],(int)row["z"]);
+    float expected=(float)row["speed"],actual=map.GetAnimationSpeed(cell);
+    readback.Add(new{id,cell,expected,actual});
+    if(Mathf.Abs(actual-expected)>.0001f)throw new Exception("Unexpected speed; no mutation performed.");
+}
+System.IO.File.WriteAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/animation-readback-before.json",Newtonsoft.Json.JsonConvert.SerializeObject(readback));
+foreach(var row in request["rects"])
+{
+    ulong id=(ulong)row["id"];
+    var rect=rects.Single(r=>GlobalObjectId.GetGlobalObjectIdSlow(r).targetObjectId==id);
+    var data=new SerializedObject(rect);
+    foreach(var property in new[]{new{json="anchorMin",field="m_AnchorMin"},new{json="anchorMax",field="m_AnchorMax"},new{json="anchoredPosition",field="m_AnchoredPosition"}})
+        data.FindProperty(property.field).vector2Value=new Vector2((float)row[property.json]["x"],(float)row[property.json]["y"]);
+    data.ApplyModifiedPropertiesWithoutUndo();
+}
+foreach(var row in request["animations"])
+{
+    ulong id=(ulong)row["id"];
+    var map=maps.Single(m=>GlobalObjectId.GetGlobalObjectIdSlow(m).targetObjectId==id);
+    map.SetAnimationSpeed(new Vector3Int((int)row["x"],(int)row["y"],(int)row["z"]),(float)row["speed"]);
+}
+var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);
+if(!UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene))throw new Exception("Save failed.");
+var result=new{rects=3,animations=20,hp=UnityEngine.Object.FindFirstObjectByType<TownHall>().MaxHealth,dirty=scene.isDirty,utc=DateTime.UtcNow};
+System.IO.File.WriteAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/fields-restored.json",Newtonsoft.Json.JsonConvert.SerializeObject(result));
+return result;

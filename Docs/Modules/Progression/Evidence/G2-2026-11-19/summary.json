@@ -1,0 +1,295 @@
+{
+  "checks": "PASS",
+  "rows": [
+    {
+      "file": "20261119T093931968-hp10000-control-1.txt",
+      "hp": 10000,
+      "policy": "control",
+      "realtime": false,
+      "config": "72594D7C7743BB376D040CF5D4B42CD58CE37362AE85AD09F4B7B5DE2B7BA2EC",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 8190,
+      "attacks": 0,
+      "deposited": [
+        0,
+        0,
+        0
+      ],
+      "spent": [
+        0,
+        0,
+        0
+      ],
+      "wallet": [
+        100,
+        100,
+        100
+      ],
+      "spawned": 76,
+      "soldiers": 1
+    },
+    {
+      "file": "20261119T094230419-hp10000-economy-1.txt",
+      "hp": 10000,
+      "policy": "economy",
+      "realtime": false,
+      "config": "72594D7C7743BB376D040CF5D4B42CD58CE37362AE85AD09F4B7B5DE2B7BA2EC",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 9928,
+      "attacks": 213,
+      "deposited": [
+        1230,
+        260,
+        176
+      ],
+      "spent": [
+        410,
+        360,
+        270
+      ],
+      "wallet": [
+        920,
+        0,
+        6
+      ],
+      "spawned": 76,
+      "soldiers": 8
+    },
+    {
+      "file": "20261119T094913804-hp10000-military-1.txt",
+      "hp": 10000,
+      "policy": "military",
+      "realtime": false,
+      "config": "72594D7C7743BB376D040CF5D4B42CD58CE37362AE85AD09F4B7B5DE2B7BA2EC",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 9898,
+      "attacks": 240,
+      "deposited": [
+        680,
+        220,
+        241
+      ],
+      "spent": [
+        310,
+        320,
+        280
+      ],
+      "wallet": [
+        470,
+        0,
+        61
+      ],
+      "spawned": 76,
+      "soldiers": 9
+    },
+    {
+      "file": "20261119T095911635-hp1600-control-1.txt",
+      "hp": 1600,
+      "policy": "control",
+      "realtime": false,
+      "config": "844F0697145B7BF27046B95B2BF1A420F46396951C55D2BE81AB46676A241007",
+      "outcome": "Defeat",
+      "elapsed": 539.95,
+      "day": 4,
+      "hallHP": 0,
+      "attacks": 0,
+      "deposited": [
+        0,
+        0,
+        0
+      ],
+      "spent": [
+        0,
+        0,
+        0
+      ],
+      "wallet": [
+        100,
+        100,
+        100
+      ],
+      "spawned": 57,
+      "soldiers": 1
+    },
+    {
+      "file": "20261119T100021662-hp1600-economy-1.txt",
+      "hp": 1600,
+      "policy": "economy",
+      "realtime": false,
+      "config": "844F0697145B7BF27046B95B2BF1A420F46396951C55D2BE81AB46676A241007",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 1348,
+      "attacks": 223,
+      "deposited": [
+        1320,
+        260,
+        222
+      ],
+      "spent": [
+        410,
+        360,
+        270
+      ],
+      "wallet": [
+        1010,
+        0,
+        52
+      ],
+      "spawned": 76,
+      "soldiers": 8
+    },
+    {
+      "file": "20261119T100706242-hp1600-economy-1-realtime.txt",
+      "hp": 1600,
+      "policy": "economy",
+      "realtime": true,
+      "config": "844F0697145B7BF27046B95B2BF1A420F46396951C55D2BE81AB46676A241007",
+      "outcome": "Victory",
+      "elapsed": 675.08,
+      "day": 6,
+      "hallHP": 1338,
+      "attacks": 236,
+      "deposited": [
+        1380,
+        260,
+        176
+      ],
+      "spent": [
+        410,
+        360,
+        270
+      ],
+      "wallet": [
+        1070,
+        0,
+        6
+      ],
+      "spawned": 76,
+      "soldiers": 8
+    },
+    {
+      "file": "20261119T100148070-hp1600-military-1.txt",
+      "hp": 1600,
+      "policy": "military",
+      "realtime": false,
+      "config": "844F0697145B7BF27046B95B2BF1A420F46396951C55D2BE81AB46676A241007",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 1522,
+      "attacks": 346,
+      "deposited": [
+        680,
+        160,
+        300
+      ],
+      "spent": [
+        50,
+        250,
+        350
+      ],
+      "wallet": [
+        730,
+        10,
+        50
+      ],
+      "spawned": 76,
+      "soldiers": 12
+    },
+    {
+      "file": "20261119T100311409-hp1200-control-1.txt",
+      "hp": 1200,
+      "policy": "control",
+      "realtime": false,
+      "config": "0E5103D824C801723B4CC89654C7605AC67B38717DBAB0C24D49E872E698E24B",
+      "outcome": "Defeat",
+      "elapsed": 516.9,
+      "day": 4,
+      "hallHP": 0,
+      "attacks": 0,
+      "deposited": [
+        0,
+        0,
+        0
+      ],
+      "spent": [
+        0,
+        0,
+        0
+      ],
+      "wallet": [
+        100,
+        100,
+        100
+      ],
+      "spawned": 49,
+      "soldiers": 1
+    },
+    {
+      "file": "20261119T100413958-hp1200-economy-1.txt",
+      "hp": 1200,
+      "policy": "economy",
+      "realtime": false,
+      "config": "0E5103D824C801723B4CC89654C7605AC67B38717DBAB0C24D49E872E698E24B",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 964,
+      "attacks": 212,
+      "deposited": [
+        1230,
+        260,
+        199
+      ],
+      "spent": [
+        410,
+        360,
+        270
+      ],
+      "wallet": [
+        920,
+        0,
+        29
+      ],
+      "spawned": 76,
+      "soldiers": 8
+    },
+    {
+      "file": "20261119T100540070-hp1200-military-1.txt",
+      "hp": 1200,
+      "policy": "military",
+      "realtime": false,
+      "config": "0E5103D824C801723B4CC89654C7605AC67B38717DBAB0C24D49E872E698E24B",
+      "outcome": "Victory",
+      "elapsed": 675.75,
+      "day": 6,
+      "hallHP": 1130,
+      "attacks": 240,
+      "deposited": [
+        690,
+        210,
+        167
+      ],
+      "spent": [
+        310,
+        300,
+        250
+      ],
+      "wallet": [
+        480,
+        10,
+        17
+      ],
+      "spawned": 76,
+      "soldiers": 8
+    }
+  ]
+}

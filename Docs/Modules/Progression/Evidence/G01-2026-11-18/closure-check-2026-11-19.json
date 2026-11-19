@@ -1,0 +1,24 @@
+{
+  "dateLocal": "2026-11-19",
+  "timezone": "Asia/Saigon",
+  "rawChecks": "PASS",
+  "finalRuns": 12,
+  "summaryUnchanged": true,
+  "reportRowsVerified": 24,
+  "localDocumentationLinks": "PASS",
+  "baselineFingerprintFiles": 269,
+  "onlyExpectedWorkerPresentationGuardDiffers": true,
+  "nodeSyntaxCheck": "PASS",
+  "trackedDiffWhitespaceCheck": "PASS",
+  "mcp": {
+    "project": "RTSgame2026",
+    "machine": "BJNB0",
+    "instanceId": "af69a69f-b6a4-4d04-9866-f02863390018",
+    "connectedAndSelected": true,
+    "sceneAndScriptToolsExposed": false,
+    "liveSceneRecheckedToday": false
+  },
+  "unityPresentationSelfCheck": "PASS on 2026-11-18; before/after JSON preserved",
+  "editorLastVerified": "2026-11-18; see editor-final.json",
+  "newPlayerBuildOrPerformanceRun": false
+}

@@ -1,0 +1,236 @@
+// Scripted policy measurements, not a substitute for human playtest or performance profiling.
+// Run a fresh ProceduralGame in paused Play Mode using script-execute. Raw S8 remains immutable.
+using System;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Core;
+using Unity.Entities;
+using Unity.Mathematics;
+using UnityEngine;
+using UnityEditor;
+using RTS.DOTS;
+
+public static class G2Realtime
+{
+    const BindingFlags Private=BindingFlags.Instance|BindingFlags.NonPublic;
+    static T Find<T>() where T:UnityEngine.Object=>UnityEngine.Object.FindFirstObjectByType<T>();
+    static T Asset<T>(string name) where T:UnityEngine.Object=>AssetDatabase.LoadAssetAtPath<T>("Assets/Game/ScriptableObjects/Units/"+name+".asset");
+    static object Field(object obj,string name)=>obj.GetType().GetField(name,Private).GetValue(obj);
+    static void Call(object obj,string name,params object[] args)=>obj.GetType().GetMethod(name,Private).Invoke(obj,args);
+    public static string Economy()=>Start(true);
+    public static string Military()=>Start(false);
+    static string Start(bool economy)
+    {
+        bool control=false,reserve=false;
+        if(!EditorApplication.isPlaying||!EditorApplication.isPaused)throw new Exception("Paused Play required.");
+        var b=Find<SwarmGameBridge>();var gp=b.Gameplay;var sim=b.Simulation;var em=gp.EntityManager;
+        var day=Find<DayNightCycleManager>();var waves=Find<EnemyWaveManager>();var game=Find<GameManager>();
+        var map=Find<TilemapManager>();var generator=Find<ProceduralMapAuthoring>();var hall=Find<TownHall>();
+        var hallEntity=hall.DotsEntity;var hallPosition=hall.transform.position;int expectedHP=hall.MaxHealth;
+        if(!Find<GameSceneCompositionRoot>().IsReady||gp.IsMatchOver||gp.Wallet.Wood!=100||gp.Wallet.Gold!=100||gp.Wallet.Meat!=100||day.CurrentDay!=1)
+            throw new Exception("Fresh, ready match with wallet100x3 required.");
+        var order=economy?new[]{"economy_tools","economy_cargo","military_archery","military_training","expansion_tower","expansion_fortify"}
+            :new[]{"military_archery","military_training","economy_tools","economy_cargo","expansion_tower","expansion_fortify"};
+        var unlock=new Dictionary<string,float>();var log=new StringBuilder();
+        int[] deposited=new int[3],gathered=new int[3],spent=new int[3];int trained=0,peakWorkers=0,peakSoldiers=0;
+        float elapsed=0;int startSpawned=sim.TotalSpawned,nav=map.NavigationVersion,previousDay=1;
+        bool expansion=false;float expansionAt=-1;string expansionAttempt=control?"not attempted (control)":"not attempted";
+        const int waveSeed=8001;
+        string policy=control?"control":reserve?"expansion":economy?"economy":"military";
+        string dir="Docs/Modules/Progression/Evidence/G2-2026-11-19";
+        string runId=DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff")+"-hp"+expectedHP+"-"+policy+"-"+generator.GeneratedMap.Seed;
+        string configId=System.IO.File.ReadAllText(dir+"/config-hp"+expectedHP+".txt").Trim();
+        var initial=gp.Wallet;
+        int[] researchSpent=new int[3],trainSpent=new int[3],buildSpent=new int[3];
+        var rallied=new Dictionary<Entity,float>();var attackSeq=new Dictionary<Entity,int>();
+        var contacted=new HashSet<Entity>();var hitHall=new HashSet<Entity>();var retreatedCold=new HashSet<Entity>();
+        var seenEnemy=new HashSet<Entity>();var lineAt=new Dictionary<Entity,float>();
+        var workerProgress=new Dictionary<Entity,(float2 position,int cargo,int attacks,float at)>();
+        var rejectedNodes=new Dictionary<Entity,HashSet<Entity>>();
+        var workerRoles=new Dictionary<Entity,int>();
+        var armyArrivals=new HashSet<Entity>();var armyTargets=new HashSet<Entity>();
+        int attacks=0,rallyCommands=0,assignmentAccepted=0,noNode=0;float firstAttack=-1;var phase=day.CurrentPhase;
+        var time=gp.World.Time;var random=UnityEngine.Random.state;
+        var trainWorker=Asset<SpawnVillagerActionSO>("SpawnVillagerAction");
+        var trainWarrior=Asset<SpawnWarriorActionSO>("SpawnWarriorAction");var trainArcher=Asset<SpawnArcherActionSO>("SpawnArcherAction");
+        var workerPrefab=(GameObject)Field(hall,"m_VillagerPrefab");
+        var barrack=Find<Barrack>();var archery=Find<ArcheryRange>();
+        var warriorPrefab=(GameObject)Field(barrack,"m_WarriorPrefab");var archerPrefab=(GameObject)Field(archery,"m_ArcherPrefab");
+        var depotAction=Asset<BuildActionSo>("BuildStoragePitAction");
+        var actors=em.CreateEntityQuery(typeof(GameplayActor),typeof(CombatBody));
+        var resources=em.CreateEntityQuery(typeof(GameplayResource));
+        var enemies=em.CreateEntityQuery(typeof(SwarmAgent),typeof(CombatBody));
+        void AddSpend(int[] bucket,PlayerWallet before,PlayerWallet after)
+        {bucket[0]+=before.Wood-after.Wood;bucket[1]+=before.Gold-after.Gold;bucket[2]+=before.Meat-after.Meat;}
+        Entity[] Living(GameplayKind kind)
+        {
+            using var list=actors.ToEntityArray(Allocator.Temp);
+            return list.ToArray().Where(e=>em.GetComponentData<CombatBody>(e).Health>0&&em.GetComponentData<GameplayActor>(e).Kind==kind).ToArray();
+        }
+        int Soldiers()=>Living(GameplayKind.Soldier).Length+Living(GameplayKind.Archer).Length;
+        void Observe()
+        {
+            peakWorkers=Math.Max(peakWorkers,Living(GameplayKind.Worker).Length);peakSoldiers=Math.Max(peakSoldiers,Soldiers());
+            foreach(var e in Living(GameplayKind.Soldier).Concat(Living(GameplayKind.Archer)))
+            {
+                var actor=em.GetComponentData<GameplayActor>(e);
+                var soldierPosition=em.GetComponentData<CombatBody>(e).Position;
+                if(armyArrivals.Add(e))log.AppendLine($"army firstSeen={elapsed:F2};entity={e};position={soldierPosition};range={actor.Range};detection={actor.Detection}");
+                if(rallied.TryGetValue(e,out float rallyAt)&&math.distance(soldierPosition,(float2)(Vector2)hallPosition)<=4&&armyTargets.Add(e))
+                    log.AppendLine($"army atHallLine={elapsed:F2};entity={e};sinceRally={elapsed-rallyAt:F2};position={soldierPosition};target={actor.Target}");
+                attackSeq.TryGetValue(e,out int previous);int delta=Math.Max(0,actor.AttackSequence-previous);
+                if(delta>0&&previous==0)log.AppendLine($"army firstAttack={elapsed:F2};entity={e};position={soldierPosition};target={actor.Target};sinceRally={(rallied.TryGetValue(e,out var commandAt)?elapsed-commandAt:-1):F2}");
+                attacks+=delta;if(delta>0&&firstAttack<0)firstAttack=elapsed;attackSeq[e]=actor.AttackSequence;
+                if(!control&&!rallied.ContainsKey(e))
+                {
+                    // One move per entity; CodeTriggered preserves automatic acquisition en route.
+                    b.ViewFor(e).MoveTo(hallPosition+new Vector3(rallied.Count%2==0?-2:2,-2,0),DestinationSource.CodeTriggered);
+                    rallied[e]=elapsed;rallyCommands++;
+                }
+            }
+            using var list=enemies.ToEntityArray(Allocator.Temp);
+            foreach(var e in list)
+            {
+                var agent=em.GetComponentData<SwarmAgent>(e);var body=em.GetComponentData<CombatBody>(e);
+                if(seenEnemy.Add(e))log.AppendLine($"enemy firstSeen={elapsed:F2};entity={e};pos={body.Position};visual={agent.VisualId};state={agent.State};initial={(elapsed==0)}");
+                if(math.distance(body.Position,(float2)(Vector2)hallPosition)<=6&&contacted.Add(e))lineAt[e]=elapsed;
+                if(agent.Target==hallEntity&&agent.State==SwarmState.Attacking)hitHall.Add(e);
+                if(agent.State==SwarmState.Retreating&&!contacted.Contains(e))retreatedCold.Add(e);
+            }
+        }
+        void Snapshot()
+        {
+            var wallet=gp.Wallet;float health=em.Exists(hallEntity)?em.GetComponentData<CombatBody>(hallEntity).Health:0;
+            log.AppendLine($"t={elapsed:F2};day={day.CurrentDay};phase={day.CurrentPhase};W/G/M={wallet.Wood}/{wallet.Gold}/{wallet.Meat};workers={Living(GameplayKind.Worker).Length};soldiers={Soldiers()};hallHP={health:F1};spawned={sim.TotalSpawned-startSpawned}");
+        }
+        bool Train(ProductionBuilding producer,ActionSO action,GameObject prefab,float duration,IResourceCostAction cost)
+        {
+            if(producer==null||!gp.TryGetActor(producer.DotsEntity,out _,out var body)||body.Health<=0)return false;
+            if(em.GetBuffer<TrainingRequest>(producer.DotsEntity).Length>=1)return false;
+            var wallet=gp.Wallet;
+            if(wallet.Wood<cost.WoodCost||wallet.Gold<cost.GoldCost||wallet.Meat<cost.MeatCost)return false;
+            if(!b.EnqueueTraining(producer,action,prefab,duration,""))return false;
+            var before=gp.Wallet;gp.AddResources(-cost.WoodCost,-cost.GoldCost,-cost.MeatCost);AddSpend(trainSpent,before,gp.Wallet);trained++;return true;
+        }
+
+        runId+="-realtime";
+        var path=dir+"/"+runId+".txt";
+        float startTime=Time.time,lastSample=-1,nextPolicy=0;
+        double startedEditor=EditorApplication.timeSinceStartup;
+        var previousWallet=gp.Wallet;
+        bool oldBackground=Application.runInBackground;
+        Application.runInBackground=true;
+        UnityEngine.Random.InitState(waveSeed);
+        log.AppendLine($"schema=G2-realtime-v1;runId={runId};configId={configId};hallMax={expectedHP};mapSeed={generator.GeneratedMap.Seed};waveSeed={waveSeed};policy={policy};rng=normal-shared-UnityRandom;speed=1;nativeTicks=UnityPlayerLoop;noResourceGrant;objective=5nights");
+        if(hall.CurrentHealth!=expectedHP||em.GetComponentData<CombatBody>(hallEntity).Health!=expectedHP||Time.timeScale!=1)
+            throw new Exception("Realtime fresh HP/timeScale mismatch.");
+        Snapshot();
+        EditorApplication.CallbackFunction update=null;
+        void Finish(string error)
+        {
+            EditorApplication.update-=update;
+            actors.Dispose();resources.Dispose();enemies.Dispose();
+            Application.runInBackground=oldBackground;UnityEngine.Random.state=random;
+            log.AppendLine($"finished wallSeconds={EditorApplication.timeSinceStartup-startedEditor:F2};error={error}");
+            System.IO.File.WriteAllText(path,log.ToString());
+        }
+        update=()=>
+        {
+            try
+            {
+                if(!EditorApplication.isPlaying){Finish("Play stopped before terminal");return;}
+                if(EditorApplication.isPaused)return;
+                elapsed=Time.time-startTime;
+                if(!gp.IsMatchOver&&elapsed-lastSample<.05f)return;
+                lastSample=elapsed;
+                var now=gp.Wallet;
+                deposited[0]+=now.Wood-previousWallet.Wood;deposited[1]+=now.Gold-previousWallet.Gold;deposited[2]+=now.Meat-previousWallet.Meat;
+                if(!gp.IsMatchOver)
+                {
+                if(!control&&elapsed>=nextPolicy)
+                {
+                    nextPolicy=elapsed+5;var before=gp.Wallet;
+                    if(gp.Research.Active==0)
+                    {
+                        var next=order.FirstOrDefault(id=>!gp.IsTechnologyUnlocked(id));
+                        if(next!=null&&(!reserve||expansion||gp.Wallet.Wood>=200&&gp.Wallet.Gold>=200))
+                        {var pre=gp.Wallet;gp.StartResearch(next,hallEntity);AddSpend(researchSpent,pre,gp.Wallet);}
+                    }
+                    foreach(var e in Living(GameplayKind.Worker).OrderBy(e=>b.ViewFor(e).name,StringComparer.Ordinal))
+                        if(!workerRoles.ContainsKey(e))workerRoles[e]=workerRoles.Count;
+                    var workers=Living(GameplayKind.Worker).OrderBy(e=>workerRoles[e]).ToArray();peakWorkers=Math.Max(peakWorkers,workers.Length);peakSoldiers=Math.Max(peakSoldiers,Soldiers());
+                    bool canSpend=!reserve||expansion||gp.Wallet.Wood>=150&&gp.Wallet.Gold>=150;
+                    if(canSpend&&workers.Length<(economy?6:4))Train(hall,trainWorker,workerPrefab,trainWorker.TrainDuration,trainWorker);
+                    if(canSpend&&Living(GameplayKind.Soldier).Length<8)Train(barrack,trainWarrior,warriorPrefab,trainWarrior.TrainDuration,trainWarrior);
+                    if(canSpend&&gp.CanUseArchery&&Living(GameplayKind.Archer).Length<6)Train(archery,trainArcher,archerPrefab,trainArcher.TrainDuration,trainArcher);
+                    using var nodes=resources.ToEntityArray(Allocator.Temp);
+                    if(day.CurrentPhase==DayNightPhase.Day)
+                        for(int i=0;i<workers.Length;i++)
+                        {
+                            var worker=workers[i];var data=em.GetComponentData<GameplayWorker>(worker);
+                            var workerActor=em.GetComponentData<GameplayActor>(worker);var pos=em.GetComponentData<CombatBody>(worker).Position;
+                            if(!workerProgress.TryGetValue(worker,out var progress)||math.distance(progress.position,pos)>.2f||progress.cargo!=data.Carried||progress.attacks!=workerActor.AttackSequence)
+                                workerProgress[worker]=progress=(pos,data.Carried,workerActor.AttackSequence,elapsed);
+                            bool stalled=data.Phase==WorkPhase.Gathering&&em.HasComponent<GameplayResource>(data.Node)&&data.Carried==0&&elapsed-progress.at>=15;
+                            if(data.Phase!=WorkPhase.None&&em.Exists(data.Node)&&!stalled)continue;
+                            if(stalled)
+                            {
+                                if(!rejectedNodes.TryGetValue(worker,out var rejected))rejectedNodes[worker]=rejected=new HashSet<Entity>();
+                                rejected.Add(data.Node);
+                                var nodeResource=em.GetComponentData<GameplayResource>(data.Node);
+                                var nodeBody=em.HasComponent<CombatBody>(data.Node)?em.GetComponentData<CombatBody>(data.Node):new CombatBody{Position=nodeResource.Position,Radius=nodeResource.Radius};
+                                log.AppendLine($"stalled t={elapsed};worker={worker};node={data.Node};position={pos};nodePosition={nodeBody.Position};distanceToCollider={GameplayMath.DistanceToBody(pos,nodeBody)};range={workerActor.Range};moving={workerActor.Moving};path={em.GetBuffer<GameplayWaypoint>(worker).Length};targetHP={nodeBody.Health};reason=no movement/cargo/attack for15s;policy=try next node");
+                                gp.CancelWork(worker);workerProgress[worker]=(pos,0,workerActor.AttackSequence,elapsed);
+                            }
+                            int role=workerRoles[worker]%4;int type=role<2?0:role==2?1:2;
+                            var node=nodes.ToArray().Where(e=>{var r=em.GetComponentData<GameplayResource>(e);return r.Type==type&&r.Claims<r.Capacity&&(!rejectedNodes.TryGetValue(worker,out var rejected)||!rejected.Contains(e));})
+                                .OrderBy(e=>math.distancesq(pos,em.GetComponentData<GameplayResource>(e).Position)).FirstOrDefault();
+                            if(node!=Entity.Null){if(gp.AssignResource(worker,node))assignmentAccepted++;}else noNode++;
+                        }
+                    if(reserve&&!expansion&&elapsed>30&&day.CurrentPhase==DayNightPhase.Day&&workers.Length>0
+                        &&gp.Wallet.Wood>=depotAction.WoodCost&&gp.Wallet.Gold>=depotAction.GoldCost)
+                    {
+                        var landmark=generator.GeneratedMap.Layout.Landmark;
+                        var cell=generator.OriginCell+new Vector3Int(landmark.X,landmark.Y,0);
+                        var position=map.WalkableTilemap.CellToWorld(cell);
+                        var placement=new PlacementProcess(depotAction,map,position);placement.ShowPlacementOutline();
+                        typeof(PlacementProcess).GetMethod("HighLightTiles",Private).Invoke(placement,new object[]{position});
+                        if(placement.TryFinalizePlacement(out var accepted))
+                        {
+                            var workerView=b.ViewFor(workers.Last()) as WorkerUnit;
+                            if(workerView==null)throw new Exception("Expansion worker has no view.");
+                            var pre=gp.Wallet;game.AddResources(-depotAction.GoldCost,-depotAction.WoodCost,0);AddSpend(buildSpent,pre,gp.Wallet);
+                            new BuildingProcess(depotAction,accepted,workerView,game,b);expansion=true;expansionAt=elapsed;expansionAttempt="landmark depot ordered";
+                        }
+                        else{placement.CleanUp();expansionAttempt="landmark placement rejected";}
+                    }
+                    var after=gp.Wallet;spent[0]+=before.Wood-after.Wood;spent[1]+=before.Gold-after.Gold;spent[2]+=before.Meat-after.Meat;
+                }
+
+                }
+                previousWallet=gp.Wallet;Observe();
+                if(phase!=day.CurrentPhase){Snapshot();phase=day.CurrentPhase;}
+                var liveHall=em.Exists(hallEntity)?em.GetComponentData<CombatBody>(hallEntity).Health:0;
+                var status=new {runId,hp=expectedHP,policy,elapsed,day=day.CurrentDay,phase=day.CurrentPhase.ToString(),hallHP=liveHall,outcome=gp.Outcome.ToString(),attacks,spawned=sim.TotalSpawned-startSpawned,wallSeconds=EditorApplication.timeSinceStartup-startedEditor};
+                if(gp.IsMatchOver||((int)elapsed)%5==0)System.IO.File.WriteAllText(dir+"/realtime-status.json",Newtonsoft.Json.JsonConvert.SerializeObject(status));
+                if(gp.IsMatchOver)
+                {
+                    Snapshot();
+                    for(int i=0;i<3;i++)if(initial.Get(i)+deposited[i]-spent[i]!=gp.Wallet.Get(i)||spent[i]!=researchSpent[i]+trainSpent[i]+buildSpent[i])throw new Exception("Realtime ledger mismatch.");
+                    log.AppendLine($"ledger=PASS;researchSpend={string.Join("/",researchSpent)};trainSpend={string.Join("/",trainSpent)};buildSpend={string.Join("/",buildSpent)};attacks={attacks};firstAttack={firstAttack};rallyCommands={rallyCommands};lineArrivals={contacted.Count};hallAttackers={hitHall.Count};retreatBeforeLine={retreatedCold.Count}");
+                    log.AppendLine($"outcome={gp.Outcome};elapsed={elapsed:F2};depositedW/G/M={string.Join("/",deposited)};spentW/G/M={string.Join("/",spent)};peakWorkers={peakWorkers};peakSoldiers={peakSoldiers};trainingAccepted={trained}");
+                    Finish("");return;
+                }
+                if(elapsed>750||EditorApplication.timeSinceStartup-startedEditor>1000)throw new Exception("Realtime deadline exceeded.");
+            }
+            catch(Exception ex){Finish(ex.ToString());}
+        };
+        EditorApplication.update+=update;
+        EditorApplication.isPaused=false;
+        System.IO.File.WriteAllText(dir+"/realtime-status.json",Newtonsoft.Json.JsonConvert.SerializeObject(new {runId,hp=expectedHP,policy,status="started"}));
+        return "Realtime monitor installed: "+runId;
+    }
+}

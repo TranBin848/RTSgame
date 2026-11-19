@@ -1,6 +1,6 @@
 # Kế hoạch sau S9 — cân bằng, hiệu năng và bản nộp khóa luận
 
-Ngày lập: **18/11/2026**. Người dùng đã duyệt và đang triển khai **G0–G1**; G2–G7 chưa thực hiện. Hợp đồng đo: [G01](G01-MeasurementContract.md).
+Ngày lập: **18/11/2026**. Chốt **19/11: G0–G2 DONE theo phạm vi từng gate**. [G01](G01-Validation.md) có baseline/policy12run; [G2](G2-PressurePilot.md) có9native+1realtime, shortlistHall1600 đã author riêng ProceduralGame. G3–G7 chưa thực hiện; chưa nghiệm thu cân bằng mọi seed hoặc bản Release.
 
 Đây là đợt mới sau S0–S9/D0–D4 đã hoàn tất, không sửa lịch sử nghiệm thu cũ. Lượt lập kế hoạch chỉ đọc tài liệu/cấu hình/source và viết tài liệu; chưa đổi gameplay, chạy thử nghiệm, build hoặc thao tác Editor. Nguồn trạng thái hiện tại: [Progress](Progress.md), [S9 Acceptance](S9-Acceptance.md), [MatchFlow](../MatchFlow/Architecture.md), [D4 Validation](../DependencyInjection/D4-Validation.md).
 
@@ -215,9 +215,9 @@ Trình tự thực hiện sau khi duyệt: chỉ mở **G0–G1** trước, tạ
 
 | Lát cắt | Trạng thái | Bằng chứng mới |
 |---|---|---|
-| G0 Baseline/đo | ĐANG KIỂM | Snapshot/fingerprint, HP resolve, ledger trong harnessG01 |
-| G1 Engagement/policy | ĐANG CHẠY | MatrixG01-v3; giữ pilot/fail riêng, chưa chốt |
-| G2 Áp lực sinh tồn | TODO | Chưa chọn/tune config |
+| G0 Baseline/đo | DONE | Snapshot269hash, HP10000resolve,12ledgerPASS; recipe restore; [G01](G01-Validation.md) |
+| G1 Engagement/policy | DONE | 12runv3, quân chủ động tham chiến3seed, worker role/rally/stall diagnostic; worker trigger fix+self-check |
+| G2 Áp lực sinh tồn | DONE — shortlist | [9native+1realtime](G2-PressurePilot.md); C1600 thuađêm4, E/M thắng; realtimeE thắng/Hall1338. Author1600 chỉProceduralGame; bước tiếpG3 |
 | G3 Tech/mở rộng/manual | TODO | Chưa chạy |
 | G4 Spike attribution | TODO | Chưa profile thêm |
 | G5 Release/onscreen | TODO | Chưa build/đo |

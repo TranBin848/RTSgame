@@ -1,5 +1,7 @@
 # Kiểm chứng gameplay ECS
 
+**19/11 — G0–G1:** [báo cáo12run và self-check worker presentation](../Progression/G01-Validation.md). Unit.ApplyDotsSnapshot bỏ triggerAttack chung cho Worker vì Pawn dùng boolisAttacking; Unity probe trước1warning/sau0, boolworker/triggerarcher đạt, native sequence không đổi. Không sửa simulation hoặc dùng kết quả81EditMode/18Player cũ để nói đã chạy lại sau guard.
+
 **17/11 — cập nhật code hiện tại:**81/81EditMode (64DOTS+17procedural),18/18Player full-gameplay checks/errors=[] trên build mới; DI UI/fog/caller/pool/reload kiểm cả ProceduralGame/SampleScene. [S9 artifact và điều kiện đo](../Progression/S9-Acceptance.md) là nguồn hiện tại. Functional smoke có timers rút ngắn; performance route riêng realtime/offscreen, không đổi timer và không là benchmark toàn bộ quy mô DOTS.
 
 ## Các mức bằng chứng

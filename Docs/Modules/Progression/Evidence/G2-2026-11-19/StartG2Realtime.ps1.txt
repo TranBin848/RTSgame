@@ -1,0 +1,10 @@
+param([ValidateSet(1600,1200)][int]$HP=1600,[ValidateSet('Economy','Military')][string]$Strategy='Economy')
+$g2RealtimeHP=$HP
+$g2RealtimeStrategy=$Strategy
+. (Join-Path $PSScriptRoot 'RunG2.ps1') -HallHP @()
+Invoke-G2 ('if(EditorApplication.isPlaying||EditorApplication.isCompiling||UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new Exception("Clean Edit required.");var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();if(hall.MaxHealth!=10000)throw new Exception("Baseline10000 required.");System.IO.File.WriteAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/pending-restore.json","{\"baselineHallHP\":10000,\"candidateHallHP\":'+$g2RealtimeHP+',\"mode\":\"realtime\",\"seed\":1}");typeof(Unit).GetField("m_Health",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).SetValue(hall,'+$g2RealtimeHP+');AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;EditorApplication.isPaused=true;EditorApplication.isPlaying=true;return "realtime candidate before Awake";')
+Start-Sleep -Seconds 4
+Wait-G2Ready
+Invoke-G2 'EditorApplication.Step();return "realtime startup";'
+Invoke-G2 ([IO.File]::ReadAllText((Join-Path $g2Dir 'G2Realtime-derived.cs.txt'))) 'G2Realtime' $g2RealtimeStrategy
+# Deliberately leave the normal game running; watch realtime-status.json until a terminal result.

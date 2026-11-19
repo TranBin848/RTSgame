@@ -1,0 +1,42 @@
+param([int[]]$HallHP = @(10000,1600,1200), [string[]]$Policy = @('Control','Economy','Military'))
+$ErrorActionPreference = 'Stop'
+$g2Dir = Join-Path $PSScriptRoot '../Docs/Modules/Progression/Evidence/G2-2026-11-19'
+$g2Args = Join-Path $PSScriptRoot '../.utmp/G2-tool-input.json'
+function Invoke-G2($Code, $Class = '', $Method = '', $Seconds = 30) {
+    @{csharpCode=$Code;className=$Class;methodName=$Method;timeout=$Seconds} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $g2Args -Encoding utf8
+    $g2Text = & npx.cmd --yes unity-mcp-cli run-tool script-execute --no-start --input-file $g2Args --timeout 310000 --format json
+    $g2Exit = $LASTEXITCODE
+    $g2Result = ($g2Text -join "`n") | ConvertFrom-Json
+    $g2Result | ConvertTo-Json -Depth 20 | Add-Content -LiteralPath (Join-Path $g2Dir 'cli-transcript.txt')
+    if ($g2Exit -ne 0 -or !$g2Result.success -or $g2Result.data.result.status -ne 'success') { throw "G2 call failed; inspect cli-transcript.txt before retry." }
+    $g2Content = ($g2Result.data.result.content | Where-Object type -eq 'text').text -join "`n"
+    if ($g2Content -match 'Compilation failed|Execution failed|plugin_reconnected') { throw $g2Content }
+    $g2Content | Out-Host
+}
+function Wait-G2Ready {
+    for ($g2Attempt=0; $g2Attempt -lt 8; $g2Attempt++) {
+        try { Invoke-G2 'if(EditorApplication.isCompiling)throw new Exception("Compiling");return "Editor connected";'; return }
+        catch { if($g2Attempt -eq 7){throw}; Start-Sleep -Seconds 3 }
+    }
+}
+foreach ($g2HP in $HallHP) {
+    if ($g2HP -notin @(10000,1600,1200)) { throw 'Only preregistered Hall HP allowed.' }
+    foreach ($g2Policy in $Policy) {
+        if ($g2Policy -notin @('Control','Economy','Military')) { throw 'Only C/E/M pilot allowed.' }
+        "START HP=$g2HP policy=$g2Policy" | Out-Host
+        try {
+            Invoke-G2 ('if(EditorApplication.isPlaying||EditorApplication.isCompiling||UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new Exception("Clean Edit Mode required.");var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();if(hall==null||hall.MaxHealth!=10000)throw new Exception("Baseline hall10000 required.");var dir="Docs/Modules/Progression/Evidence/G2-2026-11-19";System.IO.File.WriteAllText(dir+"/pending-restore.json","{\"baselineHallHP\":10000,\"candidateHallHP\":'+$g2HP+',\"seed\":1,\"saveAssets\":false}");typeof(Unit).GetField("m_Health",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).SetValue(hall,'+$g2HP+');AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;EditorApplication.isPaused=true;EditorApplication.isPlaying=true;return "candidate set in memory before Awake";')
+            Start-Sleep -Seconds 4
+            Wait-G2Ready
+            Invoke-G2 'EditorApplication.Step();return "startup frame";'
+            Invoke-G2 ([IO.File]::ReadAllText((Join-Path $g2Dir 'PlaytestG2-derived.cs.txt'))) 'G2Playtest' $g2Policy 290
+        }
+        finally {
+            Wait-G2Ready
+            Invoke-G2 'if(EditorApplication.isPlaying)EditorApplication.isPlaying=false;return "exit requested";'
+            Start-Sleep -Seconds 4
+            Wait-G2Ready
+            Invoke-G2 'if(EditorApplication.isPlaying)throw new Exception("Wait for Play exit before restoring authoring.");var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();typeof(Unit).GetField("m_Health",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).SetValue(hall,10000);AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;EditorApplication.isPaused=false;var state=new {hallMax=hall.MaxHealth,seed=1,playing=EditorApplication.isPlaying,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty};System.IO.File.WriteAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/restore-last.json",Newtonsoft.Json.JsonConvert.SerializeObject(state));return state;'
+        }
+    }
+}

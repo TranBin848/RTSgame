@@ -1,0 +1,146 @@
+// Temporary Editor-only runner. Install with the frozen harness, remove after the checkpoint is closed.
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+[InitializeOnLoad]
+public static class G2EditorRunner
+{
+    const string Dir="Docs/Modules/Progression/Evidence/G2-2026-11-19";
+    const string Request=".utmp/G2-editor-request.json";
+    const string Key="RTS.G2.EditorRunner.";
+    [Serializable] class Job { public string mode="pilot"; public int hp; }
+    static G2EditorRunner(){EditorApplication.update+=Pump;}
+    static void Status(string text)=>File.WriteAllText(Dir+"/editor-runner-status.json",Newtonsoft.Json.JsonConvert.SerializeObject(new {text,phase=SessionState.GetInt(Key+"phase",0),playing=EditorApplication.isPlaying,paused=EditorApplication.isPaused,utc=DateTime.UtcNow}));
+    static void LoadCandidate(int hp,int nextPhase)
+    {
+        if(!EditorApplication.isPlaying||!EditorApplication.isPaused)throw new Exception("Paused Play required for reload.");
+        SessionState.SetBool(Key+"bound",false);
+        UnityEngine.Events.UnityAction<Scene,LoadSceneMode> loaded=null;
+        loaded=(scene,mode)=>
+        {
+            SceneManager.sceneLoaded-=loaded;
+            try
+            {
+                var root=UnityEngine.Object.FindFirstObjectByType<GameSceneCompositionRoot>();
+                var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();
+                if(root.IsReady||hall.IsDotsControlled)throw new Exception("Expected pre-bind lifecycle.");
+                var flags=BindingFlags.Instance|BindingFlags.NonPublic;
+                typeof(Unit).GetField("m_Health",flags).SetValue(hall,hp);
+                typeof(Unit).GetField("m_CurrentHealth",flags).SetValue(hall,hp);
+                SessionState.SetBool(Key+"bound",true);
+            }
+            catch(Exception ex){Fail(ex);}
+        };
+        SceneManager.sceneLoaded+=loaded;
+        AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;
+        Time.timeScale=1;
+        SessionState.SetInt(Key+"phase",nextPhase);
+        SceneManager.LoadScene("ProceduralGame");
+        EditorApplication.Step();
+    }
+    static bool Ready()=>SessionState.GetBool(Key+"bound",false)&&UnityEngine.Object.FindFirstObjectByType<GameSceneCompositionRoot>()?.IsReady==true;
+    static string[] Runs(int hp,string policy)=>Directory.GetFiles(Dir,"*-hp"+hp+"-"+policy+"-1.txt");
+    static bool Outcome(int hp,string policy,string outcome)=>Runs(hp,policy).Any(p=>File.ReadAllText(p).Contains("outcome="+outcome+";"));
+    static void Fail(Exception ex)
+    {
+        File.WriteAllText(Dir+"/editor-runner-FAILED.txt",ex.ToString());
+        SessionState.SetInt(Key+"phase",8);
+        Status("FAILED; restoring Edit baseline");
+    }
+    static void Pump()
+    {
+        if(!File.Exists(Request)||EditorApplication.isCompiling||EditorApplication.isUpdating)return;
+        try
+        {
+            int phase=SessionState.GetInt(Key+"phase",0);
+            if(phase==0)
+            {
+                var job=JsonUtility.FromJson<Job>(File.ReadAllText(Request));
+                if(job.mode=="author")
+                {
+                    if(EditorApplication.isPlaying||SceneManager.GetActiveScene().isDirty||job.hp!=1600&&job.hp!=1200)throw new Exception("Author guard.");
+                    var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();
+                    if(hall.MaxHealth!=10000)throw new Exception("Expected baseline10000.");
+                    var serialized=new SerializedObject(hall);serialized.FindProperty("m_Health").intValue=job.hp;serialized.ApplyModifiedProperties();
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(hall);
+                    EditorSceneManager.MarkSceneDirty(hall.gameObject.scene);
+                    if(!EditorSceneManager.SaveScene(hall.gameObject.scene))throw new Exception("SaveScene failed.");
+                    File.WriteAllText(Dir+"/authored.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{hp=hall.MaxHealth,scene=hall.gameObject.scene.path,dirty=hall.gameObject.scene.isDirty,utc=DateTime.UtcNow}));
+                    File.Delete(Request);Status("Authored selected Hall HP");return;
+                }
+                Status("Starting local pilot; no SaveScene/SaveAssets");
+                SessionState.SetInt(Key+"phase",1);
+                if(EditorApplication.isPlaying)EditorApplication.isPlaying=false;
+                return;
+            }
+            if(phase==1)
+            {
+                if(EditorApplication.isPlaying)return;
+                if(SceneManager.GetActiveScene().path!="Assets/Scenes/ProceduralGame.unity"||SceneManager.GetActiveScene().isDirty||UnityEngine.Object.FindFirstObjectByType<TownHall>().MaxHealth!=10000)throw new Exception("Clean baseline scene required.");
+                SessionState.SetInt(Key+"phase",2);EditorApplication.isPaused=true;EditorApplication.isPlaying=true;return;
+            }
+            if(phase==2)
+            {
+                if(!EditorApplication.isPlaying)return;
+                SessionState.SetInt(Key+"phase",3);return;
+            }
+            if(phase==3)
+            {
+                foreach(int hp in new[]{10000,1600,1200})foreach(string policy in new[]{"control","economy","military"})
+                {
+                    if(Runs(hp,policy).Length>0)continue;
+                    SessionState.SetInt(Key+"hp",hp);SessionState.SetString(Key+"policy",policy);Status("Preparing HP"+hp+"/"+policy);
+                    LoadCandidate(hp,4);return;
+                }
+                int winner=new[]{1600,1200}.FirstOrDefault(hp=>Outcome(hp,"control","Defeat")&&(Outcome(hp,"economy","Victory")||Outcome(hp,"military","Victory")));
+                if(winner==0){Status("No shortlist; restore baseline");SessionState.SetInt(Key+"phase",8);return;}
+                string strategy=Outcome(winner,"economy","Victory")?"economy":"military";
+                SessionState.SetInt(Key+"winner",winner);SessionState.SetString(Key+"strategy",strategy);
+                File.WriteAllText(Dir+"/shortlist.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{hp=winner,strategy,rule="highest preregistered HP with controlDefeat and activeVictory; realtime pending"}));
+                Status("Preparing realtime HP"+winner+"/"+strategy);LoadCandidate(winner,6);return;
+            }
+            if(phase==4)
+            {
+                if(!Ready())return;
+                string policy=SessionState.GetString(Key+"policy","");Status("Running native HP"+SessionState.GetInt(Key+"hp",0)+"/"+policy);
+                if(policy=="control")G2EditorPlaytest.Control();else if(policy=="economy")G2EditorPlaytest.Economy();else G2EditorPlaytest.Military();
+                SessionState.SetInt(Key+"phase",3);Status("Native run completed");return;
+            }
+            if(phase==6)
+            {
+                if(!Ready())return;
+                if(SessionState.GetString(Key+"strategy","")=="economy")G2EditorRealtime.Economy();else G2EditorRealtime.Military();
+                SessionState.SetInt(Key+"phase",7);Status("Realtime running in normal Unity PlayerLoop");return;
+            }
+            if(phase==7)
+            {
+                if(!EditorApplication.isPlaying){throw new Exception("Realtime stopped externally.");}
+                var bridge=UnityEngine.Object.FindFirstObjectByType<SwarmGameBridge>();
+                if(bridge.Gameplay.IsMatchOver&&Directory.GetFiles(Dir,"*-realtime.txt").Any(p=>File.ReadAllText(p).Contains("finished wallSeconds=")))
+                {SessionState.SetInt(Key+"phase",8);Status("Realtime terminal; restoring baseline before review");}
+                return;
+            }
+            if(phase==8)
+            {
+                SessionState.SetInt(Key+"phase",9);if(EditorApplication.isPlaying)EditorApplication.isPlaying=false;return;
+            }
+            if(phase==9)
+            {
+                if(EditorApplication.isPlaying)return;
+                var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();
+                if(hall.MaxHealth!=10000)throw new Exception("Edit baseline changed unexpectedly.");
+                AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;
+                EditorApplication.isPaused=false;
+                File.WriteAllText(Dir+"/restore-local.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{hp=hall.MaxHealth,scene=SceneManager.GetActiveScene().path,dirty=SceneManager.GetActiveScene().isDirty,playing=EditorApplication.isPlaying,paused=EditorApplication.isPaused,utc=DateTime.UtcNow}));
+                SessionState.SetInt(Key+"phase",0);File.Delete(Request);Status("Complete; baseline restored; awaiting evidence review");
+            }
+        }
+        catch(Exception ex){Fail(ex);}
+    }
+}

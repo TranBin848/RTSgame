@@ -1,0 +1,16 @@
+{
+  "project": "E:/Unity project/RTSgame2026/Assets",
+  "unity": "6000.3.11f1",
+  "scene": "Assets/Scenes/ProceduralGame.unity",
+  "dirty": false,
+  "playing": false,
+  "paused": false,
+  "compiling": false,
+  "compileFlagAvailable": true,
+  "scriptCompilationFailed": false,
+  "hallHP": 1600,
+  "prefabHP": 100,
+  "seed": 1,
+  "temporaryFiles": [],
+  "temporaryTypes": []
+}

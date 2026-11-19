@@ -1,6 +1,8 @@
 # Tài liệu kỹ thuật RTSgame2026
 
-**Đợt mới18/11:** đã duyệt G0–G1 theo [NextPhasePlan](Modules/Progression/NextPhasePlan.md), đang chạy baseline/policy theo [hợp đồng đoG01](Modules/Progression/G01-MeasurementContract.md). G2–G7 chưa triển khai. Plan S0–S9/D0–D4 giữ DONE theo phạm vi nghiệm thu cũ.
+**Chốt G2 ngày19/11:** [báo cáo pilot và realtime](Modules/Progression/G2-PressurePilot.md):9native+1realtime đạt gate, chọn **Hall1600HP riêngProceduralGame** làm shortlistG3. Byte-diff scene đúng1giá trị; prefab/SampleScene/tech/wave/clock giữnguyên, runner tạm đãgỡ. Chưa nghiệm thu cân mọiseed; G3 cần kiểm controlseed0 và lợiích/exploit mởrộng.
+
+**Checkpoint G0–G1 trước G2:** [báo cáo baseline/policy12run](Modules/Progression/G01-Validation.md), [hợp đồng đo/chạy lại](Modules/Progression/G01-MeasurementContract.md), [NextPhasePlan](Modules/Progression/NextPhasePlan.md). Quân chủ động tham chiến3seed, ledgerPASS; control10000HP vẫn thắng3/3. Có fix trigger worker+self-check. S0–S9/D0–D4 giữ DONE theo phạm vi cũ.
 
 **Bàn giao17/11:** build plan S0–S9 và D0–D4 DONE trong phạm vi đã chốt. Bắt đầu ở [Progress](Modules/Progression/Progress.md), [S9 nghiệm thu/artifacts/giới hạn](Modules/Progression/S9-Acceptance.md) và [D4 DI](Modules/DependencyInjection/D4-Validation.md); các trạng thái trước đó dưới đây là lịch sử.
 

@@ -1,5 +1,9 @@
 # Progression — kiểm chứng S0
 
+**19/11 — G2 DONE shortlist:** [9native+1realtime](G2-PressurePilot.md), ledger/HPresolve/outcomePASS; chọnHall1600 riêngProceduralGame. Cseed1 thuađêm4/E-M thắng, realtimeE thắng/Hall1338. Diff scene sau phục hồiUI/tile bằngUnityAPI đúng1giá trịHP;269snapshot chỉsceneđổi. [ClosureMCP](Evidence/G2-2026-11-19/closure-state.json) sau gỡrunner: sạch/seed1/ngoàiPlay-pause-compile, compileFailed=false. Chưa Player/perf/manual hoặc3seedcandidate; Console lịch sử toolerrors giữnguyên.
+
+**Chốt19/11 — G0–G1:** [G01 Validation](G01-Validation.md) ghi12runv3/3seed×4policy, ledger và HP resolvePASS, engagement chủ động3seed, control vẫn thắng3/3; [contract/cách chạy](G01-MeasurementContract.md). Có worker presentation guard với Unity self-check trước/sau; matrix trước guard giữ riêng. Chưa Player/perf mới hoặc G2. MCP19/11 kết nối đúng instance nhưng chưa kiểm lại live scene do tool scene/script chưa được expose; xem report cho giới hạn và log kết nối/warnings.
+
 **Nghiệm thu17/11 — S0–S9/D0–D4 DONE theo phạm vi:** [S9](S9-Acceptance.md) có81tests XML,18/18Player smoke/errors=[],Windows build report, CSV19191frames/89.998s,phase startup/GC/PNG/hash416files. S8 user xác nhận chung; D4 runtime/caller/pool/reload assertions đã có. Không dùng số cũ bên dưới cho code hiện tại hoặc coi benchmark offscreen một seed là kết quả mọi máy/onscreen. Known limits được ghi, đặc biệt baseline không thao tác vẫn thắng và GC spike chưa profile attribution.
 
 **S8 —16/11:** final64/64DOTS+17/17procedural PASS; outcome/terminal/menu/replay/DI checks PASS,6policy0/1/1543 có raw data và ảnh. [MatchFlow/report](../MatchFlow/Architecture.md) là cập nhật hiện tại: S8PARTIAL vì manual/cân bằng chờ theo user; không tái dùng acceptance S7 để đóngS8. Các phần dưới là lịch sử.

@@ -1,0 +1,29 @@
+param([int[]]$HallHP = @(10000,1600,1200), [string[]]$Policy = @('Control','Economy','Military'))
+$g2RequestedHP=$HallHP
+$g2RequestedPolicy=$Policy
+. (Join-Path $PSScriptRoot 'RunG2.ps1') -HallHP @()
+try {
+    Invoke-G2 'if(EditorApplication.isPlaying||EditorApplication.isCompiling||UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new Exception("Clean Edit required.");if(UnityEngine.Object.FindFirstObjectByType<TownHall>().MaxHealth!=10000)throw new Exception("Restore baseline10000 first.");EditorApplication.isPaused=true;EditorApplication.isPlaying=true;return "enter warm Play";'
+    Start-Sleep -Seconds 4
+    Wait-G2Ready
+    foreach($g2HP in $g2RequestedHP) {
+        if($g2HP -notin @(10000,1600,1200)){throw 'Unregistered HP.'}
+        foreach($g2Policy in $g2RequestedPolicy) {
+            if($g2Policy -notin @('Control','Economy','Military')){throw 'Unregistered policy.'}
+            $g2Existing=Get-ChildItem -LiteralPath $g2Dir -Filter ('*-hp'+$g2HP+'-'+$g2Policy.ToLower()+'-1.txt')
+            if($g2Existing){"SKIP completed HP=$g2HP $g2Policy" | Out-Host;continue}
+            "START WARM HP=$g2HP policy=$g2Policy" | Out-Host
+            $g2Prepare='if(!EditorApplication.isPlaying||!EditorApplication.isPaused)throw new Exception("Paused warm Play required.");System.IO.File.WriteAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/pending-restore.json","{\"baselineHallHP\":10000,\"candidateHallHP\":'+$g2HP+',\"seed\":1,\"saveAssets\":false,\"mode\":\"warm-prebind\"}");UnityEngine.Events.UnityAction<UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode> onLoaded=null;onLoaded=(scene,mode)=>{UnityEngine.SceneManagement.SceneManager.sceneLoaded-=onLoaded;var root=UnityEngine.Object.FindFirstObjectByType<GameSceneCompositionRoot>();var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();if(root.IsReady||hall.IsDotsControlled)throw new Exception("HP must be applied before scene binding.");var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(Unit).GetField("m_Health",flags).SetValue(hall,'+$g2HP+');typeof(Unit).GetField("m_CurrentHealth",flags).SetValue(hall,'+$g2HP+');};UnityEngine.SceneManagement.SceneManager.sceneLoaded+=onLoaded;AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;Time.timeScale=1;UnityEngine.SceneManagement.SceneManager.LoadScene("ProceduralGame");return "reload with one-shot prebind HP callback";'
+            Invoke-G2 $g2Prepare
+            Invoke-G2 'EditorApplication.Step();return "warm scene startup";'
+            Invoke-G2 ([IO.File]::ReadAllText((Join-Path $g2Dir 'PlaytestG2-derived.cs.txt'))) 'G2Playtest' $g2Policy 290
+        }
+    }
+}
+finally {
+    Wait-G2Ready
+    Invoke-G2 'if(EditorApplication.isPlaying)EditorApplication.isPlaying=false;return "warm Play exit requested";'
+    Start-Sleep -Seconds 4
+    Wait-G2Ready
+    Invoke-G2 'if(EditorApplication.isPlaying)throw new Exception("Play exit pending.");var hall=UnityEngine.Object.FindFirstObjectByType<TownHall>();if(hall.MaxHealth!=10000)throw new Exception("Edit scene unexpectedly changed.");AssetDatabase.LoadAssetAtPath<ProceduralMapSettings>("Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset").Seed=1;EditorApplication.isPaused=false;var state=new{hallMax=hall.MaxHealth,seed=1,playing=EditorApplication.isPlaying,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty};System.IO.File.WriteAllText("Docs/Modules/Progression/Evidence/G2-2026-11-19/restore-last.json",Newtonsoft.Json.JsonConvert.SerializeObject(state));return state;'
+}

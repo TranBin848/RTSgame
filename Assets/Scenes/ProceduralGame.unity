@@ -320212,7 +320212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5643201212717265951, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
       propertyPath: m_Health
-      value: 10000
+      value: 1600
       objectReference: {fileID: 0}
     - target: {fileID: 5643201212717265951, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
       propertyPath: m_AttackRange

@@ -16,7 +16,7 @@ Clock/wave Tick → Gameplay.Update → Swarm.Update → bridge SynchronizeGamep
 
 Ledger thứ tự **W/G/M**: `100 + deposit - researchSpend - trainSpend - buildSpend = final`, assert từng loại và đối chiếu tổngspend. `GameManager.AddResources` nhận **G/W/M**; native `Gameplay.AddResources` nhận **W/G/M**. Deposit đo delta ví trong native tick không có command chi; gather là tổng delta cargo dương cùng loại, không tính lại hàng khi đổi nhãn. Gather không phải event accounting đầy đủ; mất cargo do chết, cargo cuối và thay đổi nhiệm vụ đọc từ worker snapshot.
 
-## Policy đã chốt trước matrixv2
+## Policy matrixv3 (hoàn thiện từ pilotv1/v2)
 
 - C: không lệnh; giữ AI và quân/công trình author sẵn. Peak vẫn đo mỗi tick; expansion ghi not attempted.
 - E: Tools→Cargo→Archery→Training→Outposts→Fortify, tối đa6worker/8warrior/6archer.
@@ -43,3 +43,7 @@ Qua Unity MCP `script-execute`: đọc full `Tools/PlaytestG01.cs`, className `G
 Sau run hoặc khi phục hồi phiên dừng: đặt lại Seed=1 trong bộ nhớ, thoát Play, xác nhận scene sạch/ngoài pause-compile và disk seed1. Không reset scene/prefab/git. G0–G1 không author candidate nên không cần phục hồi HP/wave/tech. Nếu sau này thử candidate, dùng path/serialized property trong authoring snapshot để khôi phục đúng từng trường qua SerializedObject/Unity API; không overwrite cả asset từ JSON và không hand-edit YAML.
 
 Kiểm tích hợp là matrix với assert ledger/HP/terminal; không thêm test production cho harness nằm ngoài Assets. Regression native không cần chạy lại nếu không đổi runtime; nếu xác nhận và sửa bug runtime phải thêm test rồi chạy suite liên quan. Hiệu năng, realtime candidate, Release/onscreen và manual feedback thuộc các gate sau; chưa xác nhận ở G0–G1.
+
+## Kết quả và thay đổi sau matrix
+
+[Báo cáo G01](G01-Validation.md) chốt12/12run và giới hạn. Matrixv3 đo trước guard presentation trong Unit.cs; source trước/sau, fingerprint và self-check worker/archer lưu riêng. Guard loại worker khỏi trigger Attack chung vì worker dùng bool isAttacking. Không thay native simulation và không chạy lại matrix sau guard. Script kiểm offline: `node Tools/SummarizeG01.mjs --complete --compact`.
