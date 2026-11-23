@@ -1,6 +1,8 @@
 # Progression — cách chạy baseline S0
 
-**Cấu hình sau G2 ngày19/11:** `MainMenu` → `ProceduralGame` dùng Hall1600HP, vẫn sống5đêm/thắngngày6; prefabTownHall và SampleScene không đổi. Đây là shortlist để kiểmG3, chưa xác nhận mọiseed đều không tựthắng. [G2 report/recipe/restore](G2-PressurePilot.md). Runner tạm đãgỡ, có thể Play bìnhthường; các lệnh harnessG01 bên dưới cần baseline10000 đãđóngbăng, không chạy thẳng vào trận1600 rồi trộn số liệu.
+**Giao diện mới ngày 23/11:** bấm **Công nghệ [T]** hoặc phím **T** để mở cây toàn màn hình. Kéo chuột trái/giữa, cuộn hoặc +/− để zoom, Home/Về trung tâm reset, Esc đóng. Chọn node rồi Nghiên cứu trong bảng bên phải. UI dùng TownHall hợp lệ đang chọn hoặc một TownHall đã hoàn thành trong trận, không bắt buộc chọn Hall trước. Trận vẫn chạy khi mở cây. Xem [ResearchTreeUI](ResearchTreeUI.md) cho thiết kế và phạm vi kiểm chứng; các hướng dẫn sáu panel bên dưới là lịch sử.
+
+**Cấu hình chơi thử G3 ngày 21/11.** Mở `MainMenu` để vào `ProceduralGame` với seed 1 và TownHall 1200 HP. Mục tiêu là sống qua năm đêm. Các lệnh harness G01 bên dưới dùng bản baseline đóng băng với Hall 10000 HP. [Cách chơi thử và tái lập G3](G3-EconomyExpansion.md)
 
 **Harness G0–G1, chốt19/11:** [MeasurementContract](G01-MeasurementContract.md) mô tả paused Ready Play, scene mới/seed, class G01Playtest và bốn method policy, khôi phục Seed=1/thoát Play. Kiểm raw offline từ project root: `node Tools/SummarizeG01.mjs --complete --compact`. [Báo cáo và giới hạn](G01-Validation.md) tách pilot/fail, matrix trước guard và self-check presentation sau guard; không chạy harness này để đo FPS hoặc tiếp tục trận người dùng đang chơi.
 

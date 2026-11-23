@@ -1,0 +1,62 @@
+[
+  {
+    "path": "Assets/Scenes/ProceduralGame.unity",
+    "sha256": "0B049E30DB878B2C63EB969457D7E99560230644852F760924E886223ECC869F"
+  },
+  {
+    "path": "Assets/Game/DOTS/Integration/SwarmSmokeAutomation.cs",
+    "sha256": "2C943A3B31983259E7DC642279178AE4BC1294F649E93C8C8156CBC49E4DA41E"
+  },
+  {
+    "path": "Assets/Game/DOTS/Integration/SwarmGameBridge.cs",
+    "sha256": "99FEC8FA53CE656EFD6A695FFFA62091C45CC77D4A80C350FD51720808CD9FC4"
+  },
+  {
+    "path": "Assets/Game/DOTS/Integration/GameplayGameBridge.cs",
+    "sha256": "6408A5A92EEFFCC4A4883F9A4CF1086D2A935FEB1844188B30CB896642BF3026"
+  },
+  {
+    "path": "Assets/Game/Scripts/Managers/EnemyWaveManager.cs",
+    "sha256": "506AC0F523531B23056D903F5888FFB56E90A32610534AF2D4E890E12B51DF30"
+  },
+  {
+    "path": "Assets/Game/Scripts/Managers/GameManager.cs",
+    "sha256": "570FF5F0B1933240E2D30500D0887D164753C7CBF0094B24A3B001E9EEF451ED"
+  },
+  {
+    "path": "Assets/Game/Scripts/Managers/TilemapManager.cs",
+    "sha256": "FB92190A51BD0A3094EC0FE1718909ABA8C70E66B203E20BE0941ED6DC740E5F"
+  },
+  {
+    "path": "ProjectSettings/ProjectVersion.txt",
+    "sha256": "A717ED4B946E370CE6E6AF9DD000B8ACF89495B44C84BF8F768159924CFA66C3"
+  },
+  {
+    "path": "ProjectSettings/ProjectSettings.asset",
+    "sha256": "D67790E8DDE8B68927445D2E0000BB2A9AC667F3CF0C7D263D46305233684F3D"
+  },
+  {
+    "path": "ProjectSettings/GraphicsSettings.asset",
+    "sha256": "D582A43D29C6DF139C7008EDDA9DF5DB042CF414CA3C8883C38017C884750C16"
+  },
+  {
+    "path": "ProjectSettings/QualitySettings.asset",
+    "sha256": "26B788B8F431609973E44E39D767F92EFD40971C88BDD26D0E014D784B181CB5"
+  },
+  {
+    "path": "Packages/manifest.json",
+    "sha256": "8FF062F003E4DB2ACE99C135EE67458C3147C512FF0885D2674194C4F18F1AF3"
+  },
+  {
+    "path": "Packages/packages-lock.json",
+    "sha256": "40CE7069AE3C9CAF9815BCFD43F9BA582A9B9E55B81D8E61C93124F68A469B61"
+  },
+  {
+    "path": ".utmp/g4-build-before/RTSgame2026.exe",
+    "sha256": "E3852A92C8D4350B2595C7086432A3350E25D7141FD6097BCC47D5F2D368A522"
+  },
+  {
+    "path": ".utmp/g4-build-before/RTSgame2026_Data/Managed/Assembly-CSharp.dll",
+    "sha256": "B96F06EB46FDCAD01AA0975CCFF29677D669A8DB595F6215E9AE69E24D591817"
+  }
+]

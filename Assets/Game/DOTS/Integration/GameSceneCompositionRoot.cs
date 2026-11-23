@@ -15,6 +15,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
     [SerializeField] CameraController m_Camera;
     [SerializeField] EconomyResearchDefinition m_ResearchDefinition;
     [SerializeField] ResearchPanel m_ResearchPanel;
+    [SerializeField] ResearchTreePanel m_ResearchTree;
     [SerializeField] ProceduralMapPresentation m_MapPresentation;
     [SerializeField] MinimapFogUI m_Minimap;
     [SerializeField] MatchSession m_Match;
@@ -44,6 +45,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         {
             var timer = System.Diagnostics.Stopwatch.StartNew();
             m_Bridge.BindScene();
+            m_Waves.CaptureProceduralStartingRange();
             BindMilliseconds = timer.Elapsed.TotalMilliseconds;
             m_Game.BeginGameplay();
             m_Bridge.Simulation.Paused = false;
@@ -84,7 +86,12 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         if (m_Match == null) throw new InvalidOperationException("Match session is required.");
         m_Match.Initialize(m_Bridge.Gameplay, m_DayNight, m_Game);
         Research = new ResearchService(m_Bridge);
-        if (m_ResearchPanel != null)
+        if (m_ResearchTree != null)
+        {
+            m_ResearchTree.Initialize(Research, m_Game, m_Camera);
+            m_Game.InitializeResearchTree(m_ResearchTree);
+        }
+        else if (m_ResearchPanel != null)
             foreach (var panel in m_ResearchPanel.GetComponentsInChildren<ResearchPanel>(true)) panel.Initialize(Research, m_Game);
         m_Nodes = new SceneResourceNodeLocator(m_Game.ResourceContainers);
         m_Depots = new SceneResourceDepotLocator(() => m_Game.GetPlayerStructures());
@@ -122,6 +129,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
                     case IdleWorkerPanelUI ui: ui.Initialize(game, camera); break;
                     case MinimapFogUI ui: ui.Initialize(fog, map, camera, viewCamera, bridge); break;
                     case CursorManager cursor: cursor.Initialize(game, bridge, viewCamera); break;
+                    case GameFlowMenu menu: menu.InitializeResearchTree(game.ResearchTree); break;
                 }
         }
     }

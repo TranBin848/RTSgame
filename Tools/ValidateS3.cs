@@ -16,8 +16,9 @@ public static class S3Validation
         var world = World.DefaultGameObjectInjectionWorld;
         var original = world.Time;
         var ids = new[] { "economy_tools", "economy_cargo", "military_archery", "military_training", "expansion_tower", "expansion_fortify" };
-        if (!root.IsReady || UnityEngine.Object.FindObjectsByType<ResearchPanel>(FindObjectsSortMode.None).Length != 6)
-            throw new Exception("Expected ready root and six research panels.");
+        var tree = manager.ResearchTree;
+        if (!root.IsReady || (tree == null && UnityEngine.Object.FindObjectsByType<ResearchPanel>(FindObjectsSortMode.None).Length != 6))
+            throw new Exception("Expected ready root and research tree or six legacy panels.");
         if (bridge.Gameplay.CanUseArchery || bridge.Gameplay.CanUseTowers) throw new Exception("Capabilities must start locked in a new match.");
         if (root.Research.Start("economy_cargo", hall) != ResearchResult.MissingPrerequisite) throw new Exception("Prerequisite bypass.");
         manager.AddResources(2000, 2000, 2000);
@@ -45,10 +46,11 @@ public static class S3Validation
                 if (!root.Research.IsUnlocked(id)) throw new Exception("Completion failed: " + id);
             }
             foreach (var panel in UnityEngine.Object.FindObjectsByType<ResearchPanel>(FindObjectsSortMode.None)) panel.SendMessage("Update");
+            if (tree != null) foreach (var id in ids) tree.SelectTechnology(id);
             if (!bridge.Gameplay.CanUseArchery || !bridge.Gameplay.CanUseTowers || bridge.Gameplay.CargoMultiplier != 1.5f
                 || bridge.Gameplay.TrainingMultiplier != 0.8f || bridge.Gameplay.TowerMultiplier != 1.25f)
                 throw new Exception("Effective modifiers do not match catalog.");
-            return $"PASS six research transactions, prerequisites, busy guard, unlocks, modifiers, six panel refreshes; mask={bridge.Gameplay.Research.UnlockMask}";
+            return $"PASS six research transactions, prerequisites, busy guard, unlocks, modifiers, research UI refreshes; mask={bridge.Gameplay.Research.UnlockMask}";
         }
         finally
         {

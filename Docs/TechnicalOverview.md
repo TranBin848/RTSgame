@@ -1,5 +1,11 @@
 # Tech docs — tổng quan và bàn giao RTSgame2026
 
+**21/11/2026 — G5 đã đo candidate Windows Release.** Bản build Mono giữ Unity và URP của dự án. P95 ở 1080p/Ultra đạt ngưỡng 16,67 ms ở 3/4 lượt. Build plan giữ G5 mở do độ lặp chưa đạt budget. [Báo cáo G5](Modules/Progression/G5-ReleaseOnscreen.md)
+
+**21/11/2026 — G4 đã kiểm chứng bản sửa navigation.** `TilemapManager` giữ layer mask và tái sử dụng danh sách collider khi kiểm ô đi được. Trace Development Player xác định nguồn của spike 1 MB ở lúc bắt đầu đêm 1. Kết quả trước/sau và giới hạn đo nằm trong [báo cáo G4](Modules/Progression/G4-FrameProfiling.md).
+
+**21/11/2026 — G3 chờ người chơi nghiệm thu.** `ProceduralGame` dùng TownHall 1200 HP. Trên map procedural có gateway, `GameSceneCompositionRoot` chốt bán kính wave sau khi làm cầu nối cho các công trình đầu trận vào ECS. Thử nghiệm theo ba seed và bộ 81 bài EditMode đã xong. [Báo cáo G3](Modules/Progression/G3-EconomyExpansion.md)
+
 **19/11/2026 — G2 DONE phạm vi shortlist:** [G2 report](Modules/Progression/G2-PressurePilot.md), [Progress](Modules/Progression/Progress.md).9native/2candidateHP và1trậnrealtime đạt gate; lưu **Hall1600HP riêngProceduralGame**. Cseed1 thuađêm4, E/M thắng; realtimeE thắng/Hall1338. Diff so đầuđợt đúng1giá trị scene, prefabTownHall100/SampleScene10000/tech/wave/clock giữ nguyên. RunnerEditor tạm đãgỡ. G3 kếtiếp: kiểm sớm controlseed0, logistics và côngtrình bỏtrống; chưa nghiệm thu mọiseed hoặc đoPlayer/perf mới. Các checkpoint dưới là lịch sử trướcG2.
 
 **19/11/2026 — G0–G1 DONE phạm vi baseline/policy:** [G01 validation](Modules/Progression/G01-Validation.md), [hợp đồng đo](Modules/Progression/G01-MeasurementContract.md), [NextPhasePlan](Modules/Progression/NextPhasePlan.md).12run/3seed×4policy đạtledger/HPresolve; quân chủ động tham chiến, control vẫn thắng3/3. Sửa worker snapshot gửi triggerAttack sai (controller dùng isAttacking), Unity self-check trước/sau đạt; không đổi native simulation/HP/wave/giá. G2–G7 chưa làm, chưa Player/perf/manual mới. MCP19/11 chọn đúng instance nhưng chưa đọc lại live scene; Editor cuối xác nhận18/11 sạch/seed1/ngoàiPlay-pause-compile, có log kết nối/plugin và warnings được lưu. Bản bàn giao17/11 dưới đây là lịch sử, không thay cho kết quả mới.

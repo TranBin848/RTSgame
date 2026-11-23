@@ -9,6 +9,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.Profiling;
 
 // Activated only by an explicit Player/Editor command-line flag. No effect during normal gameplay.
 [DefaultExecutionOrder(300)]
@@ -20,6 +21,9 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
     Camera m_CaptureCamera;
     RenderPipeline.StandardRequest m_RenderRequest;
     bool m_Progression;
+    bool m_Onscreen;
+    int m_OnscreenFrames, m_InvalidOnscreenFrames, m_ExtraTrainingAccepted;
+    SwarmBenchmarkRecorder m_OnscreenRecorder;
     double m_LoadRequested;
     [Serializable] class Result
     {
@@ -30,7 +34,11 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         public string cameraPosition;
         public int renderSnapshots;
         public bool offscreenRender;
-        public int seed, generatorVersion, actors, workers, day, spawned;
+        public bool development, foreground, fogActive, hudActive, onscreen, startupOnly;
+        public int screenWidth, screenHeight, vSync, frameCap, onscreenFrames, invalidOnscreenFrames, extraTrainingAccepted;
+        public string screenMode, quality, graphicsApi, os;
+        public double refreshHz;
+        public int seed, generatorVersion, actors, workers, day, spawned, hallMaxHealth, waveSeed;
         public double sceneToReadyMs, generatorAwakeToReadyMs, coreMs, terrainMs, resourceMs, navigationMs, initializeMs, bindMs;
     }
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -49,10 +57,20 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         m_Output = pathIndex >= 0 && pathIndex + 1 < args.Length ? args[pathIndex + 1] : Path.GetFullPath(".utmp/swarm-smoke");
         Directory.CreateDirectory(m_Output);
         m_Progression = Array.IndexOf(args, "--progression-smoke") >= 0;
+        m_Onscreen = m_Progression && Array.IndexOf(args, "--g5-onscreen") >= 0;
+        bool startupOnly = m_Onscreen && Array.IndexOf(args, "--g5-startup-only") >= 0;
+        bool heavy = m_Onscreen && Array.IndexOf(args, "--g5-military-1543") >= 0;
+        bool g4Trace = m_Progression && Array.IndexOf(args, "--g4-trace") >= 0;
+        bool g4 = g4Trace || (m_Progression && Array.IndexOf(args, "--g4-measure") >= 0);
         bool rts = m_Progression || Array.IndexOf(args, "--rts-smoke") >= 0;
         string targetScene = m_Progression ? "ProceduralGame" : "SampleScene";
         m_LoadRequested = Time.realtimeSinceStartupAsDouble;
-        if (rts && SceneManager.GetActiveScene().name != targetScene) { SceneManager.LoadScene(targetScene); yield return null; }
+        if (rts && SceneManager.GetActiveScene().name != targetScene)
+        {
+            ProceduralMapAuthoring.BenchmarkSeedOverride = heavy ? 1543 : null;
+            try { SceneManager.LoadScene(targetScene); yield return null; }
+            finally { ProceduralMapAuthoring.BenchmarkSeedOverride = null; }
+        }
         yield return null;
         var demo = FindFirstObjectByType<SwarmDemoController>();
         var bridge = SwarmGameBridge.Instance;
@@ -61,13 +79,14 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         var cameraController = FindFirstObjectByType<CameraController>();
         if (cameraController != null) cameraController.LockCamera = true;
         m_CaptureCamera = Camera.main;
-        if (m_CaptureCamera != null)
+        if (m_CaptureCamera != null && !m_Onscreen)
         {
             // A hidden/minimized window can suppress screen rendering. An explicit target still exercises the GPU pipeline.
             m_CaptureTarget = new RenderTexture(1920, 1080, 24) { name = "Swarm smoke render target" };
             m_CaptureTarget.Create(); m_CaptureCamera.targetTexture = m_CaptureTarget;
             m_RenderRequest = new RenderPipeline.StandardRequest { destination = m_CaptureTarget };
         }
+        if (startupOnly) { Finish(simulation, null, rts, startupOnly: true); yield break; }
         if (demo != null)
         {
             int countIndex = Array.IndexOf(args, "--swarm-count");
@@ -94,6 +113,11 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         }
         if (m_Progression && bridge != null)
         {
+            if (g4 || m_Onscreen)
+            {
+                UnityEngine.Random.InitState(8001);
+                if (g4Trace) StartCoroutine(TraceWindows());
+            }
             var root = FindFirstObjectByType<GameSceneCompositionRoot>();
             if (root == null || !root.IsReady) m_Errors.Add("Procedural composition did not become ready.");
             var workers = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None);
@@ -109,20 +133,29 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
             var hall = FindFirstObjectByType<TownHall>();
             if (root != null && hall != null)
             {
-                root.Research.Start(GameplaySimulationSystem.EconomyToolsId, hall);
+                root.Research.Start(heavy ? "military_archery" : GameplaySimulationSystem.EconomyToolsId, hall);
                 var game = hall.GetComponentInParent<GameManager>();
                 if (game == null) game = FindFirstObjectByType<GameManager>();
                 game.ActiveUnit = hall;
                 foreach (var action in hall.Actions) if (action is SpawnVillagerActionSO) { action.Excute(game); break; }
+                if (heavy) StartCoroutine(TrainMilitary(game, hall));
             }
         }
         var recorder = demo != null ? demo.GetComponent<SwarmBenchmarkRecorder>() : gameObject.AddComponent<SwarmBenchmarkRecorder>();
         recorder.Simulation = simulation; recorder.WarmupSeconds = 5; recorder.CaptureSeconds = 10;
         if (m_Progression) { recorder.WarmupSeconds = 30; recorder.CaptureSeconds = 90; }
-        recorder.Renderer = FindFirstObjectByType<SwarmInstancedRenderer>(); recorder.OffscreenCapture = true;
+        if (g4) { recorder.WarmupSeconds = 2; recorder.CaptureSeconds = 113; }
+        recorder.Renderer = FindFirstObjectByType<SwarmInstancedRenderer>(); recorder.OffscreenCapture = !m_Onscreen;
+        if (m_Onscreen) m_OnscreenRecorder = recorder;
         recorder.OutputDirectoryOverride = m_Output; recorder.BeginCapture();
         yield return new WaitForSecondsRealtime(recorder.WarmupSeconds + recorder.CaptureSeconds + 1);
         yield return new WaitForEndOfFrame();
+        if (m_Onscreen)
+        {
+            var screenshot = ScreenCapture.CaptureScreenshotAsTexture();
+            File.WriteAllBytes(Path.Combine(m_Output, "screenshot.png"), screenshot.EncodeToPNG());
+            Destroy(screenshot);
+        }
         if (m_CaptureTarget != null)
         {
             RenderTexture previous = RenderTexture.active; RenderTexture.active = m_CaptureTarget;
@@ -132,7 +165,51 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
             Destroy(screenshot); RenderTexture.active = previous;
         }
         yield return new WaitForEndOfFrame();
-        Finish(simulation, recorder, rts);
+        Finish(simulation, recorder, rts, g4 || m_Onscreen ? 8001 : 0);
+    }
+    IEnumerator TrainMilitary(GameManager game, TownHall hall)
+    {
+        var barrack = FindFirstObjectByType<Barrack>();
+        var action = barrack != null ? barrack.Actions.OfType<SpawnWarriorActionSO>().FirstOrDefault() : null;
+        if (action == null) { m_Errors.Add("Military workload requires a warrior action."); yield break; }
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(10);
+            var before = SwarmGameBridge.Instance.Gameplay.Wallet;
+            game.ActiveUnit = barrack;
+            action.Excute(game);
+            var after = SwarmGameBridge.Instance.Gameplay.Wallet;
+            if (after.Meat < before.Meat || after.Gold < before.Gold || after.Wood < before.Wood) m_ExtraTrainingAccepted++;
+            game.ActiveUnit = hall;
+        }
+        yield return new WaitForSeconds(action.TrainDuration + 1);
+        foreach (var warrior in FindObjectsByType<WarriorUnit>(FindObjectsSortMode.None))
+            warrior.MoveTo(hall.transform.position + new Vector3(2, -2), DestinationSource.CodeTriggered);
+    }
+    IEnumerator TraceWindows()
+    {
+        // Short allocation-callstack captures around commands/training and the natural first wave.
+        StartTrace("opening");
+        yield return new WaitForSecondsRealtime(16);
+        StopTrace();
+        yield return new WaitForSecondsRealtime(71);
+        StartTrace("first-wave");
+        yield return new WaitForSecondsRealtime(12);
+        StopTrace();
+    }
+    void StartTrace(string name)
+    {
+        Profiler.maxUsedMemory = 256 * 1024 * 1024;
+        Profiler.logFile = Path.Combine(m_Output, name + ".raw");
+        Profiler.enableBinaryLog = true;
+        Profiler.enableAllocationCallstacks = true;
+        Profiler.enabled = true;
+    }
+    static void StopTrace()
+    {
+        Profiler.enabled = false;
+        Profiler.enableAllocationCallstacks = false;
+        Profiler.enableBinaryLog = false;
     }
     void OnLog(string condition, string stack, LogType type)
     {
@@ -141,10 +218,17 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
     }
     void LateUpdate()
     {
+        if (m_OnscreenRecorder != null && m_OnscreenRecorder.Status == "recording")
+        {
+            m_OnscreenFrames++;
+            if (!Application.isFocused || Screen.width != 1920 || Screen.height != 1080
+                || m_CaptureCamera == null || m_CaptureCamera.targetTexture != null)
+                m_InvalidOnscreenFrames++;
+        }
         if (m_CaptureCamera != null && m_RenderRequest != null)
             RenderPipeline.SubmitRenderRequest(m_CaptureCamera, m_RenderRequest);
     }
-    void Finish(SwarmSimulationSystem simulation, SwarmBenchmarkRecorder recorder, bool rts)
+    void Finish(SwarmSimulationSystem simulation, SwarmBenchmarkRecorder recorder, bool rts, int waveSeed = 0, bool startupOnly = false)
     {
         var renderer = FindFirstObjectByType<SwarmInstancedRenderer>();
         var result = new Result { unity = Application.unityVersion, cpu = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName,
@@ -173,6 +257,24 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
             result.workers = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None).Length;
             result.day = FindFirstObjectByType<DayNightCycleManager>().CurrentDay;
             result.spawned = simulation != null ? simulation.TotalSpawned : 0;
+            result.hallMaxHealth = FindFirstObjectByType<TownHall>()?.MaxHealth ?? 0;
+            result.waveSeed = waveSeed;
+        }
+        if (m_Onscreen)
+        {
+            result.onscreen = true; result.startupOnly = startupOnly;
+            result.foreground = Application.isFocused; result.development = Debug.isDebugBuild;
+            result.screenWidth = Screen.width; result.screenHeight = Screen.height;
+            result.screenMode = Screen.fullScreenMode.ToString(); result.refreshHz = Screen.currentResolution.refreshRateRatio.value;
+            result.vSync = QualitySettings.vSyncCount; result.frameCap = Application.targetFrameRate;
+            result.quality = QualitySettings.names[QualitySettings.GetQualityLevel()];
+            result.graphicsApi = SystemInfo.graphicsDeviceType.ToString(); result.os = SystemInfo.operatingSystem;
+            result.onscreenFrames = m_OnscreenFrames; result.invalidOnscreenFrames = m_InvalidOnscreenFrames;
+            result.extraTrainingAccepted = m_ExtraTrainingAccepted;
+            var fog = FindFirstObjectByType<FogOfWarManager>();
+            var hud = FindFirstObjectByType<ResourcesDataUI>();
+            result.fogActive = fog != null && fog.isActiveAndEnabled && !fog.IsDisabled;
+            result.hudActive = hud != null && hud.isActiveAndEnabled;
         }
         File.WriteAllText(Path.Combine(m_Output, "result.json"), JsonUtility.ToJson(result, true));
         Application.logMessageReceived -= OnLog;
@@ -181,7 +283,7 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
     void OnDestroy()
     {
         Application.logMessageReceived -= OnLog;
-        if (m_CaptureCamera != null) m_CaptureCamera.targetTexture = null;
+        if (m_CaptureCamera != null && m_CaptureTarget != null) m_CaptureCamera.targetTexture = null;
         if (m_CaptureTarget != null) { m_CaptureTarget.Release(); Destroy(m_CaptureTarget); }
     }
 }

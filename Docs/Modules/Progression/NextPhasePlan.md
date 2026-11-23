@@ -1,6 +1,6 @@
 # Kế hoạch sau S9 — cân bằng, hiệu năng và bản nộp khóa luận
 
-Ngày lập: **18/11/2026**. Chốt **19/11: G0–G2 DONE theo phạm vi từng gate**. [G01](G01-Validation.md) có baseline/policy12run; [G2](G2-PressurePilot.md) có9native+1realtime, shortlistHall1600 đã author riêng ProceduralGame. G3–G7 chưa thực hiện; chưa nghiệm thu cân bằng mọi seed hoặc bản Release.
+Ngày lập **18/11/2026**, cập nhật **21/11/2026**. G0–G2 DONE theo phạm vi từng gate. G3 đã chốt cấu hình chơi thử Hall 1200 HP và chờ phản hồi người chơi. G4 đã giảm spike managed allocation của navigation. G5 đã đo và kiểm Release, với budget onscreen còn mở. G6–G7 còn trong kế hoạch. [G01](G01-Validation.md) · [G2](G2-PressurePilot.md) · [G3](G3-EconomyExpansion.md) · [G4](G4-FrameProfiling.md) · [G5](G5-ReleaseOnscreen.md)
 
 Đây là đợt mới sau S0–S9/D0–D4 đã hoàn tất, không sửa lịch sử nghiệm thu cũ. Lượt lập kế hoạch chỉ đọc tài liệu/cấu hình/source và viết tài liệu; chưa đổi gameplay, chạy thử nghiệm, build hoặc thao tác Editor. Nguồn trạng thái hiện tại: [Progress](Progress.md), [S9 Acceptance](S9-Acceptance.md), [MatchFlow](../MatchFlow/Architecture.md), [D4 Validation](../DependencyInjection/D4-Validation.md).
 
@@ -218,9 +218,9 @@ Trình tự thực hiện sau khi duyệt: chỉ mở **G0–G1** trước, tạ
 | G0 Baseline/đo | DONE | Snapshot269hash, HP10000resolve,12ledgerPASS; recipe restore; [G01](G01-Validation.md) |
 | G1 Engagement/policy | DONE | 12runv3, quân chủ động tham chiến3seed, worker role/rally/stall diagnostic; worker trigger fix+self-check |
 | G2 Áp lực sinh tồn | DONE — shortlist | [9native+1realtime](G2-PressurePilot.md); C1600 thuađêm4, E/M thắng; realtimeE thắng/Hall1338. Author1600 chỉProceduralGame; bước tiếpG3 |
-| G3 Tech/mở rộng/manual | TODO | Chưa chạy |
-| G4 Spike attribution | TODO | Chưa profile thêm |
-| G5 Release/onscreen | TODO | Chưa build/đo |
+| G3 Tech/mở rộng/manual | CHỜ NGƯỜI CHƠI | Hall 1200 HP, đã sửa ảnh hưởng của móng kho lên wave và đo lợi ích vận chuyển. Chờ hai trận kinh tế/quân sự và một lần thử mở rộng. [Báo cáo G3](G3-EconomyExpansion.md) |
+| G4 Spike attribution | DONE — phạm vi navigation | Development Player cùng workload ghi GC ở tick đầu đêm giảm từ 1.020.416 B xuống 21.648 B. EditMode 81/81 và Player smoke 18/18. Spike frame 116,49 ms chưa tái lập. [Báo cáo G4](G4-FrameProfiling.md) |
+| G5 Release/onscreen | PARTIAL — budget chưa đạt | Windows Release smoke 18/18, bốn lượt 1080p có 3/4 đạt p95 ≤ 16,67 ms, startup đủ năm mẫu. Đã trace Development cho frame chậm. [Báo cáo G5](G5-ReleaseOnscreen.md) |
 | G6 Bản nộp | TODO | Chưa chốt release candidate |
 | G7 Demo/tài liệu bảo vệ | TODO | Chưa tạo artifact theo mẫu trường |
 

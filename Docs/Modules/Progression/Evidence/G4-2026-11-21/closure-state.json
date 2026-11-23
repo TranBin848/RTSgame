@@ -1,0 +1,23 @@
+{
+  "dateLocal": "2026-11-21",
+  "unityMcp": [
+    "dataPath: \"E:/Unity project/RTSgame2026/Assets\"",
+    "scene: Assets/Scenes/ProceduralGame.unity",
+    "dirty: false",
+    "playing: false",
+    "paused: false",
+    "compiling: false",
+    "hallMaxHealth: 1200",
+    "seed: 1"
+  ],
+  "editMode": {
+    "Status": "Passed",
+    "TotalTests": 81,
+    "PassedTests": 81,
+    "FailedTests": 0,
+    "SkippedTests": 0,
+    "Duration": "00:00:07.1568632"
+  },
+  "navigationCheck": "System.String: \"PASS 22404 tile comparisons across both trigger settings; crowded fixture, layer mask and disabled collider agree; warmed scan 0 B.\"",
+  "researchPolling": "System.String: \"PASS1000idle+1000busy-other-panel Updates: 0/0B managed thread allocation; definition read once. Excludes changing progress text, Unity layout/render and whole-frame GC.\""
+}

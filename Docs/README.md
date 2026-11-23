@@ -1,5 +1,13 @@
 # Tài liệu kỹ thuật RTSgame2026
 
+**23/11 — giao diện cây công nghệ:** panel toàn màn hình, node gốc và ba nhánh, kéo/zoom, đọc state và gửi command qua service ECS hiện có. Giữ sáu tech. Xem [thiết kế, cách chạy và kiểm chứng](Modules/Progression/ResearchTreeUI.md).
+
+**21/11 — G5 đã đo Windows Release ở 1080p.** Smoke đạt 18/18. Ba trong bốn lượt đạt ngưỡng p95 16,67 ms. Kết quả frame, năm mẫu startup, chẩn đoán và giới hạn nằm trong [báo cáo G5](Modules/Progression/G5-ReleaseOnscreen.md).
+
+**21/11 — G4 đã xử lý đỉnh managed allocation khi làm mới navigation.** Development Player ghi 1.020.416 B trước và 21.648 B sau sửa ở tick bắt đầu đêm 1. Xem phạm vi phép đo, trace, kiểm thử và các spike còn lại trong [báo cáo G4](Modules/Progression/G4-FrameProfiling.md).
+
+**21/11 — G3 chờ người chơi nghiệm thu.** Cấu hình chơi thử dùng Hall 1200 HP trong `ProceduralGame` và khóa bán kính wave theo căn cứ đầu trận trên map procedural có gateway. Xem kết quả mô phỏng, đối chứng vận chuyển và cách chơi thử trong [báo cáo G3](Modules/Progression/G3-EconomyExpansion.md).
+
 **Chốt G2 ngày19/11:** [báo cáo pilot và realtime](Modules/Progression/G2-PressurePilot.md):9native+1realtime đạt gate, chọn **Hall1600HP riêngProceduralGame** làm shortlistG3. Byte-diff scene đúng1giá trị; prefab/SampleScene/tech/wave/clock giữnguyên, runner tạm đãgỡ. Chưa nghiệm thu cân mọiseed; G3 cần kiểm controlseed0 và lợiích/exploit mởrộng.
 
 **Checkpoint G0–G1 trước G2:** [báo cáo baseline/policy12run](Modules/Progression/G01-Validation.md), [hợp đồng đo/chạy lại](Modules/Progression/G01-MeasurementContract.md), [NextPhasePlan](Modules/Progression/NextPhasePlan.md). Quân chủ động tham chiến3seed, ledgerPASS; control10000HP vẫn thắng3/3. Có fix trigger worker+self-check. S0–S9/D0–D4 giữ DONE theo phạm vi cũ.

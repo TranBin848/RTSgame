@@ -1,0 +1,225 @@
+{
+  "unity": "6000.3.11f1",
+  "cpu": "11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz",
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "scenario": "Procedural progression; natural first night; workers/research/training; offscreen world render",
+  "csv": "E:\\Unity project\\RTSgame2026\\.utmp\\g4-repeat-measure\\swarm-20261120-182037.csv",
+  "enemies": 7,
+  "projectiles": 4,
+  "hits": 20,
+  "visible": 11,
+  "drawCalls": 4,
+  "lastTickMs": 2.2598,
+  "errors": [],
+  "cameraPosition": "(-7.84, -2.90, -10.00)",
+  "renderSnapshots": 11,
+  "offscreenRender": true,
+  "seed": 1,
+  "generatorVersion": 3,
+  "actors": 26,
+  "workers": 4,
+  "day": 1,
+  "spawned": 9,
+  "hallMaxHealth": 1200,
+  "waveSeed": 8001,
+  "sceneToReadyMs": 823.3309999999996,
+  "generatorAwakeToReadyMs": 527.6062999999996,
+  "coreMs": 106.2746,
+  "terrainMs": 121.6093,
+  "resourceMs": 17.9125,
+  "navigationMs": 21.1338,
+  "initializeMs": 142.31640000000002,
+  "bindMs": 62.4498,
+  "header": [
+    "# UTC: 2026-11-20T18:20:37.1371722Z",
+    "# CPU: 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz; logical cores: 8",
+    "# GPU: NVIDIA GeForce GTX 1650; RAM MB: 16179",
+    "# Unity: 6000.3.11f1; Editor: False; resolution: 1920x1080",
+    "# vSync: 1; target FPS: -1",
+    "# rendering: True",
+    "# offscreen render request: True",
+    "# frame ms median: 3.304; P95: 8.711; P99: 16.060"
+  ],
+  "frames": 26626,
+  "seconds": 112.99691579999975,
+  "frameMs": {
+    "median": 3.3035,
+    "p95": 8.7105,
+    "p99": 16.06,
+    "max": 72.2964
+  },
+  "gcBytes": {
+    "median": 104,
+    "p95": 144,
+    "p99": 232,
+    "max": 34390
+  },
+  "allocatedBytes": {
+    "first": 257987921,
+    "last": 258489229
+  },
+  "topFrameSpikes": [
+    {
+      "index": 18947,
+      "frameMs": 72.2964,
+      "tickMs": 5.6774,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 104,
+      "unityAllocatedBytes": 257867214,
+      "tick": 4866
+    },
+    {
+      "index": 26575,
+      "frameMs": 55.0273,
+      "tickMs": 3.8568,
+      "enemies": 7,
+      "projectiles": 3,
+      "gcBytes": 12030,
+      "unityAllocatedBytes": 258194717,
+      "tick": 6826
+    },
+    {
+      "index": 17681,
+      "frameMs": 52.53,
+      "tickMs": 2.8688,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 144,
+      "unityAllocatedBytes": 258189530,
+      "tick": 4449
+    },
+    {
+      "index": 15551,
+      "frameMs": 50.6666,
+      "tickMs": 7.647,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 144,
+      "unityAllocatedBytes": 257825374,
+      "tick": 3882
+    },
+    {
+      "index": 18950,
+      "frameMs": 44.1464,
+      "tickMs": 3.7602,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 144,
+      "unityAllocatedBytes": 257867214,
+      "tick": 4873
+    },
+    {
+      "index": 18946,
+      "frameMs": 40.6715,
+      "tickMs": 2.9573,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 144,
+      "unityAllocatedBytes": 257867214,
+      "tick": 4864
+    },
+    {
+      "index": 18247,
+      "frameMs": 39.3,
+      "tickMs": 2.5946,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 144,
+      "unityAllocatedBytes": 258180468,
+      "tick": 4643
+    },
+    {
+      "index": 26571,
+      "frameMs": 38.369,
+      "tickMs": 3.0882,
+      "enemies": 7,
+      "projectiles": 4,
+      "gcBytes": 144,
+      "unityAllocatedBytes": 258194717,
+      "tick": 6820
+    }
+  ],
+  "topGcSpikes": [
+    {
+      "index": 4493,
+      "frameMs": 3.3624,
+      "tickMs": 1.8212,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 34390,
+      "unityAllocatedBytes": 257740420,
+      "tick": 1202
+    },
+    {
+      "index": 1554,
+      "frameMs": 10.6066,
+      "tickMs": 2.2861,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 25002,
+      "unityAllocatedBytes": 257697325,
+      "tick": 481
+    },
+    {
+      "index": 21084,
+      "frameMs": 27.9537,
+      "tickMs": 3.4856,
+      "enemies": 1,
+      "projectiles": 0,
+      "gcBytes": 21648,
+      "unityAllocatedBytes": 258201130,
+      "tick": 5401
+    },
+    {
+      "index": 5979,
+      "frameMs": 6.4073,
+      "tickMs": 1.8214,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 12632,
+      "unityAllocatedBytes": 257771628,
+      "tick": 1536
+    },
+    {
+      "index": 8684,
+      "frameMs": 6.6495,
+      "tickMs": 1.6969,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 12270,
+      "unityAllocatedBytes": 257778488,
+      "tick": 2140
+    },
+    {
+      "index": 12412,
+      "frameMs": 7.1852,
+      "tickMs": 1.7911,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 12270,
+      "unityAllocatedBytes": 257823256,
+      "tick": 3048
+    },
+    {
+      "index": 12668,
+      "frameMs": 7.5348,
+      "tickMs": 1.6972,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 12270,
+      "unityAllocatedBytes": 257810368,
+      "tick": 3119
+    },
+    {
+      "index": 17341,
+      "frameMs": 6.7075,
+      "tickMs": 2.5481,
+      "enemies": 0,
+      "projectiles": 0,
+      "gcBytes": 12270,
+      "unityAllocatedBytes": 257862748,
+      "tick": 4315
+    }
+  ]
+}

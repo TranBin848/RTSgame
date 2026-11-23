@@ -1,0 +1,394 @@
+{
+  "result": {
+    "unity": "6000.3.11f1",
+    "cpu": "11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz",
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "scenario": "Procedural progression; natural first night; workers/research/training; offscreen world render",
+    "csv": "E:\\Unity project\\RTSgame2026\\.utmp\\g5-development-onscreen\\swarm-20261120-184853.csv",
+    "enemies": 7,
+    "projectiles": 4,
+    "hits": 20,
+    "visible": 11,
+    "drawCalls": 4,
+    "lastTickMs": 2.5665,
+    "errors": [],
+    "cameraPosition": "(-7.84, -2.90, -10.00)",
+    "renderSnapshots": 11,
+    "offscreenRender": false,
+    "development": true,
+    "foreground": true,
+    "fogActive": true,
+    "hudActive": true,
+    "onscreen": true,
+    "startupOnly": false,
+    "screenWidth": 1920,
+    "screenHeight": 1080,
+    "vSync": 1,
+    "frameCap": -1,
+    "onscreenFrames": 13750,
+    "invalidOnscreenFrames": 0,
+    "extraTrainingAccepted": 0,
+    "screenMode": "FullScreenWindow",
+    "quality": "Ultra",
+    "graphicsApi": "Direct3D11",
+    "os": "Windows 11  (10.0.26300)",
+    "refreshHz": 144.00343526875926,
+    "seed": 1,
+    "generatorVersion": 3,
+    "actors": 26,
+    "workers": 4,
+    "day": 1,
+    "spawned": 9,
+    "hallMaxHealth": 1200,
+    "waveSeed": 8001,
+    "sceneToReadyMs": 1168.1111999999985,
+    "generatorAwakeToReadyMs": 533.514499999999,
+    "coreMs": 100.16300000000001,
+    "terrainMs": 118.60220000000001,
+    "resourceMs": 20.855900000000002,
+    "navigationMs": 24.774,
+    "initializeMs": 138.2777,
+    "bindMs": 82.9244
+  },
+  "frames": 13750,
+  "seconds": 112.99035200000988,
+  "allocCounter": {
+    "min": 368,
+    "median": 2634,
+    "p95": 2674,
+    "p99": 2762,
+    "max": 36920
+  },
+  "build": "result=Succeeded options=ForceOptimizeScriptCompilation, Il2CPP, CompressTextures, StripDebugSymbols, ShaderLivelinkSupport, Development target=StandaloneWindows64 backend=Mono2x unity=6000.3.11f1 errors=0 warnings=0 bytes=226654982 seconds=283.4203807 scenes=Assets/Scenes/MainMenu.unity,Assets/Scenes/ProceduralGame.unity,Assets/Scenes/SampleScene.unity,Assets/Scenes/SwarmSimulation.unity",
+  "timeline": {
+    "midday.tsv": {
+      "exportedFrames": 1138,
+      "firstFrame": 1,
+      "lastFrame": 1138,
+      "top": [
+        {
+          "frame": 1040,
+          "frameMs": 25.1853,
+          "gc": 2674,
+          "main": [
+            {
+              "thread": "Main Thread",
+              "ms": 15.2622,
+              "selfMs": 15.228,
+              "marker": "Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 1.142,
+              "selfMs": 1.142,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 0.8438,
+              "selfMs": 0.8438,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            }
+          ],
+          "render": [
+            {
+              "thread": "Render Thread",
+              "ms": 14.8367,
+              "selfMs": 0.001,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 14.8357,
+              "selfMs": 14.8357,
+              "marker": "Semaphore.WaitForSignal"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 4.9366,
+              "selfMs": 0.0011,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            }
+          ]
+        },
+        {
+          "frame": 539,
+          "frameMs": 20.2458,
+          "gc": 2674,
+          "main": [
+            {
+              "thread": "Main Thread",
+              "ms": 11.6554,
+              "selfMs": 11.6173,
+              "marker": "Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 1.0511,
+              "selfMs": 1.0511,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 0.8644,
+              "selfMs": 0.8644,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            }
+          ],
+          "render": [
+            {
+              "thread": "Render Thread",
+              "ms": 12.2557,
+              "selfMs": 0.0008,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 12.2549,
+              "selfMs": 12.2549,
+              "marker": "Semaphore.WaitForSignal"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 4.5541,
+              "selfMs": 0.0007,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            }
+          ]
+        },
+        {
+          "frame": 59,
+          "frameMs": 19.1632,
+          "gc": 2674,
+          "main": [
+            {
+              "thread": "Main Thread",
+              "ms": 10.8082,
+              "selfMs": 10.6623,
+              "marker": "Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 0.992,
+              "selfMs": 0.992,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            }
+          ],
+          "render": [
+            {
+              "thread": "Render Thread",
+              "ms": 11.2305,
+              "selfMs": 0.0008,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 11.2297,
+              "selfMs": 11.2297,
+              "marker": "Semaphore.WaitForSignal"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 4.6769,
+              "selfMs": 0.001,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            }
+          ]
+        }
+      ],
+      "events": [],
+      "maxFogMs": 15.2622
+    },
+    "first-wave.tsv": {
+      "exportedFrames": 1351,
+      "firstFrame": 1,
+      "lastFrame": 1351,
+      "top": [
+        {
+          "frame": 455,
+          "frameMs": 42.9716,
+          "gc": 408,
+          "main": [
+            {
+              "thread": "Main Thread",
+              "ms": 15.9227,
+              "selfMs": 15.9183,
+              "marker": "WaitForTargetFPS"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 9.242,
+              "selfMs": 7.9755,
+              "marker": "Default World RTS.DOTS.GameplaySimulationSystem"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 9.3274,
+              "selfMs": 7.088,
+              "marker": "RTS.DOTS.Tick"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 0.9416,
+              "selfMs": 0.9416,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 0.7573,
+              "selfMs": 0.7573,
+              "marker": "Idle"
+            }
+          ],
+          "render": [
+            {
+              "thread": "Render Thread",
+              "ms": 22.6583,
+              "selfMs": 0.0007,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 22.6576,
+              "selfMs": 22.6576,
+              "marker": "Semaphore.WaitForSignal"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 11.6876,
+              "selfMs": 0.0294,
+              "marker": "Gfx.PresentFrame"
+            }
+          ]
+        },
+        {
+          "frame": 405,
+          "frameMs": 33.7232,
+          "gc": 408,
+          "main": [
+            {
+              "thread": "Main Thread",
+              "ms": 17.8936,
+              "selfMs": 17.78,
+              "marker": "Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 2.7825,
+              "selfMs": 2.7825,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 1.3875,
+              "selfMs": 1.3875,
+              "marker": "Animator.WriteProperties"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 1.2651,
+              "selfMs": 1.2651,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            }
+          ],
+          "render": [
+            {
+              "thread": "Render Thread",
+              "ms": 15.5658,
+              "selfMs": 0.0022,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 15.5636,
+              "selfMs": 15.5636,
+              "marker": "Semaphore.WaitForSignal"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 10.1858,
+              "selfMs": 0.0013,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            }
+          ]
+        },
+        {
+          "frame": 413,
+          "frameMs": 32.1693,
+          "gc": 408,
+          "main": [
+            {
+              "thread": "Main Thread",
+              "ms": 19.4444,
+              "selfMs": 19.4021,
+              "marker": "Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 1.9894,
+              "selfMs": 1.9894,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            },
+            {
+              "thread": "Main Thread",
+              "ms": 0.7505,
+              "selfMs": 0.7505,
+              "marker": "BuildSwarmSpatialJob (Burst)"
+            }
+          ],
+          "render": [
+            {
+              "thread": "Render Thread",
+              "ms": 17.3304,
+              "selfMs": 0.0013,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 17.3291,
+              "selfMs": 17.3291,
+              "marker": "Semaphore.WaitForSignal"
+            },
+            {
+              "thread": "Render Thread",
+              "ms": 7.6255,
+              "selfMs": 0.0017,
+              "marker": "Gfx.WaitForGfxCommandsFromMainThread"
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "frame": 261,
+          "frameMs": 8.6762,
+          "thread": "Main Thread",
+          "ms": 2.4277,
+          "selfMs": 0.3537,
+          "marker": "RTS.NightTransition",
+          "gc": 2520
+        },
+        {
+          "frame": 262,
+          "frameMs": 21.0743,
+          "thread": "Main Thread",
+          "ms": 12.2821,
+          "selfMs": 9.9092,
+          "marker": "RTS.RefreshNavigation",
+          "gc": 18084
+        },
+        {
+          "frame": 262,
+          "frameMs": 21.0743,
+          "thread": "Main Thread",
+          "ms": 0.1183,
+          "selfMs": 0.0284,
+          "marker": "RTS.WaveStarted",
+          "gc": 0
+        }
+      ],
+      "maxFogMs": 21.0084
+    }
+  },
+  "diagnosticSourcePatch": "*** Begin Patch\n*** Update File: Assets/Game/DOTS/Integration/SwarmSmokeAutomation.cs\n@@\n     IEnumerator TraceWindows()\n     {\n+#if DEVELOPMENT_BUILD\n+        if (m_Onscreen)\n+        {\n+            yield return new WaitForSecondsRealtime(53);\n+            StartTrace(\"midday\");\n+            yield return new WaitForSecondsRealtime(9);\n+            StopTrace();\n+            yield return new WaitForSecondsRealtime(25);\n+            StartTrace(\"first-wave\");\n+            yield return new WaitForSecondsRealtime(12);\n+            StopTrace();\n+            yield break;\n+        }\n+#endif\n*** End Patch"
+}

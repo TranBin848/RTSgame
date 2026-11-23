@@ -1,0 +1,1 @@
+result=Succeeded unity=6000.3.11f1 errors=0 warnings=0 seconds=49.3335254 bytes=226649418 scenes=Assets/Scenes/MainMenu.unity,Assets/Scenes/ProceduralGame.unity,Assets/Scenes/SampleScene.unity,Assets/Scenes/SwarmSimulation.unity

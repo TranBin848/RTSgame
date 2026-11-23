@@ -1,8 +1,14 @@
 # Tiến độ và bàn giao — Progression + Procedural mở rộng
 
-Cập nhật: **19/11/2026**. Kế hoạch đã nghiệm thu: [BuildPlan.md](BuildPlan.md).
+Cập nhật **21/11/2026**. [Kế hoạch S0–S9 đã nghiệm thu](BuildPlan.md) · [Kế hoạch G0–G7](NextPhasePlan.md)
 
 ## Đọc ngay khi tiếp tục
+
+**21/11 — G5 đã hoàn tất phép đo, budget còn mở.** Windows Release smoke 18/18. Ba lượt seed 1 và một lượt military seed 1543 ở 1080p/Ultra đạt p95 13,90 / 13,90 / 20,83 / 13,90 ms. Startup năm mẫu có median 875 ms. Lượt Development cùng workload xác nhận fog góp phần ở một số frame và chưa tái lập đỉnh Release 166,66 ms. [Báo cáo G5](G5-ReleaseOnscreen.md)
+
+**21/11 — G4 đã kiểm chứng nguồn spike navigation và bản sửa.** `RTS.RefreshNavigation` giảm từ 1.016.860 xuống 18.084 B managed trong trace wave đầu. Lượt đo khi tắt ghi trace xác nhận giảm 97,9% GC ở tick 5400. Kiểm collider 22.404 phép so khớp, EditMode 81/81 và research polling steady 0 B. [Báo cáo G4](G4-FrameProfiling.md)
+
+**21/11 — G3 chờ người chơi nghiệm thu.** Đã lưu Hall 1200 HP vào `ProceduralGame` và sửa lỗi móng kho làm lệch vòng wave. Ba control thua, sáu lượt kinh tế/quân sự thắng, và ba lượt mở rộng hợp lệ sau sửa thắng. Trong phép đối chứng vận chuyển seed 0, kho gần mỏ mang lại thêm 60 vàng sau chi phí vàng xây kho, với chi phí 100 gỗ. MCP xác nhận seed 1 và scene sạch. EditMode đạt 81/81. [Báo cáo G3](G3-EconomyExpansion.md)
 
 **19/11 — G2 DONE phạm vi shortlist:** [PressurePilot/report](G2-PressurePilot.md), [10run summary](Evidence/G2-2026-11-19/summary.json). Baseline10000+C/E/M và hai candidate1600/1200 đủ9native; C1600 thuađêm4/539.95s, E/M thắng với1348/1522HP; C1200 cũng thuađêm4, E/M thắng. Chọn1600 theo ruleHPcao hơn; realtimeE đủ5đêm/675.08s Victory/Hall1338, ledgerPASS. Đã author chỉ m_Health Hall trongProceduralGame10000→1600 quaUnityAPI, UI/tilefloat ngoài phạm vi đã phục hồi, byte-diff scene đúng1giá trị;269snapshot chỉscene này đổihash, prefab100/SampleScene10000/tech/wave/phase/package giữnguyên. Cloudchậpchờn nên dùngCLI --no-start vàrunnerEditor tạm; đã gỡ3script+meta, giữraw/source/failedprobe vàConsolelịch sử. Bước tiếp **G3**, kiểm sớm controlseed0 có thể còn thắng, matrix3seed/logistics/empty-building trước tune1nhánh. Chưa Release/onscreen/perf/manual hoặc robustness mới; không gọi shortlist thành Normal đã cân mọi seed. Xem closure-state.json cho trạng tháiMCP/compiler saucleanup.
 

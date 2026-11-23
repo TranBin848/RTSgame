@@ -12,6 +12,8 @@ public sealed class GameFlowMenu : MonoBehaviour
     [SerializeField] Slider m_VolumeSlider;
 
     RTS.DOTS.GameplaySimulationSystem m_Match;
+    ResearchTreePanel m_ResearchTree;
+    public void InitializeResearchTree(ResearchTreePanel tree) => m_ResearchTree = tree;
     public void InitializeMatch(RTS.DOTS.GameplaySimulationSystem match)
     {
         if (match == null) throw new System.ArgumentNullException(nameof(match));
@@ -31,6 +33,7 @@ public sealed class GameFlowMenu : MonoBehaviour
     void Update()
     {
         if (m_Match?.IsMatchOver == true) return;
+        if (m_ResearchTree != null && m_ResearchTree.BlocksGameplayInput) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         if (m_OptionsPanel != null && m_OptionsPanel.activeSelf) Back();
         else if (m_PausePanel != null) { if (m_PausePanel.activeSelf) Resume(); else Pause(); }

@@ -1,8 +1,11 @@
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyWaveManager : MonoBehaviour
 {
+    static readonly ProfilerMarker NightTransitionMarker = new("RTS.NightTransition");
+    static readonly ProfilerMarker WaveStartedMarker = new("RTS.WaveStarted");
     [SerializeField] private EnemyWaveDefinition m_Definition;
     [SerializeField] private DayNightCycleManager m_DayNightCycleManager;
     [SerializeField] private TownHall m_TownHall;
@@ -15,6 +18,7 @@ public class EnemyWaveManager : MonoBehaviour
     private ProceduralMapAuthoring m_Generator;
     public bool IsInitialized { get; private set; }
     private float m_CurrentTownHallRange;
+    private float? m_ProceduralStartingRange;
     private float m_SpawnTimer;
     private float m_WaveDelayTimer;
     private int m_CurrentWaveIndex;
@@ -57,6 +61,15 @@ public class EnemyWaveManager : MonoBehaviour
         HandlePhaseChanged(m_DayNightCycleManager.CurrentPhase);
     }
 
+    public void CaptureProceduralStartingRange()
+    {
+        if (m_ProceduralStartingRange.HasValue || m_Generator == null || m_Generator.GatewayCount == 0) return;
+        if (!m_Bridge.IsSceneBound)
+            throw new System.InvalidOperationException("Bind starting structures before capturing the wave range.");
+        if (TryGetTownHall(out var hall))
+            m_ProceduralStartingRange = CalculateTownHallRange(hall);
+    }
+
     void OnDestroy()
     {
         if (IsInitialized && m_DayNightCycleManager != null)
@@ -95,6 +108,7 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (phase == DayNightPhase.Night)
         {
+            using var sample = NightTransitionMarker.Auto();
             m_SpawnTimer = 0f;
             m_WaveDelayTimer = 0f;
             m_CurrentWaveIndex = 0;
@@ -179,6 +193,7 @@ public class EnemyWaveManager : MonoBehaviour
         }
 
         m_StartedWaveCount = waveIndex + 1;
+        using var sample = WaveStartedMarker.Auto();
         OnWaveStarted.Invoke(waveIndex);
     }
 
@@ -419,6 +434,8 @@ public class EnemyWaveManager : MonoBehaviour
 
     float CalculateTownHallRange(TownHall townHall)
     {
+        // A remote foundation must not move procedural waves away from the starting base.
+        if (m_ProceduralStartingRange.HasValue) return m_ProceduralStartingRange.Value;
         float range = m_Definition.MinimumTownHallRange;
         if (m_GameManager == null)
         {

@@ -1,0 +1,1085 @@
+{
+  "id": "92D8CDA0B3240E888D199D172120FA57C62910AD3D3D02957CD8F64D5AD83710",
+  "files": [
+    {
+      "path": "Assets/Game\\DOTS\\EconomyTools.asset",
+      "sha256": "94E1FBE9C46B0B8023F640ABA64928EDFDC368F095A7C83526E91C232E650F2E"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Editor\\MatchSessionEditorTools.cs",
+      "sha256": "6A4A0F6A0E77945EFF7ACFC45A84524E26B0E54C6CA8D38AF8DE3BCE70531ABB"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Editor\\SwarmEditorTools.cs",
+      "sha256": "DDA0656D4F3AF9CDC37C8C1D2F13C153749F38C5CAE58746945C372024DE90EC"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\EconomyResearchDefinition.cs",
+      "sha256": "F30CE83430B678E35A3E004C7A2092ED0E77EB58EC46C01E657E2349BF310C76"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\GameplayGameBridge.cs",
+      "sha256": "F2C449BE0B676CD6E9B500693626F439624EC53B8388222D9F742C7EF9C72FCC"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\GameplaySmokeAutomation.cs",
+      "sha256": "38489C159AE4D7FAFDC90A6F1F607E751BC1B05A9A38D52324A3B24C1F8B6750"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\GameSceneCompositionRoot.cs",
+      "sha256": "0C7BF0D1756C974899C49900A4A1C2872C5155B34FBBFA0EEC8E0BB859D69A80"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\MatchSession.cs",
+      "sha256": "C8567919839A37DE23AE702300FD030B81176985792B84DC551457DF21ADECB8"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\ResearchPanel.cs",
+      "sha256": "ED0E12F552BD27E582C4233FF73E3C898925ABBA43287007E0C86602A53B6EA3"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\ResearchService.cs",
+      "sha256": "80258F8DFF36BF5C01FA4B566571CA741A52C8D95B4F2A902D8AFE89CA27F77A"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\SwarmGameBridge.cs",
+      "sha256": "5EE718797BB9C4BB5F82F5A47BC8FB42ACA50B4B1658B05442554A73BB1974D4"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Integration\\SwarmSmokeAutomation.cs",
+      "sha256": "EB5F592B543874435A33D4C3C0154357B2D02DE651130EBEBC2A9E50C000046F"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Resources\\DOTS\\SwarmVisualLibrary.asset",
+      "sha256": "F96A3BDBA9A1D6EC56619E5B375C9EB7BBD53CF9513A832F9A8E7B2237A50AD9"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\FlowFieldJob.cs",
+      "sha256": "75AA90F89E8AA83F27BE364F91A4A6EF4B1CF74398FF620777C48BD6EE062CD2"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\GameplayActorJobs.cs",
+      "sha256": "9308F9F21125A12E59175C99B36B5FFD7166091C91F240D0EF325108AF0BED5A"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\GameplayComponents.cs",
+      "sha256": "69C63C1B5FB17FC3C7CE2D9CD4825D6355482F0A8E0E8780789AACA2557B5E53"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\GameplayEconomyJob.cs",
+      "sha256": "69CC28FBBB3C90D733883C5812A6A881EBA88ADC98EF7D54FBD1C5427B132239"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\GameplayMatch.cs",
+      "sha256": "06327C8EF74177722025C69E819936CD28013A7F8999B1118BAAB482DEF6E832"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\GameplayResearch.cs",
+      "sha256": "BD13E44D81432FD2F49C128A0C32A4B281236B259BB547D52DE4D4FBE9BFF912"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\GameplaySimulationSystem.cs",
+      "sha256": "6E7CD21FD2F5C609F66BE7DD04606DAB49FFAC4A3A20C27E13CBDFE7329EDB4F"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmBenchmarkRecorder.cs",
+      "sha256": "5722E9926CC0A89A80943124EF1AB8DFD334E76CCC0B82970BAAFA1624B6BF33"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmComponents.cs",
+      "sha256": "84DC9748F3B4B6ED691CCEF9DB77D1B90CD86B1B8AB5973AC9EC928F085E2E68"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmDemoController.cs",
+      "sha256": "9115A96C3FCF2368728BFC644460B40B7C0DA5E71B741A42190A14478EA8BAA1"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmInstancedRenderer.cs",
+      "sha256": "237706B4E097DCF18CD4E864C3D6082BF7D2BFA54AFC4894ECA2D922BC68F09C"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmJobs.cs",
+      "sha256": "E914496B2A48D7B818EE31615468CEF7BDAA365FEF16A9417CBB26EE575454CC"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmMath.cs",
+      "sha256": "57E5F364B8004A749DADC9AF67ABE1BEA9CB1EC1B0F650577A13A8E191048CA5"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmSimulationSystem.cs",
+      "sha256": "D3A69A82585DD84FEA72D7DCE4207406437443984A7FE594E5923B52BBCB4600"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Runtime\\SwarmVisualLibrary.cs",
+      "sha256": "92DD742C291B33DEBD15C73981C1C75050038F664AB0AB31F42327442F0B6CAD"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Tests\\Editor\\GameplaySimulationTests.cs",
+      "sha256": "292EEA64E77BF198FE31925FC71B480D8AA55144F8FCEC3BCC6EACF299896BA1"
+    },
+    {
+      "path": "Assets/Game\\DOTS\\Tests\\Editor\\SwarmSimulationTests.cs",
+      "sha256": "4AB89969FFB56D76D07C3C0C1D48AF223059AB42BACBAFBD3DEE98CDFA5474D5"
+    },
+    {
+      "path": "Assets/Game\\Fonts\\PatrickHand-Regular.asset",
+      "sha256": "591AF83A1B85998BBCD3DF6CE8ECC9C777986FC00D22849D0B9FB0BF43A63A7B"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Objects\\Arrow.prefab",
+      "sha256": "1268741361C3A0C6DF71BA7FB1FF3C1A3D65AF4602161143B499CFA207B52DCF"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Objects\\Gnoll_Bone.prefab",
+      "sha256": "D66A2924D54D146B294197401AF30B320314C892095B637A5EFD9F50B78A548B"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\GoldStone\\GoldStone1.prefab",
+      "sha256": "8DD8C3D9910F095080F91D24C822F126966F2B45536D67E41B63ED422B0F94DD"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\GoldStone\\GoldStone2.prefab",
+      "sha256": "A423DCDCDD538A535A4DBF7DE621CCB1710CA907ABE1A787F8C49B1E2657096A"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\GoldStone\\GoldStone3.prefab",
+      "sha256": "BB3FE497A8EB41BBF55DD61D1221CD9BA99ACAACE41F3CF8D1F5B8AC9FE42F77"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\GoldStone\\GoldStone4.prefab",
+      "sha256": "417CDE6E823265AECF57102351A24574E47ECFA40096A7513E6B0774533098A4"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\GoldStone\\GoldStone5.prefab",
+      "sha256": "A1FAD5EB631741F3EF62334EDE734F8AB6179B9F79CC658479D81310997B91C6"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\GoldStone\\GoldStone6.prefab",
+      "sha256": "C8BE72F0A19F98988C4E8E4E054DE09E32056FA467475163DE31C45AB2F4CA1D"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\Sheep\\Sheep.prefab",
+      "sha256": "0B3C29D139E18D6D9DA0CFD7957B06A6A9C6B8CE1465BBE3DE955C15C4AD4615"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\Tree.prefab",
+      "sha256": "E10C16EE8502B5712529A79B5FCCD68B4E1E74C54A5F191D3427240B9CB14EE4"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\TerrainObjects\\TreePrefab.prefab",
+      "sha256": "CC7DDD06FDD8DB5182C4F667B45E6CFB7F9A785E23E4BE501278929392B2B234"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\ActionButton.prefab",
+      "sha256": "A9001F8C3E73236C67B027BA2F7377D7993FBCA9066A0F73377834959B194B06"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\ActionQueueItem.prefab",
+      "sha256": "FC60C82D1C344F8666CDFA2B62E24A237D7A3DBD0F0AF7D08906D3E5984C0553"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\PointToClick.prefab",
+      "sha256": "DB1098887628238625719685DE355573DBDA9AC75B84AD9293671D6222427256"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\ResouceRibbon.prefab",
+      "sha256": "5C18ED6E42964151E6CAE83EFDD5D9F368E044E61623BC38CE46116725091146"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\SelectecUnitInfoItem.prefab",
+      "sha256": "34A93E9E0F30D138907D67A100E529A3D890988EFEB4203FBEEB7DB596EFF180"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\TextPopup.prefab",
+      "sha256": "ABF358BE944501DFA8060F029F74C391134FC137A71CB7C551602300834D71B2"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\UI\\WaveIconPrefab.prefab",
+      "sha256": "9B5AF5B6A09EB993015017197BC0850C24051B7D0095883A3E244AEC28F3B875"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Archer.prefab",
+      "sha256": "DA9BACFFCE088F76747E8D0FFF1EA0F5C93B14E6A55B38131C9479A572F64BC0"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Buildings\\ArcheryRange.prefab",
+      "sha256": "AC4753A0481304368C89A3F71EF9AF2FDB10A83E502D22350067B3D434C08AD7"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Buildings\\Barrack.prefab",
+      "sha256": "B4E8B0A470DF67E25CE4D6F2A6742662A5204419C44FF2FCD108D05B5A1EE5A8"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Buildings\\Granary.prefab",
+      "sha256": "0766F56C36E5740B31006CAC3F560D0A65A34841D9EF1B63DA592587BBCF9366"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Buildings\\StoragePit.prefab",
+      "sha256": "879D0B41043D56E1A5CED8CA05090D223F35E855EC024EAB5B38C5C0383A8660"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Buildings\\Tower.prefab",
+      "sha256": "D270C0A81AEB449E33F91E96A6B2E05CEFC751FCEAA29403B32598E397A1D237"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Buildings\\TownHall.prefab",
+      "sha256": "58FE15422FC71AB8D7D952C626DF0AC1E61CB750E0B8B85DF4CB51756A298CF7"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Gnoll.prefab",
+      "sha256": "D5266A6DEF5D46290A36554E569D48409A67A5BC4E35E036C71829DD5AA8573A"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Skull.prefab",
+      "sha256": "978CF73FC4A0836D6FB7174ABFED41E417CE656339433B34975C4260868F7A71"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Warrior.prefab",
+      "sha256": "5C2CFF5273919E56DC7245C1031973D33DF4AA6B634D6C80493FC100ACB2E64D"
+    },
+    {
+      "path": "Assets/Game\\Prefabs\\Units\\Worker.prefab",
+      "sha256": "04DD7E2007C97BE877C4FD3F0422EE6D2B63CAA95336176E48230F49A5F01BF6"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Core\\DeterministicRandom.cs",
+      "sha256": "5520C7A0546CE75C8A5D0B8F84ED2EF659B07CF407E73A1DBB570274CD04AE58"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Core\\MapGenerationData.cs",
+      "sha256": "2D004623D5C34983F50C7F80D12FA6EDC6DC08488BA561A5F409F1A44DA04EBD"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Core\\ProceduralMapGenerator.cs",
+      "sha256": "3BC096B0D4C011B0659561D83632D644AE2FC4B4021E69C25E154EC88CEA8B3D"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Core\\StrategicLayout.cs",
+      "sha256": "63005F0A0C53D463B628EDD52E09418E926E6D4ED36D14419AA142296B0907B8"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Core\\StrategicResources.cs",
+      "sha256": "62D56BB025DC8BA94BCF5AF9EDA97933D634B53C4C00F053BC9079CBC86003E9"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Editor\\ProceduralMapEditorTools.cs",
+      "sha256": "214FCFC9765055CEC267DD3DF5230FF8BC28AA2CDECEA36FC6EF5364EBBD9C4D"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Editor\\ProceduralMapPreviewWindow.cs",
+      "sha256": "B292F0D9D862F3EDA85AAF145E56B04762958DC350C1E8EAB47D7D1FF9D4998E"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Integration\\ProceduralMapAuthoring.cs",
+      "sha256": "0A34F32857A7E2276725AE559629E2A96117164CC9D550E0BE4958DE2AF52513"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Integration\\ProceduralMapPresentation.cs",
+      "sha256": "CFD131E0A9A4CD0DEC4E020F2571899E59C0832D7F95D01A9F29B53324010093"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Integration\\ProceduralMapRuntime.cs",
+      "sha256": "086C53832F65C2C260997B60F82D375AED80BFCEF11D74B12F182EEC8F950B14"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Integration\\ProceduralMapSettings.cs",
+      "sha256": "107C2B8B6A16EEE42307F07E86F258E7FB0E7ABADB29ED22A7F36EA2545E6795"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Settings\\DefaultProceduralMapSettings.asset",
+      "sha256": "635C95139F2CC44352ADDD398F81AD39602FA930F2338E28871370F6EDD21A98"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Settings\\StrategicProceduralMapSettings.asset",
+      "sha256": "161D104BC4A7D10507AA2CE4C6B5D8D7B23E91FC29B40174D5DF01FE1AE478A2"
+    },
+    {
+      "path": "Assets/Game\\ProceduralGeneration\\Tests\\Editor\\ProceduralMapGeneratorTests.cs",
+      "sha256": "A6473A5A103A13AA0581B11D4C31A9FBD54968E34E2EC8DBD0D20EB2772AC3F3"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\BuildGranaryAction.asset",
+      "sha256": "745A8712E8B73F75CC68CBE4C146DB485886B9602B0F1B89B4B9A4FAC42DF629"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\BuildStoragePitAction.asset",
+      "sha256": "3C299BDFBD4C1EC573166207494ED366EC875BA54A3A0AAFE25176121B9C70E2"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\BuildTowerAction.asset",
+      "sha256": "5186DCAB73513F9024C9782B40B7FC86590D9121299BF4D61DEED9DCE032D8FC"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\DefensiveStanceAction.asset",
+      "sha256": "2DABBE7C05DD9359602B47ACC20FEB022C02140D762D5F994AD2472F3435A740"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\Definitions\\DayNightCycleDefinition.asset",
+      "sha256": "556114451FF72A614B28698681E861CEEE76BFA551332ABC0A8EA8026AD73DD2"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\Definitions\\EnemyWaveDefinition.asset",
+      "sha256": "272B5A9AE51F018D95C385B461FCE3264016470B7C108BC4CD1644F9BD9F35BE"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\Definitions\\FogOfWarDefinition.asset",
+      "sha256": "40FE2A7065AB6306FD88672FE277538574B90575BA185DEFE099251C17D50343"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\Definitions\\MinimapSettingsDefinition.asset",
+      "sha256": "064CFB2B939DA4AB933AE03600AC13FD27252F61F535D51B63850F51E0D8CFE0"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\Definitions\\SelectionSettingsDefinition.asset",
+      "sha256": "FD13C60B576903DE550EA3E010BA529E024F21E4706BFD1A6D830BE064C4F27A"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\Definitions\\WorkerUnitDefinition.asset",
+      "sha256": "21ECA69E9A9BF679869EEFF00D46C94EC551E5709427752AEA622DBF2230BC00"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\OffensiveStanceAction 1.asset",
+      "sha256": "02565A643428B9074110DB6D1D64C00B2DEA9A75F354874CA31F9C70CD5DD661"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\SpawnArcherAction.asset",
+      "sha256": "DD8E21189C0A7156D6F50919ECD5EDCC0CA4BBF493A62A14544AB67423DFBC5B"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\SpawnVillagerAction.asset",
+      "sha256": "3E54763492427D2C793FA14CEBC4BAC822D82710ADC05A7E59B4B57F7FEDB443"
+    },
+    {
+      "path": "Assets/Game\\ScriptableObjects\\Units\\SpawnWarriorAction.asset",
+      "sha256": "DAD18E2A29DEAB2071FB09610404654E08D42ED935EFBF66FAB2921474DE3832"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\AI\\AIPawn.cs",
+      "sha256": "5EB2750BD0D02CDAB495A1E9553C2BB9E84733EBFEBCAFCC4843011006A56035"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\AI\\Node.cs",
+      "sha256": "DED25D0B56FEB013B16E09299F2ACF966AF74E548758B15109296EF07222F042"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\AI\\Pathfinding.cs",
+      "sha256": "4A25E8A8760DD81C1F17F56B55366C94B397AD7D9E9E176CD48F9801BD897084"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\CursorManager.cs",
+      "sha256": "47E844264BA6F180557279F47747C4AFF4F7B82641CE50FAAEC137A17D65380A"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\DayNightCycleManager.cs",
+      "sha256": "EC5DE6143FC13E68CE7A86CF0ADB5F2E8A17BD8FCD8FBFE2587F8513C1724F3E"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\Definitions\\DayNightCycleDefinition.cs",
+      "sha256": "81D4A1DCD81EC283DEC83ADAC5BE562A9A423D6C3A304FC3F5112F4DFA314FB5"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\Definitions\\EnemyWaveDefinition.cs",
+      "sha256": "1D13F39A7C270D812A726211671EB5632192872F2759B038F27DA07480825FDF"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\Definitions\\FogOfWarDefinition.cs",
+      "sha256": "BDAA9ED1E94130B6CF9F462D4CD521249D711EA40326348F09EC805B93D834C2"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\Definitions\\MinimapSettingsDefinition.cs",
+      "sha256": "EFE2BA29EC4291D10A4EC1829A45F606FB44D4F88C64E18672F59A5F5017CFE9"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\Definitions\\SelectionSettingsDefinition.cs",
+      "sha256": "89E5094DA72F9D86F9F33CBB6890F792DBFE85D7108962A763301CE9CA90095A"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\EnemyWaveManager.cs",
+      "sha256": "E9DF55EDCFFD8D2618869684AA6D5DD56C942DC3A417D6DE69DEA6B5530AEF8C"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\FogOfWarAffectable.cs",
+      "sha256": "2A4C01A7A7305781C6E7586BCFFFED883A6520C2F1E6283BFA320647E589AE38"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\FogOfWarManager.cs",
+      "sha256": "C6D94CED277D269E02FDBDB088E731C966A8F77E949AF97D1CFDCCE7341749BD"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\GameManager.cs",
+      "sha256": "A85FF89E75536EDE030934381B1ADC1A8EF193EE86A78AB422EEF86D9F25F612"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\SingletonManager.cs",
+      "sha256": "65513AD65AABA8C4974042B94F6DC6FEA753E81739DD84DBEFE08D6294CAE97D"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Managers\\TilemapManager.cs",
+      "sha256": "FB92190A51BD0A3094EC0FE1718909ABA8C70E66B203E20BE0941ED6DC740E5F"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Contracts\\IPlayerResourceWallet.cs",
+      "sha256": "0A1C06FD380C4DD7BC4F1DA4DB3F70CB3D829CE335553A80126A4870F0BBC782"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Contracts\\IResourceDepot.cs",
+      "sha256": "9380540DC4054636B0AE6D969754530782C6710CA3ED5E59ED9000D7AEAD313E"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Contracts\\IResourceDepotLocator.cs",
+      "sha256": "C800D00682D7E69D91320D3A7208D777CEA1BD5F7E94A8968F2D3F8622BB7A9C"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Contracts\\IResourceNode.cs",
+      "sha256": "9719B09B628837E26E474F53AF5DB312DBF70F663A74339C498117888902745A"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Contracts\\IResourceNodeLocator.cs",
+      "sha256": "C70411CCFBDEE2DC223AFE5C414A1057425E09206BA896B0D9B9AAFCECB405D0"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Contracts\\ResourceType.cs",
+      "sha256": "285EB56A97030A579D5D1DE345F527A2FA4F4E4ED9DCC58BF83B5B91B3A91604"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\ResourceNodeBase.cs",
+      "sha256": "E9F59E53977735DE2CA53ACA91B1A27E077E13959AAC874B9ECDF69FDBCA2B1F"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Services\\ResourceSpawner.cs",
+      "sha256": "D2525291D82DFB2ACFE86B2191827D2EF277C59F2AE7B4BA6A51DE7BA9605120"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Services\\SceneResourceDepotLocator.cs",
+      "sha256": "58B1255A7236CB3AC37F6F56F54501DC139C20E3BAEA8E2EF24BD7EE5EC15E08"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Resources\\Services\\SceneResourceNodeLocator.cs",
+      "sha256": "2842AD74EF368FFA5CE961DE091A483FF170E97ADF841331EF4DB8D1B48FB52D"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ActionBar.cs",
+      "sha256": "EEA76E75D6139DC3761AD28C38EA7E554D94CF5806DE857C76174C864DB57BC6"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ActionButton.cs",
+      "sha256": "06A85BB9DF6ADCD32CA06178F3AF6A094648CA403BB735C2BAFFECF5E55D0946"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ActionQueueItemUI.cs",
+      "sha256": "E15AE54E3EBEF73510A67072866F62121275732F89A77D79FF8B35472B38BF85"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ActionQueuePanel.cs",
+      "sha256": "BD086C2EDE38FF2D1D43628F8F17F9C9064E8DD49FB4AEA9992F9C7DB95970FD"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ConfirmationBar.cs",
+      "sha256": "623ED5754A1AFB0A31A1FC26E2FA76168FA569999CF284F7903A882D456D8FF9"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\DayCounterUI.cs",
+      "sha256": "02F4B8655DDEC6EF4FCB9C0EB9F0408450FF5A7C772D4E3787914518C45CF757"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\DayNightClockUI.cs",
+      "sha256": "1FE0B6F2CFC7E4A05577E9F3A30D9EE9C52ED6328945696D606B2946A1296ECD"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\GameFlowMenu.cs",
+      "sha256": "07BC79C498F488B334AFF7E6508E4C3D274A8B79728F4479F6A6DD035018D41E"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\IdleWorkerPanelUI.cs",
+      "sha256": "A20E9B7B6E5C100A2885DE8A896E202778397E6F99BE1CD931BD31D4B8EE9667"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\MinimapFogUI.cs",
+      "sha256": "F9C42B77BF16A07A5F31240D94A801BCAD04CAAC5CF87CE93CF6B95AD7D9F464"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\PointToClick.cs",
+      "sha256": "A6CD77255950AF1C9E3236EF81AB9EC0614E80AB514EF797561F10902D54CFB4"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ResourceRequirementsDisplay.cs",
+      "sha256": "A8162D88C507EC0C8E7FA6AB664061FABB01DAA0A9B069E68EF6AA0457F1A280"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\ResourcesDataUI.cs",
+      "sha256": "9B9918704B7BE01133909932E3C482359DC3B456A0BD67AAE48D6A6A62B8B459"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\SelectedUnitInfoItemUI.cs",
+      "sha256": "3BFB15978549A302BC63CA686BFC8BE8E7A99F8C3E1ADC1756F450F11EB84116"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\SelectedUnitsInfoPanelUI.cs",
+      "sha256": "0FAA1A6A76B6371D1EEC482F8232038E66D8A87410E052E88BB765EC46CF7039"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\WaveProgressIconUI.cs",
+      "sha256": "FE2350611D1181F6A003B64763A8E5072A0B132F01210D639A52BF24E8B6E05D"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\UI\\WaveProgressUI.cs",
+      "sha256": "37DDE6E70141E6D85451B0EF20F230B4595C7C74E164FB26D95AED616EB36C50"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\ActionSO.cs",
+      "sha256": "B400C54B32DD155B2EECF9B1314A9712157E0D756E0ED518F3D5895DCB022865"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\BuildActionSO.cs",
+      "sha256": "B5136F22129886B7072ABCE63CA8467FD83D8F48944F8FDDBC4E5B716A85743F"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\IResourceCostAction.cs",
+      "sha256": "A9EC10E789E8209FB2C1A31EC9F641A09E412B9220C383F7C0B9B40BC2CD28C0"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\SpawnArcherActionSO.cs",
+      "sha256": "CC17A65C5A6E8C9E5771935E9B66EC9858D792A49ED2E74D050B909DE8CF718C"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\SpawnVillagerActionSO.cs",
+      "sha256": "DEBB850E67F2766EE0EEE3E7D709CC304C2953E1619C46C7DEE4BB8265913320"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\SpawnWarriorActionSO.cs",
+      "sha256": "9C735957E081EAB3F2E9D72B18CFE080AE629F9CA24BCA88CF55E21DECD4B66C"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Actions\\UnitStanceActionSO.cs",
+      "sha256": "B81578ECE781D16FB15B83F5D671049569B5BDB901D1C7E42AD0ADAC8AE0F889"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\ArcheryRange.cs",
+      "sha256": "E116D8198E343D195BA63E09BE5C293A795B89388CFD06C8527ADC1235A862C0"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Barrack.cs",
+      "sha256": "932D93B38103E0ABCDCDAB5EEE49E3D9F16DE9F8BE04F85FF3F13DCA4AB5DC13"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Definitions\\WorkerUnitDefinition.cs",
+      "sha256": "24CD653AE79D253101395B2B783FBAB7144326E10512F4304BE652FE3E4A2257"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\EnemyRangerUnit.cs",
+      "sha256": "828B8B2527193038EBF5A1FA62DD0178602D265B0F4B5F20E87C9C50A5D8D071"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\EnemyUnit.cs",
+      "sha256": "97B67DDBFF71AE532796B4C8C17E6269620ED1EE98A0E803972C04A5BDA62F7F"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\HumanoidUnit.cs",
+      "sha256": "8E14F30B772317ADC63D731ECE37A03EF9BD498208110BC24EEE987FE8FF9BCA"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Neutral\\SheepUnit.cs",
+      "sha256": "F2C609ED15F638EBAE01A0FDC37729DECD1FF0DBF8448C6FFC41311005B172E5"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\ProductionBuilding.cs",
+      "sha256": "A5B2B57F237BC77ABF6DC3CF89DA0F54FAFCF7D0AE419258638985350F641650"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\RangerUnit.cs",
+      "sha256": "AC530CA3C82BE37A8FA15E0B192281980C1B47F2DD587BFDCFD54F6BA11D1FFF"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\StructureUnit.cs",
+      "sha256": "BA3D486F10DC6A706FA9B35420EF7E977E50A433F4E73F9F94B1955848FD2389"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\TowerUnit.cs",
+      "sha256": "4AB6F66F5D203CE3E6800CA003E02431B6314A1046C57225838B8549210451A5"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\TownHall.cs",
+      "sha256": "8FABF9ECF027A25E63AD6681566489BC1D98D0A4675673FB487680C086CF930F"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\Unit.cs",
+      "sha256": "BD3014E99A5C9A1AA064FE0A19491B2DCC801CA5660AB369B4BE0A326319FF96"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\WarrirorUnit.cs",
+      "sha256": "9FA534F7D9EBD140624463BF5ED026FF3585C31B2BD546658ABB29AD956980EE"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Units\\WorkerUnit.cs",
+      "sha256": "2F3FC009822852F939ED653DCE85138316BB5003B77EB6C437D8E216163D9CC8"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\BuildingProcess.cs",
+      "sha256": "28831D32FA3A6AB50DEBDE3ABBFE15974BD7B6202381F0DB10ED7CD553D5FD2A"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\CameraController.cs",
+      "sha256": "F07FC2106EF1999C6360CD6C2DAE1D49CF7AAA5801EBDECBCA2B89268E1599C0"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\GameUtils.cs",
+      "sha256": "505C79EDE5A408E5548B06F8A0D90E4E9B70086031AD86B03566ADED21212514"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\GoldStone.cs",
+      "sha256": "DD2FCE973D13815993D48A052B47D813C9D61B1AF18335C5DF4E3D86D5FD4A45"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\IPooledRuntimeObject.cs",
+      "sha256": "1BCC429D1DB0186D214E9B81F3AB06C5DA5920299B9CA5E873D5BF6053A4C8E6"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\PlacementProcess.cs",
+      "sha256": "9CCC3DDC8CCC3FAB2C94A4EA42C954631C1EC6B1533758D467DCDD151F7DFE10"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\PooledRuntimeObject.cs",
+      "sha256": "B60BB42151CC25039170E853502EB95326CAC0E05B134F90AC9D954B0D8B28C5"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\Projectile.cs",
+      "sha256": "32509A4F015902C5C5920A5819BA2B2951BE4F819A349E31C2A8EBBC5EF1A7EA"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\RuntimeObjectPool.cs",
+      "sha256": "DB69DDCF6BF09B2CD2E5106D898F085AB475FFC35ABC0A80CA9B58BDBEF0BF82"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\SpriteHitFlash.cs",
+      "sha256": "789CE4F5F3E88CB4E0A600F88BFDF243507255FAC07E40E8E1CD606B7C2D0ACC"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\TextPopup.cs",
+      "sha256": "C65AE6D9BB71D8736550D56631432108B1543AF15E68E932D18189F356179CE5"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\TextPopupController.cs",
+      "sha256": "E5ABDE938CCDEAC831DDD004FEF4E3C012CB72E8EFBA8C4C6162C15998132BBD"
+    },
+    {
+      "path": "Assets/Game\\Scripts\\Utils\\Tree.cs",
+      "sha256": "35D1AF5A72E5A91EFD9284D8E91A1ED47021258184A102286C3690627E5644A1"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\RuleTile.asset",
+      "sha256": "C21BB204188E932132599AAA8992546674DA357C8A814CC0E9040D10052C07CA"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilePalletes\\Square.asset",
+      "sha256": "311A7D831EFC9827B7E9C0CD7784675D15066B3C08A7A016C6E49108EFDB8D85"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilePalletes\\Terrain.prefab",
+      "sha256": "5FCF4D4530B776671535689B99A04484B8315FF5484678090C327E8D9A193CF0"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_0.asset",
+      "sha256": "D89E004BB623D2E06C57BFFE2F7447EF7AE6AB6B0EE74CE6980A3CEFFF0EBA52"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_1.asset",
+      "sha256": "7784041EE704F7434FDC9193F5C41309E2EF8B7F88A8785DF7E836D41616AE17"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_10.asset",
+      "sha256": "201F7318DF8BD8B40BAD10A73F583520FFE40DFA423862CDA0D2DCB11151E7D6"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_11.asset",
+      "sha256": "8F73254B94931B4CB54644B00A53F11FBC51B7797A854D5B884D1ED0E2757BCB"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_12.asset",
+      "sha256": "26C02AC7D29F6170A8EBAB2408EF4643AC39021440CE955D56A403C1D4514EB1"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_13.asset",
+      "sha256": "F34967E53F67AE0ED4A836B0D0275DF89897620A9EDE105779EC77ECA8B0020B"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_14.asset",
+      "sha256": "47D546AA77EC9F625A55A7556762098CDB770A06169D186C6EE27B4CB3327C5D"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_15.asset",
+      "sha256": "163B9264E4B72CD1EC3A10CB1350736FFEC1282A1CD85CF6832425560D45D5BC"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_16.asset",
+      "sha256": "D64745B988315885ED007576B0866876B5F7AFCA7F1432B6823D4F1257E810C6"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_17.asset",
+      "sha256": "6248388B770826FC34D1F391F8C0A0C5DBC1DD46536FD2C21445EEDF5693C1EB"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_18.asset",
+      "sha256": "991BE0EA93C0F9DB4C971399F52144D6B9A61A26458E323ADB06AA3636F393CA"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_19.asset",
+      "sha256": "CF901C8B1AC2FEC791A8CBDDC8C3DB9CDEDAE39BC46FF3D139178C244A4D8BEE"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_2.asset",
+      "sha256": "54E8F3BB60A5E367B77DDF88DF4D9277F88372B1474E257C96D7D4C7BE6E330E"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_20.asset",
+      "sha256": "30F8B677EE9EED0A67E798C09F9CE01186C816519704F5AE05A9279FAF2F27A7"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_21.asset",
+      "sha256": "5E7053515B9E411A606013D3661338C52FC6800BFCDBA6F8B54E051D18172582"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_22.asset",
+      "sha256": "6E37814E28FAF3BAE433ADAD681E6DDC3A57F01AA326C748582207DE1AA966BD"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_23.asset",
+      "sha256": "44D0108EFD2AC63B178F6635A577BA21D50E0C1A521A23E7201D78EA4130B915"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_24.asset",
+      "sha256": "074858B386653AEC722656AE2C17C432A09559B13B22CC26DA747DE124036BE8"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_25.asset",
+      "sha256": "C0035B090FDA3AB78597C93BC1CB6917C34574C86496FAA99F3B003B7E732482"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_26.asset",
+      "sha256": "0D2E924B24FE6A68C052DF004BDD157B2D840B506E897219E39B2328CE24974F"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_27.asset",
+      "sha256": "EFF87DDECC38410EE10F5A142AC5BEE1EE13CD424870E707CF24862ADAA37604"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_28.asset",
+      "sha256": "FE73F8AE0C6D2EF27C205FC0FA55A5A71BBC54F1E211B7476EFC9456278CD9CD"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_29.asset",
+      "sha256": "E681326B059FB555BC6EAC3B5287BA5991BCCD5E2EEC07EE4424D1D7F7C0D715"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_3.asset",
+      "sha256": "361921972213426F2D389996F1D1066E5884FCEFA454307B8D77F638B4E0E9EC"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_30.asset",
+      "sha256": "982B782A9723BDAE3C17527328CDB9D429C7A030693C9C87E7DA991FBA50CA1B"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_31.asset",
+      "sha256": "E76052B06430F99D2FBA012B24886451C7295715A9108D1D467674F0F36CFAFF"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_32.asset",
+      "sha256": "11F12C59211784F701AFE90E21B44C6A40C82BADF729DBA600143C2E4393E3FC"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_33.asset",
+      "sha256": "8E352C7927412D4E1B976EB9B5F17C5F7C3E9CBCA56AE878105D9FF85724FE84"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_34.asset",
+      "sha256": "547B78E7057D5A8B30B1ACAA8B1893276599C4267CE278906A54D1B179BC655F"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_35.asset",
+      "sha256": "BB72595236BF40613239252284CEAFA8E8A52D40018695C95D4FA05873548BC6"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_36.asset",
+      "sha256": "350FB50FFA12A66EEC7444B8AB14A0DB9EC28D02CB154FE2138F51D8A1763CF1"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_37.asset",
+      "sha256": "39A3C577ED1CA3FF814605E5C0FA97507FF3F2A216A60EACA1DE21208C9A2143"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_38.asset",
+      "sha256": "4ED6C06EEFEC8ECCDF5F1C8CB202EFCFA1E36322B3EAD38488CC2A462500B815"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_39.asset",
+      "sha256": "06B587C0D9D58DC47F99CDC92A151CC987C709DC5A43DD844504D16EBDDF96FB"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_4.asset",
+      "sha256": "BA8BEE82AE999087B9D5E7D6E9D6F186967F48D28686FB16922FE57E78731ACF"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_40.asset",
+      "sha256": "D48A1A65D835272B4776A2DEE69542BAEC54E77A5CD41AADA7ECDF08DB4FBB1A"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_41.asset",
+      "sha256": "5EFD8E97756CA9EDDFCFC7630B7C397D5EFF5CA8323E48CE5F8660DA1BFEB342"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_42.asset",
+      "sha256": "30FA724CB2A59770D22ECFE4D38F856FBA0B0896F02F8644948226E2069C968B"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_43.asset",
+      "sha256": "7324C067110965AAADB93D2BE1CEC9845E508C7BA5EF7FCE239DF91431CE03D0"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_5.asset",
+      "sha256": "86934C7DC9C9CF116B23C9AC5EA9AFA80ABE273596540AA0991338259BEFB53D"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_6.asset",
+      "sha256": "4DCDA9E8ED09DE26951D46E1E907B5370F6F0F7ABCF43CA5EE1CDD1027B29FC5"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_7.asset",
+      "sha256": "DA49B89EEFFA0C15292863AAFB609FF567343BFC275259323577776D265C8604"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_8.asset",
+      "sha256": "5F61AFF62FE3B85C5F9212728A9C50B4B0BF5871FA0D7226CF09A10998E395DF"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color1_9.asset",
+      "sha256": "95AC449C750D289B73B375CE4C4D42BC87C64FE134AE9F1A2B12667574BD7879"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_0.asset",
+      "sha256": "ABAB027C2CFEFCA99E53C1D2EF573834977AD151CE265A4BF919AEDDA5D05937"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_1.asset",
+      "sha256": "74099E778AC5C62194CA6E9F597ED900D4A6FE3A87A5F4D6C51DF45BB24BD259"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_10.asset",
+      "sha256": "D1B4EDDA3A3EAAF28C07BD10352399D47959A002F197FA811D1041884FADB74A"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_11.asset",
+      "sha256": "50A0040F9D2700E3F3640DECC8118B1EAD086995F903D0481E542AE69D395798"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_12.asset",
+      "sha256": "5BF68CB255CE53AB1FE2FC97DBDB8CBCDF28F906F6F70E12210897A66F359284"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_13.asset",
+      "sha256": "236F3EF6C91C68C789148ADDB5147B19D6817A8BF715C0D2146A9C583DDAF1FC"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_14.asset",
+      "sha256": "2DAE7D27E1BB580BBB0C1C8A7306C28D47A04F1E077E5220B1FDFAA2D7732231"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_15.asset",
+      "sha256": "57BAA1597AFE9C7D5AD8ABB9A8BE57E33A17E0A9F8211C11A114D5E25A15A03A"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_16.asset",
+      "sha256": "B379ECAC686FE48A2A086F4CD6B2306A0B8F1E8AD8E88E04E7C61CEEE190EF5F"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_17.asset",
+      "sha256": "2193BA0BE08A3500ACCDFCB009349572482FF2C74C18A92C2CF327F96C33472E"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_18.asset",
+      "sha256": "6F00150CCCBFB7383540FE902CCB71F49A5FC004AA02737E4B1C926489930822"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_19.asset",
+      "sha256": "B7C0B809ECB8F7F2F554D007F77F57963B513FCC790A7F8BFAD8612ACC525D04"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_2.asset",
+      "sha256": "00F64254220CC4E69CD2971AFECFDE0C883486BD2546C92C459EF064C35F73F5"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_20.asset",
+      "sha256": "F277A758B7CBC1431678540A4586983CDDDDCA099E3EC696E4402DACCFBCEA49"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_21.asset",
+      "sha256": "3FFBAD61B774F4819288AEA4DF827269C19615EF6F71660D36FC601E1A822E2F"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_22.asset",
+      "sha256": "AA86F19103493A8DE074BA8376421F154071175F22645E4FF4D58C12B6F7A1B7"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_23.asset",
+      "sha256": "10B0879E82DB99EEF8431467AB3A31E90A75F6D668E0420D6D42B4915E971601"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_24.asset",
+      "sha256": "F25BC6ED05881D20486BD74BE98F91BB45A6DED1CA06355CB326FC87A9082E34"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_25.asset",
+      "sha256": "624FDE650EAD4AD0E29AFB0AC8E86124F2C9B13C689B7B72138FB0E1062FAA9D"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_26.asset",
+      "sha256": "0780A025B2781C44F3F8CD8CD873FAE6CB22872480857E88B747BE3C0ABB9CA9"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_27.asset",
+      "sha256": "B5580CF98998CE22BF192B9B997696698747DB808613454D472233742F7759FC"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_28.asset",
+      "sha256": "378E831F0ED2EB6A73BAA8E3F063E555E2816DFAD625F80FF5058AB96CBB1DC4"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_29.asset",
+      "sha256": "E7459F632B60EB2488B0BE614BAE818DD830B2276E087B764E8875298336EC10"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_3.asset",
+      "sha256": "DEA273463E1F4D46CCE4FDC9E270DEBB8A177946F102AE3E51C9363D6E656190"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_30.asset",
+      "sha256": "1F7A69223702B94CE234099C4053225C8BCD7F3B2E8EA27C403332054B8FBF01"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_31.asset",
+      "sha256": "F48B5CE3494FA644C18F0A7A9A18177143AFCE560F02B02BDA7963DBCAC68762"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_32.asset",
+      "sha256": "38F18A7FA8E4511C09E41D94FC53F19A2EA51C6D0263CBD3250788C02A85851C"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_33.asset",
+      "sha256": "D2A478B1B269A115713D302CD55BD40ED867ED9C3343C10DE3E7EFC903777A92"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_34.asset",
+      "sha256": "81FA32752EEB49E90F3062F26A7740776DBE99ED8F5B0D0B239A6008F3951DAE"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_35.asset",
+      "sha256": "872BD5B27C7AA4522C2EA3BA7F64539145BE73FFDA37C4E039FA1ADAF989BCD1"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_36.asset",
+      "sha256": "CCF6CF3144EB27C51313CFE6A358C1AC621F3EDA4B7DDCE3E118388204ED71D2"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_37.asset",
+      "sha256": "9D360167FFAB6FE6672FEFBAE1BD0498BF79222C60DE3435430104A89A0F1452"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_38.asset",
+      "sha256": "CDC27A92153B4300BD8B608613A91E043AC3B8680D71CEE4B0037F36E705D080"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_39.asset",
+      "sha256": "443D3892978ACE8D9BF180DE6255BEE9A24F4E89897DA327EE6E7106F1CFAE7F"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_4.asset",
+      "sha256": "1BFF2A4100D40E1AEFD32FBAC058CBA0FF0664AE07787C8D90AD899CF91776DD"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_40.asset",
+      "sha256": "B99852BE45BC4FC4AC8140E8AE637ECE839BC89CA599117492F1E0D21FB2836B"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_41.asset",
+      "sha256": "75D006DE042718B4F4C1BEEDFFCF92B851BF750C2CA9CC5167C97931189DADBD"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_42.asset",
+      "sha256": "FC8E3AF1F12FA80E457EAFB9B7CBA30A00069AB35303C661C2ED194113123C87"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_43.asset",
+      "sha256": "60B9EB9CC3657A3022178B86431C77C06700D52B10EAA4B930F5193E3DDD9CAD"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_5.asset",
+      "sha256": "D83E595204A25C4B236FB1D33D741BBFDC3D6467B807B22B205DD58B741B32D4"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_6.asset",
+      "sha256": "7EC01D2C16389D238FCB7D77B0A5D2F605C8E1C54FC51E069BF0A03C175CC2D1"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_7.asset",
+      "sha256": "95FF13AB85DFE16E7BD53079E51DC29601B194FE0EC32CC3B00DBAE07E36751C"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_8.asset",
+      "sha256": "0FBEDBD9DF881AD368968A8183D31CC4D9FE4A63B4CFD105169F7F1402202572"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Tilemap_color3_9.asset",
+      "sha256": "0BD22ED8F27E2F7A4640BECA0B551A9A62CF066021798FEA3F571757150E2880"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\Tiles\\Water Background color.asset",
+      "sha256": "D6AD4AA0A3F613B90F4F25C87B9A9AE3A4D4AFC9CAFB2B77249DBF3234A25874"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilesAnimated\\Foam.asset",
+      "sha256": "DC136E886161B07EDF844C3D261281E7AA597F0D80DC1FDF80C618C20F4A242B"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilesAnimated\\Rock1.asset",
+      "sha256": "F0508350273544D9596E311603A994B5DD42FF264976A4C708FC1C12629B23FA"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilesAnimated\\Rock2.asset",
+      "sha256": "F181E2B18882C57896C46BA9B5BFCBF71FFEEC5B968E5560D77123F5EA2413AF"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilesAnimated\\Rock3.asset",
+      "sha256": "9C48BD3C00739F895DA8B41BFC67BEE8895A25C967DB0CB142F5BC58AD080618"
+    },
+    {
+      "path": "Assets/Game\\Tilemaps\\TilesAnimated\\Rock4.asset",
+      "sha256": "4B34C11F1983EF7BDDC5FC1CB966778CF68A303016789E38F09AD11AA6A734C9"
+    },
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "E03C987DD46DCDCCD4C177E998E65A295D004F6E90C778815E4838C5AD39520C"
+    },
+    {
+      "path": "Assets/Scenes/SampleScene.unity",
+      "sha256": "CA207397F013C84C147BC290D998647D6D2E19678A00D496969B911030B4FA4C"
+    },
+    {
+      "path": "Packages/manifest.json",
+      "sha256": "8FF062F003E4DB2ACE99C135EE67458C3147C512FF0885D2674194C4F18F1AF3"
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "sha256": "40CE7069AE3C9CAF9815BCFD43F9BA582A9B9E55B81D8E61C93124F68A469B61"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "sha256": "A717ED4B946E370CE6E6AF9DD000B8ACF89495B44C84BF8F768159924CFA66C3"
+    },
+    {
+      "path": "Tools/PlaytestG01.cs",
+      "sha256": "6995AD76CEC0A02A522CF096A616705CD8375509F3E9ED1C8300049AE24C2C04"
+    },
+    {
+      "path": "Tools/PlaytestG3.cs",
+      "sha256": "80C0CB5BF566F03757EE30833F8152F0BEAE465D21CB7B74185DD8E7EB15269B"
+    }
+  ]
+}

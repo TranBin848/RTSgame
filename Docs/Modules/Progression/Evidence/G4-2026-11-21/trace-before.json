@@ -1,0 +1,249 @@
+{
+  "first-wave.tsv": {
+    "firstFrame": 170,
+    "lastFrame": 2169,
+    "markers": {
+      "NightTransition": [
+        {
+          "frame": 548,
+          "frameMs": 14.8345,
+          "markerMs": 3.3305,
+          "managedBytes": 2520,
+          "allocationSamples": 45,
+          "tileQueryBytes": 0,
+          "overlapArrayBytes": 0,
+          "otherTileQueryBytes": 0
+        }
+      ],
+      "WaveStarted": [
+        {
+          "frame": 549,
+          "frameMs": 168.0021,
+          "markerMs": 0.2139,
+          "managedBytes": 0,
+          "allocationSamples": 0,
+          "tileQueryBytes": 0,
+          "overlapArrayBytes": 0,
+          "otherTileQueryBytes": 0
+        }
+      ],
+      "TrainingComplete": [],
+      "ActionQueueComplete": [],
+      "DepositPopup": [],
+      "RefreshNavigation": [
+        {
+          "frame": 549,
+          "frameMs": 168.0021,
+          "markerMs": 157.1435,
+          "managedBytes": 1016860,
+          "allocationSamples": 22407,
+          "tileQueryBytes": 998776,
+          "overlapArrayBytes": 371464,
+          "otherTileQueryBytes": 627312
+        }
+      ]
+    },
+    "topMainThreadFrames": [
+      {
+        "frame": 549,
+        "frameMs": 168.0021,
+        "selfTime": [
+          [
+            37.2021,
+            "Main Thread/PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate/Assembly-CSharp.dll!::SwarmGameBridge.Update() [Invoke]/RTS.RefreshNavigation"
+          ],
+          [
+            0.9697,
+            "Main Thread/PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate/Assembly-CSharp.dll!::SwarmGameBridge.Update() [Invoke]/RTS.RefreshNavigation/GC.Alloc/Profiler.Callstack"
+          ]
+        ]
+      },
+      {
+        "frame": 550,
+        "frameMs": 47.0557,
+        "selfTime": [
+          [
+            9.9419,
+            "Main Thread/PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate/Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+          ],
+          [
+            1.0966,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.GameplaySimulationSystem/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.9509,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.9102,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.8457,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.8282,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.7692,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ]
+        ]
+      },
+      {
+        "frame": 466,
+        "frameMs": 41.2861,
+        "selfTime": [
+          [
+            13.0458,
+            "Main Thread/PlayerLoop/PostLateUpdate.BatchModeUpdate/Semaphore.WaitForSignal"
+          ],
+          [
+            11.8543,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            3.946,
+            "Main Thread/PlayerLoop/PreLateUpdate.ScriptRunBehaviourLateUpdate/LateBehaviourUpdate/Assembly-CSharp.dll!::SwarmSmokeAutomation.LateUpdate() [Invoke]/Camera.CustomRender/UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.DoRenderLoop_Internal() [Invoke]/Inl_UniversalRenderTotal/Inl_RenderCameraStack/Inl_UniversalRenderPipeline.RenderSingleCameraInternal: Main Camera/Inl_RecordRenderGraph/Inl_On Record Render Graph"
+          ],
+          [
+            3.8411,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.GameplaySimulationSystem/JobHandle.Complete/WaitForJobGroupID/Idle"
+          ],
+          [
+            1.265,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.8614,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick"
+          ],
+          [
+            0.8361,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.GameplaySimulationSystem/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ]
+        ]
+      }
+    ]
+  },
+  "opening.tsv": {
+    "firstFrame": 1348,
+    "lastFrame": 3347,
+    "markers": {
+      "NightTransition": [],
+      "WaveStarted": [],
+      "TrainingComplete": [
+        {
+          "frame": 1920,
+          "frameMs": 9.8882,
+          "markerMs": 3.8285,
+          "managedBytes": 12802,
+          "allocationSamples": 108,
+          "tileQueryBytes": 0,
+          "overlapArrayBytes": 0,
+          "otherTileQueryBytes": 0
+        }
+      ],
+      "ActionQueueComplete": [
+        {
+          "frame": 1920,
+          "frameMs": 9.8882,
+          "markerMs": 0.4276,
+          "managedBytes": 160,
+          "allocationSamples": 4,
+          "tileQueryBytes": 0,
+          "overlapArrayBytes": 0,
+          "otherTileQueryBytes": 0
+        }
+      ],
+      "DepositPopup": [],
+      "RefreshNavigation": []
+    },
+    "topMainThreadFrames": [
+      {
+        "frame": 3293,
+        "frameMs": 35.287,
+        "selfTime": [
+          [
+            22.4057,
+            "Main Thread/PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate/Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+          ],
+          [
+            1.5233,
+            "Main Thread/PlayerLoop/PostLateUpdate.BatchModeUpdate/Semaphore.WaitForSignal"
+          ],
+          [
+            1.4673,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            1.3102,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            1.0054,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.GameplaySimulationSystem/JobHandle.Complete/WaitForJobGroupID"
+          ]
+        ]
+      },
+      {
+        "frame": 2280,
+        "frameMs": 28.2565,
+        "selfTime": [
+          [
+            17.1892,
+            "Main Thread/PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate/Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+          ],
+          [
+            1.9651,
+            "Main Thread/PlayerLoop/PostLateUpdate.BatchModeUpdate/Semaphore.WaitForSignal"
+          ],
+          [
+            1.091,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.93,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ]
+        ]
+      },
+      {
+        "frame": 2070,
+        "frameMs": 27.7431,
+        "selfTime": [
+          [
+            15.3024,
+            "Main Thread/PlayerLoop/Update.ScriptRunBehaviourUpdate/BehaviourUpdate/Assembly-CSharp.dll!::FogOfWarManager.Update() [Invoke]"
+          ],
+          [
+            1.363,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete"
+          ],
+          [
+            1.0752,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.GameplaySimulationSystem/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            1.0728,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.GameplaySimulationSystem/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            1.0199,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.9524,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete/WaitForJobGroupID/BuildSwarmSpatialJob (Burst)"
+          ],
+          [
+            0.8456,
+            "Main Thread/PlayerLoop/SimulationSystemGroup/UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke]/Default World Unity.Entities.SimulationSystemGroup/Default World Unity.Entities.FixedStepSimulationSystemGroup/Default World RTS.DOTS.SwarmSimulationSystem/RTS.DOTS.Tick/JobHandle.Complete"
+          ]
+        ]
+      }
+    ]
+  }
+}

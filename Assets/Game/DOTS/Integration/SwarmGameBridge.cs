@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RTS.DOTS;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(-200)]
 public sealed partial class SwarmGameBridge : MonoBehaviour
 {
+    static readonly ProfilerMarker RefreshNavigationMarker = new("RTS.RefreshNavigation");
     public static SwarmGameBridge Instance { get; private set; }
     public SwarmSimulationSystem Simulation { get; private set; }
     public bool IsInitialized => Simulation != null && Gameplay != null;
@@ -160,6 +162,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     }
     void RefreshNavigation()
     {
+        using var sample = RefreshNavigationMarker.Auto();
         m_MapBounds = m_Map.WalkableTilemap.cellBounds;
         int width = m_MapBounds.size.x, height = m_MapBounds.size.y;
         if (width <= 0 || height <= 0) return;

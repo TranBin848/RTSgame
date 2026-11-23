@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour, IPlayerResourceWallet
 {
+    static readonly ProfilerMarker ActionQueueCompleteMarker = new("RTS.ActionQueueComplete");
     [Header("UI")]
     [SerializeField] private PointToClick m_PointToClickPrefab;
     [SerializeField] private ActionBar m_ActionBar;
@@ -121,10 +123,22 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
     [SerializeField] private GameObject m_HUDCanvas;
 
     public bool IsMatchOver => m_Bridge != null && m_Bridge.Gameplay.IsMatchOver;
+    public ResearchTreePanel ResearchTree { get; private set; }
+    public void InitializeResearchTree(ResearchTreePanel tree)
+    {
+        if (tree == null || tree.gameObject.scene != gameObject.scene) throw new System.ArgumentException("Research tree must belong to this scene.");
+        if (ResearchTree != null && ResearchTree != tree) throw new System.InvalidOperationException("Research tree already assigned.");
+        ResearchTree = tree;
+    }
+    public void ResetSelectionGesture()
+    {
+        m_IsSelectionPointerDown = false;
+        m_IsSelectionDragging = false;
+    }
 
     void Update()
     {
-        if (IsMatchOver || (m_Composition != null && !m_Composition.IsReady)) return;
+        if (IsMatchOver || (m_Composition != null && !m_Composition.IsReady) || ResearchTree?.BlocksGameplayInput == true) return;
         if (Input.GetKeyDown(KeyCode.F1))
         {
             ToggleHUD();
@@ -292,6 +306,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
             return;
         }
 
+        using var sample = ActionQueueCompleteMarker.Auto();
         m_ActionQueuePanel.Complete(queueId);
     }
     public Unit FindClosetUnit(Vector3 originPosition, float maxDistance, bool isPlayer)

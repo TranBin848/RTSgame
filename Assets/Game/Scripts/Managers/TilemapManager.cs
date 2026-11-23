@@ -18,6 +18,8 @@ public class TilemapManager : MonoBehaviour
     public Tilemap[] UnreachableTilemaps => m_UnreachableTilemaps;
     private Pathfinding m_Pathfinding;
     private bool m_IsShuttingDown;
+    private int? m_BuildingLayerMask;
+    private readonly List<Collider2D> m_NavigationOverlaps = new();
     public int NavigationVersion { get; private set; }
 
     void Start()
@@ -122,10 +124,12 @@ public class TilemapManager : MonoBehaviour
 
         Vector3 tileSize = m_WalkableTilemap.cellSize;
         Vector3 worldPosition = m_WalkableTilemap.CellToWorld(tilePosition) + tileSize / 2;
-        int buildingLayerMask = LayerMask.GetMask("Unit", "GoldStone", "Tree");
-        Collider2D[] collider = Physics2D.OverlapBoxAll(worldPosition, tileSize * 0.9f, 0f, buildingLayerMask);
+        int buildingLayerMask = m_BuildingLayerMask ??= LayerMask.GetMask("Unit", "GoldStone", "Tree");
+        var filter = new ContactFilter2D { useTriggers = Physics2D.queriesHitTriggers };
+        filter.SetLayerMask(buildingLayerMask);
+        Physics2D.OverlapBox(worldPosition, tileSize * 0.9f, 0f, filter, m_NavigationOverlaps);
 
-        foreach (var col in collider)
+        foreach (var col in m_NavigationOverlaps)
         {
             if (col == null) continue;
             // Resource click triggers cover the canopy/sprite; only the physical base blocks navigation.

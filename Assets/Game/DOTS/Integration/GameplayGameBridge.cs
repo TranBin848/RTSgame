@@ -2,10 +2,13 @@ using System.Collections.Generic;
 using RTS.DOTS;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Profiling;
 using UnityEngine;
 
 public sealed partial class SwarmGameBridge
 {
+    static readonly ProfilerMarker TrainingCompleteMarker = new("RTS.TrainingComplete");
+    static readonly ProfilerMarker DepositPopupMarker = new("RTS.DepositPopup");
     public GameplaySimulationSystem Gameplay { get; private set; }
     readonly Dictionary<Unit, Vector2> m_BodyOffsets = new();
     readonly Dictionary<MonoBehaviour, Entity> m_ResourceEntities = new();
@@ -161,6 +164,7 @@ public sealed partial class SwarmGameBridge
         {
             if (evt.Kind == GameplayEventKind.TrainComplete && m_TrainingViews.Remove(evt.RequestId, out var request))
             {
+                using var sample = TrainingCompleteMarker.Auto();
                 if (request.Building != null && request.Building.CurrentState != UnitState.Dead)
                 {
                     request.Building.SpawnDotsView(request.Prefab);
@@ -175,7 +179,10 @@ public sealed partial class SwarmGameBridge
                 if (evt.Kind == GameplayEventKind.ConstructionComplete) m_ConstructionViews.Remove(evt.RequestId);
             }
             else if (evt.Kind == GameplayEventKind.Deposit && Gameplay.TryGetActor(evt.Entity, out _, out var body))
+            {
+                using var sample = DepositPopupMarker.Auto();
                 m_Game.ShowTextPopup(evt.Amount.ToString(), Color.yellow, new Vector3(body.Position.x, body.Position.y + 0.5f));
+            }
         }
         foreach (var pair in m_TrainingViews)
         {

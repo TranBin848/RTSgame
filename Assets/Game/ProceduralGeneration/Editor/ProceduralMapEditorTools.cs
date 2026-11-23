@@ -117,41 +117,7 @@ public static class ProceduralMapEditorTools
 
     public static void ConfigureResearchPanel(GameManager manager, GameSceneCompositionRoot composition)
     {
-        var gameData = new SerializedObject(manager);
-        var hud = gameData.FindProperty("m_HUDCanvas").objectReferenceValue as GameObject;
-        if (hud == null) throw new System.InvalidOperationException("Research UI requires the gameplay HUD.");
-        var ids = new[] { "economy_tools", "economy_cargo", "military_archery", "military_training", "expansion_tower", "expansion_fortify" };
-        ResearchPanel first = null;
-        for (int index = 0; index < ids.Length; index++)
-        {
-        Transform parent = index == 0 ? hud.transform : first.transform;
-        string nodeName = index == 0 ? "ResearchPanel" : ids[index];
-        var existing = parent.Find(nodeName);
-        GameObject panel = existing != null ? existing.gameObject : new GameObject(nodeName,
-            typeof(RectTransform), typeof(UnityEngine.UI.Image), typeof(UnityEngine.UI.Button), typeof(ResearchPanel));
-        panel.transform.SetParent(parent, false);
-        var rect = (RectTransform)panel.transform;
-        rect.anchorMin = rect.anchorMax = index == 0 ? new Vector2(0.5f, 1) : new Vector2(0, 1);
-        rect.pivot = new Vector2(index == 0 ? 0.5f : 0, 1);
-        rect.anchoredPosition = index == 0 ? new Vector2(-310, -75) : new Vector2((index / 2) * 310, -(index % 2) * 105);
-        rect.sizeDelta = new Vector2(300, 100);
-        panel.GetComponent<UnityEngine.UI.Image>().color = new Color(0.08f, 0.12f, 0.16f, 0.95f);
-        var textChild = panel.transform.Find("Label");
-        var labelObject = textChild != null ? textChild.gameObject : new GameObject("Label", typeof(RectTransform), typeof(UnityEngine.UI.Text));
-        labelObject.transform.SetParent(panel.transform, false);
-        var labelRect = (RectTransform)labelObject.transform; labelRect.anchorMin = Vector2.zero; labelRect.anchorMax = Vector2.one;
-        labelRect.offsetMin = new Vector2(8, 8); labelRect.offsetMax = new Vector2(-8, -8);
-        var label = labelObject.GetComponent<UnityEngine.UI.Text>(); label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        label.fontSize = 13; label.alignment = TextAnchor.MiddleCenter; label.color = Color.white; label.raycastTarget = false;
-        label.text = "Research tools — select TownHall";
-        var data = new SerializedObject(panel.GetComponent<ResearchPanel>());
-        data.FindProperty("m_Button").objectReferenceValue = panel.GetComponent<UnityEngine.UI.Button>();
-        data.FindProperty("m_TechnologyId").stringValue = ids[index];
-        data.FindProperty("m_Label").objectReferenceValue = label; data.ApplyModifiedPropertiesWithoutUndo();
-        if (index == 0) first = panel.GetComponent<ResearchPanel>();
-        }
-        var rootData = new SerializedObject(composition); rootData.FindProperty("m_ResearchPanel").objectReferenceValue = first;
-        rootData.ApplyModifiedPropertiesWithoutUndo();
+        ResearchTreeEditorTools.Configure(manager, composition);
     }
 
     [MenuItem("RTS/Procedural Generation/Open Gameplay Scene")]

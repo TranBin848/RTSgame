@@ -1,0 +1,23 @@
+{
+  "dateLocal": "2026-11-21",
+  "status": "Partial: 3 of 4 measured Release runs met p95 frame budget",
+  "scene": "Assets/Scenes/ProceduralGame.unity",
+  "unityMcpConnected": true,
+  "sceneDirty": false,
+  "playing": false,
+  "paused": false,
+  "compiling": false,
+  "seed": 1,
+  "townHallHealth": 1200,
+  "releaseSourceFingerprintVerified": true,
+  "editMode": {
+    "Status": "Passed",
+    "TotalTests": 81,
+    "PassedTests": 81,
+    "FailedTests": 0,
+    "SkippedTests": 0,
+    "Duration": "00:00:09.8879863"
+  },
+  "releaseSmokePassed": 18,
+  "releaseSmokeTotal": 18
+}

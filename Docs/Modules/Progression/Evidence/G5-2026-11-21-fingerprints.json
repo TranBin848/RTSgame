@@ -1,0 +1,34 @@
+{
+  "source": {
+    "gitBase": "11beee6ed8965ae4be2658665f1d2fef407520b6",
+    "pathCount": 190,
+    "aggregateSha256": "337750cf45456a5bbd7448d192aee47b6ce8398eefa517778d132664fda8c9a5",
+    "keyFiles": {
+      "Assets/Scenes/MainMenu.unity": "a1804eb8ee08c084466647588945b107d8eb446f2ca23032165e9e0eed0165e9",
+      "Assets/Scenes/ProceduralGame.unity": "0b049e30db878b2c63eb969457d7e99560230644852f760924e886223ecc869f",
+      "Assets/Game/DOTS/Integration/SwarmSmokeAutomation.cs": "61db7bb28bfe7527479d83f2bc8aa1673cb52fec5ea43179b0de5a1e61fb06c8",
+      "Assets/Game/ProceduralGeneration/Integration/ProceduralMapAuthoring.cs": "567029729a9d6c2d277da93325df4c6de5cc07ba621935b5c872f49d033a4e21",
+      "Assets/Game/Scripts/Managers/TilemapManager.cs": "268f207043a01fd2fb9677cc271a0df9610994a1ca5d669335c809ba195895ad",
+      "ProjectSettings/ProjectSettings.asset": "d67790e8dde8b68927445d2e0000bb2a9ac667f3cf0c7d263d46305233684f3d",
+      "ProjectSettings/GraphicsSettings.asset": "d582a43d29c6df139c7008edda9df5db042cf414ca3c8883c38017c884750c16",
+      "ProjectSettings/QualitySettings.asset": "26b788b8f431609973e44e39d767f92efd40971c88bdd26d0e014d784b181cb5",
+      "Packages/packages-lock.json": "40ce7069ae3c9caf9815bcfd43f9ba582a9b9e55b81d8e61c93124f68a469b61",
+      "Tools/RunG5.ps1": "0c3fbf3f55313d9403ced630fd48b04758701f7a8cdac363544a487387caa1b2",
+      "Tools/SummarizeG5.mjs": "09e5a9c22b31389b97aac2f951bf5ab00b4d60193b4f9747ef914ad0f92ff4fc"
+    }
+  },
+  "build": {
+    "directory": ".utmp/g5-release-2026-11-21",
+    "flags": "result=Succeeded options=None target=StandaloneWindows64 backend=Mono2x unity=6000.3.11f1 errors=0 warnings=0 bytes=137736252 seconds=254.9654726 scenes=Assets/Scenes/MainMenu.unity,Assets/Scenes/ProceduralGame.unity,Assets/Scenes/SampleScene.unity,Assets/Scenes/SwarmSimulation.unity",
+    "fileCount": 263,
+    "bytes": 138403582,
+    "aggregateSha256": "908a9e331cad801570a71c80ed44df381742c1d55a1f1153af9626dec98f6fef",
+    "keyFiles": {
+      "RTSgame2026.exe": "5bfb02293c482170c4d5035081245e45d69fe0f617fcc92a81e98adee13b945f",
+      "RTSgame2026_Data/Managed/Assembly-CSharp.dll": "e7e2e0b42a31e12815398f69fc59866d0c27e42330d0dbd12365de736bab5a31",
+      "RTSgame2026_Data/boot.config": "0899b8d760066fdebce7ddc775c250b90be1ebb5a12ecd6def1a3bcef5b15778",
+      "RTSgame2026_Data/globalgamemanagers": "4a57ce3102d044abb7a4c56fd25b27ec12f2bdbd509c81c1d796c72aa369c1fb",
+      "UnityPlayer.dll": "a2022611884470ddab23927a3eb7bbaef3924c18972d30ba7b5330a8fd25bcc4"
+    }
+  }
+}

@@ -1,0 +1,241 @@
+// Scripted policy measurements, not a substitute for human playtest or performance profiling.
+// Run a fresh ProceduralGame in paused Play Mode using script-execute. Raw S8 remains immutable.
+using System;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Core;
+using Unity.Entities;
+using Unity.Mathematics;
+using UnityEngine;
+using UnityEditor;
+using RTS.DOTS;
+
+public static class G3Playtest
+{
+    const BindingFlags Private=BindingFlags.Instance|BindingFlags.NonPublic;
+    static T Find<T>() where T:UnityEngine.Object=>UnityEngine.Object.FindFirstObjectByType<T>();
+    static T Asset<T>(string name) where T:UnityEngine.Object=>AssetDatabase.LoadAssetAtPath<T>("Assets/Game/ScriptableObjects/Units/"+name+".asset");
+    static object Field(object obj,string name)=>obj.GetType().GetField(name,Private).GetValue(obj);
+    static void Call(object obj,string name,params object[] args)=>obj.GetType().GetMethod(name,Private).Invoke(obj,args);
+    public static string Economy()=>Run(true);
+    public static string Military()=>Run(false);
+    public static string Control()=>Run(false,true);
+    public static string Expansion()=>Run(false,false,true);
+    static string Run(bool economy,bool control=false,bool reserve=false)
+    {
+        if(!EditorApplication.isPlaying||!EditorApplication.isPaused)throw new Exception("Paused Play required.");
+        var b=Find<SwarmGameBridge>();var gp=b.Gameplay;var sim=b.Simulation;var em=gp.EntityManager;
+        var day=Find<DayNightCycleManager>();var waves=Find<EnemyWaveManager>();var game=Find<GameManager>();
+        var map=Find<TilemapManager>();var generator=Find<ProceduralMapAuthoring>();var hall=Find<TownHall>();
+        var hallEntity=hall.DotsEntity;var hallPosition=hall.transform.position;int expectedHP=hall.MaxHealth;
+        if(!Find<GameSceneCompositionRoot>().IsReady||gp.IsMatchOver||gp.Wallet.Wood!=100||gp.Wallet.Gold!=100||gp.Wallet.Meat!=100||day.CurrentDay!=1)
+            throw new Exception("Fresh, ready match with wallet100x3 required.");
+        var order=economy?new[]{"economy_tools","economy_cargo","military_archery","military_training","expansion_tower","expansion_fortify"}
+            :new[]{"military_archery","military_training","economy_tools","economy_cargo","expansion_tower","expansion_fortify"};
+        var unlock=new Dictionary<string,float>();var log=new StringBuilder();
+        int[] deposited=new int[3],gathered=new int[3],spent=new int[3];int trained=0,peakWorkers=0,peakSoldiers=0;
+        float elapsed=0;int startSpawned=sim.TotalSpawned,nav=map.NavigationVersion,previousDay=1;
+        bool expansion=false;float expansionAt=-1;string expansionAttempt=control?"not attempted (control)":"not attempted";
+        const int waveSeed=8001;
+        string policy=control?"control":reserve?"expansion":economy?"economy":"military";
+        string dir="Docs/Modules/Progression/Evidence/G3-2026-11-21";
+        string runId=DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff")+"-hp"+expectedHP+"-"+policy+"-"+generator.GeneratedMap.Seed;
+        System.IO.Directory.CreateDirectory(dir); string configId=Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText(dir+"/manifest.json"))["id"].ToString()+"-hp"+expectedHP;
+        var initial=gp.Wallet;
+        int[] researchSpent=new int[3],trainSpent=new int[3],buildSpent=new int[3];
+        var rallied=new Dictionary<Entity,float>();var attackSeq=new Dictionary<Entity,int>();
+        var contacted=new HashSet<Entity>();var hitHall=new HashSet<Entity>();var retreatedCold=new HashSet<Entity>();
+        var seenEnemy=new HashSet<Entity>();var lineAt=new Dictionary<Entity,float>();
+        var workerProgress=new Dictionary<Entity,(float2 position,int cargo,int attacks,float at)>();
+        var rejectedNodes=new Dictionary<Entity,HashSet<Entity>>();
+        var workerRoles=new Dictionary<Entity,int>();
+        var armyArrivals=new HashSet<Entity>();var armyTargets=new HashSet<Entity>();
+        int attacks=0,rallyCommands=0,assignmentAccepted=0,noNode=0;float firstAttack=-1;var phase=day.CurrentPhase;
+        var time=gp.World.Time;var random=UnityEngine.Random.state;
+        var trainWorker=Asset<SpawnVillagerActionSO>("SpawnVillagerAction");
+        var trainWarrior=Asset<SpawnWarriorActionSO>("SpawnWarriorAction");var trainArcher=Asset<SpawnArcherActionSO>("SpawnArcherAction");
+        var workerPrefab=(GameObject)Field(hall,"m_VillagerPrefab");
+        var barrack=Find<Barrack>();var archery=Find<ArcheryRange>();
+        var warriorPrefab=(GameObject)Field(barrack,"m_WarriorPrefab");var archerPrefab=(GameObject)Field(archery,"m_ArcherPrefab");
+        var depotAction=Asset<BuildActionSo>("BuildStoragePitAction");
+        using var actors=em.CreateEntityQuery(typeof(GameplayActor),typeof(CombatBody));
+        using var resources=em.CreateEntityQuery(typeof(GameplayResource));
+        using var enemies=em.CreateEntityQuery(typeof(SwarmAgent),typeof(CombatBody));
+        void AddSpend(int[] bucket,PlayerWallet before,PlayerWallet after)
+        {bucket[0]+=before.Wood-after.Wood;bucket[1]+=before.Gold-after.Gold;bucket[2]+=before.Meat-after.Meat;}
+        Entity[] Living(GameplayKind kind)
+        {
+            using var list=actors.ToEntityArray(Allocator.Temp);
+            return list.ToArray().Where(e=>em.GetComponentData<CombatBody>(e).Health>0&&em.GetComponentData<GameplayActor>(e).Kind==kind).ToArray();
+        }
+        int Soldiers()=>Living(GameplayKind.Soldier).Length+Living(GameplayKind.Archer).Length;
+        void Observe()
+        {
+            peakWorkers=Math.Max(peakWorkers,Living(GameplayKind.Worker).Length);peakSoldiers=Math.Max(peakSoldiers,Soldiers());
+            foreach(var e in Living(GameplayKind.Soldier).Concat(Living(GameplayKind.Archer)))
+            {
+                var actor=em.GetComponentData<GameplayActor>(e);
+                var soldierPosition=em.GetComponentData<CombatBody>(e).Position;
+                if(armyArrivals.Add(e))log.AppendLine($"army firstSeen={elapsed:F2};entity={e};position={soldierPosition};range={actor.Range};detection={actor.Detection}");
+                if(rallied.TryGetValue(e,out float rallyAt)&&math.distance(soldierPosition,(float2)(Vector2)hallPosition)<=4&&armyTargets.Add(e))
+                    log.AppendLine($"army atHallLine={elapsed:F2};entity={e};sinceRally={elapsed-rallyAt:F2};position={soldierPosition};target={actor.Target}");
+                attackSeq.TryGetValue(e,out int previous);int delta=Math.Max(0,actor.AttackSequence-previous);
+                if(delta>0&&previous==0)log.AppendLine($"army firstAttack={elapsed:F2};entity={e};position={soldierPosition};target={actor.Target};sinceRally={(rallied.TryGetValue(e,out var commandAt)?elapsed-commandAt:-1):F2}");
+                attacks+=delta;if(delta>0&&firstAttack<0)firstAttack=elapsed;attackSeq[e]=actor.AttackSequence;
+                if(!control&&!rallied.ContainsKey(e))
+                {
+                    // One move per entity; CodeTriggered preserves automatic acquisition en route.
+                    b.ViewFor(e).MoveTo(hallPosition+new Vector3(rallied.Count%2==0?-2:2,-2,0),DestinationSource.CodeTriggered);
+                    rallied[e]=elapsed;rallyCommands++;
+                }
+            }
+            using var list=enemies.ToEntityArray(Allocator.Temp);
+            foreach(var e in list)
+            {
+                var agent=em.GetComponentData<SwarmAgent>(e);var body=em.GetComponentData<CombatBody>(e);
+                if(seenEnemy.Add(e))log.AppendLine($"enemy firstSeen={elapsed:F2};entity={e};pos={body.Position};visual={agent.VisualId};state={agent.State};initial={(elapsed==0)}");
+                if(math.distance(body.Position,(float2)(Vector2)hallPosition)<=6&&contacted.Add(e))lineAt[e]=elapsed;
+                if(agent.Target==hallEntity&&agent.State==SwarmState.Attacking)hitHall.Add(e);
+                if(agent.State==SwarmState.Retreating&&!contacted.Contains(e))retreatedCold.Add(e);
+            }
+        }
+        void Snapshot()
+        {
+            var wallet=gp.Wallet;float health=em.Exists(hallEntity)?em.GetComponentData<CombatBody>(hallEntity).Health:0;
+            log.AppendLine($"t={elapsed:F2};day={day.CurrentDay};phase={day.CurrentPhase};W/G/M={wallet.Wood}/{wallet.Gold}/{wallet.Meat};workers={Living(GameplayKind.Worker).Length};soldiers={Soldiers()};hallHP={health:F1};spawned={sim.TotalSpawned-startSpawned}");
+        }
+        bool Train(ProductionBuilding producer,ActionSO action,GameObject prefab,float duration,IResourceCostAction cost)
+        {
+            if(producer==null||!gp.TryGetActor(producer.DotsEntity,out _,out var body)||body.Health<=0)return false;
+            if(em.GetBuffer<TrainingRequest>(producer.DotsEntity).Length>=1)return false;
+            var wallet=gp.Wallet;
+            if(wallet.Wood<cost.WoodCost||wallet.Gold<cost.GoldCost||wallet.Meat<cost.MeatCost)return false;
+            if(!b.EnqueueTraining(producer,action,prefab,duration,""))return false;
+            var before=gp.Wallet;gp.AddResources(-cost.WoodCost,-cost.GoldCost,-cost.MeatCost);AddSpend(trainSpent,before,gp.Wallet);trained++;return true;
+        }
+        log.AppendLine($"schema=G3-v1;hallMax={expectedHP};runId={runId};configId={configId};mapSeed={generator.GeneratedMap.Seed};waveSeed={waveSeed};policy={policy};dt=.05;normalHP;noResourceGrant;objective=5nights");
+        try
+        {
+            UnityEngine.Random.InitState(waveSeed);
+            var waveRandom=UnityEngine.Random.state;
+            typeof(DayNightCycleManager).GetProperty("CurrentDay").SetValue(day,1);Call(day,"SetPhase",DayNightPhase.Day,true);
+            if((expectedHP!=10000&&expectedHP!=1600&&expectedHP!=1200)||hall.CurrentHealth!=expectedHP||em.GetComponentData<CombatBody>(hallEntity).Health!=expectedHP)throw new Exception("HP resolve mismatch.");
+            log.AppendLine("resolved="+Newtonsoft.Json.JsonConvert.SerializeObject(new {hallMax=hall.MaxHealth,hallCurrent=hall.CurrentHealth,entityHealth=em.GetComponentData<CombatBody>(hallEntity).Health,initial=initial,units=UnityEngine.Object.FindObjectsByType<Unit>(FindObjectsSortMode.None).Select(u=>new {u.name,u.MaxHealth,u.CurrentHealth,position=new[]{u.transform.position.x,u.transform.position.y},entity=u.DotsEntity.ToString()}).ToArray(),tech=order.Select(id=>gp.GetResearchDefinition(id)).ToArray(),durations=new[]{day.Definition.DayDuration,day.Definition.DuskDuration,day.Definition.NightDuration}}));
+            for(int d=1;d<=5;d++)
+            {
+                int wave=0,count=0,slots=0;float spawnTimer=0,delayTimer=0;
+                // Same discrete Tick scheduling, assuming every spawn succeeds; dawn tick is excluded.
+                for(float t=0;t<day.Definition.NightDuration;t+=.05f)
+                {
+                    if(wave>=waves.Definition.GetWaveCountForDay(d))break;
+                    if(count>=waves.Definition.GetEnemyCountForWave(d,wave)){wave++;count=0;spawnTimer=0;delayTimer=waves.Definition.DelayBetweenWaves;continue;}
+                    if(delayTimer>0){delayTimer-=.05f;continue;}
+                    spawnTimer-=.05f;if(spawnTimer>0)continue;
+                    slots++;count++;spawnTimer=waves.Definition.GetSpawnIntervalForDay(d);
+                }
+                log.AppendLine($"schedule day={d};quota={Enumerable.Range(0,waves.Definition.GetWaveCountForDay(d)).Sum(w=>waves.Definition.GetEnemyCountForWave(d,w))};eligibleSlots={slots};interval={waves.Definition.GetSpawnIntervalForDay(d)};delay={waves.Definition.DelayBetweenWaves};night={day.Definition.NightDuration}");
+            }
+            Observe();Snapshot();
+            for(int tick=1;tick<=15000&&!gp.IsMatchOver;tick++)
+            {
+                elapsed=tick*.05f;gp.World.SetTime(new TimeData(time.ElapsedTime+elapsed,.05f));
+                if(!control&&tick%100==1)
+                {
+                    var before=gp.Wallet;
+                    if(gp.Research.Active==0)
+                    {
+                        var next=order.FirstOrDefault(id=>!gp.IsTechnologyUnlocked(id));
+                        if(next!=null&&(!reserve||expansion||gp.Wallet.Wood>=200&&gp.Wallet.Gold>=200))
+                        {var pre=gp.Wallet;gp.StartResearch(next,hallEntity);AddSpend(researchSpent,pre,gp.Wallet);}
+                    }
+                    foreach(var e in Living(GameplayKind.Worker).OrderBy(e=>b.ViewFor(e).name,StringComparer.Ordinal))
+                        if(!workerRoles.ContainsKey(e))workerRoles[e]=workerRoles.Count;
+                    var workers=Living(GameplayKind.Worker).OrderBy(e=>workerRoles[e]).ToArray();peakWorkers=Math.Max(peakWorkers,workers.Length);peakSoldiers=Math.Max(peakSoldiers,Soldiers());
+                    bool canSpend=!reserve||expansion||gp.Wallet.Wood>=150&&gp.Wallet.Gold>=150;
+                    if(canSpend&&workers.Length<(economy?6:4))Train(hall,trainWorker,workerPrefab,trainWorker.TrainDuration,trainWorker);
+                    if(canSpend&&Living(GameplayKind.Soldier).Length<8)Train(barrack,trainWarrior,warriorPrefab,trainWarrior.TrainDuration,trainWarrior);
+                    if(canSpend&&gp.CanUseArchery&&Living(GameplayKind.Archer).Length<6)Train(archery,trainArcher,archerPrefab,trainArcher.TrainDuration,trainArcher);
+                    using var nodes=resources.ToEntityArray(Allocator.Temp);
+                    if(day.CurrentPhase==DayNightPhase.Day)
+                        for(int i=0;i<workers.Length;i++)
+                        {
+                            var worker=workers[i];var data=em.GetComponentData<GameplayWorker>(worker);
+                            var workerActor=em.GetComponentData<GameplayActor>(worker);var pos=em.GetComponentData<CombatBody>(worker).Position;
+                            if(!workerProgress.TryGetValue(worker,out var progress)||math.distance(progress.position,pos)>.2f||progress.cargo!=data.Carried||progress.attacks!=workerActor.AttackSequence)
+                                workerProgress[worker]=progress=(pos,data.Carried,workerActor.AttackSequence,elapsed);
+                            bool stalled=data.Phase==WorkPhase.Gathering&&em.HasComponent<GameplayResource>(data.Node)&&data.Carried==0&&elapsed-progress.at>=15;
+                            if(data.Phase!=WorkPhase.None&&em.Exists(data.Node)&&!stalled)continue;
+                            if(stalled)
+                            {
+                                if(!rejectedNodes.TryGetValue(worker,out var rejected))rejectedNodes[worker]=rejected=new HashSet<Entity>();
+                                rejected.Add(data.Node);
+                                var nodeResource=em.GetComponentData<GameplayResource>(data.Node);
+                                var nodeBody=em.HasComponent<CombatBody>(data.Node)?em.GetComponentData<CombatBody>(data.Node):new CombatBody{Position=nodeResource.Position,Radius=nodeResource.Radius};
+                                log.AppendLine($"stalled t={elapsed};worker={worker};node={data.Node};position={pos};nodePosition={nodeBody.Position};distanceToCollider={GameplayMath.DistanceToBody(pos,nodeBody)};range={workerActor.Range};moving={workerActor.Moving};path={em.GetBuffer<GameplayWaypoint>(worker).Length};targetHP={nodeBody.Health};reason=no movement/cargo/attack for15s;policy=try next node");
+                                gp.CancelWork(worker);workerProgress[worker]=(pos,0,workerActor.AttackSequence,elapsed);
+                            }
+                            int role=workerRoles[worker]%4;int type=role<2?0:role==2?1:2;
+                            var node=nodes.ToArray().Where(e=>{var r=em.GetComponentData<GameplayResource>(e);return r.Type==type&&r.Claims<r.Capacity&&(!rejectedNodes.TryGetValue(worker,out var rejected)||!rejected.Contains(e));})
+                                .OrderBy(e=>math.distancesq(pos,em.GetComponentData<GameplayResource>(e).Position)).FirstOrDefault();
+                            if(node!=Entity.Null){if(gp.AssignResource(worker,node))assignmentAccepted++;}else noNode++;
+                        }
+                    if(reserve&&!expansion&&elapsed>30&&day.CurrentPhase==DayNightPhase.Day&&workers.Length>0
+                        &&gp.Wallet.Wood>=depotAction.WoodCost&&gp.Wallet.Gold>=depotAction.GoldCost)
+                    {
+                        var landmark=generator.GeneratedMap.Layout.Landmark;
+                        var cell=generator.OriginCell+new Vector3Int(landmark.X,landmark.Y,0);
+                        var position=map.WalkableTilemap.CellToWorld(cell);
+                        var placement=new PlacementProcess(depotAction,map,position);placement.ShowPlacementOutline();
+                        typeof(PlacementProcess).GetMethod("HighLightTiles",Private).Invoke(placement,new object[]{position});
+                        if(placement.TryFinalizePlacement(out var accepted))
+                        {
+                            var workerView=b.ViewFor(workers.Last()) as WorkerUnit;
+                            if(workerView==null)throw new Exception("Expansion worker has no view.");
+                            var pre=gp.Wallet;game.AddResources(-depotAction.GoldCost,-depotAction.WoodCost,0);AddSpend(buildSpent,pre,gp.Wallet);
+                            new BuildingProcess(depotAction,accepted,workerView,game,b);expansion=true;expansionAt=elapsed;expansionAttempt="landmark depot ordered";
+                        }
+                        else{placement.CleanUp();expansionAttempt="landmark placement rejected";}
+                    }
+                    var after=gp.Wallet;spent[0]+=before.Wood-after.Wood;spent[1]+=before.Gold-after.Gold;spent[2]+=before.Meat-after.Meat;
+                }
+                var oldWallet=gp.Wallet;
+                var cargo=Living(GameplayKind.Worker).ToDictionary(e=>e,e=>em.GetComponentData<GameplayWorker>(e));
+                Call(day,"Tick",.05f);
+                var ambientRandom=UnityEngine.Random.state;UnityEngine.Random.state=waveRandom;
+                Call(waves,"Tick",.05f);waveRandom=UnityEngine.Random.state;UnityEngine.Random.state=ambientRandom;
+                gp.Update();sim.Update();
+                var newWallet=gp.Wallet;deposited[0]+=Math.Max(0,newWallet.Wood-oldWallet.Wood);deposited[1]+=Math.Max(0,newWallet.Gold-oldWallet.Gold);deposited[2]+=Math.Max(0,newWallet.Meat-oldWallet.Meat);
+                foreach(var pair in cargo)
+                    if(em.Exists(pair.Key)){var data=em.GetComponentData<GameplayWorker>(pair.Key);if(data.ResourceType==pair.Value.ResourceType)gathered[data.ResourceType]+=Math.Max(0,data.Carried-pair.Value.Carried);}
+                Call(b,"SynchronizeGameplay");Observe();
+                if(phase!=day.CurrentPhase)
+                {
+                    log.AppendLine($"phase t={elapsed:F2};day={day.CurrentDay};phase={day.CurrentPhase};spawned={sim.TotalSpawned-startSpawned};attacks={attacks};lineArrivals={contacted.Count};hallAttackers={hitHall.Count};retreatBeforeLine={retreatedCold.Count}");phase=day.CurrentPhase;
+                }
+                if(tick%600==0)
+                    foreach(var e in Living(GameplayKind.Soldier).Concat(Living(GameplayKind.Archer)).Concat(Living(GameplayKind.Worker)))
+                    {
+                        var body=em.GetComponentData<CombatBody>(e);var actor=em.GetComponentData<GameplayActor>(e);
+                        log.AppendLine($"actor t={elapsed};entity={e};kind={actor.Kind};pos={body.Position};HP={body.Health};target={actor.Target};state={actor.State};attackSeq={actor.AttackSequence};moving={actor.Moving};suppress={actor.SuppressAcquire};path={em.GetBuffer<GameplayWaypoint>(e).Length};detection={actor.Detection};range={actor.Range}"+(em.HasComponent<GameplayWorker>(e)?";worker="+Newtonsoft.Json.JsonConvert.SerializeObject(em.GetComponentData<GameplayWorker>(e)):""));
+                    }
+                if(tick%10==0&&nav!=map.NavigationVersion){Call(b,"RefreshNavigation");nav=map.NavigationVersion;}
+                foreach(var id in order)if(gp.IsTechnologyUnlocked(id)&&!unlock.ContainsKey(id))unlock[id]=elapsed;
+                gp.EvaluateMatch(day.CurrentDay);
+                if(day.CurrentDay!=previousDay){Snapshot();previousDay=day.CurrentDay;}
+            }
+            Snapshot();
+            for(int i=0;i<3;i++)if(initial.Get(i)+deposited[i]-spent[i]!=gp.Wallet.Get(i)||spent[i]!=researchSpent[i]+trainSpent[i]+buildSpent[i])throw new Exception("Ledger mismatch: "+i);
+            log.AppendLine($"ledger=PASS;researchSpend={string.Join("/",researchSpent)};trainSpend={string.Join("/",trainSpent)};buildSpend={string.Join("/",buildSpent)};attacks={attacks};firstAttack={firstAttack};rallyCommands={rallyCommands};lineArrivals={contacted.Count};hallAttackers={hitHall.Count};retreatBeforeLine={retreatedCold.Count};assignmentAccepted={assignmentAccepted};noNode={noNode};damageAttribution=unavailable;gather=positiveCargoDeltaSameType");
+            foreach(var pair in lineAt)log.AppendLine($"arrival entity={pair.Key};t={pair.Value:F2}");
+            log.AppendLine($"outcome={gp.Outcome};elapsed={elapsed:F2};unlockSeconds={string.Join(",",unlock.Select(p=>$"{p.Key}:{p.Value:F2}"))};gatheredW/G/M={string.Join("/",gathered)};depositedW/G/M={string.Join("/",deposited)};spentW/G/M={string.Join("/",spent)};trainingAccepted={trained};peakWorkers={peakWorkers};peakSoldiers={peakSoldiers};expansion={expansionAttempt};expansionAt={expansionAt:F2}");
+            if(!gp.IsMatchOver)throw new Exception("Match did not finish within750 simulated seconds.\n"+log);
+            System.IO.File.WriteAllText(dir+"/"+runId+".txt",log.ToString());
+            return string.Join("\n",log.ToString().Split('\n').Where(l=>l.StartsWith("schema=")||l.StartsWith("t=")||l.StartsWith("ledger=")||l.StartsWith("outcome=")));
+        }
+        catch(Exception ex){System.IO.File.WriteAllText(dir+"/"+runId+"-FAILED.txt",log+"\n"+ex);throw;}
+        finally{gp.World.SetTime(time);UnityEngine.Random.state=random;}
+    }
+}

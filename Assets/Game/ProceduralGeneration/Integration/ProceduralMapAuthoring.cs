@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 [DefaultExecutionOrder(-300)]
 public sealed class ProceduralMapAuthoring : MonoBehaviour
 {
+    internal static int? BenchmarkSeedOverride { get; set; }
     [Header("Generation")]
     [SerializeField] ProceduralMapSettings m_Settings;
     [SerializeField] TilemapManager m_TilemapManager;
@@ -113,7 +114,9 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
 
         var generator = new ProceduralMapGenerator();
         var timer = System.Diagnostics.Stopwatch.StartNew();
-        if (!generator.TryGenerate(m_Settings.ToData(), out MapData map, out error)) return false;
+        var data = m_Settings.ToData();
+        data.Seed = BenchmarkSeedOverride ?? data.Seed;
+        if (!generator.TryGenerate(data, out MapData map, out error)) return false;
         CoreMilliseconds = timer.Elapsed.TotalMilliseconds;
 
         DisableLegacyResourceSpawner();

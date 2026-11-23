@@ -1,0 +1,23 @@
+{
+  "dateLocal": "2026-11-21",
+  "unityMcpConnected": true,
+  "scene": "Assets/Scenes/ProceduralGame.unity",
+  "sceneDirty": false,
+  "playing": false,
+  "paused": false,
+  "compiling": false,
+  "mapSeed": 1,
+  "townHallMaxHealth": 1200,
+  "townHallPrefabMaxHealth": 100,
+  "sceneDiffFromBeforeG3Save": "The only change is the TownHall m_Health prefab override from 1600 to 1200.",
+  "editMode": {
+    "status": "Passed",
+    "total": 81,
+    "passed": 81,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 7.4754353
+  },
+  "rawRuns": 24,
+  "manualPlaytest": "Pending"
+}
