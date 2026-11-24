@@ -1,0 +1,13 @@
+{
+  "playing": false,
+  "paused": false,
+  "compiling": false,
+  "compileErrors": false,
+  "scene": "Assets/Scenes/ProceduralGame.unity",
+  "dirty": false,
+  "seedOverride": null,
+  "timeScale": 1.0,
+  "background": false,
+  "contentHash": "352c12d3fd6eecf20d0069c4eaa75455dbe5effacb2cfd60613322c0e9915bd7",
+  "runtimeFingerprint": "49a98e8b145fafa9e04858ba1f74de39e0e407e5c1c6b7181afe85323754da1e"
+}

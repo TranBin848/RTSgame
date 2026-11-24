@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7092611187026238676}
   - component: {fileID: 7419170060573677900}
   - component: {fileID: -4836939370736325652}
+  - component: {fileID: 6430563673853405005}
   m_Layer: 6
   m_Name: StoragePit
   m_TagString: Building
@@ -37,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4652021948500386757
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,6 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -1957754898, guid: 68630a90c0a051b459dcb5c6bafc94de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -91,7 +94,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!70 &7092611187026238676
 CapsuleCollider2D:
@@ -173,3 +175,16 @@ MonoBehaviour:
   m_AlwaysVisible: 0
   m_ExploredAlpha: 0.45
   m_UnexploredAlpha: 0
+--- !u!114 &6430563673853405005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076002598291468573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: storagepit

@@ -47,7 +47,7 @@ namespace RTS.DOTS
         }
 
         public void ConfigureGrid(float2 origin, int2 size, float cellSize, byte[] walkable)
-        {
+        { RequireSnapshotMutable();
             if (size.x <= 0 || size.y <= 0 || cellSize <= 0 || walkable == null || walkable.Length != size.x * size.y)
                 throw new ArgumentException("Invalid gameplay navigation grid.");
             Dependency.Complete(); DisposeGrid();
@@ -62,26 +62,32 @@ namespace RTS.DOTS
         }
 
         public void AttachActor(Entity entity, GameplayActor actor)
-        {
+        { RequireSnapshotMutable();
+            World.GetOrCreateSystemManaged<SwarmSimulationSystem>().EnsureSaveIdentity(entity);
+            actor.RandomSeed = entity.Index; // Persist the original seed so remapping Entity does not change sheep RNG.
             actor.Interval = math.max(0.1f, actor.Interval); actor.Delay = math.max(0, actor.Delay);
             actor.Windup = -1; actor.Facing = new float2(1, 0);
             EntityManager.AddComponentData(entity, actor);
             EntityManager.AddBuffer<GameplayWaypoint>(entity);
         }
         public void AttachWorker(Entity entity, GatheringProfileData[] profiles)
-        {
+        { RequireSnapshotMutable();
             EntityManager.AddComponentData(entity, new GameplayWorker());
             var buffer = EntityManager.AddBuffer<GatheringProfileData>(entity);
             if (profiles != null) foreach (var profile in profiles) buffer.Add(profile);
         }
         public void AttachBuilding(Entity entity, int resourceMask, bool townHall, bool producer, byte requiredTechnology = 0)
-        {
+        { RequireSnapshotMutable();
             EntityManager.AddComponentData(entity, new GameplayConstruction { RequiredTechnology = requiredTechnology });
             EntityManager.AddComponentData(entity, new GameplayDepot { ResourceMask = resourceMask, TownHall = (byte)(townHall ? 1 : 0) });
             if (producer) { EntityManager.AddComponentData(entity, new GameplayProducer { RequiresArchery = (byte)(requiredTechnology == 1 ? 1 : 0) }); EntityManager.AddBuffer<TrainingRequest>(entity); }
         }
         public Entity CreateResource(GameplayResource resource)
-        { Entity entity = EntityManager.CreateEntity(typeof(GameplayResource)); EntityManager.SetComponentData(entity, resource); return entity; }
+        { RequireSnapshotMutable();
+            Entity entity = EntityManager.CreateEntity(typeof(GameplayResource), typeof(SaveIdentity));
+            World.GetOrCreateSystemManaged<SwarmSimulationSystem>().EnsureSaveIdentity(entity);
+            EntityManager.SetComponentData(entity, resource); return entity;
+        }
         public bool TryGetActor(Entity entity, out GameplayActor actor, out CombatBody body)
         {
             actor = default; body = default;
@@ -99,15 +105,15 @@ namespace RTS.DOTS
             resource = EntityManager.GetComponentData<GameplayResource>(entity); return true;
         }
         public bool TryClaim(Entity entity)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return false;
             if (!TryGetResource(entity, out var resource) || resource.Claims >= resource.Capacity) return false;
             resource.Claims++; EntityManager.SetComponentData(entity, resource); return true;
         }
         public void Release(Entity entity)
-        { if (TryGetResource(entity, out var resource)) { resource.Claims = math.max(0, resource.Claims - 1); EntityManager.SetComponentData(entity, resource); } }
+        { RequireSnapshotMutable(); if (TryGetResource(entity, out var resource)) { resource.Claims = math.max(0, resource.Claims - 1); EntityManager.SetComponentData(entity, resource); } }
         public void CancelWork(Entity entity)
-        {
+        { RequireSnapshotMutable();
             if (!TryGetWorker(entity, out var worker)) return;
             bool wasSheltered = worker.Phase == WorkPhase.Sheltered;
             Release(worker.Node);
@@ -125,7 +131,7 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, actor); EntityManager.GetBuffer<GameplayWaypoint>(entity).Clear();
         }
         public bool AssignResource(Entity entity, Entity node)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return false;
             if (!TryGetWorker(entity, out var worker) || !TryGetResource(node, out var resource)) return false;
             if (worker.Node == node) return true;
@@ -140,7 +146,7 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, worker); return true;
         }
         public void SetDestination(Entity entity, float2 destination, bool playerCommand = false)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out var body) || body.Health <= 0 || actor.Speed <= 0) return;
             if (playerCommand) { CancelWork(entity); actor = EntityManager.GetComponentData<GameplayActor>(entity); actor.Target = Entity.Null; actor.Task = GameplayTask.None; actor.SuppressAcquire = 1; }
@@ -149,13 +155,13 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, actor); EntityManager.GetBuffer<GameplayWaypoint>(entity).Clear();
         }
         public void Stop(Entity entity)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out _)) return;
             actor.Moving = 0; actor.PathDirty = 0; EntityManager.SetComponentData(entity, actor); EntityManager.GetBuffer<GameplayWaypoint>(entity).Clear();
         }
         public void Attack(Entity entity, Entity target)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out var body) || body.Health <= 0) return;
             CancelWork(entity); actor = EntityManager.GetComponentData<GameplayActor>(entity);
@@ -163,7 +169,7 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, actor);
         }
         public void SetStance(Entity entity, bool offensive)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetActor(entity, out var actor, out _)) return;
             actor.Offensive = (byte)(offensive ? 1 : 0);
@@ -171,7 +177,7 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, actor);
         }
         public void AssignConstruction(Entity entity, Entity structure)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetWorker(entity, out _)) return;
             CancelWork(entity); var worker = EntityManager.GetComponentData<GameplayWorker>(entity); worker.Structure = structure; worker.Phase = WorkPhase.Constructing;
@@ -179,20 +185,20 @@ namespace RTS.DOTS
             var actor = EntityManager.GetComponentData<GameplayActor>(entity); actor.Task = GameplayTask.Build; EntityManager.SetComponentData(entity, actor);
         }
         public void SetDepot(Entity entity, Entity depot)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetWorker(entity, out var worker) || worker.Carried <= 0) return;
             worker.Depot = depot; worker.Phase = WorkPhase.Depositing; EntityManager.SetComponentData(entity, worker);
         }
         public void Shelter(Entity entity, Entity hall)
-        {
+        { RequireSnapshotMutable();
             if (CanRecallWorker(entity, hall) != GroupCommandResult.Accepted) return;
             CancelWork(entity); var worker = EntityManager.GetComponentData<GameplayWorker>(entity); worker.Shelter = hall; worker.Phase = WorkPhase.ReturningToShelter;
             EntityManager.SetComponentData(entity, worker);
             if (EntityManager.Exists(hall)) SetDestination(entity, EntityManager.GetComponentData<CombatBody>(hall).Position);
         }
         public void LeaveShelter(Entity entity, float2 origin, float2 exit)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             if (!TryGetWorker(entity, out var sheltered) || sheltered.Phase != WorkPhase.Sheltered) return;
             CancelWork(entity); var body = EntityManager.GetComponentData<CombatBody>(entity);
@@ -200,7 +206,7 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, body); SetDestination(entity, exit);
         }
         public bool BeginConstruction(Entity entity, float duration, int requestId)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return false;
             if (!EntityManager.Exists(entity) || !EntityManager.HasComponent<GameplayConstruction>(entity)) return false;
             byte required = EntityManager.GetComponentData<GameplayConstruction>(entity).RequiredTechnology;
@@ -208,7 +214,7 @@ namespace RTS.DOTS
             EntityManager.SetComponentData(entity, new GameplayConstruction { RequiredTechnology = required, Active = 1, Duration = math.max(0.01f, duration), RequestId = requestId }); return true;
         }
         public bool EnqueueTraining(Entity entity, int requestId, float duration)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return false;
             if (duration <= 0 || float.IsNaN(duration) || float.IsInfinity(duration)) return false;
             if (!EntityManager.Exists(entity) || !EntityManager.HasComponent<GameplayProducer>(entity)) return false;
@@ -217,7 +223,7 @@ namespace RTS.DOTS
             EntityManager.GetBuffer<TrainingRequest>(entity).Add(new TrainingRequest { RequestId = requestId, Duration = math.max(0.01f, duration * TrainingMultiplier) }); return true;
         }
         public void AddResources(int wood, int gold, int meat)
-        {
+        { RequireSnapshotMutable();
             if (IsMatchOver) return;
             var wallet = Wallet; wallet.Wood += wood; wallet.Gold += gold; wallet.Meat += meat;
             EntityManager.SetComponentData(WalletEntity, wallet);
@@ -225,12 +231,12 @@ namespace RTS.DOTS
         }
         public bool TryTakeEvent(out GameplayEvent value) => m_Events.TryDequeue(out value);
         public void Remove(Entity entity)
-        {
+        { RequireSnapshotMutable();
             if (!EntityManager.Exists(entity)) return;
             CancelWork(entity); EntityManager.DestroyEntity(entity);
         }
         public void ResetGameplay()
-        {
+        { RequireSnapshotMutable();
             Dependency.Complete(); EntityManager.DestroyEntity(m_Actors); EntityManager.DestroyEntity(m_Resources);
             EntityManager.SetComponentData(WalletEntity, new PlayerWallet()); m_Events.Clear(); m_Damage.Clear(); m_Shots.Clear(); TickCount = 0;
             EntityManager.SetComponentData(WalletEntity, new PlayerResearch()); m_ResearchConfigured = false;
@@ -240,7 +246,7 @@ namespace RTS.DOTS
 
         protected override void OnUpdate()
         {
-            if (!IsConfigured || IsMatchOver) return;
+            if (!IsConfigured || IsMatchOver || SnapshotFenced) return;
             m_Combat ??= World.GetOrCreateSystemManaged<SwarmSimulationSystem>();
             if (m_Combat.Paused) return;
             float dt = math.min(SystemAPI.Time.DeltaTime, 0.05f);

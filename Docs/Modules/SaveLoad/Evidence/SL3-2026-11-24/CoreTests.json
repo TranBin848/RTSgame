@@ -1,0 +1,249 @@
+{
+  "result": {
+    "Summary": {
+      "Status": "Passed",
+      "TotalTests": 47,
+      "PassedTests": 47,
+      "FailedTests": 0,
+      "SkippedTests": 0,
+      "Duration": "00:01:00.3852376"
+    },
+    "Results": [
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(\"\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0140000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(\"{}\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0150000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(\"{\\\"format\\\":\\\"a\\\",\\\"format\\\":\\\"b\\\"}\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0110000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(\"{}{}\")",
+        "Status": "Passed",
+        "Duration": "00:00:00"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CatalogFingerprintIsOrderStableButConfigSensitive",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.ChecksumDoesNotReplaceSemanticValidation",
+        "Status": "Passed",
+        "Duration": "00:00:00.3000000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempCreated)",
+        "Status": "Passed",
+        "Duration": "00:00:01.2600000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempWritten)",
+        "Status": "Passed",
+        "Duration": "00:00:01.7690000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempFlushed)",
+        "Status": "Passed",
+        "Duration": "00:00:02.5220000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempVerified)",
+        "Status": "Passed",
+        "Duration": "00:00:03.6590000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(BeforeCommit)",
+        "Status": "Passed",
+        "Duration": "00:00:04.6470000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(Committed)",
+        "Status": "Passed",
+        "Duration": "00:00:07.3910000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CorruptionRejected",
+        "Status": "Passed",
+        "Duration": "00:00:00.6840000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.CorruptPrimaryUsesBackupWithoutModifyingEitherFile",
+        "Status": "Passed",
+        "Duration": "00:00:08.3580000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.DoubleRequestAndSecondStorageInstanceAreBlocked",
+        "Status": "Passed",
+        "Duration": "00:00:04.0440000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.DtoRoundTripPreservesEveryFieldAndLargeIds",
+        "Status": "Passed",
+        "Duration": "00:00:02.4670000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.FinishedConstructionKeepsOneTickOvershoot",
+        "Status": "Passed",
+        "Duration": "00:00:01.6820000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.FirstWriteThenReplacementKeepsPreviousGeneration",
+        "Status": "Passed",
+        "Duration": "00:00:10.1160000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.FractionalIntegerIsNotRounded",
+        "Status": "Passed",
+        "Duration": "00:00:01.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.GenerationCannotRegressOrReplaceWithInvalidData",
+        "Status": "Passed",
+        "Duration": "00:00:04.8290000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"duplicate\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0120000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"unknown\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"dangling\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"negativeId\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"wrongReference\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"nan\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"infinity\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"overflow\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"mapSize\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"mask\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"schema\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"config\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"queue\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"request\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"technology\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"capabilities\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"cargo\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"shelter\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"claims\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(\"construction\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.MissingFieldDoesNotSilentlyDefault",
+        "Status": "Passed",
+        "Duration": "00:00:01.1020000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.MissingZeroFieldIsRejected",
+        "Status": "Passed",
+        "Duration": "00:00:00.9770000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.NoSaveAndInvalidSlotDoNotCreateFiles",
+        "Status": "Passed",
+        "Duration": "00:00:00.0150000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.NumericStringIsNotCoerced",
+        "Status": "Passed",
+        "Duration": "00:00:01.1810000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.ObjectCountIsBounded",
+        "Status": "Passed",
+        "Duration": "00:00:00.0150000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.SizeLimitIsCheckedBeforeReadingWholeFile",
+        "Status": "Passed",
+        "Duration": "00:00:00.0200000"
+      },
+      {
+        "Name": "RTS.SaveLoad.Tests.SaveLoadTests.UnknownAndTypeMetadataRejected",
+        "Status": "Passed",
+        "Duration": "00:00:01.1650000"
+      }
+    ]
+  }
+}

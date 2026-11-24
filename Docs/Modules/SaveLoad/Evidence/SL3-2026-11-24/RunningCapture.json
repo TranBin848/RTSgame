@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "seed": 1,
+  "activeCapture": true,
+  "timeScale": 1.0,
+  "simulationPaused": false,
+  "gameFenced": false,
+  "clockFenced": false,
+  "waveFenced": false,
+  "detachedSnapshotTicks": 350,
+  "liveTicks": 1005,
+  "captureMs": 76.7351
+}

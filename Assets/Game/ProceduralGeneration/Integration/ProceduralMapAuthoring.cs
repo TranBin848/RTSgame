@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [DefaultExecutionOrder(-300)]
-public sealed class ProceduralMapAuthoring : MonoBehaviour
+public sealed partial class ProceduralMapAuthoring : MonoBehaviour
 {
     internal static int? BenchmarkSeedOverride { get; set; }
     [Header("Generation")]
@@ -27,9 +27,16 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
     [SerializeField] Transform m_GeneratedResourceRoot;
 
     public MapData GeneratedMap { get; private set; }
+    readonly System.Collections.Generic.Dictionary<int, GameObject> m_SavePlacementViews = new();
+    public GameObject SavePlacementView(int index) => m_SavePlacementViews.TryGetValue(index, out var view) ? view : null;
+    public MapGenerationSettingsData SaveSettings
+    {
+        get { var data = m_LoadedMap != null ? JsonUtility.FromJson<MapGenerationSettingsData>(m_LoadedMap.SettingsJson) : m_Settings.ToData(); if (GeneratedMap != null) data.Seed = GeneratedMap.Seed; return data; }
+    }
     public bool IsReady => GeneratedMap != null && GeneratedMap.Validation.IsValid;
     public int GatewayCount => IsReady && GeneratedMap.Layout != null ? GeneratedMap.Layout.Gateways.Length : 0;
     Vector3Int m_Origin;
+    RTS.SaveLoad.MapSaveData m_LoadedMap;
     public Vector3Int OriginCell => m_Origin;
     public Transform GeneratedResourceRoot => m_GeneratedResourceRoot;
     public double BuildStartedRealtime { get; private set; }
@@ -87,6 +94,19 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
     {
         BuildStartedRealtime = Time.realtimeSinceStartupAsDouble;
         ProceduralMapRuntime.Begin();
+        if (MatchLoadBootstrap.IsLoading)
+        {
+            try
+            {
+                ApplySavedMap(MatchLoadBootstrap.Pending.Map);
+                foreach (var root in gameObject.scene.GetRootGameObjects())
+                    foreach (var unit in root.GetComponentsInChildren<Unit>(true))
+                    { unit.gameObject.SetActive(false); Destroy(unit.gameObject); }
+                ProceduralMapRuntime.Complete();
+            }
+            catch (Exception exception) { ProceduralMapRuntime.FailComposition(exception.Message); MatchLoadBootstrap.Fail(exception.Message); enabled = false; }
+            return;
+        }
         if (!TryGenerateAndApply(out string error))
         {
             ProceduralMapRuntime.Fail(error);
@@ -162,7 +182,8 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
         Tilemap foam = m_FoamTilemap;
         Vector3 centerWorld = m_MapCenter != null ? m_MapCenter.position : transform.position;
         Vector3Int centerCell = walkable.WorldToCell(centerWorld);
-        Vector3Int origin = new Vector3Int(centerCell.x - map.StartX, centerCell.y - map.StartY, 0);
+        Vector3Int origin = m_LoadedMap != null ? new Vector3Int(m_LoadedMap.OriginCellX, m_LoadedMap.OriginCellY, 0)
+            : new Vector3Int(centerCell.x - map.StartX, centerCell.y - map.StartY, 0);
         m_Origin = origin;
         var bounds = new BoundsInt(origin.x, origin.y, 0, map.Width, map.Height, 1);
         var grassTiles = new TileBase[map.Terrain.Length];
@@ -211,6 +232,7 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
 
     void SpawnResources(MapData map)
     {
+        m_SavePlacementViews.Clear();
         if (m_GeneratedResourceRoot == null)
         {
             var root = new GameObject("Procedural Resources");
@@ -220,8 +242,9 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
 
         Tilemap walkable = m_TilemapManager.WalkableTilemap;
 
-        foreach (ResourcePlacement placement in map.Resources)
+        for (int placementIndex = 0; placementIndex < map.Resources.Count; placementIndex++)
         {
+            ResourcePlacement placement = map.Resources[placementIndex];
             GameObject prefab = placement.Kind switch
             {
                 ProceduralResourceKind.Tree => m_TreePrefab,
@@ -231,7 +254,7 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
             };
             if (prefab == null) continue;
             Vector3Int cell = m_Origin + new Vector3Int(placement.X, placement.Y, 0);
-            Instantiate(prefab, walkable.GetCellCenterWorld(cell), Quaternion.identity, m_GeneratedResourceRoot);
+            m_SavePlacementViews[placementIndex] = Instantiate(prefab, walkable.GetCellCenterWorld(cell), Quaternion.identity, m_GeneratedResourceRoot);
         }
     }
 

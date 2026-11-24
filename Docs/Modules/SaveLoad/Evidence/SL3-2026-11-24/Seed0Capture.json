@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "seed": 0,
+  "objects": 157,
+  "placements": 150,
+  "uniqueIds": true,
+  "roundTrip": true,
+  "settingsSeedMatches": true,
+  "bytes": 213960,
+  "captureMs": 43.64
+}

@@ -1,0 +1,386 @@
+{
+  "capturedUtc": "2026-11-24T13:18:51.1245761Z",
+  "note": "Working tree sources/assets, including prior SL0-SL2 changes; not a release build fingerprint.",
+  "files": [
+    {
+      "path": "Assets/Game/DOTS/Integration/E10ReleaseValidation.cs",
+      "sha256": "1d6426c96eda9771f0b87699ece9131505da2b0d42eac8d6a11cc1337e201f23"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/EconomyResearchDefinition.cs",
+      "sha256": "f30ce83430b678e35a3e004c7a2092ed0e77eb58ec46c01e657e2349bf310c76"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ExpansionCommandService.cs",
+      "sha256": "10aba4652dfc04b7908404e1910fdb3208b532bb571a1072d280df80c95d8b79"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameplayGameBridge.cs",
+      "sha256": "5043ab08c4638f5d46a3f7639cf946ebc7fb43c68c779a4e0f92a444d3dfddc4"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameplaySmokeAutomation.cs",
+      "sha256": "38489c159ae4d7fafdc90a6f1f607e751bc1b05a9a38d52324a3b24c1f8b6750"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "776a946faad51ff11ab24456be7266b1c94aeb27b8306a91253f0ef2f66ccc3b"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/MatchReportService.cs",
+      "sha256": "a5291728b62d0672cb5fad28d9b7626c6446c7c79b04fdf806a54c340e4aa0e2"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/MatchSession.cs",
+      "sha256": "d5e7188795b79ec788a5dbe6b6ba579b7f2f8ed3c5be652df2163f3cf59b2393"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ResearchPanel.cs",
+      "sha256": "ed0e12f552bd27e582c4233ff73e3c898925abba43287007e0c86602a53b6ea3"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ResearchService.cs",
+      "sha256": "80258f8dff36bf5c01fa4b566571ca741a52c8d95b4f2a902d8afe89ca27f77a"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ResearchTreeGraphic.cs",
+      "sha256": "ac079c1f0d62b4e5274c25592771701b366602cb1dc3744e4c431fd60338150a"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ResearchTreePanel.cs",
+      "sha256": "75fba0838b4d50257d8a6c4f9231d5b73d0c2e3f0fcc5b2a6af2d505a28e2280"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ResearchTreeViewport.cs",
+      "sha256": "838e80726432f8cf32e0b6da52ab5a55d15c4bab91d1ae1a8d0c8348eda4905e"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/SwarmGameBridge.cs",
+      "sha256": "e52219cba6065720ece7144f8ee42817dd7130dcbdf6fb97a970beba59c87f1e"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/SwarmSmokeAutomation.cs",
+      "sha256": "302cd46bc23f865bb7e059429e3992907d61c1f0c789b1df6e1de339fc95a9c3"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/TacticalNightPlan.cs",
+      "sha256": "84f3f0563d39a6c8b3092501778d3e60baad0c5ce7cdea6f7126e9438201a1dc"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/FlowFieldJob.cs",
+      "sha256": "75aa90f89e8aa83f27be364f91a4a6ef4b1cf74398ff620777c48bd6ee062cd2"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayActorJobs.cs",
+      "sha256": "467de74f4f4584faa24c729236df9423fd664b1cd949bb76b7665e650f9d931c"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayComponents.cs",
+      "sha256": "e5c56d4d4329af887454d4e74da93a027cbe4b753c7c05a76a9e444880fb1009"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayEconomyJob.cs",
+      "sha256": "683d20f6090c334cc9a65a93c7218701366c65d155587179eb7b6abee3f5a6ff"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayLogisticsCommands.cs",
+      "sha256": "acdfd1305cb922fe5fb2a4de69ff58cc93c69de1aa4681986c6466b532f1c89b"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayMatch.cs",
+      "sha256": "e856d9bc308dc7df0302f1f297ba267356a1d8755c6c96a3b9e90941b29f046f"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayResearch.cs",
+      "sha256": "9a914d8611cb1226663d3d9f610eeee3af754f1a848c1c745b49fac9fdfb0b2a"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplaySimulationSystem.cs",
+      "sha256": "aeae52d15095ff0b7edfefa6e6c1e597681aa65bf9cbc5a7a1e56f02220b6c27"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/MatchStatistics.cs",
+      "sha256": "35ee856da281745ad96834925731b895a300dfb241653d9eb2125038c5f88e14"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/RTS.DOTS.asmdef",
+      "sha256": "78db1aa2d3425b81229f756dbe2d0933cb1cc2f3cb97306e4c28af1bdc061159"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SaveIdentity.cs",
+      "sha256": "d6e67a2cdfe1dd4e9b701f871abbc46b5d8e1f529283bed43be24ea4bfed9e7a"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SimulationSnapshot.cs",
+      "sha256": "96ed31f74e40d2a04102c7809b0e3467871481efa776f7f938683f3b46931c77"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmBenchmarkRecorder.cs",
+      "sha256": "5722e9926cc0a89a80943124ef1ab8dfd334e76ccc0b82970baafa1624b6bf33"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmComponents.cs",
+      "sha256": "69bc46525a8c0cfefc81c0ab31c30d21d1135be36a64292fcbd80bcba0864521"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmDemoController.cs",
+      "sha256": "9115a96c3fcf2368728bfc644460b40b7c0da5e71b741a42190a14478ea8baa1"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmInstancedRenderer.cs",
+      "sha256": "0853b7f03d680ef3a988e177c8b185fc8ac7daa132cbd817d495615c15cb8a02"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmJobs.cs",
+      "sha256": "63e1bed8256b00575194a470a371d2f6f0e940c82a48016e21700a553075a490"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmMath.cs",
+      "sha256": "57e5f364b8004a749dadc9af67abe1bea9cb1ec1b0f650577a13a8e191048ca5"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmSimulationSystem.cs",
+      "sha256": "dc40eb44923dcd30ace2a5ff8d1952d10e43440f908f21e49f61102f2599b553"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmVisualLibrary.cs",
+      "sha256": "33049952ab712a5a3ccc5d4843a6ff7a93ab461ead34a308ab1516314379f859"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/GameplaySimulationTests.cs",
+      "sha256": "7083abd00ced764d840e16ef340b03782e041cecb607f5c8d509f72aed0877bd"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/RTS.DOTS.Tests.asmdef",
+      "sha256": "4f84a070e1e7d76284b997feb016ccfd8671f2d3cc9ac2252a58f2cce112bca2"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/SaveIdentityTests.cs",
+      "sha256": "6f3aa4064b8dca4936be3cf847508a3bafc7685a946c78ee9685293763031bd8"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/SimulationSnapshotTests.cs",
+      "sha256": "e2e9c31748e8eb90f33d3b05027d427911088d2e85db503cadf51c3d8cd04306"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/SwarmSimulationTests.cs",
+      "sha256": "4ab89969ffb56d76d07c3c0c1d48af223059ab42bacbafbd3dee98cdfa5474d5"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Objects/Arrow.prefab",
+      "sha256": "ff757271fb2a8736463d21b39d47f51f68a3a7e1e79bd6b50b25db6674e8a684"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Objects/Gnoll_Bone.prefab",
+      "sha256": "1a1ff12b31e7ec251f60d82c2a2926d1851c7389ae8657be92d7fd23b4fc788d"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/GoldStone/GoldStone1.prefab",
+      "sha256": "4753899034752cf340faf1654f5f991e7d5cac427615a3aa015b59e53e3491c0"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/GoldStone/GoldStone2.prefab",
+      "sha256": "34167dbeee866e1c77b86a2d42fc7f5b5289bdb0f342f9325975d396541f32d3"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/GoldStone/GoldStone3.prefab",
+      "sha256": "eedbdfb8777618848a9307056f239b1aec2ce0424fc9c314a45b6481d844a5c2"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/GoldStone/GoldStone4.prefab",
+      "sha256": "fbe17f5f9c59f46ffb4cecb89a458e1f3e070fa02a487c68b3d9a3437d1f3bf9"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/GoldStone/GoldStone5.prefab",
+      "sha256": "805acc16c879c62140d1c8323b6b58fe0390b8de42400949b42edb26cf30bba6"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/GoldStone/GoldStone6.prefab",
+      "sha256": "82305488fbb113001b2356a70080ae0288eef92083903288f43f64f2a2252130"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/Sheep/Sheep.prefab",
+      "sha256": "b86a7cad9f6d27b991bab72466cc8bf2b1541dfc1b16814244ae61ac72fa03a6"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/Tree.prefab",
+      "sha256": "282f543c94efb6f7263047ea3d90473727473586626ee5104ace0601e9136954"
+    },
+    {
+      "path": "Assets/Game/Prefabs/TerrainObjects/TreePrefab.prefab",
+      "sha256": "cc7ddd06fdd8db5182c4f667b45e6cfb7f9a785e23e4be501278929392b2b234"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/ActionButton.prefab",
+      "sha256": "a9001f8c3e73236c67b027ba2f7377d7993fbca9066a0f73377834959b194b06"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/ActionQueueItem.prefab",
+      "sha256": "fc60c82d1c344f8666cdfa2b62e24a237d7a3dbd0f0af7d08906d3e5984c0553"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/PointToClick.prefab",
+      "sha256": "db1098887628238625719685de355573dbda9ac75b84ad9293671d6222427256"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/ResouceRibbon.prefab",
+      "sha256": "5c18ed6e42964151e6cae83efdd5d9f368e044e61623bc38ce46116725091146"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/SelectecUnitInfoItem.prefab",
+      "sha256": "34a93e9e0f30d138907d67a100e529a3d890988efeb4203fbeeb7db596eff180"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/TextPopup.prefab",
+      "sha256": "abf358be944501dfa8060f029f74c391134fc137a71cb7c551602300834d71b2"
+    },
+    {
+      "path": "Assets/Game/Prefabs/UI/WaveIconPrefab.prefab",
+      "sha256": "9b5af5b6a09eb993015017197bc0850c24051b7d0095883a3e244aec28f3b875"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Archer.prefab",
+      "sha256": "efb82de874cf457d45a478e8bf1b233dbca0a5b837e7357dec97030106b949d5"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Buildings/ArcheryRange.prefab",
+      "sha256": "18a5dd89ed1e9557dc4392affec24ba9190cfdd1cc350bc16627bf505287fc79"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Buildings/Barrack.prefab",
+      "sha256": "accfd2910b63a97adfbefdac9019547b7759c40ccdce182502a95219d3b8fcfa"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Buildings/Granary.prefab",
+      "sha256": "f84ec3c7624a59162fc644f08e1e59cdfc653784351cf3ea9c652544f26d99b6"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Buildings/StoragePit.prefab",
+      "sha256": "0b84c14b169bb8081a9ddf30d91131ecd9eb35aa2abd18df37b8a05596d6c4fa"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Buildings/Tower.prefab",
+      "sha256": "b18072409b83bde34808767fa2613a94f85eeb99eae36e9c9f8b20b4d1c0ca76"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Buildings/TownHall.prefab",
+      "sha256": "b7c4a22b1fb5a44b368376f3af477bc9858566d71ec00ec32cd3b2541ad380c3"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Gnoll.prefab",
+      "sha256": "082b4d11e1e5f465f87469475bc73a7388578fe283177fba1d482c9c4f8968ef"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Skull.prefab",
+      "sha256": "77538699dbbcffea95cfd272b685609e65ee5d23f8e9b75bd502fd401703b01a"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Warrior.prefab",
+      "sha256": "cfea09bfa119c069c951649f71ea50dad245ba6ff184f92fc562e3994162d0e3"
+    },
+    {
+      "path": "Assets/Game/Prefabs/Units/Worker.prefab",
+      "sha256": "628a8bf283fbafe3e273f7436eecebfe91e2cf1ac7f4d7633d6ff6f2235e3e83"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/ProceduralMapAuthoring.cs",
+      "sha256": "8f7f9f8b20344a1ca0e97f35ac4e2d8b46ea93c0926690464163a7688167ba93"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/MatchSaveData.cs",
+      "sha256": "e4e21df7a7fc14cbb97d2dec01fef3c4a3e02c26113f67f048726927e7ab505d"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/RTS.SaveLoad.asmdef",
+      "sha256": "f7ddf6173e9f3202798e8380057135b97791aaf6577aebd1eb83465fa5a068c6"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveCatalog.cs",
+      "sha256": "a7ea7587eea91cb1de5cdc65cf393cd84645975d147b6c610d02b6e2cda8268e"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveCodec.cs",
+      "sha256": "419026dc817a95ea9be3f2085727dcee313401264d9886989cc3bfe6f75f8125"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveSlotStorage.cs",
+      "sha256": "ba0c0773e0a927db0c6f25f815c7a9f037c76da940713c5ca40707dba2f40a14"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveValidator.cs",
+      "sha256": "e46745fafc274e28904946bd96605eea0334b977172c1e7e034cdb7df8cfdf27"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Editor/SaveContentCatalogEditor.cs",
+      "sha256": "fea0ac33e6c493e7cea0aba8a7883629a32bf765e68c2c7493f2c47ca9ba01ac"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Integration/BridgeSaveCapture.cs",
+      "sha256": "f124a871e7e00d797ddcdae4868d263ffa79976c4db0c3d5d09a8bd211a67d04"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Integration/MatchCaptureService.cs",
+      "sha256": "7cc4347548bc4d2a1755eaac08c0fd02fb0918ebdc544c20106537f1af519a90"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Integration/SaveContentCatalog.cs",
+      "sha256": "2fbe38f0ea7c90fade62d60a1bbb9bf9db237f82b689bc36d27bfe78bb27d278"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Integration/SaveDefinitionTag.cs",
+      "sha256": "05aad0276cc3b8ea032edb4d408b937fc9fb9f27cfed75cfa1bc9c081aeb8667"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Resources/ProceduralSaveCatalog.asset",
+      "sha256": "a1735760d35907a5340002683bbd002ded787b79009b5b549bd7dfacaeaca7b0"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Tests/Editor/RTS.SaveLoad.Tests.asmdef",
+      "sha256": "681ec05e8f3231fc08e0c01ad6029bae4d84f5ac6e289abb687ac0b143ef2f91"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Tests/Editor/SaveLoadTests.cs",
+      "sha256": "a379332fb906f64626146ffd1a7a314a8e65a0d1534166bf91bfd8fc81f6814f"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/DayNightCycleManager.cs",
+      "sha256": "7b75df219577d5e7d78dc041e4e8d96276a9b5c932ddbe17227cb0f4620b5174"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/EnemyWaveManager.cs",
+      "sha256": "043f07e4e06c0553dca5f23279a268c3f7c62c221655a5fa523cb0b3e8339cc9"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/FogOfWarManager.cs",
+      "sha256": "d7c2055c4801932dbdb956ee8235d7fd2de6355a382d5a8fa4934b67e59e3ec7"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/GameManager.cs",
+      "sha256": "d24817867f4667e36591a49497dd019dd0cc08fdb4e687ca3464c8c7b19bd7c8"
+    },
+    {
+      "path": "Assets/Game/Scripts/Units/ProductionBuilding.cs",
+      "sha256": "d090152925c16c6c59e9b4bfc40c9b73051ba1981849888ed92fd2ee8088e7cb"
+    },
+    {
+      "path": "Assets/Game/Scripts/Units/WorkerUnit.cs",
+      "sha256": "c0bdb01b087f66a60ab26c7f6be8269fc74c56b334492e5cf80f99f12643f994"
+    },
+    {
+      "path": "Assets/Game/Scripts/Utils/BuildingProcess.cs",
+      "sha256": "ca9985ee12a8b999c4982055691b0f9e707b78f7df28da60ac3df11c579687a7"
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "sha256": "2dea32d7f9603aaa7a8fd66f8f0226288fb0435d0e977f7591d752beadb8c8a4"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "sha256": "a717ed4b946e370ce6e6af9dd000b8acf89495b44c84bf8f768159924cfa66c3"
+    },
+    {
+      "path": "Tools/ValidateSaveCapture.cs",
+      "sha256": "242e7b4a4713c1aaecf2e08017dac3ec8d964be5cca30fe6e8b2b56c00bb457a"
+    }
+  ]
+}

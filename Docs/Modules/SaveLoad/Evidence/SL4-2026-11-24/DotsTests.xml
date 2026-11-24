@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="83" result="Passed" total="83" passed="83" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:40Z" duration="2.2750638">
+  <test-suite type="TestSuite" id="1191" name="RTSgame2026" fullname="RTSgame2026" runstate="Runnable" testcasecount="148" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:40Z" duration="2.275064" total="83" passed="83" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1100" name="RTS.DOTS.Tests.dll" fullname="E:/Unity project/RTSgame2026/Library/ScriptAssemblies/RTS.DOTS.Tests.dll" runstate="Runnable" testcasecount="83" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:40Z" duration="2.172275" total="83" passed="83" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="21552" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1101" name="RTS" fullname="RTS" runstate="Runnable" testcasecount="83" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:40Z" duration="2.079849" total="83" passed="83" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1102" name="DOTS" fullname="RTS.DOTS" runstate="Runnable" testcasecount="83" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:40Z" duration="1.979647" total="83" passed="83" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1103" name="Tests" fullname="RTS.DOTS.Tests" runstate="Runnable" testcasecount="83" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:40Z" duration="1.878106" total="83" passed="83" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1005" name="GameplaySimulationTests" fullname="RTS.DOTS.Tests.GameplaySimulationTests" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="59" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:39Z" duration="1.246622" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1047" name="AllRolesUseTheSameAuthoritativeHealthWithoutExternalDamageEcho" fullname="RTS.DOTS.Tests.GameplaySimulationTests.AllRolesUseTheSameAuthoritativeHealthWithoutExternalDamageEcho" methodname="AllRolesUseTheSameAuthoritativeHealthWithoutExternalDamageEcho" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1477370100" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:38Z" duration="0.301079" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1026" name="AllSixPlannedTechnologyIdsCanBeValidatedAndResearched" fullname="RTS.DOTS.Tests.GameplaySimulationTests.AllSixPlannedTechnologyIdsCanBeValidatedAndResearched" methodname="AllSixPlannedTechnologyIdsCanBeValidatedAndResearched" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1446535339" result="Passed" start-time="2026-11-24 13:35:38Z" end-time="2026-11-24 13:35:39Z" duration="0.014069" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1020" name="CancelledChildResearchPreservesPreviouslyUnlockedParent" fullname="RTS.DOTS.Tests.GameplaySimulationTests.CancelledChildResearchPreservesPreviouslyUnlockedParent" methodname="CancelledChildResearchPreservesPreviouslyUnlockedParent" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1708938045" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.009726" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="CapabilityChecksProtectDirectConstructionAndTrainingCommands" fullname="RTS.DOTS.Tests.GameplaySimulationTests.CapabilityChecksProtectDirectConstructionAndTrainingCommands" methodname="CapabilityChecksProtectDirectConstructionAndTrainingCommands" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1505256793" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.008518" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="CargoUpgradeUsesEffectiveCapacityForExistingAndNewWorkers" fullname="RTS.DOTS.Tests.GameplaySimulationTests.CargoUpgradeUsesEffectiveCapacityForExistingAndNewWorkers" methodname="CargoUpgradeUsesEffectiveCapacityForExistingAndNewWorkers" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="726418999" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.016227" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1062" name="ClaimCapacityCancellationAndWorkerDeathReleaseSlots" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ClaimCapacityCancellationAndWorkerDeathReleaseSlots" methodname="ClaimCapacityCancellationAndWorkerDeathReleaseSlots" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1673245801" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.004679" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="ConstructionPausesWithoutBuilderAndCompletesOnceAfterReassignment" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ConstructionPausesWithoutBuilderAndCompletesOnceAfterReassignment" methodname="ConstructionPausesWithoutBuilderAndCompletesOnceAfterReassignment" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1503279249" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.015873" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1050" name="DefensiveStanceDoesNotChaseOutOfRangeTarget" fullname="RTS.DOTS.Tests.GameplaySimulationTests.DefensiveStanceDoesNotChaseOutOfRangeTarget" methodname="DefensiveStanceDoesNotChaseOutOfRangeTarget" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="254688870" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.018266" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1071" name="DestroyedShelterEjectsWorkerOntoWalkableGrid" fullname="RTS.DOTS.Tests.GameplaySimulationTests.DestroyedShelterEjectsWorkerOntoWalkableGrid" methodname="DestroyedShelterEjectsWorkerOntoWalkableGrid" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1745887457" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.013057" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="FeedbackGatherAndDepositEventsFollowAuthoritativeTransactionsOnce" fullname="RTS.DOTS.Tests.GameplaySimulationTests.FeedbackGatherAndDepositEventsFollowAuthoritativeTransactionsOnce" methodname="FeedbackGatherAndDepositEventsFollowAuthoritativeTransactionsOnce" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1316531333" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.020353" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="FeedbackImpactsFollowHitsWithoutAddingDamageAndResetClearsThem" fullname="RTS.DOTS.Tests.GameplaySimulationTests.FeedbackImpactsFollowHitsWithoutAddingDamageAndResetClearsThem" methodname="FeedbackImpactsFollowHitsWithoutAddingDamageAndResetClearsThem" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="295406709" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.008131" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="FeedbackResearchCompletionOnceAndHallDeathDoesNotComplete" fullname="RTS.DOTS.Tests.GameplaySimulationTests.FeedbackResearchCompletionOnceAndHallDeathDoesNotComplete" methodname="FeedbackResearchCompletionOnceAndHallDeathDoesNotComplete" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1643381718" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.043917" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="FortifyAffectsOldAndNewTowerShotsWithoutMutatingBaseDamage" fullname="RTS.DOTS.Tests.GameplaySimulationTests.FortifyAffectsOldAndNewTowerShotsWithoutMutatingBaseDamage" methodname="FortifyAffectsOldAndNewTowerShotsWithoutMutatingBaseDamage" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="662184977" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.014153" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1067" name="HuntingSheepKeepsCorpseAsMeatResource" fullname="RTS.DOTS.Tests.GameplaySimulationTests.HuntingSheepKeepsCorpseAsMeatResource" methodname="HuntingSheepKeepsCorpseAsMeatResource" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1789134988" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.011672" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1025" name="InvalidResearchGraphIsRejectedBeforeConfiguration" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.007059" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1021" name="InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;duplicate&quot;)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;duplicate&quot;)" methodname="InvalidResearchGraphIsRejectedBeforeConfiguration" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="832596587" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002077" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1022" name="InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;missing&quot;)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;missing&quot;)" methodname="InvalidResearchGraphIsRejectedBeforeConfiguration" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="875263301" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.000863" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1023" name="InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;cycle&quot;)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;cycle&quot;)" methodname="InvalidResearchGraphIsRejectedBeforeConfiguration" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="561319429" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.000783" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1024" name="InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;unsupported&quot;)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(&quot;unsupported&quot;)" methodname="InvalidResearchGraphIsRejectedBeforeConfiguration" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1039018451" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.000750" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1035" name="InvalidTrainingModifiersAreRejected" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.101869" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1032" name="InvalidTrainingModifiersAreRejected(-0.1f)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(-0.1f)" methodname="InvalidTrainingModifiersAreRejected" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="253044016" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.003664" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1033" name="InvalidTrainingModifiersAreRejected(1.1f)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(1.1f)" methodname="InvalidTrainingModifiersAreRejected" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1573237851" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002072" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1034" name="InvalidTrainingModifiersAreRejected(float.NaN)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(float.NaN)" methodname="InvalidTrainingModifiersAreRejected" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1652095766" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001526" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1031" name="LegacyWithoutResearchKeepsCapabilitiesAvailable" fullname="RTS.DOTS.Tests.GameplaySimulationTests.LegacyWithoutResearchKeepsCapabilitiesAvailable" methodname="LegacyWithoutResearchKeepsCapabilitiesAvailable" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="3921248" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001610" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="LogisticsPreviewHonoursWallsRadiusAndPlannedFootprintWithoutChangingActor" fullname="RTS.DOTS.Tests.GameplaySimulationTests.LogisticsPreviewHonoursWallsRadiusAndPlannedFootprintWithoutChangingActor" methodname="LogisticsPreviewHonoursWallsRadiusAndPlannedFootprintWithoutChangingActor" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="786480798" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002556" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="MatchIgnoresDeadAndEnemyHallsAndPrioritizesDefeatAtDawn" fullname="RTS.DOTS.Tests.GameplaySimulationTests.MatchIgnoresDeadAndEnemyHallsAndPrioritizesDefeatAtDawn" methodname="MatchIgnoresDeadAndEnemyHallsAndPrioritizesDefeatAtDawn" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="2098041769" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001882" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="MatchLedgerCountsResolvedDamageAndDeathsDespiteHealingOrVisualDrops" fullname="RTS.DOTS.Tests.GameplaySimulationTests.MatchLedgerCountsResolvedDamageAndDeathsDespiteHealingOrVisualDrops" methodname="MatchLedgerCountsResolvedDamageAndDeathsDespiteHealingOrVisualDrops" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1878511001" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.004629" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="MatchLedgerSeparatesGrantsDepositsAndCostsAndResets" fullname="RTS.DOTS.Tests.GameplaySimulationTests.MatchLedgerSeparatesGrantsDepositsAndCostsAndResets" methodname="MatchLedgerSeparatesGrantsDepositsAndCostsAndResets" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="700913208" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.010217" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="MatchRemainsRunningWhileAnyPlayerHallLivesAndResetClearsResult" fullname="RTS.DOTS.Tests.GameplaySimulationTests.MatchRemainsRunningWhileAnyPlayerHallLivesAndResetClearsResult" methodname="MatchRemainsRunningWhileAnyPlayerHallLivesAndResetClearsResult" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="2124195366" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001472" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1014" name="MatchSurvivesFiveNightsAndOutcomeCannotChange" fullname="RTS.DOTS.Tests.GameplaySimulationTests.MatchSurvivesFiveNightsAndOutcomeCannotChange" methodname="MatchSurvivesFiveNightsAndOutcomeCannotChange" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1849835193" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001087" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1017" name="MatchValidatesConfigurationAndKeepsLegacyScenesOptIn" fullname="RTS.DOTS.Tests.GameplaySimulationTests.MatchValidatesConfigurationAndKeepsLegacyScenesOptIn" methodname="MatchValidatesConfigurationAndKeepsLegacyScenesOptIn" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1687139646" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001708" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1048" name="PlayerNavigationRoutesAroundWallAndStops" fullname="RTS.DOTS.Tests.GameplaySimulationTests.PlayerNavigationRoutesAroundWallAndStops" methodname="PlayerNavigationRoutesAroundWallAndStops" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="631331430" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.057590" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="RallyValidatesReachabilityFactionPauseAndDeathBeforeCancellingAttack" fullname="RTS.DOTS.Tests.GameplaySimulationTests.RallyValidatesReachabilityFactionPauseAndDeathBeforeCancellingAttack" methodname="RallyValidatesReachabilityFactionPauseAndDeathBeforeCancellingAttack" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1764743118" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002255" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1053" name="RangedPlayerActorsLaunchEcsProjectiles" fullname="RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.018010" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1051" name="RangedPlayerActorsLaunchEcsProjectiles(Archer)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles(Archer)" methodname="RangedPlayerActorsLaunchEcsProjectiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1565729965" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.007245" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1052" name="RangedPlayerActorsLaunchEcsProjectiles(Tower)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles(Tower)" methodname="RangedPlayerActorsLaunchEcsProjectiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1840402974" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.005970" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1012" name="RecallRejectsDeadBlockedAndDuplicateCommandsWithoutLosingCargo" fullname="RTS.DOTS.Tests.GameplaySimulationTests.RecallRejectsDeadBlockedAndDuplicateCommandsWithoutLosingCargo" methodname="RecallRejectsDeadBlockedAndDuplicateCommandsWithoutLosingCargo" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="805212609" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002009" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="RemovedResourceInvalidatesWorkerAssignmentWithoutStaleEntityAccess" fullname="RTS.DOTS.Tests.GameplaySimulationTests.RemovedResourceInvalidatesWorkerAssignmentWithoutStaleEntityAccess" methodname="RemovedResourceInvalidatesWorkerAssignmentWithoutStaleEntityAccess" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="50455098" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.003888" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="ResearchCatalogPrerequisitesRejectWithoutDebitAndUnlockInAnyCatalogOrder" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchCatalogPrerequisitesRejectWithoutDebitAndUnlockInAnyCatalogOrder" methodname="ResearchCatalogPrerequisitesRejectWithoutDebitAndUnlockInAnyCatalogOrder" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="876742136" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.007927" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1036" name="ResearchDebitsOnceCompletesOnceAndResetClearsUnlock" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchDebitsOnceCompletesOnceAndResetClearsUnlock" methodname="ResearchDebitsOnceCompletesOnceAndResetClearsUnlock" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="48296653" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.010870" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1046" name="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.102104" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1043" name="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(0,5)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(0,5)" methodname="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="234627576" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.015264" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1044" name="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(1,4)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(1,4)" methodname="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="812876941" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.012536" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1045" name="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(2,4)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(2,4)" methodname="ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="458864967" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.012641" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1038" name="ResearchPauseFreezesAndHallRemovalCancelsWithoutRefund" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchPauseFreezesAndHallRemovalCancelsWithoutRefund" methodname="ResearchPauseFreezesAndHallRemovalCancelsWithoutRefund" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1285366324" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.005732" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1042" name="ResearchRejectsInvalidDefinition" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.057019" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1039" name="ResearchRejectsInvalidDefinition(-1,1)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(-1,1)" methodname="ResearchRejectsInvalidDefinition" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="215325716" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002115" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1040" name="ResearchRejectsInvalidDefinition(1,float.NaN)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(1,float.NaN)" methodname="ResearchRejectsInvalidDefinition" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1655052914" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001046" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1041" name="ResearchRejectsInvalidDefinition(0,0)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(0,0)" methodname="ResearchRejectsInvalidDefinition" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="214334167" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.000847" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1037" name="ResearchRejectsPoorWalletAndUnfinishedOrEnemyHall" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsPoorWalletAndUnfinishedOrEnemyHall" methodname="ResearchRejectsPoorWalletAndUnfinishedOrEnemyHall" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="657140799" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001423" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="SheepGrazesAndFleesOnNativeDamage" fullname="RTS.DOTS.Tests.GameplaySimulationTests.SheepGrazesAndFleesOnNativeDamage" methodname="SheepGrazesAndFleesOnNativeDamage" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="57100957" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.020484" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="ShelterPreventsDamageAndDaybreakRestoresMovement" fullname="RTS.DOTS.Tests.GameplaySimulationTests.ShelterPreventsDamageAndDaybreakRestoresMovement" methodname="ShelterPreventsDamageAndDaybreakRestoresMovement" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1581990100" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.021719" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="SimultaneousDepositsKeepAllTransactions" fullname="RTS.DOTS.Tests.GameplaySimulationTests.SimultaneousDepositsKeepAllTransactions" methodname="SimultaneousDepositsKeepAllTransactions" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="982581965" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.006849" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1049" name="SoldiersAcquireAndAttackAnEntityEnemy" fullname="RTS.DOTS.Tests.GameplaySimulationTests.SoldiersAcquireAndAttackAnEntityEnemy" methodname="SoldiersAcquireAndAttackAnEntityEnemy" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="140742792" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.008813" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="SwitchingResourceTypeDepositsOldCargoWithoutRelabellingIt" fullname="RTS.DOTS.Tests.GameplaySimulationTests.SwitchingResourceTypeDepositsOldCargoWithoutRelabellingIt" methodname="SwitchingResourceTypeDepositsOldCargoWithoutRelabellingIt" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1697691983" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.010715" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="TerminalMatchRejectsCommandsAndFreezesSimulationEvenIfUnpaused" fullname="RTS.DOTS.Tests.GameplaySimulationTests.TerminalMatchRejectsCommandsAndFreezesSimulationEvenIfUnpaused" methodname="TerminalMatchRejectsCommandsAndFreezesSimulationEvenIfUnpaused" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="34756488" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.002234" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="TrainingQueueIsOrderedAndBlockedDuringConstruction" fullname="RTS.DOTS.Tests.GameplaySimulationTests.TrainingQueueIsOrderedAndBlockedDuringConstruction" methodname="TrainingQueueIsOrderedAndBlockedDuringConstruction" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1386294809" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.010117" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="TrainingRejectsInvalidDurationAndDeadProducerWithoutAppending" fullname="RTS.DOTS.Tests.GameplaySimulationTests.TrainingRejectsInvalidDurationAndDeadProducerWithoutAppending" methodname="TrainingRejectsInvalidDurationAndDeadProducerWithoutAppending" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="383226729" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.001493" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="TrainingUpgradeSnapshotsNewRequestsWithoutChangingOldQueue" fullname="RTS.DOTS.Tests.GameplaySimulationTests.TrainingUpgradeSnapshotsNewRequestsWithoutChangingOldQueue" methodname="TrainingUpgradeSnapshotsNewRequestsWithoutChangingOldQueue" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="74519868" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.006453" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1060" name="WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.095545" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1058" name="WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(0)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(0)" methodname="WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="859744221" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.047052" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1059" name="WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(1)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(1)" methodname="WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="170347256" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.046008" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1057" name="WorkersGatherAndDepositToNativeWallet" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.044559" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1054" name="WorkersGatherAndDepositToNativeWallet(0)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(0)" methodname="WorkersGatherAndDepositToNativeWallet" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1898832691" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.012423" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1055" name="WorkersGatherAndDepositToNativeWallet(1)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(1)" methodname="WorkersGatherAndDepositToNativeWallet" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="1651069117" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.013653" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1056" name="WorkersGatherAndDepositToNativeWallet(2)" fullname="RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(2)" methodname="WorkersGatherAndDepositToNativeWallet" classname="RTS.DOTS.Tests.GameplaySimulationTests" runstate="Runnable" seed="25074615" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.012453" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1072" name="SaveIdentityTests" fullname="RTS.DOTS.Tests.SaveIdentityTests" classname="RTS.DOTS.Tests.SaveIdentityTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.079940" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1074" name="AllFactoriesShareIdentityAndNeverReuseAfterReset" fullname="RTS.DOTS.Tests.SaveIdentityTests.AllFactoriesShareIdentityAndNeverReuseAfterReset" methodname="AllFactoriesShareIdentityAndNeverReuseAfterReset" classname="RTS.DOTS.Tests.SaveIdentityTests" runstate="Runnable" seed="394643302" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.015708" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="AllocatorPreservesLongRangeAndRejectsOverflow" fullname="RTS.DOTS.Tests.SaveIdentityTests.AllocatorPreservesLongRangeAndRejectsOverflow" methodname="AllocatorPreservesLongRangeAndRejectsOverflow" classname="RTS.DOTS.Tests.SaveIdentityTests" runstate="Runnable" seed="2091857615" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.000562" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1075" name="SheepRandomScheduleUsesSavedSeedAfterEntityRemap" fullname="RTS.DOTS.Tests.SaveIdentityTests.SheepRandomScheduleUsesSavedSeedAfterEntityRemap" methodname="SheepRandomScheduleUsesSavedSeedAfterEntityRemap" classname="RTS.DOTS.Tests.SaveIdentityTests" runstate="Runnable" seed="282606144" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:39Z" duration="0.003267" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1076" name="SimulationImportTests" fullname="RTS.DOTS.Tests.SimulationImportTests" classname="RTS.DOTS.Tests.SimulationImportTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:40Z" duration="0.098434" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1078" name="FinishRejectsDuplicateIdentityAndObstacleCacheDoesNotConsumeIds" fullname="RTS.DOTS.Tests.SimulationImportTests.FinishRejectsDuplicateIdentityAndObstacleCacheDoesNotConsumeIds" methodname="FinishRejectsDuplicateIdentityAndObstacleCacheDoesNotConsumeIds" classname="RTS.DOTS.Tests.SimulationImportTests" runstate="Runnable" seed="1464795443" result="Passed" start-time="2026-11-24 13:35:39Z" end-time="2026-11-24 13:35:40Z" duration="0.008593" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1077" name="ImportPreservesValuesReferencesAndAllocatorWithoutSpawnClamping" fullname="RTS.DOTS.Tests.SimulationImportTests.ImportPreservesValuesReferencesAndAllocatorWithoutSpawnClamping" methodname="ImportPreservesValuesReferencesAndAllocatorWithoutSpawnClamping" classname="RTS.DOTS.Tests.SimulationImportTests" runstate="Runnable" seed="496420412" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.009908" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1079" name="SimulationSnapshotTests" fullname="RTS.DOTS.Tests.SimulationSnapshotTests" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.108654" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1083" name="BuffersAndBodyCopiesAreDetachedAndDoNotExposeColliderPointers" fullname="RTS.DOTS.Tests.SimulationSnapshotTests.BuffersAndBodyCopiesAreDetachedAndDoNotExposeColliderPointers" methodname="BuffersAndBodyCopiesAreDetachedAndDoNotExposeColliderPointers" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" seed="1280493876" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.005865" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1085" name="BuildingFootprintComesFromNativeColliderWithoutViewBounds" fullname="RTS.DOTS.Tests.SimulationSnapshotTests.BuildingFootprintComesFromNativeColliderWithoutViewBounds" methodname="BuildingFootprintComesFromNativeColliderWithoutViewBounds" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" seed="1222559498" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.003596" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1082" name="CompletionMustBeAppliedBeforeCaptureAndIsNotClearedByFence" fullname="RTS.DOTS.Tests.SimulationSnapshotTests.CompletionMustBeAppliedBeforeCaptureAndIsNotClearedByFence" methodname="CompletionMustBeAppliedBeforeCaptureAndIsNotClearedByFence" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" seed="422110546" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.008350" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1080" name="FenceBlocksBothTicksAndCommandsAndReleasesAfterFailure" fullname="RTS.DOTS.Tests.SimulationSnapshotTests.FenceBlocksBothTicksAndCommandsAndReleasesAfterFailure" methodname="FenceBlocksBothTicksAndCommandsAndReleasesAfterFailure" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" seed="548450062" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.002332" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1084" name="LogicalQueryIncludesNativeProjectilesEnemiesResourcesAndSheepOnce" fullname="RTS.DOTS.Tests.SimulationSnapshotTests.LogicalQueryIncludesNativeProjectilesEnemiesResourcesAndSheepOnce" methodname="LogicalQueryIncludesNativeProjectilesEnemiesResourcesAndSheepOnce" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" seed="1647195630" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.003635" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1081" name="PendingDamageCommitsExactlyOnceWithoutAdvancingTimers" fullname="RTS.DOTS.Tests.SimulationSnapshotTests.PendingDamageCommitsExactlyOnceWithoutAdvancingTimers" methodname="PendingDamageCommitsExactlyOnceWithoutAdvancingTimers" classname="RTS.DOTS.Tests.SimulationSnapshotTests" runstate="Runnable" seed="1573681880" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.002172" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1086" name="SwarmSimulationTests" fullname="RTS.DOTS.Tests.SwarmSimulationTests" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.244014" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1089" name="DamageIsAggregatedAndAppliedExactlyOnce" fullname="RTS.DOTS.Tests.SwarmSimulationTests.DamageIsAggregatedAndAppliedExactlyOnce" methodname="DamageIsAggregatedAndAppliedExactlyOnce" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="319819234" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.010171" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1093" name="DestroyedTargetInvalidatesProjectileAndEntityHandle" fullname="RTS.DOTS.Tests.SwarmSimulationTests.DestroyedTargetInvalidatesProjectileAndEntityHandle" methodname="DestroyedTargetInvalidatesProjectileAndEntityHandle" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1828053867" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.003280" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1097" name="EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits" fullname="RTS.DOTS.Tests.SwarmSimulationTests.EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits" methodname="EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="785518680" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.015093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1094" name="ExternalDamageCanBeDrainedOnce" fullname="RTS.DOTS.Tests.SwarmSimulationTests.ExternalDamageCanBeDrainedOnce" methodname="ExternalDamageCanBeDrainedOnce" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="93984340" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.005139" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1090" name="FastProjectileSweepsThroughTargetWithoutTunnelling" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FastProjectileSweepsThroughTargetWithoutTunnelling" methodname="FastProjectileSweepsThroughTargetWithoutTunnelling" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="351882499" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.005946" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1099" name="FiveThousandAgentsAndTwoThousandProjectilesStayFinite" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FiveThousandAgentsAndTwoThousandProjectilesStayFinite" methodname="FiveThousandAgentsAndTwoThousandProjectilesStayFinite" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1360665792" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.057460" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1088" name="FlowFieldFindsRouteAroundWallAndDoesNotCutCorner" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FlowFieldFindsRouteAroundWallAndDoesNotCutCorner" methodname="FlowFieldFindsRouteAroundWallAndDoesNotCutCorner" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="1095147705" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.008597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1092" name="FriendlyProjectileDoesNotDamageSameFaction" fullname="RTS.DOTS.Tests.SwarmSimulationTests.FriendlyProjectileDoesNotDamageSameFaction" methodname="FriendlyProjectileDoesNotDamageSameFaction" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="46326485" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.006382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1095" name="RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory" fullname="RTS.DOTS.Tests.SwarmSimulationTests.RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory" methodname="RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="629626959" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.005886" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1098" name="ResetRemovesAllAgentAndProjectileState" fullname="RTS.DOTS.Tests.SwarmSimulationTests.ResetRemovesAllAgentAndProjectileState" methodname="ResetRemovesAllAgentAndProjectileState" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="43919280" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.006299" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1096" name="RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn" fullname="RTS.DOTS.Tests.SwarmSimulationTests.RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn" methodname="RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="2032537028" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.031171" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1087" name="SpawnResolverMovesBlockedAuthoringPositionToNearestValidCell" fullname="RTS.DOTS.Tests.SwarmSimulationTests.SpawnResolverMovesBlockedAuthoringPositionToNearestValidCell" methodname="SpawnResolverMovesBlockedAuthoringPositionToNearestValidCell" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="96509254" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.005910" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1091" name="StaticObstacleConsumesProjectileBeforeEnemy" fullname="RTS.DOTS.Tests.SwarmSimulationTests.StaticObstacleConsumesProjectileBeforeEnemy" methodname="StaticObstacleConsumesProjectileBeforeEnemy" classname="RTS.DOTS.Tests.SwarmSimulationTests" runstate="Runnable" seed="530770902" result="Passed" start-time="2026-11-24 13:35:40Z" end-time="2026-11-24 13:35:40Z" duration="0.007464" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/ACER/AppData/LocalLow/DefaultCompany/RTSgame2026\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

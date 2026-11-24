@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3879325628708303296}
   - component: {fileID: -2902776402685046962}
   - component: {fileID: 985767260862630959}
+  - component: {fileID: 4476545417781038744}
   m_Layer: 6
   m_Name: ArcheryRange
   m_TagString: Building
@@ -70,6 +71,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5646707852783550
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,6 +117,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 1854185523, guid: 201701c534b5e4144a99cbfa05dccd9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -124,7 +127,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2449827443807053345
 Rigidbody2D:
@@ -238,3 +240,16 @@ MonoBehaviour:
   m_AlwaysVisible: 0
   m_ExploredAlpha: 0.45
   m_UnexploredAlpha: 0
+--- !u!114 &4476545417781038744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211948813076933638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: archeryrange

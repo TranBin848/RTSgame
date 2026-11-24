@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "error": "Object has no allowed save definition: Worker",
+  "allFencesReleased": true,
+  "pausePreserved": true
+}

@@ -1,0 +1,12 @@
+{
+  "playing": false,
+  "paused": false,
+  "compiling": false,
+  "compileErrors": false,
+  "scene": "Assets/Scenes/ProceduralGame.unity",
+  "dirty": false,
+  "timeScale": 1.0,
+  "runInBackground": false,
+  "pendingLoad": false,
+  "sourceSeedOverride": null
+}

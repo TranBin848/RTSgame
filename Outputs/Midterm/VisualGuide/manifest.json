@@ -1,0 +1,46 @@
+{
+  "generatorVersion": 3,
+  "seeds": [
+    {
+      "seed": 0,
+      "attempt": 0,
+      "placements": 150,
+      "valid": true
+    },
+    {
+      "seed": 1,
+      "attempt": 0,
+      "placements": 150,
+      "valid": true
+    },
+    {
+      "seed": 1543,
+      "attempt": 0,
+      "placements": 150,
+      "valid": true
+    }
+  ],
+  "sourceFiles": {
+    "Assets\\Game\\ProceduralGeneration\\Core\\DeterministicRandom.cs": "5520c7a0546ce75c8a5d0b8f84ed2ef659b07cf407e73a1dbb570274cd04ae58",
+    "Assets\\Game\\ProceduralGeneration\\Core\\MapGenerationData.cs": "2d004623d5c34983f50c7f80d12fa6edc6dc08488ba561a5f409f1a44da04ebd",
+    "Assets\\Game\\ProceduralGeneration\\Core\\ProceduralMapGenerator.cs": "3bc096b0d4c011b0659561d83632d644ae2fc4b4021e69c25e154ec88cea8b3d",
+    "Assets\\Game\\ProceduralGeneration\\Core\\StrategicLayout.cs": "c0be5d34bf5cc6a9a6832444c90d4af14c6829a9233bcb648e73efb9a48f2a5d",
+    "Assets\\Game\\ProceduralGeneration\\Core\\StrategicResources.cs": "62d56bb025dc8ba94bcf5af9eda97933d634b53c4c00f053bc9079cbc86003e9"
+  },
+  "assets": [
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Tileset\\Tilemap_color3.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Tileset\\Water Background color.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Wood\\Trees\\Tree1.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Meat\\Sheep\\Sheep_Idle.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Gold\\Gold Stones\\Gold Stone 1.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Gold\\Gold Stones\\Gold Stone 2.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Gold\\Gold Stones\\Gold Stone 3.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Gold\\Gold Stones\\Gold Stone 4.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Gold\\Gold Stones\\Gold Stone 5.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Terrain\\Resources\\Gold\\Gold Stones\\Gold Stone 6.png",
+    "Assets\\Game\\Images\\Tiny Swords\\Buildings\\Blue Buildings\\Castle.png"
+  ],
+  "removedIsolatedCellsSeed0": 26,
+  "bfsPathSteps": 17,
+  "notes": "Figures are deterministic offline reconstructions with project tiles, plus explicitly labelled fixtures. No performance benchmark. Gameplay screenshot is historical S7 evidence."
+}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Passed" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 12:49:39Z" end-time="2026-11-24 12:49:46Z" duration="6.6631392">
+  <test-suite type="TestSuite" id="1182" name="RTSgame2026" fullname="RTSgame2026" runstate="Runnable" testcasecount="139" result="Passed" start-time="2026-11-24 12:49:39Z" end-time="2026-11-24 12:49:46Z" duration="6.663139" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1114" name="RTS.ProceduralGeneration.Tests.dll" fullname="E:/Unity project/RTSgame2026/Library/ScriptAssemblies/RTS.ProceduralGeneration.Tests.dll" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-24 12:49:39Z" end-time="2026-11-24 12:49:46Z" duration="6.568356" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="21552" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1115" name="RTS" fullname="RTS" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-24 12:49:40Z" end-time="2026-11-24 12:49:46Z" duration="6.458772" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1116" name="ProceduralGeneration" fullname="RTS.ProceduralGeneration" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-24 12:49:40Z" end-time="2026-11-24 12:49:46Z" duration="6.346032" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1117" name="Tests" fullname="RTS.ProceduralGeneration.Tests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-24 12:49:40Z" end-time="2026-11-24 12:49:46Z" duration="6.239094" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1094" name="ProceduralMapGeneratorTests" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-24 12:49:40Z" end-time="2026-11-24 12:49:46Z" duration="6.139016" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1112" name="DefaultPresetMeetsQuotasAndRequiredConnectivity" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.DefaultPresetMeetsQuotasAndRequiredConnectivity" methodname="DefaultPresetMeetsQuotasAndRequiredConnectivity" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="455845429" result="Passed" start-time="2026-11-24 12:49:40Z" end-time="2026-11-24 12:49:43Z" duration="3.361465" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1108" name="FinalTopologyValidatorRejectsBrokenFixtures" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-24 12:49:43Z" end-time="2026-11-24 12:49:44Z" duration="0.547079" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1103" name="FinalTopologyValidatorRejectsBrokenFixtures(&quot;tree-wall&quot;)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(&quot;tree-wall&quot;)" methodname="FinalTopologyValidatorRejectsBrokenFixtures" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="657179796" result="Passed" start-time="2026-11-24 12:49:43Z" end-time="2026-11-24 12:49:43Z" duration="0.144865" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1104" name="FinalTopologyValidatorRejectsBrokenFixtures(&quot;gold-water&quot;)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(&quot;gold-water&quot;)" methodname="FinalTopologyValidatorRejectsBrokenFixtures" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1775275079" result="Passed" start-time="2026-11-24 12:49:43Z" end-time="2026-11-24 12:49:44Z" duration="0.096593" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1105" name="FinalTopologyValidatorRejectsBrokenFixtures(&quot;diagonal&quot;)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(&quot;diagonal&quot;)" methodname="FinalTopologyValidatorRejectsBrokenFixtures" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="2035314140" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.092514" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1106" name="FinalTopologyValidatorRejectsBrokenFixtures(&quot;landmark-island&quot;)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(&quot;landmark-island&quot;)" methodname="FinalTopologyValidatorRejectsBrokenFixtures" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="554877052" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.102764" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1107" name="FinalTopologyValidatorRejectsBrokenFixtures(&quot;extra-entrance&quot;)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(&quot;extra-entrance&quot;)" methodname="FinalTopologyValidatorRejectsBrokenFixtures" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1926760780" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.107949" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1101" name="ImpossibleStrategicSizeIsRejectedBeforeAttempting" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.ImpossibleStrategicSizeIsRejectedBeforeAttempting" methodname="ImpossibleStrategicSizeIsRejectedBeforeAttempting" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1017714259" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.001145" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="InvalidQuotaIsRejectedBeforeGeneration" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.InvalidQuotaIsRejectedBeforeGeneration" methodname="InvalidQuotaIsRejectedBeforeGeneration" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1834618565" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.000308" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1100" name="LegacyPresetKeepsVersionOneWithoutStrategicData" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.LegacyPresetKeepsVersionOneWithoutStrategicData" methodname="LegacyPresetKeepsVersionOneWithoutStrategicData" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1150218004" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.124583" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1111" name="SameSeedProducesSameMapAndPlacements" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.SameSeedProducesSameMapAndPlacements" methodname="SameSeedProducesSameMapAndPlacements" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1076556977" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:44Z" duration="0.450733" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1102" name="StrategicBudgetsAndLandmarkPadSurviveFinalPlacement" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicBudgetsAndLandmarkPadSurviveFinalPlacement" methodname="StrategicBudgetsAndLandmarkPadSurviveFinalPlacement" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="503439656" result="Passed" start-time="2026-11-24 12:49:44Z" end-time="2026-11-24 12:49:45Z" duration="0.086554" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="StrategicFailureStillUsesFiniteAttemptBudget" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicFailureStillUsesFiniteAttemptBudget" methodname="StrategicFailureStillUsesFiniteAttemptBudget" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="986820507" result="Passed" start-time="2026-11-24 12:49:45Z" end-time="2026-11-24 12:49:45Z" duration="0.092085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="StrategicLandmarkRequiresThreeOuterGoldNodes" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLandmarkRequiresThreeOuterGoldNodes" methodname="StrategicLandmarkRequiresThreeOuterGoldNodes" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="81800432" result="Passed" start-time="2026-11-24 12:49:45Z" end-time="2026-11-24 12:49:45Z" duration="0.000665" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1099" name="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-24 12:49:45Z" end-time="2026-11-24 12:49:46Z" duration="1.367983" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1095" name="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(0)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(0)" methodname="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="759053130" result="Passed" start-time="2026-11-24 12:49:45Z" end-time="2026-11-24 12:49:45Z" duration="0.291916" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1096" name="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(-1)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(-1)" methodname="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="40466837" result="Passed" start-time="2026-11-24 12:49:45Z" end-time="2026-11-24 12:49:45Z" duration="0.384475" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1097" name="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int.MinValue)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int.MinValue)" methodname="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="30167616" result="Passed" start-time="2026-11-24 12:49:45Z" end-time="2026-11-24 12:49:46Z" duration="0.459919" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1098" name="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(1543)" fullname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(1543)" methodname="StrategicLayoutIsDeterministicAndProtectsRequiredPlaces" classname="RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests" runstate="Runnable" seed="1776137351" result="Passed" start-time="2026-11-24 12:49:46Z" end-time="2026-11-24 12:49:46Z" duration="0.229043" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[Saving results to: C:/Users/ACER/AppData/LocalLow/DefaultCompany/RTSgame2026\TestResults.xml
+]]></output>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

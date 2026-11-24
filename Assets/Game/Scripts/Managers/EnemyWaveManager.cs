@@ -41,6 +41,21 @@ public class EnemyWaveManager : MonoBehaviour
     private float m_CurrentTownHallRange;
     private float? m_ProceduralStartingRange;
     private float m_SpawnTimer;
+    public bool SnapshotFenced { get; set; }
+    public void RestoreLoadedDay(RTS.SaveLoad.WaveSaveData state)
+    {
+        m_TownHall = null; m_CurrentTownHallRange = state.CurrentTownHallRange; m_ProceduralStartingRange = state.ProceduralStartingRange;
+        m_SpawnTimer = state.SpawnTimer; m_WaveDelayTimer = state.DelayTimer; m_CurrentWaveIndex = state.WaveIndex;
+        m_SpawnedInCurrentWave = state.SpawnedInWave; m_StartedWaveCount = state.StartedWaveCount;
+        FailedSpawnAttempts = state.FailedSpawnAttempts; FallbackSpawnCount = state.FallbackSpawnCount;
+    }
+    public RTS.SaveLoad.WaveSaveData CaptureSaveState() => new()
+    {
+        CurrentTownHallRange = m_CurrentTownHallRange, ProceduralStartingRange = m_ProceduralStartingRange ?? 0,
+        SpawnTimer = m_SpawnTimer, DelayTimer = m_WaveDelayTimer, WaveIndex = m_CurrentWaveIndex,
+        SpawnedInWave = m_SpawnedInCurrentWave, StartedWaveCount = m_StartedWaveCount,
+        FailedSpawnAttempts = FailedSpawnAttempts, FallbackSpawnCount = FallbackSpawnCount, WaveSeed = TacticalPlan != null ? TacticalPlan.WaveSeed : 0
+    };
     private float m_WaveDelayTimer;
     private int m_CurrentWaveIndex;
     private int m_SpawnedInCurrentWave;
@@ -103,6 +118,8 @@ public class EnemyWaveManager : MonoBehaviour
 
     void Tick(float deltaTime)
     {
+        if (SnapshotFenced) return;
+        if (m_Bridge?.Simulation?.Paused == true) return;
         if (deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
         if (!IsInitialized || m_Bridge.Gameplay.IsMatchOver || ProceduralMapRuntime.IsCompositionBlocked || (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady))
         {
@@ -276,6 +293,7 @@ public class EnemyWaveManager : MonoBehaviour
 
     public bool SpawnEnemy(TownHall townHall)
     {
+        if (SnapshotFenced) return false;
         if (!IsInitialized || m_Bridge.Gameplay.IsMatchOver || ProceduralMapRuntime.IsCompositionBlocked || !m_Bridge.IsSceneBound || townHall == null || m_Definition == null) return false;
         m_CurrentTownHallRange = CalculateTownHallRange(townHall);
         int slot = TacticalPlan != null ? TacticalPlan.PrefabSlot(GetCurrentDay(), m_CurrentWaveIndex, m_SpawnedInCurrentWave) : -1;

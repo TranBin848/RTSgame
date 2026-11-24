@@ -1,0 +1,12 @@
+{
+  "seed": 1,
+  "wood": 560,
+  "gold": 585,
+  "meat": 600,
+  "gameplayTicks": 356,
+  "swarmTicks": 356,
+  "researchElapsed": 2.5,
+  "expectedEnemyHealth": 93,
+  "cargo": 7,
+  "queue": 2
+}

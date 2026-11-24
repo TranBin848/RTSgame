@@ -17,11 +17,13 @@ public sealed partial class SwarmGameBridge
     readonly Dictionary<int, TrainingView> m_TrainingViews = new();
     readonly List<int> m_RemovedTraining = new();
     readonly Dictionary<int, BuildingProcess> m_ConstructionViews = new();
+    readonly Dictionary<Entity, BuildActionSo> m_SaveConstructionActions = new();
     int m_NextRequestId = 1;
     struct TrainingView
     {
         public ProductionBuilding Building;
         public GameObject Prefab;
+        public ActionSO Action;
         public string UiId, Message;
     }
 
@@ -222,13 +224,14 @@ public sealed partial class SwarmGameBridge
             || Simulation.Paused || !CanUsePrefab(prefab)) return false;
         int id = m_NextRequestId++;
         if (!Gameplay.EnqueueTraining(building.DotsEntity, id, duration)) return false;
-        m_TrainingViews[id] = new TrainingView { Building = building, Prefab = prefab, UiId = m_Game.EnqueueActionUI(action), Message = message };
+        m_TrainingViews[id] = new TrainingView { Building = building, Prefab = prefab, Action = action, UiId = m_Game.EnqueueActionUI(action), Message = message };
         return true;
     }
     public void BeginConstruction(StructureUnit structure, BuildingProcess process, float duration)
     {
         int id = m_NextRequestId++;
-        if (Gameplay.BeginConstruction(ProxyFor(structure), duration, id)) m_ConstructionViews[id] = process;
+        if (Gameplay.BeginConstruction(ProxyFor(structure), duration, id))
+        { m_ConstructionViews[id] = process; m_SaveConstructionActions[structure.DotsEntity] = process.SaveAction; }
     }
     public bool CanUsePrefab(GameObject prefab)
     {

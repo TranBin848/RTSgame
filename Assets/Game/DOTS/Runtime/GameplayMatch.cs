@@ -13,7 +13,7 @@ namespace RTS.DOTS
         public int SurvivalNights { get; private set; }
 
         public void ConfigureMatch(int survivalNights)
-        {
+        { RequireSnapshotMutable();
             if (survivalNights < 1) throw new ArgumentOutOfRangeException(nameof(survivalNights));
             if (SurvivalNights != 0 && SurvivalNights != survivalNights)
                 throw new InvalidOperationException("Reset the match before changing its objective.");
@@ -21,7 +21,7 @@ namespace RTS.DOTS
         }
 
         public MatchOutcome EvaluateMatch(int currentDay)
-        {
+        { RequireSnapshotMutable();
             if (currentDay < 1) throw new ArgumentOutOfRangeException(nameof(currentDay));
             if (SurvivalNights == 0 || IsMatchOver) return Outcome;
             Dependency.Complete();

@@ -1,0 +1,57 @@
+--- PAGE 1 ---
+TRƯỜNG ĐH CÔNG NGHỆ THÔNG TIN
+KHOA CÔNG NGHỆ PHẦN MỀM
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc Lập - Tự Do - Hạnh Phúc
+Ngày 22 tháng 11 năm 2026
+BÁO CÁO GIỮA KỲ KHÓA LUẬN TỐT NGHIỆP
+Tên đề tài: PHÁT TRIỂN GÓI PHẦN MỀM CHO PHƯƠNG PHÁP TỐI ƯU LƯỢNG TỬ DỰA
+TRÊN THUẬT TOÁN FALQON KẾT HỢP BIÊN DỊCH MẠCH
+(DEVELOPING A SOFTW ARE PACKAGE FOR QUANTUM OPTIMIZA TION USING
+FALQON ALGORITHM WITH CIRCUIT COMPILA TION)
+Họ tên - Mã số sinh viên thực hiện: Nguyễn Phúc Thịnh - 23521503
+Hệ đào tạo: Chính quy
+Họ tên Giảng viên hướng dẫn: TS. Vũ Tuấn Hải
+I. NHỮNG VIỆC ĐÃ HOÀN THÀNH (70%):
+- Hoàn thành nghiên cứu lý thuyết nền tảng về các thuật toán tối ưu lượng tử (QAOA,
+FALQON), kỹ thuật biên dịch mạch lượng tử và các giới hạn của phần cứng lượng tử trong
+kỷ nguyên NISQ.
+- Mô hình hóa bài toán Max Clique dưới dạng Hamiltonian và cài đặt thuật toán FALQON
+nguyên bản làm cơ sở đối chứng.
+- Hoàn thành phát triển kỹ thuật biên dịch phân đoạn theo cơ chế cuốn chiếu tích hợp vào tiến
+trình FALQON, đồng thời tích hợp và thử nghiệm các bộ tối ưu hóa tham số cho ansatz.
+- Tiến hành thực nghiệm số trên các hệ từ 4 đến 10 qubits với bài toán Max Clique, so sánh
+đối chứng giữa FALQON nguyên bản và FALQON có biên dịch phân đoạn về độ sâu mạch,
+thời gian thực thi, mức năng lượng và khả năng tìm thấy nghiệm tối ưu.
+- Khảo sát bước đầu tính bền vững của thuật toán dưới tác động của nhiễu phép đo (readout
+noise).
+- Đóng gói mã nguồn thành thư viện có tính mô-đun hóa cao, hỗ trợ tự động xuất biểu đồ
+trực quan và cung cấp các kịch bản thực thi mẫu nhằm đảm bảo khả năng tái hiện kết quả.
+- Hoàn thành phần lớn bản thảo bài báo khoa học, gồm phần giới thiệu, cơ sở lý thuyết,
+phương pháp đề xuất kèm phân tích độ phức tạp, thiết lập thực nghiệm và phụ lục.
+II. NHỮNG VIỆC CHƯA THỰC HIỆN (30%):
+- Hoàn thiện phân tích, đánh giá kết quả thực nghiệm để hoàn thiện bài báo khoa học.
+- Đánh giá mức độ suy giảm hiệu năng của mạch sau biên dịch dưới các mô hình nhiễu giả
+lập phổ biến khác.
+- Hoàn thiện tài liệu hướng dẫn sử dụng cho gói phần mềm.
+--- PAGE 2 ---
+- Viết báo cáo và chuẩn bị slide bảo vệ cho khóa luận.
+III.THUẬN LỢI VÀ KHÓ KHĂN TRONG QUÁ TRÌNH THỰC HIỆN KLTN:
+1. Thuận lợi:
+- Giảng viên hướng dẫn theo sát tiến độ và góp ý thường xuyên ở từng giai đoạn, từ thiết kế
+thuật toán đến trình bày kết quả, giúp kịp thời điều chỉnh hướng đi.
+- Các framework như PennyLane và Qiskit hỗ trợ việc mô phỏng mạch, tính đạo hàm và
+chuyển mạch về cổng phần cứng, nhờ đó có thể tập trung vào phát triển phương pháp đề
+xuất.
+2. Khó khăn:
+- Điện toán lượng tử đòi hỏi nhiều nền tảng toán học và vật lý, nên cần khá nhiều thời gian
+tự học trước khi có thể bắt tay vào triển khai.
+- Bộ nhớ và thời gian mô phỏng tăng theo hàm mũ với số qubits, nên thực nghiệm chỉ dừng
+ở các hệ nhỏ và mỗi lượt chạy đầy đủ kéo dài nhiều ngày.
+- Việc đối chiếu cài đặt với cơ sở lý thuyết đòi hỏi kiểm tra kỹ lưỡng, và mỗi lần điều chỉnh
+đều phải chạy lại các thực nghiệm vốn tốn nhiều thời gian.
+Xác nhận của giảng viên hướng dẫn
+• Đồng ý cho sinh viên thực hiện tiếp KLTN
+• Không đồng ý cho sinh viên thực hiện tiếp KLTN
+GIẢNG VIÊN HD KÝ TÊN SINH VIÊN KÝ TÊN
+TS. Vũ Tuấn Hải Nguyễn Phúc Thịnh

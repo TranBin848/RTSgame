@@ -1,0 +1,52 @@
+[
+  {
+    "fault": "cargo",
+    "rejected": true,
+    "reason": "SL4 cannot yet restore active work/cargo/training/research/projectiles. These states require SL5."
+  },
+  {
+    "fault": "work",
+    "rejected": true,
+    "reason": "SL4 cannot yet restore active work/cargo/training/research/projectiles. These states require SL5."
+  },
+  {
+    "fault": "training",
+    "rejected": true,
+    "reason": "SL4 cannot yet restore active work/cargo/training/research/projectiles. These states require SL5."
+  },
+  {
+    "fault": "research",
+    "rejected": true,
+    "reason": "SL4 cannot yet restore active work/cargo/training/research/projectiles. These states require SL5."
+  },
+  {
+    "fault": "projectile",
+    "rejected": true,
+    "reason": "SL4 cannot yet restore active work/cargo/training/research/projectiles. These states require SL5."
+  },
+  {
+    "fault": "night",
+    "rejected": true,
+    "reason": "SL4 supports the first daytime only; later clock/wave/report restoration requires SL6."
+  },
+  {
+    "fault": "day2",
+    "rejected": true,
+    "reason": "SL4 supports the first daytime only; later clock/wave/report restoration requires SL6."
+  },
+  {
+    "fault": "wallet",
+    "rejected": true,
+    "reason": "Wallet exceeds native integer range."
+  },
+  {
+    "fault": "settings",
+    "rejected": true,
+    "reason": "Invalid saved generation settings: "
+  },
+  {
+    "fault": "visual",
+    "rejected": true,
+    "reason": "Unknown native save visual: 99"
+  }
+]

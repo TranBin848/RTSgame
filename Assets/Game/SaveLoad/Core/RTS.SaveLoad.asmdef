@@ -1,0 +1,7 @@
+{
+  "name": "RTS.SaveLoad",
+  "rootNamespace": "RTS.SaveLoad",
+  "references": [],
+  "autoReferenced": true,
+  "noEngineReferences": true
+}

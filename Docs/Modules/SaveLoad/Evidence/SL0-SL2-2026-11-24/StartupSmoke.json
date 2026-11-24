@@ -1,0 +1,15 @@
+{
+  "check": "ProceduralGame startup identity smoke",
+  "passed": true,
+  "ready": true,
+  "seed": 1,
+  "generatorVersion": 3,
+  "actors": 25,
+  "resources": 150,
+  "sheepActorResourceSameEntity": 18,
+  "identityCount": 846,
+  "idsUnique": true,
+  "gameplayTicks": 68,
+  "nextSaveId": 1534,
+  "captureRestoreTested": false
+}

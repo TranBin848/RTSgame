@@ -17,6 +17,16 @@ namespace RTS.ProceduralGeneration
         public readonly byte[] RegionIds, Routes;
 
         StrategicLayout(int cells) { RegionIds = new byte[cells]; Routes = new byte[cells]; }
+        public static StrategicLayout FromSnapshot(MapRegion[] regions, RegionConnection[] connections, MapGateway[] gateways,
+            MapLandmark landmark, byte[] regionIds, byte[] routes)
+        {
+            if (regions == null || regions.Length != 3 || connections == null || connections.Length != 2 || gateways == null || gateways.Length != 2
+                || regionIds == null || routes == null || routes.Length != regionIds.Length) throw new System.ArgumentException("Invalid strategic snapshot.");
+            var result = new StrategicLayout(regionIds.Length) { Landmark = landmark };
+            System.Array.Copy(regions, result.Regions, 3); System.Array.Copy(connections, result.Connections, 2); System.Array.Copy(gateways, result.Gateways, 2);
+            System.Array.Copy(regionIds, result.RegionIds, regionIds.Length); System.Array.Copy(routes, result.Routes, routes.Length);
+            return result;
+        }
 
         public static StrategicLayout Create(MapGenerationSettingsData settings, int attempt, byte[] terrain, byte[] reserved, MapValidationReport report)
         {

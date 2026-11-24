@@ -1,0 +1,104 @@
+{
+  "result": {
+    "Summary": {
+      "Status": "Passed",
+      "TotalTests": 18,
+      "PassedTests": 18,
+      "FailedTests": 0,
+      "SkippedTests": 0,
+      "Duration": "00:00:08.3517436"
+    },
+    "Results": [
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.DefaultPresetMeetsQuotasAndRequiredConnectivity",
+        "Status": "Passed",
+        "Duration": "00:00:04.2230000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"tree-wall\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1450000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"gold-water\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0890000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"diagonal\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1030000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"landmark-island\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1170000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"extra-entrance\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1440000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.ImpossibleStrategicSizeIsRejectedBeforeAttempting",
+        "Status": "Passed",
+        "Duration": "00:00:00.0040000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.InvalidQuotaIsRejectedBeforeGeneration",
+        "Status": "Passed",
+        "Duration": "00:00:00"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.LegacyPresetKeepsVersionOneWithoutStrategicData",
+        "Status": "Passed",
+        "Duration": "00:00:00.1400000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.SameSeedProducesSameMapAndPlacements",
+        "Status": "Passed",
+        "Duration": "00:00:00.4990000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.SnapshotLayoutClonesTopologyRatherThanRegeneratingIt",
+        "Status": "Passed",
+        "Duration": "00:00:00.0030000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicBudgetsAndLandmarkPadSurviveFinalPlacement",
+        "Status": "Passed",
+        "Duration": "00:00:00.1080000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicFailureStillUsesFiniteAttemptBudget",
+        "Status": "Passed",
+        "Duration": "00:00:00.0900000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLandmarkRequiresThreeOuterGoldNodes",
+        "Status": "Passed",
+        "Duration": "00:00:00"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(0)",
+        "Status": "Passed",
+        "Duration": "00:00:00.3210000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(-1)",
+        "Status": "Passed",
+        "Duration": "00:00:00.5720000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int.MinValue)",
+        "Status": "Passed",
+        "Duration": "00:00:00.5020000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(1543)",
+        "Status": "Passed",
+        "Duration": "00:00:00.2780000"
+      }
+    ]
+  }
+}

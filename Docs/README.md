@@ -1,6 +1,12 @@
 # Tài liệu kỹ thuật RTSgame2026
 
-**24/11 — kế hoạch Save/Load:** [Build plan SL0–SL9](Modules/SaveLoad/BuildPlan.md), PLANNED. Lưu toàn trạng thái trận, ID bền vững, capture fence, remap hai lượt, JSON có version và temp/backup; chưa triển khai hoặc nghiệm thu. Bước tiếp là SL0 inventory/schema.
+**24/11 — Kế hoạch bố cục năm vùng:** [Start trung tâm và bốn vùng ngoài FR0–FR7](Modules/ProceduralGeneration/FourFrontiersBuildPlan.md). PLANNED, giữ128×128/quota120–12–18/hai gateway; thêm preset/version mới, budget theo role/vùng, preview, gameplay, SaveLoad SL4, dự phòng lỗi và nghiệm thu. Chưa thay generator hoặc scene.
+
+**24/11 — Giải thích procedural bằng tile của dự án:** [Bản minh họa từng bước](Modules/ProceduralGeneration/IllustratedGuide.md), [Word có hình](../Outputs/Midterm/Giai_thich_Procedural_Generation_Minh_hoa_tile.docx). Có dữ liệu xuất trực tiếp Core strategic v3 cho seed0/1/1543, lớp chú giải và fixture được ghi nhãn; bổ sung đối chiếu nguồn 0 A.D./Factorio. Không cập nhật gameplay hoặc thay số đo hiệu năng.
+
+**24/11 — Tài liệu giải thích dễ đọc:** [Cách sinh bản đồ procedural](Modules/ProceduralGeneration/HowItWorks.md) mô tả strategic v3 từ seed/noise đến vùng, tài nguyên, validation và Integration; phân biệt New Game với tải snapshot ở SL4. [Báo cáo giữa kỳ rút gọn](../Outputs/Midterm/Bao_cao_giua_ky_KLTN_Tran_Ngoc_Bin_23520150_Rut_gon.docx) đối chiếu đề cương, ghi tiến độ ước lượng và phần chưa hoàn thành. Đây là cập nhật tài liệu, không thêm implementation hoặc kết quả kiểm thử mới.
+
+**24/11 — Save/Load SL4 DONE lát cắt kỹ thuật:** [SL4 report](Modules/SaveLoad/SL4-Report.md), [tiến độ](Modules/SaveLoad/Progress.md), [kiến trúc](Modules/SaveLoad/Architecture.md), [coverage](Modules/SaveLoad/Inventory.md), [cách chạy](Modules/SaveLoad/Usage.md), [kiểm chứng](Modules/SaveLoad/Validation.md).148/148tests;Windowsbuild0errors/0warnings và3seed cold-process canonicalPASS,map/entity remap,không grant100/nhânresource. SL4 first-day/idle-work; active state từ chối đếnSL5/SL6. [Build plan](Modules/SaveLoad/BuildPlan.md) tiếp SL5, chưaContinueUI/fullsave-load/rollback hoặcđóngSL9.
 
 **24/11 — E10 Release/budget đã kiểm, nghiệm thu cuối PARTIAL:** [Bản Windows, hướng dẫn chạy, hash và raw evidence](Modules/GameExperience/E10-ReleaseHandoff.md). Build0lỗi/0cảnh báo;89/89 regression,18/18 gameplay smoke,15/15 lifecycle.4/4G5 p95≈13,888ms và stress8đèn/32VFX/94quái p95=13,8952ms đạt trên baseline1080p/Ultra, foreground hợp lệ. G3manual/E9balance và manual thẩm mỹ vẫn mở; không coi đây là nghiệm thu toàn bộ E0–E10.
 

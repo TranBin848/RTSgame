@@ -26,9 +26,27 @@ public class FogOfWarManager : MonoBehaviour
     private float m_NextRefreshTime;
     private bool m_IsInitialized;
     private bool m_HasStarted;
+    bool m_RestoringExplored;
     private List<FogOfWarAffectable> m_Affectables = new();
     public UnityAction OnFogUpdated = delegate { };
     public bool IsInitialized => m_IsInitialized;
+    public void RestoreExplored(byte[] mask)
+    {
+        if (!m_IsInitialized || mask == null || mask.Length != m_Bounds.size.x * m_Bounds.size.y) throw new System.ArgumentException("Invalid explored mask.");
+        ExploredCellCount = 0;
+        for (int y = 0; y < m_Bounds.size.y; y++) for (int x = 0; x < m_Bounds.size.x; x++)
+        { bool explored = mask[y * m_Bounds.size.x + x] != 0; m_Explored[x, y] = explored; if (explored) ExploredCellCount++; }
+        m_RestoringExplored = true;
+        try { RefreshFog(); } finally { m_RestoringExplored = false; }
+    }
+    public byte[] CaptureExplored(BoundsInt bounds)
+    {
+        if (!m_IsInitialized || bounds != m_Bounds) throw new System.InvalidOperationException("Fog/map snapshot bounds differ.");
+        var mask = new byte[bounds.size.x * bounds.size.y];
+        for (int y = 0; y < bounds.size.y; y++) for (int x = 0; x < bounds.size.x; x++)
+            mask[y * bounds.size.x + x] = (byte)(m_Explored[x, y] ? 1 : 0);
+        return mask;
+    }
     public int ExploredCellCount { get; private set; }
     public BoundsInt Bounds => m_Bounds;
     public Tilemap FogTilemap => m_FogTilemap;
@@ -36,6 +54,7 @@ public class FogOfWarManager : MonoBehaviour
     void Start()
     {
         m_HasStarted = true;
+        if (MatchLoadBootstrap.IsLoading) return;
         RefreshFog();
     }
 
@@ -207,7 +226,7 @@ public class FogOfWarManager : MonoBehaviour
                 }
 
                 m_VisibilityCounts[fogX, fogY]++;
-                if (!m_Explored[fogX, fogY]) { m_Explored[fogX, fogY] = true; ExploredCellCount++; }
+                if (!m_RestoringExplored && !m_Explored[fogX, fogY]) { m_Explored[fogX, fogY] = true; ExploredCellCount++; }
                 m_VisibilityStrengths[fogX, fogY] = Mathf.Max(m_VisibilityStrengths[fogX, fogY], CalculateVisibilityStrength(x, y, radius));
             }
         }

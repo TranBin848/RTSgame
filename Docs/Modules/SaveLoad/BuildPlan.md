@@ -1,6 +1,6 @@
 # Kế hoạch triển khai hệ thống lưu và tải trận đấu
 
-Ngày lập **24/11/2026**. Trạng thái **PLANNED**. Chỉ lập kế hoạch và đối chiếu source; chưa triển khai Save/Load hoặc kiểm round-trip trong phiên này.
+Ngày lập **24/11/2026**. Trạng thái **IN PROGRESS**. [Checkpoint implementation](Progress.md): SL0–SL4 đã triển khai trong phạm vi từng gate; SL4 map/entity hydrate/remap và Windows cold-process0/1/1543 PASS cho first-day/idle-work. SL5–SL9 chưa đạt, chưa có restore toàn trận hoặc Continue UI. Các mục bên dưới là kế hoạch/gate, không phải kết quả đã hoàn thành.
 
 ## 1. Mục tiêu và phạm vi phiên bản đầu
 
@@ -106,7 +106,7 @@ Trạng thái operation: `Idle → Capturing/Reading → Writing/Restoring → I
 | SL8 | Ma trận hồi quy, file lỗi/version/cấu hình, đo save/load | Field equivalence và fault matrix PASS, phạm vi không hỗ trợ ghi rõ; có số đo stall/size/time thực tế |
 | SL9 | Windows Release, nghiệm thu người chơi và cập nhật báo cáo | Cold-process Continue, trận có research/build/train/combat, corruption recovery, artifacts/hash/docs/ảnh/video đầy đủ |
 
-Tất cả **TODO**. SL0 là bước kế tiếp khi được yêu cầu triển khai. Các mốc chỉ DONE khi đạt gate; SL1–SL4 là lát cắt kỹ thuật, không phải bản Save/Load hoàn chỉnh để nghiệm thu đề cương.
+Trạng thái từng mốc cập nhật ở [Progress](Progress.md), kiểm chứng ở [Validation](Validation.md). SL0–SL4 DONE phạm vi từng lát cắt, SL4 có kiểm Windows process mới; SL5–SL9 TODO. Các mốc chỉ DONE khi đạt gate; SL1–SL4 là lát cắt kỹ thuật, không phải bản Save/Load hoàn chỉnh để nghiệm thu đề cương.
 
 ### Thứ tự đi sâu ở SL5
 

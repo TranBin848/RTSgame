@@ -60,7 +60,7 @@ namespace RTS.DOTS
             ConfigureResearchCatalog(new[] { definition });
         }
         public void ConfigureResearchCatalog(ResearchDefinition[] definitions)
-        {
+        { RequireSnapshotMutable();
             ValidateResearchCatalog(definitions);
             Dependency.Complete();
             if (m_ResearchConfigured) throw new InvalidOperationException("Research is already configured for this match.");
@@ -112,7 +112,7 @@ namespace RTS.DOTS
         }
         public string GetTechnologyId(int index) => m_ResearchCatalog != null && index >= 0 && index < m_ResearchCatalog.Length ? m_ResearchCatalog[index].Id : null;
         public ResearchResult StartResearch(string id, Entity townHall)
-        {
+        { RequireSnapshotMutable();
             Dependency.Complete();
             if (IsMatchOver || !IsConfigured || !m_ResearchConfigured || World.GetOrCreateSystemManaged<SwarmSimulationSystem>().Paused)
                 return ResearchResult.Unavailable;

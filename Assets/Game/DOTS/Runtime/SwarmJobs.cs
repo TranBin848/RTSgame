@@ -62,7 +62,7 @@ namespace RTS.DOTS
             bool hasTarget = Targets.TryGetValue(agent.Target, out var target) && target.Body.Faction != body.Faction;
             if (agent.ThinkTimer <= 0)
             {
-                agent.ThinkTimer = 0.25f + (entity.Index % 7) * 0.013f;
+                agent.ThinkTimer = 0.25f + (agent.RandomSeed % 7) * 0.013f;
                 float best = agent.DetectionRange * agent.DetectionRange;
                 int2 min = SwarmMath.SpatialCell(body.Position - agent.DetectionRange);
                 int2 max = SwarmMath.SpatialCell(body.Position + agent.DetectionRange);
@@ -160,7 +160,7 @@ namespace RTS.DOTS
                     float length = math.length(delta), preferred = body.Radius + n.Body.Radius + 0.12f;
                     if (length < preferred)
                     {
-                        float2 away = length > 0.001f ? delta / length : math.normalizesafe(new float2((entity.Index % 11) - 5, (entity.Index % 7) - 3), new float2(1, 0));
+                        float2 away = length > 0.001f ? delta / length : math.normalizesafe(new float2((agent.RandomSeed % 11) - 5, (agent.RandomSeed % 7) - 3), new float2(1, 0));
                         separation += away * (preferred - length) / math.max(preferred, 0.1f);
                     }
                 } while (Grid.TryGetNextValue(out n, ref it));

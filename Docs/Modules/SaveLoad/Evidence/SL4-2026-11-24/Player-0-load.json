@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "mode": "load",
+  "seed": 0,
+  "objects": 160,
+  "resources": 149,
+  "missingResourcePlacements": 1,
+  "wallet": {
+    "Wood": 137,
+    "Gold": 89,
+    "Meat": 123
+  },
+  "paused": true,
+  "processId": 25796
+}

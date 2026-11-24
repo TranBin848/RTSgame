@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbe6e4ece5657a344a88094e6736a1ba, type: 3}
+  m_Name: ProceduralSaveCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::SaveContentCatalog
+  Definitions:
+  - Id: arrow
+    Prefab: {fileID: 8291309314361412291, guid: 1c465b84dce2aaa4ca79838f45c7a936, type: 3}
+    Capabilities: 256
+    NativeVisualId: 2
+  - Id: gnoll_bone
+    Prefab: {fileID: 3457609526182218536, guid: 1398d6628bbdc3644a152304939ddf09, type: 3}
+    Capabilities: 256
+    NativeVisualId: 3
+  - Id: goldstone1
+    Prefab: {fileID: 6114690377856608112, guid: 248a56346b4836c45b9ec0c2c6adc56f, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: goldstone2
+    Prefab: {fileID: 7420879337359334982, guid: dabf367ff4bd6954cadbd777292d898b, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: goldstone3
+    Prefab: {fileID: 8275578114157150523, guid: 0b814ade4e1febd47bfa2bc5b8e20041, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: goldstone4
+    Prefab: {fileID: 4838363726271453333, guid: 97b2be74e8604fa4997c6f5e44e0bd4e, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: goldstone5
+    Prefab: {fileID: 5232441971423270185, guid: aa9a03708262b1a4aa7e54171d4771a4, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: goldstone6
+    Prefab: {fileID: 7710403623466497256, guid: 8b446481521fd5746a502331fa0527dc, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: sheep
+    Prefab: {fileID: 8226707104923068619, guid: ca8e3887acae8244290157aa7fdc2b90, type: 3}
+    Capabilities: 11
+    NativeVisualId: -1
+  - Id: tree
+    Prefab: {fileID: 9033367934460242905, guid: da69dcb02757cf644ab6ad0428caea0e, type: 3}
+    Capabilities: 8
+    NativeVisualId: -1
+  - Id: archer
+    Prefab: {fileID: 5080062405969735481, guid: 888149af54526c24c9b283587e7918cf, type: 3}
+    Capabilities: 3
+    NativeVisualId: -1
+  - Id: archeryrange
+    Prefab: {fileID: 6211948813076933638, guid: 836899fb4b6f3e94c93038c8aa2b9563, type: 3}
+    Capabilities: 115
+    NativeVisualId: -1
+  - Id: barrack
+    Prefab: {fileID: 6211948813076933638, guid: 2b0ac907dc950cf48b0580cb93f7015e, type: 3}
+    Capabilities: 115
+    NativeVisualId: -1
+  - Id: granary
+    Prefab: {fileID: 7076002598291468573, guid: 399ff30bcd7984e4c87f6e0f5b7724fb, type: 3}
+    Capabilities: 51
+    NativeVisualId: -1
+  - Id: storagepit
+    Prefab: {fileID: 7076002598291468573, guid: bc288b0ec713f5e41b09e3f9b903cf92, type: 3}
+    Capabilities: 51
+    NativeVisualId: -1
+  - Id: tower
+    Prefab: {fileID: 8527654185206737124, guid: 22205fac894a2e442a38a07702693ea1, type: 3}
+    Capabilities: 51
+    NativeVisualId: -1
+  - Id: townhall
+    Prefab: {fileID: 6211948813076933638, guid: 7a23e79dad4ba1d4188681bb1e663e0c, type: 3}
+    Capabilities: 115
+    NativeVisualId: -1
+  - Id: gnoll
+    Prefab: {fileID: 2502138810622728140, guid: 540a644c92dfc2940b26a4acaa86602b, type: 3}
+    Capabilities: 129
+    NativeVisualId: 1
+  - Id: skull
+    Prefab: {fileID: 2925490060328344811, guid: 3bd289a753d575e4cac9347588a6e5e6, type: 3}
+    Capabilities: 129
+    NativeVisualId: 0
+  - Id: warrior
+    Prefab: {fileID: 5633659407228824928, guid: 259183a3370284940a0a50673c3edb62, type: 3}
+    Capabilities: 3
+    NativeVisualId: -1
+  - Id: worker
+    Prefab: {fileID: 6846916590832958109, guid: ace83e67ba4262c4c8915f81d582e29a, type: 3}
+    Capabilities: 7
+    NativeVisualId: -1
+  Actions:
+  - Id: action_18ddca89fd1f9a443ba796e6047dc782
+    Action: {fileID: 11400000, guid: 18ddca89fd1f9a443ba796e6047dc782, type: 2}
+  - Id: action_50171f6f1fd15b542a5c78c392ee2705
+    Action: {fileID: 11400000, guid: 50171f6f1fd15b542a5c78c392ee2705, type: 2}
+  - Id: action_6556196f813f88344a5e3c5eb214b3b9
+    Action: {fileID: 11400000, guid: 6556196f813f88344a5e3c5eb214b3b9, type: 2}
+  - Id: action_7197915df293cbe46a35c4b783cff4a2
+    Action: {fileID: 11400000, guid: 7197915df293cbe46a35c4b783cff4a2, type: 2}
+  - Id: action_942f2987a98965046b15e6b09b432b69
+    Action: {fileID: 11400000, guid: 942f2987a98965046b15e6b09b432b69, type: 2}
+  - Id: action_c62272bde22d74a499c15007b34672d8
+    Action: {fileID: 11400000, guid: c62272bde22d74a499c15007b34672d8, type: 2}
+  - Id: action_dd8ab255d2fcf194887dc0d8dc184d19
+    Action: {fileID: 11400000, guid: dd8ab255d2fcf194887dc0d8dc184d19, type: 2}
+  - Id: action_fa60cb36040e87c4ebd2169bad49ee96
+    Action: {fileID: 11400000, guid: fa60cb36040e87c4ebd2169bad49ee96, type: 2}
+  Research: {fileID: 11400000, guid: ceea08bb0a1d30345b2918bdaa8b644d, type: 2}
+  Clock: {fileID: 11400000, guid: 1c2bc4486e305c941bf3e314290c45c7, type: 2}
+  m_ContentHash: f81f8c2a1d23b983476ef38999044fbd7177418901bf9fbec95f71304d87040e

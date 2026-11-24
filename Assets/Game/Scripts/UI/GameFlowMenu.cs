@@ -13,6 +13,9 @@ public sealed class GameFlowMenu : MonoBehaviour
 
     RTS.DOTS.GameplaySimulationSystem m_Match;
     ResearchTreePanel m_ResearchTree;
+    CameraController m_LoadedCamera;
+    public void PauseLoaded(CameraController camera)
+    { m_LoadedCamera = camera; camera.LockCamera = true; Pause(); }
     public void InitializeResearchTree(ResearchTreePanel tree) => m_ResearchTree = tree;
     public void InitializeMatch(RTS.DOTS.GameplaySimulationSystem match)
     {
@@ -23,7 +26,7 @@ public sealed class GameFlowMenu : MonoBehaviour
 
     void Awake()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = MatchLoadBootstrap.IsLoading || ProceduralMapRuntime.HasFailed ? 0f : 1f;
         AudioListener.volume = PlayerPrefs.GetFloat(VolumeKey, 1f);
         if (m_VolumeSlider != null) m_VolumeSlider.SetValueWithoutNotify(AudioListener.volume);
         if (m_OptionsPanel != null) m_OptionsPanel.SetActive(false);
@@ -62,6 +65,9 @@ public sealed class GameFlowMenu : MonoBehaviour
     public void Resume()
     {
         if (m_Match?.IsMatchOver == true) return;
+        if (ProceduralMapRuntime.IsCompositionBlocked || MatchLoadBootstrap.IsLoading) return;
+        if (m_Match != null) m_Match.World.GetExistingSystemManaged<RTS.DOTS.SwarmSimulationSystem>().Paused = false;
+        if (m_LoadedCamera != null) { m_LoadedCamera.LockCamera = false; m_LoadedCamera = null; }
         Time.timeScale = 1f;
         if (m_PausePanel != null) m_PausePanel.SetActive(false);
         if (m_OptionsPanel != null) m_OptionsPanel.SetActive(false);

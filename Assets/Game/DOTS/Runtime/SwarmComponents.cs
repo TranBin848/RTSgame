@@ -28,6 +28,7 @@ namespace RTS.DOTS
         public float Speed, AttackRange, DetectionRange, AttackInterval, AttackDelay;
         public float Cooldown, Windup, ThinkTimer, StateTimer, VisualScale;
         public int Damage, VisualId, ProjectileVisualId;
+        public int RandomSeed;
         public byte Ranged;
         public ProjectileParameters Projectile;
         public SwarmState State;

@@ -17,6 +17,7 @@ public sealed class MatchSession : MonoBehaviour
     DayNightCycleManager m_Day;
     GameManager m_Game;
     bool m_ResultShown;
+    public void ShowLoadedPause(CameraController camera) { m_Menu.PauseLoaded(camera); }
     MatchReportService m_Reports;
     Text m_ResultStatistics;
     public string ResultStatisticsText => m_ResultStatistics != null ? m_ResultStatistics.text : "";

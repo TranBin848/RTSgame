@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "seed": 1,
+  "objects": 160,
+  "bytes": 217077,
+  "captureMs": 55.0752,
+  "paused": true,
+  "cargo": 7,
+  "fifo": 2,
+  "pendingDamageOnce": true,
+  "research": "economy_tools",
+  "construction": true,
+  "shelterResume": true,
+  "realFrameBoundary": true
+}

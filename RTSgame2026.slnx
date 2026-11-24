@@ -1,8 +1,10 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="RTS.ProceduralGeneration.Tests.csproj" />
+  <Project Path="RTS.SaveLoad.csproj" />
+  <Project Path="RTS.DOTS.Tests.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="RTS.DOTS.csproj" />
-  <Project Path="RTS.DOTS.Tests.csproj" />
+  <Project Path="RTS.SaveLoad.Tests.csproj" />
   <Project Path="RTS.ProceduralGeneration.Core.csproj" />
 </Solution>

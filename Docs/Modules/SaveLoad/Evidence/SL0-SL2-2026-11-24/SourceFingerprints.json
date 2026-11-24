@@ -1,0 +1,78 @@
+{
+  "capturedUtc": "2026-11-24T12:52:08.7842361Z",
+  "note": "Working-tree source fingerprints; includes pre-existing uncommitted changes. Not a release build fingerprint.",
+  "files": [
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayActorJobs.cs",
+      "sha256": "467de74f4f4584faa24c729236df9423fd664b1cd949bb76b7665e650f9d931c"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayComponents.cs",
+      "sha256": "e5c56d4d4329af887454d4e74da93a027cbe4b753c7c05a76a9e444880fb1009"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplaySimulationSystem.cs",
+      "sha256": "c4769fb4c759507c416bd87c76463ca5a4d25ef584fc8249d641809456404cd2"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SaveIdentity.cs",
+      "sha256": "07231ba8123d294543ad4ac88a8bc62958593fc363a0d4bcea37adeeeef603f0"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmComponents.cs",
+      "sha256": "69bc46525a8c0cfefc81c0ab31c30d21d1135be36a64292fcbd80bcba0864521"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmJobs.cs",
+      "sha256": "63e1bed8256b00575194a470a371d2f6f0e940c82a48016e21700a553075a490"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmSimulationSystem.cs",
+      "sha256": "34088bfe4e0eae2ec4d59a1e47077696bd58629f1eb14e430c6e8d4f21196199"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/SaveIdentityTests.cs",
+      "sha256": "6f3aa4064b8dca4936be3cf847508a3bafc7685a946c78ee9685293763031bd8"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/MatchSaveData.cs",
+      "sha256": "e4e21df7a7fc14cbb97d2dec01fef3c4a3e02c26113f67f048726927e7ab505d"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/RTS.SaveLoad.asmdef",
+      "sha256": "f7ddf6173e9f3202798e8380057135b97791aaf6577aebd1eb83465fa5a068c6"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveCatalog.cs",
+      "sha256": "a7ea7587eea91cb1de5cdc65cf393cd84645975d147b6c610d02b6e2cda8268e"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveCodec.cs",
+      "sha256": "419026dc817a95ea9be3f2085727dcee313401264d9886989cc3bfe6f75f8125"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveSlotStorage.cs",
+      "sha256": "ba0c0773e0a927db0c6f25f815c7a9f037c76da940713c5ca40707dba2f40a14"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Core/SaveValidator.cs",
+      "sha256": "e46745fafc274e28904946bd96605eea0334b977172c1e7e034cdb7df8cfdf27"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Tests/Editor/RTS.SaveLoad.Tests.asmdef",
+      "sha256": "681ec05e8f3231fc08e0c01ad6029bae4d84f5ac6e289abb687ac0b143ef2f91"
+    },
+    {
+      "path": "Assets/Game/SaveLoad/Tests/Editor/SaveLoadTests.cs",
+      "sha256": "a379332fb906f64626146ffd1a7a314a8e65a0d1534166bf91bfd8fc81f6814f"
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "sha256": "2dea32d7f9603aaa7a8fd66f8f0226288fb0435d0e977f7591d752beadb8c8a4"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "sha256": "a717ed4b946e370ce6e6af9dd000b8acf89495b44c84bf8f768159924cfa66c3"
+    }
+  ]
+}

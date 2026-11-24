@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "seed": 1,
+  "objects": 160,
+  "canonicalFieldsEqual": true,
+  "allRelationsRemapped": true,
+  "walletUnchanged": true,
+  "noStartingGrant": true,
+  "resourceTombstonePreserved": true,
+  "nativeVisibleWhilePaused": true,
+  "nextIdContinues": true,
+  "newId": 162,
+  "paused": true,
+  "WorldCount": 6
+}

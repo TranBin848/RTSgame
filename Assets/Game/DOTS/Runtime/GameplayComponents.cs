@@ -19,6 +19,7 @@ namespace RTS.DOTS
         public float Speed, Range, Detection, Interval, Delay, Cooldown, Windup, ThinkTimer, RepathTimer;
         public float MinIdle, MaxIdle, MinGraze, MaxGraze, GrazeTimer, FleeDistance, FleeJitter;
         public int Damage, AttackSequence, DamageSequence;
+        public int RandomSeed;
         public byte Moving, PathDirty, Offensive, SuppressAcquire, Grazing;
         public ProjectileParameters Projectile;
     }

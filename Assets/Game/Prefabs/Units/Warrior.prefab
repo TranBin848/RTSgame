@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2391659991815318043}
   - component: {fileID: 8893924291845651014}
   - component: {fileID: 6677447770053889122}
+  - component: {fileID: 378183684726705331}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Untagged
@@ -38,6 +39,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9094645670909238470
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,6 +85,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -1290986704, guid: e503f2b66f3a4ff4db4352c540cf1832, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,7 +95,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &8635922691962793371
 Animator:
@@ -194,3 +196,16 @@ MonoBehaviour:
   m_Health: 10000
   m_DamageFlashColor: {r: 1, g: 0.27, b: 0.25, a: 1}
   isTargeted: 0
+--- !u!114 &378183684726705331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633659407228824928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: warrior

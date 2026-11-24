@@ -165,7 +165,7 @@ namespace RTS.DOTS
                 if (actor.LastDamager != Entity.Null)
                 {
                     float2 away = Targets.TryGetValue(actor.LastDamager, out var attacker) ? body.Position - attacker.Body.Position : new float2(1, 0);
-                    var random = Unity.Mathematics.Random.CreateFromIndex((uint)(entity.Index * 157 + actor.DamageSequence + 1));
+                    var random = Unity.Mathematics.Random.CreateFromIndex((uint)(actor.RandomSeed * 157 + actor.DamageSequence + 1));
                     actor.Destination = body.Position + math.normalizesafe(away, random.NextFloat2Direction()) * actor.FleeDistance + random.NextFloat2Direction() * actor.FleeJitter;
                     actor.Moving = 1; actor.PathDirty = 1; actor.Grazing = 0; actor.LastDamager = Entity.Null;
                 }
@@ -176,7 +176,7 @@ namespace RTS.DOTS
                     actor.GrazeTimer -= DeltaTime;
                     if (actor.GrazeTimer <= 0)
                     {
-                        var random = Unity.Mathematics.Random.CreateFromIndex((uint)(entity.Index * 37 + actor.AttackSequence++ + 1));
+                        var random = Unity.Mathematics.Random.CreateFromIndex((uint)(actor.RandomSeed * 37 + actor.AttackSequence++ + 1));
                         actor.Grazing = (byte)(actor.Grazing == 0 ? 1 : 0);
                         actor.GrazeTimer = actor.Grazing != 0 ? random.NextFloat(actor.MinGraze, actor.MaxGraze) : random.NextFloat(actor.MinIdle, actor.MaxIdle);
                     }
@@ -231,7 +231,7 @@ namespace RTS.DOTS
                 if (actor.State == GameplayState.Attacking) { actor.State = GameplayState.Idle; actor.Task = GameplayTask.None; }
                 if (fighter && actor.Offensive != 0 && actor.SuppressAcquire == 0 && actor.ThinkTimer <= 0)
                 {
-                    actor.ThinkTimer = 0.25f + (entity.Index % 7) * 0.01f;
+                    actor.ThinkTimer = 0.25f + (actor.RandomSeed % 7) * 0.01f;
                     float best = actor.Detection * actor.Detection;
                     int2 min = SwarmMath.SpatialCell(body.Position - actor.Detection), max = SwarmMath.SpatialCell(body.Position + actor.Detection);
                     for (int y = min.y; y <= max.y; y++)

@@ -5,6 +5,7 @@ using Unity.Entities;
 public class BuildingProcess
 {
     private BuildActionSo m_BuildAction;
+    public BuildActionSo SaveAction => m_BuildAction;
     private WorkerUnit m_Worker;
     private StructureUnit m_Structure;
     private GameManager m_GameManager;

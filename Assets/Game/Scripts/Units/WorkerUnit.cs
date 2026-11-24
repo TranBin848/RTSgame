@@ -170,6 +170,8 @@ public class WorkerUnit : HumanoidUnit
     }
 
     Entity m_ResumeResource, m_ResumeConstruction;
+    public Entity SaveResumeResource => m_ResumeResource;
+    public Entity SaveResumeConstruction => m_ResumeConstruction;
     public bool IsReturningToShelter => IsDotsControlled && m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker)
         ? worker.Phase == WorkPhase.ReturningToShelter : m_IsReturningToShelter;
     public GroupCommandResult TryRecallToTownHall(TownHall townHall)

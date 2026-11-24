@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "ready": false,
+  "blocked": true,
+  "paused": true,
+  "timeScale": 0.0,
+  "error": "Saved map origin/cell size differs from scene geometry."
+}

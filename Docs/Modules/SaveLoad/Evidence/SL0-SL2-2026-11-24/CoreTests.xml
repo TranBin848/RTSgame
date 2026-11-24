@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="47" result="Passed" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="57.2974068">
+  <test-suite type="TestSuite" id="1180" name="RTSgame2026" fullname="RTSgame2026" runstate="Runnable" testcasecount="139" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="57.297407" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1169" name="RTS.SaveLoad.Tests.dll" fullname="E:/Unity project/RTSgame2026/Library/ScriptAssemblies/RTS.SaveLoad.Tests.dll" runstate="Runnable" testcasecount="47" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="57.186837" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="21552" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1170" name="RTS" fullname="RTS" runstate="Runnable" testcasecount="47" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="57.091030" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1171" name="SaveLoad" fullname="RTS.SaveLoad" runstate="Runnable" testcasecount="47" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="56.986282" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1172" name="Tests" fullname="RTS.SaveLoad.Tests" runstate="Runnable" testcasecount="47" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="56.882827" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1118" name="SaveLoadTests" fullname="RTS.SaveLoad.Tests.SaveLoadTests" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" testcasecount="47" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:48:45Z" duration="56.767764" total="47" passed="47" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1153" name="BrokenJsonRejected" fullname="RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-24 12:47:48Z" end-time="2026-11-24 12:47:49Z" duration="0.150260" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1149" name="BrokenJsonRejected(&quot;&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(&quot;&quot;)" methodname="BrokenJsonRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1623365401" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:49Z" duration="0.026322" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1150" name="BrokenJsonRejected(&quot;{}&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(&quot;{}&quot;)" methodname="BrokenJsonRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1118254438" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:49Z" duration="0.006597" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1151" name="BrokenJsonRejected(&quot;{\&quot;format\&quot;:\&quot;a\&quot;,\&quot;format\&quot;:\&quot;b\&quot;}&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(&quot;{\&quot;format\&quot;:\&quot;a\&quot;,\&quot;format\&quot;:\&quot;b\&quot;}&quot;)" methodname="BrokenJsonRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1236273906" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:49Z" duration="0.007280" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1152" name="BrokenJsonRejected(&quot;{}{}&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.BrokenJsonRejected(&quot;{}{}&quot;)" methodname="BrokenJsonRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1806575077" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:49Z" duration="0.000339" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1155" name="CatalogFingerprintIsOrderStableButConfigSensitive" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CatalogFingerprintIsOrderStableButConfigSensitive" methodname="CatalogFingerprintIsOrderStableButConfigSensitive" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1733410328" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:49Z" duration="0.006377" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1143" name="ChecksumDoesNotReplaceSemanticValidation" fullname="RTS.SaveLoad.Tests.SaveLoadTests.ChecksumDoesNotReplaceSemanticValidation" methodname="ChecksumDoesNotReplaceSemanticValidation" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="620727356" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:49Z" duration="0.371148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1163" name="CommitFaultKeepsAtLeastOneVerifiedGeneration" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:48:10Z" duration="20.800824" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1157" name="CommitFaultKeepsAtLeastOneVerifiedGeneration(TempCreated)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempCreated)" methodname="CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1268215749" result="Passed" start-time="2026-11-24 12:47:49Z" end-time="2026-11-24 12:47:50Z" duration="1.235422" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1158" name="CommitFaultKeepsAtLeastOneVerifiedGeneration(TempWritten)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempWritten)" methodname="CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1874200319" result="Passed" start-time="2026-11-24 12:47:50Z" end-time="2026-11-24 12:47:52Z" duration="1.824529" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1159" name="CommitFaultKeepsAtLeastOneVerifiedGeneration(TempFlushed)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempFlushed)" methodname="CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="632542581" result="Passed" start-time="2026-11-24 12:47:52Z" end-time="2026-11-24 12:47:54Z" duration="2.294682" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1160" name="CommitFaultKeepsAtLeastOneVerifiedGeneration(TempVerified)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(TempVerified)" methodname="CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="2126991336" result="Passed" start-time="2026-11-24 12:47:54Z" end-time="2026-11-24 12:47:58Z" duration="3.657184" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1161" name="CommitFaultKeepsAtLeastOneVerifiedGeneration(BeforeCommit)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(BeforeCommit)" methodname="CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1539999433" result="Passed" start-time="2026-11-24 12:47:58Z" end-time="2026-11-24 12:48:03Z" duration="4.910067" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1162" name="CommitFaultKeepsAtLeastOneVerifiedGeneration(Committed)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CommitFaultKeepsAtLeastOneVerifiedGeneration(Committed)" methodname="CommitFaultKeepsAtLeastOneVerifiedGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="85818717" result="Passed" start-time="2026-11-24 12:48:03Z" end-time="2026-11-24 12:48:10Z" duration="6.876092" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1154" name="CorruptionRejected" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CorruptionRejected" methodname="CorruptionRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1004966308" result="Passed" start-time="2026-11-24 12:48:10Z" end-time="2026-11-24 12:48:10Z" duration="0.585742" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1164" name="CorruptPrimaryUsesBackupWithoutModifyingEitherFile" fullname="RTS.SaveLoad.Tests.SaveLoadTests.CorruptPrimaryUsesBackupWithoutModifyingEitherFile" methodname="CorruptPrimaryUsesBackupWithoutModifyingEitherFile" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="131956009" result="Passed" start-time="2026-11-24 12:48:10Z" end-time="2026-11-24 12:48:16Z" duration="5.917816" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1166" name="DoubleRequestAndSecondStorageInstanceAreBlocked" fullname="RTS.SaveLoad.Tests.SaveLoadTests.DoubleRequestAndSecondStorageInstanceAreBlocked" methodname="DoubleRequestAndSecondStorageInstanceAreBlocked" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="908954710" result="Passed" start-time="2026-11-24 12:48:16Z" end-time="2026-11-24 12:48:20Z" duration="3.460558" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1119" name="DtoRoundTripPreservesEveryFieldAndLargeIds" fullname="RTS.SaveLoad.Tests.SaveLoadTests.DtoRoundTripPreservesEveryFieldAndLargeIds" methodname="DtoRoundTripPreservesEveryFieldAndLargeIds" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="109842531" result="Passed" start-time="2026-11-24 12:48:20Z" end-time="2026-11-24 12:48:22Z" duration="2.435547" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1148" name="FinishedConstructionKeepsOneTickOvershoot" fullname="RTS.SaveLoad.Tests.SaveLoadTests.FinishedConstructionKeepsOneTickOvershoot" methodname="FinishedConstructionKeepsOneTickOvershoot" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1310132501" result="Passed" start-time="2026-11-24 12:48:22Z" end-time="2026-11-24 12:48:24Z" duration="1.587423" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1156" name="FirstWriteThenReplacementKeepsPreviousGeneration" fullname="RTS.SaveLoad.Tests.SaveLoadTests.FirstWriteThenReplacementKeepsPreviousGeneration" methodname="FirstWriteThenReplacementKeepsPreviousGeneration" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="2014019236" result="Passed" start-time="2026-11-24 12:48:24Z" end-time="2026-11-24 12:48:35Z" duration="10.784511" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1144" name="FractionalIntegerIsNotRounded" fullname="RTS.SaveLoad.Tests.SaveLoadTests.FractionalIntegerIsNotRounded" methodname="FractionalIntegerIsNotRounded" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1394060830" result="Passed" start-time="2026-11-24 12:48:35Z" end-time="2026-11-24 12:48:36Z" duration="1.080276" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1168" name="GenerationCannotRegressOrReplaceWithInvalidData" fullname="RTS.SaveLoad.Tests.SaveLoadTests.GenerationCannotRegressOrReplaceWithInvalidData" methodname="GenerationCannotRegressOrReplaceWithInvalidData" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1491757636" result="Passed" start-time="2026-11-24 12:48:36Z" end-time="2026-11-24 12:48:41Z" duration="5.300730" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1140" name="InvalidStateIsRejected" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.081602" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1120" name="InvalidStateIsRejected(&quot;duplicate&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;duplicate&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="226111841" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.009236" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1121" name="InvalidStateIsRejected(&quot;unknown&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;unknown&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="970341650" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000707" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1122" name="InvalidStateIsRejected(&quot;dangling&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;dangling&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1983476297" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000534" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1123" name="InvalidStateIsRejected(&quot;negativeId&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;negativeId&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1964270230" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000431" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1124" name="InvalidStateIsRejected(&quot;wrongReference&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;wrongReference&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1100559121" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000425" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1125" name="InvalidStateIsRejected(&quot;nan&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;nan&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="525998442" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000265" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1126" name="InvalidStateIsRejected(&quot;infinity&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;infinity&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1376981495" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000382" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1127" name="InvalidStateIsRejected(&quot;overflow&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;overflow&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="932816503" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000198" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1128" name="InvalidStateIsRejected(&quot;mapSize&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;mapSize&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="391887896" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000446" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1129" name="InvalidStateIsRejected(&quot;mask&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;mask&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="2011922966" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000458" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1130" name="InvalidStateIsRejected(&quot;schema&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;schema&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1507962730" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000238" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1131" name="InvalidStateIsRejected(&quot;config&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;config&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="79390131" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000186" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1132" name="InvalidStateIsRejected(&quot;queue&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;queue&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1297984244" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000430" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1133" name="InvalidStateIsRejected(&quot;request&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;request&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="367650976" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000410" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1134" name="InvalidStateIsRejected(&quot;technology&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;technology&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="162457023" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000414" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1135" name="InvalidStateIsRejected(&quot;capabilities&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;capabilities&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1604933922" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000410" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1136" name="InvalidStateIsRejected(&quot;cargo&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;cargo&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1434453333" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000413" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1137" name="InvalidStateIsRejected(&quot;shelter&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;shelter&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="2128388456" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000405" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1138" name="InvalidStateIsRejected(&quot;claims&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;claims&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="530066224" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000398" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1139" name="InvalidStateIsRejected(&quot;construction&quot;)" fullname="RTS.SaveLoad.Tests.SaveLoadTests.InvalidStateIsRejected(&quot;construction&quot;)" methodname="InvalidStateIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="832234722" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:41Z" duration="0.000405" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1141" name="MissingFieldDoesNotSilentlyDefault" fullname="RTS.SaveLoad.Tests.SaveLoadTests.MissingFieldDoesNotSilentlyDefault" methodname="MissingFieldDoesNotSilentlyDefault" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="549433481" result="Passed" start-time="2026-11-24 12:48:41Z" end-time="2026-11-24 12:48:42Z" duration="1.222091" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1146" name="MissingZeroFieldIsRejected" fullname="RTS.SaveLoad.Tests.SaveLoadTests.MissingZeroFieldIsRejected" methodname="MissingZeroFieldIsRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1781282886" result="Passed" start-time="2026-11-24 12:48:42Z" end-time="2026-11-24 12:48:43Z" duration="0.988952" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1167" name="NoSaveAndInvalidSlotDoNotCreateFiles" fullname="RTS.SaveLoad.Tests.SaveLoadTests.NoSaveAndInvalidSlotDoNotCreateFiles" methodname="NoSaveAndInvalidSlotDoNotCreateFiles" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1851484272" result="Passed" start-time="2026-11-24 12:48:43Z" end-time="2026-11-24 12:48:43Z" duration="0.015951" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1145" name="NumericStringIsNotCoerced" fullname="RTS.SaveLoad.Tests.SaveLoadTests.NumericStringIsNotCoerced" methodname="NumericStringIsNotCoerced" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1119848560" result="Passed" start-time="2026-11-24 12:48:43Z" end-time="2026-11-24 12:48:44Z" duration="0.973120" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1147" name="ObjectCountIsBounded" fullname="RTS.SaveLoad.Tests.SaveLoadTests.ObjectCountIsBounded" methodname="ObjectCountIsBounded" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1123610290" result="Passed" start-time="2026-11-24 12:48:44Z" end-time="2026-11-24 12:48:44Z" duration="0.009117" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1165" name="SizeLimitIsCheckedBeforeReadingWholeFile" fullname="RTS.SaveLoad.Tests.SaveLoadTests.SizeLimitIsCheckedBeforeReadingWholeFile" methodname="SizeLimitIsCheckedBeforeReadingWholeFile" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="33284471" result="Passed" start-time="2026-11-24 12:48:44Z" end-time="2026-11-24 12:48:44Z" duration="0.023223" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1142" name="UnknownAndTypeMetadataRejected" fullname="RTS.SaveLoad.Tests.SaveLoadTests.UnknownAndTypeMetadataRejected" methodname="UnknownAndTypeMetadataRejected" classname="RTS.SaveLoad.Tests.SaveLoadTests" runstate="Runnable" seed="1684358983" result="Passed" start-time="2026-11-24 12:48:44Z" end-time="2026-11-24 12:48:45Z" duration="0.859074" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/ACER/AppData/LocalLow/DefaultCompany/RTSgame2026\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

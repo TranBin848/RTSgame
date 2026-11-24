@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -7695743413920488008}
   - component: {fileID: 3765281661786680202}
   - component: {fileID: 1315028073946485424}
+  - component: {fileID: 7310093298271009705}
   m_Layer: 7
   m_Name: Tree
   m_TagString: Resource
@@ -226,8 +227,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.1875}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1}
-    oldSize: {x: 1.859375, y: 2.96875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3, y: 4}
     newSize: {x: 3, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -235,3 +236,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.859375, y: 2.96875}
   m_EdgeRadius: 0
+--- !u!114 &7310093298271009705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033367934460242905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: tree

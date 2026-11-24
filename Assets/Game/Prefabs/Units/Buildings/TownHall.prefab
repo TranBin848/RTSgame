@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2449827443807053345}
   - component: {fileID: 3879325628708303296}
   - component: {fileID: 5643201212717265951}
+  - component: {fileID: 6871968810636082778}
   m_Layer: 0
   m_Name: TownHall
   m_TagString: Untagged
@@ -69,6 +70,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5646707852783550
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -114,6 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -1174591232, guid: 2f9070d40a0dfdb489502c749bab23c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -123,7 +126,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2449827443807053345
 Rigidbody2D:
@@ -203,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TownHall
   m_Actions:
   - {fileID: 11400000, guid: c62272bde22d74a499c15007b34672d8, type: 2}
+  m_UnitIcon: {fileID: 0}
   m_ObjectDetectionRadius: 3
   m_UnitDetectionCheckRate: 0.5
   m_AttackRange: 0
@@ -219,3 +222,16 @@ MonoBehaviour:
   m_SpawnScatterRadius: 0.75
   m_SpawnExitDistance: 1.5
   m_VillagerPrefab: {fileID: 0}
+--- !u!114 &6871968810636082778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211948813076933638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: townhall

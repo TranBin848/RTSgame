@@ -21,6 +21,8 @@ public sealed class MatchReportService : IDisposable
     public int CompletedNight { get; private set; }
     public bool IsFrozen => m_Frozen;
     public MatchReportSnapshot LatestNight { get; private set; }
+    public MatchReportSnapshot SavePreviousDawn => m_PreviousDawn;
+    public int SavePreviousPhase => (int)m_PreviousPhase;
     public MatchReportSnapshot Total => m_Frozen ? m_Final : new MatchReportSnapshot { Statistics = m_Gameplay.Statistics, ExploredCells = m_Fog.ExploredCellCount };
     public event Action NightClosed;
 

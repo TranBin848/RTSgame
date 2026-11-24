@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
     private TilemapManager m_Map;
     private GameSceneCompositionRoot m_Composition;
     private bool m_HasStartedGameplay;
+    public bool SnapshotFenced { get; set; }
     public bool IsInitialized { get; private set; }
     public Transform[] ResourceContainers => new[] { m_TreeContainer, m_GoldStoneContainer, m_SheepContainer };
     public void Initialize(SwarmGameBridge bridge, TilemapManager map, CameraController camera,
@@ -102,17 +103,18 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
         BeginGameplay();
     }
 
-    public void BeginGameplay()
+    public void BeginGameplay(bool grantStartingResources = true)
     {
         if (m_HasStartedGameplay) return;
         if (m_Composition != null && (!IsInitialized || m_Bridge == null || !m_Bridge.IsSceneBound))
             throw new System.InvalidOperationException("Gameplay must begin after scene dependencies and actors are bound.");
         ClearActionBarUI();
-        AddResources(100, 100, 100); // Starting resources for testing
+        if (grantStartingResources) AddResources(100, 100, 100);
         if (m_DayNightCycleManager != null)
             m_DayNightCycleManager.OnPhaseChanged += HandleDayNightPhaseChanged;
         m_HasStartedGameplay = true;
     }
+    public void RestoreLoadedSelection(IEnumerable<Unit> units) { SetSelectedUnits(new List<Unit>(units)); }
     void OnDestroy()
     {
         if (m_DayNightCycleManager != null)
@@ -138,6 +140,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
 
     void Update()
     {
+        if (SnapshotFenced) return;
         if (IsMatchOver || (m_Composition != null && !m_Composition.IsReady) || ResearchTree?.BlocksGameplayInput == true) return;
         if (Input.GetKeyDown(KeyCode.F1))
         {

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 102288184496515136}
   - component: {fileID: 7728813451301581197}
   - component: {fileID: -5092312109471541327}
+  - component: {fileID: 7347054213543667691}
   m_Layer: 0
   m_Name: Gnoll
   m_TagString: Untagged
@@ -39,6 +40,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1375954080922052586
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -84,6 +86,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 461987962, guid: b3c4ca97156ad424ea1bfd22328ebaba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,7 +96,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &4113408123356936854
 Animator:
@@ -215,3 +217,16 @@ MonoBehaviour:
   m_AlwaysVisible: 0
   m_ExploredAlpha: 0.45
   m_UnexploredAlpha: 0
+--- !u!114 &7347054213543667691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502138810622728140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: gnoll

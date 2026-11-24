@@ -76,9 +76,9 @@ namespace RTS.DOTS
             m_Shots = new NativeQueue<ProjectileRequest>(Allocator.Persistent);
             m_ExternalDamage = new NativeQueue<ExternalDamage>(Allocator.Persistent);
             m_RenderData = new NativeList<SwarmRenderData>(32768, Allocator.Persistent);
-            m_AgentArchetype = EntityManager.CreateArchetype(typeof(CombatBody), typeof(SwarmAgent));
-            m_ProjectileArchetype = EntityManager.CreateArchetype(typeof(SwarmProjectile));
-            m_ProxyArchetype = EntityManager.CreateArchetype(typeof(CombatBody));
+            m_AgentArchetype = EntityManager.CreateArchetype(typeof(CombatBody), typeof(SwarmAgent), typeof(SaveIdentity));
+            m_ProjectileArchetype = EntityManager.CreateArchetype(typeof(SwarmProjectile), typeof(SaveIdentity));
+            m_ProxyArchetype = EntityManager.CreateArchetype(typeof(CombatBody), typeof(SaveIdentity));
             m_Agents = GetEntityQuery(typeof(SwarmAgent), typeof(CombatBody));
             m_Projectiles = GetEntityQuery(typeof(SwarmProjectile));
             m_Bodies = GetEntityQuery(typeof(CombatBody));
@@ -86,7 +86,7 @@ namespace RTS.DOTS
         }
 
         public void ConfigureGrid(float2 origin, int2 size, float cellSize, byte[] walkable)
-        {
+        { RequireSnapshotMutable();
             if (size.x <= 0 || size.y <= 0 || cellSize <= 0 || walkable == null || walkable.Length != size.x * size.y)
                 throw new ArgumentException("Invalid swarm navigation grid.");
             Dependency.Complete();
@@ -100,17 +100,18 @@ namespace RTS.DOTS
         }
 
         public void SetGoal(float2 position, Entity primaryTarget = default)
-        {
+        { RequireSnapshotMutable();
             m_Goal = position; m_PrimaryTarget = primaryTarget;
             int2 cell = (int2)math.floor((position - m_Origin) / math.max(0.01f, m_CellSize));
             if (!math.all(cell == m_LastGoalCell)) { m_FlowDirty = true; m_LastGoalCell = cell; }
         }
 
         public Entity SpawnEnemy(float2 position, EnemySpawnSettings settings)
-        {
+        { RequireSnapshotMutable();
             if (MatchOver) return Entity.Null;
             if (!m_Configured || !SwarmMath.Fits(position, math.max(0.05f, settings.Radius), m_Origin, m_CellSize, m_Size, m_Walkable)) return Entity.Null;
             Entity entity = EntityManager.CreateEntity(m_AgentArchetype);
+            EnsureSaveIdentity(entity);
             EntityManager.SetComponentData(entity, new CombatBody
             {
                 Position = position, PreviousPosition = position, Radius = math.max(0.05f, settings.Radius),
@@ -122,7 +123,7 @@ namespace RTS.DOTS
                 Speed = math.clamp(settings.Speed, 0, 30), AttackRange = math.max(0.05f, settings.AttackRange),
                 AttackInterval = math.max(0.1f, settings.AttackInterval), AttackDelay = math.max(0, settings.AttackDelay),
                 DetectionRange = math.clamp(settings.DetectionRange, 1, 20), Damage = math.max(0, settings.Damage),
-                VisualId = settings.VisualId, ProjectileVisualId = settings.ProjectileVisualId,
+                VisualId = settings.VisualId, ProjectileVisualId = settings.ProjectileVisualId, RandomSeed = entity.Index,
                 Ranged = (byte)(settings.Ranged ? 1 : 0), Windup = -1, Target = m_PrimaryTarget,
                 VisualScale = settings.VisualScale > 0 ? settings.VisualScale : 1,
                 Projectile = settings.Projectile,
@@ -142,8 +143,9 @@ namespace RTS.DOTS
         }
 
         public Entity CreateProxy(int externalId, float2 position, float2 halfSize, float health, int faction = 0)
-        {
-            Entity entity = EntityManager.CreateEntity(m_ProxyArchetype);
+        { RequireSnapshotMutable();
+            Entity entity = faction < 0 ? EntityManager.CreateEntity(typeof(CombatBody)) : EntityManager.CreateEntity(m_ProxyArchetype);
+            if (faction >= 0) EnsureSaveIdentity(entity);
             bool box = math.all(halfSize > 0);
             EntityManager.SetComponentData(entity, new CombatBody
             {
@@ -155,8 +157,9 @@ namespace RTS.DOTS
         }
 
         public Entity CreateActorBody(int externalId, float2 position, float radius, float health, int faction)
-        {
+        { RequireSnapshotMutable();
             Entity entity = EntityManager.CreateEntity(m_ProxyArchetype);
+            EnsureSaveIdentity(entity);
             EntityManager.SetComponentData(entity, new CombatBody { ExternalId = externalId, Position = position,
                 PreviousPosition = position, Radius = math.max(0.05f, radius), Health = health, Faction = faction,
                 Targetable = 1, Collider = CreateSphere(math.max(0.05f, radius)) });
@@ -164,7 +167,7 @@ namespace RTS.DOTS
         }
 
         public void UpdateProxy(Entity entity, float2 position, float health, bool targetable)
-        {
+        { RequireSnapshotMutable();
             if (!EntityManager.Exists(entity)) return;
             var body = EntityManager.GetComponentData<CombatBody>(entity);
             body.PreviousPosition = math.distancesq(body.Position, position) > 64 ? position : body.Position;
@@ -200,17 +203,18 @@ namespace RTS.DOTS
         }
 
         public void QueueDamage(Entity target, int amount, Entity source = default)
-        {
+        { RequireSnapshotMutable();
             if (MatchOver) return;
             if (amount > 0 && TryGetBody(target, out _)) m_Damage.Enqueue(new DamageEvent { Target = target, Source = source, Amount = amount });
         }
         public bool TryTakeExternalDamage(out ExternalDamage damage) => m_ExternalDamage.TryDequeue(out damage);
 
         public Entity SpawnProjectile(ProjectileRequest request)
-        {
+        { RequireSnapshotMutable();
             if (MatchOver) return Entity.Null;
             if (request.Target != Entity.Null && !TryGetBody(request.Target, out _)) return Entity.Null;
             Entity entity = EntityManager.CreateEntity(m_ProjectileArchetype);
+            EnsureSaveIdentity(entity);
             float speed = math.clamp(request.Speed, 0.1f, 200);
             float distance = math.distance(request.Position, request.Aim);
             float duration = math.max(0.15f, distance / speed);
@@ -231,7 +235,7 @@ namespace RTS.DOTS
         }
 
         public void Retreat(float2 center, float radius)
-        {
+        { RequireSnapshotMutable();
             foreach (var (agent, body) in SystemAPI.Query<RefRW<SwarmAgent>, RefRW<CombatBody>>())
             {
                 if (body.ValueRO.Health <= 0) continue;
@@ -242,9 +246,9 @@ namespace RTS.DOTS
             }
         }
 
-        public void Remove(Entity entity) { if (EntityManager.Exists(entity)) EntityManager.DestroyEntity(entity); }
+        public void Remove(Entity entity) { RequireSnapshotMutable(); if (EntityManager.Exists(entity)) EntityManager.DestroyEntity(entity); }
         public void ResetSimulation()
-        {
+        { RequireSnapshotMutable();
             Dependency.Complete();
             EntityManager.DestroyEntity(m_Agents); EntityManager.DestroyEntity(m_Projectiles);
             m_RenderData.Clear(); m_Grid.Clear(); m_Targets.Clear(); m_Damage.Clear(); m_Shots.Clear(); m_ExternalDamage.Clear();
@@ -255,7 +259,7 @@ namespace RTS.DOTS
 
         protected override void OnUpdate()
         {
-            if (!m_Configured || Paused || MatchOver) return;
+            if (!m_Configured || Paused || MatchOver || SnapshotFenced) return;
             using var marker = TickMarker.Auto();
             long started = Stopwatch.GetTimestamp();
             int bodyCount = m_Bodies.CalculateEntityCount(), projectileCount = ProjectileCount;

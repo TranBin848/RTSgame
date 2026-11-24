@@ -4,6 +4,17 @@ namespace RTS.ProceduralGeneration.Tests
 {
     public sealed class ProceduralMapGeneratorTests
     {
+        [Test] public void SnapshotLayoutClonesTopologyRatherThanRegeneratingIt()
+        {
+            var regions = new[] { new MapRegion { X = 1 }, new MapRegion { X = 2 }, new MapRegion { X = 3 } };
+            var connections = new[] { new RegionConnection { From = 0, To = 1 }, new RegionConnection { From = 0, To = 2 } };
+            var gateways = new[] { new MapGateway { X = 4 }, new MapGateway { X = 5 } };
+            var cells = new byte[] { 0, 1, 2 };
+            var saved = StrategicLayout.FromSnapshot(regions, connections, gateways, new MapLandmark { X = 9 }, cells, new byte[3]);
+            cells[0] = 2; regions[0] = default;
+            Assert.That(saved.RegionIds[0], Is.EqualTo(0)); Assert.That(saved.Regions[0].X, Is.EqualTo(1)); Assert.That(saved.Landmark.X, Is.EqualTo(9));
+            Assert.Throws<System.ArgumentException>(() => StrategicLayout.FromSnapshot(null, connections, gateways, default, cells, new byte[3]));
+        }
         [TestCase(0)] [TestCase(-1)] [TestCase(int.MinValue)] [TestCase(1543)]
         public void StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int seed)
         {

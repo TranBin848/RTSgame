@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7153792860601124812}
   - component: {fileID: 994093456916864231}
   - component: {fileID: 3822240181381683003}
+  - component: {fileID: 1773061630358096185}
   m_Layer: 0
   m_Name: Gnoll_Bone
   m_TagString: Untagged
@@ -38,6 +39,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3999642164361795784
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,6 +85,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 1603127091, guid: 4af3674af66980540bc5b186e3b6ca6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,7 +95,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2935552600031301032
 Animator:
@@ -192,4 +194,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   m_Speed: 2
+  m_ProjectileRotatable: 0
+  m_UseArcTrajectory: 0
+  m_ArcHeight: 1.5
+  m_MinTravelDuration: 0.2
+  m_MaxTravelDuration: 0.75
+  m_DistanceToDurationMultiplier: 0.08
   m_Damage: 10
+--- !u!114 &1773061630358096185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457609526182218536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: gnoll_bone

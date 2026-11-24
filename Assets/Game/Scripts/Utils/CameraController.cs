@@ -19,6 +19,12 @@ public class CameraController : MonoBehaviour
 
     public bool LockCamera { get; set; }
     public Camera ViewCamera => m_MainCamera;
+    public void RestoreLoadedView(RTS.SaveLoad.ViewSaveData view)
+    {
+        if (view.Zoom < m_MinZoom || view.Zoom > m_MaxZoom) throw new System.ArgumentException("Saved camera zoom exceeds scene bounds.");
+        transform.position = new Vector3(view.Camera.X, view.Camera.Y, transform.position.z);
+        m_MainCamera.orthographicSize = view.Zoom; m_CurrentVelocity = Vector3.zero; m_IsDragging = false;
+    }
 
     public void Initialize(Camera camera)
     {

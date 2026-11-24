@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "CoreExport/1.0.0": {
+        "dependencies": {
+          "Unity.Mathematics": "0.0.0.0"
+        },
+        "runtime": {
+          "CoreExport.dll": {}
+        }
+      },
+      "Unity.Mathematics/0.0.0.0": {
+        "runtime": {
+          "Unity.Mathematics.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CoreExport/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Mathematics/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

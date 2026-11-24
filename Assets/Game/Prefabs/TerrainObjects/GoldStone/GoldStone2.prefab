@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -356565134047082739}
   - component: {fileID: -6573922550911448909}
   - component: {fileID: 5761271585580206695}
+  - component: {fileID: 814252999808315660}
   m_Layer: 8
   m_Name: GoldStone2
   m_TagString: Resource
@@ -234,3 +235,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.51507473, y: 0.59396124}
   m_EdgeRadius: 0
+--- !u!114 &814252999808315660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420879337359334982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: goldstone2

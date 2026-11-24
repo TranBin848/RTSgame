@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "error": "System.Exception: Cold-process canonical state mismatch.\r\n  at SL4PlayerSmoke+<Run>d__4.MoveNext () [0x00453] in <eb0d04346ff44c1e98a3c63ff7ccb139>:0 "
+}

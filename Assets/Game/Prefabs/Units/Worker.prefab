@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5353093972042388347}
   - component: {fileID: 410456894944863150}
   - component: {fileID: 1191455774626835223}
+  - component: {fileID: 4076721115123838893}
   m_Layer: 6
   m_Name: Worker
   m_TagString: Untagged
@@ -198,3 +199,16 @@ MonoBehaviour:
   isTargeted: 0
   m_Definition: {fileID: 11400000, guid: 33ca23884f74462d855e524749ded0df, type: 2}
   m_AttackAnimatorBool: isAttacking
+--- !u!114 &4076721115123838893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846916590832958109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: worker

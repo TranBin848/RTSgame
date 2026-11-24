@@ -43,6 +43,8 @@ public class DayNightCycleManager : MonoBehaviour
     }
 
     private float m_PhaseTimer;
+    public bool SnapshotFenced { get; set; }
+    public float SavePhaseElapsed => m_PhaseTimer;
     private bool m_HasStarted;
 
     public void InitializePresentation(EnvironmentPresentationDefinition presentation, Camera viewCamera)
@@ -77,6 +79,11 @@ public class DayNightCycleManager : MonoBehaviour
             m_PostProcessingVolume.profile.TryGet(out m_ColorAdjustments);
         }
 
+        if (MatchLoadBootstrap.IsLoading)
+        {
+            RestoreLoadedDay(MatchLoadBootstrap.Pending.Clock);
+            return;
+        }
         CurrentDay = Mathf.Max(1, m_StartingDay);
         OnDayChanged.Invoke(CurrentDay);
         SetPhase(m_StartingPhase, true);
@@ -84,9 +91,19 @@ public class DayNightCycleManager : MonoBehaviour
     }
 
     void Update() => Tick(Time.deltaTime);
+    public void RestoreLoadedDay(RTS.SaveLoad.ClockSaveData state)
+    {
+        if (state.Day != 1 || state.Phase != (int)DayNightPhase.Day || state.Elapsed >= m_Definition.DayDuration)
+            throw new System.InvalidOperationException("SL4 requires a valid first-day clock.");
+        CurrentDay = state.Day; CurrentPhase = (DayNightPhase)state.Phase; m_PhaseTimer = state.Elapsed;
+        CurrentPhaseProgress = Mathf.Clamp01(m_PhaseTimer / m_Definition.DayDuration); m_HasStarted = true;
+        UpdateEnvironmentEffects();
+    }
 
     void Tick(float deltaTime)
     {
+        if (SnapshotFenced) return;
+        if (m_Match?.World.GetExistingSystemManaged<RTS.DOTS.SwarmSimulationSystem>()?.Paused == true) return;
         if (m_Match?.IsMatchOver == true || deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
         if (ProceduralMapRuntime.IsCompositionBlocked || (ProceduralMapRuntime.IsActive && !ProceduralMapRuntime.IsReady))
         {

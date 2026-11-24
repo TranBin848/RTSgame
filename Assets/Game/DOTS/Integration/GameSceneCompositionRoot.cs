@@ -29,6 +29,8 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
     public DawnReportPresentation DawnReport { get; private set; }
     public ExpansionCommandService Expansion { get; private set; }
     public ExpansionHud ExpansionView { get; private set; }
+    public MatchCaptureService SaveCapture { get; private set; }
+    bool m_FinalizeLoad;
     SwarmGameBridge m_Bridge;
     SceneResourceNodeLocator m_Nodes;
     SceneResourceDepotLocator m_Depots;
@@ -43,7 +45,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
     {
         ProceduralMapRuntime.BeginComposition();
         var timer = System.Diagnostics.Stopwatch.StartNew();
-        try { Initialize(); InitializeMilliseconds = timer.Elapsed.TotalMilliseconds; }
+        try { if (ProceduralMapRuntime.HasFailed) throw new InvalidOperationException(ProceduralMapRuntime.LastError); Initialize(); InitializeMilliseconds = timer.Elapsed.TotalMilliseconds; }
         catch (Exception error) { Fail(error); }
     }
 
@@ -54,10 +56,20 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         {
             var timer = System.Diagnostics.Stopwatch.StartNew();
             m_Bridge.BindScene();
-            m_Waves.CaptureProceduralStartingRange();
+            if (MatchLoadBootstrap.IsLoading)
+            {
+                var saved = MatchLoadBootstrap.Pending;
+                m_Game.BeginGameplay(false);
+                m_Bridge.RestoreSL4(saved, Resources.Load<SaveContentCatalog>("ProceduralSaveCatalog"), m_Generator);
+                m_DayNight.RestoreLoadedDay(saved.Clock); m_Waves.RestoreLoadedDay(saved.Wave);
+                m_Fog.RestoreExplored(saved.Map.Explored); m_Camera.RestoreLoadedView(saved.View);
+                Time.timeScale = 0; m_Bridge.Simulation.Paused = true;
+                m_Game.SnapshotFenced = m_DayNight.SnapshotFenced = m_Waves.SnapshotFenced = true;
+                m_Match.ShowLoadedPause(m_Camera);
+                m_FinalizeLoad = true;
+            }
+            else { m_Waves.CaptureProceduralStartingRange(); m_Game.BeginGameplay(); m_Bridge.Simulation.Paused = false; }
             BindMilliseconds = timer.Elapsed.TotalMilliseconds;
-            m_Game.BeginGameplay();
-            m_Bridge.Simulation.Paused = false;
             IsReady = true;
             ProceduralMapRuntime.CompleteComposition();
             ReadyRealtime = Time.realtimeSinceStartupAsDouble;
@@ -71,6 +83,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         IsReady = false;
         ProceduralMapRuntime.FailComposition(LastError);
         if (m_Bridge != null && m_Bridge.Simulation != null) m_Bridge.Simulation.Paused = true;
+        if (MatchLoadBootstrap.IsLoading || MatchLoadBootstrap.LastError != null) { MatchLoadBootstrap.Fail(LastError); Time.timeScale = 0; }
         Debug.LogError($"Scene composition failed: {LastError}", this);
     }
 
@@ -137,7 +150,17 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
             break;
         }
         if (DuskWarning == null) throw new InvalidOperationException("Procedural HUD requires a day/night clock for dusk warnings.");
+        var saveContent = Resources.Load<SaveContentCatalog>("ProceduralSaveCatalog");
+        SaveCapture = gameObject.AddComponent<MatchCaptureService>();
+        SaveCapture.Initialize(this, m_Bridge, m_Generator, m_Map, m_Game, m_DayNight, m_Waves, m_Fog, m_Camera, Reports, saveContent);
         IsInitialized = true;
+    }
+    void LateUpdate()
+    {
+        if (!m_FinalizeLoad) return;
+        m_FinalizeLoad = false;
+        m_Game.SnapshotFenced = m_DayNight.SnapshotFenced = m_Waves.SnapshotFenced = false;
+        MatchLoadBootstrap.Complete();
     }
 
 

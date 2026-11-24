@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "definitions": 21,
+  "actions": 8,
+  "technologies": 6,
+  "stable": true,
+  "unknownRejected": true,
+  "duplicateRejected": true,
+  "tacticalResourceIncluded": true,
+  "contentHash": "54b35ddbb0d1e32413bca4e63b2769af2151f75bb5eacf02dcf2b34f308d039b",
+  "catalogFingerprint": "39fa73de6ee268f1568de211e2edb0b4f20c3b4fabfd68339e71dca0f8c67f3c"
+}

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3918217943049801864}
   - component: {fileID: 200352423005392940}
   - component: {fileID: 8080132879727578985}
+  - component: {fileID: 7366760705540692382}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -70,6 +71,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7969451797250005346
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,6 +117,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -1617528638, guid: 92a789f3d75d2fe4b9a2ecfc5d870ee9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -124,7 +127,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1720544440726156830
 MonoBehaviour:
@@ -231,3 +233,16 @@ CapsuleCollider2D:
   m_Offset: {x: -0.04161334, y: 0.011889219}
   m_Size: {x: 0.87180567, y: 1.2879319}
   m_Direction: 0
+--- !u!114 &7366760705540692382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5080062405969735481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fcaa662e903fc4d83e93211cc0fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDefinitionTag
+  m_DefinitionId: archer

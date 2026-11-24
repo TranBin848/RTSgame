@@ -13,6 +13,8 @@ public abstract class ProductionBuilding : StructureUnit
     private ProductionRequest m_CurrentSpawn;
     private float m_CurrentSpawnTimer;
     private int m_SpawnSequence;
+    public int SaveSpawnSequence => m_SpawnSequence;
+    public void RestoreSpawnSequence(int value) { m_SpawnSequence = value; }
     private int m_LastQueuedFrame = -1;
     private GameManager m_ProductionGame;
     private SwarmGameBridge m_ProductionBridge;

@@ -1,6 +1,6 @@
 # Tech docs — tổng quan và bàn giao RTSgame2026
 
-**24/11/2026 — Save/Load còn chưa triển khai:** [kế hoạch SL0–SL9](Modules/SaveLoad/BuildPlan.md) chốt phạm vi khôi phục toàn trận và gate kiểm thử. Telemetry JSON/CSV và map seed không thay thế Save/Load. Bước kế tiếp khi triển khai: SL0 inventory/schema/identity.
+**24/11/2026 — Save/Load SL4 DONE lát cắt kỹ thuật:** [SL4 report](Modules/SaveLoad/SL4-Report.md), [tiến độ](Modules/SaveLoad/Progress.md). MainMenu→LoadGame trướcAwake, finalmap/entity hydrate/remap2lượt, không startinggrant/resource duplication; pause/camera giữ tớiResume.148/148tests,WindowsMono build0errors/0warnings,cold-process0/1/1543 canonicalPASS; preflight10ca/applyfailhold/ResumePASS. SL4 chỉfirstDay/idle-work, từ chối activecargo/build/train/research/projectile/deadactors; tiếp SL5,SL6–SL9 chưađạt, chưaContinueUI/rollback/fullsave-load hoặcRelease latency. [SL3 capture](Modules/SaveLoad/SL3-Report.md) giữ lịch sử riêng.
 
 **24/11/2026 — E10 Release và budget baseline đã kiểm:** [bàn giao/config/raw evidence](Modules/GameExperience/E10-ReleaseHandoff.md). Windows x64 Mono/Ultra/1080p/vSync1, build0lỗi/0cảnh báo;89/89 EditMode,18/18 SampleScene smoke,15/15 procedural lifecycle PASS. G5 ba seed1 và military1543 đều p95≈13,888ms; tải đêm8đèn/32pulse/94quái p95=13,8952ms. Mọi capture foreground hợp lệ; GC Release unavailable. Đóng budget G5 cho candidate/batch này, không sửa kết quả lịch sử3/4. E10 nghiệm thu cuối PARTIAL: G3manual người dùng giữ mở, E9holdoutEconomythua và thẩm mỹ/audio/máy thứ hai chưa nghiệm thu.
 
@@ -158,7 +158,7 @@ Yêu cầu mới ngày 05/11/2026: chuyển mã do dự án sở hữu sang depe
 | Damage được tổng hợp một nơi | `QueueDamage` cập nhật máu ECS; không gọi tiếp damage legacy để trừ lại trên view |
 | Prefab được giữ làm authoring/presentation | Thêm loại quân cần ánh xạ dữ liệu và hành vi ECS; thêm prefab đơn thuần chưa tạo AI mới |
 | Renderer quái/đạn dùng `Graphics.DrawMeshInstanced` | Đây là renderer riêng; chưa dùng Entities Graphics cho toàn bộ project |
-| `Entity`/`GetInstanceID()` là handle runtime | Save/load cần thiết kế ID bền vững và khôi phục quan hệ; chưa có module này |
+| `Entity`/`GetInstanceID()` là handle runtime | SaveIdentity64 bit đã gắn ở factories; capture/restore và remap còn trong [kế hoạch SaveLoad](Modules/SaveLoad/Progress.md) |
 
 Xem [hướng dẫn phát triển DOTS](Modules/DOTS/DevelopmentGuide.md) để biết API nên gọi, file cần sửa và cách nối procedural generation.
 

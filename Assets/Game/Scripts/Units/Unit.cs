@@ -101,6 +101,15 @@ public abstract class Unit : MonoBehaviour, IPooledRuntimeObject
         if (m_AIPawn != null) m_AIPawn.enabled = false;
     }
     public void UnbindDots() { DotsEntity = Entity.Null; }
+    public void HydratePresentation(GameplayActor actor, CombatBody body, Vector2 offset, int maxHealth)
+    {
+        m_Health = maxHealth; m_CurrentHealth = Mathf.Max(0, Mathf.CeilToInt(body.Health));
+        CurrentState = (UnitState)actor.State; CurrentTask = (UnitTask)actor.Task; m_DotsAttackSequence = actor.AttackSequence;
+        DotsTarget = actor.Target; Target = m_Bridge.ViewFor(actor.Target);
+        transform.position = new Vector3(body.Position.x - offset.x, body.Position.y - offset.y, transform.position.z);
+        if (body.Health <= 0 && m_Collider != null && this is not SheepUnit) m_Collider.enabled = false;
+        if (m_SpriteRenderer != null && Mathf.Abs(actor.Facing.x) > .001f) m_SpriteRenderer.flipX = actor.Facing.x < 0;
+    }
     public void ApplyDotsSnapshot(GameplayActor actor, CombatBody body, Vector2 offset)
     {
         m_ApplyingDotsSnapshot = true;

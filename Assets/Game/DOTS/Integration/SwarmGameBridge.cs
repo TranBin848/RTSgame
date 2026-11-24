@@ -129,6 +129,7 @@ public sealed partial class SwarmGameBridge : MonoBehaviour
     public void Unregister(Unit unit)
     {
         if (unit.SceneBridge != this) return;
+        m_SaveConstructionActions.Remove(unit.DotsEntity);
         if (unit is ProductionBuilding production)
         {
             RemoveTrainingFor(production);

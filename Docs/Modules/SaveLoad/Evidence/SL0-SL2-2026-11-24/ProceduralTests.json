@@ -1,0 +1,99 @@
+{
+  "result": {
+    "Summary": {
+      "Status": "Passed",
+      "TotalTests": 17,
+      "PassedTests": 17,
+      "FailedTests": 0,
+      "SkippedTests": 0,
+      "Duration": "00:00:06.9887462"
+    },
+    "Results": [
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.DefaultPresetMeetsQuotasAndRequiredConnectivity",
+        "Status": "Passed",
+        "Duration": "00:00:03.3610000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"tree-wall\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1450000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"gold-water\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0970000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"diagonal\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.0930000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"landmark-island\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1030000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"extra-entrance\")",
+        "Status": "Passed",
+        "Duration": "00:00:00.1080000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.ImpossibleStrategicSizeIsRejectedBeforeAttempting",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.InvalidQuotaIsRejectedBeforeGeneration",
+        "Status": "Passed",
+        "Duration": "00:00:00"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.LegacyPresetKeepsVersionOneWithoutStrategicData",
+        "Status": "Passed",
+        "Duration": "00:00:00.1250000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.SameSeedProducesSameMapAndPlacements",
+        "Status": "Passed",
+        "Duration": "00:00:00.4510000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicBudgetsAndLandmarkPadSurviveFinalPlacement",
+        "Status": "Passed",
+        "Duration": "00:00:00.0870000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicFailureStillUsesFiniteAttemptBudget",
+        "Status": "Passed",
+        "Duration": "00:00:00.0920000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLandmarkRequiresThreeOuterGoldNodes",
+        "Status": "Passed",
+        "Duration": "00:00:00.0010000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(0)",
+        "Status": "Passed",
+        "Duration": "00:00:00.2920000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(-1)",
+        "Status": "Passed",
+        "Duration": "00:00:00.3840000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int.MinValue)",
+        "Status": "Passed",
+        "Duration": "00:00:00.4600000"
+      },
+      {
+        "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(1543)",
+        "Status": "Passed",
+        "Duration": "00:00:00.2290000"
+      }
+    ]
+  }
+}

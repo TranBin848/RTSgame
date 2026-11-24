@@ -1,5 +1,7 @@
 # Nghiên cứu sinh địa hình và phân bố tài nguyên cho RTSgame2026
 
+**Bổ sung 24/11/2026:** [Hướng dẫn có hình tile](IllustratedGuide.md) đối chiếu source hiện tại và xuất hình từ Core strategic v3. Nghiên cứu ngày26/10 bên dưới đã có **0 A.D.** làm nguồn cấu trúc bố trí căn cứ/tài nguyên. Lần bổ sung này đọc thêm nguồn chính thức **Factorio**: [FFF258 New autoplace](https://www.factorio.com/blog/post/fff-258) về tài nguyên khởi đầu có kiểm soát và [FFF390 Noise expressions](https://www.factorio.com/blog/post/fff-390) về trường noise kết hợp biểu thức hình học. Đây là nguồn đối chiếu mới, không sửa lịch sử thành đã dùng Factorio từ đầu hoặc khẳng định generator hai game giống nhau. Crown Siege chỉ được ghi nhận làm tham khảo UI tech tree trong module Progression. Các trạng thái “chưa triển khai” bên dưới là lịch sử tại ngày nghiên cứu, xem TechnicalOverview và S4–S7 cho tiến độ sau đó.
+
 Ngày đối chiếu code và tra cứu nguồn: **26/10/2026**.
 
 Kế hoạch thực hiện từ nghiên cứu này: [Implementation Plan, ngày 27/10/2026](ImplementationPlan.md).
