@@ -1,0 +1,5 @@
+PASS component-only destroy immediately unsubscribes fog; step once to inspect deferred owned resources.
+PASS component-only teardown: atlas/runtime sprites/decor views destroyed; shared art/material alive.
+PASS menu: all recorded controller/atlas/sprite/view IDs gone, old map context cleared; loading new match.
+PASS new seed1 match: Ready, Day, one presentation/one fog listener, same visual hash, unknown sites reset.
+PASS SampleScene legacy: no procedural presentation/E4 and legacy palette retained.

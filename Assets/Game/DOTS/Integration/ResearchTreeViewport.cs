@@ -39,7 +39,9 @@ public sealed class ResearchTreeViewport : MonoBehaviour, IBeginDragHandler, IDr
     {
         if (e.button != PointerEventData.InputButton.Left && e.button != PointerEventData.InputButton.Middle) return;
         IsDragging = true;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(View, e.position, e.pressEventCamera, out m_LastPointer);
+        // The first drag event can already be far from the press (fast mouse motion).
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(View, e.pressPosition, e.pressEventCamera, out m_LastPointer);
+        e.eligibleForClick = false;
     }
     public void OnDrag(PointerEventData e)
     {

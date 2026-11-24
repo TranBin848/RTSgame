@@ -1,5 +1,17 @@
 # Tech docs — tổng quan và bàn giao RTSgame2026
 
+**23/11/2026 — E4 DONE phạm vi implementation/Editor:** [Daytime regions và ảnh/evidence](Modules/GameExperience/E4-DaytimeRegions.md). Mở rộng presentation S7 bằng partial Daytime, root cấp clock; seed riêng314159, trần220chi tiết mới/12ambient, sửa crop bụi8frame. Ba seed0/1/1543 hash gameplay khớp Core v3, visual deterministic, fog/clearance/RNG/lifecycle/legacy và native khai thác/nộp/xây PASS;81/81 EditMode6.4467015s. Seed gốc1 đã khôi phục, Editor sạch ngoài Play/pause/compile,0Exception. Người dùng đã nghe chuông E3. Chưa đo Player E4 hoặc nghiệm thu thẩm mỹ E4; tiếp E5, G3/G5 vẫn mở. Các checkpoint dưới là lịch sử.
+
+**23/11/2026 — E3 DONE phạm vi implementation/Editor:** [Dusk warning và evidence](Modules/GameExperience/E3-DuskWarning.md). Root inject cảnh báo trên HUD, một signal/Dusk, countdown theo clock, dấu hướng chỉ gateway đã khám phá và ghi rõ possible approach. Natural Day→Dusk→Night với pause menu2s, cleanup/reload/RNG/fog và81/81 regression PASS; giữ60/30/45. Đã chỉnh banner tránh thanh wave qua ảnh. Chưa đo Player E3 hoặc nghiệm thu nghe thiết bị thật. Tiếp E4, G3/G5 vẫn mở; checkpoint bên dưới là lịch sử.
+
+**23/11/2026 — E2 DONE phạm vi đã kiểm:** [Night lighting/ảnh/Player A/B](Modules/GameExperience/E2-NightLighting.md). Root inject đèn TownHall/Tower/depot, glow có visibility mask từng pixel, trần8Light2D trong camera.81/81 tests, fixtures/GPU/lifecycle/legacy PASS; Windows Release0lỗi/0cảnh báo,2cặp seed1 p95≈13.89ms đạt gate tăng≤10% với1đèn. Chưa Player8đèn hoặc đóng G5/G3. E0 đã nghiệm thu; tiếp E3. Các checkpoint “tiếp E2” bên dưới là lịch sử.
+
+**23/11/2026 — E0 đã được người dùng nghiệm thu:** [xác nhận và giới hạn bằng chứng](Modules/GameExperience/Evidence/E0/Acceptance.md). E1 đã kiểm Editor; tiếp E2 ánh sáng đêm. Các trạng thái chờ E0 bên dưới là lịch sử.
+
+**23/11/2026 — E1 DONE phạm vi Editor:** [Game Experience palette/ownership và ảnh A/B](Modules/GameExperience/E1-ArtDirection.md). Root inject EnvironmentPresentationDefinition cho clock; grading đồng nhất terrain/sprite/instanced, config riêng ProceduralGame. Timing60/30/45, gameplay và SampleScene giữ nguyên. Integration/legacy/reload +81/81 EditMode PASS; chưa Player/perf E1. E0/manual drag vẫn PARTIAL theo người dùng; tiếp E2. Đoạn lập kế hoạch bên dưới là lịch sử trước implementation.
+
+**23/11/2026 — lộ trình hình ảnh và gameplay tiếp theo:** [Game Experience E0–E10](Modules/GameExperience/BuildPlan.md) bắt đầu bằng nghiệm thu cây công nghệ còn dở, tiếp palette/đêm/hoàng hôn/ngày/chiều sâu/phản hồi, rồi mở rộng/wave/Release. Chỉ lập kế hoạch, giữ sáu tech; không tự đóng G3 hoặc budget G5.
+
 **21/11/2026 — G5 đã đo candidate Windows Release.** Bản build Mono giữ Unity và URP của dự án. P95 ở 1080p/Ultra đạt ngưỡng 16,67 ms ở 3/4 lượt. Build plan giữ G5 mở do độ lặp chưa đạt budget. [Báo cáo G5](Modules/Progression/G5-ReleaseOnscreen.md)
 
 **21/11/2026 — G4 đã kiểm chứng bản sửa navigation.** `TilemapManager` giữ layer mask và tái sử dụng danh sách collider khi kiểm ô đi được. Trace Development Player xác định nguồn của spike 1 MB ở lúc bắt đầu đêm 1. Kết quả trước/sau và giới hạn đo nằm trong [báo cáo G4](Modules/Progression/G4-FrameProfiling.md).

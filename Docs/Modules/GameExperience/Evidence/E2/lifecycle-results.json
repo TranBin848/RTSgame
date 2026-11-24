@@ -1,0 +1,52 @@
+[
+  {
+    "task": "lifecycle-save",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: Saved 7 owned IDs and returned to menu\n"
+  },
+  {
+    "task": "step",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: Advance one startup frame for E2\n"
+  },
+  {
+    "task": "lifecycle-menu",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: \"PASS menu cleanup: controller, sprites, textures, material and groups destroyed; loading match2\"\n"
+  },
+  {
+    "task": "step",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: Advance one startup frame for E2\n"
+  },
+  {
+    "task": "lifecycle-match2",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: \"PASS E2 menu→game→menu→game: fresh Ready context, one lighting controller, research reset, repeated root init, old owned resources destroyed.\"\n"
+  },
+  {
+    "task": "sample-open",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: Loading SampleScene legacy smoke\n"
+  },
+  {
+    "task": "step",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: Advance one startup frame for E2\n"
+  },
+  {
+    "task": "sample-check",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: \"PASS SampleScene: no E2 controller and legacy palette path retained.\"\n"
+  },
+  {
+    "task": "stop",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: Discard previous fixture match\n"
+  },
+  {
+    "task": "final-open",
+    "exit_code": 0,
+    "output": "Connecting...\nCalling script-execute...\nSystem.String: \"Final ProceduralGame, outside Play\"\n"
+  }
+]

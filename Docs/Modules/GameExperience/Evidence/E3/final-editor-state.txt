@@ -1,0 +1,20 @@
+Connecting...
+Calling rql-query...
+[1/4] editor | select isPlaying isPaused isCompiling
+1 result
+isPlaying|isPaused|isCompiling
+false|false|false
+
+[2/4] scenes | select name path isDirty
+1 result
+name|path|isDirty
+ProceduralGame|Assets/Scenes/ProceduralGame.unity|false
+
+[3/4] objects | get components | where $ is GameSceneCompositionRoot | select IsInitialized IsReady LastError
+1 result
+IsInitialized|IsReady|LastError
+false|false|null
+
+[4/4] console | where logType == "Exception" | sort sequence desc | first 3 | select logType message
+0 results
+logType|message

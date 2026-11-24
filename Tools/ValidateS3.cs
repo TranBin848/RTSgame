@@ -29,12 +29,16 @@ public static class S3Validation
         int ticks = 0;
         try
         {
+            if (tree != null) tree.Open();
             foreach (var id in ids)
             {
+                if (tree != null) tree.SelectTechnology(id);
                 var cost = root.Research.GetDefinition(id);
                 int wood = manager.Wood, gold = manager.Gold, meat = manager.Meat;
-                if (root.Research.Start(id, hall) != ResearchResult.Started) throw new Exception("Start failed: " + id);
-                if (root.Research.Start(id, hall) != ResearchResult.Busy) throw new Exception("Slot bypass.");
+                var started = tree != null ? tree.ResearchSelected() : root.Research.Start(id, hall);
+                if (started != ResearchResult.Started) throw new Exception("Start failed: " + id);
+                var duplicate = tree != null ? tree.ResearchSelected() : root.Research.Start(id, hall);
+                if (duplicate != ResearchResult.Busy) throw new Exception("Slot bypass.");
                 if (manager.Wood != wood - cost.Wood || manager.Gold != gold - cost.Gold || manager.Meat != meat - cost.Meat)
                     throw new Exception("Incorrect debit: " + id);
                 int count = (int)Math.Ceiling(cost.Duration / 0.05) + 2;
@@ -54,6 +58,7 @@ public static class S3Validation
         }
         finally
         {
+            if (tree != null) tree.Close();
             world.SetTime(original);
             if (bridge.Gameplay.EntityManager.Exists(hall.DotsEntity)) bridge.Gameplay.EntityManager.SetComponentData(hall.DotsEntity, originalHall);
         }

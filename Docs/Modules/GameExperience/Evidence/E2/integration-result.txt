@@ -1,0 +1,2 @@
+23/11/2026 — Unity CLI script-execute, GameExperienceE2Validation.Run, exit code 0.
+PASS E2: injected/repeat init; Day off, Dusk ramp, Night on/dawn fade; pause stable; disable/re-enable; camera culling; no collider/Unit or gameplay/RNG mutations; 8 local-light cap with glow fallback; Tower/Depot details; return/reuse/death/destroy; unexplored/visible/explored-only fog gates; GPU shader probe shows visible half and masks hidden half. Temporary direct-bind fixtures do not validate tech/construction/balance; exit Play afterwards.

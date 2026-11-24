@@ -1,0 +1,7 @@
+E4 camera PNG1920x1080: seed1, Day, frozen gameplay. A/B differs only E4 ground/detail visibility. Bush frame-crop fix retained in both. Fog-off world comparisons are explicitly debug views; not player discovery evidence.
+Start: center=(64,64), ortho=10, both views same gameplay/camera/clock; fog disabled.
+Economy: center=(63,12), ortho=14, both views same gameplay/camera/clock; fog disabled.
+GoldFrontier: center=(116,66), ortho=14, both views same gameplay/camera/clock; fog disabled.
+butterfly: camera frozen ortho4, presentation animation sampled at0 and0.8; no gameplay ticks/clock injection.
+ripple: camera frozen ortho4, presentation animation sampled at0 and0.8; no gameplay ticks/clock injection.
+PASS capture map hash unchanged: 26102ba0e108e16be640d2d6532189a47a30cf834ca74e04fcd5e160e9d71f5e

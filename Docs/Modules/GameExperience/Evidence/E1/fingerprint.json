@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-23",
+  "scope": "E1 Editor palette validation, not a Player performance result",
+  "files": [
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/EnvironmentPresentationDefinition.cs",
+      "sha256": "F935C15E06E61B1F5B0EED65CD49866B88A984AC4EDD7C54A2B4C23B95A61C4D"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/EnvironmentPresentation.asset",
+      "sha256": "307B9254D435265AAF57A3B1F63F6544F28C09C303D1324299084018E14592C1"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/DayNightCycleManager.cs",
+      "sha256": "175847986D93690EBE8406CD85A4DF7E5F6037F80B39CC7C05E6488BD2D7269F"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "E6D4EC28A22A11878AE631A31C4F3AAA6F1431461025E7A447F4F82AF3B90650"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Editor/ProceduralMapEditorTools.cs",
+      "sha256": "B3699B5D31A84CF02376D5DD5CB6E0D8B1C378363D5CED67EF06CDD2BA827B29"
+    },
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "428A94FBBF03E5F97071BCA915A81AC29AF7FF50D0B8E71530FFB021EB29EBED"
+    },
+    {
+      "path": "Assets/Scenes/SampleScene.unity",
+      "sha256": "CA207397F013C84C147BC290D998647D6D2E19678A00D496969B911030B4FA4C"
+    },
+    {
+      "path": "Assets/Game/ScriptableObjects/Units/Definitions/DayNightCycleDefinition.asset",
+      "sha256": "556114451FF72A614B28698681E861CEEE76BFA551332ABC0A8EA8026AD73DD2"
+    },
+    {
+      "path": "Tools/ValidateGameExperienceE1.cs",
+      "sha256": "8874874FA790BD3FDC863607A917EAB9B3CEB11842DFF0677E0C7F778AB8F97C"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+PASS seed=0; generatorVersion=3; resources=150; totalDecor=194; E4=179; ambient=12; regionCounts=25,73,73
+mapSHA256=c155c2bd64a0281248f0ebd30fe07e81ccd02628cc521056c3a53caaf612371b
+visualSHA256=c7feecf4d58f83d11345666fad56a01e27d928cb3148eaaf6c5c437e9b81d8ed
+groundSHA256=9dd0b404af114a40608184087ad5a147710e3987632f7b1a09b9346c20c8ae6a
+changedSeedVisualSHA256=0d4897efcf92138a3b36d039e9dd564fe78a828091b0f93a49d50f1be3a7565f
+changedSeedGroundSHA256=b085e0de42ea2c67d0eb6c31a34d36c662576cd01198dd4095cd381ec9055378
+baselineGroundSHA256=2a49763a6c4758f9ae8fad88aa027abc13bc8319c722a3c0a171e8f50992684f
+PASS same seed reproduces; presentation seed/enable changes visuals, not full map hash; fresh raw generator agrees; footprint/resource/pad/routes safe; sparse Start; cropped bush; one listener/repeat-init; fog unknown/partial footprint/explored memory/visible-only motion/uninitialized; animation changes with time/freezes at same time/Night butterfly off; gameplay nav/wallet/actor/tick/RNG unchanged.

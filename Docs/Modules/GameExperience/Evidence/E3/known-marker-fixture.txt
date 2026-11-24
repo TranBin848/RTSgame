@@ -1,0 +1,4 @@
+PASS one known gateway marker; other gateway remains hidden. Fog memory injected by fixture, not actual scouting.
+! NIGHT  |  Defend your Town Hall
+3 waves tonight. Markers: known possible approaches.
+Routes chosen on spawn; stay alert for unexplored approaches.

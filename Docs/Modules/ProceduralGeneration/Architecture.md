@@ -1,5 +1,7 @@
 # Kiến trúc Procedural Generation
 
+**23/11 — E4 triển khai trên presentation S7:** [Daytime regions](../GameExperience/E4-DaytimeRegions.md). Partial Daytime nhận clock do root cấp, dùng seed riêng314159 cho mảng nền và cụm cỏ/hoa/đất/sỏi, tối đa220renderer mới gồm12ambient. Sửa crop bush8frame; giữ Core v3/quota/Routes/Reserved/resources và logic terrain. Ba seed0/1/1543 đã kiểm full map hash, determinism, fog footprint, native economy/construction/navigation và lifecycle;81/81 regression. Chưa Player/performance E4; tiếp E5. Các trạng thái S7/S8 bên dưới là lịch sử.
+
 Cập nhật **16/11 — S7 DONE:** [Presentation](S7-Presentation.md) nhận MapData/map/origin/fog từ root; tint tile và decor SpriteRenderer không collider/Unit, path/pad/region identity và minimap glyph sau explored. Root/Minimap dùng Initialize refs, scene generator wire cùng code; Fog toggle notify cập nhật ngay. Shared night palette đổi readability, timing/Core/Resources/navigation không đổi.3seed checks, ảnh cùng camera/seed ngày-đêm và user acceptance PASS;59DOTS+17procedural. Tiếp S8; D4 không được coi đã hoàn tất.
 
 Cập nhật đóng **16/11/2026 — S6/D3 DONE:** pipeline Unit sau map Ready dùng explicit scene injection tại bridge.Register; Awake không tra manager, return/unload clear refs, raw pool cần explicit register. Hai grids/fog-camera/input/economy/build và3chu kỳ đêm trên0/1/1543, worker pool qua menu→game mới và17procedural đã PASS. [S6 final](S6-FinalValidation.md) mô tả dữ liệu/cách chạy/kết quả/giới hạn; tiếp S7, D4/UI/fog toàn project chưa được coi đã migrate.

@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "System.String: \"Captured raw camera PNGs1920x1080: baseline/candidate Day,Dusk,Night same frozen seed/camera/state with fog disabled for color comparison; candidate Night with original fog. Presentation probes apply colors only, no clock phase event or gameplay tick. No HUD in camera captures.\""
+    }
+  ],
+  "isError": false
+}

@@ -17,6 +17,9 @@ public class DayNightCycleManager : MonoBehaviour
     
     private UnityEngine.Rendering.Universal.Vignette m_Vignette;
     private UnityEngine.Rendering.Universal.ColorAdjustments m_ColorAdjustments;
+    EnvironmentPresentationDefinition m_Presentation;
+    UnityEngine.Rendering.VolumeProfile m_RuntimeProfile;
+    public EnvironmentPresentationDefinition Presentation => m_Presentation;
     [SerializeField] private DayNightPhase m_StartingPhase = DayNightPhase.Day;
     [SerializeField] private int m_StartingDay = 1;
 
@@ -26,7 +29,9 @@ public class DayNightCycleManager : MonoBehaviour
     public int CurrentDay { get; private set; } = 1;
     public float CurrentPhaseProgress { get; private set; }
     public DayNightCycleDefinition Definition => m_Definition;
-    public Color EnvironmentTint => m_GlobalLight != null ? m_GlobalLight.color * Mathf.Max(0.35f, m_GlobalLight.intensity) : Color.white;
+    // The candidate grades lit, unlit and instanced sprites together; avoid a second tint on instances.
+    public Color EnvironmentTint => m_Presentation != null ? Color.white
+        : m_GlobalLight != null ? m_GlobalLight.color * Mathf.Max(0.35f, m_GlobalLight.intensity) : Color.white;
     public float CycleNormalizedProgress => GetCycleNormalizedProgress();
 
     RTS.DOTS.GameplaySimulationSystem m_Match;
@@ -40,11 +45,34 @@ public class DayNightCycleManager : MonoBehaviour
     private float m_PhaseTimer;
     private bool m_HasStarted;
 
+    public void InitializePresentation(EnvironmentPresentationDefinition presentation, Camera viewCamera)
+    {
+        if (presentation == null) throw new System.ArgumentNullException(nameof(presentation));
+        if (m_Presentation != null && m_Presentation != presentation)
+            throw new System.InvalidOperationException("Clock already owns another presentation palette.");
+        presentation.Validate();
+        var profile = m_PostProcessingVolume != null ? m_PostProcessingVolume.sharedProfile : null;
+        var cameraData = viewCamera != null ? viewCamera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>() : null;
+        if (m_GlobalLight == null || profile == null || cameraData == null || !cameraData.renderPostProcessing
+            || viewCamera.gameObject.scene != gameObject.scene || !m_PostProcessingVolume.enabled
+            || !m_PostProcessingVolume.gameObject.activeInHierarchy
+            || !m_PostProcessingVolume.isGlobal || m_PostProcessingVolume.weight != 1
+            || (cameraData.volumeLayerMask.value & (1 << m_PostProcessingVolume.gameObject.layer)) == 0
+            || !profile.TryGet<UnityEngine.Rendering.Universal.ColorAdjustments>(out _)
+            || !profile.TryGet<UnityEngine.Rendering.Universal.Vignette>(out _))
+            throw new System.InvalidOperationException("Environment grading requires camera post processing, Global Light and an active global volume with ColorAdjustments/Vignette.");
+        m_Presentation = presentation;
+        if (m_HasStarted) UpdateEnvironmentEffects();
+    }
+
     void Start()
     {
-        if (m_PostProcessingVolume != null && m_PostProcessingVolume.profile != null)
+        if (m_PostProcessingVolume != null && m_PostProcessingVolume.sharedProfile != null)
         {
-            m_PostProcessingVolume.profile = Instantiate(m_PostProcessingVolume.profile);
+            m_RuntimeProfile = ScriptableObject.CreateInstance<UnityEngine.Rendering.VolumeProfile>();
+            foreach (var component in m_PostProcessingVolume.sharedProfile.components)
+                m_RuntimeProfile.components.Add(Instantiate(component));
+            m_PostProcessingVolume.profile = m_RuntimeProfile;
             m_PostProcessingVolume.profile.TryGet(out m_Vignette);
             m_PostProcessingVolume.profile.TryGet(out m_ColorAdjustments);
         }
@@ -120,6 +148,11 @@ public class DayNightCycleManager : MonoBehaviour
 
     void UpdateEnvironmentEffects()
     {
+        if (m_Presentation != null)
+        {
+            ApplyPalette(m_Presentation.Evaluate(CurrentPhase, CurrentPhaseProgress));
+            return;
+        }
         if (m_Definition == null) return;
 
         DayNightPhase nextPhase = GetNextPhase(CurrentPhase);
@@ -144,6 +177,11 @@ public class DayNightCycleManager : MonoBehaviour
 
     void ApplyInstantEnvironmentEffects(DayNightPhase phase)
     {
+        if (m_Presentation != null)
+        {
+            ApplyPalette(m_Presentation.Evaluate(phase, 0));
+            return;
+        }
         if (m_Definition == null) return;
 
         if (m_GlobalLight != null)
@@ -160,6 +198,34 @@ public class DayNightCycleManager : MonoBehaviour
         if (m_ColorAdjustments != null)
         {
             m_ColorAdjustments.colorFilter.value = GetColorFilterForPhase(phase);
+        }
+    }
+
+    void ApplyPalette(EnvironmentPresentationDefinition.Palette palette)
+    {
+        // Neutral ambient keeps the lit terrain on the same grading path as unlit actors.
+        m_GlobalLight.color = Color.white;
+        m_GlobalLight.intensity = 1;
+        if (m_ColorAdjustments != null)
+        {
+            m_ColorAdjustments.active = true;
+            m_ColorAdjustments.colorFilter.Override(palette.Filter);
+            m_ColorAdjustments.postExposure.Override(Mathf.Log(palette.Intensity, 2));
+        }
+        if (m_Vignette != null)
+        {
+            m_Vignette.active = true;
+            m_Vignette.intensity.Override(palette.Vignette);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (m_RuntimeProfile != null)
+        {
+            if (m_PostProcessingVolume != null) m_PostProcessingVolume.profile = null;
+            foreach (var component in m_RuntimeProfile.components) Destroy(component);
+            Destroy(m_RuntimeProfile);
         }
     }
 

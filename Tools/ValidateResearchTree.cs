@@ -56,9 +56,10 @@ public static class ResearchTreeValidation
             view.ResetView();
             Canvas.ForceUpdateCanvases();
             var center = RectTransformUtility.WorldToScreenPoint(null, view.transform.position);
-            var pointer = new PointerEventData(events) { button = PointerEventData.InputButton.Left, position = center, eligibleForClick = true };
+            var pointer = new PointerEventData(events) { button = PointerEventData.InputButton.Left,
+                pressPosition = center, position = center + new Vector2(100, 45), eligibleForClick = true };
             before = view.Content.anchoredPosition;
-            view.OnBeginDrag(pointer); pointer.position += new Vector2(100, 45); view.OnDrag(pointer); view.OnEndDrag(pointer);
+            view.OnBeginDrag(pointer); view.OnDrag(pointer); view.OnEndDrag(pointer);
             Check(Vector2.Distance(view.Content.anchoredPosition, before) > 10, "drag did not move tree.");
             Check(!pointer.eligibleForClick && !view.IsDragging, "drag could buy a node or stayed captured.");
             camera.SendMessage("LateUpdate");

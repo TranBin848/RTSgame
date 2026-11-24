@@ -1,0 +1,3 @@
+Unity=6000.3.11f1; seed=1; playing=False; paused=False; compiling=False; scene=Assets/Scenes/ProceduralGame.unity; dirty=False
+RQL confirmed: ProceduralGame, isDirty=false; isPlaying/isPaused/isCompiling=false. Root IsInitialized/IsReady=false, LastError=null in EditMode (expected). Console Exception query:0results.
+Original strategic settings seed restored1; no diff in strategic settings, packages or project settings. Own TMP generated font-cache changes restored after tests.

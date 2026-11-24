@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "System.String: \"PASS SampleScene live: no candidate injected; legacy Day/Night Light2D and instance tint match unchanged DayNightCycleDefinition; runtime volume remains instance-only.\""
+    }
+  ],
+  "isError": false
+}

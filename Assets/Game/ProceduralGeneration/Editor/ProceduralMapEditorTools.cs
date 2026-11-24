@@ -146,9 +146,33 @@ public static class ProceduralMapEditorTools
         data.ApplyModifiedPropertiesWithoutUndo();
         var refs=new SerializedObject(root);
         refs.FindProperty("m_MapPresentation").objectReferenceValue=presentation;
+        const string palettePath = "Assets/Game/ProceduralGeneration/Settings/EnvironmentPresentation.asset";
+        var palette = AssetDatabase.LoadAssetAtPath<EnvironmentPresentationDefinition>(palettePath);
+        if (palette == null)
+        {
+            EnsureSettingsFolder();
+            palette = ScriptableObject.CreateInstance<EnvironmentPresentationDefinition>();
+            AssetDatabase.CreateAsset(palette, palettePath);
+        }
+        refs.FindProperty("m_EnvironmentPresentation").objectReferenceValue = palette;
+        ConfigureNightLighting(palette);
         refs.FindProperty("m_Minimap").objectReferenceValue=Object.FindFirstObjectByType<MinimapFogUI>();
         refs.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(presentation);EditorUtility.SetDirty(root);
+    }
+
+    public static void ConfigureNightLighting(EnvironmentPresentationDefinition palette)
+    {
+        if (palette.NightGlowMaterial != null) return;
+        const string path = "Assets/Game/ProceduralGeneration/Settings/NightGlow.mat";
+        var material = AssetDatabase.LoadAssetAtPath<Material>(path);
+        if (material == null)
+        {
+            var shader = AssetDatabase.LoadAssetAtPath<Shader>("Assets/Game/ProceduralGeneration/Integration/NightGlow.shader");
+            if (shader == null) throw new System.InvalidOperationException("Night glow shader is missing.");
+            material = new Material(shader); AssetDatabase.CreateAsset(material, path);
+        }
+        palette.NightGlowMaterial = material; EditorUtility.SetDirty(palette);
     }
 
     static void AddToBuildSettings()

@@ -15,7 +15,7 @@ public static class S7Validation
         var p=Find<ProceduralMapPresentation>();var a=Find<ProceduralMapAuthoring>();var map=Find<TilemapManager>();var fog=Find<FogOfWarManager>();var b=Find<SwarmGameBridge>();
         Check(Find<GameSceneCompositionRoot>().IsReady&&p.IsInitialized,"Root/presentation not ready.");
         Check(b.Gameplay.ActorCount==25&&a.GeneratedMap.Resources.Count==150,"Visuals changed actor/resource budget.");
-        Check(p.Decorations.Count>0&&p.Decorations.Count<=45&&p.Decorations.Count(r=>r.name=="Old Watchpost")==1,"Missing/duplicate landmark or decoration budget exceeded.");
+        Check(p.Decorations.Count>0&&p.Decorations.Count<=45+ProceduralMapPresentation.DaytimeDetailBudget&&p.Decorations.Count(r=>r.name=="Old Watchpost")==1,"Missing/duplicate landmark or decoration budget exceeded.");
         Check(p.Decorations.All(r=>r.GetComponent<Collider2D>()==null&&r.GetComponent<Unit>()==null),"Decor added gameplay/collision components.");
         var landmark=a.GeneratedMap.Layout.Landmark;
         foreach(var decor in p.Decorations)
@@ -28,7 +28,7 @@ public static class S7Validation
         p.Initialize(a.GeneratedMap,map,a.OriginCell,fog);p.Initialize(a.GeneratedMap,map,a.OriginCell,fog);
         Check(p.Decorations.Count==count&&map.NavigationVersion==nav&&terrain.SequenceEqual(a.GeneratedMap.Terrain),"Repeat visual init changed geometry/navigation or duplicated decor.");
         Check(fog.OnFogUpdated.GetInvocationList().Count(d=>ReferenceEquals(d.Target,p))==1,"Presentation subscribed twice.");
-        Check(!p.IsSiteDiscovered(1)&&!p.IsSiteDiscovered(2)&&p.Decorations.All(r=>!r.enabled),"Unexplored map leaked sites/decor.");
+        Check(!p.IsSiteDiscovered(1)&&!p.IsSiteDiscovered(2)&&p.Decorations.Where(r=>r.enabled).All(r=>fog.IsWorldPositionExplored(r.transform.position)),"Unexplored map leaked sites/decor.");
         bool rejected=false;try{p.Initialize(null,map,a.OriginCell,fog);}catch(ArgumentException){rejected=true;}
         Check(rejected,"Missing presentation dependency accepted.");
         return $"PASS seed={a.GeneratedMap.Seed}; decor={count},one watchpost; pad clear; no Collider2D/Unit; actors25/resources150; repeat init stable/nav unchanged/one listener; unknown sites hidden; missing dependency rejected";

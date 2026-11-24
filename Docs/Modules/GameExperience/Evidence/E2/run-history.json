@@ -1,0 +1,72 @@
+[
+  {
+    "group": "e2-lighting-onscreen-2026-11-23",
+    "run": "baseline1",
+    "invalidOnscreenFrames": 0,
+    "onscreenFrames": 11983,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": false,
+    "resultSha256": "14C828BD0C1F8F893AF2C6100D641D8544F14A3300802C99308BBFBC6768B1E6",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23\\baseline1"
+  },
+  {
+    "group": "e2-lighting-onscreen-2026-11-23",
+    "run": "candidate1",
+    "invalidOnscreenFrames": 920,
+    "onscreenFrames": 12185,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": false,
+    "resultSha256": "CF6BE03C70E67EB41ADCABC8C738A4706C162F3F9BC31636DC9BC7EC8364DDC2",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23\\candidate1"
+  },
+  {
+    "group": "e2-lighting-onscreen-2026-11-23-retry1",
+    "run": "baseline1",
+    "invalidOnscreenFrames": 30,
+    "onscreenFrames": 12044,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": false,
+    "resultSha256": "C389EFC9FD4960B9681D206392022317977416E99ABAA9AB3CC9432E996D0AC2",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23-retry1\\baseline1"
+  },
+  {
+    "group": "e2-lighting-onscreen-2026-11-23-retry2",
+    "run": "baseline1",
+    "invalidOnscreenFrames": 0,
+    "onscreenFrames": 12211,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": true,
+    "resultSha256": "C442A76886689A5E081CF7CBCF8AC891DD8DD42922A08EDCAC6C65BD9522B4A0",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23-retry2\\baseline1"
+  },
+  {
+    "group": "e2-lighting-onscreen-2026-11-23-retry2",
+    "run": "baseline2",
+    "invalidOnscreenFrames": 0,
+    "onscreenFrames": 12219,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": true,
+    "resultSha256": "D2141FD0F8B3312976550A64B04CBCCF7A2E93CBFE96523FD6EBAEFAC2216287",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23-retry2\\baseline2"
+  },
+  {
+    "group": "e2-lighting-onscreen-2026-11-23-retry2",
+    "run": "candidate1",
+    "invalidOnscreenFrames": 0,
+    "onscreenFrames": 12197,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": true,
+    "resultSha256": "48F9AB0367E908C28834E861941D41DD6953DD17601C01DB95C72EAB6788F841",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23-retry2\\candidate1"
+  },
+  {
+    "group": "e2-lighting-onscreen-2026-11-23-retry2",
+    "run": "candidate2",
+    "invalidOnscreenFrames": 0,
+    "onscreenFrames": 12217,
+    "foregroundAtFinish": true,
+    "includedInFinalComparison": true,
+    "resultSha256": "D9E78195C9E00C0C44C83FACB4B58DCA1DE35BD8EE36F52E9675F365035A7768",
+    "rawDirectory": "E:\\Unity project\\RTSgame2026\\.utmp\\e2-lighting-onscreen-2026-11-23-retry2\\candidate2"
+  }
+]

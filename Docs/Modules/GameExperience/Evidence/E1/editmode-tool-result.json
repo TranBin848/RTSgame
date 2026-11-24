@@ -1,0 +1,428 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"result\":{\"Summary\":{\"Status\":\"Passed\",\"TotalTests\":81,\"PassedTests\":81,\"FailedTests\":0,\"SkippedTests\":0,\"Duration\":\"00:00:06.4597257\"},\"Results\":[{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.AllRolesUseTheSameAuthoritativeHealthWithoutExternalDamageEcho\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0250000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.AllSixPlannedTechnologyIdsCanBeValidatedAndResearched\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0110000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.CancelledChildResearchPreservesPreviouslyUnlockedParent\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0100000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.CapabilityChecksProtectDirectConstructionAndTrainingCommands\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0070000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.CargoUpgradeUsesEffectiveCapacityForExistingAndNewWorkers\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0170000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ClaimCapacityCancellationAndWorkerDeathReleaseSlots\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0070000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ConstructionPausesWithoutBuilderAndCompletesOnceAfterReassignment\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0200000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.DefensiveStanceDoesNotChaseOutOfRangeTarget\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0180000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.DestroyedShelterEjectsWorkerOntoWalkableGrid\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0070000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.FortifyAffectsOldAndNewTowerShotsWithoutMutatingBaseDamage\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0190000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.HuntingSheepKeepsCorpseAsMeatResource\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0170000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\\u0022duplicate\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0030000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\\u0022missing\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\\u0022cycle\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\\u0022unsupported\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(-0.1f)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0030000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(1.1f)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0020000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(float.NaN)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.LegacyWithoutResearchKeepsCapabilitiesAvailable\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.MatchIgnoresDeadAndEnemyHallsAndPrioritizesDefeatAtDawn\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.MatchRemainsRunningWhileAnyPlayerHallLivesAndResetClearsResult\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.MatchSurvivesFiveNightsAndOutcomeCannotChange\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.MatchValidatesConfigurationAndKeepsLegacyScenesOptIn\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0020000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.PlayerNavigationRoutesAroundWallAndStops\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0700000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles(Archer)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0080000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles(Tower)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0060000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.RemovedResourceInvalidatesWorkerAssignmentWithoutStaleEntityAccess\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0050000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchCatalogPrerequisitesRejectWithoutDebitAndUnlockInAnyCatalogOrder\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0080000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchDebitsOnceCompletesOnceAndResetClearsUnlock\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0100000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(0,5)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0190000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(1,4)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0130000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(2,4)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0130000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchPauseFreezesAndHallRemovalCancelsWithoutRefund\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0060000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(-1,1)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0020000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(1,float.NaN)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(0,0)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsPoorWalletAndUnfinishedOrEnemyHall\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.SheepGrazesAndFleesOnNativeDamage\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0210000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.ShelterPreventsDamageAndDaybreakRestoresMovement\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0220000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.SimultaneousDepositsKeepAllTransactions\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0070000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.SoldiersAcquireAndAttackAnEntityEnemy\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0080000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.SwitchingResourceTypeDepositsOldCargoWithoutRelabellingIt\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0100000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.TerminalMatchRejectsCommandsAndFreezesSimulationEvenIfUnpaused\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0030000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.TrainingQueueIsOrderedAndBlockedDuringConstruction\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0110000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.TrainingRejectsInvalidDurationAndDeadProducerWithoutAppending\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0020000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.TrainingUpgradeSnapshotsNewRequestsWithoutChangingOldQueue\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0060000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(0)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0480000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(1)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0490000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(0)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0130000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(1)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0150000\"},{\"Name\":\"RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(2)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0150000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.DamageIsAggregatedAndAppliedExactlyOnce\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0040000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.DestroyedTargetInvalidatesProjectileAndEntityHandle\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0020000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0080000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.ExternalDamageCanBeDrainedOnce\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0040000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.FastProjectileSweepsThroughTargetWithoutTunnelling\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0060000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.FiveThousandAgentsAndTwoThousandProjectilesStayFinite\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0400000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.FlowFieldFindsRouteAroundWallAndDoesNotCutCorner\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0060000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.FriendlyProjectileDoesNotDamageSameFaction\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0040000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0040000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.ResetRemovesAllAgentAndProjectileState\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0040000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0190000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.SpawnResolverMovesBlockedAuthoringPositionToNearestValidCell\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0030000\"},{\"Name\":\"RTS.DOTS.Tests.SwarmSimulationTests.StaticObstacleConsumesProjectileBeforeEnemy\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0050000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.DefaultPresetMeetsQuotasAndRequiredConnectivity\",\"Status\":\"Passed\",\"Duration\":\"00:00:02.3070000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\\u0022tree-wall\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0700000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\\u0022gold-water\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0680000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\\u0022diagonal\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0690000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\\u0022landmark-island\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0720000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\\u0022extra-entrance\\u0022)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0680000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.ImpossibleStrategicSizeIsRejectedBeforeAttempting\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0010000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.InvalidQuotaIsRejectedBeforeGeneration\",\"Status\":\"Passed\",\"Duration\":\"00:00:00\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.LegacyPresetKeepsVersionOneWithoutStrategicData\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0650000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.SameSeedProducesSameMapAndPlacements\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.3650000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicBudgetsAndLandmarkPadSurviveFinalPlacement\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0740000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicFailureStillUsesFiniteAttemptBudget\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.0670000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLandmarkRequiresThreeOuterGoldNodes\",\"Status\":\"Passed\",\"Duration\":\"00:00:00\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(0)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.1710000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(-1)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.3070000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int.MinValue)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.3020000\"},{\"Name\":\"RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(1543)\",\"Status\":\"Passed\",\"Duration\":\"00:00:00.1680000\"}]}}"
+    }
+  ],
+  "structuredContent": {
+    "result": {
+      "Summary": {
+        "Status": "Passed",
+        "TotalTests": 81,
+        "PassedTests": 81,
+        "FailedTests": 0,
+        "SkippedTests": 0,
+        "Duration": "00:00:06.4597257"
+      },
+      "Results": [
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.AllRolesUseTheSameAuthoritativeHealthWithoutExternalDamageEcho",
+          "Status": "Passed",
+          "Duration": "00:00:00.0250000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.AllSixPlannedTechnologyIdsCanBeValidatedAndResearched",
+          "Status": "Passed",
+          "Duration": "00:00:00.0110000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.CancelledChildResearchPreservesPreviouslyUnlockedParent",
+          "Status": "Passed",
+          "Duration": "00:00:00.0100000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.CapabilityChecksProtectDirectConstructionAndTrainingCommands",
+          "Status": "Passed",
+          "Duration": "00:00:00.0070000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.CargoUpgradeUsesEffectiveCapacityForExistingAndNewWorkers",
+          "Status": "Passed",
+          "Duration": "00:00:00.0170000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ClaimCapacityCancellationAndWorkerDeathReleaseSlots",
+          "Status": "Passed",
+          "Duration": "00:00:00.0070000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ConstructionPausesWithoutBuilderAndCompletesOnceAfterReassignment",
+          "Status": "Passed",
+          "Duration": "00:00:00.0200000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.DefensiveStanceDoesNotChaseOutOfRangeTarget",
+          "Status": "Passed",
+          "Duration": "00:00:00.0180000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.DestroyedShelterEjectsWorkerOntoWalkableGrid",
+          "Status": "Passed",
+          "Duration": "00:00:00.0070000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.FortifyAffectsOldAndNewTowerShotsWithoutMutatingBaseDamage",
+          "Status": "Passed",
+          "Duration": "00:00:00.0190000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.HuntingSheepKeepsCorpseAsMeatResource",
+          "Status": "Passed",
+          "Duration": "00:00:00.0170000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\"duplicate\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0030000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\"missing\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\"cycle\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidResearchGraphIsRejectedBeforeConfiguration(\"unsupported\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(-0.1f)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0030000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(1.1f)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0020000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.InvalidTrainingModifiersAreRejected(float.NaN)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.LegacyWithoutResearchKeepsCapabilitiesAvailable",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.MatchIgnoresDeadAndEnemyHallsAndPrioritizesDefeatAtDawn",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.MatchRemainsRunningWhileAnyPlayerHallLivesAndResetClearsResult",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.MatchSurvivesFiveNightsAndOutcomeCannotChange",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.MatchValidatesConfigurationAndKeepsLegacyScenesOptIn",
+          "Status": "Passed",
+          "Duration": "00:00:00.0020000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.PlayerNavigationRoutesAroundWallAndStops",
+          "Status": "Passed",
+          "Duration": "00:00:00.0700000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles(Archer)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0080000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.RangedPlayerActorsLaunchEcsProjectiles(Tower)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0060000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.RemovedResourceInvalidatesWorkerAssignmentWithoutStaleEntityAccess",
+          "Status": "Passed",
+          "Duration": "00:00:00.0050000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchCatalogPrerequisitesRejectWithoutDebitAndUnlockInAnyCatalogOrder",
+          "Status": "Passed",
+          "Duration": "00:00:00.0080000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchDebitsOnceCompletesOnceAndResetClearsUnlock",
+          "Status": "Passed",
+          "Duration": "00:00:00.0100000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(0,5)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0190000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(1,4)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0130000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchMultiplierAffectsExistingAndNewWorkersWithoutChangingProfiles(2,4)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0130000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchPauseFreezesAndHallRemovalCancelsWithoutRefund",
+          "Status": "Passed",
+          "Duration": "00:00:00.0060000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(-1,1)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0020000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(1,float.NaN)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsInvalidDefinition(0,0)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ResearchRejectsPoorWalletAndUnfinishedOrEnemyHall",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.SheepGrazesAndFleesOnNativeDamage",
+          "Status": "Passed",
+          "Duration": "00:00:00.0210000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.ShelterPreventsDamageAndDaybreakRestoresMovement",
+          "Status": "Passed",
+          "Duration": "00:00:00.0220000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.SimultaneousDepositsKeepAllTransactions",
+          "Status": "Passed",
+          "Duration": "00:00:00.0070000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.SoldiersAcquireAndAttackAnEntityEnemy",
+          "Status": "Passed",
+          "Duration": "00:00:00.0080000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.SwitchingResourceTypeDepositsOldCargoWithoutRelabellingIt",
+          "Status": "Passed",
+          "Duration": "00:00:00.0100000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.TerminalMatchRejectsCommandsAndFreezesSimulationEvenIfUnpaused",
+          "Status": "Passed",
+          "Duration": "00:00:00.0030000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.TrainingQueueIsOrderedAndBlockedDuringConstruction",
+          "Status": "Passed",
+          "Duration": "00:00:00.0110000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.TrainingRejectsInvalidDurationAndDeadProducerWithoutAppending",
+          "Status": "Passed",
+          "Duration": "00:00:00.0020000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.TrainingUpgradeSnapshotsNewRequestsWithoutChangingOldQueue",
+          "Status": "Passed",
+          "Duration": "00:00:00.0060000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(0)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0480000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.WorkersApproachResourceInteractionPerimeterAfterClaimOpensTile(1)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0490000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(0)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0130000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(1)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0150000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.GameplaySimulationTests.WorkersGatherAndDepositToNativeWallet(2)",
+          "Status": "Passed",
+          "Duration": "00:00:00.0150000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.DamageIsAggregatedAndAppliedExactlyOnce",
+          "Status": "Passed",
+          "Duration": "00:00:00.0040000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.DestroyedTargetInvalidatesProjectileAndEntityHandle",
+          "Status": "Passed",
+          "Duration": "00:00:00.0020000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.EnemyAcquisitionDoesNotTreatNeutralSheepAsPlayerUnits",
+          "Status": "Passed",
+          "Duration": "00:00:00.0080000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.ExternalDamageCanBeDrainedOnce",
+          "Status": "Passed",
+          "Duration": "00:00:00.0040000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.FastProjectileSweepsThroughTargetWithoutTunnelling",
+          "Status": "Passed",
+          "Duration": "00:00:00.0060000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.FiveThousandAgentsAndTwoThousandProjectilesStayFinite",
+          "Status": "Passed",
+          "Duration": "00:00:00.0400000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.FlowFieldFindsRouteAroundWallAndDoesNotCutCorner",
+          "Status": "Passed",
+          "Duration": "00:00:00.0060000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.FriendlyProjectileDoesNotDamageSameFaction",
+          "Status": "Passed",
+          "Duration": "00:00:00.0040000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.RangedAttackUsesConfiguredProjectileInsteadOfHardcodedTrajectory",
+          "Status": "Passed",
+          "Duration": "00:00:00.0040000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.ResetRemovesAllAgentAndProjectileState",
+          "Status": "Passed",
+          "Duration": "00:00:00.0040000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.RetreatingEnemiesCannotBeTargetedAndEventuallyDespawn",
+          "Status": "Passed",
+          "Duration": "00:00:00.0190000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.SpawnResolverMovesBlockedAuthoringPositionToNearestValidCell",
+          "Status": "Passed",
+          "Duration": "00:00:00.0030000"
+        },
+        {
+          "Name": "RTS.DOTS.Tests.SwarmSimulationTests.StaticObstacleConsumesProjectileBeforeEnemy",
+          "Status": "Passed",
+          "Duration": "00:00:00.0050000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.DefaultPresetMeetsQuotasAndRequiredConnectivity",
+          "Status": "Passed",
+          "Duration": "00:00:02.3070000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"tree-wall\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0700000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"gold-water\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0680000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"diagonal\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0690000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"landmark-island\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0720000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.FinalTopologyValidatorRejectsBrokenFixtures(\"extra-entrance\")",
+          "Status": "Passed",
+          "Duration": "00:00:00.0680000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.ImpossibleStrategicSizeIsRejectedBeforeAttempting",
+          "Status": "Passed",
+          "Duration": "00:00:00.0010000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.InvalidQuotaIsRejectedBeforeGeneration",
+          "Status": "Passed",
+          "Duration": "00:00:00"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.LegacyPresetKeepsVersionOneWithoutStrategicData",
+          "Status": "Passed",
+          "Duration": "00:00:00.0650000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.SameSeedProducesSameMapAndPlacements",
+          "Status": "Passed",
+          "Duration": "00:00:00.3650000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicBudgetsAndLandmarkPadSurviveFinalPlacement",
+          "Status": "Passed",
+          "Duration": "00:00:00.0740000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicFailureStillUsesFiniteAttemptBudget",
+          "Status": "Passed",
+          "Duration": "00:00:00.0670000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLandmarkRequiresThreeOuterGoldNodes",
+          "Status": "Passed",
+          "Duration": "00:00:00"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(0)",
+          "Status": "Passed",
+          "Duration": "00:00:00.1710000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(-1)",
+          "Status": "Passed",
+          "Duration": "00:00:00.3070000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(int.MinValue)",
+          "Status": "Passed",
+          "Duration": "00:00:00.3020000"
+        },
+        {
+          "Name": "RTS.ProceduralGeneration.Tests.ProceduralMapGeneratorTests.StrategicLayoutIsDeterministicAndProtectsRequiredPlaces(1543)",
+          "Status": "Passed",
+          "Duration": "00:00:00.1680000"
+        }
+      ]
+    }
+  },
+  "isError": false
+}

@@ -1019,7 +1019,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
     void OnGUI()
     {
         bool isHudActive = m_HUDCanvas == null || m_HUDCanvas.activeSelf;
-        if (!isHudActive)
+        if (!isHudActive || ResearchTree?.BlocksGameplayInput == true)
         {
             return;
         }

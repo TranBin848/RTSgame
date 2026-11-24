@@ -1,0 +1,1 @@
+PASS SampleScene legacy: no E3 controller and no procedural palette; procedural-only warning does not replace legacy HUD.

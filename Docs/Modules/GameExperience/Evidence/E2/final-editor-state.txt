@@ -1,0 +1,24 @@
+Connecting...
+Calling rql-query...
+[1/4] editor | select isPlaying isPaused isCompiling
+1 result
+isPlaying|isPaused|isCompiling
+false|false|false
+
+[2/4] scenes | select name isDirty
+1 result
+name|isDirty
+ProceduralGame|false
+
+[3/4] objects | get components | where $ is GameSceneCompositionRoot | select IsInitialized IsReady LastError
+1 result
+IsInitialized|IsReady|LastError
+false|false|null
+
+[4/4] console | sort sequence desc | first 4 | select logType message
+4 results
+logType|message
+Log|[ResourceSpawner] Spawned 18/18 of Sheep in Sheeps
+Log|[ResourceSpawner] Spawned 20/20 of GoldStone5 in Golds
+Log|[ResourceSpawner] Spawned 30/30 of Tree in Trees
+Log|[ProceduralMap] Ready. Seed=1, attempt=0, grass=11202, water=5182, trees=120, gold=12, sheep=18, repairs=470.

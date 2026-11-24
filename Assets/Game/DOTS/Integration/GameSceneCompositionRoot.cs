@@ -17,9 +17,12 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
     [SerializeField] ResearchPanel m_ResearchPanel;
     [SerializeField] ResearchTreePanel m_ResearchTree;
     [SerializeField] ProceduralMapPresentation m_MapPresentation;
+    [SerializeField] EnvironmentPresentationDefinition m_EnvironmentPresentation;
     [SerializeField] MinimapFogUI m_Minimap;
     [SerializeField] MatchSession m_Match;
     public IResearchService Research { get; private set; }
+    public StructureNightLighting NightLighting { get; private set; }
+    public DuskWarningPresentation DuskWarning { get; private set; }
     SwarmGameBridge m_Bridge;
     SceneResourceNodeLocator m_Nodes;
     SceneResourceDepotLocator m_Depots;
@@ -74,6 +77,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
             throw new InvalidOperationException("Generated map must be ready before scene composition.");
         if (m_ResearchDefinition == null) throw new InvalidOperationException("Economy research definition is required.");
         if(m_MapPresentation==null||m_Minimap==null)throw new InvalidOperationException("Procedural map presentation and minimap references are required.");
+        m_DayNight.InitializePresentation(m_EnvironmentPresentation, m_Camera.GetComponent<Camera>());
         var researchData = m_ResearchDefinition.ToCatalog();
         var world = World.DefaultGameObjectInjectionWorld;
         if (world == null || !world.IsCreated)
@@ -98,9 +102,21 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         m_Game.Initialize(m_Bridge, m_Map, m_Camera, m_Fog, m_DayNight, m_Nodes, m_Depots);
         foreach (var spawner in m_Generator.LegacySpawners) spawner.Initialize(m_Game, m_Map, m_Bridge);
         m_Waves.Initialize(m_Game, m_Map, m_DayNight, m_Bridge, m_Generator);
+        m_MapPresentation.InitializeDaytimeClock(m_DayNight);
         m_MapPresentation.Initialize(m_Generator.GeneratedMap,m_Map,m_Generator.OriginCell,m_Fog);
         m_Minimap.InitializeLandmarks(m_MapPresentation);
         ComposePresentation(m_Game, m_Map, m_Fog, m_DayNight, m_Waves, m_Camera, m_Bridge);
+        NightLighting = m_MapPresentation.gameObject.AddComponent<StructureNightLighting>();
+        NightLighting.Initialize(m_Game, m_DayNight, m_Fog, m_Map, m_Camera.GetComponent<Camera>(), m_EnvironmentPresentation, m_Bridge.GetComponent<RTS.DOTS.SwarmInstancedRenderer>());
+        foreach (var sceneRoot in gameObject.scene.GetRootGameObjects())
+        {
+            var clockUi = sceneRoot.GetComponentInChildren<DayNightClockUI>(true);
+            if (clockUi == null) continue;
+            DuskWarning = clockUi.gameObject.AddComponent<DuskWarningPresentation>();
+            DuskWarning.Initialize(m_DayNight, m_Waves, m_Generator, m_Fog, m_Camera.GetComponent<Camera>(), clockUi.GetComponentInParent<Canvas>());
+            break;
+        }
+        if (DuskWarning == null) throw new InvalidOperationException("Procedural HUD requires a day/night clock for dusk warnings.");
         IsInitialized = true;
     }
 

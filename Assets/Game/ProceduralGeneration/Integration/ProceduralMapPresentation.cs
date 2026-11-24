@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 // Visuals only: no Unit, collider or navigation data is added by this component.
-public sealed class ProceduralMapPresentation : MonoBehaviour
+public sealed partial class ProceduralMapPresentation : MonoBehaviour
 {
     [SerializeField] Texture2D m_BushTexture;
     [SerializeField] Texture2D m_RockTexture;
@@ -25,7 +25,8 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
     {
         if (map == null || tilemap == null || fog == null || tilemap.WalkableTilemap == null
             || tilemap.gameObject.scene != gameObject.scene || fog.gameObject.scene != gameObject.scene
-            || m_BushTexture == null || m_RockTexture == null || m_WatchpostTexture == null || m_WorldMaterial == null)
+            || m_BushTexture == null || m_RockTexture == null || m_WatchpostTexture == null || m_WorldMaterial == null
+            || (m_EnableDaytimeDetail && m_DetailClock == null))
             throw new ArgumentException("Map presentation requires its map/fog and authored visual assets.");
         if (IsInitialized)
         {
@@ -36,7 +37,8 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
         m_Map = map; m_Ground = tilemap.WalkableTilemap; m_Origin = origin; m_Fog = fog;
         if (map.Layout == null) return;
         PaintGround();
-        var bush = MakeSprite(m_BushTexture, .5f);
+        // Bush art is an eight-frame strip; use one frame, not the entire strip as a billboard.
+        var bush = MakeSprite(m_BushTexture, .5f, new Rect(0, 0, m_BushTexture.height, m_BushTexture.height));
         var rock = MakeSprite(m_RockTexture, .5f);
         var watchpost = MakeSprite(m_WatchpostTexture, .15f);
         for (int region = 1; region < map.Layout.Regions.Length; region++)
@@ -66,6 +68,7 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
             int y=landmark.Y+Mathf.RoundToInt(Mathf.Sin(i*Mathf.PI/8)*radius);
             if(CanDecorate(x,y)){AddDecor(watchpost,x,y,"Old Watchpost");placed=true;}
         }
+        InitializeDaytimeDetails(bush, rock);
         m_Fog.OnFogUpdated += RefreshVisibility;
         RefreshVisibility();
     }
@@ -89,6 +92,7 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
             if (Mathf.Abs(x-landmark.X)<=2 && Mathf.Abs(y-landmark.Y)<=2)
                 color=Mathf.Abs(x-landmark.X)==2||Mathf.Abs(y-landmark.Y)==2 ? new Color(.78f,.84f,.76f) : new Color(1f,.8f,.6f);
             var cell = m_Origin + new Vector3Int(x,y,0);
+            color = VaryGround(x, y, color);
             m_Ground.RemoveTileFlags(cell, TileFlags.LockColor);
             m_Ground.SetColor(cell,color);
         }
@@ -101,16 +105,16 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
         return true;
     }
     bool IsRoute(int x,int y)=>m_Map.InBounds(x,y)&&m_Map.Layout.Routes[m_Map.Index(x,y)]!=0;
-    Sprite MakeSprite(Texture2D texture,float pivotY)
+    Sprite MakeSprite(Texture2D texture,float pivotY,Rect? frame=null)
     {
-        var sprite=Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(.5f,pivotY),64,0,SpriteMeshType.FullRect);
+        var sprite=Sprite.Create(texture,frame??new Rect(0,0,texture.width,texture.height),new Vector2(.5f,pivotY),64,0,SpriteMeshType.FullRect);
         m_Sprites.Add(sprite);return sprite;
     }
-    void AddDecor(Sprite sprite,int x,int y,string label)
+    SpriteRenderer AddDecor(Sprite sprite,int x,int y,string label)
     {
         var view=new GameObject(label);view.transform.SetParent(transform,false);view.transform.position=CellWorld(x,y);
         var renderer=view.AddComponent<SpriteRenderer>();renderer.sprite=sprite;renderer.sharedMaterial=m_WorldMaterial;
-        renderer.sortingOrder=10;m_Decor.Add(renderer);
+        renderer.sortingOrder=10;m_Decor.Add(renderer);return renderer;
     }
     Vector3 CellWorld(int x,int y)=>m_Ground.GetCellCenterWorld(m_Origin+new Vector3Int(x,y,0));
     void RefreshVisibility()
@@ -119,12 +123,13 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
         {
             var position=renderer.transform.position;
             bool explored=m_Fog.IsInitialized&&(m_Fog.IsDisabled||m_Fog.IsWorldPositionExplored(position));
-            renderer.enabled=explored;
+            renderer.enabled=explored&&(!m_DaytimeDetails.Contains(renderer)||IsFootprintKnown(position,false));
             float alpha=1;
             var cell=m_Ground.WorldToCell(position);
             if (!m_Fog.IsDisabled&&m_Fog.TryGetCellState(cell,out var state,out _)&&state!=FogCellState.Visible) alpha=.5f;
             renderer.color=new Color(1,1,1,alpha);
         }
+        RefreshAmbientVisibility();
     }
     public bool IsSiteDiscovered(int region)
     {
@@ -151,6 +156,8 @@ public sealed class ProceduralMapPresentation : MonoBehaviour
     void OnDestroy()
     {
         if(m_Fog!=null)m_Fog.OnFogUpdated-=RefreshVisibility;
+        foreach(var renderer in m_Decor)if(renderer!=null)Destroy(renderer.gameObject);
         foreach(var sprite in m_Sprites)if(sprite!=null)Destroy(sprite);
+        if(m_DetailAtlas!=null)Destroy(m_DetailAtlas);
     }
 }

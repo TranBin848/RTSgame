@@ -1,5 +1,7 @@
 # Kế hoạch sau S9 — cân bằng, hiệu năng và bản nộp khóa luận
 
+**Bổ sung 23/11:** yêu cầu mới về đồ họa và vòng ngày–đêm có [build plan E0–E10](../GameExperience/BuildPlan.md). UI graph đã được triển khai trong phạm vi giữ sáu tech, còn nghiệm thu thao tác/ảnh cuối. E8 đối chiếu G3, E10 đối chiếu G5/G6/G7; không thay kết quả hoặc trạng thái các gate G dưới đây bằng kế hoạch E.
+
 Ngày lập **18/11/2026**, cập nhật **21/11/2026**. G0–G2 DONE theo phạm vi từng gate. G3 đã chốt cấu hình chơi thử Hall 1200 HP và chờ phản hồi người chơi. G4 đã giảm spike managed allocation của navigation. G5 đã đo và kiểm Release, với budget onscreen còn mở. G6–G7 còn trong kế hoạch. [G01](G01-Validation.md) · [G2](G2-PressurePilot.md) · [G3](G3-EconomyExpansion.md) · [G4](G4-FrameProfiling.md) · [G5](G5-ReleaseOnscreen.md)
 
 Đây là đợt mới sau S0–S9/D0–D4 đã hoàn tất, không sửa lịch sử nghiệm thu cũ. Lượt lập kế hoạch chỉ đọc tài liệu/cấu hình/source và viết tài liệu; chưa đổi gameplay, chạy thử nghiệm, build hoặc thao tác Editor. Nguồn trạng thái hiện tại: [Progress](Progress.md), [S9 Acceptance](S9-Acceptance.md), [MatchFlow](../MatchFlow/Architecture.md), [D4 Validation](../DependencyInjection/D4-Validation.md).

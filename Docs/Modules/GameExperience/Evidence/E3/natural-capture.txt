@@ -1,0 +1,7 @@
+Natural clock capture: no phase/progress/definition injection; Editor GameView, fog on.
+natural-Day-before-Dusk: gameTime=58.2017, phase=Day, progress=0.970027, countdown=0, signals=0, knownGateways=0, lighting=0.0000, timeScale=1
+natural-Dusk-entry: gameTime=60.3140, phase=Dusk, progress=0.010177, countdown=30, signals=1, knownGateways=0, lighting=0.0003, timeScale=1
+PASS real menu pause2s: progress/countdown/cue unchanged, resumed without a second signal.
+natural-Dusk-mid: gameTime=75.0128, phase=Dusk, progress=0.500139, countdown=15, signals=1, knownGateways=0, lighting=0.5002, timeScale=1
+natural-Night-entry: gameTime=90.4624, phase=Night, progress=0.010060, countdown=0, signals=1, knownGateways=0, lighting=1.0000, timeScale=1
+PASS natural Day60→Dusk30→Night; one Dusk signal, countdown follows clock; timings unchanged. Capture ends at Night entry, not a full45s Night.

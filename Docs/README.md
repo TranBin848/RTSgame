@@ -1,5 +1,15 @@
 # Tài liệu kỹ thuật RTSgame2026
 
+**23/11 — E4 DONE phạm vi implementation/Editor:** [Ban ngày và bản sắc vùng, ảnh A/B và bằng chứng](Modules/GameExperience/E4-DaytimeRegions.md). Cụm cỏ/hoa/bụi/đất khô/sỏi, gợn nước/bướm; seed presentation riêng, fog footprint guard. Seed0/1/1543 tái tạo/hash gameplay, khai thác/nộp/xây/đi đường và lifecycle/legacy PASS;81/81 regression. E3 đã được xác nhận nghe chuông. Tiếp E5; chưa Player E4, G3/G5 giữ mở. Các checkpoint bên dưới là lịch sử.
+
+**23/11 — E3 đã triển khai và kiểm Editor:** [Hoàng hôn/cảnh báo, dữ liệu, ảnh tự nhiên và giới hạn](Modules/GameExperience/E3-DuskWarning.md). Chuông một lần/Dusk, countdown từ clock, marker chỉ gateway đã biết; pause/reload/RNG/fog PASS,81/81 regression. Timing60/30/45 giữ nguyên. Chưa nghe nghiệm thu hoặc đo Player E3; tiếp E4. Các dòng “tiếp E3” bên dưới là lịch sử.
+
+**23/11 — E2 đã kiểm chức năng và Player A/B:** [Ánh sáng đêm](Modules/GameExperience/E2-NightLighting.md),81/81 regression, GPU mask/tint, pool/death/unload/menu/legacy PASS; Release0lỗi/0cảnh báo. Hai cặp seed1 đạt gate p95+≤10%, candidate khoảng13.89ms với1đèn; không chứng nhận8đèn Player hoặc đóng G5. [E0 đã được nghiệm thu](Modules/GameExperience/Evidence/E0/Acceptance.md); tiếp E3. Các dòng E0/manual chờ bên dưới là lịch sử.
+
+**23/11 — E1 đã triển khai:** [palette Day/Dusk/Night, ownership và ảnh A/B](Modules/GameExperience/E1-ArtDirection.md). Candidate riêng ProceduralGame, clock giữ60/30/45; không double-tint quái/đạn. Integration, SampleScene legacy, reload và **81/81 EditMode PASS**. E0/manual drag vẫn mở; tiếp E2, chưa đo Player E1. Dòng kế hoạch dưới là checkpoint trước triển khai.
+
+**23/11 — kế hoạch trải nghiệm ngày/hoàng hôn/đêm:** [Game Experience Build Plan E0–E10](Modules/GameExperience/BuildPlan.md). Đợt A hoàn thiện UI/ánh sáng/môi trường/phản hồi; đợt B làm sâu mở rộng/wave và nghiệm thu Release. Đây là kế hoạch, chưa phải chức năng đã triển khai; giữ sáu tech hiện tại.
+
 **23/11 — giao diện cây công nghệ:** panel toàn màn hình, node gốc và ba nhánh, kéo/zoom, đọc state và gửi command qua service ECS hiện có. Giữ sáu tech. Xem [thiết kế, cách chạy và kiểm chứng](Modules/Progression/ResearchTreeUI.md).
 
 **21/11 — G5 đã đo Windows Release ở 1080p.** Smoke đạt 18/18. Ba trong bốn lượt đạt ngưỡng p95 16,67 ms. Kết quả frame, năm mẫu startup, chẩn đoán và giới hạn nằm trong [báo cáo G5](Modules/Progression/G5-ReleaseOnscreen.md).

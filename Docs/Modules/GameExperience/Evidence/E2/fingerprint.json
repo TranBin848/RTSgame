@@ -1,0 +1,118 @@
+{
+  "scope": "E2 Release candidate and source",
+  "files": [
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/StructureNightLighting.cs",
+      "sha256": "D48BEF93A620AA4E86EC9956AC791C44262D5FE06013FF5D53FA2A0CADB95D9B"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/NightGlow.shader",
+      "sha256": "EAB9A5511D0173CB44966151B38C03A5EE9EFC651308CCD81999BA5283DAC61A"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/NightGlow.mat",
+      "sha256": "25CE9FAA40EC3F9CFE000650BCF8BDC780A4C2687132ACBDDADA78BC4933B1A8"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/EnvironmentPresentation.asset",
+      "sha256": "C3C7F87FC15C980AC6E8CD78D518820661EC826E9368DE7668E25389F85050C2"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "CC847968D94ED3530600E0602AEDF5E41970C08E1EF90B39FA3561B509B86BFA"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/SwarmSmokeAutomation.cs",
+      "sha256": "316D8EAB4115510A2B6DAC0596AE652CA0044438AC741C95C41A52DC86A1116A"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Editor/ProceduralMapEditorTools.cs",
+      "sha256": "380B02937DE29DE28DF099D7F140CFEC63949EAC7B81D6D09D5F3A7490914AE3"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/DayNightCycleManager.cs",
+      "sha256": "175847986D93690EBE8406CD85A4DF7E5F6037F80B39CC7C05E6488BD2D7269F"
+    },
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "428A94FBBF03E5F97071BCA915A81AC29AF7FF50D0B8E71530FFB021EB29EBED"
+    },
+    {
+      "path": "Assets/Scenes/SampleScene.unity",
+      "sha256": "CA207397F013C84C147BC290D998647D6D2E19678A00D496969B911030B4FA4C"
+    },
+    {
+      "path": "Assets/Game/ScriptableObjects/Units/Definitions/DayNightCycleDefinition.asset",
+      "sha256": "556114451FF72A614B28698681E861CEEE76BFA551332ABC0A8EA8026AD73DD2"
+    },
+    {
+      "path": "Tools/ValidateGameExperienceE2.cs",
+      "sha256": "C9A9D02ACFC736C200863025943832723A7BB846064B14BDACE5E06ECAD9F29A"
+    },
+    {
+      "path": ".utmp/e2-release-2026-11-23/RTSgame2026.exe",
+      "sha256": "5BFB02293C482170C4D5035081245E45D69FE0F617FCC92A81E98ADEE13B945F"
+    },
+    {
+      "path": ".utmp/e2-release-2026-11-23/RTSgame2026_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "FE790D8AB4316816E30C61B1CA769BF2562EA21E64EA0A54A8DFC8290526DCF6"
+    },
+    {
+      "path": "Tools/RunE2Lighting.ps1",
+      "sha256": "0A4274F498E5FAF4504E941D1A642251DBE8C9B1FD8838731F9843EAD4C94D09"
+    },
+    {
+      "path": "Tools/SummarizeE2Lighting.mjs",
+      "sha256": "51E004E689729B19102E27BF0B9B99E99646AF04AD9811FF4550C0E3B284C864"
+    },
+    {
+      "path": "Tools/ValidateGameExperienceE2Lifecycle.cs",
+      "sha256": "6C7FA5BC63210443E11490963A50A0DC157A29CE06E300A8171B57F7C69CCBAF"
+    },
+    {
+      "path": ".utmp/e2-release-2026-11-23/RTSgame2026_Data/globalgamemanagers",
+      "sha256": "EB51D6FA9A9856107D7D720A2F0F4D57E5CEEAFAAF672BE8E05F0F7F5A35BF03"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\globalgamemanagers.assets",
+      "sha256": "4742155C9E1698647721763D1E159A545B45C45792A561FF709766BC686145D0"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\globalgamemanagers.assets.resS",
+      "sha256": "F2E891F1A2ECA090FD71651B299B57C89B6F16599AEE6DD338E290BA791E314B"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\resources.assets",
+      "sha256": "577294CD67AD3D774271ACBC967CAF39E27A558F91E46B61118BF6D14A70D9FA"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\resources.assets.resS",
+      "sha256": "264ED673F11D669802ECC32458DE2980C1DF23130B2119D867D15669A9CBC243"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\sharedassets0.assets",
+      "sha256": "F741288F21379A0457E5AA26A689DBA9975D40233AC77F6E71A7C93052013EE4"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\sharedassets0.assets.resS",
+      "sha256": "0B6D2A581D9ACA95DCABCD58BB48764C17BF75D034C80303015C2DAB68A0E90B"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\sharedassets1.assets",
+      "sha256": "F223B6F5F6E1B1A0489492172393244BDDB2483CACF3DF5253C223286392943D"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\sharedassets1.assets.resS",
+      "sha256": "C7288A5C13C1CF8494A948F05275B10A28F06D5EE5119B233F990B7C3ED4737D"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\sharedassets2.assets",
+      "sha256": "254EABAC516121B42CD6AA4C310E97963EC931B2286F1201919757544381FB4C"
+    },
+    {
+      "path": ".utmp\\e2-release-2026-11-23\\RTSgame2026_Data\\sharedassets3.assets",
+      "sha256": "CAC3BF01B9DCC3A2A7D69D8CF1518A50B13D8229A32D0E758410CFE5FABDE5E0"
+    }
+  ],
+  "date": "2026-11-23"
+}

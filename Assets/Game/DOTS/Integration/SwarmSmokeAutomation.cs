@@ -24,11 +24,15 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
     bool m_Onscreen;
     int m_OnscreenFrames, m_InvalidOnscreenFrames, m_ExtraTrainingAccepted;
     SwarmBenchmarkRecorder m_OnscreenRecorder;
+    StructureNightLighting m_NightLighting;
+    int m_PeakLocalLights, m_PeakGlowGroups;
     double m_LoadRequested;
     [Serializable] class Result
     {
         public string unity, cpu, gpu, scenario, csv;
         public int enemies, projectiles, hits, visible, drawCalls;
+        public bool e2LightingEnabled;
+        public int peakLocalLights, peakGlowGroups;
         public double lastTickMs;
         public string[] errors;
         public string cameraPosition;
@@ -120,6 +124,9 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
             }
             var root = FindFirstObjectByType<GameSceneCompositionRoot>();
             if (root == null || !root.IsReady) m_Errors.Add("Procedural composition did not become ready.");
+            m_NightLighting = root != null ? root.NightLighting : null;
+            if (m_Onscreen && m_NightLighting != null && Array.IndexOf(args, "--e2-lighting-off") >= 0)
+                m_NightLighting.enabled = false;
             var workers = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None);
             var trees = FindObjectsByType<Tree>(FindObjectsSortMode.None);
             var stones = FindObjectsByType<GoldStone>(FindObjectsSortMode.None);
@@ -218,6 +225,11 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
     }
     void LateUpdate()
     {
+        if (m_NightLighting != null)
+        {
+            m_PeakLocalLights = Mathf.Max(m_PeakLocalLights, m_NightLighting.ActiveLocalLights);
+            m_PeakGlowGroups = Mathf.Max(m_PeakGlowGroups, m_NightLighting.ActiveGlowGroups);
+        }
         if (m_OnscreenRecorder != null && m_OnscreenRecorder.Status == "recording")
         {
             m_OnscreenFrames++;
@@ -239,6 +251,8 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         result.renderSnapshots = simulation != null ? simulation.RenderData.Length : 0;
         result.cameraPosition = m_CaptureCamera != null ? m_CaptureCamera.transform.position.ToString() : "missing camera";
         result.offscreenRender = m_CaptureTarget != null;
+        result.e2LightingEnabled = m_NightLighting != null && m_NightLighting.enabled;
+        result.peakLocalLights = m_PeakLocalLights; result.peakGlowGroups = m_PeakGlowGroups;
         if (m_Progression)
         {
             result.scenario = "Procedural progression; natural first night; workers/research/training; offscreen world render";

@@ -1,0 +1,2 @@
+23/11/2026 — GameExperienceE2Validation.RunMaskProbe via Unity CLI, exit code 0.
+PASS GPU: visible half drawn, hidden half masked, SpriteRenderer warm tint applied.
