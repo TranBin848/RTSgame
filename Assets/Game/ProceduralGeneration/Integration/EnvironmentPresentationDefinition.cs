@@ -26,6 +26,9 @@ public sealed class EnvironmentPresentationDefinition : ScriptableObject
     [Range(.05f, 1)] public float TransitionFraction = .2f;
     [Header("Night lighting and VFX budgets")]
     public Material NightGlowMaterial;
+    [Header("E5 depth and contact presentation")]
+    public Material FootDepthMaterial;
+    public Material ContactShadowMaterial;
     public Color WarmEmissive = new(1, .64f, .28f);
     [Range(0, 8)] public int LocalLightBudget = 8;
     [Range(0, 128)] public int TransientVfxBudget = 32;

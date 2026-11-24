@@ -13,6 +13,8 @@ namespace RTS.DOTS
             public Sprite[] Idle, Move, Attack, Dead;
             public float FramesPerSecond = 10;
             public float Scale = 1;
+            [Tooltip("Render-only foot offset before visual scale; current Tiny Swords 192px frames have feet 32px below the pivot at64PPU.")]
+            public float FootOffset = -.5f;
             public bool RotateWithVelocity;
 
             public Sprite Frame(SwarmState state, float age, int offset)

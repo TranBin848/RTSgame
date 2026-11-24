@@ -93,7 +93,7 @@ namespace RTS.DOTS
                             if (Distance(body, depotBody) <= 0.55f)
                             {
                                 var wallet = Wallets[Wallet]; wallet.Add(worker.ResourceType, worker.Carried); Wallets[Wallet] = wallet;
-                                Events.Enqueue(new GameplayEvent { Kind = GameplayEventKind.Deposit, Entity = entity, Amount = worker.Carried, ResourceType = worker.ResourceType });
+                                Events.Enqueue(new GameplayEvent { Kind = GameplayEventKind.Deposit, Entity = entity, Amount = worker.Carried, ResourceType = worker.ResourceType, Position = depotBody.Position });
                                 worker.Carried = 0; worker.Timer = 0; worker.Depot = Entity.Null;
                                 worker.Phase = Resources.HasComponent(worker.Node) ? WorkPhase.Gathering : WorkPhase.None;
                                 if (worker.Phase == WorkPhase.Gathering) worker.ResourceType = Resources[worker.Node].Type;
@@ -131,6 +131,7 @@ namespace RTS.DOTS
                                     int amount = GameplaySimulationSystem.EffectiveGatherAmount(profile.Amount, profile.ResourceType == 0 ? WoodMultiplier : 1);
                                     int capacity = GameplaySimulationSystem.EffectiveGatherAmount(profile.Capacity, CargoMultiplier);
                                     worker.Carried = math.min(capacity, worker.Carried + amount);
+                                    Events.Enqueue(new GameplayEvent { Kind = GameplayEventKind.Gather, Entity = entity, Position = node.Position, ResourceType = worker.ResourceType });
                                     if (worker.Carried >= capacity)
                                     { worker.Phase = WorkPhase.Depositing; actor.Task = GameplayTask.ReturnResource; actor.State = GameplayState.Idle; worker.Timer = 0; }
                                 }

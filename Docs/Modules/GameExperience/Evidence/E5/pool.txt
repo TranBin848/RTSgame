@@ -1,0 +1,1 @@
+PASS pool return removes E5 material/property state and unbinds; same view reused in same scene, re-registered with foot shader, no stale roof fade.

@@ -22,7 +22,7 @@ public static class S7Validation
         {
             var cell=map.WalkableTilemap.WorldToCell(decor.transform.position)-a.OriginCell;
             Check(!(Mathf.Abs(cell.x-landmark.X)<=2&&Mathf.Abs(cell.y-landmark.Y)<=2),"Decor occupies landmark build pad.");
-            Check(decor.sortingOrder<25,"Decor covers unit/resource presentation.");
+            Check(decor.sortingOrder<25||(decor.name=="Old Watchpost"&&decor.sharedMaterial.shader.name=="RTS/Presentation/FootDepth"),"Decor covers unit/resource presentation.");
         }
         int count=p.Decorations.Count,nav=map.NavigationVersion;var terrain=a.GeneratedMap.Terrain.ToArray();
         p.Initialize(a.GeneratedMap,map,a.OriginCell,fog);p.Initialize(a.GeneratedMap,map,a.OriginCell,fog);

@@ -144,6 +144,7 @@ public sealed partial class SwarmGameBridge
         }
         foreach (var deleted in m_DeletedResources) UnregisterResource(deleted);
     }
+    public event System.Action<GameplayEvent> PresentationEvent;
     void SynchronizeGameplay()
     {
         if (Gameplay == null || Gameplay.World == null || !Gameplay.World.IsCreated) return;
@@ -162,6 +163,7 @@ public sealed partial class SwarmGameBridge
         }
         while (Gameplay.TryTakeEvent(out var evt))
         {
+            PresentationEvent?.Invoke(evt);
             if (evt.Kind == GameplayEventKind.TrainComplete && m_TrainingViews.Remove(evt.RequestId, out var request))
             {
                 using var sample = TrainingCompleteMarker.Auto();

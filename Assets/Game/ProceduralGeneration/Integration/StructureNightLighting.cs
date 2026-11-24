@@ -158,6 +158,10 @@ public sealed class StructureNightLighting : MonoBehaviour
     void CreateEmitter(StructureUnit owner)
     {
         var source = owner.SpriteRenderer;
+        var footCollider = owner.GetComponent<CapsuleCollider2D>() as Collider2D;
+        if(footCollider==null)foreach(var candidate in owner.GetComponents<Collider2D>())if(!candidate.isTrigger){footCollider=candidate;break;}
+        float half=footCollider is CapsuleCollider2D capsule?capsule.size.y*.5f:footCollider is BoxCollider2D box?box.size.y*.5f:0;
+        float footY=footCollider!=null?footCollider.transform.TransformPoint(footCollider.offset-Vector2.up*half).y:owner.transform.position.y;
         var group = new GameObject("Night light presentation"); group.SetActive(false); group.transform.SetParent(owner.transform, false);
         var bounds = source.bounds;
         Vector3 Point(float x, float y) => new(bounds.min.x + bounds.size.x * x, bounds.min.y + bounds.size.y * y, source.transform.position.z);
@@ -168,6 +172,7 @@ public sealed class StructureNightLighting : MonoBehaviour
             go.transform.localScale = new Vector3(scale.x, scale.y, 1);
             var sprite = go.AddComponent<SpriteRenderer>(); sprite.sprite = core ? m_CoreSprite : m_GlowSprite;
             sprite.sharedMaterial = m_RuntimeMaterial; sprite.sortingLayerID = source.sortingLayerID; sprite.sortingOrder = order;
+            var depth = new MaterialPropertyBlock(); depth.SetFloat("_NightFootY", footY); sprite.SetPropertyBlock(depth);
             glows.Add(sprite); return sprite;
         }
         void Lamp(string name, Vector3 position)

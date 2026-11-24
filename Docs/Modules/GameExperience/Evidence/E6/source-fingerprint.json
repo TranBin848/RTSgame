@@ -1,0 +1,55 @@
+{
+  "unity": "6000.3.11f1",
+  "date": "2026-11-24",
+  "scope": "source/config only; not a Player build",
+  "files": [
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/ActionFeedbackPresentation.cs",
+      "sha256": "8f581c1f6a81df179f32fa98152b15c674c7897312cf06110900941ec0c6e233"
+    },
+    {
+      "path": "Assets/Game/DOTS/Resources/E6Feedback.shader",
+      "sha256": "3d24642ce01dcfb76f2d3bce63c430a3307f1f289e37740bf2a3e31fc31666bc"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "e21029c7abc5a8513d853f2f8d35d89bdca59257763b728afb137ec5d31f0fbd"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameplayGameBridge.cs",
+      "sha256": "6789c0f3027ecc5adeff0f7140993f3b5c419c1eb7edb319a03e845548d449d7"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayComponents.cs",
+      "sha256": "5f86e2bb036216d76aa59f143ab20e5872d21ead40da7e129485b6f865aab432"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayEconomyJob.cs",
+      "sha256": "683d20f6090c334cc9a65a93c7218701366c65d155587179eb7b6abee3f5a6ff"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayResearch.cs",
+      "sha256": "29014380ae49382d6d434e0da821133ebdcbd69256787a0e6af2d63927ac6435"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmSimulationSystem.cs",
+      "sha256": "181072a11e61a0e33153e6d5cfdcc03d35fa54e7999b1fcd53e23814332e6d33"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/GameplaySimulationTests.cs",
+      "sha256": "69fd3d6ae3e4c7275bdc48177a8f4548764e84ce919bc26f8f3287ab396386f4"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/EnvironmentPresentation.asset",
+      "sha256": "85ea34c84f2e9374bd844b885ce8d8760d25789505f0842c4f1c363edda0266a"
+    },
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "428a94fbbf03e5f97071bca915a81ac29af7ff50d0b8e71530ffb021eb29ebed"
+    },
+    {
+      "path": "Tools/ValidateGameExperienceE6.cs",
+      "sha256": "a12b721862bfc5791f95e892085f84f4365ba4a1839241a8b002f6feebb4c882"
+    }
+  ]
+}

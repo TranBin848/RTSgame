@@ -1,5 +1,9 @@
 # Tài liệu kỹ thuật RTSgame2026
 
+**24/11 — E6 DONE phạm vi implementation/Editor:** [Phản hồi hit/khai thác/nộp kho, Cargo/Fortify và research](Modules/GameExperience/E6-ActionFeedback.md). Event authoritative, pool/buffer có trần, fog từng pixel;84/84 EditMode, GPU, pause/death/pool/destroy/reload/legacy PASS. Chưa Player/performance/nghiệm thu thẩm mỹ E6; tiếp E7, G3/G5 mở. Các checkpoint dưới là lịch sử.
+
+**24/11 — E5 DONE phạm vi implementation/Editor:** [Chiều sâu, contact shadows, mái/tán và evidence](Modules/GameExperience/E5-DepthOcclusion.md). Unified foot depth cho SpriteRenderer/native, mesh batch đúng sortingOrder của Renderer2D, ring ở chân và fade chỉ phần trên. GPU depth/fog/zoom/snap, route ba pha, nhóm96native, pool/pause/component/unload/reload/legacy và S7/E4 compatibility PASS;81/81 regression10.2861536s. Map hash v3/quota/clock giữ nguyên; chưa Player E5 hoặc nghiệm thu thẩm mỹ. Tiếp E6, G3/G5 vẫn mở; các checkpoint dưới là lịch sử.
+
 **23/11 — E4 DONE phạm vi implementation/Editor:** [Ban ngày và bản sắc vùng, ảnh A/B và bằng chứng](Modules/GameExperience/E4-DaytimeRegions.md). Cụm cỏ/hoa/bụi/đất khô/sỏi, gợn nước/bướm; seed presentation riêng, fog footprint guard. Seed0/1/1543 tái tạo/hash gameplay, khai thác/nộp/xây/đi đường và lifecycle/legacy PASS;81/81 regression. E3 đã được xác nhận nghe chuông. Tiếp E5; chưa Player E4, G3/G5 giữ mở. Các checkpoint bên dưới là lịch sử.
 
 **23/11 — E3 đã triển khai và kiểm Editor:** [Hoàng hôn/cảnh báo, dữ liệu, ảnh tự nhiên và giới hạn](Modules/GameExperience/E3-DuskWarning.md). Chuông một lần/Dusk, countdown từ clock, marker chỉ gateway đã biết; pause/reload/RNG/fog PASS,81/81 regression. Timing60/30/45 giữ nguyên. Chưa nghe nghiệm thu hoặc đo Player E3; tiếp E4. Các dòng “tiếp E3” bên dưới là lịch sử.

@@ -1,0 +1,8 @@
+PASS zero-current-visibility probe: existing selection emits0contacts/0rings/0faded occluders; visibility counts restored.
+PASS actual menu pause + Editor step: mono contact geometry and phase progress unchanged; resumed.
+PASS component-only teardown: all recorded E5/native contact IDs gone, fog listener removed, original materials/orders/property blocks restored; retained shared materials alive.
+PASS menu has no E5/old procedural context; loading new match.
+PASS new match: Ready/Day, one depth controller/one fog listener, native enabled, full fresh registry.
+PASS direct scene unload with E5 active: all owned controller/material/mesh/texture/view/native contact IDs gone; loading another match.
+PASS new match: Ready/Day, one depth controller/one fog listener, native enabled, full fresh registry.
+PASS SampleScene: no E5 controller, no native depth/contact mode, legacy palette path retained.

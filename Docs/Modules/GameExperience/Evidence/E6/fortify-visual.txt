@@ -1,0 +1,1 @@
+PASS explicit unlocked-state/real Tower visual probe after Editor frame: badgeCount=1, badgePosition=(-9.14, -4.70, 0.00), color=RGBA(1.000, 0.820, 0.350, 1.000), visible=True.

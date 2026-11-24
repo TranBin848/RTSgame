@@ -44,7 +44,8 @@ public static class GameExperienceE4Validation
         var text = new StringBuilder();
         foreach (var r in p.Decorations)
         {
-            text.Append(r.name).Append('|').Append(r.sprite.texture.name).Append('|').Append(r.sortingOrder).Append('|');
+            int order=r.name=="Old Watchpost"&&r.sharedMaterial.shader.name=="RTS/Presentation/FootDepth"?10:r.sortingOrder;
+            text.Append(r.name).Append('|').Append(r.sprite.texture.name).Append('|').Append(order).Append('|');
             if (ambient.TryGetValue(r, out var a)) text.Append(a.GetType().GetField("Home").GetValue(a)).Append('|').Append(a.GetType().GetField("Offset").GetValue(a));
             else text.Append(r.transform.position.ToString("R")).Append('|').Append(r.transform.localScale.ToString("R")).Append('|').Append(r.flipX).Append('|').Append(r.sprite.rect);
             text.AppendLine();

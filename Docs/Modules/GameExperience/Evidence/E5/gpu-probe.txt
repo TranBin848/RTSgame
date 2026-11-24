@@ -1,0 +1,2 @@
+PASS synthetic192x192 GPU: native-shader quad behind/front correctly depth tested against SpriteRenderer; upper fade leaves red=76/green=100 samples, lower body stays opaque; static visible/explored/unexplored per-pixel mask and mobile explored-only rejection. Uses real shaders via MeshRenderer quad, not a native simulation workload.
+PASS contact per-pixel fog mask, analytic ring; bilinear source texture stays sharp through point shader at ortho2/3/4;0.001world camera pan yields identical pixels after render-anchor snap.

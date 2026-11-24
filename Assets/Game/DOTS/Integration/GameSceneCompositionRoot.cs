@@ -23,6 +23,8 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
     public IResearchService Research { get; private set; }
     public StructureNightLighting NightLighting { get; private set; }
     public DuskWarningPresentation DuskWarning { get; private set; }
+    public WorldDepthPresentation DepthPresentation { get; private set; }
+    public ActionFeedbackPresentation ActionFeedback { get; private set; }
     SwarmGameBridge m_Bridge;
     SceneResourceNodeLocator m_Nodes;
     SceneResourceDepotLocator m_Depots;
@@ -108,12 +110,16 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         ComposePresentation(m_Game, m_Map, m_Fog, m_DayNight, m_Waves, m_Camera, m_Bridge);
         NightLighting = m_MapPresentation.gameObject.AddComponent<StructureNightLighting>();
         NightLighting.Initialize(m_Game, m_DayNight, m_Fog, m_Map, m_Camera.GetComponent<Camera>(), m_EnvironmentPresentation, m_Bridge.GetComponent<RTS.DOTS.SwarmInstancedRenderer>());
+        DepthPresentation = m_MapPresentation.gameObject.AddComponent<WorldDepthPresentation>();
+        DepthPresentation.Initialize(m_Game, m_DayNight, m_Fog, m_Camera.GetComponent<Camera>(), m_EnvironmentPresentation, m_Bridge.GetComponent<RTS.DOTS.SwarmInstancedRenderer>(), m_Generator.GeneratedResourceRoot, m_MapPresentation.Decorations);
         foreach (var sceneRoot in gameObject.scene.GetRootGameObjects())
         {
             var clockUi = sceneRoot.GetComponentInChildren<DayNightClockUI>(true);
             if (clockUi == null) continue;
             DuskWarning = clockUi.gameObject.AddComponent<DuskWarningPresentation>();
             DuskWarning.Initialize(m_DayNight, m_Waves, m_Generator, m_Fog, m_Camera.GetComponent<Camera>(), clockUi.GetComponentInParent<Canvas>());
+            ActionFeedback = m_MapPresentation.gameObject.AddComponent<ActionFeedbackPresentation>();
+            ActionFeedback.Initialize(m_Bridge, m_Game, m_Fog, m_Camera.GetComponent<Camera>(), Research, m_EnvironmentPresentation, clockUi.GetComponentInParent<Canvas>(), m_Bridge.GetComponent<RTS.DOTS.SwarmInstancedRenderer>());
             break;
         }
         if (DuskWarning == null) throw new InvalidOperationException("Procedural HUD requires a day/night clock for dusk warnings.");

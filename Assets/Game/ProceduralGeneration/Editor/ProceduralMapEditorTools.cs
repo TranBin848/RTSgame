@@ -156,9 +156,29 @@ public static class ProceduralMapEditorTools
         }
         refs.FindProperty("m_EnvironmentPresentation").objectReferenceValue = palette;
         ConfigureNightLighting(palette);
+        ConfigureDepthMaterials(palette);
         refs.FindProperty("m_Minimap").objectReferenceValue=Object.FindFirstObjectByType<MinimapFogUI>();
         refs.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(presentation);EditorUtility.SetDirty(root);
+    }
+
+    public static void ConfigureDepthMaterials(EnvironmentPresentationDefinition palette)
+    {
+        Material Get(string name)
+        {
+            string path = "Assets/Game/ProceduralGeneration/Settings/" + name + ".mat";
+            var material = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (material == null)
+            {
+                var shader = AssetDatabase.LoadAssetAtPath<Shader>("Assets/Game/ProceduralGeneration/Integration/" + name + ".shader");
+                if (shader == null) throw new System.InvalidOperationException("Missing E5 shader: " + name);
+                material = new Material(shader) { enableInstancing = true }; AssetDatabase.CreateAsset(material, path);
+            }
+            return material;
+        }
+        if (palette.FootDepthMaterial == null) palette.FootDepthMaterial = Get("FootDepth");
+        if (palette.ContactShadowMaterial == null) palette.ContactShadowMaterial = Get("ContactShadow");
+        EditorUtility.SetDirty(palette);
     }
 
     public static void ConfigureNightLighting(EnvironmentPresentationDefinition palette)

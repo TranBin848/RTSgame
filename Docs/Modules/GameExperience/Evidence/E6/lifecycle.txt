@@ -1,0 +1,5 @@
+PASS menu pause + Editor step freezes VFX color/age and toast/clock; resumed.
+PASS component-only destroy unsubscribes, stops/clears impact capture and destroys all owned glyphs/material/texture/160views/HUD; shared shader remains.
+PASS new match Ready with all feedback counters/badges/toast/pulses/unlocks reset and capture re-enabled.
+PASS explicit carried-state fixture: zero current fog hides badge, restore reveals; actual pool return/reuse same instance clears cargo without stale glyph.
+PASS direct unload with active consumer destroys owned objects and capture; SampleScene has no E6.

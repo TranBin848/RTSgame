@@ -18,6 +18,12 @@ namespace RTS.DOTS
         public Entity Source;
     }
 
+    public struct PresentationImpact
+    {
+        public float2 Position;
+        public int Faction;
+    }
+
     [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     public partial class SwarmSimulationSystem : SystemBase
     {
@@ -44,6 +50,10 @@ namespace RTS.DOTS
         Entity m_PrimaryTarget;
         static readonly ProfilerMarker TickMarker = new("RTS.DOTS.Tick");
         public bool Paused { get; set; }
+        readonly Queue<PresentationImpact> m_PresentationImpacts = new(256);
+        public bool CapturePresentationImpacts { get; set; }
+        public bool TryTakePresentationImpact(out PresentationImpact impact) => m_PresentationImpacts.TryDequeue(out impact);
+        public void ClearPresentationImpacts() => m_PresentationImpacts.Clear();
         bool MatchOver => World.GetExistingSystemManaged<GameplaySimulationSystem>()?.IsMatchOver == true;
         public double LastTickMilliseconds { get; private set; }
         public int AgentCount => m_Agents.CalculateEntityCount();
@@ -238,6 +248,7 @@ namespace RTS.DOTS
             Dependency.Complete();
             EntityManager.DestroyEntity(m_Agents); EntityManager.DestroyEntity(m_Projectiles);
             m_RenderData.Clear(); m_Grid.Clear(); m_Targets.Clear(); m_Damage.Clear(); m_Shots.Clear(); m_ExternalDamage.Clear();
+            m_PresentationImpacts.Clear();
             TotalSpawned = 0; TotalHits = 0;
             TickCount = 0; Generation++;
         }
@@ -300,6 +311,8 @@ namespace RTS.DOTS
             while (m_Damage.TryDequeue(out var hit))
             {
                 if (!TryGetBody(hit.Target, out var body) || body.Faction < 0) continue;
+                if (CapturePresentationImpacts && hit.Amount > 0 && m_PresentationImpacts.Count < 256)
+                    m_PresentationImpacts.Enqueue(new PresentationImpact { Position = body.Position, Faction = body.Faction });
                 m_DamageTotals.TryGetValue(hit.Target, out int previous);
                 m_DamageTotals[hit.Target] = previous + hit.Amount;
                 m_DamageSources.TryAdd(hit.Target, hit.Source);

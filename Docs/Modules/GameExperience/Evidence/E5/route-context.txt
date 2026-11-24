@@ -1,0 +1,14 @@
+E5 same four Move destinations in Day/Dusk/Night, actual ECS path movement ticked at0.05. Clock phase/progress set for presentation only, not natural transitions. Debug fog off for route visibility; extra tree bound as fixture; existing Hall. Camera1920x1080, ortho6.
+Day/Tree-behind: actual=(-8.74, -4.44, 0.00), target=(-8.14, -4.70, 0.00), travelSim=2.75s (arrival tolerance0.8world), namedTargetFade=1, faded=1, contacts=42, ring=1, stretch=1.00, localLights=0
+Day/Tree-front: actual=(-8.37, -7.53, 0.00), target=(-8.14, -7.70, 0.00), travelSim=1.75s (arrival tolerance0.8world), namedTargetFade=0, faded=0, contacts=42, ring=1, stretch=1.00, localLights=0
+Day/Hall-behind: actual=(-11.39, -0.44, 0.00), target=(-12.14, -0.40, 0.00), travelSim=3.50s (arrival tolerance0.8world), namedTargetFade=1, faded=1, contacts=42, ring=1, stretch=1.00, localLights=0
+Day/Hall-front: actual=(-10.49, -5.19, 0.00), target=(-11.14, -5.20, 0.00), travelSim=2.00s (arrival tolerance0.8world), namedTargetFade=0, faded=0, contacts=42, ring=1, stretch=1.00, localLights=0
+Dusk/Tree-behind: actual=(-8.74, -4.44, 0.00), target=(-8.14, -4.70, 0.00), travelSim=1.00s (arrival tolerance0.8world), namedTargetFade=1, faded=1, contacts=42, ring=1, stretch=1.80, localLights=1
+Dusk/Tree-front: actual=(-8.37, -7.53, 0.00), target=(-8.14, -7.70, 0.00), travelSim=1.75s (arrival tolerance0.8world), namedTargetFade=0, faded=0, contacts=42, ring=1, stretch=1.80, localLights=1
+Dusk/Hall-behind: actual=(-11.39, -0.44, 0.00), target=(-12.14, -0.40, 0.00), travelSim=3.50s (arrival tolerance0.8world), namedTargetFade=1, faded=1, contacts=42, ring=1, stretch=1.80, localLights=1
+Dusk/Hall-front: actual=(-10.49, -5.19, 0.00), target=(-11.14, -5.20, 0.00), travelSim=2.00s (arrival tolerance0.8world), namedTargetFade=0, faded=0, contacts=42, ring=1, stretch=1.80, localLights=1
+Night/Tree-behind: actual=(-8.74, -4.44, 0.00), target=(-8.14, -4.70, 0.00), travelSim=1.00s (arrival tolerance0.8world), namedTargetFade=1, faded=1, contacts=42, ring=1, stretch=1.00, localLights=1
+Night/Tree-front: actual=(-8.37, -7.53, 0.00), target=(-8.14, -7.70, 0.00), travelSim=1.75s (arrival tolerance0.8world), namedTargetFade=0, faded=0, contacts=42, ring=1, stretch=1.00, localLights=1
+Night/Hall-behind: actual=(-11.39, -0.44, 0.00), target=(-12.14, -0.40, 0.00), travelSim=3.50s (arrival tolerance0.8world), namedTargetFade=1, faded=1, contacts=42, ring=1, stretch=1.00, localLights=1
+Night/Hall-front: actual=(-10.49, -5.19, 0.00), target=(-11.14, -5.20, 0.00), travelSim=2.00s (arrival tolerance0.8world), namedTargetFade=0, faded=0, contacts=42, ring=1, stretch=1.00, localLights=1
+Fog restored after route; data-source fog mask remains enabled. Counts are camera/fixture observations, not FPS.

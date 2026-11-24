@@ -16,7 +16,7 @@ Shader "RTS/DOTS/SwarmSprite"
             TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
             TEXTURE2D(_SwarmFog); SAMPLER(sampler_SwarmFog);
             float4 _SwarmFogBounds, _SwarmLight;
-            float _SwarmFogEnabled;
+            float _SwarmFogEnabled, _SwarmPointSampling;
             UNITY_INSTANCING_BUFFER_START(Props)
                 UNITY_DEFINE_INSTANCED_PROP(float4, _UVRect)
                 UNITY_DEFINE_INSTANCED_PROP(float4, _InstanceColor)
@@ -29,6 +29,12 @@ Shader "RTS/DOTS/SwarmSprite"
                 Varyings o;
                 float3 world = TransformObjectToWorld(input.positionOS);
                 o.positionCS = TransformWorldToHClip(world);
+                if(_SwarmPointSampling>.5)
+                {
+                    float4 anchor=TransformWorldToHClip(TransformObjectToWorld(float3(0,0,0)));
+                    float2 pixel=anchor.xy/anchor.w*_ScreenParams.xy*.5;
+                    o.positionCS.xy+=(round(pixel)-pixel)*2/_ScreenParams.xy*o.positionCS.w;
+                }
                 float4 rect = UNITY_ACCESS_INSTANCED_PROP(Props, _UVRect);
                 o.uv = rect.xy + input.uv * rect.zw;
                 o.world = world.xy;
@@ -38,6 +44,7 @@ Shader "RTS/DOTS/SwarmSprite"
             half4 Frag(Varyings input) : SV_Target
             {
                 half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv) * input.color;
+                if (_SwarmPointSampling > .5) color = SAMPLE_TEXTURE2D(_MainTex, sampler_PointClamp, input.uv) * input.color;
                 if (_SwarmFogEnabled > 0.5)
                 {
                     float2 uv = (input.world - _SwarmFogBounds.xy) / max(_SwarmFogBounds.zw, 0.001);

@@ -17,6 +17,40 @@ namespace RTS.DOTS
         public Vector4 FogBounds { get; set; }
         public bool FogEnabled { get; set; }
         public Color EnvironmentColor { get; set; } = Color.white;
+        Material m_ContactMaterial;
+        Batch m_Contact;
+        Mesh m_ContactMesh;
+        MeshRenderer m_ContactView;
+        readonly Vector3[] m_ContactVertices = new Vector3[4092];
+        readonly Vector2[] m_ContactUvs = new Vector2[4092];
+        readonly int[] m_ContactIndices = new int[6138];
+        public float ContactStretch { get; set; } = 1;
+        public int ContactInstances { get; private set; }
+        public bool HasDepthPresentation => m_ContactMaterial != null;
+
+        public void SetDepthPresentation(Material contact)
+        {
+            if (m_ContactMaterial != null) Destroy(m_ContactMaterial);
+            m_ContactMaterial = contact != null ? new Material(contact) { enableInstancing = true } : null;
+            if(contact!=null&&m_ContactView==null)
+            {
+                var view=new GameObject("Native contact batch");view.transform.SetParent(transform,true);
+                m_ContactMesh=new Mesh{name="Native contact batch"};m_ContactMesh.MarkDynamic();view.AddComponent<MeshFilter>().sharedMesh=m_ContactMesh;
+                m_ContactView=view.AddComponent<MeshRenderer>();m_ContactView.sortingOrder=20;m_ContactView.shadowCastingMode=ShadowCastingMode.Off;m_ContactView.receiveShadows=false;
+                for(int i=0;i<1023;i++){int v=i*4,j=i*6;m_ContactUvs[v]=Vector2.zero;m_ContactUvs[v+1]=Vector2.right;m_ContactUvs[v+2]=Vector2.up;m_ContactUvs[v+3]=Vector2.one;m_ContactIndices[j]=v;m_ContactIndices[j+1]=v+2;m_ContactIndices[j+2]=v+1;m_ContactIndices[j+3]=v+2;m_ContactIndices[j+4]=v+3;m_ContactIndices[j+5]=v+1;}
+            }
+            if(m_ContactView!=null){m_ContactView.sharedMaterial=m_ContactMaterial;m_ContactView.enabled=false;}
+            if(contact==null)
+            {
+                if(m_ContactView!=null)Destroy(m_ContactView.gameObject);if(m_ContactMesh!=null)Destroy(m_ContactMesh);
+                m_ContactView=null;m_ContactMesh=null;
+            }
+            foreach (var batch in m_Batches.Values)
+            {
+                batch.Material.renderQueue = contact != null ? 3003 : 3001;
+                batch.Material.SetFloat("_SwarmPointSampling", contact != null ? 1 : 0);
+            }
+        }
 
         sealed class Batch
         {
@@ -37,6 +71,7 @@ namespace RTS.DOTS
 
         void Awake()
         {
+            m_Contact = new Batch();
             if (Library == null) Library = Resources.Load<SwarmVisualLibrary>("DOTS/SwarmVisualLibrary");
             var retainedMaterial = Resources.Load<Material>("DOTS/SwarmSprite");
             m_Shader = retainedMaterial != null ? retainedMaterial.shader : Shader.Find("RTS/DOTS/SwarmSprite");
@@ -85,11 +120,13 @@ namespace RTS.DOTS
             if (m_Batches.ContainsKey(texture) || m_Shader == null) return;
             var material = new Material(m_Shader) { name = "Swarm instanced sprites", enableInstancing = true };
             material.mainTexture = texture;
+            if (HasDepthPresentation) { material.renderQueue = 3003; material.SetFloat("_SwarmPointSampling", 1); }
             m_Batches.Add(texture, new Batch { Material = material });
         }
         void LateUpdate()
         {
-            VisibleInstances = 0; DrawCalls = 0;
+            VisibleInstances = 0; DrawCalls = 0; ContactInstances = 0; m_Contact.Count = 0;
+            if(m_ContactView!=null)m_ContactView.enabled=false;
             if (!DrawEntities || Simulation == null || Simulation.World == null || !Simulation.World.IsCreated || m_Shader == null || !SystemInfo.supportsInstancing) return;
             if (m_Camera == null) m_Camera = Camera.main;
             if (m_Camera == null) return;
@@ -108,11 +145,20 @@ namespace RTS.DOTS
                 if (!m_Batches.TryGetValue(frame.Texture, out var batch)) continue;
                 if (batch.Count == 1023) Flush(batch);
                 float scale = (visual?.Scale ?? 1) * (item.VisualScale > 0 ? item.VisualScale : 1);
+                float footY=item.Position.y+(visual?.FootOffset??0)*scale;
+                if (HasDepthPresentation && item.Projectile == 0 && item.State != SwarmState.Dead && ContactInstances<1023)
+                {
+                    float width = Mathf.Clamp(frame.Size.x * scale * .55f, .35f, 1.5f);
+                    int s = m_Contact.Count++;
+                    m_Contact.Matrices[s] = Matrix4x4.TRS(new Vector3(item.Position.x + (ContactStretch - 1) * .12f, footY, -.8f),
+                        Quaternion.Euler(0, 0, -20), new Vector3(width * ContactStretch, width * .32f, 1));
+                    ContactInstances++;
+                }
                 bool rotate = visual != null && visual.RotateWithVelocity;
                 float angle = item.Spinning != 0 ? item.Age * 720 : rotate ? math.degrees(math.atan2(item.Direction.y, item.Direction.x)) : 0;
                 float flip = !rotate && item.Direction.x < 0 ? -1 : 1;
                 Vector3 position = new(item.Position.x + frame.Center.x * flip * scale, item.Position.y + item.Height + frame.Center.y * scale,
-                    -1f + item.Position.y * 0.001f - (item.Projectile != 0 ? 0.1f : 0));
+                    -1f + (HasDepthPresentation&&item.Projectile==0?footY:item.Position.y) * 0.001f - (item.Projectile != 0 ? 0.1f : 0));
                 int n = batch.Count++;
                 batch.Matrices[n] = Matrix4x4.TRS(position, Quaternion.Euler(0, 0, angle), new Vector3(frame.Size.x * scale * flip, frame.Size.y * scale, 1));
                 batch.UV[n] = frame.UV;
@@ -122,6 +168,22 @@ namespace RTS.DOTS
                 VisibleInstances++;
             }
             foreach (var batch in m_Batches.Values) Flush(batch);
+            FlushContact();
+        }
+        void FlushContact()
+        {
+            if (m_Contact.Count == 0 || m_ContactMaterial == null) return;
+            for(int i=0;i<m_Contact.Count;i++)
+            {
+                var m=m_Contact.Matrices[i];int v=i*4;
+                m_ContactVertices[v]=m.MultiplyPoint3x4(new Vector3(-.5f,-.5f));m_ContactVertices[v+1]=m.MultiplyPoint3x4(new Vector3(.5f,-.5f));m_ContactVertices[v+2]=m.MultiplyPoint3x4(new Vector3(-.5f,.5f));m_ContactVertices[v+3]=m.MultiplyPoint3x4(new Vector3(.5f,.5f));
+            }
+            m_ContactMesh.Clear();m_ContactMesh.SetVertices(m_ContactVertices,0,m_Contact.Count*4);m_ContactMesh.SetUVs(0,m_ContactUvs,0,m_Contact.Count*4);m_ContactMesh.SetTriangles(m_ContactIndices,0,m_Contact.Count*6,0);m_ContactMesh.RecalculateBounds();
+            m_Contact.Properties.SetTexture("_ContactFog", FogTexture != null ? FogTexture : m_White);
+            m_Contact.Properties.SetVector("_ContactFogBounds", FogBounds);
+            m_Contact.Properties.SetFloat("_ContactFogEnabled", FogEnabled ? 1 : 0);
+            m_ContactView.SetPropertyBlock(m_Contact.Properties);m_ContactView.enabled=true;
+            m_Contact.Count = 0;
         }
         void Flush(Batch batch)
         {
@@ -138,6 +200,8 @@ namespace RTS.DOTS
         }
         void OnDestroy()
         {
+            if (m_ContactMaterial != null) Destroy(m_ContactMaterial);
+            if(m_ContactView!=null)Destroy(m_ContactView.gameObject);if(m_ContactMesh!=null)Destroy(m_ContactMesh);
             foreach (var batch in m_Batches.Values) if (batch.Material != null) Destroy(batch.Material);
             if (m_Quad != null) Destroy(m_Quad);
             if (m_White != null) Destroy(m_White);

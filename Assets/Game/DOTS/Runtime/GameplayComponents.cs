@@ -78,11 +78,12 @@ namespace RTS.DOTS
         }
     }
 
-    public enum GameplayEventKind : byte { Deposit, TrainComplete, ConstructionMiddle, ConstructionComplete }
+    public enum GameplayEventKind : byte { Deposit, TrainComplete, ConstructionMiddle, ConstructionComplete, Gather, ResearchComplete }
     public struct GameplayEvent
     {
         public GameplayEventKind Kind;
         public Entity Entity;
         public int RequestId, Amount, ResourceType;
+        public float2 Position;
     }
 }

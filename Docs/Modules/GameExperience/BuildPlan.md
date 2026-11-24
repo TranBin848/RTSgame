@@ -1,5 +1,9 @@
 # Build plan — trải nghiệm RTS ngày, hoàng hôn và đêm
 
+**24/11 — E6 DONE phạm vi implementation và kiểm Editor:** [report/ảnh/evidence](E6-ActionFeedback.md). Hit/dust/deposit/research, hàng mang Cargo và dấu Fortify; source authoritative, không replay snapshot, cap32pulse/128badge/256impact, giữ base profile/queue cũ/đạn đang bay.84/84 regression, GPU/fog/pause/death/pool/destroy/reload/legacy PASS. Chưa Player/performance/nghiệm thu thẩm mỹ E6; **tiếp E7**, G3/G5 vẫn mở. Các checkpoint dưới là lịch sử.
+
+**24/11 — E5 DONE phạm vi implementation và kiểm Editor:** [report/ảnh/GPU/lifecycle](E5-DepthOcclusion.md). Route native qua cây/Hall trong3pha, nhóm96native, pool/pause/destroy/unload/reload/legacy, S7/E4 compatibility và81/81 regression PASS. Không dịch collider/pivot hoặc đổi Core/gameplay/clock. Chưa Player/performance/manual thẩm mỹ E5; tiếp E6. Dòng “tiếp E5” ngày23/11 dưới đây là lịch sử; G3/G5 vẫn mở.
+
 Ngày lập: **23/11/2026**. Cập nhật triển khai cùng ngày: **E0 được người dùng nghiệm thu** (“E0 tôi đã test và thấy oke”), xem [checkpoint](Evidence/E0/Acceptance.md); **E1 DONE phạm vi palette/ownership và kiểm Editor**, xem [báo cáo/ảnh A/B](E1-ArtDirection.md); **E2 DONE phạm vi chức năng và Player A/B seed1 đã đo**, xem [báo cáo/giới hạn](E2-NightLighting.md); **E3 DONE phạm vi implementation/Editor**, [người dùng đã nghe chuông](Evidence/E3/AudioAcceptance.md); **E4 DONE phạm vi implementation/Editor trên3seed**, xem [report/ảnh/hash](E4-DaytimeRegions.md). Tiếp E5. Các mô tả công việc bên dưới là hợp đồng, không tự chứng nhận kết quả.
 
 ## 1. Mục tiêu và phạm vi
@@ -104,6 +108,8 @@ Triển khai từng mốc có thể chạy và kiểm riêng. Nếu mốc chưa 
 **Nghiệm thu:** cùng seed tái tạo decor ổn định; đổi presentation không đổi hash dữ liệu map gameplay. Seed 0/1/1543 vẫn khai thác/xây/đi đường được, site chưa khám phá không lộ. Nền ít lặp hơn và vùng đọc được từ cảnh thực; không phủ chi tiết lên mọi ô.
 
 ### E5 — chiều sâu và che khuất
+
+**Trạng thái24/11: DONE phạm vi implementation/Editor**, xem [E5 evidence và giới hạn](E5-DepthOcclusion.md). Foot depth, contact mesh batches, upper-only coverage40%, ring tại chân, fog/point/snap;12ảnh cùng route Move qua cây/Hall và named fade1sau/0trước trong3pha. GPU probes/group96/pool/pause/component/direct-unload/new-match/legacy và81regression đạt; E2 glow còn đúng. Chưa đo Player E5 hoặc nghiệm thu thẩm mỹ. Tiếp E6, không đóng G3/G5.
 
 **Công việc:** bóng tiếp xúc cho quân/cây/công trình, thử bóng dài hơn ở Dusk; sorting theo chân; cây/mái che quân đang chọn mờ vừa phải. Chuẩn hóa material/filter và kiểm camera zoom để tránh blur hoặc rung pixel.
 

@@ -26,6 +26,8 @@ MonoBehaviour:
     Vignette: 0.22
   TransitionFraction: 0.2
   NightGlowMaterial: {fileID: 2100000, guid: db75c369483a2164b8c5616ce1927218, type: 2}
+  FootDepthMaterial: {fileID: 2100000, guid: 3d7546d228ec4444f8153d2732a045cd, type: 2}
+  ContactShadowMaterial: {fileID: 2100000, guid: 8637cb0fadd78e342837123bde199f8a, type: 2}
   WarmEmissive: {r: 1, g: 0.64, b: 0.28, a: 1}
   LocalLightBudget: 8
   TransientVfxBudget: 32

@@ -1,0 +1,13 @@
+E6 actual Editor/ProceduralGame fixture. ECS timers accelerated explicitly; not natural clock/performance.
+PASS repeated Initialize/listener=1; 20 snapshots no event replay/material growth/RNG/wallet/tick changes.
+PASS authoritative gather once + carried badge, deposit once amount=1, wallet +1, badge cleared.
+PASS QueueDamage7 -> HP -7, one impact; repeated snapshots and paused delta10 preserve ages/count.
+PASS completion economy_tools treeOpen=True text=RESEARCH COMPLETE · Improved gathering tools
+PASS completion economy_cargo treeOpen=False text=RESEARCH COMPLETE · Larger carrying loads
+PASS completion military_archery treeOpen=True text=UNLOCKED · Archery Range and Archers
+PASS completion military_training treeOpen=False text=RESEARCH COMPLETE · Faster training for new orders
+PASS completion expansion_tower treeOpen=True text=UNLOCKED · Outposts / defensive towers
+PASS completion expansion_fortify treeOpen=False text=RESEARCH COMPLETE · Fortified tower shots
+PASS base gather profiles unchanged; queued500 duration unchanged; in-flight damage17 unchanged.
+PASS real bound Tower after Fortify + Cargo .32 badge; dead Tower immediately removes its badge.
+PASS 300 hits -> HP -300, bridge impact cap256, active pulses 32/32, visual drops 234.

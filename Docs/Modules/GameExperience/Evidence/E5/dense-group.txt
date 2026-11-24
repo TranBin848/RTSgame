@@ -1,0 +1,1 @@
+PASS dense synthetic group in real scene:96 stationary zero-damage native enemies; native contacts=98, renderedInstances=98, selected rings=4, body contacts=42. Test-only spawn; not workload/performance acceptance.

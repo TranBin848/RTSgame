@@ -110,6 +110,7 @@ namespace RTS.DOTS
             int index = FindTechnology(id);
             return index >= 0 && (Research.UnlockMask & (1u << index)) != 0;
         }
+        public string GetTechnologyId(int index) => m_ResearchCatalog != null && index >= 0 && index < m_ResearchCatalog.Length ? m_ResearchCatalog[index].Id : null;
         public ResearchResult StartResearch(string id, Entity townHall)
         {
             Dependency.Complete();
@@ -153,6 +154,8 @@ namespace RTS.DOTS
                 if (state.Elapsed >= duration)
                 {
                     state.Active = 0; state.UnlockMask |= 1u << state.Technology;
+                    m_Events.Enqueue(new GameplayEvent { Kind = GameplayEventKind.ResearchComplete, Entity = state.TownHall,
+                        RequestId = state.Technology, Position = EntityManager.GetComponentData<CombatBody>(state.TownHall).Position });
                     if (m_ResearchCatalog[state.Technology].Id == EconomyToolsId) state.Unlocked = 1;
                     state.TownHall = Entity.Null;
                 }

@@ -31,6 +31,7 @@ public sealed class ProceduralMapAuthoring : MonoBehaviour
     public int GatewayCount => IsReady && GeneratedMap.Layout != null ? GeneratedMap.Layout.Gateways.Length : 0;
     Vector3Int m_Origin;
     public Vector3Int OriginCell => m_Origin;
+    public Transform GeneratedResourceRoot => m_GeneratedResourceRoot;
     public double BuildStartedRealtime { get; private set; }
     public double CoreMilliseconds { get; private set; }
     public double TerrainMilliseconds { get; private set; }

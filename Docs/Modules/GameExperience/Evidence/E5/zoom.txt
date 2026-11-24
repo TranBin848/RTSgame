@@ -1,0 +1,1 @@
+Captured actual scene at1920x1080, ortho4/6/8, same frozen camera center/Night/dense group. Point sampling and render anchor pixel snapping; physical transforms unchanged.

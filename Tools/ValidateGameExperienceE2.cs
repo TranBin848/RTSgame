@@ -133,6 +133,7 @@ public static class GameExperienceE2Validation
             camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = Color.black;
             var renderer = spriteObject.AddComponent<SpriteRenderer>(); renderer.sprite = sprite; renderer.sharedMaterial = material;
             renderer.color = new Color(1, .25f, .05f, 1);
+            var depth = new MaterialPropertyBlock(); depth.SetFloat("_NightFootY", 0); renderer.SetPropertyBlock(depth);
             spriteObject.transform.localScale = Vector3.one * 2;
             mask.SetPixels(new[] { Color.white, Color.black }); mask.Apply();
             material.SetTexture("_NightFog", mask); material.SetVector("_NightFogBounds", new Vector4(-1, -1, 2, 2)); material.SetFloat("_NightFogEnabled", 1);

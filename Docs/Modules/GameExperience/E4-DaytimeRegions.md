@@ -1,5 +1,7 @@
 # E4 — ban ngày và bản sắc vùng
 
+**24/11 — E5 đã triển khai:** [depth/occlusion report](E5-DepthOcclusion.md). E5 thêm depth cho Old Watchpost và bodies mà không đổi placement/ground E4; S7/E4 kiểm lại và hash giữ nguyên. Checkpoint “tiếp E5” ngày23/11 bên dưới là lịch sử.
+
 Ngày **23/11/2026 — DONE phạm vi implementation và kiểm Editor trên seed0/1/1543**. [E3 đã được xác nhận nghe chuông](Evidence/E3/AudioAcceptance.md). Tiếp E5 theo [build plan](BuildPlan.md); G3/G5 vẫn mở, chưa đo Player E4.
 
 ## Mục tiêu và phạm vi

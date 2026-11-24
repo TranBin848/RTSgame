@@ -1,5 +1,9 @@
 # Kiến trúc DOTS cho AI quái vật, đạn và mô phỏng Swarm
 
+**24/11 — E6 impact presentation:** [report](../GameExperience/E6-ActionFeedback.md). ApplyDamage ghi position/faction của hit Amount > 0 vào managed queue main-thread tối đa256, chỉ khi consumer bật capture. Không đổi damage accumulation, target hoặc projectile snapshot; queue đầy chỉ bỏ hình ảnh. Reset/consumer destroy xóa queue; Integration sở hữu consumer/VFX, RTS.DOTS không tham chiếu gameplay MonoBehaviour.84/84 EditMode, burst300hit vẫn −300HP và lifecycle/legacy PASS; chưa Player/performance E6.
+
+**24/11 — E5 presentation:** [Depth/occlusion và kiểm chứng](../GameExperience/E5-DepthOcclusion.md). SwarmInstancedRenderer nhận optional Material/contact stretch, giữ sprite instancing và thêm một contact mesh batch order20 tối đa1023quad. Visual.FootOffset là metadata render, chỉ dùng khi mode E5 bật; point/pixel snap và depth theo chân kết hợp SpriteRenderer tại Integration. Không đổi component/job/simulation AI, damage hoặc navigation; RTS.DOTS không tham chiếu Unit/GameManager. Khi không được cấp material E5, legacy queue/sampling/depth giữ đường cũ. GPU/real scene group96/pool/unload/legacy và81regression đã kiểm, chưa Player E5/G5.
+
 Để định hướng phát triển tiếp, đọc [Tech Overview](../../TechnicalOverview.md) và [DOTS Development Guide](DevelopmentGuide.md). Tài liệu này tập trung vào thuật toán/runtime Swarm; phần gameplay RTS nằm trong [DOTS Gameplay](../DOTSGameplay/Architecture.md).
 
 ## 1. Bối cảnh và mục tiêu

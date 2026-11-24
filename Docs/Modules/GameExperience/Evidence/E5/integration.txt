@@ -1,0 +1,1 @@
+PASS E5 root/repeat init; registry=158, native enabled; one fog listener; no materials added over20refreshes; foot depth property matches render anchor; contacts=33<=512; no ghost rings; Dusk midpoint stretch1.8; actor transforms/scales, wallet/actors/ticks/nav/RNG unchanged;3shaders no compile errors.

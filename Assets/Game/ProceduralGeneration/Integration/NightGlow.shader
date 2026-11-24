@@ -3,7 +3,7 @@ Shader "RTS/Presentation/NightGlow"
     Properties { [PerRendererData] _MainTex("Sprite", 2D) = "white" {} }
     SubShader
     {
-        Tags { "Queue"="Transparent" "RenderType"="Transparent" "RenderPipeline"="UniversalPipeline" }
+        Tags { "Queue"="Transparent+4" "RenderType"="Transparent" "RenderPipeline"="UniversalPipeline" }
         Cull Off ZWrite Off Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
@@ -16,7 +16,7 @@ Shader "RTS/Presentation/NightGlow"
             TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
             TEXTURE2D(_NightFog); SAMPLER(sampler_NightFog);
             float4 _NightFogBounds;
-            float _NightFogEnabled;
+            float _NightFogEnabled, _NightFootY;
             struct Attributes { float3 positionOS : POSITION; float2 uv : TEXCOORD0; half4 color : COLOR; UNITY_VERTEX_INPUT_INSTANCE_ID };
             struct Varyings { float4 positionCS : SV_POSITION; float2 uv : TEXCOORD0; float2 world : TEXCOORD1; half4 color : COLOR; };
             Varyings Vert(Attributes input)
@@ -26,6 +26,7 @@ Shader "RTS/Presentation/NightGlow"
                 input.positionOS = UnityFlipSprite(input.positionOS, unity_SpriteProps.xy);
                 Varyings o;
                 float3 world = TransformObjectToWorld(input.positionOS);
+                world.z = -1 + _NightFootY * .001 - .00015;
                 o.positionCS = TransformWorldToHClip(world); o.world = world.xy; o.uv = input.uv; o.color = input.color * unity_SpriteColor;
                 return o;
             }

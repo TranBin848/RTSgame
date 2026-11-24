@@ -50,6 +50,54 @@ namespace RTS.DOTS.Tests
         Entity Enemy(float2 position)
         { var settings = EnemySpawnSettings.Default; settings.Speed = 0; settings.Damage = 0; return m_Combat.SpawnEnemy(position, settings); }
 
+        [Test] public void FeedbackGatherAndDepositEventsFollowAuthoritativeTransactionsOnce()
+        {
+            var worker = Actor(GameplayKind.Worker, new float2(10));
+            var node = Resource(new float2(10.4f, 10));
+            var hall = Building(new float2(10, 10.4f));
+            Assert.That(m_Gameplay.AssignResource(worker, node), Is.True);
+            Tick(40);
+            int gathers = 0, deposits = 0, income = 0;
+            while (m_Gameplay.TryTakeEvent(out var evt))
+            {
+                if (evt.Kind == GameplayEventKind.Gather) { gathers++; Assert.That(evt.Position, Is.EqualTo(new float2(10.4f, 10))); }
+                if (evt.Kind == GameplayEventKind.Deposit) { deposits++; income += evt.Amount; Assert.That(evt.Position, Is.EqualTo(new float2(10, 10.4f))); }
+            }
+            Assert.That(gathers, Is.GreaterThan(0)); Assert.That(deposits, Is.GreaterThan(0));
+            Assert.That(m_Gameplay.Wallet.Wood, Is.EqualTo(income));
+            Assert.That(m_Gameplay.TryTakeEvent(out _), Is.False);
+            m_Combat.Paused = true; Tick(20); Assert.That(m_Gameplay.TryTakeEvent(out _), Is.False);
+        }
+
+        [Test] public void FeedbackResearchCompletionOnceAndHallDeathDoesNotComplete()
+        {
+            ConfigureResearch(); var hall = Building(new float2(15)); m_Gameplay.AddResources(100, 100, 0);
+            Assert.That(m_Gameplay.StartResearch(GameplaySimulationSystem.EconomyToolsId, hall), Is.EqualTo(ResearchResult.Started));
+            Tick(30); int count = 0;
+            while (m_Gameplay.TryTakeEvent(out var evt)) if (evt.Kind == GameplayEventKind.ResearchComplete)
+            { count++; Assert.That(evt.Entity, Is.EqualTo(hall)); Assert.That(m_Gameplay.GetTechnologyId(evt.RequestId), Is.EqualTo(GameplaySimulationSystem.EconomyToolsId)); }
+            Assert.That(count, Is.EqualTo(1)); Assert.That(m_Gameplay.Wallet.Wood, Is.EqualTo(60));
+            Tick(30); Assert.That(m_Gameplay.TryTakeEvent(out _), Is.False);
+            m_Gameplay.ResetGameplay(); m_Combat.ResetSimulation();
+            ConfigureResearch(1); hall = Building(new float2(15)); m_Gameplay.AddResources(100, 100, 0);
+            m_Gameplay.StartResearch(GameplaySimulationSystem.EconomyToolsId, hall);
+            var body = EM.GetComponentData<CombatBody>(hall); body.Health = 0; EM.SetComponentData(hall, body);
+            Tick(90); Assert.That(m_Gameplay.TryTakeEvent(out _), Is.False); Assert.That(m_Gameplay.Research.UnlockMask, Is.Zero);
+        }
+
+        [Test] public void FeedbackImpactsFollowHitsWithoutAddingDamageAndResetClearsThem()
+        {
+            m_Combat.CapturePresentationImpacts = true;
+            var enemy = Enemy(new float2(10.8f, 10));
+            for (int i = 0; i < 3; i++) m_Combat.QueueDamage(enemy, 10);
+            Tick(); int impacts = 0;
+            while (m_Combat.TryTakePresentationImpact(out var impact)) { impacts++; Assert.That(impact.Faction, Is.EqualTo(1)); }
+            Assert.That(impacts, Is.GreaterThan(0)); Assert.That(impacts, Is.EqualTo(m_Combat.TotalHits));
+            Assert.That(EM.GetComponentData<CombatBody>(enemy).Health, Is.EqualTo(100 - 10 * impacts));
+            Assert.That(m_Combat.TryTakePresentationImpact(out _), Is.False);
+            m_Combat.QueueDamage(enemy, 1); Tick(); m_Combat.ResetSimulation(); Assert.That(m_Combat.TryTakePresentationImpact(out _), Is.False);
+        }
+
         void ConfigureResearch(float duration = 0.05f)
             => m_Gameplay.ConfigureResearch(new ResearchDefinition { Wood = 40, Gold = 15, Duration = duration, WoodMultiplier = 1.25f });
 

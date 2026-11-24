@@ -1,0 +1,46 @@
+{
+  "unity": "6000.3.11f1",
+  "files": [
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/WorldDepthPresentation.cs",
+      "sha256": "39823668a389680606c67fe7ae21a56f8ab7457902fc4d7f815572f29ae67fc2"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/FootDepth.shader",
+      "sha256": "a2fae803efc619b14d50324f53fa551a61287c42788f3fb24d6b4f9573917806"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/ContactShadow.shader",
+      "sha256": "8086d6cd209b07ba0fdeb964c983a12ff1681fd7f570befde92c2f619ea63e62"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/NightGlow.shader",
+      "sha256": "2a8f8eb881712fd338c549a26e20d88ddba3544fd716cf10c3f3a507ca2776f2"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmInstancedRenderer.cs",
+      "sha256": "0853b7f03d680ef3a988e177c8b185fc8ac7daa132cbd817d495615c15cb8a02"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmVisualLibrary.cs",
+      "sha256": "33049952ab712a5a3ccc5d4843a6ff7a93ab461ead34a308ab1516314379f859"
+    },
+    {
+      "path": "Assets/Game/DOTS/Resources/DOTS/SwarmSprite.shader",
+      "sha256": "be8234df0598bd74ae1f1f17318b36bcd47b71882fbe1667c7a2fba5bc396a26"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "56857cd84bf1702a56ba8215f58532230c799c5269f0d44e4dfbd9c0de716dd6"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/StructureNightLighting.cs",
+      "sha256": "d2613e27c8864e818bbc36350053cce29d0ed1b11236bbbf6dc6ce5c6d54b031"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/EnvironmentPresentation.asset",
+      "sha256": "85ea34c84f2e9374bd844b885ce8d8760d25789505f0842c4f1c363edda0266a"
+    }
+  ],
+  "scope": "E5 final Editor source/config, not a Player build"
+}
