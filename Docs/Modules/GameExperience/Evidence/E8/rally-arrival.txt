@@ -1,0 +1,1 @@
+PASS group rally actual ECS movement: accepted=1, steps=17, start=float2(-15.14f, -6.2f), destination=float2(-12.5f, -6.5f), final=float2(-12.87978f, -6.4588f), error=0.38201. No body/transform relocation performed by this check.

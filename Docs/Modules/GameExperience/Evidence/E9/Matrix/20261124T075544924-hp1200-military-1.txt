@@ -1,0 +1,429 @@
+initialTownHallRange=14.13
+schema=E9-G3-derived;hallMax=1200;runId=20261124T075544924-hp1200-military-1;configId=E9-candidate76-v1-hp1200;mapSeed=1;waveSeed=8001;policy=military;dt=.05;noResourceGrant;objective=5nights
+resolved={"hallMax":1200,"hallCurrent":1200,"entityHealth":1200.0,"initial":{"Wood":100,"Gold":100,"Meat":100},"units":[{"name":"Archer","MaxHealth":100,"CurrentHealth":100,"position":[-10.04,5.55],"entity":"Entity(882:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[23.5,-14.5],"entity":"Entity(883:17)"},{"name":"Worker","MaxHealth":20,"CurrentHealth":20,"position":[-16.01,-1.18],"entity":"Entity(884:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-61.5,-31.5],"entity":"Entity(885:17)"},{"name":"Worker (2)","MaxHealth":20,"CurrentHealth":20,"position":[-9.33,-1.42],"entity":"Entity(887:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-72.5,-41.5],"entity":"Entity(888:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-23.5,-4.5],"entity":"Entity(889:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-42.5,-46.5],"entity":"Entity(890:17)"},{"name":"ArcheryRange","MaxHealth":100,"CurrentHealth":100,"position":[-5.72913933,-13.49573],"entity":"Entity(891:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-21.5,-1.5],"entity":"Entity(892:19)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-1.5,-36.5],"entity":"Entity(893:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[25.5,0.5],"entity":"Entity(894:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[34.5,-52.5],"entity":"Entity(895:21)"},{"name":"Worker (1)","MaxHealth":20,"CurrentHealth":20,"position":[-13.86,-6.97],"entity":"Entity(896:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-20.5,-7.5],"entity":"Entity(897:17)"},{"name":"TownHall","MaxHealth":1200,"CurrentHealth":1200,"position":[-12.14,-3.2],"entity":"Entity(898:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[13.5,42.5],"entity":"Entity(899:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-19.5,-56.5],"entity":"Entity(900:19)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-9.5,-11.5],"entity":"Entity(901:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-58.5,-55.5],"entity":"Entity(902:19)"},{"name":"Barrack","MaxHealth":100,"CurrentHealth":100,"position":[-23.8027611,-3.454832],"entity":"Entity(904:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-20.5,-4.5],"entity":"Entity(905:23)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-42.5,-36.5],"entity":"Entity(906:23)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-22.5,-2.5],"entity":"Entity(907:17)"},{"name":"Sheep(Clone)","MaxHealth":20,"CurrentHealth":20,"position":[-43.5,-42.5],"entity":"Entity(908:17)"}],"tech":[{"Id":"military_archery","Prerequisite":"","Wood":50,"Gold":30,"Meat":10,"Duration":25.0,"WoodMultiplier":1.0,"CargoMultiplier":0.0,"TrainingMultiplier":0.0,"TowerMultiplier":0.0},{"Id":"military_training","Prerequisite":"military_archery","Wood":80,"Gold":60,"Meat":20,"Duration":35.0,"WoodMultiplier":1.0,"CargoMultiplier":0.0,"TrainingMultiplier":0.8,"TowerMultiplier":0.0},{"Id":"economy_tools","Prerequisite":null,"Wood":40,"Gold":15,"Meat":0,"Duration":20.0,"WoodMultiplier":1.25,"CargoMultiplier":0.0,"TrainingMultiplier":0.0,"TowerMultiplier":0.0},{"Id":"economy_cargo","Prerequisite":"economy_tools","Wood":80,"Gold":30,"Meat":0,"Duration":30.0,"WoodMultiplier":1.0,"CargoMultiplier":1.5,"TrainingMultiplier":0.0,"TowerMultiplier":0.0},{"Id":"expansion_tower","Prerequisite":"","Wood":60,"Gold":25,"Meat":0,"Duration":25.0,"WoodMultiplier":1.0,"CargoMultiplier":0.0,"TrainingMultiplier":0.0,"TowerMultiplier":0.0},{"Id":"expansion_fortify","Prerequisite":"expansion_tower","Wood":100,"Gold":60,"Meat":0,"Duration":40.0,"WoodMultiplier":1.0,"CargoMultiplier":0.0,"TrainingMultiplier":0.0,"TowerMultiplier":1.25}],"durations":[60.0,30.0,45.0]}
+schedule day=1;quota=12;eligibleSlots=12;interval=2.2;delay=8;night=45
+schedule day=2;quota=15;eligibleSlots=15;interval=1.9;delay=8;night=45
+schedule day=3;quota=15;eligibleSlots=15;interval=1.7;delay=7;night=45
+schedule day=4;quota=16;eligibleSlots=16;interval=1.6;delay=6;night=45
+schedule day=5;quota=18;eligibleSlots=18;interval=1.25;delay=5;night=45
+army firstSeen=0.00;entity=Entity(882:17);position=float2(-10.08161f, 5.56189f);range=5;detection=4
+enemy firstSeen=0.00;entity=Entity(886:17);pos=float2(2.799982f, -2.299398f);visual=1;state=Retreating;initial=True
+enemy firstSeen=0.00;entity=Entity(903:25);pos=float2(1.326337f, 1.202071f);visual=0;state=Retreating;initial=True
+t=0.00;day=1;phase=Day;W/G/M=100/100/100;workers=3;soldiers=1;hallHP=1200.0;spawned=0
+army firstSeen=8.00;entity=Entity(748:113);position=float2(-25.70518f, -5.904453f);range=1;detection=3
+army atHallLine=14.75;entity=Entity(748:113);sinceRally=6.75;position=float2(-10.5f, -6.9f);target=Entity.Null
+army firstSeen=18.00;entity=Entity(749:113);position=float2(-26.33062f, -5.611914f);range=1;detection=3
+delivery t=23.35;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=2.05;destination=hall
+army atHallLine=24.05;entity=Entity(749:113);sinceRally=6.05;position=float2(-14.48042f, -6.201283f);target=Entity.Null
+delivery t=25.95;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=3.45;destination=hall
+actor t=30;entity=Entity(748:113);kind=Soldier;pos=float2(-10.13418f, -5.23794f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=30;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=30;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=30;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":4,"Timer":0.4000005}
+actor t=30;entity=Entity(887:17);kind=Worker;pos=float2(-4.8f, -6.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=30;entity=Entity(896:17);kind=Worker;pos=float2(-19.32283f, -5.942915f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":0,"Timer":0.5500001}
+actor t=30;entity=Entity(747:113);kind=Worker;pos=float2(-25.2f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=0;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":1,"Timer":0.7000002}
+delivery t=32.25;node=Entity(793:17);nodePosition=float2(2.519844f, -9.459081f);type=1;amount=20;seconds=5.55;destination=hall
+delivery t=47.55;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=1.95;destination=hall
+delivery t=51.55;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=2.10;destination=hall
+delivery t=53.85;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=15;seconds=10.55;destination=hall
+actor t=60;entity=Entity(748:113);kind=Soldier;pos=float2(-10.13418f, -5.23794f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=60;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=60;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=60;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":10,"Timer":0.550001264}
+actor t=60;entity=Entity(887:17);kind=Worker;pos=float2(-3.25f, -8.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=13;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=60;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":6,"Timer":0.450000763}
+actor t=60;entity=Entity(747:113);kind=Worker;pos=float2(-24.5f, -7.600001f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=14;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":0,"Timer":0.0}
+phase t=60.05;day=1;phase=Dusk;spawned=0;attacks=0;lineArrivals=0;hallAttackers=0;retreatBeforeLine=2
+army firstSeen=63.00;entity=Entity(886:19);position=float2(-25.96515f, -6.432765f);range=1;detection=3
+delivery t=63.50;node=Entity(793:17);nodePosition=float2(2.519844f, -9.459081f);type=1;amount=20;seconds=5.55;destination=hall
+army atHallLine=69.70;entity=Entity(886:19);sinceRally=6.70;position=float2(-10.5f, -6.9f);target=Entity.Null
+delivery t=71.40;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=1.95;destination=hall
+delivery t=75.60;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=2.05;destination=hall
+delivery t=89.80;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=15;seconds=10.50;destination=hall
+actor t=90;entity=Entity(748:113);kind=Soldier;pos=float2(-10.13418f, -5.23794f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=90;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=90;entity=Entity(886:19);kind=Soldier;pos=float2(-10.1574f, -5.24029f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=90;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=90;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":16,"Timer":0.700002}
+actor t=90;entity=Entity(887:17);kind=Worker;pos=float2(-0.5f, -9.35f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=16;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=90;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":12,"Timer":0.400001466}
+actor t=90;entity=Entity(747:113);kind=Worker;pos=float2(-10.51971f, -6.348197f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=31;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":0,"Timer":0.0}
+enemy firstSeen=90.10;entity=Entity(903:27);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+phase t=90.10;day=1;phase=Night;spawned=1;attacks=0;lineArrivals=0;hallAttackers=0;retreatBeforeLine=2
+enemy firstSeen=92.35;entity=Entity(912:25);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=94.60;entity=Entity(913:35);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+army firstAttack=98.65;entity=Entity(886:19);position=float2(-10.58385f, -6.018744f);target=Entity(903:27);sinceRally=35.65
+army firstAttack=98.70;entity=Entity(748:113);position=float2(-10.05438f, -5.971568f);target=Entity(903:27);sinceRally=90.70
+enemy firstSeen=102.70;entity=Entity(914:29);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=104.95;entity=Entity(915:41);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=107.20;entity=Entity(903:29);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=109.45;entity=Entity(916:29);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=117.55;entity=Entity(917:55);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=119.80;entity=Entity(918:39);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+actor t=120;entity=Entity(748:113);kind=Soldier;pos=float2(-10.05438f, -5.971568f);HP=9880;target=Entity(913:35);state=Attacking;attackSeq=14;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=120;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=120;entity=Entity(886:19);kind=Soldier;pos=float2(-10.58385f, -6.018744f);HP=9780;target=Entity(912:25);state=Attacking;attackSeq=14;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=120;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=120;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":16,"Timer":0.0}
+actor t=120;entity=Entity(887:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=120;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":12,"Timer":0.0}
+actor t=120;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":0,"Timer":0.0}
+enemy firstSeen=122.05;entity=Entity(912:27);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=124.30;entity=Entity(913:37);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=126.55;entity=Entity(919:49);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+phase t=135.15;day=2;phase=Day;spawned=12;attacks=48;lineArrivals=12;hallAttackers=0;retreatBeforeLine=2
+t=135.15;day=2;phase=Day;W/G/M=170/50/20;workers=4;soldiers=4;hallHP=1200.0;spawned=12
+delivery t=142.65;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=1.95;destination=hall
+delivery t=146.85;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=2.05;destination=hall
+actor t=150;entity=Entity(748:113);kind=Soldier;pos=float2(-10.05438f, -5.971568f);HP=9690;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=150;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=150;entity=Entity(886:19);kind=Soldier;pos=float2(-10.58385f, -6.018744f);HP=9590;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=150;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=150;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":5,"Timer":0.450000644}
+actor t=150;entity=Entity(887:17);kind=Worker;pos=float2(-10.67935f, -5.966594f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=150;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":0,"Timer":0.850000143}
+actor t=150;entity=Entity(747:113);kind=Worker;pos=float2(-25.35f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":5,"Timer":0.500000656}
+delivery t=150.05;node=Entity(793:17);nodePosition=float2(2.519844f, -9.459081f);type=1;amount=20;seconds=5.75;destination=hall
+delivery t=166.50;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=1.95;destination=hall
+delivery t=171.20;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=2.05;destination=hall
+actor t=180;entity=Entity(748:113);kind=Soldier;pos=float2(-10.05438f, -5.971568f);HP=9690;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=180;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=180;entity=Entity(886:19);kind=Soldier;pos=float2(-10.58385f, -6.018744f);HP=9590;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=180;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=180;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":11,"Timer":0.6000014}
+actor t=180;entity=Entity(887:17);kind=Worker;pos=float2(-7.1f, -6.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=7;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=180;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":6,"Timer":0.800000846}
+actor t=180;entity=Entity(747:113);kind=Worker;pos=float2(-10.93613f, -6.306072f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":2,"Carried":15,"Timer":0.0}
+delivery t=181.70;node=Entity(793:17);nodePosition=float2(2.519844f, -9.459081f);type=1;amount=20;seconds=5.80;destination=hall
+delivery t=190.35;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=1.95;destination=hall
+phase t=195.20;day=2;phase=Dusk;spawned=12;attacks=48;lineArrivals=12;hallAttackers=0;retreatBeforeLine=2
+delivery t=195.25;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=2.05;destination=hall
+actor t=210;entity=Entity(748:113);kind=Soldier;pos=float2(-10.05438f, -5.971568f);HP=9690;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=210;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=210;entity=Entity(886:19);kind=Soldier;pos=float2(-10.58385f, -6.018744f);HP=9590;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=210;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=210;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":17,"Timer":0.750002146}
+actor t=210;entity=Entity(887:17);kind=Worker;pos=float2(-3.5f, -7.05f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=11;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":20,"Timer":0.0}
+actor t=210;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":12,"Timer":0.75000155}
+actor t=210;entity=Entity(747:113);kind=Worker;pos=float2(-10.93613f, -6.306072f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":2,"Carried":15,"Timer":0.0}
+delivery t=213.15;node=Entity(793:17);nodePosition=float2(2.519844f, -9.459081f);type=1;amount=20;seconds=5.80;destination=hall
+delivery t=214.20;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=20;seconds=1.95;destination=hall
+delivery t=219.30;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=20;seconds=2.05;destination=hall
+enemy firstSeen=225.25;entity=Entity(903:31);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+phase t=225.25;day=2;phase=Night;spawned=13;attacks=48;lineArrivals=12;hallAttackers=0;retreatBeforeLine=2
+enemy firstSeen=227.20;entity=Entity(912:29);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=229.15;entity=Entity(913:39);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=231.10;entity=Entity(914:31);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=239.20;entity=Entity(915:43);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+actor t=240;entity=Entity(748:113);kind=Soldier;pos=float2(-9.5f, -5.5f);HP=9630;target=Entity(903:31);state=Attacking;attackSeq=28;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=240;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=240;entity=Entity(886:19);kind=Soldier;pos=float2(-9.509774f, -6.050853f);HP=9590;target=Entity(903:31);state=Attacking;attackSeq=28;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=240;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=240;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":9,"Timer":0.0}
+actor t=240;entity=Entity(887:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=1;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":1,"Carried":6,"Timer":0.0}
+actor t=240;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":3,"Timer":0.0}
+actor t=240;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":15,"Timer":0.0}
+enemy firstSeen=241.15;entity=Entity(916:31);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=243.10;entity=Entity(903:33);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=245.05;entity=Entity(917:57);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=247.00;entity=Entity(918:41);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=255.10;entity=Entity(919:51);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=257.05;entity=Entity(914:33);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=259.00;entity=Entity(912:31);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=260.95;entity=Entity(920:27);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=262.90;entity=Entity(921:35);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=264.85;entity=Entity(922:37);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+actor t=270;entity=Entity(748:113);kind=Soldier;pos=float2(-9.5f, -5.5f);HP=9160;target=Entity(913:39);state=Attacking;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=270;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=270;entity=Entity(886:19);kind=Soldier;pos=float2(-9.509774f, -6.050853f);HP=9220;target=Entity(915:43);state=Attacking;attackSeq=47;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=270;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=270;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":9,"Timer":0.0}
+actor t=270;entity=Entity(887:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=1;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":1,"Carried":6,"Timer":0.0}
+actor t=270;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":3,"Timer":0.0}
+actor t=270;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":15,"Timer":0.0}
+phase t=270.30;day=3;phase=Day;spawned=27;attacks=96;lineArrivals=25;hallAttackers=0;retreatBeforeLine=4
+t=270.30;day=3;phase=Day;W/G/M=130/5/0;workers=4;soldiers=4;hallHP=1200.0;spawned=27
+delivery t=294.80;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+delivery t=298.15;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=23;seconds=10.50;destination=hall
+actor t=300;entity=Entity(748:113);kind=Soldier;pos=float2(-9.5f, -5.5f);HP=9150;target=Entity.Null;state=Idle;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=300;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=300;entity=Entity(886:19);kind=Soldier;pos=float2(-9.509774f, -6.050853f);HP=9220;target=Entity.Null;state=Idle;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=300;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=300;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":3,"Timer":0.30000037}
+actor t=300;entity=Entity(887:17);kind=Worker;pos=float2(1.5f, -9.5f);HP=20;target=Entity.Null;state=Mining;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":793,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":27,"Timer":0.500002563}
+actor t=300;entity=Entity(896:17);kind=Worker;pos=float2(-16.6f, -4.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=12;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":0,"Carried":30,"Timer":0.0}
+actor t=300;entity=Entity(747:113);kind=Worker;pos=float2(-15.1f, -6.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=26;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":0,"Timer":0.0}
+delivery t=301.00;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.05;destination=hall
+delivery t=308.05;node=Entity(793:17);nodePosition=float2(2.519844f, -9.459081f);type=1;amount=30;seconds=5.55;destination=hall
+stalled t=325.05;worker=Entity(887:17);node=Entity(793:17);position=float2(-9.496895f, -5.325009f);nodePosition=float2(2.519844f, -9.459081f);distanceToCollider=12.10797;range=0.4;moving=1;path=17;targetHP=0;reason=no movement/cargo/attack for15s;policy=try next node
+delivery t=328.65;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+actor t=330;entity=Entity(748:113);kind=Soldier;pos=float2(-9.5f, -5.5f);HP=9150;target=Entity.Null;state=Idle;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=330;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=330;entity=Entity(886:19);kind=Soldier;pos=float2(-9.509774f, -6.050853f);HP=9220;target=Entity.Null;state=Idle;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=330;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=330;entity=Entity(884:17);kind=Worker;pos=float2(-17.65f, -2.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":0,"Timer":0.0}
+actor t=330;entity=Entity(887:17);kind=Worker;pos=float2(-3.5f, -13.4f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=4;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":0,"Timer":0.0}
+actor t=330;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":26,"Timer":0.7000032}
+actor t=330;entity=Entity(747:113);kind=Worker;pos=float2(-25.35f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":21,"Timer":0.400002539}
+phase t=330.35;day=3;phase=Dusk;spawned=27;attacks=96;lineArrivals=25;hallAttackers=0;retreatBeforeLine=4
+delivery t=335.35;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.05;destination=hall
+delivery t=342.10;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=23;seconds=10.50;destination=hall
+actor t=360;entity=Entity(748:113);kind=Soldier;pos=float2(-9.5f, -5.5f);HP=9150;target=Entity.Null;state=Idle;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=360;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=360;entity=Entity(886:19);kind=Soldier;pos=float2(-9.509774f, -6.050853f);HP=9220;target=Entity.Null;state=Idle;attackSeq=48;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=360;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=360;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":29,"Timer":0.4500035}
+actor t=360;entity=Entity(887:17);kind=Worker;pos=float2(-2.5f, -14.1f);HP=20;target=Entity.Null;state=Mining;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":29,"Timer":0.4000035}
+actor t=360;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":22,"Timer":0.6500027}
+actor t=360;entity=Entity(747:113);kind=Worker;pos=float2(-25.35f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":7,"Timer":0.450000882}
+enemy firstSeen=360.40;entity=Entity(903:35);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+phase t=360.40;day=3;phase=Night;spawned=28;attacks=96;lineArrivals=25;hallAttackers=0;retreatBeforeLine=4
+enemy firstSeen=362.15;entity=Entity(912:33);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=363.90;entity=Entity(913:41);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=365.65;entity=Entity(914:35);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=372.75;entity=Entity(916:33);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=374.50;entity=Entity(917:59);pos=float2(-13.43636f, -23.43636f);visual=1;state=Moving;initial=False
+enemy firstSeen=376.25;entity=Entity(918:43);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=378.00;entity=Entity(903:37);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=379.75;entity=Entity(915:55);pos=float2(-13.43636f, -23.43636f);visual=1;state=Moving;initial=False
+enemy firstSeen=386.85;entity=Entity(922:39);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=388.60;entity=Entity(923:47);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+actor t=390;entity=Entity(748:113);kind=Soldier;pos=float2(-8.771151f, -5.414333f);HP=8930;target=Entity(914:35);state=Attacking;attackSeq=62;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=390;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=390;entity=Entity(886:19);kind=Soldier;pos=float2(-7.503206f, -6.199659f);HP=9070;target=Entity(912:33);state=Attacking;attackSeq=62;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=390;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=390;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":29,"Timer":0.0}
+actor t=390;entity=Entity(887:17);kind=Worker;pos=float2(-2.778543f, -14.21142f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=19;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":4,"ResourceType":1,"Carried":29,"Timer":0.0}
+actor t=390;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":23,"Timer":0.0}
+actor t=390;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":7,"Timer":0.0}
+enemy firstSeen=390.35;entity=Entity(920:37);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=392.10;entity=Entity(914:37);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=393.85;entity=Entity(912:37);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=395.60;entity=Entity(926:93);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+phase t=405.45;day=4;phase=Day;spawned=42;attacks=144;lineArrivals=38;hallAttackers=2;retreatBeforeLine=6
+t=405.45;day=4;phase=Day;W/G/M=190/10/46;workers=4;soldiers=4;hallHP=1170.0;spawned=42
+delivery t=409.95;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+delivery t=412.30;node=Entity(777:17);nodePosition=float2(-2.466947f, -15.20836f);type=1;amount=30;seconds=5.90;destination=hall
+delivery t=416.40;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.05;destination=hall
+actor t=420;entity=Entity(748:113);kind=Soldier;pos=float2(-8.771151f, -5.414333f);HP=8622;target=Entity.Null;state=Idle;attackSeq=72;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=420;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=420;entity=Entity(886:19);kind=Soldier;pos=float2(-8.5f, -6.5f);HP=9032;target=Entity.Null;state=Idle;attackSeq=72;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=420;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=420;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":8,"Timer":0.15000096}
+actor t=420;entity=Entity(887:17);kind=Worker;pos=float2(-2.5f, -14.1f);HP=20;target=Entity.Null;state=Mining;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":1,"Timer":0.9500003}
+actor t=420;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":1,"Timer":0.6000002}
+actor t=420;entity=Entity(747:113);kind=Worker;pos=float2(-25.35f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":12,"Timer":0.2000006}
+army firstSeen=421.40;entity=Entity(903:39);position=float2(-25.63858f, -5.418626f);range=1;detection=3
+army atHallLine=427.15;entity=Entity(903:39);sinceRally=5.75;position=float2(-15.2f, -5.5f);target=Entity.Null
+delivery t=441.30;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=23;seconds=10.50;destination=hall
+delivery t=443.80;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+actor t=450;entity=Entity(748:113);kind=Soldier;pos=float2(-8.771151f, -5.414333f);HP=8622;target=Entity.Null;state=Idle;attackSeq=72;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=450;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=450;entity=Entity(886:19);kind=Soldier;pos=float2(-8.5f, -6.5f);HP=9032;target=Entity.Null;state=Idle;attackSeq=72;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=450;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=450;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=450;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":4,"Timer":0.3000005}
+actor t=450;entity=Entity(887:17);kind=Worker;pos=float2(-4.5f, -11.05f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=14;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":1,"Carried":30,"Timer":0.0}
+actor t=450;entity=Entity(896:17);kind=Worker;pos=float2(-14.75234f, -5.530425f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=9;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":0,"Carried":30,"Timer":0.0}
+actor t=450;entity=Entity(747:113);kind=Worker;pos=float2(-27.5f, -3.35f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=6;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":0,"Timer":0.0}
+delivery t=450.55;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.15;destination=hall
+army firstSeen=451.40;entity=Entity(909:31);position=float2(-26.68562f, -6.023342f);range=1;detection=3
+delivery t=454.05;node=Entity(777:17);nodePosition=float2(-2.466947f, -15.20836f);type=1;amount=30;seconds=6.00;destination=hall
+army atHallLine=458.35;entity=Entity(909:31);sinceRally=6.95;position=float2(-10.5f, -6.9f);target=Entity.Null
+phase t=465.50;day=4;phase=Dusk;spawned=42;attacks=144;lineArrivals=38;hallAttackers=2;retreatBeforeLine=6
+delivery t=477.65;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+actor t=480;entity=Entity(748:113);kind=Soldier;pos=float2(-8.771151f, -5.414333f);HP=8622;target=Entity.Null;state=Idle;attackSeq=72;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=480;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=480;entity=Entity(886:19);kind=Soldier;pos=float2(-8.5f, -6.5f);HP=9032;target=Entity.Null;state=Idle;attackSeq=72;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=480;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=480;entity=Entity(909:31);kind=Soldier;pos=float2(-10.13418f, -5.23794f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=480;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=480;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":0,"Timer":0.450000048}
+actor t=480;entity=Entity(887:17);kind=Worker;pos=float2(-2.5f, -14.1f);HP=20;target=Entity.Null;state=Mining;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":20,"Timer":0.200002387}
+actor t=480;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":27,"Timer":0.300003231}
+actor t=480;entity=Entity(747:113);kind=Worker;pos=float2(-22.75f, -8.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=18;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":2,"Carried":23,"Timer":0.0}
+delivery t=484.85;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.15;destination=hall
+delivery t=485.25;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=23;seconds=10.50;destination=hall
+enemy firstSeen=495.55;entity=Entity(910:27);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+phase t=495.55;day=4;phase=Night;spawned=43;attacks=144;lineArrivals=38;hallAttackers=2;retreatBeforeLine=6
+army firstSeen=496.40;entity=Entity(914:39);position=float2(-25.37882f, -6.307428f);range=1;detection=3
+enemy firstSeen=497.20;entity=Entity(915:57);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=498.85;entity=Entity(916:35);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=500.50;entity=Entity(917:61);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+army atHallLine=501.85;entity=Entity(914:39);sinceRally=5.45;position=float2(-15.2f, -5.5f);target=Entity.Null
+enemy firstSeen=502.15;entity=Entity(918:45);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+army firstAttack=504.65;entity=Entity(909:31);position=float2(-8.600002f, -4.5f);target=Entity(910:27);sinceRally=53.25
+enemy firstSeen=508.25;entity=Entity(919:83);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=509.90;entity=Entity(910:29);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+actor t=510;entity=Entity(748:113);kind=Soldier;pos=float2(-8.02285f, -5.464763f);HP=8592;target=Entity(915:57);state=Attacking;attackSeq=77;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=510;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=510;entity=Entity(886:19);kind=Soldier;pos=float2(-7.672399f, -6.210254f);HP=8998;target=Entity(915:57);state=Attacking;attackSeq=77;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=510;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=510;entity=Entity(909:31);kind=Soldier;pos=float2(-8.600002f, -4.5f);HP=9980;target=Entity(916:35);state=Attacking;attackSeq=4;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=510;entity=Entity(914:39);kind=Soldier;pos=float2(-13.8198f, -4.956227f);HP=10000;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=1;detection=3;range=1
+actor t=510;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=510;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":15,"Timer":0.0}
+actor t=510;entity=Entity(887:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":1,"Carried":30,"Timer":0.0}
+actor t=510;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":8,"Timer":0.0}
+actor t=510;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":0,"Timer":0.0}
+enemy firstSeen=511.55;entity=Entity(921:55);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=513.20;entity=Entity(922:41);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=514.85;entity=Entity(920:45);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=520.95;entity=Entity(923:55);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=522.60;entity=Entity(924:59);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=524.25;entity=Entity(915:65);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=525.90;entity=Entity(918:47);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=527.55;entity=Entity(916:41);pos=float2(8.457574f, -3.542426f);visual=0;state=Moving;initial=False
+enemy firstSeen=529.20;entity=Entity(926:95);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+actor t=540;entity=Entity(748:113);kind=Soldier;pos=float2(-8.02285f, -5.464763f);HP=8410;target=Entity(918:47);state=Attacking;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=540;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=540;entity=Entity(886:19);kind=Soldier;pos=float2(-7.672399f, -6.210254f);HP=8840;target=Entity(918:47);state=Attacking;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=540;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=540;entity=Entity(909:31);kind=Soldier;pos=float2(-8.600002f, -4.5f);HP=9642;target=Entity(922:41);state=Attacking;attackSeq=23;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=540;entity=Entity(914:39);kind=Soldier;pos=float2(-13.8198f, -4.956227f);HP=10000;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=1;detection=3;range=1
+actor t=540;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=540;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":15,"Timer":0.0}
+actor t=540;entity=Entity(887:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":1,"Carried":30,"Timer":0.0}
+actor t=540;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":8,"Timer":0.0}
+actor t=540;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":0,"Timer":0.0}
+phase t=540.60;day=5;phase=Day;spawned=58;attacks=216;lineArrivals=49;hallAttackers=2;retreatBeforeLine=11
+t=540.60;day=5;phase=Day;W/G/M=370/10/2;workers=4;soldiers=7;hallHP=1168.0;spawned=58
+delivery t=555.85;node=Entity(777:17);nodePosition=float2(-2.466947f, -15.20836f);type=1;amount=30;seconds=5.90;destination=hall
+delivery t=559.10;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=2.10;destination=hall
+delivery t=567.10;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.40;destination=hall
+actor t=570;entity=Entity(748:113);kind=Soldier;pos=float2(-8.02285f, -5.464763f);HP=8410;target=Entity.Null;state=Idle;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=570;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=570;entity=Entity(886:19);kind=Soldier;pos=float2(-7.672399f, -6.210254f);HP=8838;target=Entity.Null;state=Idle;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=570;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=570;entity=Entity(909:31);kind=Soldier;pos=float2(-8.600002f, -4.5f);HP=9620;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=570;entity=Entity(914:39);kind=Soldier;pos=float2(-13.70623f, -4.852744f);HP=10000;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=1;detection=3;range=1
+actor t=570;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=570;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":8,"Timer":0.650001049}
+actor t=570;entity=Entity(887:17);kind=Worker;pos=float2(-2.5f, -14.1f);HP=20;target=Entity.Null;state=Mining;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":8,"Timer":0.400001}
+actor t=570;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":0,"Timer":0.15}
+actor t=570;entity=Entity(747:113);kind=Worker;pos=float2(-25.35f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":20,"Timer":0.0500023849}
+delivery t=583.45;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=23;seconds=10.50;destination=hall
+delivery t=593.30;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+delivery t=597.50;node=Entity(777:17);nodePosition=float2(-2.466947f, -15.20836f);type=1;amount=30;seconds=5.90;destination=hall
+actor t=600;entity=Entity(748:113);kind=Soldier;pos=float2(-8.02285f, -5.464763f);HP=8410;target=Entity.Null;state=Idle;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=600;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=600;entity=Entity(886:19);kind=Soldier;pos=float2(-7.672399f, -6.210254f);HP=8838;target=Entity.Null;state=Idle;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=600;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=600;entity=Entity(909:31);kind=Soldier;pos=float2(-8.600002f, -4.5f);HP=9620;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=600;entity=Entity(914:39);kind=Soldier;pos=float2(-13.70628f, -4.852695f);HP=10000;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=1;detection=3;range=1
+actor t=600;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=600;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":4,"Timer":0.8000006}
+actor t=600;entity=Entity(887:17);kind=Worker;pos=float2(-6.2f, -8.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=11;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":0,"Timer":0.0}
+actor t=600;entity=Entity(896:17);kind=Worker;pos=float2(-18.95f, -5.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=13;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":898,"Version":17},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":2,"ResourceType":0,"Carried":30,"Timer":0.0}
+actor t=600;entity=Entity(747:113);kind=Worker;pos=float2(-25.35f, -0.5f);HP=20;target=Entity.Null;state=Collecting;attackSeq=5;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":6,"Timer":0.100000717}
+phase t=600.65;day=5;phase=Dusk;spawned=58;attacks=216;lineArrivals=49;hallAttackers=2;retreatBeforeLine=11
+delivery t=602.00;node=Entity(845:17);nodePosition=float2(-20.48353f, -5.348932f);type=0;amount=30;seconds=2.15;destination=hall
+delivery t=627.15;node=Entity(864:17);nodePosition=float2(-20.48353f, -2.348932f);type=0;amount=30;seconds=1.95;destination=hall
+delivery t=627.40;node=Entity(905:23);nodePosition=float2(-20.51986f, -4.43646f);type=2;amount=23;seconds=10.50;destination=hall
+actor t=630;entity=Entity(748:113);kind=Soldier;pos=float2(-8.02285f, -5.464763f);HP=8410;target=Entity.Null;state=Idle;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=630;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=630;entity=Entity(886:19);kind=Soldier;pos=float2(-7.672399f, -6.210254f);HP=8838;target=Entity.Null;state=Idle;attackSeq=96;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=630;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=630;entity=Entity(909:31);kind=Soldier;pos=float2(-8.600002f, -4.5f);HP=9620;target=Entity.Null;state=Idle;attackSeq=24;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=630;entity=Entity(914:39);kind=Soldier;pos=float2(-13.7171f, -4.862567f);HP=10000;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=1;detection=3;range=1
+actor t=630;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=630;entity=Entity(884:17);kind=Worker;pos=float2(-19.25f, -2.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":864,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":0,"Timer":0.950000167}
+actor t=630;entity=Entity(887:17);kind=Worker;pos=float2(-2.5f, -14.1f);HP=20;target=Entity.Null;state=Mining;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":777,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":1,"Carried":26,"Timer":0.7500032}
+actor t=630;entity=Entity(896:17);kind=Worker;pos=float2(-19.25f, -5.5f);HP=20;target=Entity.Null;state=Chopping;attackSeq=0;moving=0;suppress=0;path=2;detection=0.77;range=0.4;worker={"Node":{"Index":845,"Version":17},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":0,"Carried":25,"Timer":0.8500031}
+actor t=630;entity=Entity(747:113);kind=Worker;pos=float2(-17.25f, -6.5f);HP=20;target=Entity.Null;state=Moving;attackSeq=5;moving=1;suppress=0;path=24;detection=0.55;range=0.4;worker={"Node":{"Index":905,"Version":23},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":0,"Version":0},"Phase":1,"ResourceType":2,"Carried":0,"Timer":0.0}
+enemy firstSeen=630.70;entity=Entity(910:43);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+phase t=630.70;day=5;phase=Night;spawned=59;attacks=216;lineArrivals=49;hallAttackers=2;retreatBeforeLine=11
+enemy firstSeen=632.00;entity=Entity(915:67);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=633.30;entity=Entity(916:43);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=634.60;entity=Entity(917:63);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=639.70;entity=Entity(920:47);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=641.00;entity=Entity(918:53);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=642.30;entity=Entity(919:89);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=643.60;entity=Entity(922:43);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=648.70;entity=Entity(921:65);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=650.00;entity=Entity(923:65);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=651.30;entity=Entity(926:99);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=652.60;entity=Entity(924:67);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=653.90;entity=Entity(930:89);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=659.00;entity=Entity(927:79);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+actor t=660;entity=Entity(748:113);kind=Soldier;pos=float2(-7.046884f, -5.479732f);HP=8410;target=Entity(915:67);state=Attacking;attackSeq=111;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=660;entity=Entity(749:113);kind=Soldier;pos=float2(-14.1322f, -5.236581f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=660;entity=Entity(886:19);kind=Soldier;pos=float2(-5.5f, -5.9f);HP=8794;target=Entity(915:67);state=Attacking;attackSeq=111;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=660;entity=Entity(903:39);kind=Soldier;pos=float2(-14.13704f, -5.250356f);HP=10000;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=660;entity=Entity(909:31);kind=Soldier;pos=float2(-7.400003f, -4.5f);HP=9598;target=Entity(915:67);state=Attacking;attackSeq=39;moving=0;suppress=0;path=0;detection=3;range=1
+actor t=660;entity=Entity(914:39);kind=Soldier;pos=float2(-13.71344f, -4.859228f);HP=10000;target=Entity.Null;state=Moving;attackSeq=0;moving=1;suppress=0;path=1;detection=3;range=1
+actor t=660;entity=Entity(882:17);kind=Archer;pos=float2(-10.08161f, 5.56189f);HP=100;target=Entity.Null;state=Moving;attackSeq=0;moving=0;suppress=0;path=0;detection=4;range=5
+actor t=660;entity=Entity(884:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=9;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":1,"Timer":0.0}
+actor t=660;entity=Entity(887:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=2;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":1,"Carried":27,"Timer":0.0}
+actor t=660;entity=Entity(896:17);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=0;moving=0;suppress=0;path=8;detection=0.77;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":0,"Carried":26,"Timer":0.0}
+actor t=660;entity=Entity(747:113);kind=Worker;pos=float2(-11.99493f, -3.201194f);HP=20;target=Entity.Null;state=Idle;attackSeq=5;moving=0;suppress=0;path=3;detection=0.55;range=0.4;worker={"Node":{"Index":0,"Version":0},"Depot":{"Index":0,"Version":0},"Structure":{"Index":0,"Version":0},"Shelter":{"Index":898,"Version":17},"Phase":5,"ResourceType":2,"Carried":0,"Timer":0.0}
+enemy firstSeen=660.30;entity=Entity(925:101);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=661.60;entity=Entity(931:121);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+enemy firstSeen=662.90;entity=Entity(928:63);pos=float2(-13.45757f, -23.45757f);visual=0;state=Moving;initial=False
+enemy firstSeen=664.20;entity=Entity(936:75);pos=float2(8.43636f, -3.56364f);visual=1;state=Moving;initial=False
+phase t=675.75;day=6;phase=Day;spawned=76;attacks=291;lineArrivals=58;hallAttackers=6;retreatBeforeLine=20
+t=675.75;day=6;phase=Day;W/G/M=420/10/48;workers=4;soldiers=7;hallHP=728.0;spawned=76
+t=675.75;day=6;phase=Day;W/G/M=420/10/48;workers=4;soldiers=7;hallHP=728.0;spawned=76
+ledger=PASS;researchSpend=410/220/30;trainSpend=0/120/190;buildSpend=0/0/0;attacks=291;firstAttack=98.65;rallyCommands=7;lineArrivals=58;hallAttackers=6;retreatBeforeLine=20;assignmentAccepted=5;noNode=0;damageAttribution=unavailable;gather=positiveCargoDeltaSameType
+arrival entity=Entity(903:27);t=97.80
+arrival entity=Entity(912:25);t=100.05
+arrival entity=Entity(913:35);t=102.30
+arrival entity=Entity(914:29);t=110.40
+arrival entity=Entity(915:41);t=112.65
+arrival entity=Entity(903:29);t=114.90
+arrival entity=Entity(916:29);t=117.15
+arrival entity=Entity(917:55);t=125.25
+arrival entity=Entity(918:39);t=127.50
+arrival entity=Entity(912:27);t=129.75
+arrival entity=Entity(913:37);t=132.00
+arrival entity=Entity(919:49);t=134.25
+arrival entity=Entity(903:31);t=232.70
+arrival entity=Entity(912:29);t=234.65
+arrival entity=Entity(913:39);t=236.60
+arrival entity=Entity(914:31);t=238.55
+arrival entity=Entity(915:43);t=246.90
+arrival entity=Entity(916:31);t=248.85
+arrival entity=Entity(903:33);t=250.80
+arrival entity=Entity(917:57);t=252.75
+arrival entity=Entity(918:41);t=254.70
+arrival entity=Entity(919:51);t=262.55
+arrival entity=Entity(914:33);t=264.50
+arrival entity=Entity(912:31);t=266.45
+arrival entity=Entity(920:27);t=268.40
+arrival entity=Entity(903:35);t=367.85
+arrival entity=Entity(912:33);t=369.60
+arrival entity=Entity(914:35);t=373.15
+arrival entity=Entity(916:33);t=380.40
+arrival entity=Entity(917:59);t=380.60
+arrival entity=Entity(918:43);t=383.95
+arrival entity=Entity(903:37);t=385.65
+arrival entity=Entity(915:55);t=386.10
+arrival entity=Entity(922:39);t=391.85
+arrival entity=Entity(923:47);t=397.40
+arrival entity=Entity(920:37);t=398.05
+arrival entity=Entity(914:37);t=400.90
+arrival entity=Entity(912:37);t=402.75
+arrival entity=Entity(910:27);t=503.00
+arrival entity=Entity(915:57);t=504.65
+arrival entity=Entity(916:35);t=506.30
+arrival entity=Entity(918:45);t=509.65
+arrival entity=Entity(919:83);t=515.75
+arrival entity=Entity(910:29);t=517.40
+arrival entity=Entity(922:41);t=522.20
+arrival entity=Entity(920:45);t=528.25
+arrival entity=Entity(923:55);t=528.45
+arrival entity=Entity(924:59);t=531.35
+arrival entity=Entity(918:47);t=534.70
+arrival entity=Entity(910:43);t=638.40
+arrival entity=Entity(916:43);t=641.00
+arrival entity=Entity(918:53);t=648.70
+arrival entity=Entity(922:43);t=651.30
+arrival entity=Entity(921:65);t=656.40
+arrival entity=Entity(926:99);t=659.00
+arrival entity=Entity(930:89);t=661.60
+arrival entity=Entity(925:101);t=668.00
+arrival entity=Entity(928:63);t=670.60
+outcome=Victory;elapsed=675.75;unlockSeconds=military_archery:25.05,military_training:190.05,economy_tools:215.05,economy_cargo:250.05,expansion_tower:335.05,expansion_fortify:640.05;gatheredW/G/M=757/277/168;depositedW/G/M=730/250/168;spentW/G/M=410/340/220;trainingAccepted=7;peakWorkers=4;peakSoldiers=7;expansion=not attempted;expansionAt=-1.00
+depotSummary completedAt=-1.00;depositedW/G/M=0/0/0
+nativeStatistics={"Deposited":{"Wood":730,"Gold":250,"Meat":168},"Spent":{"Wood":410,"Gold":340,"Meat":220},"Granted":{"Wood":100,"Gold":100,"Meat":100},"UnitsLost":0,"ResearchCompleted":6,"TownHallDamage":472.0}

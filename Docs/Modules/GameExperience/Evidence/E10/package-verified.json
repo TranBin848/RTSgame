@@ -1,0 +1,5 @@
+{
+  "filesVerified": 264,
+  "passed": true,
+  "method": "Every ZIP entry SHA-256 and length compared to artifact manifest"
+}

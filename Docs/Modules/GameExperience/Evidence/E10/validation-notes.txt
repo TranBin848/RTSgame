@@ -1,0 +1,5 @@
+E10 validation notes, 24/11/2026
+1. Initial Editor preflight checked TickCount equality after Pause and failed. Native systems may update at zero delta. Final fixture waits a settling frame and checks actual ECS actor position/health, wallet and clock. Release preflight and final lifecycle both passed 15/15; no runtime pause implementation changed.
+2. Initial summary assert required 96 live enemies and failed. Raw stress CSV sampled exactly 94 throughout 89.9980714 seconds; target=96, TotalSpawned=96 includes earlier enemies. SpawnEnemy can reject blocked cells, but per-attempt reasons were not recorded. Do not claim a verified cause or a 96-live run. Final summarizer records targetReached=false and checks positive live count within target/cap; the eight-light, 32-pulse, focus, duration and p95 gates remain unchanged.
+3. Release build CLI returned Editor busy while compiling. No Cancel was sent. BuildReport on disk succeeded in 235.7321746 seconds with zero errors/warnings, and Player executions confirmed the artifact.
+4. No Development profile was run in E10: all measured p95 values passed. Release GC -1 means unavailable, not zero allocation.

@@ -1,0 +1,45 @@
+{
+  "launch": "normal executable; no smoke/stress flags",
+  "finalPlayerState": "MainMenu left open for review",
+  "seed": 1,
+  "scope": "Full natural control loss on final Release, not a five-night Player victory or human balance acceptance",
+  "policy": "control: no economy, training, research or movement commands; UI tree/report/menu only",
+  "phases": "natural 60/30/45; UI pause briefly tested",
+  "result": {
+    "deposited": [
+      0,
+      0,
+      0
+    ],
+    "spent": [
+      0,
+      0,
+      0
+    ],
+    "unitsLost": 0,
+    "researchCompleted": 0,
+    "townHallDamage": 1200,
+    "exploredCells": 316,
+    "outcome": "Defeat",
+    "day": 3,
+    "granted": [
+      100,
+      100,
+      100
+    ]
+  },
+  "build": ".utmp/e10-release-2026-11-24",
+  "screenshots": "Displayed in chat by computer-use; no local PNG was exported for this normal run",
+  "observer": "computer-use UI screenshots; not native exported telemetry",
+  "observedChecks": [
+    "MainMenu Play click starts game",
+    "T opens tree",
+    "Escape closes tree",
+    "Escape opens pause",
+    "Continue click resumes",
+    "night2 report opens and closes; damage590 in cycle",
+    "natural Defeat day3",
+    "Play again resets Day1 and wallet100/100/100",
+    "pause to MainMenu works"
+  ]
+}

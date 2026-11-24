@@ -1,0 +1,1 @@
+Natural dawn4; signals=4; timeScale=1; reportOpen=True; sourcePlaying=True; clip=Dawn chime (owned). Software playback state, not confirmation of physical audibility.

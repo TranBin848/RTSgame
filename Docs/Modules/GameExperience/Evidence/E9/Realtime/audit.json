@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "outcome": "Victory",
+  "samples": 45,
+  "dawns": 5,
+  "spawns": 76,
+  "scheduleMatchesControlledPrefix": true,
+  "walletReconciled": true,
+  "grantsOnlyInitial100": true,
+  "tail": {
+    "Deposited.Wood": 0,
+    "Deposited.Gold": 0,
+    "Deposited.Meat": 0,
+    "Spent.Wood": 0,
+    "Spent.Gold": 0,
+    "Spent.Meat": 0,
+    "Granted.Wood": 0,
+    "Granted.Gold": 0,
+    "Granted.Meat": 0,
+    "UnitsLost": 0,
+    "ResearchCompleted": 0,
+    "TownHallDamage": 0,
+    "ExploredCells": 0
+  },
+  "failedSpawns": 0,
+  "fallbackSpawns": 0,
+  "scope": "Normal Editor PlayerLoop command-policy playtest, not a human win rate or Player performance benchmark"
+}

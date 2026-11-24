@@ -1,0 +1,5 @@
+E7 controlled ledger fixture; manual ECS ticks, body relocation/heal and clock phase transitions, not real five-night evidence.
+PASS cycle1: {"amount":1,"stats":{"Deposited":{"Wood":1,"Gold":0,"Meat":0},"Spent":{"Wood":45,"Gold":22,"Meat":9},"Granted":{"Wood":120,"Gold":130,"Meat":140},"UnitsLost":1,"ResearchCompleted":1,"TownHallDamage":12.0},"explored":294}
+PASS 20 close/open + duplicate Day signals under actual menu pause preserve wallet/counters/snapshot/chime count.
+PASS cycle2 delta only: {"Statistics":{"Deposited":{"Wood":0,"Gold":0,"Meat":0},"Spent":{"Wood":3,"Gold":0,"Meat":0},"Granted":{"Wood":0,"Gold":0,"Meat":0},"UnitsLost":0,"ResearchCompleted":0,"TownHallDamage":4.0},"ExploredCells":0}
+PASS total: {"Statistics":{"Deposited":{"Wood":1,"Gold":0,"Meat":0},"Spent":{"Wood":48,"Gold":22,"Meat":9},"Granted":{"Wood":120,"Gold":130,"Meat":140},"UnitsLost":1,"ResearchCompleted":1,"TownHallDamage":16.0},"ExploredCells":294}

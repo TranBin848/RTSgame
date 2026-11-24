@@ -1,0 +1,9 @@
+PASS injected day6 tests terminal UI only, not survival evidence.
+TỔNG TRẬN
+Nộp kho:  Gỗ 1   ·   Vàng 0   ·   Thịt 0
+Chi phí:  Gỗ 48   ·   Vàng 22   ·   Thịt 9
+Dân / quân mất:  1
+Sát thương TownHall đã nhận:  16
+Nghiên cứu hoàn tất:  1
+Ô mới khám phá:  294
+Đầu trận / cấp thêm (riêng):  Gỗ 120   ·   Vàng 130   ·   Thịt 140

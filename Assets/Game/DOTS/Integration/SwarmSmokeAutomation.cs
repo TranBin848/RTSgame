@@ -26,6 +26,9 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
     SwarmBenchmarkRecorder m_OnscreenRecorder;
     StructureNightLighting m_NightLighting;
     int m_PeakLocalLights, m_PeakGlowGroups;
+    int m_PeakPulses, m_PeakActors;
+    bool m_E10NightStress;
+    ActionFeedbackPresentation m_Feedback;
     double m_LoadRequested;
     [Serializable] class Result
     {
@@ -33,6 +36,8 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         public int enemies, projectiles, hits, visible, drawCalls;
         public bool e2LightingEnabled;
         public int peakLocalLights, peakGlowGroups;
+        public int peakPulses, peakActors, particleSystems;
+        public bool e10NightStress;
         public double lastTickMs;
         public string[] errors;
         public string cameraPosition;
@@ -64,6 +69,7 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         m_Onscreen = m_Progression && Array.IndexOf(args, "--g5-onscreen") >= 0;
         bool startupOnly = m_Onscreen && Array.IndexOf(args, "--g5-startup-only") >= 0;
         bool heavy = m_Onscreen && Array.IndexOf(args, "--g5-military-1543") >= 0;
+        m_E10NightStress = m_Onscreen && Array.IndexOf(args, "--e10-night-stress") >= 0;
         bool g4Trace = m_Progression && Array.IndexOf(args, "--g4-trace") >= 0;
         bool g4 = g4Trace || (m_Progression && Array.IndexOf(args, "--g4-measure") >= 0);
         bool rts = m_Progression || Array.IndexOf(args, "--rts-smoke") >= 0;
@@ -125,6 +131,7 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
             var root = FindFirstObjectByType<GameSceneCompositionRoot>();
             if (root == null || !root.IsReady) m_Errors.Add("Procedural composition did not become ready.");
             m_NightLighting = root != null ? root.NightLighting : null;
+            m_Feedback = root != null ? root.ActionFeedback : null;
             if (m_Onscreen && m_NightLighting != null && Array.IndexOf(args, "--e2-lighting-off") >= 0)
                 m_NightLighting.enabled = false;
             var workers = FindObjectsByType<WorkerUnit>(FindObjectsSortMode.None);
@@ -147,6 +154,7 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
                 foreach (var action in hall.Actions) if (action is SpawnVillagerActionSO) { action.Excute(game); break; }
                 if (heavy) StartCoroutine(TrainMilitary(game, hall));
             }
+            if (m_E10NightStress) StartCoroutine(E10ReleaseValidation.NightStress(root, bridge, m_CaptureCamera));
         }
         var recorder = demo != null ? demo.GetComponent<SwarmBenchmarkRecorder>() : gameObject.AddComponent<SwarmBenchmarkRecorder>();
         recorder.Simulation = simulation; recorder.WarmupSeconds = 5; recorder.CaptureSeconds = 10;
@@ -232,6 +240,9 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         }
         if (m_OnscreenRecorder != null && m_OnscreenRecorder.Status == "recording")
         {
+            if (m_Feedback != null) m_PeakPulses = Mathf.Max(m_PeakPulses, m_Feedback.ActivePulseCount);
+            var bridge = SwarmGameBridge.Instance;
+            if (bridge != null) m_PeakActors = Mathf.Max(m_PeakActors, bridge.Gameplay.ActorCount);
             m_OnscreenFrames++;
             if (!Application.isFocused || Screen.width != 1920 || Screen.height != 1080
                 || m_CaptureCamera == null || m_CaptureCamera.targetTexture != null)
@@ -253,9 +264,13 @@ public sealed class SwarmSmokeAutomation : MonoBehaviour
         result.offscreenRender = m_CaptureTarget != null;
         result.e2LightingEnabled = m_NightLighting != null && m_NightLighting.enabled;
         result.peakLocalLights = m_PeakLocalLights; result.peakGlowGroups = m_PeakGlowGroups;
+        result.peakPulses = m_PeakPulses; result.peakActors = m_PeakActors;
+        result.e10NightStress = m_E10NightStress;
+        result.particleSystems = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None).Length;
         if (m_Progression)
         {
-            result.scenario = "Procedural progression; natural first night; workers/research/training; offscreen world render";
+            result.scenario = m_E10NightStress ? "Synthetic night stress: cloned Halls, 96 replenished native enemies, injected bounded gather VFX; not a playtest"
+                : "Procedural progression; natural first night; workers/research/training; " + (m_Onscreen ? "onscreen" : "offscreen") + " world render";
             var generator = FindFirstObjectByType<ProceduralMapAuthoring>(); var root = FindFirstObjectByType<GameSceneCompositionRoot>();
             var bridge = FindFirstObjectByType<SwarmGameBridge>();
             if (root != null && generator != null)

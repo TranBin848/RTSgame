@@ -1,0 +1,2 @@
+PASS HUD destroy/dispose twice/menu/new match: owned UI gone, fresh service/HUD, default hint, no previous command result, no placement, no returning/sheltered workers.
+PASS direct unload of active E8: HUD released, SampleScene has no E8/root.

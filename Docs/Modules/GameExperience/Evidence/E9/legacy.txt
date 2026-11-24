@@ -1,0 +1,1 @@
+PASS SampleScene: no procedural root, TacticalPlan null; EnemyWaveDefinition legacy formula path remains active. Shared procedural plan asset remains available for the next match.

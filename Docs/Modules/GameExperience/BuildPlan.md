@@ -1,5 +1,13 @@
 # Build plan — trải nghiệm RTS ngày, hoàng hôn và đêm
 
+**24/11 — E10 Release/kiểm kỹ thuật và budget baseline PASS, nghiệm thu cuối PARTIAL:** [bàn giao và evidence](E10-ReleaseHandoff.md). Build0lỗi/0cảnh báo,89/89EditMode,18/18SampleScene smoke,15/15procedural lifecycle.4/4G5 p95≈13,888ms; stress8đèn/32pulse/94quái p95=13,8952ms;1080p/Ultra/foreground/HUD/fog hợp lệ. G3manual/E9balance và manual thẩm mỹ/audio còn mở; không tự đóng toàn bộ lộ trình nhờ build/perf đạt.
+
+**24/11 — E9 implementation/Editor xong, nghiệm thu cân bằng PARTIAL:** [plan76-v1/report](E9-TacticalNights.md).5đêm đổi roster/hướng/nhịp từSkull/Gnollcũ,Duskcùngdata,hashWaveSeedkhôngđộngglobalRNG,dawnstop/retreatgiữ.89/89+schedule/edge/legacyPASS,16matrixledger/tracePASS; training0/1/1543controlthua/activewin,holdout137/901Economythuađượcgiữnguyên. RealtimeEditor675s/5đêmVictory/Hall1200,76spawn/45mẫuAuditPASS. Không đóngbalance/mọi-seed,G3manual,G5/Player; E10 tiếp theo theo yêu cầu.
+
+**24/11 — E8 implementation/kiểm Editor đã xong; G3manual OPEN:** [report/ảnh/đối soát](E8-ExpansionCommands.md). Preview path/cost chỉ vùng đã khám phá; recall/rally counts và dawn resume.89/89EditMode, movement/scene/lifecyclePASS; A/B0/8001 Hall80G/kho240G,19.9/.7s,+60Gnet đổi100W; emptydepotrange14.13/0income. Người dùng chưa thửG3 và giữ mở; chưa Player/perf/naturalE8 hoặc đủgateE8/G3/G5. TiếpE9 nếu được yêu cầu; không coi đây là approval nghiệm thu người chơi.
+
+**24/11 — E7 DONE phạm vi implementation/kiểm kỹ thuật Editor:** [bình minh/tổng kết và evidence](E7-DawnReports.md). Ledger authoritative, snapshot chu kỳ/delta và result dùng cùng định nghĩa;86/86 EditMode, controlled ledger/reopen/pause/lifecycle PASS. Một trận camera cố định clock thật675s thắng5đêm,45mẫu ví/5bình minh đối soát; ảnh3pha/dawn/result và UIABBA Editor đã lưu. Chưa Player A/B đợt A, video liên tục hoặc manual thẩm mỹ/nghe; không đóng toàn bộ gate đợt A/G3/G5. Tiếp E8 theo phạm vi được yêu cầu.
+
 **24/11 — E6 DONE phạm vi implementation và kiểm Editor:** [report/ảnh/evidence](E6-ActionFeedback.md). Hit/dust/deposit/research, hàng mang Cargo và dấu Fortify; source authoritative, không replay snapshot, cap32pulse/128badge/256impact, giữ base profile/queue cũ/đạn đang bay.84/84 regression, GPU/fog/pause/death/pool/destroy/reload/legacy PASS. Chưa Player/performance/nghiệm thu thẩm mỹ E6; **tiếp E7**, G3/G5 vẫn mở. Các checkpoint dưới là lịch sử.
 
 **24/11 — E5 DONE phạm vi implementation và kiểm Editor:** [report/ảnh/GPU/lifecycle](E5-DepthOcclusion.md). Route native qua cây/Hall trong3pha, nhóm96native, pool/pause/destroy/unload/reload/legacy, S7/E4 compatibility và81/81 regression PASS. Không dịch collider/pivot hoặc đổi Core/gameplay/clock. Chưa Player/performance/manual thẩm mỹ E5; tiếp E6. Dòng “tiếp E5” ngày23/11 dưới đây là lịch sử; G3/G5 vẫn mở.
@@ -50,14 +58,14 @@ Giữ camera 2D hiện tại. Chiều sâu đến từ sorting theo chân, bóng
 | E0 | Baseline và nghiệm thu UI cây | Code hiện tại | DONE phạm vi nghiệm thu người dùng23/11; [checkpoint và giới hạn bằng chứng](Evidence/E0/Acceptance.md) |
 | E1 | Palette, quy tắc hình ảnh và cấu hình presentation | E0 | DONE — [báo cáo](E1-ArtDirection.md), 81/81 regression + integration/legacy/lifecycle/ảnh Editor; triển khai riêng theo yêu cầu người dùng |
 | E2 | Ban đêm có nguồn sáng và cảm giác căn cứ an toàn | E1 | DONE — [fixtures/GPU mask/lifecycle81tests/Release2cặp A/B](E2-NightLighting.md); Player đo1đèn, budget8 chỉ kiểm Editor, không đóng G5 |
-| E3 | Hoàng hôn có chuyển cảnh và báo chuẩn bị | E2 | TODO |
-| E4 | Ban ngày có sức sống, ba vùng có bản sắc | E3 | TODO |
-| E5 | Chiều sâu, sorting và xử lý che khuất | E4 | TODO |
-| E6 | Phản hồi khai thác, chiến đấu và nâng cấp | E5 | TODO |
-| E7 | Tổng kết đêm/trận và nghiệm thu đợt A | E6 | TODO |
-| E8 | Mở rộng và chuẩn bị phòng thủ dễ điều khiển | E7 | TODO |
-| E9 | Các đêm có vai trò chiến thuật khác nhau | E8 | TODO |
-| E10 | Cân bằng, hiệu năng Release và bàn giao | E9 | TODO |
+| E3 | Hoàng hôn có chuyển cảnh và báo chuẩn bị | E2 | DONE Editor — [report](E3-DuskWarning.md); người dùng xác nhận nghe chuông; chưa Player E3 |
+| E4 | Ban ngày có sức sống, ba vùng có bản sắc | E3 | DONE Editor — [report](E4-DaytimeRegions.md); chưa Player/performance/manual thẩm mỹ E4 |
+| E5 | Chiều sâu, sorting và xử lý che khuất | E4 | DONE Editor — [report](E5-DepthOcclusion.md); chưa Player/performance/manual thẩm mỹ E5 |
+| E6 | Phản hồi khai thác, chiến đấu và nâng cấp | E5 | DONE Editor — [report](E6-ActionFeedback.md),84/84 regression; chưa Player/performance/manual thẩm mỹ E6 |
+| E7 | Tổng kết đêm/trận và nghiệm thu đợt A | E6 | DONE implementation/Editor — [report](E7-DawnReports.md),86/86 +5đêm clock thật/ledger/ảnh/UI A/B; gate Player/video/manual đợt A còn mở |
+| E8 | Mở rộng và chuẩn bị phòng thủ dễ điều khiển | E7 | DONE implementation/Editor — [report](E8-ExpansionCommands.md),89/89+A/Blogistics; PARTIAL nghiệm thu toànmốc vì G3manual người dùng giữ mở, chưa Player/naturalE8 |
+| E9 | Các đêm có vai trò chiến thuật khác nhau | E8 | DONE implementation/Editor candidate76-v1 — [report](E9-TacticalNights.md),89/89+16matrix+realtime5đêm; PARTIAL balance vì holdout137/901Economythua, chưa manual/Player |
+| E10 | Cân bằng, hiệu năng Release và bàn giao | E9 | PARTIAL nghiệm thu cuối — [Release/handoff](E10-ReleaseHandoff.md): build,89regression,18smoke,15lifecycle và4/4G5+stress8đèn/32VFX PASS; G3manual/E9balance còn mở |
 
 Triển khai từng mốc có thể chạy và kiểm riêng. Nếu mốc chưa đạt, ghi PARTIAL cùng lý do, không chuyển thành DONE chỉ vì đã có code. Có thể bổ sung tài liệu Architecture/Usage/Validation khi module runtime mới bắt đầu hình thành.
 

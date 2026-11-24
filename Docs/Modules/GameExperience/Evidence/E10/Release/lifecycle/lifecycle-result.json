@@ -1,0 +1,23 @@
+{
+    "scenario": "Release procedural lifecycle; injected terminal states, not a combat playtest",
+    "passed": true,
+    "development": false,
+    "checks": [
+        "authored MainMenu startup",
+        "procedural composition Ready",
+        "fog, feedback and lighting bound",
+        "tree blocks gameplay input",
+        "tree closes",
+        "pause freezes clock, wallet and actor state (zero-delta system updates may still count)",
+        "tree preserves menu pause",
+        "resume advances simulation",
+        "last Hall defeat freezes result",
+        "result contains cumulative statistics",
+        "result replay disposes old presentation and resumes fresh match",
+        "replay resets research, reports and ledger",
+        "fifth dawn victory and report freeze",
+        "result menu clears match context",
+        "menu starts one fresh presentation context"
+    ],
+    "errors": []
+}

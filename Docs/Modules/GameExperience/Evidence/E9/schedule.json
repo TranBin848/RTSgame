@@ -1,0 +1,179 @@
+{
+  "passed": true,
+  "WaveSeed": 8001,
+  "total": 76,
+  "rows": [
+    {
+      "day": 1,
+      "Title": "First defence",
+      "Briefing": "Melee pressure from one approach",
+      "Counts": [
+        3,
+        4,
+        5
+      ],
+      "SpawnInterval": 2.2,
+      "Delay": 8.0,
+      "RangedEvery": 0,
+      "approach": "Single",
+      "total": 12,
+      "ranged": 0,
+      "nominalLastSpawn": 35.8,
+      "gates": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "day": 2,
+      "Title": "Split the defence",
+      "Briefing": "Successive waves alternate approaches",
+      "Counts": [
+        4,
+        5,
+        6
+      ],
+      "SpawnInterval": 1.9,
+      "Delay": 8.0,
+      "RangedEvery": 0,
+      "approach": "AlternatingWaves",
+      "total": 15,
+      "ranged": 0,
+      "nominalLastSpawn": 38.8,
+      "gates": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "day": 3,
+      "Title": "Cover against ranged support",
+      "Briefing": "Melee backed by ranged attackers",
+      "Counts": [
+        4,
+        5,
+        6
+      ],
+      "SpawnInterval": 1.7,
+      "Delay": 7.0,
+      "RangedEvery": 3,
+      "approach": "MixedSupport",
+      "total": 15,
+      "ranged": 5,
+      "nominalLastSpawn": 34.4,
+      "gates": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "day": 4,
+      "Title": "Protect the expansion side",
+      "Briefing": "Pressure from the landmark-side route",
+      "Counts": [
+        5,
+        5,
+        6
+      ],
+      "SpawnInterval": 1.6,
+      "Delay": 6.0,
+      "RangedEvery": 4,
+      "approach": "ExpansionSide",
+      "total": 16,
+      "ranged": 4,
+      "nominalLastSpawn": 32.8,
+      "gates": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "day": 5,
+      "Title": "Combined defence",
+      "Briefing": "Mixed units and alternating reinforcements",
+      "Counts": [
+        4,
+        4,
+        5,
+        5
+      ],
+      "SpawnInterval": 1.25,
+      "Delay": 5.0,
+      "RangedEvery": 2,
+      "approach": "Combined",
+      "total": 18,
+      "ranged": 9,
+      "nominalLastSpawn": 32.5,
+      "gates": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ]
+}

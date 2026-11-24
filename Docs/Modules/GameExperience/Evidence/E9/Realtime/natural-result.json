@@ -1,0 +1,56 @@
+{
+  "outcome": "Victory",
+  "completedNights": 5,
+  "signals": 5,
+  "total": {
+    "Statistics": {
+      "Deposited": {
+        "Wood": 1410,
+        "Gold": 500,
+        "Meat": 628
+      },
+      "Spent": {
+        "Wood": 410,
+        "Gold": 420,
+        "Meat": 380
+      },
+      "Granted": {
+        "Wood": 100,
+        "Gold": 100,
+        "Meat": 100
+      },
+      "UnitsLost": 0,
+      "ResearchCompleted": 6,
+      "TownHallDamage": 0.0
+    },
+    "ExploredCells": 580
+  },
+  "wallet": {
+    "Wood": 1100,
+    "Gold": 180,
+    "Meat": 348
+  },
+  "resultText": "TỔNG TRẬN\nNộp kho:  Gỗ 1410   ·   Vàng 500   ·   Thịt 628\nChi phí:  Gỗ 410   ·   Vàng 420   ·   Thịt 380\nDân / quân mất:  0\nSát thương TownHall đã nhận:  0\nNghiên cứu hoàn tất:  6\nÔ mới khám phá:  580\nĐầu trận / cấp thêm (riêng):  Gỗ 100   ·   Vàng 100   ·   Thịt 100",
+  "duration": 675.07074,
+  "wallSeconds": 675.28406650000034,
+  "unity": "6000.3.11f1",
+  "editor": true,
+  "timeScaleBeforeTerminal": 1,
+  "durations": [
+    60.0,
+    30.0,
+    45.0
+  ],
+  "fogEnabled": true,
+  "cameraPosition": [
+    -12.14,
+    -3.2,
+    -10.0
+  ],
+  "cameraLocked": true,
+  "orthographicSize": 6.0,
+  "resolution": [
+    1280,
+    720
+  ]
+}

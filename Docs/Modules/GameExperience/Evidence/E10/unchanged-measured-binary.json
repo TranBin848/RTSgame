@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "sourceChanges": [
+    "Tools/RunE10.ps1",
+    "Tools/SummarizeE10.mjs"
+  ],
+  "artifactChanges": [
+    "README.txt"
+  ],
+  "unitySourceManifestHash": "752cb95b8eb19ef512c9a4cfb9442978bb330cacaf7dd6de718aa79cde10f956",
+  "measuredBinaryManifestHash": "cdcecfe50764223735606e81e66c6426a8bb1c918900d06d74e67c5273c0b5be",
+  "exe": {
+    "path": "RTSgame2026.exe",
+    "bytes": 667648,
+    "sha256": "5bfb02293c482170c4d5035081245e45d69fe0f617fcc92a81e98adee13b945f"
+  },
+  "assembly": {
+    "path": "RTSgame2026_Data/Managed/Assembly-CSharp.dll",
+    "bytes": 357376,
+    "sha256": "a3af577d318b6949d47c6092a59b59d47092e01a54523f1196d5e84acdbc2939"
+  }
+}

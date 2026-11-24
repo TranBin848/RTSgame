@@ -306,6 +306,7 @@ namespace RTS.DOTS
 
         void ApplyDamage()
         {
+            var gameplay = World.GetExistingSystemManaged<GameplaySimulationSystem>();
             m_DamageTotals.Clear();
             m_DamageSources.Clear();
             while (m_Damage.TryDequeue(out var hit))
@@ -321,6 +322,7 @@ namespace RTS.DOTS
             foreach (var entry in m_DamageTotals)
             {
                 if (!TryGetBody(entry.Key, out var body)) continue;
+                gameplay?.RecordCombatStatistics(entry.Key, body, entry.Value);
                 body.Health -= entry.Value;
                 EntityManager.SetComponentData(entry.Key, body);
                 m_DamageSources.TryGetValue(entry.Key, out var source);

@@ -1,0 +1,61 @@
+{
+  "scope": "Editor GameView UI closed/open ABBA; frozen world, timeScale0, not Player or a G5 frame gate",
+  "groups": [
+    {
+      "block": 0,
+      "reportOpen": false,
+      "frames": 661,
+      "medianMs": 5.8783944696187973,
+      "p95Ms": 7.4514029547572136,
+      "medianGc": 13801,
+      "focusStates": [
+        true
+      ]
+    },
+    {
+      "block": 1,
+      "reportOpen": true,
+      "frames": 660,
+      "medianMs": 5.92670077458024,
+      "p95Ms": 7.5035006739199162,
+      "medianGc": 13801,
+      "focusStates": [
+        true
+      ]
+    },
+    {
+      "block": 2,
+      "reportOpen": true,
+      "frames": 681,
+      "medianMs": 5.6871953420341015,
+      "p95Ms": 7.2736041620373726,
+      "medianGc": 13801,
+      "focusStates": [
+        true
+      ]
+    },
+    {
+      "block": 3,
+      "reportOpen": false,
+      "frames": 692,
+      "medianMs": 5.6008007377386093,
+      "p95Ms": 7.2537981905043125,
+      "medianGc": 13801,
+      "focusStates": [
+        true
+      ]
+    }
+  ],
+  "stable": true,
+  "statsStable": true,
+  "walletStable": true,
+  "clockStable": true,
+  "rngStable": true,
+  "error": "",
+  "resolution": [
+    1280,
+    720
+  ],
+  "vsync": 1,
+  "targetFps": -1
+}

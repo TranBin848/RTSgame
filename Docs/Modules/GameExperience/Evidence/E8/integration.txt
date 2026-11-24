@@ -1,0 +1,7 @@
+E8 controlled scene fixture, manual ECS ticks/positions; not natural play/performance.
+PASS all workers recall accepted; repeat already-returning; no transform/wallet/stats/tick/nav/RNG mutation; dawn returning workers remain at current position.
+PASS carrier Node/cargo3/claim1 and unfinished builder Structure restored at dawn; repeated auto-return did not overwrite suspended work. Building fixture spawned without economic debit solely for lifecycle test.
+PASS worker health0 rejected before execution; menu pause rejects group commands.
+PASS attacking army on explicitly resolved fixture cell accepts known reachable camera goal and clears attack; command does not teleport; unknown/outside goal rejected for all army. Original Archer starts in a clearance-blocked cell and was truthfully rejected before fixture relocation.
+PASS preview cost, no travel-time claim; repeated preview leaves wallet/statistics/ticks/navigation unchanged. Explicit reveal fixture for screenshot.
+PASS unknown footprint returns only cost/unknown message without resource/depot distances.

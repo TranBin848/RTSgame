@@ -1,0 +1,63 @@
+{
+  "scope": "Final source/config only; not a Player build",
+  "files": [
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayLogisticsCommands.cs",
+      "sha256": "acdfd1305cb922fe5fb2a4de69ff58cc93c69de1aa4681986c6466b532f1c89b"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplaySimulationSystem.cs",
+      "sha256": "01bf35a12429e4c3b59ab27fd195c3198d0e93acb761524ab9abbe172988885f"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/ExpansionCommandService.cs",
+      "sha256": "10aba4652dfc04b7908404e1910fdb3208b532bb571a1072d280df80c95d8b79"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "57cc4c33d9880ba6c0b30c648ae31915b72a5701eaeb0a104979e1c52f0e2293"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/ExpansionHud.cs",
+      "sha256": "bb206db9f148b926304da25f695992670232b2be8cf4d24b43339e4ed908291f"
+    },
+    {
+      "path": "Assets/Game/Scripts/Units/WorkerUnit.cs",
+      "sha256": "90ad5531aae2900ae395f522f6d736ab718ec70ac80741c9b14a18d53f2d6783"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/GameManager.cs",
+      "sha256": "f4ec894b1fb79ca89923a79ff81ed0a163aa6eb80c6e2b47f1891640746d14fd"
+    },
+    {
+      "path": "Assets/Game/Scripts/Utils/PlacementProcess.cs",
+      "sha256": "49e76f9c6ca866231f0592f265843e906f4b31f95345fd6f13ee6d67e2dd96fe"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/GameplaySimulationTests.cs",
+      "sha256": "7083abd00ced764d840e16ef340b03782e041cecb607f5c8d509f72aed0877bd"
+    },
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "428a94fbbf03e5f97071bca915a81ac29af7ff50d0b8e71530ffb021eb29ebed"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset",
+      "sha256": "161d104bc4a7d10507aa2ce4c6b5d8d7b23e91fc29b40174d5df01fe1ae478a2"
+    },
+    {
+      "path": "Tools/ValidateGameExperienceE8.cs",
+      "sha256": "ca6758ef271b4a1427f503efbd61e3de3c24a2d74cb1e1ed54f1f58615a85bee"
+    },
+    {
+      "path": "Tools/PlaytestE8Logistics.cs",
+      "sha256": "bd2c1508bdd84996c32f76a285da5d03c98b09ed7d2c1b24d363fd71a683b0e2"
+    },
+    {
+      "path": "Tools/SummarizeE8.mjs",
+      "sha256": "9abfdea0a4c981e9db332ad83d146f7cf866a91e294dafea527124b78fd8368b"
+    }
+  ],
+  "unity": "6000.3.11f1",
+  "date": "2026-11-24"
+}

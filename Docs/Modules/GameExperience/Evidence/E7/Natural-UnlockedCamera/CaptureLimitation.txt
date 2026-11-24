@@ -1,0 +1,1 @@
+First run: Victory,675seconds,ledger PASS. Camera was not locked; final observed position(-11.69,-10957.02,-10),pointerY19.12. Camera drift invalidates continuous world-view evidence. Retained for audit; rerun with harness camera lock, not a gameplay/balance change.

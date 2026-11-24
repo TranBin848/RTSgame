@@ -1,0 +1,19 @@
+{
+  "result": "Succeeded",
+  "unity": "6000.3.11f1",
+  "output": "E:/Unity project/RTSgame2026/.utmp/e10-release-2026-11-24/RTSgame2026.exe",
+  "scenes": [
+    "Assets/Scenes/MainMenu.unity",
+    "Assets/Scenes/ProceduralGame.unity",
+    "Assets/Scenes/SampleScene.unity",
+    "Assets/Scenes/SwarmSimulation.unity"
+  ],
+  "bytes": 137883211,
+  "seconds": 235.73217459999998,
+  "errors": 0,
+  "warnings": 0,
+  "options": "None",
+  "backend": "Mono2x",
+  "quality": "Ultra",
+  "vsync": 1
+}

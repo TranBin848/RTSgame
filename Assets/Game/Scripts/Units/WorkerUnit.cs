@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RTS.DOTS;
+using Unity.Entities;
 
 public class WorkerUnit : HumanoidUnit
 {
@@ -79,6 +80,7 @@ public class WorkerUnit : HumanoidUnit
         m_CarriedResources.Clear(); m_AssignedResourceNode = null; m_AssignedDepot = null;
         m_ActiveProfile = default; m_HasActiveProfile = false; m_GatherTimer = 0;
         m_ShelterTownHall = null; m_IsReturningToShelter = false; m_IsSheltered = false;
+        m_ResumeResource = m_ResumeConstruction = Entity.Null;
         base.OnReturnedToPool();
     }
 
@@ -167,10 +169,26 @@ public class WorkerUnit : HumanoidUnit
         SetTask(UnitTask.Build);
     }
 
+    Entity m_ResumeResource, m_ResumeConstruction;
+    public bool IsReturningToShelter => IsDotsControlled && m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker)
+        ? worker.Phase == WorkPhase.ReturningToShelter : m_IsReturningToShelter;
+    public GroupCommandResult TryRecallToTownHall(TownHall townHall)
+    {
+        if (!IsDotsControlled || townHall == null || !townHall.IsDotsControlled) return GroupCommandResult.InvalidTarget;
+        var result = m_Bridge.Gameplay.CanRecallWorker(DotsEntity, townHall.DotsEntity);
+        if (result != GroupCommandResult.Accepted) return result;
+        m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker);
+        if (worker.Phase != WorkPhase.ReturningToShelter && worker.Phase != WorkPhase.Sheltered)
+        { m_ResumeResource = worker.Node; m_ResumeConstruction = worker.Structure; }
+        m_ShelterTownHall = townHall;
+        m_Bridge.Gameplay.Shelter(DotsEntity, townHall.DotsEntity);
+        return GroupCommandResult.Accepted;
+    }
+
     public void ReturnToTownHall(TownHall townHall)
     {
         if (IsDotsControlled)
-        { m_ShelterTownHall = townHall; m_Bridge.Gameplay.Shelter(DotsEntity, m_Bridge.ProxyFor(townHall)); return; }
+        { TryRecallToTownHall(townHall); return; }
         if (townHall == null)
         {
             CancelActiveWork();
@@ -191,7 +209,17 @@ public class WorkerUnit : HumanoidUnit
     {
         if (IsDotsControlled)
         {
-            if (m_ShelterTownHall != null) m_Bridge.Gameplay.LeaveShelter(DotsEntity, (Vector2)m_ShelterTownHall.GetSpawnOrigin(), (Vector2)m_ShelterTownHall.GetSpawnExitDestination());
+            if (!m_Bridge.Gameplay.TryGetActor(DotsEntity, out _, out var self) || self.Health <= 0 || !m_Bridge.Gameplay.TryGetWorker(DotsEntity, out var worker)
+                || (worker.Phase != WorkPhase.Sheltered && worker.Phase != WorkPhase.ReturningToShelter)) return;
+            if (worker.Phase == WorkPhase.Sheltered && m_ShelterTownHall != null)
+                m_Bridge.Gameplay.LeaveShelter(DotsEntity, (Vector2)m_ShelterTownHall.GetSpawnOrigin(), (Vector2)m_ShelterTownHall.GetSpawnExitDestination());
+            else m_Bridge.Gameplay.CancelWork(DotsEntity);
+            if (m_ResumeConstruction != Entity.Null && m_Bridge.Gameplay.TryGetActor(m_ResumeConstruction, out _, out var buildBody) && buildBody.Health > 0
+                && m_Bridge.Gameplay.EntityManager.HasComponent<GameplayConstruction>(m_ResumeConstruction)
+                && m_Bridge.Gameplay.EntityManager.GetComponentData<GameplayConstruction>(m_ResumeConstruction).Active != 0)
+                m_Bridge.Gameplay.AssignConstruction(DotsEntity, m_ResumeConstruction);
+            else if (m_ResumeResource != Entity.Null) m_Bridge.Gameplay.AssignResource(DotsEntity, m_ResumeResource);
+            m_ResumeResource = m_ResumeConstruction = Entity.Null;
             return;
         }
         if (m_ShelterTownHall == null)

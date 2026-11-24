@@ -65,6 +65,7 @@ namespace RTS.DOTS.Tests
             }
             Assert.That(gathers, Is.GreaterThan(0)); Assert.That(deposits, Is.GreaterThan(0));
             Assert.That(m_Gameplay.Wallet.Wood, Is.EqualTo(income));
+            Assert.That(m_Gameplay.Statistics.Deposited.Wood, Is.EqualTo(income));
             Assert.That(m_Gameplay.TryTakeEvent(out _), Is.False);
             m_Combat.Paused = true; Tick(20); Assert.That(m_Gameplay.TryTakeEvent(out _), Is.False);
         }
@@ -96,6 +97,83 @@ namespace RTS.DOTS.Tests
             Assert.That(EM.GetComponentData<CombatBody>(enemy).Health, Is.EqualTo(100 - 10 * impacts));
             Assert.That(m_Combat.TryTakePresentationImpact(out _), Is.False);
             m_Combat.QueueDamage(enemy, 1); Tick(); m_Combat.ResetSimulation(); Assert.That(m_Combat.TryTakePresentationImpact(out _), Is.False);
+        }
+
+        [Test] public void MatchLedgerSeparatesGrantsDepositsAndCostsAndResets()
+        {
+            m_Gameplay.AddResources(100, 100, 100); m_Gameplay.AddResources(-20, -10, -5);
+            ConfigureResearch(); var hall = Building(new float2(15));
+            Assert.That(m_Gameplay.StartResearch(GameplaySimulationSystem.EconomyToolsId, hall), Is.EqualTo(ResearchResult.Started));
+            Tick(10);
+            var s = m_Gameplay.Statistics;
+            Assert.That(s.Granted.Wood, Is.EqualTo(100)); Assert.That(s.Deposited.Wood, Is.Zero);
+            Assert.That(s.Spent.Wood, Is.EqualTo(60)); Assert.That(s.Spent.Gold, Is.EqualTo(25)); Assert.That(s.Spent.Meat, Is.EqualTo(5));
+            Assert.That(s.ResearchCompleted, Is.EqualTo(1));
+            Assert.That(m_Gameplay.Wallet.Wood, Is.EqualTo(s.Granted.Wood + s.Deposited.Wood - s.Spent.Wood));
+            m_Gameplay.StartResearch(GameplaySimulationSystem.EconomyToolsId, hall); Tick(10);
+            Assert.That(m_Gameplay.Statistics.Equals(s), Is.True, "rejected/repeated request changed ledger");
+            m_Gameplay.ResetGameplay(); Assert.That(m_Gameplay.Statistics.Equals(default(MatchStatistics)), Is.True);
+        }
+
+        [Test] public void MatchLedgerCountsResolvedDamageAndDeathsDespiteHealingOrVisualDrops()
+        {
+            var hall = Building(new float2(15)); var worker = Actor(GameplayKind.Worker, new float2(5));
+            m_Combat.QueueDamage(hall, 30); m_Combat.QueueDamage(worker, 120); Tick();
+            Assert.That(m_Gameplay.Statistics.TownHallDamage, Is.EqualTo(30)); Assert.That(m_Gameplay.Statistics.UnitsLost, Is.EqualTo(1));
+            var body = EM.GetComponentData<CombatBody>(hall); body.Health = 100; EM.SetComponentData(hall, body);
+            m_Combat.QueueDamage(hall, 20); m_Combat.QueueDamage(worker, 10); Tick();
+            Assert.That(m_Gameplay.Statistics.TownHallDamage, Is.EqualTo(50)); Assert.That(m_Gameplay.Statistics.UnitsLost, Is.EqualTo(1));
+            m_Combat.QueueDamage(hall, 1000); Tick();
+            Assert.That(m_Gameplay.Statistics.TownHallDamage, Is.EqualTo(130), "overkill must be capped to pre-hit HP");
+            Assert.That(m_Combat.TryTakePresentationImpact(out _), Is.False, "visual capture is optional and must not own statistics");
+        }
+
+        [Test] public void LogisticsPreviewHonoursWallsRadiusAndPlannedFootprintWithoutChangingActor()
+        {
+            var actor = Actor(GameplayKind.Soldier, new float2(4.5f, 4.5f));
+            var before = EM.GetComponentData<CombatBody>(actor); var data = EM.GetComponentData<GameplayActor>(actor);
+            var target = new CombatBody { Position = new float2(8.5f, 4.5f) };
+            Assert.That(m_Gameplay.TryLogisticsRoute(before.Position, .2f, target, 0, out float distance, out _), Is.True);
+            Assert.That(distance, Is.EqualTo(4));
+            Assert.That(m_Gameplay.TryLogisticsRoute(before.Position, .2f, target, 0, out float detour, out _, new float2(6, 3), new float2(7, 6)), Is.True);
+            Assert.That(detour, Is.GreaterThan(distance));
+            var map = new byte[32 * 32]; System.Array.Fill(map, (byte)1);
+            for (int y = 0; y < 32; y++) map[y * 32 + 6] = 0;
+            Configure(map);
+            Assert.That(m_Gameplay.TryLogisticsRoute(before.Position, .2f, target, 0, out _, out _), Is.False);
+            Assert.That(EM.GetComponentData<CombatBody>(actor).Equals(before), Is.True);
+            Assert.That(EM.GetComponentData<GameplayActor>(actor).Equals(data), Is.True);
+            Assert.That(m_Gameplay.Wallet.Wood, Is.Zero);
+        }
+        [Test] public void RecallRejectsDeadBlockedAndDuplicateCommandsWithoutLosingCargo()
+        {
+            var worker = Actor(GameplayKind.Worker, new float2(4.5f, 4.5f)); var hall = Building(new float2(8.5f, 4.5f));
+            var cargo = EM.GetComponentData<GameplayWorker>(worker); cargo.Carried = 3; EM.SetComponentData(worker, cargo);
+            Assert.That(m_Gameplay.CanRecallWorker(worker, hall), Is.EqualTo(GroupCommandResult.Accepted));
+            m_Gameplay.Shelter(worker, hall);
+            var current = EM.GetComponentData<GameplayWorker>(worker);
+            Assert.That(m_Gameplay.CanRecallWorker(worker, hall), Is.EqualTo(GroupCommandResult.AlreadyReturning));
+            m_Gameplay.Shelter(worker, hall); Assert.That(EM.GetComponentData<GameplayWorker>(worker).Equals(current), Is.True);
+            Assert.That(current.Carried, Is.EqualTo(3));
+            var position = EM.GetComponentData<CombatBody>(worker).Position;
+            m_Gameplay.LeaveShelter(worker, new float2(20), new float2(21));
+            Assert.That(EM.GetComponentData<CombatBody>(worker).Position, Is.EqualTo(position), "returning worker must not teleport on dawn");
+            var body = EM.GetComponentData<CombatBody>(worker); body.Health = 0; EM.SetComponentData(worker, body);
+            Assert.That(m_Gameplay.CanRecallWorker(worker, hall), Is.EqualTo(GroupCommandResult.InvalidActor));
+            m_Combat.Paused = true; Assert.That(m_Gameplay.CanRecallWorker(worker, hall), Is.EqualTo(GroupCommandResult.Unavailable));
+        }
+        [Test] public void RallyValidatesReachabilityFactionPauseAndDeathBeforeCancellingAttack()
+        {
+            var soldier = Actor(GameplayKind.Soldier, new float2(4.5f, 4.5f)); var enemy = Enemy(new float2(5));
+            m_Gameplay.Attack(soldier, enemy);
+            var map = new byte[32 * 32]; System.Array.Fill(map, (byte)1); for (int y = 0; y < 32; y++) map[y * 32 + 6] = 0; Configure(map);
+            Assert.That(m_Gameplay.TryRallyActor(soldier, new float2(8.5f, 4.5f)), Is.EqualTo(GroupCommandResult.Unreachable));
+            Assert.That(EM.GetComponentData<GameplayActor>(soldier).Target, Is.EqualTo(enemy));
+            Assert.That(m_Gameplay.TryRallyActor(soldier, new float2(3.5f, 4.5f)), Is.EqualTo(GroupCommandResult.Accepted));
+            Assert.That(EM.GetComponentData<GameplayActor>(soldier).Target, Is.EqualTo(Entity.Null));
+            m_Combat.Paused = true; Assert.That(m_Gameplay.TryRallyActor(soldier, new float2(3.5f)), Is.EqualTo(GroupCommandResult.Unavailable));
+            m_Combat.Paused = false; var body = EM.GetComponentData<CombatBody>(soldier); body.Health = 0; EM.SetComponentData(soldier, body);
+            Assert.That(m_Gameplay.TryRallyActor(soldier, new float2(3.5f)), Is.EqualTo(GroupCommandResult.InvalidActor));
         }
 
         void ConfigureResearch(float duration = 0.05f)

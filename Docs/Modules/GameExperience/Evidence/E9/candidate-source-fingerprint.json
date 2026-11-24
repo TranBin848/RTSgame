@@ -1,0 +1,41 @@
+{
+  "files": [
+    {
+      "sha256": "84f3f0563d39a6c8b3092501778d3e60baad0c5ce7cdea6f7126e9438201a1dc",
+      "path": "Assets/Game/DOTS/Integration/TacticalNightPlan.cs"
+    },
+    {
+      "sha256": "be818f674129d91d1a5001a1e0a1933d12164228db2818df4f5010caf98ec326",
+      "path": "Assets/Game/ProceduralGeneration/Resources/ProceduralNightPlan.asset"
+    },
+    {
+      "sha256": "0d7be56167a778ce8536f320587855f8bc49b4fa9822dce87f0e3d07af046967",
+      "path": "Assets/Game/Scripts/Managers/EnemyWaveManager.cs"
+    },
+    {
+      "sha256": "1d13f39a7c270d812a726211671eb5632192872f2759b038f27da07480825fdf",
+      "path": "Assets/Game/Scripts/Managers/Definitions/EnemyWaveDefinition.cs"
+    },
+    {
+      "sha256": "272b5a9ae51f018d95c385b461fce3264016470b7c108bc4cd1644f9bd9f35be",
+      "path": "Assets/Game/ScriptableObjects/Units/Definitions/EnemyWaveDefinition.asset"
+    },
+    {
+      "sha256": "c6cb88d7da4eec9f7ef15f4b5f97d8adf09a2f0631cdf16cc4c53cc639b9cbe3",
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs"
+    },
+    {
+      "sha256": "50fa661b1436096155b67c1891376e4f0550da0d4e8551903f48de5e17a35cff",
+      "path": "Assets/Game/ProceduralGeneration/Integration/DuskWarningPresentation.cs"
+    },
+    {
+      "sha256": "8b1c9d4e127b6084b8ecda3ffeedbecbaf31fa426d0070ec9a03071c44595070",
+      "path": "Tools/PlaytestE9.cs"
+    },
+    {
+      "sha256": "83bcc0b79e105c9bdfc26e9d82abe2a694a1e0bae4fb4b6733e6a98bc176733f",
+      "path": "Tools/RunE9Matrix.ps1"
+    }
+  ],
+  "scope": "Frozen candidate76-v1 source/config during matrix, not a Player build"
+}

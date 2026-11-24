@@ -1,0 +1,1 @@
+PASS actual native walking reached Shelter in 7 x.05s ticks; Targetable0; repeat return unchanged; native shelter exit at dawn restores resource task and Targetable1. Existing shelter entrance/exit animation relocation is used only after actual sheltered state.

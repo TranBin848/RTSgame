@@ -29,6 +29,7 @@ public class FogOfWarManager : MonoBehaviour
     private List<FogOfWarAffectable> m_Affectables = new();
     public UnityAction OnFogUpdated = delegate { };
     public bool IsInitialized => m_IsInitialized;
+    public int ExploredCellCount { get; private set; }
     public BoundsInt Bounds => m_Bounds;
     public Tilemap FogTilemap => m_FogTilemap;
 
@@ -104,6 +105,7 @@ public class FogOfWarManager : MonoBehaviour
         }
 
         m_Explored = new bool[m_Bounds.size.x, m_Bounds.size.y];
+        ExploredCellCount = 0;
         m_VisibilityCounts = new int[m_Bounds.size.x, m_Bounds.size.y];
         m_VisibilityStrengths = new float[m_Bounds.size.x, m_Bounds.size.y];
         
@@ -205,7 +207,7 @@ public class FogOfWarManager : MonoBehaviour
                 }
 
                 m_VisibilityCounts[fogX, fogY]++;
-                m_Explored[fogX, fogY] = true;
+                if (!m_Explored[fogX, fogY]) { m_Explored[fogX, fogY] = true; ExploredCellCount++; }
                 m_VisibilityStrengths[fogX, fogY] = Mathf.Max(m_VisibilityStrengths[fogX, fogY], CalculateVisibilityStrength(x, y, radius));
             }
         }

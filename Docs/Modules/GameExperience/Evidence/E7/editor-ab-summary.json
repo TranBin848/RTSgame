@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "medianMs": 5.7288,
+      "p95Ms": 7.4003,
+      "medianGcBytes": 13801,
+      "reportOpen": false,
+      "frames": 1353
+    },
+    {
+      "medianMs": 5.8076,
+      "p95Ms": 7.3926,
+      "medianGcBytes": 13801,
+      "reportOpen": true,
+      "frames": 1341
+    }
+  ],
+  "scope": "Pooled retained frames by closed/open; Editor frozen world only"
+}

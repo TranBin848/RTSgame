@@ -1,0 +1,5 @@
+PASS component destroy unsubscribes; Dispose twice safely removes clock listener.
+PASS menu removes owned UI/chime; new match Ready with reset counters, no dawn/closed report, initial grant100 separated.
+PASS menu removes owned UI/chime; new match Ready with reset counters, no dawn/closed report, initial grant100 separated.
+PASS direct scene unload of active E7 removes UI/chime; SampleScene has no report consumer/root.
+PASS menu removes owned UI/chime; new match Ready with reset counters, no dawn/closed report, initial grant100 separated.

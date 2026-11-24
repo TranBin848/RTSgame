@@ -1,0 +1,157 @@
+{
+  "scope": "Controlled Editor ECS policy; not Player performance or manual G3 acceptance",
+  "passed": true,
+  "rows": [
+    {
+      "file": "20261124T064447773-hp1200-logistics-hall-0.txt",
+      "policy": "logistics-hall",
+      "seed": 0,
+      "waveSeed": 8001,
+      "dt": 0.05,
+      "windowSeconds": 535,
+      "deliveries": 4,
+      "medianDeliverySeconds": 19.9,
+      "goldDeposited": 80,
+      "netWood": 0,
+      "netGold": 80,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 80,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "wallet": {
+        "Wood": 100,
+        "Gold": 180,
+        "Meat": 100
+      },
+      "outcome": "Defeat",
+      "elapsed": 536.45,
+      "spawned": 57,
+      "townHallRange": [
+        14.13
+      ],
+      "ledgerPassed": true
+    },
+    {
+      "file": "20261124T064554869-hp1200-logistics-depot-0.txt",
+      "policy": "logistics-depot",
+      "seed": 0,
+      "waveSeed": 8001,
+      "dt": 0.05,
+      "windowSeconds": 535,
+      "deliveries": 12,
+      "medianDeliverySeconds": 0.7,
+      "goldDeposited": 240,
+      "netWood": -100,
+      "netGold": 140,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 240,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "wallet": {
+        "Wood": 0,
+        "Gold": 240,
+        "Meat": 100
+      },
+      "outcome": "Defeat",
+      "elapsed": 537.25,
+      "spawned": 57,
+      "townHallRange": [
+        14.13,
+        14.13,
+        14.13
+      ],
+      "ledgerPassed": true
+    },
+    {
+      "file": "20261124T064701363-hp1200-empty-depot-0.txt",
+      "policy": "empty-depot",
+      "seed": 0,
+      "waveSeed": 8001,
+      "dt": 0.05,
+      "windowSeconds": 535,
+      "deliveries": 0,
+      "medianDeliverySeconds": null,
+      "goldDeposited": 0,
+      "netWood": -100,
+      "netGold": -100,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "wallet": {
+        "Wood": 0,
+        "Gold": 0,
+        "Meat": 100
+      },
+      "outcome": "Defeat",
+      "elapsed": 537.15,
+      "spawned": 57,
+      "townHallRange": [
+        14.13,
+        14.13,
+        14.13
+      ],
+      "ledgerPassed": true
+    }
+  ],
+  "comparison": {
+    "extraGoldDeposited": 160,
+    "extraNetGold": 60,
+    "extraWoodCost": 100
+  },
+  "limitations": [
+    "One map/wave seed only",
+    "No research/training/rally defence in logistics policy",
+    "Building uses an additional builder as the intervention",
+    "All three policies lose on night4",
+    "G3 human acceptance explicitly remains open"
+  ]
+}

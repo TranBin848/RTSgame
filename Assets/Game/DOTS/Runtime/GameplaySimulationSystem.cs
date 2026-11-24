@@ -43,7 +43,7 @@ namespace RTS.DOTS
             m_Events = new NativeQueue<GameplayEvent>(Allocator.Persistent);
             m_Damage = new NativeQueue<DamageEvent>(Allocator.Persistent);
             m_Shots = new NativeQueue<ProjectileRequest>(Allocator.Persistent);
-            WalletEntity = EntityManager.CreateEntity(typeof(PlayerWallet), typeof(PlayerResearch));
+            WalletEntity = EntityManager.CreateEntity(typeof(PlayerWallet), typeof(PlayerResearch), typeof(MatchStatistics));
         }
 
         public void ConfigureGrid(float2 origin, int2 size, float cellSize, byte[] walkable)
@@ -186,8 +186,7 @@ namespace RTS.DOTS
         }
         public void Shelter(Entity entity, Entity hall)
         {
-            if (IsMatchOver) return;
-            if (!TryGetWorker(entity, out _)) return;
+            if (CanRecallWorker(entity, hall) != GroupCommandResult.Accepted) return;
             CancelWork(entity); var worker = EntityManager.GetComponentData<GameplayWorker>(entity); worker.Shelter = hall; worker.Phase = WorkPhase.ReturningToShelter;
             EntityManager.SetComponentData(entity, worker);
             if (EntityManager.Exists(hall)) SetDestination(entity, EntityManager.GetComponentData<CombatBody>(hall).Position);
@@ -195,7 +194,7 @@ namespace RTS.DOTS
         public void LeaveShelter(Entity entity, float2 origin, float2 exit)
         {
             if (IsMatchOver) return;
-            if (!TryGetWorker(entity, out _)) return;
+            if (!TryGetWorker(entity, out var sheltered) || sheltered.Phase != WorkPhase.Sheltered) return;
             CancelWork(entity); var body = EntityManager.GetComponentData<CombatBody>(entity);
             body.Position = body.PreviousPosition = GameplayMath.NearestWalkable(origin, body.Radius, m_Origin, m_CellSize, m_Size, m_Walkable); body.Targetable = 1;
             EntityManager.SetComponentData(entity, body); SetDestination(entity, exit);
@@ -222,6 +221,7 @@ namespace RTS.DOTS
             if (IsMatchOver) return;
             var wallet = Wallet; wallet.Wood += wood; wallet.Gold += gold; wallet.Meat += meat;
             EntityManager.SetComponentData(WalletEntity, wallet);
+            RecordWalletAdjustment(wood, gold, meat);
         }
         public bool TryTakeEvent(out GameplayEvent value) => m_Events.TryDequeue(out value);
         public void Remove(Entity entity)
@@ -234,6 +234,7 @@ namespace RTS.DOTS
             Dependency.Complete(); EntityManager.DestroyEntity(m_Actors); EntityManager.DestroyEntity(m_Resources);
             EntityManager.SetComponentData(WalletEntity, new PlayerWallet()); m_Events.Clear(); m_Damage.Clear(); m_Shots.Clear(); TickCount = 0;
             EntityManager.SetComponentData(WalletEntity, new PlayerResearch()); m_ResearchConfigured = false;
+            EntityManager.SetComponentData(WalletEntity, new MatchStatistics());
             Outcome = MatchOutcome.Running; SurvivalNights = 0;
         }
 
@@ -244,6 +245,7 @@ namespace RTS.DOTS
             if (m_Combat.Paused) return;
             float dt = math.min(SystemAPI.Time.DeltaTime, 0.05f);
             TickResearch(dt);
+            var beforeEconomy = Wallet;
             using var workers = m_Workers.ToEntityArray(Allocator.TempJob);
             using var buildings = m_Buildings.ToEntityArray(Allocator.TempJob);
             using var depots = m_Depots.ToEntityArray(Allocator.TempJob);
@@ -259,6 +261,17 @@ namespace RTS.DOTS
                 WoodMultiplier = Research.Unlocked != 0 ? m_ResearchDefinition.WoodMultiplier : 1, CargoMultiplier = CargoMultiplier
             }.Schedule(Dependency);
             Dependency.Complete();
+
+            // This completed single-writer job only credits deposits; research/commands run outside this bracket.
+            var deposited = Wallet;
+            if (deposited.Wood != beforeEconomy.Wood || deposited.Gold != beforeEconomy.Gold || deposited.Meat != beforeEconomy.Meat)
+            {
+                var stats = Statistics;
+                stats.Deposited.Wood += (long)deposited.Wood - beforeEconomy.Wood;
+                stats.Deposited.Gold += (long)deposited.Gold - beforeEconomy.Gold;
+                stats.Deposited.Meat += (long)deposited.Meat - beforeEconomy.Meat;
+                EntityManager.SetComponentData(WalletEntity, stats);
+            }
 
             int bodies = m_Bodies.CalculateEntityCount();
             if (m_Targets.Capacity < bodies + 16) m_Targets.Capacity = math.ceilpow2(bodies + 16);

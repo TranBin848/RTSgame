@@ -1,0 +1,458 @@
+using RTS.DOTS;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using Unity.Collections;
+using Unity.Core;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Profiling;
+using UnityEditor;
+using UnityEngine;
+
+public static class GameExperienceE7Validation
+{
+    const string Dir = "Docs/Modules/GameExperience/Evidence/E7/";
+    const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
+    static T Find<T>() where T : UnityEngine.Object => UnityEngine.Object.FindFirstObjectByType<T>();
+    static void Check(bool value, string message) { if (!value) throw new Exception("E7: " + message); }
+    static void Call(object obj, string method, params object[] args) => obj.GetType().GetMethod(method, Private).Invoke(obj, args);
+    static object Field(object obj, string name) => obj.GetType().GetField(name, Private).GetValue(obj);
+    static void Save(string file, string text) { Directory.CreateDirectory(Dir); File.WriteAllText(Dir + file, text); }
+    static void Tick(SwarmGameBridge b, int count, bool combat = false)
+    {
+        var old = b.Gameplay.World.Time; bool paused = b.Simulation.Paused;
+        try
+        {
+            b.Simulation.Paused = false;
+            for (int i = 1; i <= count; i++)
+            {
+                b.Gameplay.World.SetTime(new TimeData(old.ElapsedTime + i * .05, .05f));
+                if (combat) b.Simulation.Update(); else b.Gameplay.Update();
+                Call(b, "SynchronizeGameplay");
+            }
+        }
+        finally { b.Gameplay.World.SetTime(old); b.Simulation.Paused = paused; }
+    }
+    static void Balance(SwarmGameBridge b)
+    {
+        var s = b.Gameplay.Statistics; var w = b.Gameplay.Wallet;
+        Check(w.Wood == s.Granted.Wood + s.Deposited.Wood - s.Spent.Wood
+            && w.Gold == s.Granted.Gold + s.Deposited.Gold - s.Spent.Gold
+            && w.Meat == s.Granted.Meat + s.Deposited.Meat - s.Spent.Meat, "wallet does not reconcile");
+    }
+    public static string Run()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var b = Find<SwarmGameBridge>(); var game = Find<GameManager>();
+        var clock = Find<DayNightCycleManager>(); var fog = Find<FogOfWarManager>(); var reports = root.Reports; var view = root.DawnReport;
+        Check(EditorApplication.isPlaying && EditorApplication.isPaused && root.IsReady && reports.CompletedNight == 0, "fresh paused Ready match required");
+        b.Simulation.Paused = true;
+        Find<CameraController>().LockCamera = true;
+        var log = new StringBuilder("E7 controlled ledger fixture; manual ECS ticks, body relocation/heal and clock phase transitions, not real five-night evidence.\n");
+        view.Initialize(reports, Find<DayNightClockUI>().GetComponentInParent<Canvas>());
+        Check(((Delegate)Field(reports, "NightClosed")).GetInvocationList().Count(d => d.Target == view) == 1, "duplicate consumer");
+        var initial = b.Gameplay.Statistics;
+        Check(initial.Granted.Wood == 100 && initial.Granted.Gold == 100 && initial.Granted.Meat == 100 && initial.Deposited.Wood == 0, "starting money misclassified");
+        b.Gameplay.AddResources(20, 30, 40); b.Gameplay.AddResources(-5, -7, -9);
+        var hall = Find<TownHall>();
+        b.Simulation.Paused = false;
+        Check(root.Research.Start("economy_tools", hall) == ResearchResult.Started, "research start");
+        b.Simulation.Paused = true;
+        var r = root.Research.State; r.Elapsed = root.Research.Duration - .025f;
+        b.Gameplay.EntityManager.SetComponentData(b.Gameplay.WalletEntity, r); Tick(b, 1);
+        var worker = game.GetFriendlyUnits(true).OfType<WorkerUnit>().First();
+        b.Gameplay.TryGetActor(hall.DotsEntity, out _, out var hallBody);
+        b.Gameplay.TryGetActor(worker.DotsEntity, out _, out var body);
+        body.Position = body.PreviousPosition = hallBody.Position;
+        b.Gameplay.EntityManager.SetComponentData(worker.DotsEntity, body);
+        var node = b.Gameplay.CreateResource(new GameplayResource { Position = body.Position, Radius = .3f, Type = 0, Capacity = 4 });
+        b.Gameplay.AssignResource(worker.DotsEntity, node);
+        for (int i = 0; i < 300 && b.Gameplay.EntityManager.GetComponentData<GameplayWorker>(worker.DotsEntity).Carried == 0; i++) Tick(b, 1);
+        var carried = b.Gameplay.EntityManager.GetComponentData<GameplayWorker>(worker.DotsEntity);
+        Check(carried.Carried > 0 && b.Gameplay.Statistics.Deposited.Wood == 0, "gather counted as deposit");
+        int amount = carried.Carried; carried.Phase = WorkPhase.Depositing; carried.Depot = hall.DotsEntity;
+        b.Gameplay.EntityManager.SetComponentData(worker.DotsEntity, carried); Tick(b, 1); b.Gameplay.CancelWork(worker.DotsEntity);
+        var soldier = game.GetFriendlyUnits(true).First(u => u is WarriorUnit);
+        b.Simulation.QueueDamage(soldier.DotsEntity, 100000); b.Simulation.QueueDamage(hall.DotsEntity, 7); Tick(b, 1, true);
+        body = b.Gameplay.EntityManager.GetComponentData<CombatBody>(hall.DotsEntity); body.Health += 3;
+        b.Gameplay.EntityManager.SetComponentData(hall.DotsEntity, body);
+        b.Simulation.QueueDamage(hall.DotsEntity, 5); Tick(b, 1, true);
+        var stats = b.Gameplay.Statistics;
+        Check(stats.Granted.Wood == 120 && stats.Granted.Gold == 130 && stats.Granted.Meat == 140, "grants");
+        Check(stats.Deposited.Wood == amount && stats.Spent.Wood == 45 && stats.Spent.Gold == 22 && stats.Spent.Meat == 9, "resource ledger");
+        Check(stats.UnitsLost == 1 && stats.ResearchCompleted == 1 && stats.TownHallDamage == 12, "combat/research ledger"); Balance(b);
+        int explored = fog.ExploredCellCount; Call(fog, "RefreshFog"); Call(fog, "RefreshFog");
+        Check(fog.ExploredCellCount >= explored, "exploration regressed");
+        explored = fog.ExploredCellCount; Call(fog, "RefreshFog"); Check(fog.ExploredCellCount == explored, "repeat fog counts cells twice");
+        Call(clock, "SetPhase", DayNightPhase.Night, true); Call(clock, "Tick", clock.Definition.NightDuration);
+        Check(reports.CompletedNight == 1 && view.DawnSignalCount == 1 && reports.LatestNight.Statistics.Equals(stats), "first cycle snapshot");
+        view.OpenLatest(); string text = view.DisplayedText;
+        var frozen = reports.LatestNight;
+        Find<GameFlowMenu>().Pause();
+        for (int i = 0; i < 20; i++) { view.Close(); view.OpenLatest(); clock.OnPhaseChanged.Invoke(DayNightPhase.Day); Call(b, "SynchronizeGameplay"); }
+        Check(view.DisplayedText == text && view.DawnSignalCount == 1 && b.Gameplay.Statistics.Equals(stats) && reports.LatestNight.Equals(frozen), "reopen/pause replay");
+        Find<GameFlowMenu>().Resume(); Balance(b);
+        log.AppendLine("PASS cycle1: " + Newtonsoft.Json.JsonConvert.SerializeObject(new { amount, stats, explored }));
+        log.AppendLine("PASS 20 close/open + duplicate Day signals under actual menu pause preserve wallet/counters/snapshot/chime count.");
+        b.Gameplay.AddResources(-3, 0, 0); b.Simulation.QueueDamage(hall.DotsEntity, 4); Tick(b, 1, true);
+        Call(clock, "SetPhase", DayNightPhase.Night, true); Call(clock, "Tick", clock.Definition.NightDuration);
+        var second = reports.LatestNight.Statistics;
+        Check(reports.CompletedNight == 2 && view.DawnSignalCount == 2 && second.Spent.Wood == 3 && second.Spent.Gold == 0
+            && second.Deposited.Wood == 0 && second.Granted.Wood == 0 && second.TownHallDamage == 4 && second.UnitsLost == 0 && second.ResearchCompleted == 0, "cycle2 includes cycle1 again");
+        Balance(b); view.OpenLatest();
+        log.AppendLine("PASS cycle2 delta only: " + Newtonsoft.Json.JsonConvert.SerializeObject(reports.LatestNight));
+        log.AppendLine("PASS total: " + Newtonsoft.Json.JsonConvert.SerializeObject(reports.Total));
+        Save("controlled-ledger.txt", log.ToString()); return log.ToString();
+    }
+    public static string FinalizeFixture()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var clock = Find<DayNightCycleManager>();
+        typeof(DayNightCycleManager).GetProperty("CurrentDay").SetValue(clock, 6);
+        Call(Find<MatchSession>(), "LateUpdate");
+        Check(root.Reports.IsFrozen && Find<SwarmGameBridge>().Gameplay.Outcome == MatchOutcome.Victory, "terminal fixture");
+        string text = "TỔNG TRẬN\n" + MatchReportText.Format(root.Reports.Total);
+        Check(Find<MatchSession>().ResultStatisticsText == text && Time.timeScale == 0, "result definitions differ");
+        Save("result-fixture.txt", "PASS injected day6 tests terminal UI only, not survival evidence.\n" + text);
+        return "PASS result uses exactly the same frozen snapshot/formatter; step then capture.";
+    }
+    public static string CaptureReport() { Capture("controlled-report.png"); return "Saved report Game View"; }
+    public static string CaptureResult() { Capture("controlled-result.png"); return "Saved terminal fixture Game View"; }
+    public static string BaselineAB()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var view = root.DawnReport; var b = Find<SwarmGameBridge>(); var clock = Find<DayNightCycleManager>();
+        Check(EditorApplication.isPlaying && EditorApplication.isPaused && !root.Reports.IsFrozen, "nonterminal paused fixture required");
+        var before = root.Reports.Total; var wallet = b.Gameplay.Wallet; var rng = JsonUtility.ToJson(UnityEngine.Random.state);
+        float phaseProgress = clock.CurrentPhaseProgress, previousScale = Time.timeScale;
+        bool previousBackground = Application.runInBackground, previousPause = b.Simulation.Paused;
+        Time.timeScale = 0; Application.runInBackground = true; b.Simulation.Paused = true;
+        var gc = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "GC Allocated In Frame");
+        var rows = new List<(int block, bool open, double ms, long bytes, bool focused)>();
+        double start = EditorApplication.timeSinceStartup, blockStart = start;
+        int block = 0, lastFrame = -1; view.Close();
+        EditorApplication.CallbackFunction update = null;
+        void Finish(string error)
+        {
+            EditorApplication.update -= update; gc.Dispose(); view.Close();
+            Time.timeScale = previousScale; Application.runInBackground = previousBackground; b.Simulation.Paused = previousPause;
+            EditorApplication.isPaused = true;
+            var text = new StringBuilder("block,report_open,frame_ms,gc_bytes,focused\n");
+            foreach (var row in rows) text.AppendLine($"{row.block},{row.open},{row.ms.ToString("F5", System.Globalization.CultureInfo.InvariantCulture)},{row.bytes},{row.focused}");
+            Save("editor-ab.csv", text.ToString());
+            var groups = rows.GroupBy(r => r.block).Select(g =>
+            {
+                var ms = g.Select(r => r.ms).OrderBy(x => x).ToArray(); var bytes = g.Select(r => r.bytes).OrderBy(x => x).ToArray();
+                return new { block = g.Key, reportOpen = g.First().open, frames = ms.Length, medianMs = ms[ms.Length / 2], p95Ms = ms[(int)((ms.Length - 1) * .95)], medianGc = bytes[bytes.Length / 2], focusStates = g.Select(r => r.focused).Distinct().ToArray() };
+            }).ToArray();
+            bool statsStable = before.Equals(root.Reports.Total), walletStable = wallet.Equals(b.Gameplay.Wallet), clockStable = phaseProgress == clock.CurrentPhaseProgress, rngStable = rng == JsonUtility.ToJson(UnityEngine.Random.state);
+            bool stable = statsStable && walletStable && clockStable && rngStable;
+            Save("editor-ab.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { scope = "Editor GameView UI closed/open ABBA; frozen world, timeScale0, not Player or a G5 frame gate", groups, stable, statsStable, walletStable, clockStable, rngStable, error, resolution = new[] { Screen.width, Screen.height }, vsync = QualitySettings.vSyncCount, targetFps = Application.targetFrameRate }, Newtonsoft.Json.Formatting.Indented));
+        }
+        update = () =>
+        {
+            try
+            {
+                double now = EditorApplication.timeSinceStartup;
+                if (!EditorApplication.isPlaying || now - start > 80) { Finish("watchdog/Play stopped"); return; }
+                if (Time.frameCount != lastFrame && now - blockStart > 1)
+                { lastFrame = Time.frameCount; rows.Add((block, view.IsOpen, Time.unscaledDeltaTime * 1000.0, gc.LastValue, Application.isFocused)); }
+                if (now - blockStart < 5) return;
+                block++; if (block == 4) { Finish(""); return; }
+                blockStart = now; if (block == 1 || block == 2) view.OpenLatest(); else view.Close();
+            }
+            catch (Exception error) { Finish(error.ToString()); }
+        };
+        EditorApplication.update += update; EditorApplication.isPaused = false;
+        return "Recording20s Editor frozen-world ABBA: closed/open/open/closed, 1s warmup each block. No Player performance claim.";
+    }
+
+    public static string CleanupAndMenu()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var reports = root.Reports; var view = root.DawnReport;
+        var clock = Find<DayNightCycleManager>(); var canvasRoot = (GameObject)Field(view, "m_Root"); var chime = (AudioClip)Field(view, "m_Chime");
+        SessionState.SetString("E7.Owned", canvasRoot.GetInstanceID() + "," + chime.GetInstanceID());
+        UnityEngine.Object.DestroyImmediate(view);
+        var listeners = (Delegate)Field(reports, "NightClosed"); Check(listeners == null || listeners.GetInvocationList().All(d => d.Target != (object)view), "view listener retained");
+        reports.Dispose(); reports.Dispose();
+        Check(clock.OnPhaseChanged.GetInvocationList().All(d => d.Target != (object)reports), "service clock listener retained");
+        Save("lifecycle.txt", "PASS component destroy unsubscribes; Dispose twice safely removes clock listener.\n");
+        Find<GameFlowMenu>().ReturnToMenu(); return "Destroyed E7 presentation/disposed service; menu loading, step then Reload.";
+    }
+    public static string Reload()
+    {
+        Check(SessionState.GetString("E7.Owned", "").Split(',').Select(int.Parse).All(id => EditorUtility.InstanceIDToObject(id) == null), "owned UI/chime leaked");
+        Check(Find<GameSceneCompositionRoot>() == null, "menu retained root");
+        Find<GameFlowMenu>().Play(); return "New match requested; step then CheckFresh.";
+    }
+    public static string CheckFresh()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var stats = root.Reports.Total.Statistics;
+        Check(root.IsReady && root.DawnReport.DawnSignalCount == 0 && root.Reports.CompletedNight == 0 && !root.Reports.IsFrozen
+            && stats.Spent.Wood == 0 && stats.Deposited.Wood == 0 && stats.UnitsLost == 0 && stats.ResearchCompleted == 0 && stats.TownHallDamage == 0
+            && stats.Granted.Wood == 100 && !root.DawnReport.IsOpen, "match reports/counters not fresh");
+        File.AppendAllText(Dir + "lifecycle.txt", "PASS menu removes owned UI/chime; new match Ready with reset counters, no dawn/closed report, initial grant100 separated.\n");
+        return "PASS fresh report context; suitable for natural run.";
+    }
+    public static string ActiveUnload()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var view = root.DawnReport;
+        SessionState.SetString("E7.ActiveOwned", ((GameObject)Field(view, "m_Root")).GetInstanceID() + "," + ((AudioClip)Field(view, "m_Chime")).GetInstanceID());
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene"); return "Directly unloading active E7 into legacy; step then CheckLegacy.";
+    }
+    public static string CheckLegacy()
+    {
+        Check(Find<GameSceneCompositionRoot>() == null && Find<DawnReportPresentation>() == null, "legacy gained report consumer");
+        Check(SessionState.GetString("E7.ActiveOwned", "").Split(',').Select(int.Parse).All(id => EditorUtility.InstanceIDToObject(id) == null), "active unload leaked UI/chime");
+        File.AppendAllText(Dir + "lifecycle.txt", "PASS direct scene unload of active E7 removes UI/chime; SampleScene has no report consumer/root.\n");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ProceduralGame"); return "Legacy passed; loading fresh procedural. Step then CheckFresh.";
+    }
+    public static string CaptureNextDawn()
+    {
+        var root = Find<GameSceneCompositionRoot>(); int target = root.Reports.CompletedNight + 1, frame = -1;
+        double started = EditorApplication.timeSinceStartup;
+        EditorApplication.CallbackFunction update = null;
+        update = () =>
+        {
+            if (!EditorApplication.isPlaying || root == null || EditorApplication.timeSinceStartup - started > 170)
+            { EditorApplication.update -= update; return; }
+            if (root.Reports.CompletedNight < target) return;
+            if (frame < 0) { frame = Time.frameCount; return; }
+            if (Time.frameCount <= frame + 1) return;
+            EditorApplication.update -= update;
+            Capture("natural-dawn.png");
+            var audio = (AudioSource)Field(root.DawnReport, "m_Audio");
+            Save("natural-dawn.txt", $"Natural dawn{root.Reports.CompletedNight}; signals={root.DawnReport.DawnSignalCount}; timeScale={Time.timeScale}; reportOpen={root.DawnReport.IsOpen}; sourcePlaying={audio.isPlaying}; clip={audio.clip.name}. Software playback state, not confirmation of physical audibility.\n");
+        };
+        EditorApplication.update += update; return "Armed one read-only capture on next natural dawn; no clock/gameplay edits.";
+    }
+    public static string AuditFiles()
+    {
+        var result = Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(Dir + "natural-result.json"));
+        Check((string)result["outcome"] == "Victory" && (int)result["completedNights"] == 5 && (int)result["signals"] == 5, "natural five-night completion");
+        var totals = result["total"]; var sums = new Dictionary<string, double>();
+        string[] resources = { "Wood", "Gold", "Meat" }, categories = { "Deposited", "Spent", "Granted" };
+        int checkedSamples = 0, dawns = 0;
+        foreach (string line in File.ReadAllLines(Dir + "natural-five-nights.txt"))
+        {
+            if (line.StartsWith("t="))
+            {
+                int walletAt = line.IndexOf("wallet=") + 7, statsAt = line.IndexOf(";stats=");
+                var wallet = line.Substring(walletAt, statsAt - walletAt).Split('/').Select(long.Parse).ToArray();
+                var sample = Newtonsoft.Json.Linq.JObject.Parse(line.Substring(statsAt + 7))["Statistics"];
+                for (int i = 0; i < 3; i++) Check(wallet[i] == (long)sample["Granted"][resources[i]] + (long)sample["Deposited"][resources[i]] - (long)sample["Spent"][resources[i]], "sample balance " + checkedSamples);
+                checkedSamples++;
+            }
+            if (!line.StartsWith("dawn=")) continue;
+            dawns++; var snapshot = Newtonsoft.Json.Linq.JObject.Parse(line.Substring(line.IndexOf("snapshot=") + 9));
+            void Sum(string key, double value) { sums.TryGetValue(key, out double old); sums[key] = old + value; }
+            foreach (string category in categories) foreach (string resource in resources)
+                Sum(category + "." + resource, (double)snapshot["Statistics"][category][resource]);
+            foreach (string counter in new[] { "UnitsLost", "ResearchCompleted", "TownHallDamage" }) Sum(counter, (double)snapshot["Statistics"][counter]);
+            Sum("ExploredCells", (double)snapshot["ExploredCells"]);
+        }
+        Check(dawns == 5 && checkedSamples >= 40, "missing natural samples/dawns");
+        var terminalTail = new Dictionary<string, double>();
+        foreach (var pair in sums)
+        {
+            double value;
+            if (pair.Key == "ExploredCells") value = (double)totals["ExploredCells"];
+            else if (pair.Key.Contains(".")) { var key = pair.Key.Split('.'); value = (double)totals["Statistics"][key[0]][key[1]]; }
+            else value = (double)totals["Statistics"][pair.Key];
+            Check(value + .0001 >= pair.Value, "night sums exceed cumulative: " + pair.Key);
+            terminalTail[pair.Key] = value - pair.Value;
+        }
+        for (int i = 0; i < 3; i++) Check((long)result["wallet"][resources[i]] == (long)totals["Statistics"]["Granted"][resources[i]]
+            + (long)totals["Statistics"]["Deposited"][resources[i]] - (long)totals["Statistics"]["Spent"][resources[i]], "terminal wallet");
+        var parsed = totals.ToObject<MatchReportSnapshot>();
+        Check((string)result["resultText"] == "TỔNG TRẬN\n" + MatchReportText.Format(parsed), "terminal formatting not identical");
+        var ab = Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(Dir + "editor-ab.json"));
+        Check((bool)ab["stable"] && (string)ab["error"] == "" && ab["groups"].Count() == 4, "invalid AB baseline");
+        Save("ledger-audit.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { passed = true, checkedSamples, dawns,
+            dawnSums = sums, terminalTail, terminalWalletReconciled = true, sameResultFormatter = true, editorABStable = true }, Newtonsoft.Json.Formatting.Indented));
+        return $"PASS independent file audit: {checkedSamples} wallet samples,5 dawns,terminal equation/same formatter and stable AB. Tail records any transactions after final dawn boundary.";
+    }
+    public static void Capture(string name)
+    {
+        var view = EditorWindow.GetWindow(typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView")); view.Repaint();
+        var render = (RenderTexture)view.GetType().GetField("m_RenderTexture", Private).GetValue(view);
+        var old = RenderTexture.active; var image = new Texture2D(render.width, render.height, TextureFormat.RGB24, false);
+        try
+        {
+            RenderTexture.active = render; image.ReadPixels(new Rect(0, 0, render.width, render.height), 0, 0); image.Apply();
+            if (SystemInfo.graphicsUVStartsAtTop)
+            {
+                var pixels = image.GetPixels32();
+                for (int y = 0; y < render.height / 2; y++) for (int x = 0; x < render.width; x++)
+                { int a = y * render.width + x, b = (render.height - 1 - y) * render.width + x; var p = pixels[a]; pixels[a] = pixels[b]; pixels[b] = p; }
+                image.SetPixels32(pixels); image.Apply();
+            }
+            Directory.CreateDirectory(Dir); File.WriteAllBytes(Dir + name, image.EncodeToPNG());
+        }
+        finally { RenderTexture.active = old; UnityEngine.Object.DestroyImmediate(image); }
+    }
+}
+
+
+// Bounded normal PlayerLoop run, timeScale1. Commands obey existing costs/queues; no clock injection or grants.
+public static class GameExperienceE7Natural
+{
+    const string Dir = "Docs/Modules/GameExperience/Evidence/E7/";
+    const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
+    static T Find<T>() where T : UnityEngine.Object => UnityEngine.Object.FindFirstObjectByType<T>();
+    static object Field(object obj, string name) => obj.GetType().GetField(name, Private).GetValue(obj);
+    public static string Start()
+    {
+        var root = Find<GameSceneCompositionRoot>(); var b = Find<SwarmGameBridge>(); var gp = b.Gameplay; var em = gp.EntityManager;
+        var game = Find<GameManager>(); var clock = Find<DayNightCycleManager>(); var fog = Find<FogOfWarManager>(); var hall = Find<TownHall>();
+        if (!EditorApplication.isPlaying || !EditorApplication.isPaused || !root.IsReady || root.Reports.CompletedNight != 0
+            || clock.CurrentDay != 1 || clock.CurrentPhase != DayNightPhase.Day || gp.Wallet.Wood != 100 || fog.IsDisabled || Time.timeScale != 1)
+            throw new Exception("E7 natural requires fresh Ready/paused Day1, original wallet and fog.");
+        var query = em.CreateEntityQuery(typeof(GameplayResource));
+        var log = new StringBuilder("E7 natural Editor match, seed1, unmodified balance/60-30-45 clock, Unity PlayerLoop/timeScale1.\nPolicy: gather nearest available W/G/M, up to8 workers; existing Barrack/Archery queues if present, army defensive ring/auto-acquire; research tools,cargo,archery,training,outposts,fortify. No grants/teleport/phase injection or forced targets.\n");
+        var roles = new Dictionary<Entity, int>(); var rallied = new HashSet<Entity>();
+        var progress = new Dictionary<Entity, (Vector2 pos, int cargo, float time)>();
+        var rejected = new Dictionary<Entity, HashSet<Entity>>();
+        var workerAction = AssetDatabase.LoadAssetAtPath<SpawnVillagerActionSO>("Assets/Game/ScriptableObjects/Units/SpawnVillagerAction.asset");
+        var soldierAction = AssetDatabase.LoadAssetAtPath<SpawnWarriorActionSO>("Assets/Game/ScriptableObjects/Units/SpawnWarriorAction.asset");
+        var archerAction = AssetDatabase.LoadAssetAtPath<SpawnArcherActionSO>("Assets/Game/ScriptableObjects/Units/SpawnArcherAction.asset");
+        string[] order = { "economy_tools", "economy_cargo", "military_archery", "military_training", "expansion_tower", "expansion_fortify" };
+        bool oldBackground = Application.runInBackground; Application.runInBackground = true;
+        float started = Time.time, nextPolicy = 0, nextLog = 0, closeReportAt = float.PositiveInfinity;
+        double wall = EditorApplication.timeSinceStartup;
+        int reported = 0, endingFrames = 0, pendingDawn = 0, dawnFrame = -1; var photos = new HashSet<string>();
+        var camera = Camera.main; camera.transform.position = new Vector3(hall.transform.position.x, hall.transform.position.y, camera.transform.position.z); camera.orthographicSize = 6;
+        var controller = Find<CameraController>(); bool previousCameraLock = controller.LockCamera; controller.LockCamera = true;
+        var capturePosition = camera.transform.position;
+        void Balance()
+        {
+            var s = gp.Statistics; var w = gp.Wallet;
+            if (w.Wood != s.Granted.Wood + s.Deposited.Wood - s.Spent.Wood || w.Gold != s.Granted.Gold + s.Deposited.Gold - s.Spent.Gold
+                || w.Meat != s.Granted.Meat + s.Deposited.Meat - s.Spent.Meat) throw new Exception("Natural ledger mismatch");
+            if (s.Granted.Wood != 100 || s.Granted.Gold != 100 || s.Granted.Meat != 100) throw new Exception("Unexpected external grant");
+            if (Vector3.Distance(camera.transform.position, capturePosition) > .01f || Mathf.Abs(camera.orthographicSize - 6) > .001f) throw new Exception("Capture camera moved");
+        }
+        void Policy(float elapsed)
+        {
+            var workers = game.GetFriendlyUnits(true).OfType<WorkerUnit>().Where(u => u != null && u.CurrentHealth > 0 && u.IsDotsControlled).ToArray();
+            if (gp.Research.Active == 0)
+            {
+                string id = order.FirstOrDefault(t => !root.Research.IsUnlocked(t));
+                if (id != null) root.Research.Start(id, hall);
+            }
+            if (workers.Length < 8 && em.Exists(hall.DotsEntity) && em.GetBuffer<TrainingRequest>(hall.DotsEntity).Length == 0 && gp.Wallet.Meat >= workerAction.MeatCost)
+                if (hall.EnqueueVillagerSpawn(workerAction)) game.AddResources(0, 0, -workerAction.MeatCost);
+            var barrack = Find<Barrack>(); var archery = Find<ArcheryRange>();
+            var army = game.GetFriendlyUnits(true).Where(u => (u is WarriorUnit || u is RangerUnit) && u.CurrentHealth > 0 && u.IsDotsControlled).ToArray();
+            bool Affordable(IResourceCostAction cost) => gp.Wallet.Wood >= cost.WoodCost && gp.Wallet.Gold >= cost.GoldCost && gp.Wallet.Meat >= cost.MeatCost;
+            if (barrack != null && barrack.IsDotsControlled && army.Count(u => u is WarriorUnit) < 8
+                && em.GetBuffer<TrainingRequest>(barrack.DotsEntity).Length == 0 && Affordable(soldierAction) && barrack.EnqueueWarriorSpawn(soldierAction))
+                game.AddResources(-soldierAction.GoldCost, -soldierAction.WoodCost, -soldierAction.MeatCost);
+            if (archery != null && archery.IsDotsControlled && gp.CanUseArchery && army.Count(u => u is RangerUnit) < 6
+                && em.GetBuffer<TrainingRequest>(archery.DotsEntity).Length == 0 && Affordable(archerAction) && archery.EnqueueArcherSpawn(archerAction))
+                game.AddResources(-archerAction.GoldCost, -archerAction.WoodCost, -archerAction.MeatCost);
+            foreach (var unit in army)
+            {
+                if (rallied.Add(unit.DotsEntity))
+                {
+                    float angle = rallied.Count * 2.39996f;
+                    gp.SetStance(unit.DotsEntity, true);
+                    b.MoveActor(unit, hall.transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * 3, true);
+                }
+            }
+            if (clock.CurrentPhase != DayNightPhase.Day) return;
+            using var nodes = query.ToEntityArray(Allocator.Temp);
+            foreach (var unit in workers)
+            {
+                var entity = unit.DotsEntity; if (!roles.ContainsKey(entity)) roles[entity] = roles.Count;
+                gp.TryGetWorker(entity, out var data); gp.TryGetActor(entity, out var actor, out var body);
+                var pos = (Vector2)body.Position;
+                if (!progress.TryGetValue(entity, out var last) || Vector2.Distance(pos, last.pos) > .2f || data.Carried != last.cargo)
+                    progress[entity] = last = (pos, data.Carried, elapsed);
+                bool stalled = data.Phase == WorkPhase.Gathering && data.Carried == 0 && elapsed - last.time > 15;
+                if (data.Phase != WorkPhase.None && em.Exists(data.Node) && !stalled) continue;
+                if (stalled)
+                {
+                    if (!rejected.TryGetValue(entity, out var set)) rejected[entity] = set = new HashSet<Entity>();
+                    set.Add(data.Node); gp.CancelWork(entity); progress[entity] = (pos, data.Carried, elapsed);
+                }
+                int role = roles[entity] % 4; int type = role < 2 ? 0 : role == 2 ? 1 : 2;
+                var node = nodes.ToArray().Where(e => { var r = em.GetComponentData<GameplayResource>(e); return r.Type == type && r.Claims < r.Capacity && (!rejected.TryGetValue(entity, out var set) || !set.Contains(e)); })
+                    .OrderBy(e => math.distancesq(body.Position, em.GetComponentData<GameplayResource>(e).Position)).FirstOrDefault();
+                if (node != Entity.Null) gp.AssignResource(entity, node);
+            }
+        }
+        Directory.CreateDirectory(Dir);
+        EditorApplication.CallbackFunction update = null;
+        void Finish(string error)
+        {
+            EditorApplication.update -= update; query.Dispose(); Application.runInBackground = oldBackground;
+            controller.LockCamera = previousCameraLock;
+            log.AppendLine($"finished wall={EditorApplication.timeSinceStartup-wall:F3};gameSeconds={Time.time-started:F3};outcome={gp.Outcome};completedNights={root.Reports.CompletedNight};signals={root.DawnReport.DawnSignalCount};error={error}");
+            File.WriteAllText(Dir + "natural-five-nights.txt", log.ToString());
+            EditorApplication.isPaused = true;
+        }
+        update = () =>
+        {
+            try
+            {
+                if (!EditorApplication.isPlaying) { Finish("Play stopped early"); return; }
+                if (EditorApplication.isPaused) return;
+                float elapsed = Time.time - started;
+                if (EditorApplication.timeSinceStartup - wall > 1100) { Finish("wall watchdog"); return; }
+                Balance();
+                if (!gp.IsMatchOver && elapsed >= nextPolicy) { nextPolicy = elapsed + 5; Policy(elapsed); }
+                if (elapsed >= nextLog)
+                {
+                    nextLog = elapsed + 15;
+                    float hp = em.Exists(hall.DotsEntity) ? em.GetComponentData<CombatBody>(hall.DotsEntity).Health : 0;
+                    log.AppendLine($"t={elapsed:F3};day={clock.CurrentDay};phase={clock.CurrentPhase};HP={hp};wallet={gp.Wallet.Wood}/{gp.Wallet.Gold}/{gp.Wallet.Meat};stats=" + Newtonsoft.Json.JsonConvert.SerializeObject(root.Reports.Total));
+                    File.WriteAllText(Dir + "natural-five-nights.txt", log.ToString());
+                }
+                string phase = clock.CurrentPhase.ToString();
+                if (clock.CurrentDay == 1 && clock.CurrentPhaseProgress >= .5f && photos.Add(phase))
+                    GameExperienceE7Validation.Capture("natural-" + phase + ".png");
+                if (root.Reports.CompletedNight > reported)
+                {
+                    reported = root.Reports.CompletedNight;
+                    log.AppendLine("dawn=" + reported + ";snapshot=" + Newtonsoft.Json.JsonConvert.SerializeObject(root.Reports.LatestNight));
+                    root.DawnReport.OpenLatest();
+                    closeReportAt = elapsed + 2;
+                    pendingDawn = reported; dawnFrame = Time.frameCount;
+                }
+                if (pendingDawn > 0 && !gp.IsMatchOver && Time.frameCount > dawnFrame + 1)
+                {
+                    if (pendingDawn == 1 || pendingDawn == 4)
+                    {
+                        GameExperienceE7Validation.Capture("natural-dawn-" + pendingDawn + ".png");
+                        if (pendingDawn == 4)
+                        {
+                            GameExperienceE7Validation.Capture("natural-dawn.png");
+                            var audio = (AudioSource)Field(root.DawnReport, "m_Audio");
+                            File.WriteAllText(Dir + "natural-dawn.txt", $"Natural dawn4;signals={root.DawnReport.DawnSignalCount};timeScale={Time.timeScale};reportOpen={root.DawnReport.IsOpen};sourcePlaying={audio.isPlaying};camera={camera.transform.position};orthographicSize={camera.orthographicSize};cameraLocked={controller.LockCamera}. Software playback, not physical audibility confirmation.\n");
+                        }
+                    }
+                    pendingDawn = 0;
+                }
+                if (elapsed >= closeReportAt) { root.DawnReport.Close(); closeReportAt = float.PositiveInfinity; }
+                // Give the Game View a rendered frame before saving terminal UI.
+                if (gp.IsMatchOver && ++endingFrames >= 4)
+                {
+                    Balance();
+                    File.WriteAllText(Dir + "natural-result.json", Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    { outcome = gp.Outcome.ToString(), completedNights = root.Reports.CompletedNight, signals = root.DawnReport.DawnSignalCount,
+                        total = root.Reports.Total, wallet = gp.Wallet, resultText = Find<MatchSession>().ResultStatisticsText, duration = elapsed,
+                        wallSeconds = EditorApplication.timeSinceStartup - wall, unity = Application.unityVersion, editor = true, timeScaleBeforeTerminal = 1,
+                        durations = new[] { clock.Definition.DayDuration, clock.Definition.DuskDuration, clock.Definition.NightDuration }, fogEnabled = !fog.IsDisabled,
+                        cameraPosition = camera.transform.position, cameraLocked = controller.LockCamera, orthographicSize = camera.orthographicSize, resolution = new[] { Screen.width, Screen.height } }, Newtonsoft.Json.Formatting.Indented));
+                    GameExperienceE7Validation.Capture("natural-result.png"); Finish("");
+                }
+            }
+            catch (Exception error) { Finish(error.ToString()); }
+        };
+        EditorApplication.update += update;
+        EditorApplication.isPaused = false;
+        return "Armed natural five-night Editor run (675 game seconds, watchdog1100wall). No manual simulation/clock ticks; writing progress every15game seconds.";
+    }
+}

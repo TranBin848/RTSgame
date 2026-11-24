@@ -222,7 +222,7 @@ Trình tự thực hiện sau khi duyệt: chỉ mở **G0–G1** trước, tạ
 | G2 Áp lực sinh tồn | DONE — shortlist | [9native+1realtime](G2-PressurePilot.md); C1600 thuađêm4, E/M thắng; realtimeE thắng/Hall1338. Author1600 chỉProceduralGame; bước tiếpG3 |
 | G3 Tech/mở rộng/manual | CHỜ NGƯỜI CHƠI | Hall 1200 HP, đã sửa ảnh hưởng của móng kho lên wave và đo lợi ích vận chuyển. Chờ hai trận kinh tế/quân sự và một lần thử mở rộng. [Báo cáo G3](G3-EconomyExpansion.md) |
 | G4 Spike attribution | DONE — phạm vi navigation | Development Player cùng workload ghi GC ở tick đầu đêm giảm từ 1.020.416 B xuống 21.648 B. EditMode 81/81 và Player smoke 18/18. Spike frame 116,49 ms chưa tái lập. [Báo cáo G4](G4-FrameProfiling.md) |
-| G5 Release/onscreen | PARTIAL — budget chưa đạt | Windows Release smoke 18/18, bốn lượt 1080p có 3/4 đạt p95 ≤ 16,67 ms, startup đủ năm mẫu. Đã trace Development cho frame chậm. [Báo cáo G5](G5-ReleaseOnscreen.md) |
+| G5 Release/onscreen | PASS budget trên candidate/batch E10 ngày24/11 | 4/4lượt chuẩn1080p/Ultra p95≈13,888ms; thêm8đèn/32pulse/94quái p95=13,8952ms,0frame mấtfocus;18/18Player smoke. Artifact21/11 vẫn3/4, không sửa lịch sử. [E10/raw/config/giới hạn](../GameExperience/E10-ReleaseHandoff.md) |
 | G6 Bản nộp | TODO | Chưa chốt release candidate |
 | G7 Demo/tài liệu bảo vệ | TODO | Chưa tạo artifact theo mẫu trường |
 

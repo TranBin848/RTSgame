@@ -17,6 +17,25 @@ public sealed class MatchSession : MonoBehaviour
     DayNightCycleManager m_Day;
     GameManager m_Game;
     bool m_ResultShown;
+    MatchReportService m_Reports;
+    Text m_ResultStatistics;
+    public string ResultStatisticsText => m_ResultStatistics != null ? m_ResultStatistics.text : "";
+
+    public void InitializeReports(MatchReportService reports)
+    {
+        if (reports == null) throw new ArgumentNullException(nameof(reports));
+        if (m_Reports != null) { if (m_Reports != reports) throw new InvalidOperationException("Result reports belong to another match."); return; }
+        m_Reports = reports;
+        m_ResultPanel.GetComponentInParent<Canvas>().sortingOrder = 4000;
+        m_ResultPanel.GetComponent<Image>().color = new Color(.02f, .04f, .07f, 1);
+        var go = new GameObject("Result statistics", typeof(RectTransform)); go.transform.SetParent(m_ResultPanel.transform, false);
+        m_ResultStatistics = go.AddComponent<Text>(); m_ResultStatistics.font = m_ResultLabel.font; m_ResultStatistics.fontSize = 25;
+        m_ResultStatistics.color = Color.white; m_ResultStatistics.raycastTarget = false; m_ResultStatistics.alignment = TextAnchor.MiddleCenter;
+        var rect = m_ResultStatistics.rectTransform; rect.sizeDelta = new Vector2(1050, 330); rect.anchoredPosition = new Vector2(0, 25);
+        m_ResultLabel.rectTransform.anchoredPosition = new Vector2(0, 280);
+        m_ReplayButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -220);
+        m_MenuButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -310);
+    }
 
     public void Initialize(GameplaySimulationSystem gameplay, DayNightCycleManager day, GameManager game)
     {
@@ -51,6 +70,7 @@ public sealed class MatchSession : MonoBehaviour
             ? $"VICTORY\nSurvived {m_SurvivalNights} nights!"
             : $"DEFEAT\nYour last TownHall fell on day {m_Day.CurrentDay}.";
         m_ResultPanel.SetActive(true);
+        if (m_Reports != null) { m_Reports.Freeze(); m_ResultStatistics.text = "TỔNG TRẬN\n" + MatchReportText.Format(m_Reports.Total); }
         Time.timeScale = 0;
     }
 }

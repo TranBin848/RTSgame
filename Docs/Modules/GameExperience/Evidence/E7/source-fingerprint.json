@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-24",
+  "files": [
+    {
+      "path": "Assets/Game/DOTS/Runtime/MatchStatistics.cs",
+      "sha256": "35ee856da281745ad96834925731b895a300dfb241653d9eb2125038c5f88e14"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplaySimulationSystem.cs",
+      "sha256": "d146f863aa8855e9ed716bc0c889138aa14e388b41d2e489abd3e76153117feb"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/GameplayResearch.cs",
+      "sha256": "60dcbdbc24dc8e277cb8c9427465c770931503fdc924139da783af02c2eedf69"
+    },
+    {
+      "path": "Assets/Game/DOTS/Runtime/SwarmSimulationSystem.cs",
+      "sha256": "aae6ca81ec83da939b93ccbb18b3ff0b81f163c169d7309f0a24c8329a0f4651"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/MatchReportService.cs",
+      "sha256": "4f2b8215115964fb7ffae0888efe8b468e3c4f7ee274b31e7800e0c68439b2d3"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/MatchSession.cs",
+      "sha256": "d5e7188795b79ec788a5dbe6b6ba579b7f2f8ed3c5be652df2163f3cf59b2393"
+    },
+    {
+      "path": "Assets/Game/DOTS/Integration/GameSceneCompositionRoot.cs",
+      "sha256": "dd6d1b018a9e9702561288bfc81af7c474e56eda8f28bdb4af50efaa0db5417f"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Integration/DawnReportPresentation.cs",
+      "sha256": "f6eec60b9b90bdb6b2204e1d2adf41471322542311ddac5c1c4e1694f55d290b"
+    },
+    {
+      "path": "Assets/Game/Scripts/Managers/FogOfWarManager.cs",
+      "sha256": "529649522287414144b591374f3f51182531898758738965439aacb0e978b027"
+    },
+    {
+      "path": "Assets/Game/DOTS/Tests/Editor/GameplaySimulationTests.cs",
+      "sha256": "43e610ace6b0758c8ada627a009c6a0441c6633b0d536faa1ffee8e37f8c6afe"
+    },
+    {
+      "path": "Assets/Scenes/ProceduralGame.unity",
+      "sha256": "428a94fbbf03e5f97071bca915a81ac29af7ff50d0b8e71530ffb021eb29ebed"
+    },
+    {
+      "path": "Assets/Game/ProceduralGeneration/Settings/EnvironmentPresentation.asset",
+      "sha256": "85ea34c84f2e9374bd844b885ce8d8760d25789505f0842c4f1c363edda0266a"
+    },
+    {
+      "path": "Tools/ValidateGameExperienceE7.cs",
+      "sha256": "e2688bc16cf74bc12d1877bd0939f01b5d500a7c515b66b56873e661fff5057b"
+    },
+    {
+      "path": "Tools/CaptureGameExperienceE7.cs",
+      "sha256": "549c5f22a84cd4905bbbcf46850a249854479979e1a6a795f330f6c93c5701c7"
+    }
+  ],
+  "scope": "Final source/config only, not a Player build. Executed natural snippet preserved separately.",
+  "unity": "6000.3.11f1"
+}

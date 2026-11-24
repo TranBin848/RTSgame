@@ -1,0 +1,1 @@
+Natural dawn4;signals=4;timeScale=1;reportOpen=True;sourcePlaying=True;camera=(-12.14, -3.20, -10.00);orthographicSize=6;cameraLocked=True. Software playback, not physical audibility confirmation.

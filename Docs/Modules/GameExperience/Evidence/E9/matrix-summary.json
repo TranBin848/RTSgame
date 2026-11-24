@@ -1,0 +1,650 @@
+{
+  "schema": "E9-matrix-v1",
+  "scope": "Controlled Editor .05s policy ticks, not human win rate or Player performance",
+  "runs": 16,
+  "deterministic": true,
+  "rows": [
+    {
+      "file": "20261124T075133223-hp1200-control-0.txt",
+      "seed": 0,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 395.75,
+      "hallHP": 0,
+      "spawned": 42,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075204242-hp1200-economy-0.txt",
+      "seed": 0,
+      "policy": "economy",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 1200,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 1050,
+          "Gold": 430,
+          "Meat": 306
+        },
+        "Spent": {
+          "Wood": 410,
+          "Gold": 440,
+          "Meat": 400
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 6,
+        "TownHallDamage": 0
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075250936-hp1200-military-0.txt",
+      "seed": 0,
+      "policy": "military",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 1200,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 600,
+          "Gold": 260,
+          "Meat": 280
+        },
+        "Spent": {
+          "Wood": 310,
+          "Gold": 360,
+          "Meat": 340
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 5,
+        "TownHallDamage": 0
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075337609-hp1200-expansion-0.txt",
+      "seed": 0,
+      "policy": "expansion",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 1200,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 540,
+          "Gold": 240,
+          "Meat": 225
+        },
+        "Spent": {
+          "Wood": 150,
+          "Gold": 330,
+          "Meat": 320
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 1,
+        "TownHallDamage": 0
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075427906-hp1200-control-1.txt",
+      "seed": 1,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 269.35,
+      "hallHP": 0,
+      "spawned": 27,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075453304-hp1200-economy-1.txt",
+      "seed": 1,
+      "policy": "economy",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 1200,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 1440,
+          "Gold": 260,
+          "Meat": 199
+        },
+        "Spent": {
+          "Wood": 410,
+          "Gold": 360,
+          "Meat": 270
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 6,
+        "TownHallDamage": 0
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075544924-hp1200-military-1.txt",
+      "seed": 1,
+      "policy": "military",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 728,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 730,
+          "Gold": 250,
+          "Meat": 168
+        },
+        "Spent": {
+          "Wood": 410,
+          "Gold": 340,
+          "Meat": 220
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 6,
+        "TownHallDamage": 472
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075635968-hp1200-expansion-1.txt",
+      "seed": 1,
+      "policy": "expansion",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 1200,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 640,
+          "Gold": 260,
+          "Meat": 285
+        },
+        "Spent": {
+          "Wood": 150,
+          "Gold": 350,
+          "Meat": 350
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 1,
+        "TownHallDamage": 0
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075730286-hp1200-control-1543.txt",
+      "seed": 1543,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 373.15,
+      "hallHP": 0,
+      "spawned": 32,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075801073-hp1200-economy-1543.txt",
+      "seed": 1543,
+      "policy": "economy",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 916,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 1410,
+          "Gold": 290,
+          "Meat": 291
+        },
+        "Spent": {
+          "Wood": 310,
+          "Gold": 380,
+          "Meat": 390
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 5,
+        "TownHallDamage": 284
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075850706-hp1200-military-1543.txt",
+      "seed": 1543,
+      "policy": "military",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 946,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 710,
+          "Gold": 280,
+          "Meat": 236
+        },
+        "Spent": {
+          "Wood": 310,
+          "Gold": 340,
+          "Meat": 310
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 5,
+        "TownHallDamage": 254
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T075939747-hp1200-expansion-1543.txt",
+      "seed": 1543,
+      "policy": "expansion",
+      "outcome": "Victory",
+      "seconds": 675.75,
+      "hallHP": 916,
+      "spawned": 76,
+      "statistics": {
+        "Deposited": {
+          "Wood": 560,
+          "Gold": 260,
+          "Meat": 195
+        },
+        "Spent": {
+          "Wood": 230,
+          "Gold": 350,
+          "Meat": 290
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 2,
+        "TownHallDamage": 284
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080032157-hp1200-control-137.txt",
+      "seed": 137,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 265.05,
+      "hallHP": 0,
+      "spawned": 27,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080059892-hp1200-economy-137.txt",
+      "seed": 137,
+      "policy": "economy",
+      "outcome": "Defeat",
+      "seconds": 405.35,
+      "hallHP": 0,
+      "spawned": 42,
+      "statistics": {
+        "Deposited": {
+          "Wood": 600,
+          "Gold": 160,
+          "Meat": 130
+        },
+        "Spent": {
+          "Wood": 310,
+          "Gold": 260,
+          "Meat": 210
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 5,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080140836-hp1200-control-901.txt",
+      "seed": 901,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 375.05,
+      "hallHP": 0,
+      "spawned": 33,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080219862-hp1200-economy-901.txt",
+      "seed": 901,
+      "policy": "economy",
+      "outcome": "Defeat",
+      "seconds": 391.05,
+      "hallHP": 0,
+      "spawned": 39,
+      "statistics": {
+        "Deposited": {
+          "Wood": 810,
+          "Gold": 190,
+          "Meat": 176
+        },
+        "Spent": {
+          "Wood": 250,
+          "Gold": 275,
+          "Meat": 270
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 4,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    }
+  ],
+  "trainingGates": [
+    {
+      "seed": 0,
+      "complete": true,
+      "controlLoses": true,
+      "activeWin": true
+    },
+    {
+      "seed": 1,
+      "complete": true,
+      "controlLoses": true,
+      "activeWin": true
+    },
+    {
+      "seed": 1543,
+      "complete": true,
+      "controlLoses": true,
+      "activeWin": true
+    }
+  ],
+  "holdouts": [
+    {
+      "file": "20261124T080032157-hp1200-control-137.txt",
+      "seed": 137,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 265.05,
+      "hallHP": 0,
+      "spawned": 27,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080059892-hp1200-economy-137.txt",
+      "seed": 137,
+      "policy": "economy",
+      "outcome": "Defeat",
+      "seconds": 405.35,
+      "hallHP": 0,
+      "spawned": 42,
+      "statistics": {
+        "Deposited": {
+          "Wood": 600,
+          "Gold": 160,
+          "Meat": 130
+        },
+        "Spent": {
+          "Wood": 310,
+          "Gold": 260,
+          "Meat": 210
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 5,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080140836-hp1200-control-901.txt",
+      "seed": 901,
+      "policy": "control",
+      "outcome": "Defeat",
+      "seconds": 375.05,
+      "hallHP": 0,
+      "spawned": 33,
+      "statistics": {
+        "Deposited": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Spent": {
+          "Wood": 0,
+          "Gold": 0,
+          "Meat": 0
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 1,
+        "ResearchCompleted": 0,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    },
+    {
+      "file": "20261124T080219862-hp1200-economy-901.txt",
+      "seed": 901,
+      "policy": "economy",
+      "outcome": "Defeat",
+      "seconds": 391.05,
+      "hallHP": 0,
+      "spawned": 39,
+      "statistics": {
+        "Deposited": {
+          "Wood": 810,
+          "Gold": 190,
+          "Meat": 176
+        },
+        "Spent": {
+          "Wood": 250,
+          "Gold": 275,
+          "Meat": 270
+        },
+        "Granted": {
+          "Wood": 100,
+          "Gold": 100,
+          "Meat": 100
+        },
+        "UnitsLost": 0,
+        "ResearchCompleted": 4,
+        "TownHallDamage": 1200
+      },
+      "failedSpawns": 0,
+      "fallbackSpawns": 0
+    }
+  ]
+}

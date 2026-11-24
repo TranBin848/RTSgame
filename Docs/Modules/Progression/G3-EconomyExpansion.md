@@ -1,5 +1,7 @@
 # G3 — Kinh tế, mở rộng và áp lực wave
 
+**24/11 — cập nhật E8, manual gate vẫn OPEN:** người dùng xác nhận “Chưa thử, giữ nghiệm thu G3 mở”. [E8 report](../GameExperience/E8-ExpansionCommands.md) thêm preview/commands và đo lại controlledseed0/wave8001:Hall4chuyến/80G/19.9s,kho12chuyến/240G/.7s,cost100W100G→+60Gnet đổi100W; emptydepot0income/range14.13,cả3thuađêm4.89/89regression+movement/lifecyclePASS; không dùng dữ liệu này để thay nghiệm thu người chơi hoặc tuyên bố balance/mọiseedPASS. Các kết quả G3 cũ dưới đây giữ nguyên.
+
 Ngày 21/11/2026. Đã chốt cấu hình chơi thử G3 với Hall 1200 HP và bán kính wave procedural lấy từ căn cứ đầu trận. Nghiệm thu của người chơi còn chờ. Tên run dùng UTC. [Kế hoạch](NextPhasePlan.md) · [shortlist G2](G2-PressurePilot.md) · [raw và fingerprint](Evidence/G3-2026-11-21/)
 
 ## Thiết kế đo

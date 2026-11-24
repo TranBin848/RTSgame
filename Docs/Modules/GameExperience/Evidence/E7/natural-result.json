@@ -1,0 +1,52 @@
+{
+  "outcome": "Victory",
+  "completedNights": 5,
+  "signals": 5,
+  "total": {
+    "Statistics": {
+      "Deposited": {
+        "Wood": 1410,
+        "Gold": 530,
+        "Meat": 391
+      },
+      "Spent": {
+        "Wood": 410,
+        "Gold": 440,
+        "Meat": 410
+      },
+      "Granted": {
+        "Wood": 100,
+        "Gold": 100,
+        "Meat": 100
+      },
+      "UnitsLost": 0,
+      "ResearchCompleted": 6,
+      "TownHallDamage": 214.0
+    },
+    "ExploredCells": 613
+  },
+  "wallet": {
+    "Wood": 1100,
+    "Gold": 190,
+    "Meat": 81
+  },
+  "resultText": "TỔNG TRẬN\nNộp kho:  Gỗ 1410   ·   Vàng 530   ·   Thịt 391\nChi phí:  Gỗ 410   ·   Vàng 440   ·   Thịt 410\nDân / quân mất:  0\nSát thương TownHall đã nhận:  214\nNghiên cứu hoàn tất:  6\nÔ mới khám phá:  613\nĐầu trận / cấp thêm (riêng):  Gỗ 100   ·   Vàng 100   ·   Thịt 100",
+  "duration": 675.052,
+  "wallSeconds": 675.299,
+  "unity": "6000.3.11f1",
+  "editor": true,
+  "timeScaleBeforeTerminal": 1,
+  "durations": [
+    60.0,
+    30.0,
+    45.0
+  ],
+  "fogEnabled": true,
+  "cameraPosition": [
+    -12.14,
+    -3.2,
+    -10.0
+  ],
+  "orthographicSize": 6.0,
+  "exportRecovery": "Natural run completed; original terminal serialization failed on Vector3.normalized. Recovered from still-loaded frozen terminal state. Durations copied from original finished log; camera lock restored by runner cleanup."
+}

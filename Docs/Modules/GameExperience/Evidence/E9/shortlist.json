@@ -1,0 +1,27 @@
+{
+  "trainingRuns": 12,
+  "limitations": "Policy harness is not a player win rate; no claim of complete balance.",
+  "candidate": "candidate76-v1",
+  "trainingGates": [
+    {
+      "seed": 0,
+      "complete": true,
+      "controlLoses": true,
+      "activeWin": true
+    },
+    {
+      "seed": 1,
+      "complete": true,
+      "controlLoses": true,
+      "activeWin": true
+    },
+    {
+      "seed": 1543,
+      "complete": true,
+      "controlLoses": true,
+      "activeWin": true
+    }
+  ],
+  "decision": "Keep unchanged after 12 training runs; holdouts137/901 excluded from authoring/tuning",
+  "planSha256": "be818f674129d91d1a5001a1e0a1933d12164228db2818df4f5010caf98ec326"
+}

@@ -4,6 +4,27 @@ using UnityEngine.Events;
 
 public class EnemyWaveManager : MonoBehaviour
 {
+    public struct WaveSpawnRecord
+    {
+        public int Day, Wave, Ordinal, PrefabSlot, RequestedGateway, ActualGateway;
+        public Vector3 Position;
+    }
+    public TacticalNightPlan TacticalPlan { get; private set; }
+    public event System.Action<WaveSpawnRecord> Spawned;
+    public int FailedSpawnAttempts { get; private set; }
+    public int FallbackSpawnCount { get; private set; }
+    public string TacticalBriefing => TacticalPlan != null ? TacticalPlan.ForDay(GetCurrentDay()).Title : "";
+    public void InitializeTacticalPlan(TacticalNightPlan plan)
+    {
+        if (plan == null) throw new System.ArgumentNullException(nameof(plan));
+        plan.Validate();
+        if (TacticalPlan != null && TacticalPlan != plan) throw new System.InvalidOperationException("Wave plan already configured.");
+        TacticalPlan = plan;
+    }
+    public int WaveCountForDay(int day) => TacticalPlan != null ? TacticalPlan.ForDay(day).Counts.Length : m_Definition.GetWaveCountForDay(day);
+    public int EnemyCountForWave(int day, int wave) => TacticalPlan != null ? TacticalPlan.ForDay(day).Counts[Mathf.Clamp(wave, 0, WaveCountForDay(day) - 1)] : m_Definition.GetEnemyCountForWave(day, wave);
+    public float SpawnIntervalForDay(int day) => TacticalPlan != null ? TacticalPlan.ForDay(day).SpawnInterval : m_Definition.GetSpawnIntervalForDay(day);
+    public float DelayForDay(int day) => TacticalPlan != null ? TacticalPlan.ForDay(day).Delay : m_Definition.DelayBetweenWaves;
     static readonly ProfilerMarker NightTransitionMarker = new("RTS.NightTransition");
     static readonly ProfilerMarker WaveStartedMarker = new("RTS.WaveStarted");
     [SerializeField] private EnemyWaveDefinition m_Definition;
@@ -33,7 +54,7 @@ public class EnemyWaveManager : MonoBehaviour
     public int CurrentWaveIndex => m_CurrentWaveIndex;
     public EnemyWaveDefinition Definition => m_Definition;
     public int StartedWaveCount => m_StartedWaveCount;
-    public int CurrentWaveCount => m_Definition != null ? m_Definition.GetWaveCountForDay(GetCurrentDay()) : 0;
+    public int CurrentWaveCount => m_Definition != null ? WaveCountForDay(GetCurrentDay()) : 0;
 
     void Awake()
     {
@@ -137,19 +158,19 @@ public class EnemyWaveManager : MonoBehaviour
         }
 
         int currentDay = GetCurrentDay();
-        int waveCount = m_Definition.GetWaveCountForDay(currentDay);
+        int waveCount = WaveCountForDay(currentDay);
         if (m_CurrentWaveIndex >= waveCount)
         {
             return;
         }
 
-        int enemiesInCurrentWave = m_Definition.GetEnemyCountForWave(currentDay, m_CurrentWaveIndex);
+        int enemiesInCurrentWave = EnemyCountForWave(currentDay, m_CurrentWaveIndex);
         if (m_SpawnedInCurrentWave >= enemiesInCurrentWave)
         {
             m_CurrentWaveIndex++;
             m_SpawnedInCurrentWave = 0;
             m_SpawnTimer = 0f;
-            m_WaveDelayTimer = m_Definition.DelayBetweenWaves;
+            m_WaveDelayTimer = DelayForDay(currentDay);
             return;
         }
 
@@ -173,7 +194,7 @@ public class EnemyWaveManager : MonoBehaviour
             }
 
             m_SpawnedInCurrentWave++;
-            m_SpawnTimer = m_Definition.GetSpawnIntervalForDay(currentDay);
+            m_SpawnTimer = SpawnIntervalForDay(currentDay);
             return;
         }
 
@@ -217,17 +238,17 @@ public class EnemyWaveManager : MonoBehaviour
     float GetWaveStartTime(int day, int waveIndex)
     {
         float waveStartTime = 0f;
-        float spawnInterval = m_Definition.GetSpawnIntervalForDay(day);
+        float spawnInterval = SpawnIntervalForDay(day);
 
         for (int i = 0; i < waveIndex; i++)
         {
-            int enemyCount = m_Definition.GetEnemyCountForWave(day, i);
+            int enemyCount = EnemyCountForWave(day, i);
             if (enemyCount > 0)
             {
                 waveStartTime += Mathf.Max(0, enemyCount - 1) * spawnInterval;
             }
 
-            waveStartTime += m_Definition.DelayBetweenWaves;
+            waveStartTime += DelayForDay(day);
         }
 
         return waveStartTime;
@@ -241,15 +262,15 @@ public class EnemyWaveManager : MonoBehaviour
         }
 
         int currentDay = GetCurrentDay();
-        int waveCount = m_Definition.GetWaveCountForDay(currentDay);
+        int waveCount = WaveCountForDay(currentDay);
         if (waveCount <= 0)
         {
             return 1f;
         }
 
         int lastWaveIndex = waveCount - 1;
-        int lastEnemyCount = m_Definition.GetEnemyCountForWave(currentDay, lastWaveIndex);
-        float lastWaveDuration = Mathf.Max(0, lastEnemyCount - 1) * m_Definition.GetSpawnIntervalForDay(currentDay);
+        int lastEnemyCount = EnemyCountForWave(currentDay, lastWaveIndex);
+        float lastWaveDuration = Mathf.Max(0, lastEnemyCount - 1) * SpawnIntervalForDay(currentDay);
         return Mathf.Max(1f, GetWaveStartTime(currentDay, lastWaveIndex) + lastWaveDuration);
     }
 
@@ -257,7 +278,8 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (!IsInitialized || m_Bridge.Gameplay.IsMatchOver || ProceduralMapRuntime.IsCompositionBlocked || !m_Bridge.IsSceneBound || townHall == null || m_Definition == null) return false;
         m_CurrentTownHallRange = CalculateTownHallRange(townHall);
-        GameObject enemyPrefab = GetRandomEnemyPrefab();
+        int slot = TacticalPlan != null ? TacticalPlan.PrefabSlot(GetCurrentDay(), m_CurrentWaveIndex, m_SpawnedInCurrentWave) : -1;
+        GameObject enemyPrefab = TacticalPlan != null ? (slot == 0 ? TacticalPlan.MeleePrefab : TacticalPlan.RangedPrefab) : GetRandomEnemyPrefab();
         if (enemyPrefab == null)
         {
             return false;
@@ -265,11 +287,30 @@ public class EnemyWaveManager : MonoBehaviour
 
         if (m_Generator != null && m_Generator.GatewayCount > 0)
         {
-            int start = Random.Range(0, m_Generator.GatewayCount);
+            int expansion = 0;
+            if (TacticalPlan != null)
+            {
+                var layout = m_Generator.GeneratedMap.Layout; float best = float.MaxValue;
+                for (int i = 0; i < layout.Gateways.Length; i++)
+                {
+                    var gate = layout.Gateways[i];
+                    float distance = (gate.X - layout.Landmark.X) * (gate.X - layout.Landmark.X) + (gate.Y - layout.Landmark.Y) * (gate.Y - layout.Landmark.Y);
+                    if (distance < best) { best = distance; expansion = i; }
+                }
+            }
+            int start = TacticalPlan != null ? TacticalPlan.Gateway(GetCurrentDay(), m_CurrentWaveIndex, m_SpawnedInCurrentWave,
+                m_Generator.GeneratedMap.Seed, m_Generator.GatewayCount, expansion) : Random.Range(0, m_Generator.GatewayCount);
             for (int i = 0; i < m_Generator.GatewayCount; i++)
                 if (m_Generator.TryGetGatewayApproachPosition((start + i) % m_Generator.GatewayCount,
                         townHall.transform.position, m_CurrentTownHallRange + m_Definition.SpawnExtraRange, out var gateway)
-                    && m_Bridge.SpawnEnemy(enemyPrefab, gateway)) return true;
+                    && m_Bridge.SpawnEnemy(enemyPrefab, gateway))
+                {
+                    if (i > 0) FallbackSpawnCount++;
+                    Spawned?.Invoke(new WaveSpawnRecord { Day = GetCurrentDay(), Wave = m_CurrentWaveIndex, Ordinal = m_SpawnedInCurrentWave,
+                        PrefabSlot = slot, RequestedGateway = start, ActualGateway = (start + i) % m_Generator.GatewayCount, Position = gateway });
+                    return true;
+                }
+            FailedSpawnAttempts++;
             return false;
         }
         return TryGetEnemySpawnPosition(townHall.transform.position, out Vector3 spawnPosition)

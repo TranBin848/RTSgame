@@ -128,6 +128,7 @@ namespace RTS.DOTS
                 return ResearchResult.InsufficientResources;
             wallet.Wood -= cost.Wood; wallet.Gold -= cost.Gold; wallet.Meat -= cost.Meat;
             EntityManager.SetComponentData(WalletEntity, wallet);
+            RecordWalletAdjustment(-cost.Wood, -cost.Gold, -cost.Meat);
             state.TownHall = townHall; state.Active = 1; state.Elapsed = 0; state.Technology = technology;
             EntityManager.SetComponentData(WalletEntity, state);
             return ResearchResult.Started;
@@ -154,6 +155,7 @@ namespace RTS.DOTS
                 if (state.Elapsed >= duration)
                 {
                     state.Active = 0; state.UnlockMask |= 1u << state.Technology;
+                    var stats = Statistics; stats.ResearchCompleted++; EntityManager.SetComponentData(WalletEntity, stats);
                     m_Events.Enqueue(new GameplayEvent { Kind = GameplayEventKind.ResearchComplete, Entity = state.TownHall,
                         RequestId = state.Technology, Position = EntityManager.GetComponentData<CombatBody>(state.TownHall).Position });
                     if (m_ResearchCatalog[state.Technology].Id == EconomyToolsId) state.Unlocked = 1;

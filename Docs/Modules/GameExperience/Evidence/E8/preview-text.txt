@@ -1,0 +1,5 @@
+Xây: Gỗ 100 · Vàng 100
+Dân → mép xây: 10 đơn vị lưới.
+Mép kho → tài nguyên gần nhất: 5 đơn vị lưới.
+Tài nguyên → kho hiện có: 7 đơn vị lưới.
+Chưa đánh giá được độ an toàn từ thông tin đã khám phá.

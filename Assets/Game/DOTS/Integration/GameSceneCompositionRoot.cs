@@ -25,6 +25,10 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
     public DuskWarningPresentation DuskWarning { get; private set; }
     public WorldDepthPresentation DepthPresentation { get; private set; }
     public ActionFeedbackPresentation ActionFeedback { get; private set; }
+    public MatchReportService Reports { get; private set; }
+    public DawnReportPresentation DawnReport { get; private set; }
+    public ExpansionCommandService Expansion { get; private set; }
+    public ExpansionHud ExpansionView { get; private set; }
     SwarmGameBridge m_Bridge;
     SceneResourceNodeLocator m_Nodes;
     SceneResourceDepotLocator m_Depots;
@@ -103,11 +107,17 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         m_Depots = new SceneResourceDepotLocator(() => m_Game.GetPlayerStructures());
         m_Game.Initialize(m_Bridge, m_Map, m_Camera, m_Fog, m_DayNight, m_Nodes, m_Depots);
         foreach (var spawner in m_Generator.LegacySpawners) spawner.Initialize(m_Game, m_Map, m_Bridge);
+        var tacticalPlan = Resources.Load<TacticalNightPlan>("ProceduralNightPlan");
+        if (tacticalPlan == null) throw new InvalidOperationException("ProceduralNightPlan resource is required.");
+        m_Waves.InitializeTacticalPlan(tacticalPlan);
         m_Waves.Initialize(m_Game, m_Map, m_DayNight, m_Bridge, m_Generator);
         m_MapPresentation.InitializeDaytimeClock(m_DayNight);
         m_MapPresentation.Initialize(m_Generator.GeneratedMap,m_Map,m_Generator.OriginCell,m_Fog);
         m_Minimap.InitializeLandmarks(m_MapPresentation);
         ComposePresentation(m_Game, m_Map, m_Fog, m_DayNight, m_Waves, m_Camera, m_Bridge);
+        Reports = new MatchReportService(m_Bridge.Gameplay, m_DayNight, m_Fog);
+        Expansion = new ExpansionCommandService(m_Bridge, m_Game, m_Fog, m_Generator);
+        m_Match.InitializeReports(Reports);
         NightLighting = m_MapPresentation.gameObject.AddComponent<StructureNightLighting>();
         NightLighting.Initialize(m_Game, m_DayNight, m_Fog, m_Map, m_Camera.GetComponent<Camera>(), m_EnvironmentPresentation, m_Bridge.GetComponent<RTS.DOTS.SwarmInstancedRenderer>());
         DepthPresentation = m_MapPresentation.gameObject.AddComponent<WorldDepthPresentation>();
@@ -120,6 +130,10 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
             DuskWarning.Initialize(m_DayNight, m_Waves, m_Generator, m_Fog, m_Camera.GetComponent<Camera>(), clockUi.GetComponentInParent<Canvas>());
             ActionFeedback = m_MapPresentation.gameObject.AddComponent<ActionFeedbackPresentation>();
             ActionFeedback.Initialize(m_Bridge, m_Game, m_Fog, m_Camera.GetComponent<Camera>(), Research, m_EnvironmentPresentation, clockUi.GetComponentInParent<Canvas>(), m_Bridge.GetComponent<RTS.DOTS.SwarmInstancedRenderer>());
+            DawnReport = m_MapPresentation.gameObject.AddComponent<DawnReportPresentation>();
+            DawnReport.Initialize(Reports, clockUi.GetComponentInParent<Canvas>());
+            ExpansionView = m_MapPresentation.gameObject.AddComponent<ExpansionHud>();
+            ExpansionView.Initialize(Expansion, m_Game, m_Camera.GetComponent<Camera>(), clockUi.GetComponentInParent<Canvas>());
             break;
         }
         if (DuskWarning == null) throw new InvalidOperationException("Procedural HUD requires a day/night clock for dusk warnings.");
@@ -158,6 +172,8 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
 
     void OnDestroy()
     {
+        Reports?.Dispose();
+        Expansion?.Dispose();
         IsReady = false;
         m_Nodes?.ClearCache();
         ProceduralMapRuntime.EndComposition();

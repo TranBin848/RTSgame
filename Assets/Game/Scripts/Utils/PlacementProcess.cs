@@ -15,6 +15,8 @@ public class PlacementProcess
     private Color m_BlockColor = new Color(1f, 0f, 0f, 0.8f);
 
     public BuildActionSo BuildAction => m_BuildAction;
+    public Vector3 PreviewPosition => m_InitialPlacementPosition;
+    public bool PreviewAreaValid => m_HighlightPositions != null && m_HighlightPositions.Length > 0 && isPlacementAreaValid();
     public int GoldCost => BuildAction.GoldCost;
     public int WoodCost => BuildAction.WoodCost;
 

@@ -1,0 +1,146 @@
+{
+  "startup": {
+    "firstLaunchMs": 933.3886000000007,
+    "samplesMs": [
+      933.3886000000007,
+      763.7719000000001,
+      771.89,
+      750.5115999999994,
+      805.6869000000004
+    ],
+    "minMs": 750.5115999999994,
+    "medianMs": 771.89,
+    "maxMs": 933.3886000000007
+  },
+  "runs": [
+    {
+      "id": "seed1-run1",
+      "samples": 12154,
+      "frameMs": {
+        "median": 6.9445,
+        "p95": 13.8884,
+        "p99": 13.8965,
+        "max": 27.7858
+      },
+      "gcBytes": null,
+      "p95Pass": true,
+      "overBudget": 46
+    },
+    {
+      "id": "seed1-run2",
+      "samples": 12169,
+      "frameMs": {
+        "median": 6.9445,
+        "p95": 13.8882,
+        "p99": 13.8967,
+        "max": 27.7798
+      },
+      "gcBytes": null,
+      "p95Pass": true,
+      "overBudget": 65
+    },
+    {
+      "id": "seed1-run3",
+      "samples": 12148,
+      "frameMs": {
+        "median": 6.9445,
+        "p95": 13.8884,
+        "p99": 13.8969,
+        "max": 34.7176
+      },
+      "gcBytes": null,
+      "p95Pass": true,
+      "overBudget": 65
+    },
+    {
+      "id": "seed1543-military",
+      "samples": 12175,
+      "frameMs": {
+        "median": 6.9446,
+        "p95": 13.8881,
+        "p99": 13.8963,
+        "max": 27.7911
+      },
+      "gcBytes": null,
+      "p95Pass": true,
+      "overBudget": 41
+    }
+  ]
+}
+{
+  "stress": {
+    "unity": "6000.3.11f1",
+    "cpu": "11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz",
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "scenario": "Synthetic night stress: cloned Halls, 96 replenished native enemies, injected bounded gather VFX; not a playtest",
+    "csv": "E:\\Unity project\\RTSgame2026\\.utmp\\e10-release-onscreen\\night-stress\\swarm-20261124-085918.csv",
+    "enemies": 94,
+    "projectiles": 0,
+    "hits": 6399,
+    "visible": 94,
+    "drawCalls": 2,
+    "e2LightingEnabled": true,
+    "peakLocalLights": 8,
+    "peakGlowGroups": 8,
+    "peakPulses": 32,
+    "peakActors": 32,
+    "particleSystems": 0,
+    "e10NightStress": true,
+    "lastTickMs": 2.9257,
+    "errors": [],
+    "cameraPosition": "(-12.14, -3.20, -10.00)",
+    "renderSnapshots": 94,
+    "offscreenRender": false,
+    "development": false,
+    "foreground": true,
+    "fogActive": true,
+    "hudActive": true,
+    "onscreen": true,
+    "startupOnly": false,
+    "screenWidth": 1920,
+    "screenHeight": 1080,
+    "vSync": 1,
+    "frameCap": -1,
+    "onscreenFrames": 11186,
+    "invalidOnscreenFrames": 0,
+    "extraTrainingAccepted": 0,
+    "screenMode": "FullScreenWindow",
+    "quality": "Ultra",
+    "graphicsApi": "Direct3D11",
+    "os": "Windows 11  (10.0.26300)",
+    "refreshHz": 144.00343526875926,
+    "seed": 1,
+    "generatorVersion": 3,
+    "actors": 32,
+    "workers": 3,
+    "day": 1,
+    "spawned": 96,
+    "hallMaxHealth": 1200,
+    "waveSeed": 8001,
+    "sceneToReadyMs": 796.0698999999995,
+    "generatorAwakeToReadyMs": 471.07410000000004,
+    "coreMs": 75.9203,
+    "terrainMs": 71.6268,
+    "resourceMs": 8.9395,
+    "navigationMs": 12.14,
+    "initializeMs": 223.95180000000002,
+    "bindMs": 47.9735,
+    "samples": 11186,
+    "seconds": 89.99807140000445,
+    "frameMs": {
+      "median": 6.9445,
+      "p95": 13.8952,
+      "p99": 20.8337,
+      "max": 27.7907
+    },
+    "enemyTarget": 96,
+    "enemyTargetReached": false,
+    "minEnemies": 94,
+    "peakEnemies": 94,
+    "peakProjectiles": 0,
+    "overBudget": 189,
+    "gcAvailable": false,
+    "budgetP95Pass": true
+  },
+  "allMeasuredP95Pass": true
+}

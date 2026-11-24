@@ -1,5 +1,15 @@
 # Tài liệu kỹ thuật RTSgame2026
 
+**24/11 — kế hoạch Save/Load:** [Build plan SL0–SL9](Modules/SaveLoad/BuildPlan.md), PLANNED. Lưu toàn trạng thái trận, ID bền vững, capture fence, remap hai lượt, JSON có version và temp/backup; chưa triển khai hoặc nghiệm thu. Bước tiếp là SL0 inventory/schema.
+
+**24/11 — E10 Release/budget đã kiểm, nghiệm thu cuối PARTIAL:** [Bản Windows, hướng dẫn chạy, hash và raw evidence](Modules/GameExperience/E10-ReleaseHandoff.md). Build0lỗi/0cảnh báo;89/89 regression,18/18 gameplay smoke,15/15 lifecycle.4/4G5 p95≈13,888ms và stress8đèn/32VFX/94quái p95=13,8952ms đạt trên baseline1080p/Ultra, foreground hợp lệ. G3manual/E9balance và manual thẩm mỹ vẫn mở; không coi đây là nghiệm thu toàn bộ E0–E10.
+
+**24/11 — E9 đã triển khai/kiểm Editor:** [Năm đêm chiến thuật, shortlist/matrix/realtime](Modules/GameExperience/E9-TacticalNights.md).89/89regression,16policyledger/trace,normalPlayerLoop5đêmVictory vàPNG. Holdout137/901Economyđềuthua, nghiệmthu cânbằngPARTIAL; không suy tỷlệthắngharness thànhngườichơi hoặc đóngG3/G5/Player. TiếpE10 nếu được yêu cầu.
+
+**24/11 — E8 đã triển khai/kiểm Editor:** [Preview logistics, gọi dân và tập kết quân](Modules/GameExperience/E8-ExpansionCommands.md).89/89regression, movement/resume/lifecycle và A/Bkho gần cùng mỏPASS; khoảng cách lưới/cost, không ước tính giây UI. G3manual vẫn mở theo người dùng; chưa Player/perf/naturalE8, không đóng gateE8đầyđủ/G5. Checkpoint dưới là lịch sử.
+
+**24/11 — E7 DONE implementation/Editor:** [Bình minh, tổng kết đêm/trận, ledger và evidence](Modules/GameExperience/E7-DawnReports.md).86/86EditMode, fixture/lifecycle/reopen/pause và một lượt5đêm clock thậtPASS;45mẫu ví/5bình minh khớp cumulative, ảnh3pha/dawn/result và UIABBA Editor. Chưa Player/video/manual đợt A; không đóng G3/G5. Tiếp E8; checkpoint dưới là lịch sử.
+
 **24/11 — E6 DONE phạm vi implementation/Editor:** [Phản hồi hit/khai thác/nộp kho, Cargo/Fortify và research](Modules/GameExperience/E6-ActionFeedback.md). Event authoritative, pool/buffer có trần, fog từng pixel;84/84 EditMode, GPU, pause/death/pool/destroy/reload/legacy PASS. Chưa Player/performance/nghiệm thu thẩm mỹ E6; tiếp E7, G3/G5 mở. Các checkpoint dưới là lịch sử.
 
 **24/11 — E5 DONE phạm vi implementation/Editor:** [Chiều sâu, contact shadows, mái/tán và evidence](Modules/GameExperience/E5-DepthOcclusion.md). Unified foot depth cho SpriteRenderer/native, mesh batch đúng sortingOrder của Renderer2D, ring ở chân và fade chỉ phần trên. GPU depth/fog/zoom/snap, route ba pha, nhóm96native, pool/pause/component/unload/reload/legacy và S7/E4 compatibility PASS;81/81 regression10.2861536s. Map hash v3/quota/clock giữ nguyên; chưa Player E5 hoặc nghiệm thu thẩm mỹ. Tiếp E6, G3/G5 vẫn mở; các checkpoint dưới là lịch sử.

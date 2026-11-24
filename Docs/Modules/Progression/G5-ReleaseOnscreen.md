@@ -1,5 +1,7 @@
 # G5 — Windows Release và đo onscreen
 
+**Cập nhật24/11 — budget đã đạt trên candidate E10:** [Release E10 và raw CSV](../GameExperience/E10-ReleaseHandoff.md). Cùng máy baseline/1080p/Ultra/vSync1:4/4lượt chuẩn p95=13,8881–13,8884ms; thêm tải đêm8đèn/32pulse/94quái p95=13,8952ms. Mọi capture foreground/HUD/fog hợp lệ,18/18smoke và15/15lifecycle PASS. Đóng phần budget còn mở cho candidate/batch E10; không biến kết quả3/4 của artifact21/11 dưới đây thành4/4, không tuyên bố mọi frame≤16,67ms. G3manual/E9balance/nghiệm thu cuối vẫn mở.
+
 G5 dùng TownHall 1200 HP và bản sửa navigation của G4. Phần nghiệm thu chơi thực tế G3 vẫn chờ. [Build plan G0–G7](NextPhasePlan.md) · [Đối chiếu G4](G4-FrameProfiling.md)
 
 **Trạng thái 21/11/2026** — Build, đo và smoke đã xong. Cấu hình Ultra 1080p chưa đạt budget p95 16,67 ms ở mọi lượt nên G5 còn mở phần hiệu năng.

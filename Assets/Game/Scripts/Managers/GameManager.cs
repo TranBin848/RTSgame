@@ -812,7 +812,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
 
         foreach (var unit in m_PlayerUnits)
         {
-            if (unit is WorkerUnit worker && worker.IsSheltered)
+            if (unit is WorkerUnit worker && (worker.IsSheltered || worker.IsReturningToShelter))
             {
                 worker.LeaveTownHallAtDaybreak();
             }
@@ -957,6 +957,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
         m_ActionBar.HideRequirements();
     }
 
+    public PlacementProcess CurrentPlacement => m_PlacementProcess;
     public void CancelBuildProcess()
     {
         if (m_PlacementProcess == null)
@@ -1026,7 +1027,7 @@ public class GameManager : MonoBehaviour, IPlayerResourceWallet
 
         DrawSelectionRectangle();
 
-        if (ActiveUnit != null)
+        if (ActiveUnit != null && m_Composition == null)
         {
             GUI.Label(new Rect(10, 120, 200, 20), "State: " + ActiveUnit.CurrentState.ToString(), new GUIStyle { fontSize = 30 });
             GUI.Label(new Rect(10, 160, 200, 20), "Task: " + ActiveUnit.CurrentTask.ToString(), new GUIStyle { fontSize = 30 });

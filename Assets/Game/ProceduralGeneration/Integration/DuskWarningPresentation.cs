@@ -103,6 +103,9 @@ public sealed class DuskWarningPresentation : MonoBehaviour
         m_Detail.text = KnownApproachCount == 0
             ? $"{waves} waves tonight. Enemy approaches unknown - scout the border."
             : $"{waves} waves tonight. Markers: known possible approaches.\nRoutes chosen on spawn; stay alert for unexplored approaches.";
+        if (m_Waves.TacticalPlan != null)
+            m_Detail.text = $"{waves} waves · {m_Waves.TacticalBriefing}\n"
+                + (KnownApproachCount == 0 ? "Approaches unknown - scout the border." : "Known possible approaches marked; blocked routes may reroute.");
     }
 
     void BuildHud()
