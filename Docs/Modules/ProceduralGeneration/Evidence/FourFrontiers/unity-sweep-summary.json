@@ -1,0 +1,18 @@
+{
+  "count": 1000,
+  "failures": [],
+  "retries": [
+    782,
+    175,
+    28,
+    10,
+    4,
+    1,
+    0,
+    0
+  ],
+  "median": 103.96640000000001,
+  "p95": 265.32,
+  "max": 621.7936000000001,
+  "runtime": "Unity Editor Core; batches; includes instrumentation overhead, excludes Tilemap/prefabs/nav"
+}

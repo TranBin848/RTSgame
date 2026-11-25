@@ -7,6 +7,11 @@ using UnityEngine.Tilemaps;
 public sealed partial class ProceduralMapAuthoring : MonoBehaviour
 {
     internal static int? BenchmarkSeedOverride { get; set; }
+    internal static MapLayoutPreset? BenchmarkPresetOverride { get; set; }
+    internal static bool BenchmarkForceExhaustion { get; set; }
+    internal static bool BenchmarkCorruptFallback { get; set; }
+    public int RequestedSeed { get; private set; }
+    public bool UsedFallback => GeneratedMap?.UsedFallback == true;
     [Header("Generation")]
     [SerializeField] ProceduralMapSettings m_Settings;
     [SerializeField] TilemapManager m_TilemapManager;
@@ -110,7 +115,8 @@ public sealed partial class ProceduralMapAuthoring : MonoBehaviour
         if (!TryGenerateAndApply(out string error))
         {
             ProceduralMapRuntime.Fail(error);
-            RestoreLegacyResourceSpawner();
+            ProceduralMapRuntime.FailComposition(error);
+            Time.timeScale = 0;
             Debug.LogError($"[ProceduralMap] {error}", this);
             enabled = false;
             return;
@@ -137,7 +143,23 @@ public sealed partial class ProceduralMapAuthoring : MonoBehaviour
         var timer = System.Diagnostics.Stopwatch.StartNew();
         var data = m_Settings.ToData();
         data.Seed = BenchmarkSeedOverride ?? data.Seed;
-        if (!generator.TryGenerate(data, out MapData map, out error)) return false;
+        data.Preset = BenchmarkPresetOverride ?? data.Preset;
+        RequestedSeed = data.Seed;
+        MapData map = null;
+        bool generated = !BenchmarkForceExhaustion && generator.TryGenerate(data, out map, out error);
+        if (!generated)
+        {
+            if (data.Preset != MapLayoutPreset.FourFrontiers || MapGenerationSettingsValidator.Validate(data) != null) return false;
+            try
+            {
+                var asset = Resources.Load<TextAsset>("FourFrontiersFallback");
+                if (asset == null || BenchmarkCorruptFallback) throw new InvalidOperationException("Fallback asset unavailable.");
+                map = JsonUtility.FromJson<FourFrontiersFallback>(asset.text).Restore(data);
+                Debug.LogWarning($"[ProceduralMap] Fallback requestedSeed={RequestedSeed}, actualSeed={map.Seed}, attempt={map.Attempt}. Original error: {error}",this);
+                error = null;
+            }
+            catch (Exception failure) { error += " Fallback rejected: " + failure.Message; return false; }
+        }
         CoreMilliseconds = timer.Elapsed.TotalMilliseconds;
 
         DisableLegacyResourceSpawner();

@@ -1,5 +1,7 @@
 # Kiến trúc Procedural Generation
 
+**24/11 — FourFrontiers v4:** [Hợp đồng, thuật toán, inventory, fallback và evidence](FourFrontiers-Implementation.md). ID0..4 độc lập role, 4 connection/2gateway; presentation theo role, snapshot restore arrays thay vì regenerate. Các mô tả legacy bên dưới được giữ làm lịch sử.
+
 **24/11 — E5 tích hợp presentation:** [Depth/occlusion](../GameExperience/E5-DepthOcclusion.md). Authoring expose GeneratedResourceRoot read-only để root cấp registry cây/cừu; WorldDepthPresentation lấy scenery S7/E4 (gồm Old Watchpost) qua explicit dependency. Không đổi Core v3, MapData, quota, logic terrain hoặc collider. S7/E4 regression trong E5 PASS và full map hash giữ nguyên. Thứ tự/dither/contact là dữ liệu render; tiếp E6.
 
 **23/11 — E4 triển khai trên presentation S7:** [Daytime regions](../GameExperience/E4-DaytimeRegions.md). Partial Daytime nhận clock do root cấp, dùng seed riêng314159 cho mảng nền và cụm cỏ/hoa/đất/sỏi, tối đa220renderer mới gồm12ambient. Sửa crop bush8frame; giữ Core v3/quota/Routes/Reserved/resources và logic terrain. Ba seed0/1/1543 đã kiểm full map hash, determinism, fog footprint, native economy/construction/navigation và lifecycle;81/81 regression. Chưa Player/performance E4; tiếp E5. Các trạng thái S7/S8 bên dưới là lịch sử.

@@ -11,14 +11,15 @@ public sealed partial class ProceduralMapAuthoring
         string error = ValidateAuthoring();
         if (error != null) throw new InvalidOperationException(error);
         m_LoadedMap = saved;
-        var layout = saved.GeneratorVersion == 3 ? StrategicLayout.FromSnapshot(
+        RequestedSeed = saved.RequestedSeed;
+        var layout = saved.GeneratorVersion == 3 || saved.GeneratorVersion == 4 ? StrategicLayout.FromSnapshot(
             saved.Regions.Select(x => new MapRegion { X = x.X, Y = x.Y, Radius = x.Radius, Role = (RegionRole)x.Role }).ToArray(),
             saved.Connections.Select(x => new RegionConnection { From = x.From, To = x.To }).ToArray(),
             saved.Gateways.Select(x => new MapGateway { X = x.X, Y = x.Y, Region = x.Region }).ToArray(),
             new MapLandmark { X = saved.Landmark.X, Y = saved.Landmark.Y, Radius = saved.Landmark.Radius, Region = saved.Landmark.Region }, saved.RegionIds, saved.Routes) : null;
         GeneratedMap = new MapData(saved.Width, saved.Height, saved.Seed, saved.Attempt, saved.StartX, saved.StartY,
             (byte[])saved.Terrain.Clone(), (byte[])saved.Reserved.Clone(), saved.Placements.Select(p => new ResourcePlacement
-            { Kind = (ProceduralResourceKind)p.Kind, VariantId = p.VariantId, X = p.X, Y = p.Y, ClusterId = p.ClusterId, IsStartingResource = p.IsStartingResource }).ToList(), new MapValidationReport(), layout);
+            { Kind = (ProceduralResourceKind)p.Kind, VariantId = p.VariantId, X = p.X, Y = p.Y, ClusterId = p.ClusterId, IsStartingResource = p.IsStartingResource }).ToList(), new MapValidationReport(), layout, saved.RequestedSeed, saved.UsedFallback);
         DisableLegacyResourceSpawner();
         if (m_GeneratedResourceRoot == null)
         { var root = new GameObject("Procedural Resources"); root.transform.SetParent(transform, false); m_GeneratedResourceRoot = root.transform; }

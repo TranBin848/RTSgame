@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "mode": "gameplay",
+  "seed": 0,
+  "error": "System.Exception: Native gather/deposit failed in region 2\r\n  at FourFrontiersPlayerSmoke.CheckEconomy () [0x002f1] in <6ce3f7d099ab4bc9bfea301cb39e335f>:0 \r\n  at FourFrontiersPlayerSmoke+<Run>d__8.MoveNext () [0x00269] in <6ce3f7d099ab4bc9bfea301cb39e335f>:0 "
+}

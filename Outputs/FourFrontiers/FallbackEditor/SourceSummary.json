@@ -1,0 +1,13 @@
+{
+  "seed": 1,
+  "objects": 160,
+  "resources": 149,
+  "enemies": 3,
+  "tombstones": 1,
+  "Wallet": {
+    "Wood": 137,
+    "Gold": 89,
+    "Meat": 123
+  },
+  "NextSaveId": 321
+}

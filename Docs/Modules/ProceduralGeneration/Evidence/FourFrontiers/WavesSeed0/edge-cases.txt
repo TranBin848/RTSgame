@@ -1,0 +1,1 @@
+PASS fresh first-spawn timer: actual menu pause delta0/NaN makes0spawns; all-zero native grid fails without quota/StartedWaveCount increment; restored navigation retry produces ordinal0 once; dawn stops spawn and sets native agents Retreating. Native grid replacement is fixture only, restored in finally.

@@ -1,0 +1,42 @@
+{
+  "regions": [
+    {
+      "id": 1,
+      "role": "Economy",
+      "deposited": 20,
+      "simulationSeconds": 52.25
+    },
+    {
+      "id": 2,
+      "role": "GoldFrontier",
+      "deposited": 20,
+      "simulationSeconds": 54.25
+    },
+    {
+      "id": 3,
+      "role": "Economy",
+      "deposited": 20,
+      "simulationSeconds": 54.45
+    },
+    {
+      "id": 4,
+      "role": "GoldFrontier",
+      "deposited": 20,
+      "simulationSeconds": 60.6
+    }
+  ],
+  "woodDeposited": 40,
+  "goldDeposited": 40,
+  "depositedWallet": {
+    "Wood": 140,
+    "Gold": 140,
+    "Meat": 100
+  },
+  "landmarkBuilt": true,
+  "trainedExactlyOne": true,
+  "finalWallet": {
+    "Wood": 40,
+    "Gold": 40,
+    "Meat": 90
+  }
+}

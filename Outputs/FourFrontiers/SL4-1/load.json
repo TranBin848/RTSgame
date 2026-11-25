@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "mode": "load",
+  "seed": 1,
+  "requestedSeed": 1,
+  "usedFallback": false,
+  "version": 4,
+  "regions": 5,
+  "connections": 4,
+  "gateways": 2,
+  "objects": 160,
+  "resources": 149,
+  "missingResourcePlacements": 1,
+  "wallet": {
+    "Wood": 137,
+    "Gold": 89,
+    "Meat": 123
+  },
+  "paused": true,
+  "processId": 11404
+}

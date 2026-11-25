@@ -1,0 +1,15 @@
+{
+  "result": "Succeeded",
+  "errors": 0,
+  "warnings": 0,
+  "seconds": 25.2288675,
+  "output": "E:/Unity project/RTSgame2026/.utmp/four-frontiers-20261124-165350/RTSgame2026.exe",
+  "backend": "Mono2x",
+  "unity": "6000.3.11f1",
+  "cpu": "11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz",
+  "memoryMiB": 16179,
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "quality": "Ultra",
+  "vsync": 1,
+  "runInBackground": false
+}

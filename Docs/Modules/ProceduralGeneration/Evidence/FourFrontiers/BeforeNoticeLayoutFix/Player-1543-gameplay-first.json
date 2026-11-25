@@ -1,0 +1,63 @@
+{
+  "first": {
+    "actualSeed": 1543,
+    "requestedSeed": 1543,
+    "regions": 5,
+    "connections": 4,
+    "gateways": 2,
+    "placements": 150,
+    "resourceEntities": 150,
+    "actors": 25,
+    "worlds": 6,
+    "usedFallback": false,
+    "coreMs": 81.5587,
+    "terrainMs": 62.24,
+    "resourceMs": 10.5691,
+    "navigationMs": 13.9999,
+    "initializeMs": 250.6181,
+    "bindMs": 44.985400000000006,
+    "sceneToReadyMs": 566.31069999999988
+  },
+  "economy": {
+    "regions": [
+      {
+        "id": 1,
+        "role": "Economy",
+        "deposited": 20,
+        "simulationSeconds": 51.050000000000004
+      },
+      {
+        "id": 2,
+        "role": "GoldFrontier",
+        "deposited": 20,
+        "simulationSeconds": 61.150000000000006
+      },
+      {
+        "id": 3,
+        "role": "Economy",
+        "deposited": 20,
+        "simulationSeconds": 62.0
+      },
+      {
+        "id": 4,
+        "role": "GoldFrontier",
+        "deposited": 20,
+        "simulationSeconds": 75.2
+      }
+    ],
+    "woodDeposited": 40,
+    "goldDeposited": 40,
+    "depositedWallet": {
+      "Wood": 140,
+      "Gold": 140,
+      "Meat": 100
+    },
+    "landmarkBuilt": true,
+    "trainedExactlyOne": true,
+    "finalWallet": {
+      "Wood": 40,
+      "Gold": 40,
+      "Meat": 90
+    }
+  }
+}

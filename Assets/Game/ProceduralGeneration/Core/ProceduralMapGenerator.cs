@@ -76,7 +76,7 @@ namespace RTS.ProceduralGeneration
             }
 
             StrategicLayout layout = null;
-            if(settings.Preset == MapLayoutPreset.StrategicRegions) layout=StrategicLayout.Create(settings,attempt,terrain,reserved,report);
+            if(settings.Preset != MapLayoutPreset.LegacyMainland) layout=StrategicLayout.Create(settings,attempt,terrain,reserved,report);
             else ReserveStartAndCorridor(settings, terrain, reserved, startX, startY, report);
             RemoveUnreachableLand(terrain, width, height, startX, startY, report);
 
@@ -86,12 +86,18 @@ namespace RTS.ProceduralGeneration
             int resourceSeed = DeterministicRandom.DeriveSeed(settings.Seed, ResourcePhase, attempt);
             var resourceRandom = new DeterministicRandom(resourceSeed, ResourcePhase);
 
+            // The four reserved spokes leave the smallest candidate area for starting sheep.
+            if(settings.Preset==MapLayoutPreset.FourFrontiers)
+            PlaceQuota(settings, ProceduralResourceKind.Sheep, settings.StartingSheepCount, 0,
+                settings.StartingSheepMinDistance, settings.StartingSheepMaxDistance, true,
+                terrain, reserved, occupied, distances, resources, ref resourceRandom);
             PlaceQuota(settings, ProceduralResourceKind.Tree, settings.StartingTreeCount, 0,
                 settings.StartingTreeMinDistance, settings.StartingTreeMaxDistance, true,
                 terrain, reserved, occupied, distances, resources, ref resourceRandom);
             PlaceQuota(settings, ProceduralResourceKind.Gold, settings.StartingGoldCount, 1,
                 settings.StartingGoldMinDistance, settings.StartingGoldMaxDistance, true,
                 terrain, reserved, occupied, distances, resources, ref resourceRandom);
+            if(settings.Preset!=MapLayoutPreset.FourFrontiers)
             PlaceQuota(settings, ProceduralResourceKind.Sheep, settings.StartingSheepCount, 0,
                 settings.StartingSheepMinDistance, settings.StartingSheepMaxDistance, true,
                 terrain, reserved, occupied, distances, resources, ref resourceRandom);
@@ -198,6 +204,9 @@ namespace RTS.ProceduralGeneration
                 int distance = distances[y * width + x];
                 if (distance < minDistance || distance > maxDistance) continue;
                 if (!CanPlace(x, y, footprintRadius, terrain, reserved, occupied, width, height)) continue;
+                // FourFrontiers keeps an interaction ring between resources and noisy narrow shore cells.
+                if (!starting && settings.Preset == MapLayoutPreset.FourFrontiers &&
+                    !HasFreeInteractionRing(x,y,footprintRadius+1,terrain,occupied,width,height)) continue;
                 if (kind == ProceduralResourceKind.Gold && HasNearby(placements, kind, x, y, 3)) continue;
                 if (kind == ProceduralResourceKind.Sheep && HasNearby(placements, kind, x, y, 1)) continue;
 
@@ -214,6 +223,13 @@ namespace RTS.ProceduralGeneration
                 MarkOccupied(x, y, footprintRadius, occupied, width, height);
                 placed++;
             }
+        }
+
+        static bool HasFreeInteractionRing(int x,int y,int radius,byte[] terrain,byte[] occupied,int width,int height)
+        {
+            for(int py=y-radius;py<=y+radius;py++)for(int px=x-radius;px<=x+radius;px++)
+                if(!InBounds(px,py,width,height)||terrain[py*width+px]==0||occupied[py*width+px]!=0)return false;
+            return true;
         }
 
         static bool CanPlace(int x, int y, int radius, byte[] terrain, byte[] reserved, byte[] occupied, int width, int height)

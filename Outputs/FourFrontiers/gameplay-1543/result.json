@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "mode": "gameplay",
+  "seed": 1543,
+  "reloaded": {
+    "actualSeed": 1543,
+    "requestedSeed": 1543,
+    "regions": 5,
+    "connections": 4,
+    "gateways": 2,
+    "placements": 150,
+    "resourceEntities": 150,
+    "actors": 25,
+    "worlds": 6,
+    "usedFallback": false,
+    "coreMs": 70.68010000000001,
+    "terrainMs": 55.8973,
+    "resourceMs": 6.1496,
+    "navigationMs": 10.182500000000001,
+    "initializeMs": 137.3697,
+    "bindMs": 10.5052,
+    "sceneToReadyMs": 330.85240000000039
+  }
+}

@@ -108,7 +108,7 @@ public sealed class MatchCaptureService : MonoBehaviour
         var world = m_Map.WalkableTilemap.CellToWorld(origin);
         return new MapSaveData
         {
-            Width = map.Width, Height = map.Height, Seed = map.Seed, Attempt = map.Attempt, GeneratorVersion = map.GeneratorVersion,
+            Width = map.Width, Height = map.Height, Seed = map.Seed, RequestedSeed = map.RequestedSeed, UsedFallback = map.UsedFallback, Attempt = map.Attempt, GeneratorVersion = map.GeneratorVersion,
             StartX = map.StartX, StartY = map.StartY, OriginCellX = origin.x, OriginCellY = origin.y,
             WorldOrigin = new SaveVector { X = world.x, Y = world.y }, CellSize = m_Map.WalkableTilemap.cellSize.x * m_Map.WalkableTilemap.transform.lossyScale.x,
             SettingsJson = JsonUtility.ToJson(m_Generator.SaveSettings), Terrain = (byte[])map.Terrain.Clone(), Reserved = (byte[])map.Reserved.Clone(),

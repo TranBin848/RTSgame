@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "count": 11,
+  "rows": [
+    {
+      "fault": "schema",
+      "rejected": true,
+      "error": "Unsupported save schema.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "content",
+      "rejected": true,
+      "error": "Save content/configuration differs from this build.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "version",
+      "rejected": true,
+      "error": "Invalid strategic topology.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "role",
+      "rejected": true,
+      "error": "Invalid region role contract.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "connection",
+      "rejected": true,
+      "error": "Invalid Start connections.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "gateway",
+      "rejected": true,
+      "error": "Invalid gateway ownership.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "region-id",
+      "rejected": true,
+      "error": "Invalid strategic topology.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "preset",
+      "rejected": true,
+      "error": "Saved preset/version mismatch.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "starting-budget",
+      "rejected": true,
+      "error": "Saved starting resource budget mismatch.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "regional-budget",
+      "rejected": true,
+      "error": "Saved regional resource budget mismatch.",
+      "scene": "MainMenu",
+      "pending": false
+    },
+    {
+      "fault": "provenance",
+      "rejected": true,
+      "error": "Invalid map seed provenance.",
+      "scene": "MainMenu",
+      "pending": false
+    }
+  ]
+}

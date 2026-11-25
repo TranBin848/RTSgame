@@ -49,7 +49,7 @@ public sealed partial class ProceduralMapPresentation : MonoBehaviour
                 float angle = i * Mathf.PI / 8;
                 int x = area.X + Mathf.RoundToInt(Mathf.Cos(angle) * (area.Radius + 1));
                 int y = area.Y + Mathf.RoundToInt(Mathf.Sin(angle) * (area.Radius + 1));
-                if (CanDecorate(x, y)) AddDecor(region == 1 ? bush : rock, x, y, region == 1 ? "Grove shrubs" : "Frontier stones");
+                if (CanDecorate(x, y)) AddDecor(m_Map.Layout.Regions[region].Role == RegionRole.Economy ? bush : rock, x, y, m_Map.Layout.Regions[region].Role == RegionRole.Economy ? "Grove shrubs" : "Frontier stones");
             }
         }
         var landmark = map.Layout.Landmark;
@@ -81,7 +81,7 @@ public sealed partial class ProceduralMapPresentation : MonoBehaviour
             int index = m_Map.Index(x, y), region = m_Map.Layout.RegionIds[index];
             var area = m_Map.Layout.Regions[region];
             float distance = Vector2.Distance(new Vector2(x,y), new Vector2(area.X,area.Y));
-            var tint = region == 1 ? new Color(.72f,1f,.8f) : region == 2 ? new Color(1f,.82f,.55f) : Color.white;
+            var tint = m_Map.Layout.Regions[region].Role == RegionRole.Economy ? new Color(.72f,1f,.8f) : m_Map.Layout.Regions[region].Role == RegionRole.GoldFrontier ? new Color(1f,.82f,.55f) : Color.white;
             var color = Color.Lerp(Color.white, tint, Mathf.Clamp01((area.Radius + 8 - distance) / 8));
             if (m_Map.Layout.Routes[index] != 0)
             {
@@ -139,17 +139,17 @@ public sealed partial class ProceduralMapPresentation : MonoBehaviour
     public void DrawMinimapMarkers(Texture2D texture,BoundsInt bounds)
     {
         if (m_Map?.Layout == null) return;
-        for(int region=1;region<3;region++)
+        for(int region=1;region<m_Map.Layout.Regions.Length;region++)
         {
             if(!IsSiteDiscovered(region))continue;
             var site=m_Map.Layout.Regions[region];var cell=m_Origin+new Vector3Int(site.X,site.Y,0);
             int cx=cell.x-bounds.xMin,cy=cell.y-bounds.yMin;
             for(int y=-2;y<=2;y++)for(int x=-2;x<=2;x++)
             {
-                bool ink=region==1 ? (y>=0&&Mathf.Abs(x)<=2-y)||(x==0&&y<0) : (y==-2)||(Mathf.Abs(x)==1)||(y==2);
+                bool ink=m_Map.Layout.Regions[region].Role==RegionRole.Economy ? (y>=0&&Mathf.Abs(x)<=2-y)||(x==0&&y<0) : (y==-2)||(Mathf.Abs(x)==1)||(y==2);
                 int px=cx+x,py=cy+y;
                 if(px<0||py<0||px>=texture.width||py>=texture.height)continue;
-                texture.SetPixel(px,py,ink?(region==1?new Color(.3f,1,.45f):new Color(1,.75f,.2f)):new Color(.08f,.1f,.12f));
+                texture.SetPixel(px,py,ink?(m_Map.Layout.Regions[region].Role==RegionRole.Economy?new Color(.3f,1,.45f):new Color(1,.75f,.2f)):new Color(.08f,.1f,.12f));
             }
         }
     }

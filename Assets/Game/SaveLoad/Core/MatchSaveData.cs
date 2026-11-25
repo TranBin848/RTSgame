@@ -24,6 +24,8 @@ namespace RTS.SaveLoad
     [Serializable] public sealed class MapSaveData
     {
         public int Width, Height, Seed, Attempt, GeneratorVersion, StartX, StartY, OriginCellX, OriginCellY;
+        public int RequestedSeed;
+        public bool UsedFallback;
         public SaveVector WorldOrigin;
         public float CellSize;
         public string SettingsJson;

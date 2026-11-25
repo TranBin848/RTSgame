@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "seed": 1,
+  "objects": 160,
+  "canonicalFieldsEqual": true,
+  "allRelationsRemapped": true,
+  "walletUnchanged": true,
+  "noStartingGrant": true,
+  "resourceTombstonePreserved": true,
+  "nativeVisibleWhilePaused": true,
+  "nextIdContinues": true,
+  "newId": 321,
+  "paused": true,
+  "WorldCount": 6,
+  "requestedSeed": 1543,
+  "actualSeed": 1,
+  "usedFallback": true,
+  "schema": 2,
+  "scope": "Editor fresh scene; final canonical MapData and provenance; not cold-process fallback"
+}

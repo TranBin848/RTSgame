@@ -1,167 +1,176 @@
-# Cách sinh bản đồ procedural qua hình minh họa bằng tile trong game
+# Hiểu procedural generator qua hình — FourFrontiers v4
 
-Ngày cập nhật 24/11/2026. Core strategic v3.
+Cập nhật **25/11/2026**. Đây là bản giải thích có hình cho **năm vùng hiện tại** của `ProceduralGame`. Đọc [HowItWorks](HowItWorks.md) nếu cần luồng đầy đủ và liên hệ mã nguồn. Hình và kết quả bên dưới lấy từ evidence FR0–FR7 đã lưu ngày 24/11; lần viết tài liệu này không chạy lại generator hoặc benchmark.
 
-Tài liệu dành cho người muốn hiểu game tạo bản đồ ra sao. Các hình dùng tile và sprite Tiny Swords đang có trong RTSgame2026, kèm lớp màu chú giải. Dữ liệu seed 0, 1, 1543 được xuất bằng chính Core generator strategic v3 của project.
+## 1. Đọc một bản đồ hoàn chỉnh trước
 
+<img src="Evidence/FourFrontiers/preview-1.png" width="512" alt="Preview Core FourFrontiers v4 seed 1, năm vùng và hai gateway">
 
-![Sơ đồ tổng quát pipeline sinh bản đồ và nhánh thử lại](../../../Outputs/Midterm/VisualGuide/figures/00-overview.png)
+**Hình 1 — MapData thật: FourFrontiers v4, seed 1, accepted attempt 1.** Attempt 1 là lần thử thứ hai, không phải generator version 1. Preview bỏ qua sprite, collider và fog để nhìn rõ các lớp dữ liệu.
 
-Đọc từ trên xuống. Kiểm tra lúc đặt từng tài nguyên chỉ xét vị trí hợp lệ; validation cuối kiểm khả năng đi lại của toàn bản đồ sau placement. Cấu hình sai bị từ chối trước khi sinh; chỉ MapData hợp lệ mới được áp vào scene.
+| Dấu/màu trong preview | Ý nghĩa |
+|---|---|
+| Xanh dương | Nước |
+| Vàng nâu ở giữa | Nhãn vùng Start |
+| Xanh lá ở hai phía đối diện | Hai vùng có role Economy |
+| Cam/nâu ở hai phía còn lại | Hai vùng có role GoldFrontier |
+| Dải sáng | Tuyến được carve và bảo vệ |
+| Dấu đỏ ở biên | Hai gateway |
+| Dấu tím | Landmark, chỉ có một |
+| Dấu cyan | Tâm vùng; có thể bị ký hiệu landmark/gateway ghi đè |
+| Chấm xanh đậm / vàng / trắng | Cây / mỏ vàng / cừu |
 
+Màu vùng là chú giải; terrain gameplay vẫn chỉ phân loại cỏ hoặc nước. Những đường ranh theo tâm gần nhất không phải tường ngăn người chơi. Dữ liệu đối chiếu: [Unity sweep, sample seed 1](Evidence/FourFrontiers/unity-sweep-0-100.json).
 
-## 1  Những vật liệu dùng để tạo bản đồ
+## 2. Từ một con số seed tới hình địa hình
 
+```mermaid
+flowchart LR
+    Seed[Seed và cấu hình] --> Noise[4 lớp Simplex noise]
+    Noise --> Threshold[So với ngưỡng -0.22]
+    Threshold --> Terrain[Cỏ hoặc nước từng ô]
+    Terrain --> Carve[Ép đất tại căn cứ, vùng và tuyến bắt buộc]
+    Carve --> BFS[Bỏ đất cô lập bằng BFS]
+```
 
-![Hình 1  Tile và sprite được trích từ asset của dự án](../../../Outputs/Midterm/VisualGuide/figures/01-assets.png)
+Seed không trực tiếp chứa danh sách cây hay hồ. Nó khởi tạo các stream số giả ngẫu nhiên cho terrain, layout và resource; mỗi attempt có seed con riêng.
 
-- Cỏ là ô đi được; nước là ô không đi được. Hình bờ cỏ đổi theo các ô lân cận bằng RuleTile hiện có. Tile không tự tạo ra luật sinh địa hình.
-- Cây, mỏ vàng và cừu là đối tượng được đặt sau khi có terrain. Sprite là hình ảnh; footprint là diện tích logic dùng kiểm chồng lấn và đường đi.
-Các hình tái dựng chỉ thể hiện các lớp cần giải thích, không có fog, hoạt ảnh foam, ánh sáng hoặc sorting đầy đủ như khi chạy Unity. Hình có nhãn “ví dụ” là fixture minh họa; hình có seed dùng dữ liệu Core thật. Báo cáo giữa kỳ đã được giữ nguyên.
+Noise tạo các mảng liền, sau đó ngưỡng quyết định ô là nước hay cỏ. Carve sửa phần bắt buộc để căn cứ và tuyến không phụ thuộc hoàn toàn vào hình noise. Cuối cùng BFS lan theo bốn hướng từ Start; đất không tới được bị đổi thành nước.
 
-Luồng tổng quát: seed và cấu hình → noise → vùng và tuyến → BFS → tài nguyên → validation → Tilemap/prefab/navigation → trận sẵn sàng.
+BFS giống đổ mực trên ô cỏ. Mực không đi xuyên nước và không nhảy chéo qua hai góc chạm nhau. Cùng phép duyệt tạo khoảng đường dùng chọn tài nguyên khởi đầu.
 
+## 3. Năm vùng nằm ở đâu trong seed 1?
 
-## 2  Từ noise đến tile cỏ và nước
+Trong lưới Core, X tăng sang phải, Y tăng lên trên. Tọa độ dưới đây là **cell**, chưa phải tọa độ world của Unity.
 
-Seed là số đầu vào cho bộ sinh giả ngẫu nhiên. Với cùng cấu hình và phiên bản thuật toán, nó cho phép tái lập MapData. Trong ví dụ seed 0, attempt được chấp nhận là 0; lưới có 128 × 128 ô.
+| ID | Role | Tâm `(X, Y)` | Hướng trong seed 1 | Có tuyến tới biên? |
+|---:|---|---|---|---|
+| 0 | Start | (64, 64) | Giữa | Qua nhánh 1 và 2 |
+| 1 | Economy A | (64, 116) | Bắc | Có, gateway (64, 127) |
+| 2 | GoldFrontier A | (12, 62) | Tây | Có, gateway (0, 62) |
+| 3 | Economy B | (62, 12) | Nam | Không mở thêm gateway |
+| 4 | GoldFrontier B | (116, 64) | Đông | Không mở thêm gateway |
 
+```text
+                         G1 tại biên bắc
+                               |
+                        1 · Economy A
+                               |
+G2 tại biên tây — 2 · Gold A — 0 · Start — 4 · Gold B
+                    landmark   |
+                        3 · Economy B
+```
 
-![Hình 2  Trường noise thực của seed 0 và terrain trước carve](../../../Outputs/Midterm/VisualGuide/figures/02-noise.png)
+Sơ đồ chữ chỉ thể hiện quan hệ và hướng; không thể hiện độ dài hoặc chi tiết chữ L. Với seed khác, cả bố cục có thể xoay và tâm lệch nhẹ. Hai gateway liên kết bằng region ID, không tra từ số lượng vùng.
 
-Ô sáng/tối ở ba hình đầu biểu diễn giá trị noise, chưa phải độ cao gameplay. Hai hình trên cho thấy hai lớp đầu; hình dưới trái là hỗn hợp đủ bốn octave. Lớp sau có tần số cao hơn và ảnh hưởng nhỏ hơn.
+Mỗi ô nhận ID của tâm gần nhất. Bán kính 8 chỉ xác định đĩa đất bắt buộc quanh tâm ngoài, không giới hạn toàn bộ diện tích vùng. Bởi vậy tài nguyên của vùng có thể rải rộng hơn khu vực sát tâm.
 
-- Core dùng noise.snoise của Unity.Mathematics, tức Simplex noise. Cấu hình đang minh họa: 4 octave, NoiseScale 34, Persistence 0,5 và Lacunarity 2.
-- Giá trị trung bình có trọng số từ −0,22 trở lên được chọn thành cỏ; thấp hơn thành nước. Vì các giá trị lân cận liên tục, bản đồ tạo thành mảng thay vì các ô ngẫu nhiên rời rạc.
-Noise chỉ tạo hình địa hình nền. Nếu dừng ở bước này, căn cứ có thể nằm trong nước hoặc đất bị chia cắt. Các bước tiếp theo sửa và kiểm tra để tạo điều kiện chơi được.
+## 4. Đường sáng và ô Reserved bảo vệ điều gì?
 
+Bốn tuyến chữ L nối Start với bốn tâm ngoài. Half-width 2 tạo bề rộng 5 ô. Chỉ hai tuyến của vùng 1 và 2 được kéo tiếp tới biên; hai vùng còn lại vẫn có đường tới căn cứ nhưng không tự mở cửa quái mới.
 
-## 3  Dành chỗ cho căn cứ vùng mở rộng và đường chính
+```text
+Ví dụ cắt ngang một tuyến được carve, không phải ảnh một seed:
 
+    ô thường | R R R R R | ô thường
+               rộng 5 ô
 
-![Hình 3  Cùng seed 0 trước và sau quy hoạch chiến thuật](../../../Outputs/Midterm/VisualGuide/figures/03-layout.png)
+R: terrain được ép thành cỏ, có Reserved và Routes.
+```
 
-StrategicLayout chọn một trong bốn hướng xoay, đặt hai vùng ngoài theo hai hướng vuông góc và thêm độ lệch nhỏ. Mỗi ô nhận nhãn của tâm vùng gần nhất. Màu trên hình là chú giải vai trò; terrain gameplay vẫn chỉ là cỏ hoặc nước.
+Reserved chặn **placement tài nguyên**, không chặn người đi. Start giữ pad 15 × 15; bốn tâm ngoài giữ pad 5 × 5. Pad landmark nằm ở tâm vùng 2. Các khoảng này giúp giữ chỗ căn cứ, điểm tiếp cận và vùng đặt công trình; không phải kích thước sprite.
 
-- Start: TownHall ở trung tâm, có vùng giữ trống. Economy: ưu tiên cây và cừu. GoldFrontier: vùng nhiều vàng và có landmark.
-- Hai tuyến chữ L nối Start tới vùng ngoài rồi ra hai gateway G1/G2 ở biên. Half-width bằng 2 tạo đường rộng 5 ô. Bản đồ có thể còn nhánh nối tự nhiên bên trong.
-- Strategic tạo dải nước biên dày 2 ô trước khi mở gateway. Noise và quy hoạch được phối hợp; không đơn thuần rải tài nguyên lên một hình noise có sẵn.
+Biên có dải nước 2 ô trước khi carve gateway. Validator cuối còn kiểm mọi cửa biên đi tới được đều nằm trong vùng cửa đã đăng ký.
 
-![Hình 4  Phóng chi tiết Reserved và tuyến đi  màu được phủ để giải thích](../../../Outputs/Midterm/VisualGuide/figures/04-reserved.png)
+## 5. Tài nguyên được chia cụ thể ra sao?
 
-Reserved ngăn tài nguyên chiếm pad của căn cứ, pad landmark và đường được bảo vệ. Hình TownHall chỉ minh họa vị trí căn cứ; Reserved không phải bán kính sprite của tòa nhà.
+V4 đặt tài nguyên khởi đầu theo thứ tự **cừu → cây → vàng**. Sáu cừu được ưu tiên vì miền BFS gần căn cứ nhỏ và đã bị bốn tuyến Reserved chia bớt diện tích. Sau đó mới chia phần ngoài khởi đầu:
 
+| Nhóm placement | Cây | Vàng | Cừu |
+|---|---:|---:|---:|
+| Khởi đầu, chọn theo BFS | 30 | 3 | 6 |
+| Economy A, ID 1 | 34 | 0 | 5 |
+| GoldFrontier A, ID 2 | 11 | 5 | 2 |
+| Economy B, ID 3 | 34 | 0 | 4 |
+| GoldFrontier B, ID 4 | 11 | 4 | 1 |
+| **Tổng** | **120** | **12** | **18** |
 
-## 4  Loại đất cô lập bằng BFS bốn hướng
+Các hàng vùng chỉ đếm placement **ngoài khởi đầu**. Một tài nguyên có cờ khởi đầu vẫn có thể nằm qua ranh giới ID vùng, nên đếm mọi chấm trong một vùng trên preview có thể cho số khác hàng budget đó.
 
+Ba mỏ cạnh landmark được tính trong năm mỏ của vùng 2. Chúng không được cộng thêm sau tổng 12. Nếu cấu hình tùy chỉnh chỉ có bốn vàng ngoài khởi đầu, generator chia 3/1; không chia 2/2 rồi làm thiếu cụm landmark.
 
-![Hình 5  Seed 0 có 26 ô đất bị loại ở bước làm sạch kết nối](../../../Outputs/Midterm/VisualGuide/figures/05-connectivity.png)
+## 6. Vì sao phải kiểm lại sau placement?
 
-Hãy hình dung đổ mực từ Start: mực chỉ lan sang trên, dưới, trái, phải trên ô cỏ. Các ô đất không nhận mực là đất cô lập. Core đổi chúng thành nước để tránh giữ lại đảo không thể đi tới.
+Đặt được tài nguyên trên đất chưa chứng minh dân khai thác được. Cây và vàng còn làm thay đổi đường đi.
 
-- Ảnh trái lấy terrain sau carve, trước RemoveUnreachableLand; màu đỏ đánh dấu chính các ô đất biến mất. Ảnh phải lấy terrain sau hàm này từ MapData cuối.
-- BFS đồng thời tạo distance field: mỗi ô có số bước từ Start. Khoảng này phù hợp chọn tài nguyên đầu game hơn khoảng cách thẳng xuyên qua hồ.
-- Hai ô cỏ chỉ chạm góc không được coi là liền nhau. Quy tắc bốn hướng khớp với phép kiểm lưới của module, giúp tránh map trông thông nhưng đường thực tế bị đứt.
-Đây mới là kiểm kết nối trên terrain. Sau khi đặt cây và mỏ vàng, hệ thống phải kiểm lại với footprint tài nguyên; một bãi cỏ thông trước placement vẫn có thể bị tài nguyên chặn sau đó.
+```text
+Fixture minh họa một mỏ vàng, không phải collider thật:
 
+    . i i i i i .
+    . i G G G i .
+    . i G G G i .
+    . i G G G i .
+    . i i i i i .
 
-## 5  Đặt tài nguyên gần trước rồi phân bổ theo vùng
+G: footprint vàng 3 × 3 bị chặn trong kiểm topology.
+i: vòng ô tương tác; cần ít nhất một ô tới được từ Start.
+.: những ô xung quanh, không mặc định đều đi được.
+```
 
+Cây dùng footprint một ô; cừu không chặn đường trong topology tĩnh. Các lời gọi placement ngoài khởi đầu của v4 kiểm thêm vòng trống; footprint không được đè Reserved, còn vòng tương tác có thể đi trên Reserved. Ba mỏ landmark được đặt riêng trước và vẫn qua kiểm cuối.
 
-![Hình 6  Placement thật seed 0 và vùng gần căn cứ được phóng lớn](../../../Outputs/Midterm/VisualGuide/figures/06-resources.png)
+Validator kiểm đủ tổng và budget từng vùng, không overlap, đường tới từng tài nguyên, cả bốn tâm ngoài, pad, lối thoát và hai gateway. Clearance 3 × 3 loại lối quá hẹp bằng cách yêu cầu thêm một ô trống quanh tâm. Các phép kiểm này dùng lưới; collider và bán kính actor thật tiếp tục được đối chiếu ở Integration.
 
-Core đặt quota khởi đầu trước: 30 cây, 3 mỏ vàng, 6 cừu. Chúng được chọn theo khoảng BFS quanh căn cứ; không buộc mọi node khởi đầu phải mang nhãn vùng Start. Sau đó mới đặt phần còn lại theo vai trò vùng.
+Map có đường tới tài nguyên chưa tự chứng minh vùng đó có hiệu quả kinh tế cao. Dân còn phải mang hàng về kho; quãng vận chuyển là lý do cần xây depot khi mở rộng.
 
-- Tổng map: 120 cây, 12 mỏ vàng, 18 cừu. Ngoài quota khởi đầu, Economy nhận 68 cây và 9 cừu; GoldFrontier nhận 22 cây, 9 vàng và 3 cừu.
-- Ba mỏ vàng quanh landmark nằm trong tổng 12 mỏ. Các VariantId chọn hình Gold Stone 1–6; tất cả cùng loại tài nguyên Gold.
-- Cây/vàng xa được lấy mẫu quanh các tâm cụm; cừu lấy mẫu trên đất mở. Occupancy và Reserved loại vị trí chồng lấn hoặc chắn chỗ đã dành trước.
-Con số quota nói về số đối tượng được đặt, không tự chứng minh nguồn tài nguyên sẽ cạn hoặc game đã cân bằng. Mức lợi ích của mở rộng còn phụ thuộc quãng vận chuyển, depot và thời điểm wave.
+## 7. Từ preview tới hình ảnh thật trong Unity
 
+Các ảnh sau là **ảnh camera Unity của v4**, seed 1. Helper đã reveal từng vùng rồi áp màu fog để kiểm tint/decor; đây là fixture quan sát, không phải bằng chứng người chơi tự khám phá hết map.
 
-## 6  Sprite và footprint là hai thứ khác nhau
+| Economy A, ID 1 | Economy B, ID 3 |
+|---|---|
+| ![Economy A](Evidence/FourFrontiers/editor-region-1-applied.png) | ![Economy B](Evidence/FourFrontiers/editor-region-3-applied.png) |
 
+Cả hai cùng role Economy nên cùng nhóm tint/decor. Chúng không cần có hình địa hình hoặc cách rải cây giống hệt nhau. Cây còn có thể nằm ngoài khung camera chụp quanh tâm.
 
-![Hình 7  Fixture minh họa footprint vàng và một lối bị cây chắn](../../../Outputs/Midterm/VisualGuide/figures/07-footprint.png)
+| GoldFrontier A, ID 2 | GoldFrontier B, ID 4 |
+|---|---|
+| ![GoldFrontier có landmark](Evidence/FourFrontiers/editor-region-2-applied.png) | ![GoldFrontier còn lại](Evidence/FourFrontiers/editor-region-4-applied.png) |
 
-Các ô vàng biểu diễn footprint 3 × 3 của mỏ, không phải hình dạng chính xác của sprite. Vòng cyan là các ô tương tác ứng viên phía ngoài. Dân cần đứng được ở một ô hợp lệ trên vòng này để khai thác.
+Chỉ vùng 2 có landmark Old Watchpost ở lớp hiển thị; vùng 4 vẫn có vàng và đường tiếp cận. Những ảnh chụp quanh tâm không phải ảnh kiểm đếm tất cả tài nguyên của cả vùng.
 
-- Cây chặn 1 ô trong validator Core. Vàng chặn 3 × 3 ô. Cừu không chặn đường trong phép kiểm topology tĩnh nhưng vẫn được kiểm vị trí và overlap khi placement.
-- Sprite có phần trang trí và khoảng trong suốt; hình trông nhỏ hoặc lớn không tự thay đổi footprint lưới. Collider và offset thật được đối chiếu ở Integration.
-- Hình bên phải cố tình thêm hàng cây chạy hết chiều cao khu vực minh họa: lối đi từ phía trái tới mỏ bị chia cắt. Ví dụ xét khu vực đóng trong hình; nếu có đường vòng ngoài khung thì phải kiểm cả đường đó. Đây là fixture để đọc luật, không phải kết quả hợp lệ của generator.
-Sau placement, hệ thống kiểm tất cả tài nguyên: nằm trên đất, không đè Reserved, không trùng footprint và có ít nhất một ô tương tác tới được. Chỉ kiểm “tâm mỏ nằm trên cỏ” là chưa đủ.
+Authoring ghi Tilemap và tạo prefab từ MapData; physics/navigation được cập nhật trước khi root bind gameplay. ECS điều khiển khai thác, vận chuyển, xây và chiến đấu. Presentation đọc role để vẽ và đọc fog để quyết định phần đã biết; nó không tự sửa quota hoặc mở tầm nhìn.
 
+## 8. Không đạt validation thì xử lý ra sao?
 
-## 7  Đường phải vừa nối được vừa đủ rộng
+Generator tối đa tám attempt, đánh số 0–7. Không đủ quota hoặc đường không hợp lệ thì thử attempt tiếp theo; không hạ quota để lấy một bản đồ thiếu tài nguyên.
 
+Nếu hết lượt, Integration xét final map dự phòng cùng preset/cấu hình. Dự phòng phải được kiểm lại trước khi áp. Nếu cấu hình sai hoặc dự phòng không dùng được, trận bị chặn và hiện thử lại/về menu/thoát.
 
-![Hình 8  BFS trên map seed 0 tới mỏ khởi đầu  đường có 17 bước](../../../Outputs/Midterm/VisualGuide/figures/09-bfs-path.png)
+![Thông báo dùng map dự phòng, nằm dưới giữa để tránh HUD](Evidence/FourFrontiers/fallback-notice-final.png)
 
-Đường vàng được dựng bằng BFS bốn hướng trên terrain thật cộng vật cản cây/vàng. Đường kết thúc ở ô tương tác ngoài mỏ, không chạy xuyên qua tâm mỏ. Đây là phép minh họa validator, không phải lệnh di chuyển cho một Unit đang chạy.
+**Hình 2 — Fixture dùng fallback.** Ví dụ yêu cầu seed 1543 nhưng dùng map dự phòng seed 1: hệ thống lưu cả requested seed và actual seed. Dữ liệu thật được lưu/restore, không sinh lại requested seed khi load.
 
+![Panel lỗi khi không sinh hoặc dùng được map dự phòng](Evidence/FourFrontiers/failure-panel-editor.png)
 
-![Hình 9  Fixture so sánh hành lang hẹp và hành lang đủ clearance](../../../Outputs/Midterm/VisualGuide/figures/08-clearance.png)
+**Hình 3 — Fixture lỗi trong Editor.** View authoring có thể còn xuất hiện phía sau panel; simulation vẫn bị chặn. Ảnh này không chứng nhận một lượt click lỗi hiếm của người chơi trong Player; các handler retry/menu đã có kiểm riêng theo [báo cáo FR6](FourFrontiers-Implementation.md).
 
-Đường 1 ô có thể nối được nếu xem nhân vật như một điểm. Phép kiểm clearance dùng footprint 3 × 3, tương đương cần 1 ô trống xung quanh tâm; lối hẹp bên trái không đạt. Hệ thống co vùng đi được rồi kiểm tới hai gateway và landmark. Ô biên được xử lý theo quy tắc gateway.
+## 9. So ba seed và phân biệt tạo trận với tải trận
 
+| Seed 0 | Seed 1 | Seed 1543 |
+|---|---|---|
+| ![Preview v4 seed 0](Evidence/FourFrontiers/preview-0.png) | ![Preview v4 seed 1](Evidence/FourFrontiers/preview-1.png) | ![Preview v4 seed 1543](Evidence/FourFrontiers/preview-1543.png) |
 
-## 8  Vì sao cần seed attempt và validation
+Đổi seed làm đổi noise, hướng/jitter và placement; các ràng buộc năm vùng, hai gateway và tổng quota vẫn giữ. Accepted attempt có thể khác nhau giữa seed và giữa các phiên bản; không lấy số attempt từ tài liệu v3 gán sang v4.
 
+**New Game** chạy generator hoặc dùng fallback đã validate. **Load Game SL4** áp final terrain/topology và khôi phục đối tượng theo ID, không regenerate hoặc mọc lại tài nguyên đã mất. Schema 2 lưu thêm provenance fallback; save schema cũ bị từ chối. SL4 vẫn chỉ nhận đầu ngày 1 và không có công việc đang chạy.
 
-![Hình 10  Ba bản đồ xuất từ Core hiện tại  cùng preset khác seed](../../../Outputs/Midterm/VisualGuide/figures/10-seeds.png)
+Muốn tự xem: **RTS → Procedural Generation → Preview Regions → FourFrontiers → nhập seed → Sinh preview**. Muốn chơi: `MainMenu → Chơi`, với `FourFrontiersMapSettings.asset` được gán trong authoring.
 
-Ba seed 0, 1, 1543 ở đợt xuất hình này đều được chấp nhận tại attempt 0 và đủ 150 placement. Đây là kiểm tra phục vụ minh họa, không phải một đợt benchmark hoặc chứng nhận mọi seed đều hợp lệ.
+## 10. Những gì đã kiểm và tài liệu lịch sử
 
-- Validation cuối kiểm quota, ô tương tác, footprint, pad, clearance và gateway. Mọi cửa biên đi tới được phải thuộc vùng gateway được khai báo.
-- Nếu một attempt không đạt, Core thử attempt tiếp theo. Mặc định tối đa 8 attempt; từng lời gọi PlaceQuota có giới hạn phép thử. Hết giới hạn thì trả lỗi, không tự giảm quota để báo thành công.
-- Terrain, layout và resource có stream seed riêng được suy ra từ seed gốc, mã phase và attempt. Một lần UI gọi random không được làm xê dịch bố trí map.
-Cùng seed chỉ đủ để tái lập khi cấu hình và phiên bản generator cũng phù hợp. Nếu đổi thuật toán hoặc quota, kết quả có thể đổi. Khi debug cần giữ seed, settings, version, attempt và nguyên nhân validator.
+Đợt FR0–FR7 đã lưu 1.000 seed v4 trên cả Unity và .NET, 165 EditMode tests, 14 lượt Player và 18 check SampleScene; có cold-process SL4 và xác nhận nghiệm thu của người dùng. Đây là bằng chứng trong phạm vi cấu hình và workload đã ghi, không bảo đảm mọi seed/cấu hình hoặc mọi hướng mở rộng đều cân bằng. Xem [implementation/evidence](FourFrontiers-Implementation.md) để đọc raw và số đo.
 
-Các bài kiểm lịch sử: S5 quét 1.000 strategic và 1.000 legacy, có sinh lại để so dữ liệu; SL4 có 18/18 procedural tests đạt. Không dùng các kết quả đó để kết luận thời gian scene đến Ready hay cân bằng kinh tế đã đạt.
+[Bản Word minh họa ngày 24/11](../../../Outputs/Midterm/Giai_thich_Procedural_Generation_Minh_hoa_tile.docx) cùng các hình trong `Outputs/Midterm/VisualGuide` mô tả **StrategicRegions v3**, có ba vùng. Chúng được giữ làm tư liệu lịch sử, chưa được xuất lại theo v4 trong lần sửa Markdown này. Báo cáo giữa kỳ cũng giữ nguyên.
 
-
-## 9  Từ bản đồ dữ liệu tới màn hình chơi
-
-
-![Hình 11  Ảnh gameplay đã lưu ở S7 ngày 16 tháng 11 năm 2026](../../../Outputs/Midterm/VisualGuide/figures/11-gameplay-evidence.png)
-
-Ảnh trên là evidence Unity có sẵn, không phải ảnh chụp mới của candidate E10. Nó cho thấy RuleTile, bờ nước, tài nguyên và lớp presentation được áp vào scene. Hình tái dựng ở các trang trước chủ động lược bỏ các lớp này để thấy từng bước logic.
-
-- Core tạo MapData. ProceduralMapAuthoring ghi Tilemap theo batch, tạo prefab đúng placement, tắt spawner cũ để tránh sinh trùng, rồi đồng bộ Physics2D và dựng lại pathfinding.
-- Root và bridge kết nối dependency, đăng ký thực thể/tài nguyên vào ECS. Đồng hồ và wave chờ quá trình chuẩn bị; map chưa hợp lệ không được coi là sinh thành công.
-- Gateway là dữ liệu tuyến tiếp cận. Điểm spawn thực tế được chọn trên tuyến ở bán kính khởi đầu phù hợp; không mặc định quái luôn sinh đúng mép map.
-New Game chạy generator. Load Game SL4 áp snapshot terrain/topology và khôi phục đối tượng bằng ID, không sinh map và tài nguyên lần nữa. Vì vậy tài nguyên đã mất không mọc lại chỉ nhờ còn seed. SL4 vẫn chỉ nhận lát cắt đầu ngày không có công việc đang chạy.
-
-Cách xem thử: RTS → Procedural Generation → Preview Regions → StrategicRegions → nhập seed → Sinh preview. Muốn chơi dùng ProceduralGame. Đọc asset được gán thực tế ở authoring; không suy preset gameplay từ asset DefaultProceduralMapSettings riêng.
-
-
-## 10  Tham khảo từ game nào và học điều gì
-
-Có hai loại nguồn: tài liệu/công trình giải thích thuật toán và game cho thấy cách áp dụng luật sinh vào trải nghiệm. Không có bằng chứng rằng RTSgame2026 sao chép nguyên bộ sinh map của một game thương mại.
-
-
-## 0 A D là tham khảo đã có trong nghiên cứu ban đầu
-
-Research.md ngày 26/10/2026 đã dẫn mã nguồn 0 A.D. File rmgen-common/player.js tách các bước đặt căn cứ, cây, mỏ và động vật khởi đầu, đồng thời dùng constraints và khoảng cách. Điểm học cho dự án là tách tài nguyên quanh căn cứ khỏi phần ngẫu nhiên xa hơn. Không lấy quota hay thông số cân bằng của 0 A.D. làm thông số của game này.
-
-[Nguồn 1  0 A D  rmgen common player js](https://github.com/0ad/0ad/blob/master/binaries/data/mods/public/maps/random/rmgen-common/player.js)
-
-
-## Factorio là nguồn bổ sung ở lần cập nhật này
-
-Friday Facts 258 giải thích việc làm tài nguyên đầu game dễ dự đoán hơn, tránh chồng lấn và nước che tài nguyên. Friday Facts 390 minh họa cách kết hợp trường noise với biểu thức hình học để quyết định tile và vị trí đối tượng. Liên hệ với dự án là “nền tự nhiên + vùng bắt buộc + tài nguyên có luật”; đây là đối chiếu thiết kế, không khẳng định hai game dùng cùng thuật toán hoặc mã nguồn.
-
-[Nguồn 2  Factorio Friday Facts 258  New autoplace](https://www.factorio.com/blog/post/fff-258)
-
-[Nguồn 3  Factorio Friday Facts 390  Noise expressions 2 0](https://www.factorio.com/blog/post/fff-390)
-
-
-## Các nguồn khác và giới hạn diễn giải
-
-Crown Siege được dùng tham khảo giao diện tech tree nền tối, node và điều hướng; không có bằng chứng về thuật toán sinh map của Crown Siege trong nghiên cứu hiện có. They Are Billions và Age of Darkness xuất hiện trong đề cương như bối cảnh RTS sinh tồn, không phải nguồn chứng minh cách generator hiện tại được cài đặt.
-
-Nền tảng noise tham khảo Red Blob Games và API Unity.Mathematics. WFC, Cellular Automata, Poisson disk và multiobjective generation có được khảo sát; Core hiện tại không triển khai đầy đủ các kỹ thuật đó. Tài nguyên theo cụm không được gọi là Bridson Poisson disk hoàn chỉnh.
-
-[Nguồn 4  Red Blob Games  Making maps with noise functions](https://www.redblobgames.com/maps/terrain-from-noise/)
-
-Asset: Tiny Swords đã có trong project. Hình tái dựng bằng tile gốc, dữ liệu Core xuất riêng và lớp chú giải; không thay đổi asset, scene hay gameplay. Source đối chiếu: ProceduralMapGenerator.cs, StrategicLayout.cs, StrategicResources.cs, DeterministicRandom.cs, ProceduralMapAuthoring.cs; các báo cáo S4, S5, S6 và SaveLoad SL4.
-
+Nguồn đối chiếu chính là [HowItWorks](HowItWorks.md), [Core generator](../../../Assets/Game/ProceduralGeneration/Core/ProceduralMapGenerator.cs), [StrategicLayout](../../../Assets/Game/ProceduralGeneration/Core/StrategicLayout.cs), [StrategicResources](../../../Assets/Game/ProceduralGeneration/Core/StrategicResources.cs) và [Authoring](../../../Assets/Game/ProceduralGeneration/Integration/ProceduralMapAuthoring.cs). Nguồn nghiên cứu thuật toán và đối chiếu game nằm ở [Research](Research.md); không coi việc tham khảo một game là bằng chứng sao chép generator của game đó.

@@ -51,7 +51,7 @@ public sealed partial class ProceduralMapPresentation
         if (!m_EnableDaytimeDetail || m_Map.Reserved[index] != 0 || m_Map.Layout.Routes[index] != 0) return color;
         int region = m_Map.Layout.RegionIds[index];
         float patch = PatchNoise(x, y);
-        Color shade = region == 2 ? new Color(.79f, .66f, .43f) : new Color(.73f, .88f, .66f);
+        Color shade = m_Map.Layout.Regions[region].Role == RegionRole.GoldFrontier ? new Color(.79f, .66f, .43f) : new Color(.73f, .88f, .66f);
         return Color.Lerp(color, color * shade, Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.3f, .8f, patch)) * (region == 0 ? .08f : .24f));
     }
 
@@ -68,7 +68,7 @@ public sealed partial class ProceduralMapPresentation
         for (int region = 0; region < m_Map.Layout.Regions.Length; region++)
         {
             var area = m_Map.Layout.Regions[region];
-            int wanted = region == 0 ? 5 : 16, clusters = 0, radius = area.Radius + 13;
+            int wanted = region == 0 ? 5 : m_Map.GeneratorVersion==4 ? 8 : 16, clusters = 0, radius = area.Radius + 13;
             for (int attempt = 0; attempt < 1200 && clusters < wanted && DaytimeDetailCount < DaytimeDetailBudget - AmbientBudget; attempt++)
             {
                 int x = area.X + random.NextInt(-radius, radius + 1), y = area.Y + random.NextInt(-radius, radius + 1);
@@ -83,14 +83,14 @@ public sealed partial class ProceduralMapPresentation
                     if (!CanPlaceDetail(px, py) || m_Map.Layout.RegionIds[m_Map.Index(px, py)] != region) continue;
                     int kind = random.NextInt(0, 100);
                     Sprite sprite; string name;
-                    if (region == 2)
+                    if (m_Map.Layout.Regions[region].Role == RegionRole.GoldFrontier)
                     {
                         sprite = kind < 60 ? m_DetailSprites[2] : kind < 85 ? m_DetailSprites[3] : rock;
                         name = kind < 60 ? "Dry earth" : "Frontier pebbles";
                     }
                     else
                     {
-                        sprite = kind < 45 ? m_DetailSprites[0] : kind < 85 ? m_DetailSprites[1] : region == 1 ? bush : m_DetailSprites[0];
+                        sprite = kind < 45 ? m_DetailSprites[0] : kind < 85 ? m_DetailSprites[1] : m_Map.Layout.Regions[region].Role == RegionRole.Economy ? bush : m_DetailSprites[0];
                         name = kind < 45 ? "Meadow grass" : kind < 85 ? "Meadow flowers" : "Grove shrubs";
                     }
                     var renderer = AddDetail(sprite, px, py, "E4 " + name);
@@ -98,7 +98,7 @@ public sealed partial class ProceduralMapPresentation
                     renderer.transform.localScale = Vector3.one * scale; renderer.flipX = random.NextInt(0, 2) == 0;
                     renderer.sortingOrder = sprite == bush || sprite == rock ? 12 : 11;
                     member++;
-                    if (region == 1 && sprite == m_DetailSprites[1] && m_Ambient.Count < 4
+                    if (m_Map.Layout.Regions[region].Role == RegionRole.Economy && sprite == m_DetailSprites[1] && m_Ambient.Count < 4
                         && !m_Ambient.Exists(a => (a.Home - renderer.transform.position).sqrMagnitude < 36))
                         AddAmbient(m_DetailSprites[5], px, py, true, random.NextFloat() * 6.28f);
                 }

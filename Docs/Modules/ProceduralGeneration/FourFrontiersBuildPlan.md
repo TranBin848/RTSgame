@@ -1,6 +1,6 @@
 # Kế hoạch bố cục căn cứ trung tâm và bốn vùng ngoài
 
-Ngày lập **24/11/2026**. Trạng thái **PLANNED**. Phiên này chỉ rà source và lập kế hoạch; chưa đổi generator, scene, save format hoặc chạy kiểm thử mới. Các kết quả cũ không chứng nhận bố cục đề xuất.
+Ngày lập **24/11/2026**. Kế hoạch dưới đây là hợp đồng triển khai. **Đã triển khai candidate FR0–FR7; trạng thái nghiệm thu và bằng chứng mới nằm trong [báo cáo implementation](FourFrontiers-Implementation.md).** Giữ nguyên tiêu chí gốc, không suy DONE kỹ thuật thành nghiệm thu người chơi.
 
 ## 1 Mục tiêu và phạm vi
 
@@ -68,7 +68,7 @@ Ví dụ một cấu hình phân bổ hợp lệ:
 
 ## 4 Các mốc triển khai và tiêu chí nghiệm thu
 
-Tất cả các mốc dưới đây **TODO**. Mỗi mốc có artifact và giới hạn riêng; DONE Core không đồng nghĩa DONE gameplay hoặc Save/Load toàn trận.
+Bảng dưới đây giữ tiêu chí gốc của từng mốc. Trạng thái thực thi hiện tại xem [implementation/evidence](FourFrontiers-Implementation.md); DONE Core không đồng nghĩa DONE gameplay hoặc Save/Load toàn trận.
 
 | Mốc | Công việc | Điều kiện đạt |
 |---|---|---|

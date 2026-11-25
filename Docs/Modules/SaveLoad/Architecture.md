@@ -1,5 +1,7 @@
 # Kiến trúc Save/Load
 
+**24/11 — FourFrontiers:** [Mở rộng SL4 cho v4](../ProceduralGeneration/FourFrontiers-Implementation.md). Topology5/4/2; kiểm ID/role/connection/gateway và budget trước teardown. Schema2 thêm `RequestedSeed`/`UsedFallback` bắt buộc; schema1 bị từ chối, không migration/xóa save. Phạm vi SL4 giữ nguyên.
+
 Ngày đối chiếu source: **24/11/2026**. Thực hiện theo [BuildPlan SL0–SL9](BuildPlan.md). Trạng thái thực tế nằm ở [Progress](Progress.md); schema và storage không đồng nghĩa đã có Continue toàn trận.
 
 ## Mục tiêu và phạm vi

@@ -1,0 +1,28 @@
+{
+  "dateLocal": "2026-11-24",
+  "timezone": "Asia/Saigon",
+  "status": "Accepted by user in chat",
+  "preview": {
+    "seed": 1,
+    "answer": "Đồng ý bố cục, tiếp tục tích hợp"
+  },
+  "fr7": {
+    "build": ".utmp/four-frontiers-20261124-164713/RTSgame2026.exe",
+    "answer": "Đã thử và đồng ý nghiệm thu",
+    "requestedScope": "MainMenu → Chơi, khám phá bốn hướng, khai thác/nộp và xây kho; bố cục/gameplay thực tế"
+  },
+  "limits": [
+    "Không mở rộng nghiệm thu thành mọi seed/máy hoặc SaveLoad SL5–SL9.",
+    "Fault UX Player được automation gọi handlers; chưa có chứng nhận click lỗi hiếm bởi người chơi.",
+    "Không đóng G3manual của đợt cân bằng cũ hoặc các gate ngoài FourFrontiers."
+  ],
+  "finalPackaging": {
+    "build": ".utmp/four-frontiers-20261124-165350/RTSgame2026.exe",
+    "difference": "Same gameplay source; restores original ProjectSettings.runInBackground=0 after Editor fixture had persisted1. Smoke runners set runtime background explicitly. Final packaging validated by automated matrix; user acceptance remains attributed to tested164713build.",
+    "automatedValidation": {
+      "matrix": "14/14 Player PASS",
+      "legacy": "18/18 SampleScene PASS",
+      "projectSettingsRestored": true
+    }
+  }
+}

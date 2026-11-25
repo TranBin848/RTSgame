@@ -1,6 +1,12 @@
 # Tài liệu kỹ thuật RTSgame2026
 
-**24/11 — Kế hoạch bố cục năm vùng:** [Start trung tâm và bốn vùng ngoài FR0–FR7](Modules/ProceduralGeneration/FourFrontiersBuildPlan.md). PLANNED, giữ128×128/quota120–12–18/hai gateway; thêm preset/version mới, budget theo role/vùng, preview, gameplay, SaveLoad SL4, dự phòng lỗi và nghiệm thu. Chưa thay generator hoặc scene.
+**25/11 — Viết lại giải thích procedural theo FourFrontiers v4:** [Cách hoạt động](Modules/ProceduralGeneration/HowItWorks.md) và [bản có hình](Modules/ProceduralGeneration/IllustratedGuide.md). Giải thích năm vùng, ID/role, quota, BFS/clearance, fallback và New Game/Load Game; dùng evidence v4 đã có. Word minh họa cũ vẫn là v3, được ghi nhãn lịch sử. Chỉ cập nhật tài liệu, không thay gameplay hoặc đo mới.
+
+**24/11 — FourFrontiers FR0–FR7 nghiệm thu:** [implementation, build, số đo và xác nhận người dùng](Modules/ProceduralGeneration/FourFrontiers-Implementation.md). 165/165 tests, 1.000 seed Unity/.NET, 14 lượt Player và 18 check legacy PASS. Cold-process v4 và fallback hữu hạn đã kiểm; giữ giới hạn SL4, không đóng SL5–SL9.
+
+**24/11 — Triển khai FourFrontiers:** [Trạng thái FR0–FR7, hợp đồng và bằng chứng](Modules/ProceduralGeneration/FourFrontiers-Implementation.md). Preset v4 riêng, v1/v3 giữ baseline; xem báo cáo để phân biệt code đã có, kiểm kỹ thuật và nghiệm thu người chơi.
+
+**24/11 — Kế hoạch bố cục năm vùng:** [Start trung tâm và bốn vùng ngoài FR0–FR7](Modules/ProceduralGeneration/FourFrontiersBuildPlan.md). Checkpoint lập kế hoạch trước triển khai; trạng thái mới xem báo cáo FourFrontiers ở trên. Giữ128×128/quota120–12–18/hai gateway.
 
 **24/11 — Giải thích procedural bằng tile của dự án:** [Bản minh họa từng bước](Modules/ProceduralGeneration/IllustratedGuide.md), [Word có hình](../Outputs/Midterm/Giai_thich_Procedural_Generation_Minh_hoa_tile.docx). Có dữ liệu xuất trực tiếp Core strategic v3 cho seed0/1/1543, lớp chú giải và fixture được ghi nhãn; bổ sung đối chiếu nguồn 0 A.D./Factorio. Không cập nhật gameplay hoặc thay số đo hiệu năng.
 

@@ -6,7 +6,7 @@ public sealed class ProceduralMapPreviewWindow : EditorWindow
 {
     ProceduralMapSettings m_Settings;
     int m_Seed = 1;
-    MapLayoutPreset m_Preset = MapLayoutPreset.StrategicRegions;
+    MapLayoutPreset m_Preset = MapLayoutPreset.FourFrontiers;
     Texture2D m_Texture;
     string m_Report = "Chọn preset và bấm Sinh preview. Preview không thay đổi scene.";
     public MapData Map { get; private set; }
@@ -25,6 +25,13 @@ public sealed class ProceduralMapPreviewWindow : EditorWindow
         m_Report=$"Seed {map.Seed} / attempt {map.Attempt} / generator v{map.GeneratorVersion}\n"
             + $"{map.Width}×{map.Height} / {map.Resources.Count} resources / repairs {map.Validation.Repairs}\n"
             + $"Gateways with clearance: {map.Validation.ReachableGateways}; longest resource path: {map.Validation.MaxResourcePathDistance}";
+        if(map.Layout!=null) for(int id=0;id<map.Layout.Regions.Length;id++)
+        {
+            var r=map.Layout.Regions[id]; int trees=0,gold=0,sheep=0;
+            foreach(var node in map.Resources) if(!node.IsStartingResource&&map.Layout.RegionIds[map.Index(node.X,node.Y)]==id)
+            {if(node.Kind==ProceduralResourceKind.Tree)trees++;else if(node.Kind==ProceduralResourceKind.Gold)gold++;else sheep++;}
+            m_Report+=$"\nID {id}: {r.Role} @ ({r.X},{r.Y}); ngoài khởi đầu T/G/S={trees}/{gold}/{sheep}";
+        }
         Repaint();
     }
     void OnGUI()
@@ -43,6 +50,13 @@ public sealed class ProceduralMapPreviewWindow : EditorWindow
         {
             var rect=GUILayoutUtility.GetRect(100,10000,100,10000,GUILayout.ExpandWidth(true),GUILayout.ExpandHeight(true));
             EditorGUI.DrawPreviewTexture(rect,m_Texture,null,ScaleMode.ScaleToFit);
+            if(Map?.Layout!=null)
+            {
+                float scale=Mathf.Min(rect.width/Map.Width,rect.height/Map.Height);
+                float left=rect.x+(rect.width-Map.Width*scale)/2, top=rect.y+(rect.height-Map.Height*scale)/2;
+                for(int id=0;id<Map.Layout.Regions.Length;id++)
+                {var r=Map.Layout.Regions[id];GUI.Label(new Rect(left+r.X*scale-45,top+(Map.Height-r.Y)*scale+6,160,22),$"{id}: {r.Role}",EditorStyles.whiteLabel);}
+            }
         }
     }
     void OnDisable() {if(m_Texture!=null)DestroyImmediate(m_Texture);}
@@ -55,7 +69,7 @@ public sealed class ProceduralMapPreviewWindow : EditorWindow
         for(int i=0;i<pixels.Length;i++)
         {
             pixels[i]=map.Terrain[i]==(byte)TerrainCell.Water?new Color(0.06f,0.15f,0.3f)
-                :map.Layout==null?new Color(0.22f,0.4f,0.22f):roles[map.Layout.RegionIds[i]];
+                :map.Layout==null?new Color(0.22f,0.4f,0.22f):roles[(int)map.Layout.Regions[map.Layout.RegionIds[i]].Role];
             if(map.Layout!=null&&map.Layout.Routes[i]!=0)pixels[i]=new Color(0.8f,0.8f,0.8f);
         }
         foreach(var resource in map.Resources)pixels[map.Index(resource.X,resource.Y)]=resource.Kind==ProceduralResourceKind.Tree?new Color(0,0.18f,0)

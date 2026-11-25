@@ -90,7 +90,7 @@ public sealed class SL4PlayerSmoke : MonoBehaviour
                 if (!MatchLoadBootstrap.LastLoadSucceeded || !root.GetComponent<SwarmGameBridge>().Simulation.Paused) throw new Exception("Loaded state/pause mismatch.");
             }
             File.WriteAllText(Path.Combine(m_Folder, m_Mode + ".json"), JsonConvert.SerializeObject(new { passed = true, mode = m_Mode,
-                seed = saved.Map.Seed, objects = saved.Objects.Length, resources = saved.Objects.Count(x => x.Resource != null),
+                seed = saved.Map.Seed, requestedSeed = saved.Map.RequestedSeed, usedFallback = saved.Map.UsedFallback, version = saved.Map.GeneratorVersion, regions = saved.Map.Regions.Length, connections = saved.Map.Connections.Length, gateways = saved.Map.Gateways.Length, objects = saved.Objects.Length, resources = saved.Objects.Count(x => x.Resource != null),
                 missingResourcePlacements = saved.Map.Placements.Count(x => x.ObjectId == 0), wallet = saved.Player.Wallet,
                 paused = Time.timeScale == 0, processId = System.Diagnostics.Process.GetCurrentProcess().Id }, Formatting.Indented));
             Application.Quit(0);

@@ -32,7 +32,7 @@ namespace RTS.SaveLoad.Tests
         {
             return new MatchSaveData
             {
-                SchemaVersion = 1, SaveId = Guid.NewGuid().ToString("N"), CapturedUtc = DateTimeOffset.UtcNow.ToString("O"),
+                SchemaVersion = SaveValidator.SchemaVersion, SaveId = Guid.NewGuid().ToString("N"), CapturedUtc = DateTimeOffset.UtcNow.ToString("O"),
                 ContentFingerprint = m_Catalog.Fingerprint, Generation = generation, NextSaveId = 100, NextRequestId = 20,
                 Map = new MapSaveData
                 {
@@ -63,6 +63,30 @@ namespace RTS.SaveLoad.Tests
                 View = new ViewSaveData { Zoom = 9, Selection = new long[] { 2 } }
             };
         }
+        [TestCase("valid")] [TestCase("connection")] [TestCase("gateway")] [TestCase("role")] [TestCase("region-id")] [TestCase("version")]
+        public void FourFrontiersTopologyIsValidatedBeforeRestore(string fault)
+        {
+            var value=Fixture(); var map=value.Map;map.GeneratorVersion=4;map.RequestedSeed=1543;map.Seed=1;map.UsedFallback=true;
+            map.RegionIds=new byte[1024];map.Routes=new byte[1024];
+            map.Regions=new[]{new RegionSaveData{X=16,Y=16,Radius=2,Role=0},new RegionSaveData{X=24,Y=16,Radius=2,Role=1},
+                new RegionSaveData{X=16,Y=24,Radius=2,Role=2},new RegionSaveData{X=8,Y=16,Radius=2,Role=1},new RegionSaveData{X=16,Y=8,Radius=2,Role=2}};
+            map.Connections=Enumerable.Range(1,4).Select(id=>new ConnectionSaveData{From=0,To=id}).ToArray();
+            map.Gateways=new[]{new GatewaySaveData{X=31,Y=16,Region=1},new GatewaySaveData{X=16,Y=31,Region=2}};
+            map.Landmark=new LandmarkSaveData{X=16,Y=24,Radius=2,Region=2};
+            if(fault=="connection")map.Connections[3]=map.Connections[0];
+            if(fault=="gateway")map.Gateways[1]=map.Gateways[0];
+            if(fault=="role")map.Regions[4].Role=1;
+            if(fault=="region-id")map.RegionIds[0]=5;
+            if(fault=="version")map.GeneratorVersion=3;
+            if(fault!="valid")Assert.Throws<SaveValidationException>(()=>m_Codec.Encode(value));
+            else
+            {
+                var restored=m_Codec.Decode(m_Codec.Encode(value));
+                Assert.That(restored.Map.Regions.Length,Is.EqualTo(5));Assert.That(restored.Map.Connections.Length,Is.EqualTo(4));
+                Assert.That(restored.Map.RequestedSeed,Is.EqualTo(1543));Assert.That(restored.Map.Seed,Is.EqualTo(1));Assert.That(restored.Map.UsedFallback,Is.True);
+            }
+        }
+
         static BodySaveData Body() => new() { Radius = .25f, Health = 100, Targetable = true };
         static ActorSaveData Actor(int kind) => new() { Kind = kind, Interval = 1, Windup = -1, RandomSeed = 123,
             Projectile = new ProjectileParametersData { Speed = 10, VisualScale = 1 } };

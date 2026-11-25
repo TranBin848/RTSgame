@@ -1,5 +1,7 @@
 # Sử dụng Procedural Generation
 
+**24/11 — Preset mới:** `FourFrontiers` v4 có asset riêng `FourFrontiersMapSettings.asset`, preview hiển thị ID/role và budget. [Cách chạy/giới hạn FR0–FR7](FourFrontiers-Implementation.md); không dùng trạng thái Core để suy nghiệm thu balance.
+
 Cập nhật **16/11 — S7:** ProceduralGame root cần `Map Presentation` và `Minimap`; component presentation cần3texture TinySwords có sẵn và shared material Tree. `ProceduralMapEditorTools.ConfigureMapPresentation` wire cấu hình này, menu refresh scene cũng gọi helper. World watchpost là decor trung lập cạnh pad, không phải Unit có thể chọn; tree/watchpost glyph chỉ hiện sau khám phá và giữ khi đã explored. [S7 evidence](S7-Presentation.md) có cách chạy ValidateS7/capture trước-sau, nightly values và nguồn asset. Mặc định fog bật/seed1; fog-off/camera lock trong ảnh chỉ là setup test, không save runtime scene.
 
 Cập nhật đóng **16/11/2026 — S6/D3 DONE:** xem [S6 final](S6-FinalValidation.md) để chạy `Tools/RunS6SeedChecks.ps1 -Seed 0`, `-Seed 1`, `-Seed 1543` từng lần trong paused Play, restore Seed1 khi kết thúc; không SaveAssets cho Seed tạm. Unit/pool mới phải bridge.Register sau acquire, không tự tìm manager trong Awake/Start. Matrix/manual/pool qua reload và17procedural đã PASS; [Progress](../Progression/Progress.md) chuyển sang S7. Các mục chờ trong checkpoint cũ dưới đây mang tính lịch sử.

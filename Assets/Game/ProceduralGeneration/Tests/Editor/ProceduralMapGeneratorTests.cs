@@ -4,6 +4,54 @@ namespace RTS.ProceduralGeneration.Tests
 {
     public sealed class ProceduralMapGeneratorTests
     {
+        [TestCase(0)] [TestCase(1)] [TestCase(1543)] [TestCase(-1)] [TestCase(int.MinValue)]
+        public void FourFrontiersHasDeterministicBudgetsAndClearCenters(int seed)
+        {
+            var settings=new MapGenerationSettingsData {Preset=MapLayoutPreset.FourFrontiers,Seed=seed};
+            var generator=new ProceduralMapGenerator();
+            Assert.That(generator.TryGenerate(settings,out var a,out var error),Is.True,error);
+            Assert.That(generator.TryGenerate(settings,out var b,out error),Is.True,error);
+            Assert.That(a.GeneratorVersion,Is.EqualTo(4)); Assert.That(a.Layout.Regions.Length,Is.EqualTo(5));
+            Assert.That(a.Layout.Connections.Length,Is.EqualTo(4));Assert.That(a.Layout.Gateways.Length,Is.EqualTo(2));
+            Assert.That(b.Terrain,Is.EqualTo(a.Terrain));Assert.That(b.Reserved,Is.EqualTo(a.Reserved));Assert.That(b.Resources,Is.EqualTo(a.Resources));
+            Assert.That(b.Layout.RegionIds,Is.EqualTo(a.Layout.RegionIds));Assert.That(b.Layout.Routes,Is.EqualTo(a.Layout.Routes));
+            Assert.That(b.Layout.Regions,Is.EqualTo(a.Layout.Regions));Assert.That(b.Layout.Gateways,Is.EqualTo(a.Layout.Gateways));
+            Assert.That(a.Validation.ReachableGateways,Is.EqualTo(2));
+            Assert.That(ProceduralMapGenerator.ValidateStrategicMap(settings,a).IsValid,Is.True);
+            for(int id=1;id<5;id++)foreach(ProceduralResourceKind kind in System.Enum.GetValues(typeof(ProceduralResourceKind)))
+            {
+                int count=0;foreach(var r in a.Resources)if(!r.IsStartingResource&&r.Kind==kind&&a.Layout.RegionIds[a.Index(r.X,r.Y)]==id)count++;
+                Assert.That(count,Is.EqualTo(ProceduralMapGenerator.FourFrontiersBudget(settings,id,kind)),id+" "+kind);
+            }
+        }
+        [Test] public void FourFrontiersExhaustionKeepsEightAttemptLimit()
+        {
+            var settings=new MapGenerationSettingsData {Preset=MapLayoutPreset.FourFrontiers,ResourcePlacementAttempts=1};
+            Assert.That(new ProceduralMapGenerator().TryGenerate(settings,out var map,out var error),Is.False);
+            Assert.That(map,Is.Null);Assert.That(error,Does.Contain("after 8 attempts"));
+        }
+        [Test] public void FourFrontiersMinimumGoldSplitsThreeAndOne()
+        {
+            var settings=new MapGenerationSettingsData {Preset=MapLayoutPreset.FourFrontiers,TotalGoldCount=7};
+            Assert.That(ProceduralMapGenerator.FourFrontiersBudget(settings,2,ProceduralResourceKind.Gold),Is.EqualTo(3));
+            Assert.That(ProceduralMapGenerator.FourFrontiersBudget(settings,4,ProceduralResourceKind.Gold),Is.EqualTo(1));
+            Assert.That(new ProceduralMapGenerator().TryGenerate(settings,out var map,out var error),Is.True,error);
+            settings.TotalGoldCount=6;
+            Assert.That(MapGenerationSettingsValidator.Validate(settings),Is.Not.Null);
+        }
+        [TestCase("connection")] [TestCase("gateway")] [TestCase("role")] [TestCase("fourth-region")]
+        public void FourFrontiersRejectsBrokenTopology(string fixture)
+        {
+            var settings=new MapGenerationSettingsData {Preset=MapLayoutPreset.FourFrontiers};
+            Assert.That(new ProceduralMapGenerator().TryGenerate(settings,out var map,out _),Is.True);
+            if(fixture=="connection")map.Layout.Connections[3]=map.Layout.Connections[0];
+            if(fixture=="gateway")map.Layout.Gateways[1]=map.Layout.Gateways[0];
+            if(fixture=="role")map.Layout.Regions[4].Role=RegionRole.Economy;
+            if(fixture=="fourth-region")
+            {var r=map.Layout.Regions[4];map.Terrain[map.Index(r.X,r.Y)]=0;}
+            Assert.That(ProceduralMapGenerator.ValidateStrategicMap(settings,map).IsValid,Is.False);
+        }
+
         [Test] public void SnapshotLayoutClonesTopologyRatherThanRegeneratingIt()
         {
             var regions = new[] { new MapRegion { X = 1 }, new MapRegion { X = 2 }, new MapRegion { X = 3 } };

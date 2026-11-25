@@ -33,6 +33,25 @@ public static class MatchLoadBootstrap
         string settingsError = RTS.ProceduralGeneration.MapGenerationSettingsValidator.Validate(settings);
         if (settingsError != null || settings.Seed != save.Map.Seed || settings.Width != save.Map.Width || settings.Height != save.Map.Height)
             throw new SaveValidationException("Invalid saved generation settings: " + settingsError);
+        int version=settings.Preset==RTS.ProceduralGeneration.MapLayoutPreset.LegacyMainland?1
+            :settings.Preset==RTS.ProceduralGeneration.MapLayoutPreset.StrategicRegions?3:4;
+        if(version!=save.Map.GeneratorVersion)throw new SaveValidationException("Saved preset/version mismatch.");
+        if(version==4)
+        {
+            foreach(RTS.ProceduralGeneration.ProceduralResourceKind kind in Enum.GetValues(typeof(RTS.ProceduralGeneration.ProceduralResourceKind)))
+            {
+                int start=kind==RTS.ProceduralGeneration.ProceduralResourceKind.Tree?settings.StartingTreeCount
+                    :kind==RTS.ProceduralGeneration.ProceduralResourceKind.Gold?settings.StartingGoldCount:settings.StartingSheepCount;
+                if(save.Map.Placements.Count(p=>p.IsStartingResource&&p.Kind==(int)kind)!=start)
+                    throw new SaveValidationException("Saved starting resource budget mismatch.");
+                for(int id=1;id<5;id++)
+                    if(save.Map.Placements.Count(p=>!p.IsStartingResource&&p.Kind==(int)kind&&save.Map.RegionIds[p.Y*settings.Width+p.X]==id)
+                        !=RTS.ProceduralGeneration.ProceduralMapGenerator.FourFrontiersBudget(settings,id,kind))
+                        throw new SaveValidationException("Saved regional resource budget mismatch.");
+                if(save.Map.Placements.Any(p=>!p.IsStartingResource&&p.Kind==(int)kind&&save.Map.RegionIds[p.Y*settings.Width+p.X]==0))
+                    throw new SaveValidationException("Unexpected outer resource in Start region.");
+            }
+        }
         foreach (var obj in save.Objects)
         {
             var prefab = content.ResolvePrefab(obj.DefinitionId);

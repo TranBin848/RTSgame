@@ -1,5 +1,7 @@
 # Kiểm chứng Procedural Generation
 
+**24/11 — FourFrontiers:** [Bằng chứng và trạng thái FR0–FR7](FourFrontiers-Implementation.md). Báo cáo giữ các lượt seed sweep không đạt và lượt cuối, tách .NET/Unity/Player. Kết quả legacy dưới đây không chứng nhận preset mới.
+
 **17/11 — S9 Player/bàn giao:** [S9](../Progression/S9-Acceptance.md) ghi build mới,81regression/18Player smoke và capture seed1/v3/world render;Core102.3715ms,Terrain112.0096ms,Prefab24.0047ms,Physics/pathfinding25.1017ms,load→Ready836.3275ms trong một lần Player. Không gọi đó là median/p95startup hoặc áp mọi seed. S7/S8 user đã xác nhận checklist, D4 runtime/legacy integration đã kiểm. Các trạng thái chưa Player/perf bên dưới là lịch sử.
 
 Cập nhật **16/11 — S7 DONE:** [Evidence/ảnh](S7-Presentation.md): seed1/0/1543 có16/15/14decor/1watchpost, unknown→reveal→explored glyph/silhouette PASS; collider/Unit0/pad clear/actor25/resources150/repeat init/nav stable. Seed1 input/gather/deposit/build PASS;4ảnh final cùng camera/seed ngày-đêm inspect, user báo “Ổn, dễ nhận ra”. Regression59/59DOTS2,1626465s và17/17procedural5,3338967s,0fail/skip. Chưa Player/perf/fullbalance, không biến thời gian mô phỏng thành FPS.

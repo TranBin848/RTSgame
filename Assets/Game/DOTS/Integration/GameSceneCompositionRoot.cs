@@ -127,7 +127,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
         m_MapPresentation.InitializeDaytimeClock(m_DayNight);
         m_MapPresentation.Initialize(m_Generator.GeneratedMap,m_Map,m_Generator.OriginCell,m_Fog);
         m_Minimap.InitializeLandmarks(m_MapPresentation);
-        ComposePresentation(m_Game, m_Map, m_Fog, m_DayNight, m_Waves, m_Camera, m_Bridge);
+        ComposePresentation(m_Game, m_Map, m_Fog, m_DayNight, m_Waves, m_Camera, m_Bridge, m_Generator);
         Reports = new MatchReportService(m_Bridge.Gameplay, m_DayNight, m_Fog);
         Expansion = new ExpansionCommandService(m_Bridge, m_Game, m_Fog, m_Generator);
         m_Match.InitializeReports(Reports);
@@ -165,7 +165,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
 
 
     public static void ComposePresentation(GameManager game, TilemapManager map, FogOfWarManager fog,
-        DayNightCycleManager day, EnemyWaveManager waves, CameraController camera, SwarmGameBridge bridge)
+        DayNightCycleManager day, EnemyWaveManager waves, CameraController camera, SwarmGameBridge bridge, ProceduralMapAuthoring generator = null)
     {
         if (game == null || map == null || fog == null || day == null || waves == null || camera == null || bridge == null)
             throw new ArgumentException("Scene presentation dependencies are required.");
@@ -188,7 +188,7 @@ public sealed class GameSceneCompositionRoot : MonoBehaviour
                     case IdleWorkerPanelUI ui: ui.Initialize(game, camera); break;
                     case MinimapFogUI ui: ui.Initialize(fog, map, camera, viewCamera, bridge); break;
                     case CursorManager cursor: cursor.Initialize(game, bridge, viewCamera); break;
-                    case GameFlowMenu menu: menu.InitializeResearchTree(game.ResearchTree); break;
+                    case GameFlowMenu menu: menu.InitializeResearchTree(game.ResearchTree); menu.InitializeMapStatus(generator); break;
                 }
         }
     }

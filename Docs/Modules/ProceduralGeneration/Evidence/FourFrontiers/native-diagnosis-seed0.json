@@ -1,0 +1,26 @@
+{
+  "phase": "Gathering",
+  "Carried": 0,
+  "ResourceType": 1,
+  "state": "Moving",
+  "task": "None",
+  "Moving": 0,
+  "PathDirty": 0,
+  "position": [
+    -15.5,
+    -49.5
+  ],
+  "destination": [
+    -15.4882784,
+    -50.2010765
+  ],
+  "Radius": 0.428703785,
+  "resourcePosition": [
+    -15.4732323,
+    -51.1009521
+  ],
+  "resourceRadius": 0.9,
+  "Claims": 1,
+  "Capacity": 4,
+  "waypoints": 0
+}

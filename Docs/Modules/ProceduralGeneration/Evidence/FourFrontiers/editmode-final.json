@@ -1,0 +1,11 @@
+{
+  "status": "Passed",
+  "total": 165,
+  "passed": 165,
+  "failed": 0,
+  "skipped": 0,
+  "durationSeconds": 54.3935836,
+  "mode": "EditMode",
+  "namespace": "RTS",
+  "source": "Unity MCP tests-run, final source after menu injection and notice layout"
+}

@@ -1,0 +1,116 @@
+{
+  "count": 1000,
+  "runtime": ".NET Core; final resource footprints blocked, sheep traversable; units in cells; not collider-adjusted journey times",
+  "rows": [
+    {
+      "id": 0,
+      "role": "Start",
+      "grassCells": {
+        "min": 1664,
+        "median": 2192.5,
+        "p95": 2406,
+        "max": 2571
+      },
+      "resourcesPer100Grass": {
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "centerBfs": {
+        "min": 0,
+        "median": 0,
+        "p95": 0,
+        "max": 0
+      }
+    },
+    {
+      "id": 1,
+      "role": "Economy",
+      "grassCells": {
+        "min": 1547,
+        "median": 2446.5,
+        "p95": 2719,
+        "max": 2997
+      },
+      "resourcesPer100Grass": {
+        "min": 1.3013013013013013,
+        "median": 1.5941141070498326,
+        "p95": 1.8301267010793054,
+        "max": 2.5210084033613445
+      },
+      "centerBfs": {
+        "min": 52,
+        "median": 53,
+        "p95": 54,
+        "max": 54
+      }
+    },
+    {
+      "id": 2,
+      "role": "GoldFrontier",
+      "grassCells": {
+        "min": 1694,
+        "median": 2441,
+        "p95": 2705,
+        "max": 2954
+      },
+      "resourcesPer100Grass": {
+        "min": 0.6093432633716994,
+        "median": 0.737402703809914,
+        "p95": 0.8567348881485007,
+        "max": 1.062573789846517
+      },
+      "centerBfs": {
+        "min": 52,
+        "median": 53,
+        "p95": 54,
+        "max": 54
+      }
+    },
+    {
+      "id": 3,
+      "role": "Economy",
+      "grassCells": {
+        "min": 1723,
+        "median": 2445.5,
+        "p95": 2691,
+        "max": 2910
+      },
+      "resourcesPer100Grass": {
+        "min": 1.3058419243986255,
+        "median": 1.5538745282561404,
+        "p95": 1.7873941674506115,
+        "max": 2.20545560069646
+      },
+      "centerBfs": {
+        "min": 52,
+        "median": 53,
+        "p95": 54,
+        "max": 54
+      }
+    },
+    {
+      "id": 4,
+      "role": "GoldFrontier",
+      "grassCells": {
+        "min": 1635,
+        "median": 2431,
+        "p95": 2701,
+        "max": 3016
+      },
+      "resourcesPer100Grass": {
+        "min": 0.5305039787798409,
+        "median": 0.658165364047717,
+        "p95": 0.7619047619047619,
+        "max": 0.9785932721712538
+      },
+      "centerBfs": {
+        "min": 52,
+        "median": 53,
+        "p95": 54,
+        "max": 54
+      }
+    }
+  ]
+}

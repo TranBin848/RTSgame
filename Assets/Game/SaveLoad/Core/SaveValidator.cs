@@ -8,7 +8,7 @@ namespace RTS.SaveLoad
 {
     public static class SaveValidator
     {
-        public const int SchemaVersion = 1, MaxObjects = 50000, MaxQueue = 256, MaxDimension = 1024;
+        public const int SchemaVersion = 2, MaxObjects = 50000, MaxQueue = 256, MaxDimension = 1024;
         public const int MaxFileBytes = 64 * 1024 * 1024;
         internal static void Require(bool condition, string message)
         { if (!condition) throw new SaveValidationException(message); }
@@ -171,7 +171,8 @@ namespace RTS.SaveLoad
         static void Map(MapSaveData map)
         {
             Require(map != null && map.Width >= 32 && map.Height >= 32 && map.Width <= MaxDimension && map.Height <= MaxDimension
-                && map.CellSize > 0 && map.Attempt >= 0 && (map.GeneratorVersion == 1 || map.GeneratorVersion == 3), "Invalid map geometry/version.");
+                && map.CellSize > 0 && map.Attempt >= 0 && (map.GeneratorVersion == 1 || map.GeneratorVersion == 3 || map.GeneratorVersion == 4), "Invalid map geometry/version.");
+            Require(map.UsedFallback ? map.GeneratorVersion==4 : map.RequestedSeed==map.Seed, "Invalid map seed provenance.");
             int count = map.Width * map.Height;
             bool InBounds(int x, int y) => x >= 0 && y >= 0 && x < map.Width && y < map.Height;
             Require(InBounds(map.StartX, map.StartY) && !string.IsNullOrEmpty(map.SettingsJson) && map.SettingsJson.Length <= 16384, "Invalid map start/settings.");
@@ -179,14 +180,24 @@ namespace RTS.SaveLoad
                 Require(mask != null && mask.Length == count && mask.All(x => x <= 1), "Invalid map/fog mask.");
             Require(map.RegionIds != null && map.Routes != null && map.Regions != null && map.Connections != null && map.Gateways != null
                 && map.Placements != null && map.Placements.Length <= MaxObjects, "Missing map topology/placements.");
-            if (map.GeneratorVersion == 3)
+            if (map.GeneratorVersion == 3 || map.GeneratorVersion == 4)
             {
-                Require(map.RegionIds.Length == count && map.RegionIds.All(x => x < 3) && map.Routes.Length == count && map.Routes.All(x => x <= 1)
-                    && map.Regions.Length == 3 && map.Connections.Length == 2 && map.Gateways.Length == 2, "Invalid strategic topology.");
+                int regions=map.GeneratorVersion==4?5:3;
+                Require(map.RegionIds.Length == count && map.RegionIds.All(x => x < regions) && map.Routes.Length == count && map.Routes.All(x => x <= 1)
+                    && map.Regions.Length == regions && map.Connections.Length == regions-1 && map.Gateways.Length == 2, "Invalid strategic topology.");
                 foreach (var r in map.Regions) Require(InBounds(r.X, r.Y) && r.Radius > 0 && r.Role >= 0 && r.Role <= 2, "Invalid region.");
-                foreach (var c in map.Connections) Require(c.From >= 0 && c.From < 3 && c.To >= 0 && c.To < 3 && c.From != c.To, "Invalid region connection.");
-                foreach (var g in map.Gateways) Require(InBounds(g.X, g.Y) && g.Region >= 0 && g.Region < 3, "Invalid gateway.");
-                Require(InBounds(map.Landmark.X, map.Landmark.Y) && map.Landmark.Radius > 0 && map.Landmark.Region >= 0 && map.Landmark.Region < 3, "Invalid landmark.");
+                foreach (var c in map.Connections) Require(c.From >= 0 && c.From < regions && c.To >= 0 && c.To < regions && c.From != c.To, "Invalid region connection.");
+                foreach (var g in map.Gateways) Require(InBounds(g.X, g.Y) && g.Region >= 0 && g.Region < regions, "Invalid gateway.");
+                Require(InBounds(map.Landmark.X, map.Landmark.Y) && map.Landmark.Radius > 0 && map.Landmark.Region >= 0 && map.Landmark.Region < regions, "Invalid landmark.");
+                Require(map.Regions[0].Role==0 && map.Regions[1].Role==1 && map.Regions[2].Role==2
+                    && (regions==3 || map.Regions[3].Role==1 && map.Regions[4].Role==2), "Invalid region role contract.");
+                Require(map.Connections.Select(c=>c.To).Distinct().Count()==regions-1
+                    && map.Connections.All(c=>c.From==0 && c.To>0), "Invalid Start connections.");
+                Require(map.Gateways[0].Region!=map.Gateways[1].Region
+                    && map.Gateways.All(g=>g.Region>0 && (g.X==0||g.Y==0||g.X==map.Width-1||g.Y==map.Height-1))
+                    && map.Gateways.Count(g=>map.Regions[g.Region].Role==1)==1
+                    && map.Gateways.Count(g=>map.Regions[g.Region].Role==2)==1, "Invalid gateway ownership.");
+                Require(map.Landmark.Region>0 && map.Regions[map.Landmark.Region].Role==2, "Invalid landmark ownership.");
             }
             else Require(map.RegionIds.Length == 0 && map.Routes.Length == 0 && map.Regions.Length == 0 && map.Connections.Length == 0 && map.Gateways.Length == 0, "Unexpected legacy topology.");
             var ids = new HashSet<long>();

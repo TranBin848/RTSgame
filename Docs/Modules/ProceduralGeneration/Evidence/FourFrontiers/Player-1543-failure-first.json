@@ -1,0 +1,22 @@
+{
+  "first": {
+    "actualSeed": 1543,
+    "requestedSeed": 1543,
+    "regions": 5,
+    "connections": 4,
+    "gateways": 2,
+    "placements": 150,
+    "resourceEntities": 150,
+    "actors": 25,
+    "worlds": 6,
+    "usedFallback": false,
+    "coreMs": 90.343,
+    "terrainMs": 91.5031,
+    "resourceMs": 9.2924,
+    "navigationMs": 11.6469,
+    "initializeMs": 264.3296,
+    "bindMs": 64.4436,
+    "sceneToReadyMs": 571.08859999999993
+  },
+  "economy": null
+}

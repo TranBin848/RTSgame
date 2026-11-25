@@ -9,7 +9,7 @@ public static class ProceduralMapEditorTools
 {
     const string SourceScene = "Assets/Scenes/SampleScene.unity";
     const string TargetScene = "Assets/Scenes/ProceduralGame.unity";
-    const string SettingsPath = "Assets/Game/ProceduralGeneration/Settings/StrategicProceduralMapSettings.asset";
+    const string SettingsPath = "Assets/Game/ProceduralGeneration/Settings/FourFrontiersMapSettings.asset";
 
     [MenuItem("RTS/Procedural Generation/Create or Refresh Gameplay Scene")]
     public static void CreateOrRefreshGameplayScene()
@@ -20,7 +20,7 @@ public static class ProceduralMapEditorTools
         {
             settings = ScriptableObject.CreateInstance<ProceduralMapSettings>();
             var settingsData = new SerializedObject(settings);
-            settingsData.FindProperty("m_Preset").enumValueIndex = (int)RTS.ProceduralGeneration.MapLayoutPreset.StrategicRegions;
+            settingsData.FindProperty("m_Preset").enumValueIndex = (int)RTS.ProceduralGeneration.MapLayoutPreset.FourFrontiers;
             settingsData.ApplyModifiedPropertiesWithoutUndo();
             AssetDatabase.CreateAsset(settings, SettingsPath);
             AssetDatabase.SaveAssets();

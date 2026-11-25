@@ -33,6 +33,10 @@ public sealed class GameFlowMenu : MonoBehaviour
         if (m_PausePanel != null) m_PausePanel.SetActive(false);
     }
 
+    ProceduralMapAuthoring m_MapStatus;
+    public void InitializeMapStatus(ProceduralMapAuthoring map) => m_MapStatus = map;
+    bool m_FallbackNoticeClosed;
+
     void Update()
     {
         if (m_Match?.IsMatchOver == true) return;
@@ -40,6 +44,31 @@ public sealed class GameFlowMenu : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         if (m_OptionsPanel != null && m_OptionsPanel.activeSelf) Back();
         else if (m_PausePanel != null) { if (m_PausePanel.activeSelf) Resume(); else Pause(); }
+    }
+
+    void OnGUI()
+    {
+        if (ProceduralMapRuntime.HasFailed)
+        {
+            GUILayout.BeginArea(new Rect((Screen.width-460)/2f,(Screen.height-230)/2f,460,230), GUI.skin.box);
+            GUILayout.Label("Không thể chuẩn bị bản đồ");
+            GUILayout.Label("Trận đấu chưa bắt đầu. Bạn có thể thử lại hoặc trở về menu.");
+            if(GUILayout.Button("Thử lại"))Play();
+            if(GUILayout.Button("Về menu"))ReturnToMenu();
+            if(GUILayout.Button("Thoát"))Exit();
+            GUILayout.EndArea();
+        }
+        else if(!m_FallbackNoticeClosed && SceneManager.GetActiveScene().name=="ProceduralGame")
+        {
+            var generator=m_MapStatus;
+            if(generator!=null && generator.UsedFallback)
+            {
+                GUILayout.BeginArea(new Rect((Screen.width-460)/2f,Screen.height-125,460,74),GUI.skin.box);
+                GUILayout.Label("Đã dùng bản đồ dự phòng cùng bố cục và tài nguyên.");
+                if(GUILayout.Button("Đã hiểu"))m_FallbackNoticeClosed=true;
+                GUILayout.EndArea();
+            }
+        }
     }
 
     public void Play()

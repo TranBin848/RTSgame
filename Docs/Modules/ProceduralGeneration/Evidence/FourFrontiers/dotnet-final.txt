@@ -1,0 +1,7 @@
+Median/p95 Core: 20.148/54.705 ms
+Seeds checked: 1000
+Preset: FourFrontiers
+Failures: 0
+Accepted attempt histogram (0-based): 782,175,28,10,4,1,0,0
+Mean generation time: 25.99 ms
+Worst generation time: 513 ms (seed 0)

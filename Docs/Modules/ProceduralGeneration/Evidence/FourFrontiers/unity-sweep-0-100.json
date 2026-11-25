@@ -1,0 +1,4132 @@
+{
+  "count": 100,
+  "failures": [],
+  "retries": [
+    74,
+    20,
+    4,
+    2,
+    0,
+    0,
+    0,
+    0
+  ],
+  "median": 115.9094,
+  "p95": 280.2269,
+  "max": 621.79360000000008,
+  "runtime": "Unity Editor Core; excludes Tilemap/prefabs/navigation",
+  "samples": [
+    {
+      "seed": 0,
+      "ok": true,
+      "attempt": 1,
+      "hash": "E8CD2C26369774CC0EF8CCD8A07FBDED3A34EB3CD25A6104FEBA7CF1A15C8137",
+      "milliseconds": 254.6072,
+      "area": [
+        2731,
+        3522,
+        3481,
+        3319,
+        3331
+      ],
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 1,
+      "ok": true,
+      "attempt": 1,
+      "hash": "225BC049A6863976EEFCEDCC0999BC3317BF0A08E0469DB86323E1C2D00450FE",
+      "milliseconds": 205.64950000000002,
+      "area": [
+        2764,
+        3416,
+        3432,
+        3394,
+        3378
+      ],
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 2,
+      "ok": true,
+      "attempt": 1,
+      "hash": "18757F3D998D1F939A98C08E16BF95C4EBE51BDDC9B16685ED9EBF0720B3FE6F",
+      "milliseconds": 187.78560000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 99
+    },
+    {
+      "seed": 3,
+      "ok": true,
+      "attempt": 0,
+      "hash": "2067F5C59E9F7F520820C2EBD29F6F3FEBF5C47FDCCAE0C934E913219D281894",
+      "milliseconds": 120.8986,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 4,
+      "ok": true,
+      "attempt": 0,
+      "hash": "CF588E2C6CFAD9E7ACF0E633473C95BE93A0325027CD045E3336AC9F3C6986F8",
+      "milliseconds": 90.777,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 5,
+      "ok": true,
+      "attempt": 0,
+      "hash": "497A1BB93B19D21E7DEC99C03C1BA62E68B0B90139243321DF990916ACB41DED",
+      "milliseconds": 100.26360000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 6,
+      "ok": true,
+      "attempt": 0,
+      "hash": "0DDFABDD20520E1DA23186012FF0B9282A2083EA57F4C112F305786E95855FB5",
+      "milliseconds": 91.9993,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 126
+    },
+    {
+      "seed": 7,
+      "ok": true,
+      "attempt": 0,
+      "hash": "8C8AFECA4F6E955ABC510D9C0A418169EB5D6EFD3168C886B5072385471781B5",
+      "milliseconds": 95.850400000000008,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 119
+    },
+    {
+      "seed": 8,
+      "ok": true,
+      "attempt": 0,
+      "hash": "C76B080D29280E1372B789C3775C9644FAB0DA26F1D8D1F6A4F03824C3139CB0",
+      "milliseconds": 89.207100000000011,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 9,
+      "ok": true,
+      "attempt": 0,
+      "hash": "C9C61E021353985B3C80D9253BC4B0626A9C9E60788DA368F66730F5EFCD0CAC",
+      "milliseconds": 100.0369,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 10,
+      "ok": true,
+      "attempt": 0,
+      "hash": "C3ABC00E0A8E72AC52924F68AA6B8EB6C29E3243B4CA36DA13183112CE784CEB",
+      "milliseconds": 151.1896,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 111
+    },
+    {
+      "seed": 11,
+      "ok": true,
+      "attempt": 0,
+      "hash": "42F140EE7A74D605047388BECCACA8399A8AA6E01E499EBA6EECC7D32065D7E8",
+      "milliseconds": 99.79140000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 12,
+      "ok": true,
+      "attempt": 0,
+      "hash": "9756CDAC6F25357B205F4C897DEAA58362F1902AE7F486C9AE23AACF01D6897A",
+      "milliseconds": 104.6363,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 104
+    },
+    {
+      "seed": 13,
+      "ok": true,
+      "attempt": 0,
+      "hash": "B473AD9954FB3A09DE4B83B1AFF955FF97545836E9CFAF6C8F7793FE229377AB",
+      "milliseconds": 93.6593,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 110
+    },
+    {
+      "seed": 14,
+      "ok": true,
+      "attempt": 1,
+      "hash": "CD5694F909C5AFFDAF2CB54BA4D7AB29ADE3B1662EC98539C3DD05E882743AA0",
+      "milliseconds": 236.3057,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 100
+    },
+    {
+      "seed": 15,
+      "ok": true,
+      "attempt": 0,
+      "hash": "50E2DEEF491F50B784615AA7831F6C0A3B2B09410B26F2ABF9B5B7A9C1E5D75F",
+      "milliseconds": 119.64070000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 127
+    },
+    {
+      "seed": 16,
+      "ok": true,
+      "attempt": 0,
+      "hash": "8E86BD154E540F0CA10136140ED22A7CBC8A62BD7EC2D0B4D811BD7D8800F348",
+      "milliseconds": 96.6909,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 17,
+      "ok": true,
+      "attempt": 1,
+      "hash": "382CC9D9A27F5414ECA5EB73AECAC500C4CF0385D074680E3375F1B88373E60B",
+      "milliseconds": 216.79000000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 18,
+      "ok": true,
+      "attempt": 0,
+      "hash": "8EBCDE86FFA8CA21CF96CB9377A03CD040AAF7C3ED7B39CF5E5AAA6A1028041D",
+      "milliseconds": 82.4765,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 19,
+      "ok": true,
+      "attempt": 0,
+      "hash": "7C8DAC412DC1E9C703CC1852A926CA614DAA1A6DC8565C789F4F1F645A8EAC75",
+      "milliseconds": 107.9792,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 20,
+      "ok": true,
+      "attempt": 1,
+      "hash": "7A2A7EBABE3B76E380361F83824C7E62B30F2EED34DB2E5790E6F857CD60D6B2",
+      "milliseconds": 173.7952,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 111
+    },
+    {
+      "seed": 21,
+      "ok": true,
+      "attempt": 1,
+      "hash": "4AE365A8762B363E5220DF248597924A9091F8299BB539157E738C8D226B0665",
+      "milliseconds": 204.38320000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 22,
+      "ok": true,
+      "attempt": 0,
+      "hash": "A58979DB67D37CD72C94C89804B69B9422CB947176BCB8957692C8E966E7E088",
+      "milliseconds": 94.981400000000008,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 23,
+      "ok": true,
+      "attempt": 0,
+      "hash": "8F61651C8629E4F6DA1436ED56FB4FF7E34131187267F751DBCF4B6B2510B854",
+      "milliseconds": 91.145800000000008,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 24,
+      "ok": true,
+      "attempt": 3,
+      "hash": "C2C2250C60FE3E8409E9AEF84419BA124BAA68C3D5DD672A6ACB8DD39464E2E3",
+      "milliseconds": 435.4841,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 111
+    },
+    {
+      "seed": 25,
+      "ok": true,
+      "attempt": 0,
+      "hash": "23419A2725BEF43D9668DF12CB8652EBC32807DCC01D9B33139DDAF30BD934FE",
+      "milliseconds": 96.9932,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 26,
+      "ok": true,
+      "attempt": 0,
+      "hash": "65D8890D72E2FD3DFED029247627A2EFAD08BD57B4CBD67D3B1C38C855884008",
+      "milliseconds": 93.3883,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 27,
+      "ok": true,
+      "attempt": 0,
+      "hash": "3BCE2E96BC8486C898D9ED516F79ED58CDD901D70EF366799BA7ADDB6941912E",
+      "milliseconds": 84.9032,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 95
+    },
+    {
+      "seed": 28,
+      "ok": true,
+      "attempt": 0,
+      "hash": "817D9CF05023D5514D82371A6528C8B3531886FFBCB65DF9A27A1C990EEE3BB8",
+      "milliseconds": 104.3403,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 29,
+      "ok": true,
+      "attempt": 0,
+      "hash": "2A81BDE46F2C820769E892E58CBA8CE59933C5269F93418655771199BE79CC23",
+      "milliseconds": 120.6537,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 30,
+      "ok": true,
+      "attempt": 0,
+      "hash": "416DE6A096DF5C88CA9681715F192D0DDD47BF740A122A4E8A20E866000CDE57",
+      "milliseconds": 90.09190000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 99
+    },
+    {
+      "seed": 31,
+      "ok": true,
+      "attempt": 0,
+      "hash": "4E0261DD3FB0DE196F846AE78A5A03E7B533A6470DA7CD430141FC3C89F13DBB",
+      "milliseconds": 120.78410000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 32,
+      "ok": true,
+      "attempt": 0,
+      "hash": "7710A5D67B759DC331ED9B80ADB98DA964F4738DE1B1FE46A4FC12CFEA068001",
+      "milliseconds": 105.9285,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 135
+    },
+    {
+      "seed": 33,
+      "ok": true,
+      "attempt": 0,
+      "hash": "F2065317025C3AE66151992744123AA951F87351694E553C87356C5239003609",
+      "milliseconds": 89.2962,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 128
+    },
+    {
+      "seed": 34,
+      "ok": true,
+      "attempt": 0,
+      "hash": "AE5F087914512E103D045976DA6C943690D776A4EFE6331CE7A01D11DBE69284",
+      "milliseconds": 87.04610000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 110
+    },
+    {
+      "seed": 35,
+      "ok": true,
+      "attempt": 0,
+      "hash": "5F8BA1C4AC8635D09CBE3BC884B5F4723AF914ACD1217B9051CFEA9B6485D37C",
+      "milliseconds": 118.23360000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 119
+    },
+    {
+      "seed": 36,
+      "ok": true,
+      "attempt": 0,
+      "hash": "B11632B8CD7714147B6612039B3D884B9D51F3F9448A39CC60A971649B6BEAD8",
+      "milliseconds": 122.15530000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 118
+    },
+    {
+      "seed": 37,
+      "ok": true,
+      "attempt": 1,
+      "hash": "684E19290F3C372E1EBFAD6B71EAA6E6F92BEEDE24599BDFD9B2758729DB9524",
+      "milliseconds": 195.7116,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 105
+    },
+    {
+      "seed": 38,
+      "ok": true,
+      "attempt": 0,
+      "hash": "64C4BF9783FC3301E8685B68F3CBE71CBDDCDCA480F0E213E45CF7D3B7B63DFE",
+      "milliseconds": 125.00070000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 39,
+      "ok": true,
+      "attempt": 0,
+      "hash": "07CFBFA8770E6ACC1697A74DBB327FEF81326DD2086C2331F7E556C31ECBF202",
+      "milliseconds": 115.9094,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 130
+    },
+    {
+      "seed": 40,
+      "ok": true,
+      "attempt": 2,
+      "hash": "BBA4DBE9DF999E2DAC4BD364C560D447E61BF1B440CDDA94855CD85BD29F2426",
+      "milliseconds": 268.27520000000004,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 103
+    },
+    {
+      "seed": 41,
+      "ok": true,
+      "attempt": 1,
+      "hash": "70A87D9E55ABA2CD7E9A13254467C4B9042B4419CBA4A92B6DACF76E928FCED1",
+      "milliseconds": 218.32340000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 42,
+      "ok": true,
+      "attempt": 0,
+      "hash": "DAF42EA926505F10F5F453EA2362C31FF5B63A561EDA41FD5176ABDFFCE2AC36",
+      "milliseconds": 108.04820000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 104
+    },
+    {
+      "seed": 43,
+      "ok": true,
+      "attempt": 0,
+      "hash": "9CA039CF6265E8CF65051CF1860D835CC1A60A7675702BC00FD0207AE2B2C335",
+      "milliseconds": 134.4878,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 44,
+      "ok": true,
+      "attempt": 0,
+      "hash": "6A6D106339BF7CE543749887975551DDA5E6BE7A114A2EBE43D571EBD0D1E733",
+      "milliseconds": 93.187300000000008,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 104
+    },
+    {
+      "seed": 45,
+      "ok": true,
+      "attempt": 1,
+      "hash": "0F733DD4FE0C026AE3823094E9FC8EE313887BF5BDB15E5B94622E2B0F0CEE8C",
+      "milliseconds": 186.71030000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 122
+    },
+    {
+      "seed": 46,
+      "ok": true,
+      "attempt": 0,
+      "hash": "8B77723B07E77F5E2381042273C49896F37125E7E333D355A242C2A11ADE0971",
+      "milliseconds": 112.05260000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 111
+    },
+    {
+      "seed": 47,
+      "ok": true,
+      "attempt": 0,
+      "hash": "F75D315F988226E10AC3304B61ABECA42743D1F0A45FFDC6AEF74B691D0F7A4C",
+      "milliseconds": 136.6842,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 105
+    },
+    {
+      "seed": 48,
+      "ok": true,
+      "attempt": 0,
+      "hash": "64B0F6B412BEA1F8D51583289D99ADDE10E4CAD612C26A4B6B57D492CE407373",
+      "milliseconds": 97.4666,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 110
+    },
+    {
+      "seed": 49,
+      "ok": true,
+      "attempt": 0,
+      "hash": "67265921F3F51D42BAD567B63EF22240F4D01957F62CDA296BC98E543CEAEDAE",
+      "milliseconds": 110.6362,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 105
+    },
+    {
+      "seed": 50,
+      "ok": true,
+      "attempt": 2,
+      "hash": "54CC5A67525B5CB10801835D6F1BD819172D958B616E369253A088BC2E2A30D6",
+      "milliseconds": 328.5439,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 118
+    },
+    {
+      "seed": 51,
+      "ok": true,
+      "attempt": 0,
+      "hash": "A16EECE81019A2151021438FB2C499E3FF23BE58E6894B9D400A0E84A2ED734D",
+      "milliseconds": 111.9414,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 52,
+      "ok": true,
+      "attempt": 0,
+      "hash": "C736588CFE226A9C6480BC138BF08AEF02FCC47F42E5BC7B432D458E852CC51F",
+      "milliseconds": 97.9662,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 53,
+      "ok": true,
+      "attempt": 1,
+      "hash": "956D63810FDE435799F9472E70299C1DB7B45726F6D452E20F5ED15A2675E651",
+      "milliseconds": 199.4212,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 54,
+      "ok": true,
+      "attempt": 2,
+      "hash": "0D2DD370A8C21D6BB408D9BD7A85C2FE3A67584668E57ED9DB9ADBC53A856CCE",
+      "milliseconds": 303.0519,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 55,
+      "ok": true,
+      "attempt": 0,
+      "hash": "C535AF7A1F0B7635A0BB1B6AB2180CCF3245FCF67DABFEAEDF2B9DF50DBF4977",
+      "milliseconds": 90.9067,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 56,
+      "ok": true,
+      "attempt": 0,
+      "hash": "D461C8BC99EEDB95ABD12A54EC53B7FFF191E038B0BC46EBA953B2031F159C91",
+      "milliseconds": 94.58,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 125
+    },
+    {
+      "seed": 57,
+      "ok": true,
+      "attempt": 0,
+      "hash": "968CCE453F631B06B34D93F82D964427E354BC5F047155DA459B01D5646B0854",
+      "milliseconds": 88.13600000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 118
+    },
+    {
+      "seed": 58,
+      "ok": true,
+      "attempt": 0,
+      "hash": "06165E52F34C995C1B3FC4512E421FC3DB5C9AB790FF43CBA1C708334705F400",
+      "milliseconds": 87.5604,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 59,
+      "ok": true,
+      "attempt": 1,
+      "hash": "DD02F65463BAE371ECA1785F9C8072D3AE4E046A2E6880AB71CE9CFA4CA15BC2",
+      "milliseconds": 220.94400000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 60,
+      "ok": true,
+      "attempt": 0,
+      "hash": "3D4C2D1584DBD64878007256E601E42AC2D216A1DF405912945C4995B50CBD38",
+      "milliseconds": 93.6357,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 61,
+      "ok": true,
+      "attempt": 0,
+      "hash": "5B098A27A6F51B1BBF5456352792D9F9C4711DA936B5F731707046BBCFA953D5",
+      "milliseconds": 125.8605,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 111
+    },
+    {
+      "seed": 62,
+      "ok": true,
+      "attempt": 0,
+      "hash": "21E49ACDDC7957FAD45937A0400F0679472D3A2686A70AF981FB0190C316E3D8",
+      "milliseconds": 101.67630000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 63,
+      "ok": true,
+      "attempt": 0,
+      "hash": "826277A1D815392884419BAF44D2E037D4C7F202860E0A291D7DEDA4D5F977E2",
+      "milliseconds": 124.69890000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 64,
+      "ok": true,
+      "attempt": 0,
+      "hash": "95FA26F7758444E1380FD4BB639CF8536DC48E6806A54CA18EA07C4223B92DFD",
+      "milliseconds": 84.5562,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 120
+    },
+    {
+      "seed": 65,
+      "ok": true,
+      "attempt": 0,
+      "hash": "EB5F96312861DD521D4552447773350F8A41D0DD6E5C9F90310A4DF41D99EC2F",
+      "milliseconds": 98.97760000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 108
+    },
+    {
+      "seed": 66,
+      "ok": true,
+      "attempt": 0,
+      "hash": "7E66D6B84938FAF3D9F315BEAC8CC7C7CE57B92F3256A2726E3027F92F05C866",
+      "milliseconds": 89.0419,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 67,
+      "ok": true,
+      "attempt": 0,
+      "hash": "91255C317BC44F2D58A12D83BD454C0616EE0EFDA1D4ED8F13826F633CB2C36A",
+      "milliseconds": 90.1271,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 68,
+      "ok": true,
+      "attempt": 0,
+      "hash": "50D9B1A7B6E80E844C976E906EBAED1E3FDF62E247CAC4C6CB321BCFDD5E923E",
+      "milliseconds": 112.0822,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 119
+    },
+    {
+      "seed": 69,
+      "ok": true,
+      "attempt": 1,
+      "hash": "9EA2AD960C93468E7A5B90C93BDD3E8EB4CCC3275D9B9C8B82CC1E9E2F01DBCC",
+      "milliseconds": 185.2156,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 107
+    },
+    {
+      "seed": 70,
+      "ok": true,
+      "attempt": 0,
+      "hash": "EA688D13FA90749096C8704014549BB7CB322D86265593B8550B0EBD9D3EDD97",
+      "milliseconds": 123.5156,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 71,
+      "ok": true,
+      "attempt": 0,
+      "hash": "5357481AC2785883D1183E9972027D77BD5FBF569C281246B8C1ED0E765B862D",
+      "milliseconds": 104.7775,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 72,
+      "ok": true,
+      "attempt": 2,
+      "hash": "1CCE283FDDE1126169CF2DD1A290E74FA61D3AA7B5BBEE669B152BFBCEC49DE7",
+      "milliseconds": 305.0867,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 109
+    },
+    {
+      "seed": 73,
+      "ok": true,
+      "attempt": 0,
+      "hash": "E8731574BCC57C4E885F475D5DDCEFD61D836A1FC899B2D6EBBE42D4B5416306",
+      "milliseconds": 140.6456,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 119
+    },
+    {
+      "seed": 74,
+      "ok": true,
+      "attempt": 1,
+      "hash": "182CD27E1916A9DEBBDFF81E17303CA47F14546A1E1EC75F088974326FC5694E",
+      "milliseconds": 238.6895,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 75,
+      "ok": true,
+      "attempt": 1,
+      "hash": "9B1A8DC0B187EFF19CD78D4C8395368EF557F34235B436E2A9203188B3E64A0C",
+      "milliseconds": 230.2271,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 115
+    },
+    {
+      "seed": 76,
+      "ok": true,
+      "attempt": 1,
+      "hash": "9732BA5A1876E866179CEF490D03C31AC2D32D0275B654393F22EA170F49C891",
+      "milliseconds": 235.698,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 111
+    },
+    {
+      "seed": 77,
+      "ok": true,
+      "attempt": 0,
+      "hash": "D2F9900F7EAB64700FAC801A1C4EAD1E8A35B8D2B126A1F535B98675CA447C70",
+      "milliseconds": 149.9402,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 78,
+      "ok": true,
+      "attempt": 0,
+      "hash": "DD9472EF0E6FC9EF978E3819A80330C9A6D1A32E5C6A93B372E3BFB2C8862C55",
+      "milliseconds": 89.21690000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 79,
+      "ok": true,
+      "attempt": 0,
+      "hash": "D8B03093695D40D3F005296C9C375A5C0EC80BEDB67F0BC0AF84DC84069A011C",
+      "milliseconds": 88.008800000000008,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 80,
+      "ok": true,
+      "attempt": 0,
+      "hash": "8E97F0237AAD2F8855CBF7F680D6CFD1B9E358739B2E107970E14FF6ECBC8E52",
+      "milliseconds": 113.39880000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 81,
+      "ok": true,
+      "attempt": 1,
+      "hash": "14846B1F2FDE24ECA12BC35DD691A110BB204815407C4A78A68D7D9F7A0A57F7",
+      "milliseconds": 168.7501,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 62,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 108
+    },
+    {
+      "seed": 82,
+      "ok": true,
+      "attempt": 0,
+      "hash": "0C7104DC1C41AB6AC8E0CCBA27E88333DC24C43EC7EBC3BF3354E733F1D04A36",
+      "milliseconds": 114.3631,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 107
+    },
+    {
+      "seed": 83,
+      "ok": true,
+      "attempt": 0,
+      "hash": "431F1DCA922FDAA958E02F3112ABECAC40B787B3D52007C3A13122AD9E02F176",
+      "milliseconds": 107.2176,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 103
+    },
+    {
+      "seed": 84,
+      "ok": true,
+      "attempt": 0,
+      "hash": "505D771A687175576D2783DD0716CB2A36D2D77BCE9675CDDD11347056CAC1A8",
+      "milliseconds": 106.6692,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 85,
+      "ok": true,
+      "attempt": 0,
+      "hash": "0AAB44522C999E1922876230DA914C10827D805ECF48859748F01C4D25515029",
+      "milliseconds": 161.4915,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 116
+    },
+    {
+      "seed": 86,
+      "ok": true,
+      "attempt": 0,
+      "hash": "C0BCA11E855DFDFA9BB4C397AA84CC97AAC3BD3DA5CD0DC9F99710447E94D9C4",
+      "milliseconds": 134.92860000000002,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 106
+    },
+    {
+      "seed": 87,
+      "ok": true,
+      "attempt": 0,
+      "hash": "13AC3224BF945FF690EF367F7FD7F1CB55A3292A46A370F4AE5D393630E79899",
+      "milliseconds": 180.53040000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 105
+    },
+    {
+      "seed": 88,
+      "ok": true,
+      "attempt": 1,
+      "hash": "5106DB52A02F36C370AC5562306AB460FF6B6D045699DA4ABA8CE68FDD17981A",
+      "milliseconds": 280.2269,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 119
+    },
+    {
+      "seed": 89,
+      "ok": true,
+      "attempt": 1,
+      "hash": "6A1BBACB5773F9278C697691AB74F9CA428E03DD0961C06E298C42F5CFF85AA0",
+      "milliseconds": 223.6277,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 119
+    },
+    {
+      "seed": 90,
+      "ok": true,
+      "attempt": 0,
+      "hash": "3121611DA1A7736316BD00C6227E32F38CEF7A881F783B7CF779263D8C23FCDF",
+      "milliseconds": 121.90060000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 127
+    },
+    {
+      "seed": 91,
+      "ok": true,
+      "attempt": 0,
+      "hash": "CFF414D88F0D7782A58138034308FE1C81ACACCF26B04EB59A8C123BEE597117",
+      "milliseconds": 187.47,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 92,
+      "ok": true,
+      "attempt": 3,
+      "hash": "9D6D75F6B824EC568750E816D12F35D1ECA04FB7ED6DF9469BA9C1D268DA73A6",
+      "milliseconds": 621.79360000000008,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    },
+    {
+      "seed": 93,
+      "ok": true,
+      "attempt": 0,
+      "hash": "6C4B33B7E820DBE108434C441DF2123DC0B5628C5BF0F34A5BE58C2B75E1410D",
+      "milliseconds": 104.72080000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 117
+    },
+    {
+      "seed": 94,
+      "ok": true,
+      "attempt": 0,
+      "hash": "4865D1427CC6E4C7C4B082E71C230438830EC4677416682C1BA4F26798CEA1B3",
+      "milliseconds": 147.4981,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 65,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 65,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 118
+    },
+    {
+      "seed": 95,
+      "ok": true,
+      "attempt": 1,
+      "hash": "411D2C6FFAD2EDC0CBD1EF46823E0FE2861968BDBF3708997F8836AB39281D05",
+      "milliseconds": 273.7635,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 12,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 112
+    },
+    {
+      "seed": 96,
+      "ok": true,
+      "attempt": 0,
+      "hash": "AB6BF09683D110BFB88D60B3575C1D91AF26FC6C9EEA69FE805C58C162F55F05",
+      "milliseconds": 127.29740000000001,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 62,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 107
+    },
+    {
+      "seed": 97,
+      "ok": true,
+      "attempt": 0,
+      "hash": "FA8F1167B00DDA581538CF8C4A5C087402D0748C1D3091840B6A68BC14287D69",
+      "milliseconds": 109.4688,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 66,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 62,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 118
+    },
+    {
+      "seed": 98,
+      "ok": true,
+      "attempt": 0,
+      "hash": "0BCC5B8F678ADA307B42F2E6DD2D241E766F23132FBF214713208D3E37D39797",
+      "milliseconds": 142.7528,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 116,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 66,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 12,
+          "Y": 63,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 63,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 113
+    },
+    {
+      "seed": 99,
+      "ok": true,
+      "attempt": 0,
+      "hash": "41B4EFAE1FFDA71CDF1C8BFEEA8DD1EAA2E7986A101068FAFE1F5B48104B8B1E",
+      "milliseconds": 117.4723,
+      "area": null,
+      "centers": [
+        {
+          "X": 64,
+          "Y": 64,
+          "Radius": 7,
+          "Role": 0
+        },
+        {
+          "X": 63,
+          "Y": 116,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 12,
+          "Y": 64,
+          "Radius": 8,
+          "Role": 2
+        },
+        {
+          "X": 64,
+          "Y": 12,
+          "Radius": 8,
+          "Role": 1
+        },
+        {
+          "X": 116,
+          "Y": 65,
+          "Radius": 8,
+          "Role": 2
+        }
+      ],
+      "resourceMaxPath": 114
+    }
+  ]
+}

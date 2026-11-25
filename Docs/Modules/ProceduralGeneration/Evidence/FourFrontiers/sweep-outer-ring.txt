@@ -1,0 +1,7 @@
+Seeds checked: 1000
+Preset: FourFrontiers
+Failures: 1
+Accepted attempt histogram (0-based): 591,249,86,40,22,7,2,2
+Mean generation time: 32.00 ms
+Worst generation time: 185 ms (seed 877)
+seed=56: Seed 56 failed after 8 attempts: Sheep quota 16/18.

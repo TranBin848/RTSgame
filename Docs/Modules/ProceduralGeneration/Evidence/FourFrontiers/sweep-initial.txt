@@ -1,0 +1,9 @@
+Seeds checked: 1000
+Preset: FourFrontiers
+Failures: 3
+Accepted attempt histogram (0-based): 550,255,101,50,28,9,3,1
+Mean generation time: 36.34 ms
+Worst generation time: 552 ms (seed 385)
+seed=56: Seed 56 failed after 8 attempts: Sheep quota 16/18.
+seed=369: Seed 369 failed after 8 attempts: Tree at (125,96) has no reachable interaction cell. | Resource has no final path to deposit.
+seed=989: Seed 989 failed after 8 attempts: Sheep at (13,23) has no reachable interaction cell. | Gold at (23,3) has no reachable interaction cell. | Sheep at (18,4) has no reachable interaction cell. | Resource has no final path to deposit. | Resource has no final path to deposit. | Resource has no final path to deposit.

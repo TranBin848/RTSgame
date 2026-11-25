@@ -1,5 +1,9 @@
 # Tiến độ Save/Load
 
+**24/11 — FR5 v4 đã kiểm:** [evidence](../ProceduralGeneration/FourFrontiers-Implementation.md). Schema 2, topology 5/4/2; cold-process 0/1/1543 khớp canonical, 11 ca sai bị preflight từ chối trước chuyển scene. Fallback qua scene mới giữ requested seed 1543 / actual seed 1. SL5–SL9 giữ nguyên phạm vi TODO.
+
+**24/11 — FR5:** [Theo dõi cold-process v4 và provenance fallback](../ProceduralGeneration/FourFrontiers-Implementation.md). Schema2; không nâng trạng thái SL5–SL9. Báo cáo SL4 cũ bên dưới là kết quả trước đợt FourFrontiers.
+
 Cập nhật **24/11/2026 — SL4**. Theo [BuildPlan](BuildPlan.md). Đã có capture và bootstrap/hydrate hai lượt cho lát cắt SL4; **chưa có restore toàn trận hoặc Continue UI**.
 
 | Mốc | Trạng thái | Bằng chứng / phần còn thiếu |

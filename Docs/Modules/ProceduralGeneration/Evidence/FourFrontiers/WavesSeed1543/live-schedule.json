@@ -1,0 +1,923 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "Day": 1,
+      "Wave": 0,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 0,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 0,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 1,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 1,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 1,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 1,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 2,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 2,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 2,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 2,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 1,
+      "Wave": 2,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 0,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 0,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 0,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 0,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 1,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 1,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 1,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 1,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 1,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 2,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 2,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 2,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 2,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 2,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 2,
+      "Wave": 2,
+      "Ordinal": 5,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 0,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 0,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 0,
+      "Ordinal": 2,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 0,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 1,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 1,
+      "Ordinal": 1,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 1,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 1,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 1,
+      "Ordinal": 4,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 2,
+      "Ordinal": 0,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 2,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 2,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 2,
+      "Ordinal": 3,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 2,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 3,
+      "Wave": 2,
+      "Ordinal": 5,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 0,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 0,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 0,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 0,
+      "Ordinal": 3,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 0,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 1,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 1,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 1,
+      "Ordinal": 2,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 1,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 1,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 2,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 2,
+      "Ordinal": 1,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 2,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 2,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 2,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 4,
+      "Wave": 2,
+      "Ordinal": 5,
+      "PrefabSlot": 1,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 0,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 0,
+      "Ordinal": 1,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 0,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 0,
+      "Ordinal": 3,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 1,
+      "Ordinal": 0,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 1,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 1,
+      "Ordinal": 2,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 1,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 2,
+      "Ordinal": 0,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 2,
+      "Ordinal": 1,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 2,
+      "Ordinal": 2,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 2,
+      "Ordinal": 3,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 2,
+      "Ordinal": 4,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 3,
+      "Ordinal": 0,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 3,
+      "Ordinal": 1,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 3,
+      "Ordinal": 2,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 3,
+      "Ordinal": 3,
+      "PrefabSlot": 0,
+      "RequestedGateway": 1,
+      "ActualGateway": 1,
+      "position": [
+        -32.5,
+        -3.5
+      ]
+    },
+    {
+      "Day": 5,
+      "Wave": 3,
+      "Ordinal": 4,
+      "PrefabSlot": 1,
+      "RequestedGateway": 0,
+      "ActualGateway": 0,
+      "position": [
+        -11.5,
+        17.5
+      ]
+    }
+  ],
+  "FailedSpawnAttempts": 0,
+  "FallbackSpawnCount": 0,
+  "initialSpawned": 2,
+  "actualTotal": 78,
+  "scheduledDelta": 76,
+  "scope": "Clock phases injected; only wave Tick advanced, enemies not combat-simulated. Verifies all scheduling/native spawns, not balance."
+}

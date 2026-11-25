@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RTS.ProceduralGeneration
 {
-    public enum MapLayoutPreset : byte { LegacyMainland, StrategicRegions }
+    public enum MapLayoutPreset : byte { LegacyMainland, StrategicRegions, FourFrontiers }
     public enum TerrainCell : byte
     {
         Water = 0,
@@ -95,6 +95,8 @@ namespace RTS.ProceduralGeneration
         public readonly int Height;
         public readonly int Seed;
         public readonly int Attempt;
+        public readonly int RequestedSeed;
+        public readonly bool UsedFallback;
         public readonly int StartX;
         public readonly int StartY;
         public readonly byte[] Terrain;
@@ -102,15 +104,17 @@ namespace RTS.ProceduralGeneration
         public readonly List<ResourcePlacement> Resources;
         public readonly MapValidationReport Validation;
         public readonly StrategicLayout Layout;
-        public int GeneratorVersion => Layout == null ? 1 : 3;
+        public int GeneratorVersion => Layout == null ? 1 : Layout.Regions.Length == 5 ? 4 : 3;
 
         public MapData(int width, int height, int seed, int attempt, int startX, int startY,
-            byte[] terrain, byte[] reserved, List<ResourcePlacement> resources, MapValidationReport validation, StrategicLayout layout = null)
+            byte[] terrain, byte[] reserved, List<ResourcePlacement> resources, MapValidationReport validation, StrategicLayout layout = null, int? requestedSeed = null, bool usedFallback = false)
         {
             Width = width;
             Height = height;
             Seed = seed;
             Attempt = attempt;
+            RequestedSeed = requestedSeed ?? seed;
+            UsedFallback = usedFallback;
             StartX = startX;
             StartY = startY;
             Terrain = terrain;
@@ -133,13 +137,18 @@ namespace RTS.ProceduralGeneration
             if (settings.Width < 32 || settings.Height < 32) return "Map size must be at least 32 x 32.";
             if (settings.Width > 1024 || settings.Height > 1024) return "Map size exceeds the supported 1024 x 1024 limit.";
             if (settings.MaxAttempts < 1) return "MaxAttempts must be positive.";
-            if (settings.Preset != MapLayoutPreset.LegacyMainland && settings.Preset != MapLayoutPreset.StrategicRegions) return "Unknown map layout preset.";
-            if (settings.Preset == MapLayoutPreset.StrategicRegions
+            if (settings.Preset != MapLayoutPreset.LegacyMainland && settings.Preset != MapLayoutPreset.StrategicRegions && settings.Preset != MapLayoutPreset.FourFrontiers) return "Unknown map layout preset.";
+            if (settings.Preset != MapLayoutPreset.LegacyMainland
                 && (settings.RegionRadius < 8 || settings.RequiredCorridorHalfWidth < 1 || settings.RequiredCorridorHalfWidth > settings.RegionRadius
                     || settings.StartClearRadius + settings.RegionRadius * 2L + 6 >= Math.Min(settings.Width, settings.Height) / 2))
                 return "Strategic regions need more room between the start, outer regions and border; reduce radii or increase map size.";
             if (settings.Preset == MapLayoutPreset.StrategicRegions && settings.TotalGoldCount - settings.StartingGoldCount < 3)
                 return "Strategic landmark requires at least three outer gold nodes.";
+            if (settings.Preset == MapLayoutPreset.FourFrontiers &&
+                (settings.TotalGoldCount - settings.StartingGoldCount < 4 || (settings.TotalTreeCount - settings.StartingTreeCount) * 3L < 5))
+                return "FourFrontiers requires four outer gold (landmark 3 + other 1) and enough outer trees for both Economy regions.";
+            if (settings.Preset == MapLayoutPreset.FourFrontiers && settings.RequiredCorridorHalfWidth > 2)
+                return "FourFrontiers landmark gold requires corridor half-width at most two.";
             if (settings.Octaves < 1 || settings.Octaves > 8) return "Octaves must be between 1 and 8.";
             if (settings.NoiseScale <= 0f) return "NoiseScale must be positive.";
             if (settings.Persistence <= 0f || settings.Persistence > 1f) return "Persistence must be in (0, 1].";
